@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>born-standalone</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>born-owlapi</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	
+	</dependencies>
+
+	<parent>
+		<groupId>de.tudresden.inf.lat.born</groupId>
+		<artifactId>born-parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<mainClass>${project.groupId}.owlapi.main.BornMain</mainClass>
+	</properties>
+
+	<build>
+
+		<finalName>born</finalName>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.4</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>de.tudresden.inf.lat.born;singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>born</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Activator>org.protege.editor.core.plugin.DefaultPluginActivator</Bundle-Activator>
+						<Bundle-Category>protege</Bundle-Category>
+						<Bundle-Description>BORN standalone</Bundle-Description>
+						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
+						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
+						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
+						<Import-Package>javax.accessibility, javax.swing, javax.swing.border, org.osgi.framework, org.protege.editor.core.ui.workspace, *</Import-Package>
+						<Main-Class>${mainClass}</Main-Class>
+						<Include-Resource>
+							{maven-resources}, {maven-dependencies},
+							@born-owlapi-${project.version}.jar,
+							@jcel-0.21.0-SNAPSHOT.jar,
+							@owlapi-distribution-3.5.0.jar
+						</Include-Resource>
+					</instructions>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<executable>java</executable>
+					<mainClass>${mainClass}</mainClass>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<name>BORN standalone</name>
+
+</project>
+
