@@ -23,9 +23,9 @@ public class BornMainTest {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		ProblogInputCreator instance = new ProblogInputCreator();
 		instance.createProblogFile(new FileInputStream(
-				"src/test/resources/ontology.owl"), new FileInputStream(
+				"src/test/resources/born-example.owl"), new FileInputStream(
 				"src/test/resources/network.pl"), new FileInputStream(
-				"src/test/resources/query.pl"), output);
+				"src/test/resources/born-example.pl"), output);
 		// TODO finish the unit test
 	}
 

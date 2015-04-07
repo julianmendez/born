@@ -21,7 +21,7 @@ public class SplitterTest {
 		ByteArrayOutputStream output0 = new ByteArrayOutputStream();
 		ByteArrayOutputStream output1 = new ByteArrayOutputStream();
 		Splitter instance = new Splitter();
-		instance.split(new FileInputStream("src/test/resources/dbpedia.owl"),
+		instance.split(new FileInputStream("src/test/resources/born-example.owl"),
 				output0, output1);
 		// TODO finish the unit test
 	}
