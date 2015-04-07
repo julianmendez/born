@@ -1,0 +1,87 @@
+package de.tudresden.inf.lat.born.owlapi.main;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+/**
+ * 
+ * An object of this class decompresses a ZIP file.
+ * 
+ * @author Julian Mendez
+ * 
+ */
+public class Decompressor {
+
+	/**
+	 * Stores a file.
+	 * 
+	 * @param inputStream
+	 *            input stream
+	 * @param outputFile
+	 *            output file
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	void storeFile(InputStream inputStream, File outputFile) throws IOException {
+		BufferedInputStream input = new BufferedInputStream(inputStream);
+		BufferedOutputStream output = new BufferedOutputStream(
+				new FileOutputStream(outputFile));
+		for (int ch = input.read(); ch != -1; ch = input.read()) {
+			output.write(ch);
+		}
+		output.flush();
+		output.close();
+	}
+
+	/**
+	 * Decompresses a ZIP file.
+	 * 
+	 * @param compressedFile
+	 *            compressed file
+	 * @param outputDirectory
+	 *            output directory
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+
+	public void decompress(File compressedFile, File outputDirectory)
+			throws IOException {
+		if (compressedFile == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (outputDirectory == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		if (!outputDirectory.exists()) {
+			outputDirectory.mkdirs();
+		}
+		ZipInputStream input = new ZipInputStream(new FileInputStream(
+				compressedFile));
+		for (ZipEntry entry = input.getNextEntry(); (entry != null); entry = input
+				.getNextEntry()) {
+
+			String fileName = entry.getName();
+			File newFile = new File(outputDirectory + File.separator + fileName);
+
+			(new File(newFile.getParent())).mkdirs();
+
+			if (entry.isDirectory()) {
+				newFile.mkdirs();
+			} else {
+				storeFile(input, newFile);
+			}
+
+		}
+		input.closeEntry();
+		input.close();
+	}
+
+}
