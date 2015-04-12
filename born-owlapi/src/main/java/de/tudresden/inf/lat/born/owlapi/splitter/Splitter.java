@@ -25,7 +25,7 @@ import de.tudresden.inf.lat.born.core.term.SubApp;
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
- * OWL ontology with variables and a Bayesian network.
+ * OWL ontology with variables, and a Bayesian network.
  * 
  * @author Julian Mendez
  *
@@ -36,12 +36,38 @@ public class Splitter implements SubApp {
 	public static final String POINT = ".";
 	public static final String HELP = "Parameters: <input ontology> <output ontology> <Bayesian network>";
 
+	/**
+	 * Constructs a new splitter.
+	 */
+	public Splitter() {
+	}
+
+	/**
+	 * Loads an ontology from an input stream and returns the ontology.
+	 * 
+	 * @param input
+	 *            input stream
+	 * @return the ontology provided by the given input stream
+	 * @throws OWLOntologyCreationException
+	 */
 	OWLOntology loadOWLOntology(InputStream input)
 			throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
 	}
 
+	/**
+	 * Stores an ontology
+	 * 
+	 * @param ontology
+	 *            ontology
+	 * @param ontologyOutputStream
+	 *            output stream to store the ontology
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 * @throws OWLRendererException
+	 *             if the ontology could not be rendered
+	 */
 	void storeOWLOntology(OWLOntology ontology,
 			OutputStream ontologyOutputStream) throws IOException,
 			OWLRendererException {
@@ -51,6 +77,13 @@ public class Splitter implements SubApp {
 		writer.flush();
 	}
 
+	/**
+	 * Stores a given Bayesian network.
+	 * @param keyOrder order of keys
+	 * @param map map
+	 * @param outputNetwork output network
+	 * @throws IOException if something went wrong with the I/P
+	 */
 	void storeBayesianNetwork(List<String> keyOrder, Map<String, String> map,
 			OutputStream outputNetwork) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
@@ -66,6 +99,23 @@ public class Splitter implements SubApp {
 		writer.flush();
 	}
 
+	/**
+	 * Splits a probabilistic OWL ontology in two parts: an OWL ontology with
+	 * variables, and a Bayesian network.
+	 * 
+	 * @param ontologyInputStream
+	 *            input stream of ontology
+	 * @param newOntologyOutputStream
+	 *            output stream of new ontology
+	 * @param networkOutputStream
+	 *            output stream of Bayesian network
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 * @throws OWLOntologyCreationException
+	 *             if the OWL ontology could not be created
+	 * @throws OWLRendererException
+	 *             if the OWL ontology could not be rendered
+	 */
 	public void split(InputStream ontologyInputStream,
 			OutputStream newOntologyOutputStream,
 			OutputStream networkOutputStream) throws IOException,

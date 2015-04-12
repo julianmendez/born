@@ -56,8 +56,8 @@ import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.SWRLRule;
 
 /**
- * An object of this does the splitting of an ontology, axiom by axiom.
- * 
+ * An object of this class is a visitor of OWL axioms, and splits the ontology axiom by axiom.
+ *
  * @author Julian Mendez
  *
  */

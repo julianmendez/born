@@ -3,7 +3,6 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -215,15 +214,12 @@ public class Processor implements SubApp {
 	 * @return the content of the Problog input file
 	 * @throws OWLOntologyCreationException
 	 *             if the ontology was not created
-	 * @throws FileNotFoundException
-	 *             if the file was not found
 	 * @throws IOException
 	 *             if something went wrong with the I/O
 	 */
 	String createProblogFile(long start, String ontologyFileName,
 			String bayesianNetworkFileName, String queryFileName)
-			throws OWLOntologyCreationException, FileNotFoundException,
-			IOException {
+			throws OWLOntologyCreationException, IOException {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(new FileInputStream(
