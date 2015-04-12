@@ -120,18 +120,14 @@ public class Processor implements SubApp {
 	/**
 	 * Shows the entry on the standard output, if logging is enabled.
 	 * 
-	 * @param sbuf
-	 *            logging buffer
 	 * @param str
 	 *            entry to log
 	 * @param start
 	 *            execution start
 	 */
-	void log(StringBuffer sbuf, String str, long start) {
+	void log(String str, long start) {
 		long current = System.nanoTime();
 		String info = "" + (current - start) + LONG_TAB + str;
-		// sbuf.append(info);
-		// sbuf.append(Symbol.NEW_LINE_CHAR);
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
@@ -140,8 +136,6 @@ public class Processor implements SubApp {
 	/**
 	 * Downloads Problog from the default download URI.
 	 * 
-	 * @param sbuf
-	 *            string buffer with logging information
 	 * @param start
 	 *            execution start
 	 * @param problogZipFile
@@ -151,9 +145,9 @@ public class Processor implements SubApp {
 	 * @throws URISyntaxException
 	 *             if the default URI is not valid
 	 */
-	void downloadProblog(StringBuffer sbuf, long start, String problogZipFile)
-			throws IOException, URISyntaxException {
-		log(sbuf, "Download ProbLog.", start);
+	void downloadProblog(long start, String problogZipFile) throws IOException,
+			URISyntaxException {
+		log("Download ProbLog.", start);
 		ReadableByteChannel channel = Channels
 				.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
 		FileOutputStream output = new FileOutputStream(problogZipFile);
@@ -164,8 +158,6 @@ public class Processor implements SubApp {
 	/**
 	 * Decompresses the Problog ZIP file.
 	 * 
-	 * @param sbuf
-	 *            string buffer with logging information
 	 * @param start
 	 *            execution start
 	 * @param problogZipFile
@@ -175,9 +167,9 @@ public class Processor implements SubApp {
 	 * @throws IOException
 	 *             if something went wrong with the I/O
 	 */
-	void decompressProblog(StringBuffer sbuf, long start,
-			String problogZipFile, String problogDirectory) throws IOException {
-		log(sbuf, "Decompress ProbLog.", start);
+	void decompressProblog(long start, String problogZipFile,
+			String problogDirectory) throws IOException {
+		log("Decompress ProbLog.", start);
 		Decompressor installer = new Decompressor();
 		installer.decompress(new File(problogZipFile), new File(
 				problogDirectory));
@@ -187,8 +179,6 @@ public class Processor implements SubApp {
 	 * Installs Problog. This is necessary because just decompressing the ZIP
 	 * file is not enough.
 	 * 
-	 * @param sbuf
-	 *            string buffer with logging information
 	 * @param start
 	 *            execution start
 	 * @param problogDirectory
@@ -199,12 +189,12 @@ public class Processor implements SubApp {
 	 * @throws InterruptedException
 	 *             if the execution was interrupted
 	 */
-	int installProblog(StringBuffer sbuf, long start, String problogDirectory)
-			throws IOException, InterruptedException {
-		log(sbuf, "Install ProbLog.", start);
+	int installProblog(long start, String problogDirectory) throws IOException,
+			InterruptedException {
+		log("Install ProbLog.", start);
 		String commandLine = PYTHON + SPACE + problogDirectory + SLASH
 				+ PROBLOG_CLI + SPACE + PROBLOG_INSTALL_COMMAND;
-		log(sbuf, commandLine, start);
+		log(commandLine, start);
 		Runtime runtime = Runtime.getRuntime();
 		Process process = runtime.exec(commandLine);
 		return process.waitFor();
@@ -214,8 +204,6 @@ public class Processor implements SubApp {
 	 * Creates the content of the Problog input file and returns this content as
 	 * a string.
 	 * 
-	 * @param sbuf
-	 *            string buffer with logging information
 	 * @param start
 	 *            execution start
 	 * @param ontologyFileName
@@ -232,11 +220,11 @@ public class Processor implements SubApp {
 	 * @throws IOException
 	 *             if something went wrong with the I/O
 	 */
-	String createProblogFile(StringBuffer sbuf, long start,
-			String ontologyFileName, String bayesianNetworkFileName,
-			String queryFileName) throws OWLOntologyCreationException,
-			FileNotFoundException, IOException {
-		log(sbuf, "Create ProbLog file.", start);
+	String createProblogFile(long start, String ontologyFileName,
+			String bayesianNetworkFileName, String queryFileName)
+			throws OWLOntologyCreationException, FileNotFoundException,
+			IOException {
+		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(new FileInputStream(
 				ontologyFileName),
@@ -251,8 +239,6 @@ public class Processor implements SubApp {
 	 * Executes Problog and returns the exit value given by the operating
 	 * system.
 	 * 
-	 * @param sbuf
-	 *            string buffer with logging information
 	 * @param start
 	 *            execution start
 	 * @param problogDirectory
@@ -265,16 +251,16 @@ public class Processor implements SubApp {
 	 * @throws IOException
 	 *             if something went wrong with the I/O
 	 */
-	int executeProblog(StringBuffer sbuf, long start, String problogDirectory,
+	int executeProblog(long start, String problogDirectory,
 			String outputFileName) throws InterruptedException, IOException {
-		log(sbuf, "Execute ProbLog.", start);
+		log("Execute ProbLog.", start);
 		Runtime runtime = Runtime.getRuntime();
 		String commandLine = PYTHON + SPACE + problogDirectory + SLASH
 				+ PROBLOG_CLI + SPACE
 				+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE
 				+ PROBLOG_OUTPUT_OPTION + SPACE
 				+ (new File(outputFileName)).getAbsolutePath();
-		log(sbuf, commandLine, start);
+		log(commandLine, start);
 		Process process = runtime.exec(commandLine);
 		return process.waitFor();
 	}
@@ -308,8 +294,7 @@ public class Processor implements SubApp {
 					this.isShowingLog = false;
 				}
 
-				log(sbuf,
-						"Start. Each row shows nanoseconds from start and task that is starting.",
+				log("Start. Each row shows nanoseconds from start and task that is starting.",
 						start);
 
 				String ontologyFileName = newArgs[0];
@@ -322,20 +307,20 @@ public class Processor implements SubApp {
 					problogDirectory = newArgs[4];
 				} else {
 					problogDirectory = DEFAULT_PROBLOG_DIRECTORY;
-					downloadProblog(sbuf, start, DEFAULT_PROBLOG_ZIP_FILE);
-					decompressProblog(sbuf, start, DEFAULT_PROBLOG_ZIP_FILE,
+					downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
+					decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
 							DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-					installProblog(sbuf, start, problogDirectory);
+					installProblog(start, problogDirectory);
 				}
 
-				String info = createProblogFile(sbuf, start, ontologyFileName,
+				String info = createProblogFile(start, ontologyFileName,
 						bayesianNetworkFileName, queryFileName);
-				log(sbuf, info, start);
+				log(info, start);
 
-				int exitVal = executeProblog(sbuf, start, problogDirectory,
+				int exitVal = executeProblog(start, problogDirectory,
 						outputFileName);
 
-				log(sbuf, "End and show results.", start);
+				log("End and show results.", start);
 
 				File outputFile = new File(outputFileName);
 				if (outputFile.exists()) {
