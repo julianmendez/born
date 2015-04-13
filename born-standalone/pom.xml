@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-
+	<!-- Copyright 2015 Julian Mendez -->
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>de.tudresden.inf.lat.born</groupId>
 		<artifactId>born-parent</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<properties>
@@ -57,7 +57,7 @@
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
-							@jcel-0.21.0-SNAPSHOT.jar,
+							@jcel-0.21.0.jar,
 							@owlapi-distribution-3.5.0.jar
 						</Include-Resource>
 					</instructions>
