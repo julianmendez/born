@@ -3,7 +3,6 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +19,8 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
 /**
+ * An object of this class processes an OWL ontology, produces a Problog file,
+ * and executes Problog to obtain the result.
  * 
  * @author Julian Mendez
  *
@@ -89,9 +90,23 @@ public class Processor implements SubApp {
 
 	private boolean isShowingLog = false;
 
+	/**
+	 * Constructs a new processor.
+	 */
 	public Processor() {
 	}
 
+	/**
+	 * Reads all the content provided by a reader and stores it in a string
+	 * buffer.
+	 * 
+	 * @param sbuf
+	 *            string buffer to store the content provided by the reader
+	 * @param input
+	 *            reader
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 */
 	void show(StringBuffer sbuf, Reader input) throws IOException {
 		BufferedReader reader = new BufferedReader(input);
 		for (String line = reader.readLine(); line != null; line = reader
@@ -101,19 +116,37 @@ public class Processor implements SubApp {
 		}
 	}
 
-	void log(StringBuffer sbuf, String str, long start) {
+	/**
+	 * Shows the entry on the standard output, if logging is enabled.
+	 * 
+	 * @param str
+	 *            entry to log
+	 * @param start
+	 *            execution start
+	 */
+	void log(String str, long start) {
 		long current = System.nanoTime();
 		String info = "" + (current - start) + LONG_TAB + str;
-		// sbuf.append(info);
-		// sbuf.append(Symbol.NEW_LINE_CHAR);
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
 	}
 
-	void downloadProblog(StringBuffer sbuf, long start, String problogZipFile)
-			throws IOException, URISyntaxException {
-		log(sbuf, "Download ProbLog.", start);
+	/**
+	 * Downloads Problog from the default download URI.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @param problogZipFile
+	 *            file name of the Problog ZIP file
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 * @throws URISyntaxException
+	 *             if the default URI is not valid
+	 */
+	void downloadProblog(long start, String problogZipFile) throws IOException,
+			URISyntaxException {
+		log("Download ProbLog.", start);
 		ReadableByteChannel channel = Channels
 				.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
 		FileOutputStream output = new FileOutputStream(problogZipFile);
@@ -121,30 +154,73 @@ public class Processor implements SubApp {
 		output.close();
 	}
 
-	void decompressProblog(StringBuffer sbuf, long start,
-			String problogZipFile, String problogDirectory) throws IOException {
-		log(sbuf, "Decompress ProbLog.", start);
+	/**
+	 * Decompresses the Problog ZIP file.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @param problogZipFile
+	 *            file name of Problog ZIP file
+	 * @param problogDirectory
+	 *            directory where Problog is being installed
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 */
+	void decompressProblog(long start, String problogZipFile,
+			String problogDirectory) throws IOException {
+		log("Decompress ProbLog.", start);
 		Decompressor installer = new Decompressor();
 		installer.decompress(new File(problogZipFile), new File(
 				problogDirectory));
 	}
 
-	int installProblog(StringBuffer sbuf, long start, String problogDirectory)
-			throws IOException, InterruptedException {
-		log(sbuf, "Install ProbLog.", start);
+	/**
+	 * Installs Problog. This is necessary because just decompressing the ZIP
+	 * file is not enough.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @param problogDirectory
+	 *            directory where Problog has been installed
+	 * @return the exit value given by the operating system
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 * @throws InterruptedException
+	 *             if the execution was interrupted
+	 */
+	int installProblog(long start, String problogDirectory) throws IOException,
+			InterruptedException {
+		log("Install ProbLog.", start);
 		String commandLine = PYTHON + SPACE + problogDirectory + SLASH
 				+ PROBLOG_CLI + SPACE + PROBLOG_INSTALL_COMMAND;
-		log(sbuf, commandLine, start);
+		log(commandLine, start);
 		Runtime runtime = Runtime.getRuntime();
 		Process process = runtime.exec(commandLine);
 		return process.waitFor();
 	}
 
-	String createProblogFile(StringBuffer sbuf, long start,
-			String ontologyFileName, String bayesianNetworkFileName,
-			String queryFileName) throws OWLOntologyCreationException,
-			FileNotFoundException, IOException {
-		log(sbuf, "Create ProbLog file.", start);
+	/**
+	 * Creates the content of the Problog input file and returns this content as
+	 * a string.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @param ontologyFileName
+	 *            file name of the OWL ontology
+	 * @param bayesianNetworkFileName
+	 *            file name of the Bayesian network
+	 * @param queryFileName
+	 *            file name of the query
+	 * @return the content of the Problog input file
+	 * @throws OWLOntologyCreationException
+	 *             if the ontology was not created
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 */
+	String createProblogFile(long start, String ontologyFileName,
+			String bayesianNetworkFileName, String queryFileName)
+			throws OWLOntologyCreationException, IOException {
+		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(new FileInputStream(
 				ontologyFileName),
@@ -155,16 +231,32 @@ public class Processor implements SubApp {
 
 	}
 
-	int executeProblog(StringBuffer sbuf, long start, String problogDirectory,
+	/**
+	 * Executes Problog and returns the exit value given by the operating
+	 * system.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @param problogDirectory
+	 *            directory where Problog is installed
+	 * @param outputFileName
+	 *            file name of output
+	 * @return the exit value given by the operating system
+	 * @throws InterruptedException
+	 *             if the execution was interrupted
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 */
+	int executeProblog(long start, String problogDirectory,
 			String outputFileName) throws InterruptedException, IOException {
-		log(sbuf, "Execute ProbLog.", start);
+		log("Execute ProbLog.", start);
 		Runtime runtime = Runtime.getRuntime();
 		String commandLine = PYTHON + SPACE + problogDirectory + SLASH
 				+ PROBLOG_CLI + SPACE
 				+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE
 				+ PROBLOG_OUTPUT_OPTION + SPACE
 				+ (new File(outputFileName)).getAbsolutePath();
-		log(sbuf, commandLine, start);
+		log(commandLine, start);
 		Process process = runtime.exec(commandLine);
 		return process.waitFor();
 	}
@@ -198,8 +290,7 @@ public class Processor implements SubApp {
 					this.isShowingLog = false;
 				}
 
-				log(sbuf,
-						"Start. Each row shows nanoseconds from start and task that is starting.",
+				log("Start. Each row shows nanoseconds from start and task that is starting.",
 						start);
 
 				String ontologyFileName = newArgs[0];
@@ -212,20 +303,20 @@ public class Processor implements SubApp {
 					problogDirectory = newArgs[4];
 				} else {
 					problogDirectory = DEFAULT_PROBLOG_DIRECTORY;
-					downloadProblog(sbuf, start, DEFAULT_PROBLOG_ZIP_FILE);
-					decompressProblog(sbuf, start, DEFAULT_PROBLOG_ZIP_FILE,
+					downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
+					decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
 							DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-					installProblog(sbuf, start, problogDirectory);
+					installProblog(start, problogDirectory);
 				}
 
-				String info = createProblogFile(sbuf, start, ontologyFileName,
+				String info = createProblogFile(start, ontologyFileName,
 						bayesianNetworkFileName, queryFileName);
-				log(sbuf, info, start);
+				log(info, start);
 
-				int exitVal = executeProblog(sbuf, start, problogDirectory,
+				int exitVal = executeProblog(start, problogDirectory,
 						outputFileName);
 
-				log(sbuf, "End and show results.", start);
+				log("End and show results.", start);
 
 				File outputFile = new File(outputFileName);
 				if (outputFile.exists()) {
