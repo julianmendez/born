@@ -181,9 +181,9 @@ code {
 pre {
   padding: 20px;
   overflow: auto;
-  color: #f2f2f2;
+  color: #000000;
   text-shadow: none;
-  background: #303030;
+  background: #ffffdd;
 }
 pre code {
   padding: 0;
