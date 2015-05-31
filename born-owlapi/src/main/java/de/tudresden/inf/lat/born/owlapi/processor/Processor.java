@@ -58,13 +58,13 @@ public class Processor implements SubApp {
 			+ "\nExamples:"
 			+ "\n"
 			+ "\n Execution without ProbLog installed:"
-			+ "\n  java -jar born.jar ontology.owl network.pl query.pl output.pl"
+			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl"
 			+ "\n"
 			+ "\n Execution with ProbLog installed:"
-			+ "\n  java -jar born.jar ontology.owl network.pl query.pl output.pl /opt/problog2.1"
+			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl /opt/problog2.1"
 			+ "\n"
 			+ "\n Execution with ProbLog installed showing log:"
-			+ "\n  java -jar born.jar --log ontology.owl network.pl query.pl output.pl /opt/problog2.1"
+			+ "\n  java -jar born.jar get --log ontology.owl network.pl query.pl output.pl /opt/problog2.1"
 			+ "\n"
 			+ "\n Bayesian network:"
 			+ "\n  0.58::x1."
@@ -83,7 +83,7 @@ public class Processor implements SubApp {
 			+ "\nIf ProbLog is not installed, this program downloads ProbLog from:"
 			+ "\n   "
 			+ DEFAULT_PROBLOG_DOWNLOAD_URI
-			+ "\nPlease, note that this option requires an Internet connection and the execution time can take longer."
+			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
 			+ "\n" //
 			+ "\n" //
 			+ "\n";
