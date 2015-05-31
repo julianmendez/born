@@ -9,8 +9,8 @@ import de.tudresden.inf.lat.born.core.term.Term;
 /**
  * This is an optimization rule for Problog.
  * <ul>
- * <li><b>if</b>X \u2291 Y &isin; <i>T</i><br>
- * <b>then</b> S := S &cup; {X \u2291 Y}</li>
+ * <li><b>if</b>X \u2291 B &isin; <i>T</i><br>
+ * <b>then</b> S := S &cup; {X \u2291 B}</li>
  * </ul>
  * <br>
  * 
@@ -28,11 +28,11 @@ public class BR3Rule implements CompletionRule {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
-		Term y = c.newVar("Y");
+		Term b = c.newVar("B");
 
-		Term head = c.sub(x, y);
+		Term head = c.sub(x, b);
 		List<Term> body = new ArrayList<Term>();
-		body.add(c.subs(x, y));
+		body.add(c.subs(x, b));
 
 		this.clause = c.rule(head, body);
 	}
