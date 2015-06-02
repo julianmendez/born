@@ -37,6 +37,11 @@
 			<outputDirectory>standalone</outputDirectory>
 		</file>
 
+		<file>
+			<source>${basedir}/../born-plugin/target/de.tudresden.inf.lat.born.jar</source>
+			<outputDirectory>plugin</outputDirectory>
+		</file>
+
 	</files>
 
 </assembly>

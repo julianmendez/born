@@ -23,6 +23,7 @@
 
 	<modules>
 		<module>born-owlapi</module>
+		<module>born-plugin</module>
 		<module>born-standalone</module>
 		<module>born-distribution</module>
 	</modules>

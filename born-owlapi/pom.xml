@@ -22,6 +22,18 @@
 			<version>0.21.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>edu.stanford.protege</groupId>
+			<artifactId>org.protege.editor.owl</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.stanford.protege</groupId>
+			<artifactId>org.protege.editor.core.application</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<parent>
@@ -116,10 +128,5 @@
 	<name>BORN OWL API</name>
 
 </project>
-
-
-
-
-
 
 

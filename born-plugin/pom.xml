@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>born-plugin</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>born-owlapi</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<parent>
+		<groupId>de.tudresden.inf.lat.born</groupId>
+		<artifactId>born-parent</artifactId>
+		<version>0.2.0-SNAPSHOT</version>
+		<relativePath>../..</relativePath>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<bundle.jars>lib/born/born-owlapi/0.2.0-SNAPSHOT/born-owlapi-0.2.0-SNAPSHOT.jar lib/jcel/0.21.0/jcel-0.21.0.jar</bundle.jars>
+		<bundle.licenses>LICENSE</bundle.licenses>
+		<bundle.classpath>.,lib/born/born-owlapi/0.2.0-SNAPSHOT/born-owlapi-0.2.0-SNAPSHOT.jar,lib/jcel/0.21.0/jcel-0.21.0.jar</bundle.classpath>
+	</properties>
+
+	<build>
+
+		<finalName>${project.groupId}</finalName>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.4</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>BORN</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Activator>org.protege.editor.core.plugin.DefaultPluginActivator</Bundle-Activator>
+						<Bundle-Category>protege</Bundle-Category>
+						<Bundle-Description>BORN plug-in for Protege</Bundle-Description>
+						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
+						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
+						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
+						<Import-Package>javax.accessibility, javax.swing,
+							javax.swing.border, org.osgi.framework,
+							org.protege.editor.core.ui.workspace, *</Import-Package>
+						<Include-Resource>
+							{maven-resources}, {maven-dependencies},
+							@born-owlapi-${project.version}.jar,
+							lib/jcel/0.21.0/jcel-0.21.0.jar=../born-distribution/lib/de/tudresden/inf/lat/jcel/jcel/0.21.0/jcel-0.21.0.jar,
+							LICENSE=../LICENSE
+						</Include-Resource>
+					</instructions>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<name>BORN plug-in</name>
+
+</project>
+
