@@ -58,7 +58,7 @@
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
 							@jcel-0.21.0.jar,
-							@owlapi-distribution-3.5.0.jar
+							@owlapi-distribution-4.0.2.jar
 						</Include-Resource>
 					</instructions>
 				</configuration>

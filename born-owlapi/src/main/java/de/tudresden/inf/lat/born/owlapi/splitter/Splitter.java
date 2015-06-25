@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
@@ -20,6 +19,7 @@ import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
@@ -79,10 +79,15 @@ public class Splitter implements SubApp {
 
 	/**
 	 * Stores a given Bayesian network.
-	 * @param keyOrder order of keys
-	 * @param map map
-	 * @param outputNetwork output network
-	 * @throws IOException if something went wrong with the I/P
+	 * 
+	 * @param keyOrder
+	 *            order of keys
+	 * @param map
+	 *            map
+	 * @param outputNetwork
+	 *            output network
+	 * @throws IOException
+	 *             if something went wrong with the I/P
 	 */
 	void storeBayesianNetwork(List<String> keyOrder, Map<String, String> map,
 			OutputStream outputNetwork) throws IOException {
