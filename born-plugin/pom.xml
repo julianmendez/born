@@ -26,9 +26,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<bundle.jars>lib/born/born-owlapi/0.2.0-SNAPSHOT/born-owlapi-0.2.0-SNAPSHOT.jar lib/jcel/0.21.0/jcel-0.21.0.jar</bundle.jars>
-		<bundle.licenses>LICENSE</bundle.licenses>
 		<bundle.classpath>.,lib/born/born-owlapi/0.2.0-SNAPSHOT/born-owlapi-0.2.0-SNAPSHOT.jar,lib/jcel/0.21.0/jcel-0.21.0.jar</bundle.classpath>
+		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
+		<import.package>javax.accessibility,javax.swing,javax.swing.border,org.osgi.framework,org.protege.editor.core.ui.workspace,*</import.package>
 	</properties>
 
 	<build>
@@ -40,22 +40,20 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.4</version>
+				<version>2.5.4</version>
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>BORN</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<Bundle-Activator>org.protege.editor.core.plugin.DefaultPluginActivator</Bundle-Activator>
+						<Bundle-Activator>${bundle.activator}</Bundle-Activator>
 						<Bundle-Category>protege</Bundle-Category>
 						<Bundle-Description>BORN plug-in for Protege</Bundle-Description>
 						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
 						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
 						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
-						<Import-Package>javax.accessibility, javax.swing,
-							javax.swing.border, org.osgi.framework,
-							org.protege.editor.core.ui.workspace, *</Import-Package>
+						<Import-Package>${import.package}</Import-Package>
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,

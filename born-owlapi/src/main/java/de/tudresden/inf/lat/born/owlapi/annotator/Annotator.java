@@ -16,9 +16,15 @@ import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
+
+//for OWL API 3.5.1
+import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
+
+//for OWL API 4.0.2
+//import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
+
 
 /**
  * An object of this class add annotations with variables to an OWL ontology.
