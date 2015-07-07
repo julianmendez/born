@@ -16,6 +16,150 @@
 			<version>${project.version}</version>
 		</dependency>
 	
+		<dependency>
+			<groupId>net.sourceforge.owlapi</groupId>
+			<artifactId>owlapi-distribution</artifactId>
+			<version>3.5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.0-beta</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-multibindings</artifactId>
+			<version>4.0-beta</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-assistedinject</artifactId>
+			<version>4.0-beta</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-model</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-util</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-api</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-binary</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-datatypes</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-languages</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-n3</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-nquads</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-ntriples</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-rdfjson</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-rdfxml</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-trig</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-trix</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-turtle</artifactId>
+			<version>2.7.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.trove4j</groupId>
+			<artifactId>trove4j</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<parent>
@@ -61,7 +205,30 @@
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
 							@jcel-0.21.0.jar,
-							@owlapi-distribution-3.5.1.jar
+							@owlapi-distribution-3.5.1.jar,
+							@slf4j-api-1.7.7.jar,
+							@guava-18.0.jar,
+							@guice-4.0-beta.jar,
+							@guice-multibindings-4.0-beta.jar,
+							@guice-assistedinject-4.0-beta.jar,
+							@javax.inject-1.jar,
+							@aopalliance-1.0.jar,
+							@commons-io-2.4.jar,
+							@sesame-model-2.7.12.jar,
+							@sesame-rio-api-2.7.12.jar,
+							@sesame-rio-binary-2.7.12.jar,
+							@sesame-rio-datatypes-2.7.12.jar,
+							@sesame-rio-languages-2.7.12.jar,
+							@sesame-rio-n3-2.7.12.jar,
+							@sesame-rio-nquads-2.7.12.jar,
+							@sesame-rio-ntriples-2.7.12.jar,
+							@sesame-rio-rdfjson-2.7.12.jar,
+							@sesame-rio-rdfxml-2.7.12.jar,
+							@sesame-rio-trig-2.7.12.jar,
+							@sesame-rio-trix-2.7.12.jar,
+							@sesame-rio-turtle-2.7.12.jar,
+							@sesame-util-2.7.12.jar,
+							@trove4j-3.0.3.jar
 						</Include-Resource>
 					</instructions>
 				</configuration>
