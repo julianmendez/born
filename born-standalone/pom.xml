@@ -173,7 +173,6 @@
 
 		<mainClass>${project.groupId}.owlapi.main.BornMain</mainClass>
 
-		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
 		<import.package>javax.accessibility, javax.swing, javax.swing.border, org.osgi.framework, org.protege.editor.core.ui.workspace, *</import.package>
 	</properties>
 
@@ -193,7 +192,6 @@
 						<Bundle-SymbolicName>de.tudresden.inf.lat.born;singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>born</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<Bundle-Activator>${bundle.activator}</Bundle-Activator>
 						<Bundle-Category>protege</Bundle-Category>
 						<Bundle-Description>BORN standalone</Bundle-Description>
 						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
