@@ -10,11 +10,8 @@ import org.junit.Test;
 import org.semanticweb.owlapi.io.OWLRendererException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.problog.parser.Token;
-import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
-import de.tudresden.inf.lat.born.problog.parser.TokenImpl;
-
 /**
+ * Test class for {@link TokenCreator}.
  * 
  * @author Julian Mendez
  *
