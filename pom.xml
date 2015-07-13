@@ -30,11 +30,48 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<name>BORN build</name>
+	<name>BORN</name>
+
+	<description>Bayesian ontology reasoner.</description>
+
+	<url>https://github.com/julianmendez/born</url>
+
+	<inceptionYear>2015</inceptionYear>
+
+	<licenses>
+
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+
+	</licenses>
+
+	<organization>
+		<name>Chair of Automata Theory - TU Dresden</name>
+		<url>http://lat.inf.tu-dresden.de</url>
+	</organization>
+
+	<developers>
+
+		<developer>
+			<id>julianmendez</id>
+			<name>Julian Mendez</name>
+			<email>mendez@tcs.inf.tu-dresden.de</email>
+		</developer>
+
+	</developers>
+
+	<scm>
+		<url>https://github.com/julianmendez/born.git</url>
+		<connection>scm:git:https://github.com/julianmendez/born.git</connection>
+		<developerConnection>scm:git:https://github.com/julianmendez/born.git</developerConnection>
+	</scm>
 
 	<repositories>
 
