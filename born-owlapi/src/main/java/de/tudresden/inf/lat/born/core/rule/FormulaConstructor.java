@@ -40,7 +40,8 @@ public class FormulaConstructor {
 	 * @return new constant
 	 */
 	public Term newCons(String name) {
-		return new TermImpl(name, Collections.emptyList());
+		List<Term> emptyList = Collections.emptyList();
+		return new TermImpl(name, emptyList);
 	}
 
 	/**
@@ -182,7 +183,8 @@ public class FormulaConstructor {
 		List<Term> list = new ArrayList<Term>();
 		list.add(query);
 		TermImpl term = new TermImpl(QUERY, list);
-		return new ClauseImpl(term, Collections.emptyList());
+		List<Term> emptyList = Collections.emptyList();
+		return new ClauseImpl(term, emptyList);
 	}
 
 }

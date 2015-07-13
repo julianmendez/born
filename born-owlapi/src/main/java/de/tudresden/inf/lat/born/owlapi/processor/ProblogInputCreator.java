@@ -220,8 +220,9 @@ public class ProblogInputCreator {
 		ModuleExtractor moduleExtractor = new ModuleExtractor();
 		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
 
+		Set<Integer> emptySet = Collections.emptySet();
 		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(
-				normalizedAxioms, setOfClasses, Collections.emptySet());
+				normalizedAxioms, setOfClasses, emptySet);
 		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 

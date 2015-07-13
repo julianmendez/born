@@ -93,7 +93,8 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	Clause ax(Term str, Set<Annotation> annotations) {
 		FormulaConstructor c = new FormulaConstructor();
 		if (annotations.isEmpty()) {
-			return c.rule(str, Collections.emptyList());
+			List<Term> emptyList = Collections.emptyList();
+			return c.rule(str, emptyList);
 
 		} else if (annotations.size() == 1) {
 			Annotation annotation = annotations.iterator().next();
@@ -113,14 +114,16 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	public Clause renderDeclarationOfClass(Integer entity) {
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
-		Clause clause = ax(c.con(a), Collections.emptySet());
+		Set<Annotation> emptySet = Collections.emptySet();
+		Clause clause = ax(c.con(a), emptySet);
 		return clause;
 	}
 
 	public Clause renderDeclarationOfObjectProperty(Integer entity) {
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
-		Clause clause = ax(c.role(a), Collections.emptySet());
+		Set<Annotation> emptySet = Collections.emptySet();
+		Clause clause = ax(c.role(a), emptySet);
 		return clause;
 	}
 
