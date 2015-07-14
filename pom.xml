@@ -65,6 +65,12 @@
 			<email>mendez@tcs.inf.tu-dresden.de</email>
 		</developer>
 
+		<developer>
+			<id>ismailceylan</id>
+			<name>Ismail Ilkan Ceylan</name>
+			<email>ismail_ilkan.ceylan@tu-dresden.de</email>
+		</developer>
+
 	</developers>
 
 	<scm>
