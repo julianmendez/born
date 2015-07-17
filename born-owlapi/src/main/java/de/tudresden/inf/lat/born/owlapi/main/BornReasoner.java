@@ -82,7 +82,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 		logger.fine("resetting reasoner ...");
 		resetReasoner();
 
-		logger.fine("jcel reasoner configured.");
+		logger.fine("BORN reasoner configured.");
 	}
 
 	/**
