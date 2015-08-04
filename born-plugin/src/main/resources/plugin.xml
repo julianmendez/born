@@ -4,4 +4,17 @@
 		<name value="BORN"/>
 		<class value="de.tudresden.inf.lat.born.protege.BornProtegeReasonerFactory"/>
 	</extension>
+	<extension id="BornMain" point="org.protege.editor.core.application.ViewComponent">
+		<label value="BORN"/>
+		<class value="de.tudresden.inf.lat.born.protege.ui.Main"/>
+		<headerColor value="@org.protege.classcolor"/>
+		<category value="@org.protege.classcategory"/>
+	</extension>
+	<extension id="BornTab" point="org.protege.editor.core.application.WorkspaceTab">
+		<label value="BORN"/>
+		<class value="org.protege.editor.core.ui.workspace.WorkspaceViewsTab"/>
+		<defaultViewConfigFileName value="viewconfig-ueltab.xml"/>
+		<index value="A"/>
+		<editorKitId value="OWLEditorKit"/>
+	</extension>
 </plugin>

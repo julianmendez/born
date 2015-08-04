@@ -77,4 +77,8 @@ public class BornStarter implements OWLOntologyChangeListener,
 		}
 	}
 
+	public void removeListeners() {
+		// TODO
+	}
+
 }
