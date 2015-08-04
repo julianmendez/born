@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<VSNode splits="0.5">
+		<HSNode splits="0.125 0.125">
+			<CNode>
+				<Component label="BORN">
+					<Property id="pluginId" value="de.tudresden.inf.lat.born.protege.ui.Main" />
+				</Component>
+			</CNode>
+			<VSNode splits="0.0625 0.0625">
+				<CNode>
+					<Component label="Class hierarchy">
+						<Property id="pluginId" value="org.protege.editor.owl.OWLAssertedClassHierarchy" />
+					</Component>
+				</CNode>
+				<CNode>
+					<Component label="Description">
+						<Property id="pluginId" value="org.protege.editor.owl.OWLClassDescription" />
+					</Component>
+				</CNode>
+			</VSNode>
+		</HSNode>
+	</VSNode>
+</layout>
