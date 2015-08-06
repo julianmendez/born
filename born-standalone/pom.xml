@@ -12,10 +12,10 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>born-owlapi</artifactId>
+			<artifactId>born-ui</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
 			<artifactId>owlapi-distribution</artifactId>
@@ -202,6 +202,7 @@
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
+							@born-ui-${project.version}.jar,
 							@jcel-0.22.0-SNAPSHOT.jar,
 							@owlapi-distribution-3.5.1.jar,
 							@slf4j-api-1.7.7.jar,
