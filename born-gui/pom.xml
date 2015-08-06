@@ -5,7 +5,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>born-ui</artifactId>
+	<artifactId>born-gui</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
