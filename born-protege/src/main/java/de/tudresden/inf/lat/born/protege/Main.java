@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.protege.ui;
+package de.tudresden.inf.lat.born.protege;
 
 import java.awt.BorderLayout;
 

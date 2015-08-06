@@ -6,7 +6,7 @@
 	</extension>
 	<extension id="BornMain" point="org.protege.editor.core.application.ViewComponent">
 		<label value="BORN"/>
-		<class value="de.tudresden.inf.lat.born.protege.ui.Main"/>
+		<class value="de.tudresden.inf.lat.born.protege.Main"/>
 		<headerColor value="@org.protege.classcolor"/>
 		<category value="@org.protege.classcategory"/>
 	</extension>
