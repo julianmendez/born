@@ -7,9 +7,9 @@ import org.semanticweb.owlapi.model.OWLOntologyChangeListener;
 import org.semanticweb.owlapi.model.OWLOntologyLoaderListener;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.ui.BornController;
-import de.tudresden.inf.lat.born.ui.BornModel;
-import de.tudresden.inf.lat.born.ui.BornView;
+import de.tudresden.inf.lat.born.gui.BornController;
+import de.tudresden.inf.lat.born.gui.BornModel;
+import de.tudresden.inf.lat.born.gui.BornView;
 
 /**
  * This is used to start the system.

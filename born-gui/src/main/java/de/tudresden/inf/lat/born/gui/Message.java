@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.ui;
+package de.tudresden.inf.lat.born.gui;
 
 /**
  * This interface provides messages for the user interface.
