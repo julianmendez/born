@@ -17,10 +17,10 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
  */
 public class BornController implements ActionListener {
 
-	private static final String actionOpenInputOntologyFile = "open file";
+	private static final String actionSelectInputOntologyFile = "open file";
+	private static final String actionSelectBayesianNetworkFile = "Bayesian network file";
 	private static final String actionComputeInference = "compute inference";
 
-	private OWLOntology owlInputOntology = null;
 	private final OWLOntologyManager owlOntologyManager;
 
 	private final BornView view;
@@ -46,8 +46,10 @@ public class BornController implements ActionListener {
 		}
 
 		String cmd = e.getActionCommand();
-		if (cmd.equals(actionOpenInputOntologyFile)) {
-			executeActionOpenInputOntologyFile();
+		if (cmd.equals(actionSelectInputOntologyFile)) {
+			executeActionSelectInputOntologyFile();
+		} else if (cmd.equals(actionSelectBayesianNetworkFile)) {
+			executeActionSelectBayesianNetworkFile();
 		} else if (cmd.equals(actionComputeInference)) {
 			executeActionComputeInference();
 		} else {
@@ -55,7 +57,7 @@ public class BornController implements ActionListener {
 		}
 	}
 
-	private void executeActionOpenInputOntologyFile() {
+	private void executeActionSelectInputOntologyFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
@@ -64,13 +66,26 @@ public class BornController implements ActionListener {
 		}
 		if (file != null) {
 			try {
-				this.owlInputOntology = this.owlOntologyManager
+				OWLOntology owlInputOntology = this.owlOntologyManager
 						.loadOntologyFromOntologyDocument(file);
-				getView().setOntologies(this.owlInputOntology);
-				reset();
+				getModel().setInputOntologyFile(file);
+				getModel().setInputOntology(owlInputOntology);
+				update();
 			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
 			}
+		}
+	}
+
+	private void executeActionSelectBayesianNetworkFile() {
+		JFileChooser fileChooser = new JFileChooser();
+		int returnVal = fileChooser.showOpenDialog(getView());
+		File file = null;
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
+		}
+		if (file != null) {
+			update();
 		}
 	}
 
@@ -95,8 +110,10 @@ public class BornController implements ActionListener {
 	 * initialized.
 	 */
 	private void init() {
-		getView().addButtonOpenInputOntologyFileListener(this,
-				actionOpenInputOntologyFile);
+		getView().addButtonSelectInputOntologyFileListener(this,
+				actionSelectInputOntologyFile);
+		getView().addButtonSelectBayesianNetworkFileListener(this,
+				actionSelectBayesianNetworkFile);
 		getView().addButtonComputeInferenceListener(this,
 				actionComputeInference);
 
@@ -105,6 +122,10 @@ public class BornController implements ActionListener {
 
 	public void reset() {
 		getView().setButtonComputeInferenceEnabled(false);
+	}
+
+	public void update() {
+		getView().update();
 	}
 
 }

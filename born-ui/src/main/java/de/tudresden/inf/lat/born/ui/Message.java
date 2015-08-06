@@ -12,8 +12,8 @@ public interface Message {
 
 	String textInputOntologyFile = "input ontology file";
 	String textBayesianNetworkFile = "Bayesian network file";
-	String textQueryFile = "query file";
-	String textOutputFile = "output file";
+	String textQuery = "query";
+	String textOutput = "output";
 
 	String tooltipTextFieldInputOntologyFile = "select the input ontology file";
 	String tooltipTextFieldBayesianNetworkFile = "select the Bayesian network file";

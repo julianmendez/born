@@ -12,8 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import org.semanticweb.owlapi.model.OWLOntology;
-
 /**
  * This is the main panel.
  * 
@@ -23,8 +21,12 @@ public class BornView extends JPanel {
 
 	private static final long serialVersionUID = 8739938469381396848L;
 
-	private JButton buttonOpenInputOntologyFile = new JButton(new ImageIcon(
+	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
 			this.getClass().getClassLoader()
+					.getResource(Message.iconOpenInputOntologyFile)));
+
+	private JButton buttonSelectBayesianNetworkFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader()
 					.getResource(Message.iconOpenInputOntologyFile)));
 	private JButton buttonComputeInference = new JButton(
 			Message.textComputeInference);
@@ -43,8 +45,8 @@ public class BornView extends JPanel {
 		add(createMainPanel());
 	}
 
-	public void addButtonOpenInputOntologyFileListener(ActionListener listener,
-			String actionCommand) {
+	public void addButtonSelectInputOntologyFileListener(
+			ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -52,8 +54,21 @@ public class BornView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonOpenInputOntologyFile.addActionListener(listener);
-		this.buttonOpenInputOntologyFile.setActionCommand(actionCommand);
+		this.buttonSelectInputOntologyFile.addActionListener(listener);
+		this.buttonSelectInputOntologyFile.setActionCommand(actionCommand);
+	}
+
+	public void addButtonSelectBayesianNetworkFileListener(
+			ActionListener listener, String actionCommand) {
+		if (listener == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (actionCommand == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		this.buttonSelectBayesianNetworkFile.addActionListener(listener);
+		this.buttonSelectBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
 	public void addButtonComputeInferenceListener(ActionListener listener,
@@ -131,10 +146,6 @@ public class BornView extends JPanel {
 
 		JPanel smallPanel = new JPanel();
 		smallPanel.setAlignmentX(CENTER_ALIGNMENT);
-
-		this.buttonOpenInputOntologyFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
-		smallPanel.add(this.buttonOpenInputOntologyFile);
 		this.buttonComputeInference
 				.setToolTipText(Message.tooltipComputeInference);
 		smallPanel.add(this.buttonComputeInference);
@@ -149,7 +160,12 @@ public class BornView extends JPanel {
 		JLabel labelInputOntologyFile = new JLabel(
 				Message.textInputOntologyFile);
 		labelInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+
 		largePanel.add(labelInputOntologyFile);
+
+		this.buttonSelectInputOntologyFile
+				.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		largePanel.add(this.buttonSelectInputOntologyFile);
 
 		this.textInputOntologyFile
 				.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
@@ -161,7 +177,13 @@ public class BornView extends JPanel {
 		JLabel labelBayesianNetworkFile = new JLabel(
 				Message.textBayesianNetworkFile);
 		labelBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+
 		largePanel.add(labelBayesianNetworkFile);
+
+		this.buttonSelectBayesianNetworkFile
+				.setToolTipText(Message.tooltipOpenInputOntologyFile);
+
+		largePanel.add(this.buttonSelectBayesianNetworkFile);
 
 		this.textBayesianNetworkFile
 				.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
@@ -170,7 +192,7 @@ public class BornView extends JPanel {
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		JLabel labelQueryFile = new JLabel(Message.textQueryFile);
+		JLabel labelQueryFile = new JLabel(Message.textQuery);
 		labelQueryFile.setAlignmentX(LEFT_ALIGNMENT);
 		largePanel.add(labelQueryFile);
 
@@ -180,7 +202,7 @@ public class BornView extends JPanel {
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		JLabel labelOutputFile = new JLabel(Message.textOutputFile);
+		JLabel labelOutputFile = new JLabel(Message.textOutput);
 		labelOutputFile.setHorizontalAlignment(SwingConstants.CENTER);
 		largePanel.add(labelOutputFile);
 
@@ -198,25 +220,19 @@ public class BornView extends JPanel {
 		return this.model;
 	}
 
-	public void setOntologies(OWLOntology owlInputOntology) {
-		if (owlInputOntology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		this.textInputOntologyFile.setText("");
-		this.textBayesianNetworkFile.setText("");
-		this.textQueryFile.setText("");
-		this.textOutputFile.setText("");
-		this.textInputOntologyFile.setText(owlInputOntology.getOntologyID()
-				.toString());
-	}
-
 	public void setButtonLoadEnabled(boolean b) {
-		this.buttonOpenInputOntologyFile.setEnabled(b);
+		this.buttonSelectInputOntologyFile.setEnabled(b);
 	}
 
 	public void setButtonComputeInferenceEnabled(boolean b) {
 		this.buttonComputeInference.setEnabled(b);
+	}
+
+	public void update() {
+		this.textInputOntologyFile.setText(getModel().getInputOntologyFile()
+				.getAbsolutePath());
+		this.textBayesianNetworkFile.setText(getModel()
+				.getBayesianNetworkFileName());
 	}
 
 }
