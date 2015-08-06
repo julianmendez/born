@@ -39,7 +39,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<mainClass>de.tudresden.inf.lat.born.ui.BornUI</mainClass>
+		<mainClass>de.tudresden.inf.lat.born.main.BornStandalone</mainClass>
 	</properties>
 
 	<build>
