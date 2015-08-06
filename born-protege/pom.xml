@@ -5,14 +5,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>born-ui</artifactId>
+	<artifactId>born-protege</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>born-owlapi</artifactId>
+			<artifactId>born-ui</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -27,7 +27,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<mainClass>de.tudresden.inf.lat.born.main.BornStandalone</mainClass>
+		<mainClass>de.tudresden.inf.lat.born.ui.BornUI</mainClass>
 	</properties>
 
 	<build>
@@ -98,7 +98,7 @@
 		</plugins>
 	</build>
 
-	<name>BORN graphical user interface</name>
+	<name>BORN Protege interface</name>
 
 </project>
 
