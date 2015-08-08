@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>born-jar-parent</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>de.tudresden.inf.lat.born</groupId>
