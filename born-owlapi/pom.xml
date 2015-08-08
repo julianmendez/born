@@ -26,8 +26,9 @@
 
 	<parent>
 		<groupId>de.tudresden.inf.lat.born</groupId>
-		<artifactId>born-parent</artifactId>
+		<artifactId>born-jar-parent</artifactId>
 		<version>0.2.0-SNAPSHOT</version>
+		<relativePath>../jar-pom.xml</relativePath>
 	</parent>
 
 	<properties>
@@ -35,74 +36,6 @@
 
 		<mainClass>de.tudresden.inf.lat.born.owlapi.main.BornMain</mainClass>
 	</properties>
-
-	<build>
-		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.3</version>
-				<executions>
-					<execution>
-						<id>sources-jar</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<executions>
-					<execution>
-						<id>javadoc-jar</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<mainClass>${mainClass}</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.3.2</version>
-				<configuration>
-					<executable>java</executable>
-					<mainClass>${mainClass}</mainClass>
-				</configuration>
-			</plugin>
-
-		</plugins>
-	</build>
 
 	<name>BORN OWL API</name>
 
