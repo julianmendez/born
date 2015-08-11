@@ -37,6 +37,46 @@
 		<plugins>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+
+					<execution>
+						<id>create-library-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>${project.groupId}</finalName>
+							<formats>
+								<format>jar</format>
+							</formats>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/sources.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>create-library-javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>${project.groupId}</finalName>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/javadoc.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<version>2.5.4</version>
@@ -71,4 +111,5 @@
 	<name>BORN plug-in</name>
 
 </project>
+
 

@@ -87,8 +87,7 @@
 						<Bundle-Name>BORN</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>${bundle.activator}</Bundle-Activator>
-						<Bundle-Category>protege</Bundle-Category>
-						<Bundle-Description>BORN plug-in for Protege</Bundle-Description>
+						<Bundle-Description>BORN library</Bundle-Description>
 						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
 						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
 						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
@@ -97,7 +96,6 @@
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
-							lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar=../born-distribution/lib/de/tudresden/inf/lat/jcel/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar,
 							LICENSE=../LICENSE
 						</Include-Resource>
 					</instructions>

@@ -51,6 +51,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<includeDependencySources>true</includeDependencySources>
+					<dependencySourceIncludes>
+						<dependencySourceInclude>${project.groupId}</dependencySourceInclude>
+					</dependencySourceIncludes>
+				</configuration>
 			</plugin>
 
 			<plugin>
