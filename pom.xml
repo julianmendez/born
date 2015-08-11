@@ -25,6 +25,7 @@
 		<module>born-owlapi</module>
 		<module>born-gui</module>
 		<module>born-protege</module>
+		<module>born-library</module>
 		<module>born-plugin</module>
 		<module>born-standalone</module>
 		<module>born-distribution</module>

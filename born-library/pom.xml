@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>born-library</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>born-protege</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<parent>
+		<groupId>de.tudresden.inf.lat.born</groupId>
+		<artifactId>born-parent</artifactId>
+		<version>0.2.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<bundle.classpath>.,lib/born/born-owlapi/0.2.0-SNAPSHOT/born-owlapi-0.2.0-SNAPSHOT.jar,lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar</bundle.classpath>
+		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
+		<import.package>javax.accessibility,javax.swing,javax.swing.border,org.osgi.framework,org.protege.editor.core.ui.workspace,*</import.package>
+	</properties>
+
+	<build>
+
+		<finalName>born-${project.version}</finalName>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+
+					<execution>
+						<id>create-library-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>born-${project.version}</finalName>
+							<formats>
+								<format>jar</format>
+							</formats>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/sources.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>create-library-javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>born-${project.version}</finalName>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/javadoc.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.5.4</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>BORN</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Activator>${bundle.activator}</Bundle-Activator>
+						<Bundle-Category>protege</Bundle-Category>
+						<Bundle-Description>BORN plug-in for Protege</Bundle-Description>
+						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
+						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
+						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
+						<Import-Package>${import.package}</Import-Package>
+						<Include-Resource>
+							{maven-resources}, {maven-dependencies},
+							@born-owlapi-${project.version}.jar,
+							@born-gui-${project.version}.jar,
+							lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar=../born-distribution/lib/de/tudresden/inf/lat/jcel/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar,
+							LICENSE=../LICENSE
+						</Include-Resource>
+					</instructions>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<name>BORN library</name>
+
+</project>
+
+
