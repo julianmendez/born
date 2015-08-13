@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>born-plugin</artifactId>
+	<artifactId>born-build-plugin</artifactId>
 	<packaging>bundle</packaging>
 
 	<dependencies>
@@ -108,7 +108,7 @@
 		</plugins>
 	</build>
 
-	<name>BORN plug-in</name>
+	<name>BORN build plug-in</name>
 
 </project>
 

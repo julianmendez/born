@@ -15,11 +15,19 @@
 	<fileSets>
 
 		<fileSet>
-			<directory>${basedir}/../born-owlapi/target</directory>
+			<directory>${basedir}/../born-build-library/target</directory>
 			<includes>
-				<include>born-owlapi-${project.version}-javadoc.jar</include>
+				<include>born-${project.version}-javadoc.jar</include>
 			</includes>
 			<outputDirectory>library</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>${basedir}/../born-build-plugin/target</directory>
+			<includes>
+				<include>de.tudresden.inf.lat.born-javadoc.jar</include>
+			</includes>
+			<outputDirectory>plugin</outputDirectory>
 		</fileSet>
 
 	</fileSets>
@@ -27,22 +35,27 @@
 	<files>
 
 		<file>
-			<source>${basedir}/../born-owlapi/target/born-owlapi-${project.version}.jar</source>
+			<source>${basedir}/../born-build-library/target/born-${project.version}.jar</source>
 			<outputDirectory>library</outputDirectory>
 		</file>
 
 		<file>
-			<source>${basedir}/../born-owlapi/target/born-owlapi-${project.version}-sources.jar</source>
+			<source>${basedir}/../born-build-library/target/born-${project.version}-sources.jar</source>
 			<outputDirectory>library</outputDirectory>
 		</file>
 
 		<file>
-			<source>${basedir}/../born-standalone/target/born.jar</source>
+			<source>${basedir}/../born-build-standalone/target/born.jar</source>
 			<outputDirectory>standalone</outputDirectory>
 		</file>
 
 		<file>
-			<source>${basedir}/../born-plugin/target/de.tudresden.inf.lat.born.jar</source>
+			<source>${basedir}/../born-build-plugin/target/de.tudresden.inf.lat.born.jar</source>
+			<outputDirectory>plugin</outputDirectory>
+		</file>
+
+		<file>
+			<source>${basedir}/../born-build-plugin/target/de.tudresden.inf.lat.born-sources.jar</source>
 			<outputDirectory>plugin</outputDirectory>
 		</file>
 
