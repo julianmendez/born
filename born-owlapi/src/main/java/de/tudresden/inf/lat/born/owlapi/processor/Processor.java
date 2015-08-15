@@ -273,69 +273,85 @@ public class Processor implements SubApp {
 		return HELP;
 	}
 
+	public String run(ProcessorConfiguration conf, long start) {
+		StringBuffer sbuf = new StringBuffer();
+		try {
+			if (conf.isProblogNeeded()) {
+				downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
+				decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
+						DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+				installProblog(start, conf.getProblogDirectory());
+			}
+
+			String info = createProblogFile(start, conf.getOntologyFileName(),
+					conf.getBayesianNetworkFileName(), conf.getQueryFileName());
+			log(info, start);
+
+			int exitVal = executeProblog(start, conf.getProblogDirectory(),
+					conf.getOutputFileName());
+
+			log("End and show results.", start);
+
+			File outputFile = new File(conf.getOutputFileName());
+			if (outputFile.exists()) {
+				show(sbuf, new InputStreamReader(
+						new FileInputStream(outputFile)));
+
+			} else {
+				sbuf.append("No results. Exit value: '" + exitVal + "'.");
+
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(e);
+		}
+
+		return sbuf.toString();
+	}
+
 	@Override
 	public String run(String[] args) {
 		long start = System.nanoTime();
 		if (isValid(args)) {
 			StringBuffer sbuf = new StringBuffer();
-			try {
-				String[] newArgs = null;
-				if (args[0].equals(LOGGING_OPTION)) {
-					newArgs = new String[args.length - 1];
-					System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-					this.isShowingLog = true;
-				} else {
-					newArgs = new String[args.length];
-					System.arraycopy(args, 0, newArgs, 0, args.length);
-					this.isShowingLog = false;
-				}
-
-				log("Start. Each row shows nanoseconds from start and task that is starting.",
-						start);
-
-				String ontologyFileName = newArgs[0];
-				String bayesianNetworkFileName = newArgs[1];
-				String queryFileName = newArgs[2];
-				String outputFileName = newArgs[3];
-				String problogDirectory = null;
-
-				if (newArgs.length == 5) {
-					problogDirectory = newArgs[4];
-				} else {
-					problogDirectory = DEFAULT_PROBLOG_DIRECTORY;
-					downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
-					decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
-							DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-					installProblog(start, problogDirectory);
-				}
-
-				String info = createProblogFile(start, ontologyFileName,
-						bayesianNetworkFileName, queryFileName);
-				log(info, start);
-
-				int exitVal = executeProblog(start, problogDirectory,
-						outputFileName);
-
-				log("End and show results.", start);
-
-				File outputFile = new File(outputFileName);
-				if (outputFile.exists()) {
-					show(sbuf, new InputStreamReader(new FileInputStream(
-							outputFile)));
-
-				} else {
-					sbuf.append("No results. Exit value: '" + exitVal + "'.");
-
-				}
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			} catch (OWLOntologyCreationException e) {
-				throw new RuntimeException(e);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			} catch (URISyntaxException e) {
-				throw new RuntimeException(e);
+			String[] newArgs = null;
+			if (args[0].equals(LOGGING_OPTION)) {
+				newArgs = new String[args.length - 1];
+				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
+				this.isShowingLog = true;
+			} else {
+				newArgs = new String[args.length];
+				System.arraycopy(args, 0, newArgs, 0, args.length);
+				this.isShowingLog = false;
 			}
+
+			log("Start. Each row shows nanoseconds from start and task that is starting.",
+					start);
+
+			ProcessorConfiguration conf = new ProcessorConfiguration();
+
+			conf.setOntologyFileName(newArgs[0]);
+			conf.setBayesianNetworkFileName(newArgs[1]);
+			conf.setQueryFileName(newArgs[2]);
+			conf.setOutputFileName(newArgs[3]);
+			conf.setProblogDirectory(null);
+
+			if (newArgs.length == 5) {
+				conf.setProblogDirectory(newArgs[4]);
+				conf.setProblogNeeded(false);
+			} else {
+				conf.setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
+				conf.setProblogNeeded(true);
+			}
+
+			String result = run(conf, start);
+			sbuf.append(result);
+
 			return sbuf.toString();
 		} else {
 			return getHelp();
