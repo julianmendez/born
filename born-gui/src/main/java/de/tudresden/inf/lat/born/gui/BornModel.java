@@ -1,8 +1,11 @@
 package de.tudresden.inf.lat.born.gui;
 
-import java.io.File;
-
 import org.semanticweb.owlapi.model.OWLOntology;
+
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.splitter.SplitterConfiguration;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
 /**
  * 
@@ -11,18 +14,48 @@ import org.semanticweb.owlapi.model.OWLOntology;
  */
 public class BornModel {
 
+	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfiguration();
+	private ProcessorConfiguration processorConfiguration = new ProcessorConfiguration();
+	private SplitterConfiguration splitterConfiguration = new SplitterConfiguration();
+	private BayesianNetworkCreatorConfiguration bayesianNetworkCreatorConfiguration = new BayesianNetworkCreatorConfiguration();
+
 	private OWLOntology inputOntology = null;
-	private File inputOntologyFile = null;
-	private String bayesianNetworkFileName = null;
-	private String query = null;
 	private String output = null;
 
-	public File getInputOntologyFile() {
-		return this.inputOntologyFile;
+	public AnnotatorConfiguration getAnnotatorConfiguration() {
+		return annotatorConfiguration;
 	}
 
-	public void setInputOntologyFile(File ontologyFileName) {
-		this.inputOntologyFile = ontologyFileName;
+	public void setAnnotatorConfiguration(
+			AnnotatorConfiguration annotatorConfiguration) {
+		this.annotatorConfiguration = annotatorConfiguration;
+	}
+
+	public ProcessorConfiguration getProcessorConfiguration() {
+		return processorConfiguration;
+	}
+
+	public void setProcessorConfiguration(
+			ProcessorConfiguration processorConfiguration) {
+		this.processorConfiguration = processorConfiguration;
+	}
+
+	public SplitterConfiguration getSplitterConfiguration() {
+		return splitterConfiguration;
+	}
+
+	public void setSplitterConfiguration(
+			SplitterConfiguration splitterConfiguration) {
+		this.splitterConfiguration = splitterConfiguration;
+	}
+
+	public BayesianNetworkCreatorConfiguration getBayesianNetworkCreatorConfiguration() {
+		return bayesianNetworkCreatorConfiguration;
+	}
+
+	public void setBayesianNetworkCreatorConfiguration(
+			BayesianNetworkCreatorConfiguration bayesianNetworkCreatorConfiguration) {
+		this.bayesianNetworkCreatorConfiguration = bayesianNetworkCreatorConfiguration;
 	}
 
 	public OWLOntology getInputOntology() {
@@ -31,22 +64,6 @@ public class BornModel {
 
 	public void setInputOntology(OWLOntology ontology) {
 		this.inputOntology = ontology;
-	}
-
-	public String getBayesianNetworkFileName() {
-		return this.bayesianNetworkFileName;
-	}
-
-	public void setBayesianNetworkFileName(String bayesianNetworkFileName) {
-		this.bayesianNetworkFileName = bayesianNetworkFileName;
-	}
-
-	public String getQuery() {
-		return this.query;
-	}
-
-	public void setQuery(String query) {
-		this.query = query;
 	}
 
 	public String getOutput() {

@@ -68,8 +68,10 @@ public class BornController implements ActionListener {
 			try {
 				OWLOntology owlInputOntology = this.owlOntologyManager
 						.loadOntologyFromOntologyDocument(file);
-				getModel().setInputOntologyFile(file);
-				getModel().setInputOntology(owlInputOntology);
+				getModel().getProcessorConfiguration().setOntologyFileName(
+						file.getAbsolutePath());
+				getModel().setInputOntology(
+						owlInputOntology);
 				update();
 			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);

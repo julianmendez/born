@@ -229,9 +229,9 @@ public class BornView extends JPanel {
 	}
 
 	public void update() {
-		this.textInputOntologyFile.setText(getModel().getInputOntologyFile()
-				.getAbsolutePath());
-		this.textBayesianNetworkFile.setText(getModel()
+		this.textInputOntologyFile.setText(getModel()
+				.getProcessorConfiguration().getOntologyFileName());
+		this.textBayesianNetworkFile.setText(getModel().getProcessorConfiguration()
 				.getBayesianNetworkFileName());
 	}
 
