@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+//for OWL API 3.5.1
+import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
@@ -22,12 +24,8 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
-//for OWL API 3.5.1
-import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 //for OWL API 4.0.2
 //import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
@@ -154,23 +152,40 @@ public class Splitter implements SubApp {
 		return (args.length == 3);
 	}
 
+	public void run(SplitterConfiguration conf) {
+		try {
+			split(conf.getInputOntology(), conf.getOutputOntology(),
+					conf.getBayesianNetwork());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLRendererException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	public String run(String args[]) {
 		if (isValid(args)) {
-			Splitter instance = new Splitter();
 			try {
+				SplitterConfiguration conf = new SplitterConfiguration();
+
 				InputStream in = new FileInputStream(args[0]);
+				conf.setInputOntology(in);
+
 				OutputStream outOnt = new FileOutputStream(args[1]);
+				conf.setOutputOntology(outOnt);
+
 				OutputStream outNet = new FileOutputStream(args[2]);
-				instance.split(in, outOnt, outNet);
+				conf.setBayesianNetwork(outNet);
+
+				run(conf);
+
 				in.close();
 				outNet.close();
 				outOnt.close();
 			} catch (IOException e) {
-				throw new RuntimeException(e);
-			} catch (OWLRendererException e) {
-				throw new RuntimeException(e);
-			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
 			}
 			return "Done.";

@@ -176,15 +176,31 @@ public class BayesianNetworkCreator implements SubApp {
 		}
 	}
 
+	public void run(BayesianNetworkCreatorConfiguration conf) {
+		try {
+			List<ProbClause> network = createNetwork(conf.getDependencies());
+			write(new OutputStreamWriter(conf.getOutput()), network);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	public String run(String[] args) {
 		if (isValid(args)) {
 			try {
+				BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfiguration();
+
 				List<Integer> dependencies = parseIntegers(args[0]);
+				conf.setDependencies(dependencies);
+
 				OutputStream output = new FileOutputStream(args[1]);
-				BayesianNetworkCreator instance = new BayesianNetworkCreator();
-				List<ProbClause> network = instance.createNetwork(dependencies);
-				instance.write(new OutputStreamWriter(output), network);
+				conf.setOutput(output);
+
+				run(conf);
+
+				output.close();
+
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

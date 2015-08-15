@@ -9,6 +9,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Set;
 
+//for OWL API 3.5.1
+import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
@@ -19,12 +21,8 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
-//for OWL API 3.5.1
-import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 //for OWL API 4.0.2
 //import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 
 /**
  * An object of this class add annotations with variables to an OWL ontology.
@@ -78,29 +76,49 @@ public class Annotator implements SubApp {
 		return (2 <= args.length) && (args.length <= 4);
 	}
 
+	public void run(AnnotatorConfiguration conf) {
+		try {
+			annotate(conf.getInputOntology(), conf.getOutputOntology(),
+					conf.getThreshold(), conf.getMaxNumberOfVars());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLRendererException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
 	@Override
 	public String run(String args[]) {
 		if (isValid(args)) {
-			Annotator instance = new Annotator();
+			AnnotatorConfiguration conf = new AnnotatorConfiguration();
+
 			double threshold = 1;
 			if (args.length >= 3) {
 				threshold = Double.parseDouble(args[2]);
 			}
+			conf.setThreshold(threshold);
+
 			int maxNumberOfVars = Integer.MAX_VALUE;
 			if (args.length >= 4) {
 				maxNumberOfVars = Integer.parseInt(args[3]);
 			}
+			conf.setMaxNumberOfVars(maxNumberOfVars);
+
 			try {
 				InputStream in = new FileInputStream(args[0]);
+				conf.setInputOntology(in);
+
 				OutputStream outOnt = new FileOutputStream(args[1]);
-				instance.annotate(in, outOnt, threshold, maxNumberOfVars);
+				conf.setOutputOntology(outOnt);
+
+				run(conf);
+
 				in.close();
 				outOnt.close();
 			} catch (IOException e) {
-				throw new RuntimeException(e);
-			} catch (OWLRendererException e) {
-				throw new RuntimeException(e);
-			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
 			}
 			return "Done.";
