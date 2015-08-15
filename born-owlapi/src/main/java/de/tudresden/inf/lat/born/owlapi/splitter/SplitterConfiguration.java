@@ -38,4 +38,33 @@ public class SplitterConfiguration {
 		this.bayesianNetwork = bayesianNetwork;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof SplitterConfiguration)) {
+			return false;
+		} else {
+			SplitterConfiguration other = (SplitterConfiguration) obj;
+			return getInputOntology().equals(other.getInputOntology())
+					&& getOutputOntology().equals(other.getOutputOntology())
+					&& getBayesianNetwork().equals(other.getBayesianNetwork());
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.inputOntology.hashCode()
+				+ 0x1F
+				* (this.outputOntology.hashCode() + 0x1F * this.bayesianNetwork
+						.hashCode());
+	}
+
+	@Override
+	public String toString() {
+		return this.inputOntology.toString() + " "
+				+ this.outputOntology.toString() + " "
+				+ this.bayesianNetwork.toString();
+	}
+
 }

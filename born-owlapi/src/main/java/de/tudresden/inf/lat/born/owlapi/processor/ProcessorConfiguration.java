@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+
 /**
  * 
  * @author Julian Mendez
@@ -69,6 +71,45 @@ public class ProcessorConfiguration {
 
 	public void setProblogNeeded(boolean problogNeeded) {
 		this.problogNeeded = problogNeeded;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof AnnotatorConfiguration)) {
+			return false;
+		} else {
+			ProcessorConfiguration other = (ProcessorConfiguration) obj;
+			return getOntologyFileName().equals(other.getOntologyFileName())
+					&& getBayesianNetworkFileName().equals(
+							other.getBayesianNetworkFileName())
+					&& getQueryFileName().equals(other.getQueryFileName())
+					&& getOutputFileName().equals(other.getOutputFileName())
+					&& getProblogDirectory()
+							.equals(other.getProblogDirectory())
+					&& (isShowingLog() == other.isShowingLog())
+					&& (isProblogNeeded() == other.isProblogNeeded());
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.ontologyFileName.hashCode()
+				+ 0x1F
+				* (this.bayesianNetworkFileName.hashCode() + 0x1F * (this.queryFileName
+						.hashCode() + 0x1F * (this.ontologyFileName.hashCode() + 0x1F * (this.problogDirectory
+						.hashCode()))));
+	}
+
+	@Override
+	public String toString() {
+		return this.ontologyFileName.toString() + " "
+				+ this.bayesianNetworkFileName.toString() + " "
+				+ this.queryFileName.toString() + " "
+				+ this.outputFileName.toString() + " "
+				+ this.problogDirectory.toString() + " " + this.showingLog
+				+ " " + this.problogNeeded;
 	}
 
 }
