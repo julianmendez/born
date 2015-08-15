@@ -1,7 +1,5 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,8 +17,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.core.term.SubApp;
-
 //for OWL API 4.0.2
 //import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
@@ -31,11 +27,10 @@ import de.tudresden.inf.lat.born.core.term.SubApp;
  * @author Julian Mendez
  *
  */
-public class Annotator implements SubApp {
+public class AnnotatorCore {
 
-	public static final String COLON_COLON = "::";
-	public static final String POINT = ".";
-	public static final String HELP = "Parameters: <input ontology> <output ontology> [<threshold> [<number of variables>] ]";
+	public AnnotatorCore() {
+	}
 
 	OWLOntology loadOWLOntology(InputStream input)
 			throws OWLOntologyCreationException {
@@ -66,16 +61,6 @@ public class Annotator implements SubApp {
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
 	}
 
-	@Override
-	public String getHelp() {
-		return HELP;
-	}
-
-	@Override
-	public boolean isValid(String[] args) {
-		return (2 <= args.length) && (args.length <= 4);
-	}
-
 	public void run(AnnotatorConfiguration conf) {
 		try {
 			annotate(conf.getInputOntology(), conf.getOutputOntology(),
@@ -88,43 +73,6 @@ public class Annotator implements SubApp {
 			throw new RuntimeException(e);
 		}
 
-	}
-
-	@Override
-	public String run(String args[]) {
-		if (isValid(args)) {
-			AnnotatorConfiguration conf = new AnnotatorConfiguration();
-
-			double threshold = 1;
-			if (args.length >= 3) {
-				threshold = Double.parseDouble(args[2]);
-			}
-			conf.setThreshold(threshold);
-
-			int maxNumberOfVars = Integer.MAX_VALUE;
-			if (args.length >= 4) {
-				maxNumberOfVars = Integer.parseInt(args[3]);
-			}
-			conf.setMaxNumberOfVars(maxNumberOfVars);
-
-			try {
-				InputStream in = new FileInputStream(args[0]);
-				conf.setInputOntology(in);
-
-				OutputStream outOnt = new FileOutputStream(args[1]);
-				conf.setOutputOntology(outOnt);
-
-				run(conf);
-
-				in.close();
-				outOnt.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-			return "Done.";
-		} else {
-			return getHelp();
-		}
 	}
 
 }

@@ -13,14 +13,7 @@ public class ProcessorConfiguration {
 	private String outputFileName;
 	private String problogDirectory;
 	private boolean problogNeeded = true;
-
-	public boolean isProblogNeeded() {
-		return problogNeeded;
-	}
-
-	public void setProblogNeeded(boolean problogNeeded) {
-		this.problogNeeded = problogNeeded;
-	}
+	private boolean showingLog = true;
 
 	public String getOntologyFileName() {
 		return ontologyFileName;
@@ -60,6 +53,22 @@ public class ProcessorConfiguration {
 
 	public void setProblogDirectory(String problogDirectory) {
 		this.problogDirectory = problogDirectory;
+	}
+
+	public boolean isShowingLog() {
+		return showingLog;
+	}
+
+	public void setShowingLog(boolean showingLog) {
+		this.showingLog = showingLog;
+	}
+
+	public boolean isProblogNeeded() {
+		return problogNeeded;
+	}
+
+	public void setProblogNeeded(boolean problogNeeded) {
+		this.problogNeeded = problogNeeded;
 	}
 
 }

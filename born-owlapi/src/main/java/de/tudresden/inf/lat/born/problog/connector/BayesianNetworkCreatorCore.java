@@ -1,20 +1,16 @@
 package de.tudresden.inf.lat.born.problog.connector;
 
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 import de.tudresden.inf.lat.born.core.term.ProbClause;
 import de.tudresden.inf.lat.born.core.term.ProbClauseImpl;
-import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.core.term.Term;
 import de.tudresden.inf.lat.born.core.term.TermImpl;
 
@@ -24,23 +20,14 @@ import de.tudresden.inf.lat.born.core.term.TermImpl;
  * @author Julian Mendez
  *
  */
-public class BayesianNetworkCreator implements SubApp {
+public class BayesianNetworkCreatorCore {
 
 	public static final String VARIABLE_PREFIX = "x";
 	public static final String NEGATION_PREFIX = "\\+";
 	public static final int PRECISION = 2;
 	public static final int PRECISION_PLUS_2 = PRECISION + 2;
-	public static final String HELP = "Parameters: <list of parents> <output file>"
-			+ "\n\nExample of parameters: \"1,1,2,3,5,8\" network.pl"
-			+ "\n\nThe example creates a Bayesian network with:"
-			+ "\n  1 independent variable (no parents),"
-			+ "\n  1 variable with 1 parent,"
-			+ "\n  2 variables with 2 parents,"
-			+ "\n  3 variables with 3 parents,"
-			+ "\n  5 variables with 4 parents,"
-			+ "\n  and 8 variables with 5 parents.";
 
-	public BayesianNetworkCreator() {
+	public BayesianNetworkCreatorCore() {
 	}
 
 	Term newTerm(int variableIndex, boolean isNegative) {
@@ -140,73 +127,12 @@ public class BayesianNetworkCreator implements SubApp {
 		output.flush();
 	}
 
-	boolean isValidInput(List<Integer> variables) {
-		int accumVars = 0;
-		boolean isValid = true;
-		for (int parents = 0; isValid && (parents < variables.size()); parents++) {
-			isValid = isValid && (parents <= accumVars);
-			int current = variables.get(parents);
-			accumVars += current;
-		}
-		return isValid;
-	}
-
-	List<Integer> parseIntegers(String listAsStr) {
-		List<Integer> ret = new ArrayList<Integer>();
-		StringTokenizer stok = new StringTokenizer(listAsStr, ",");
-		while (stok.hasMoreTokens()) {
-			String value = stok.nextToken().trim();
-			ret.add(Integer.parseInt(value));
-		}
-		return ret;
-	}
-
-	@Override
-	public String getHelp() {
-		return HELP;
-	}
-
-	@Override
-	public boolean isValid(String[] args) {
-		if (args.length == 2) {
-			List<Integer> dependencies = parseIntegers(args[0]);
-			return isValidInput(dependencies);
-		} else {
-			return false;
-		}
-	}
-
 	public void run(BayesianNetworkCreatorConfiguration conf) {
 		try {
 			List<ProbClause> network = createNetwork(conf.getDependencies());
 			write(new OutputStreamWriter(conf.getOutput()), network);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public String run(String[] args) {
-		if (isValid(args)) {
-			try {
-				BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfiguration();
-
-				List<Integer> dependencies = parseIntegers(args[0]);
-				conf.setDependencies(dependencies);
-
-				OutputStream output = new FileOutputStream(args[1]);
-				conf.setOutput(output);
-
-				run(conf);
-
-				output.close();
-
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-			return "Done.";
-		} else {
-			return getHelp();
 		}
 	}
 
