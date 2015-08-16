@@ -66,8 +66,8 @@ public class AnnotatorConfiguration {
 	public int hashCode() {
 		return this.inputOntology.hashCode()
 				+ 0x1F
-				* (this.outputOntology.hashCode() + 0x1F * (Double
-						.hashCode(this.threshold) + 0x1F * this.maxNumberOfVars));
+				* (this.outputOntology.hashCode() + 0x1F * ((new Double(
+						this.threshold)).hashCode() + 0x1F * this.maxNumberOfVars));
 	}
 
 	@Override
