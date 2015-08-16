@@ -185,7 +185,6 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.5.4</version>
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
@@ -236,11 +235,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<configuration>
-					<executable>java</executable>
-					<mainClass>${mainClass}</mainClass>
-				</configuration>
 			</plugin>
 
 		</plugins>
