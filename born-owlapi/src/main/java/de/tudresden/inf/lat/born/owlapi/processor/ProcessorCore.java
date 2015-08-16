@@ -14,7 +14,6 @@ import java.nio.channels.ReadableByteChannel;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
@@ -25,16 +24,13 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
  * @author Julian Mendez
  *
  */
-public class Processor implements SubApp {
+public class ProcessorCore {
 
-	static final String LOGGING_OPTION = "--log";
 	static final String SLASH = "/";
 	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
 			.create("https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip");
 	static final String DEFAULT_PROBLOG_ZIP_FILE = "problog-2.1-SNAPSHOT.zip";
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
-	static final String DEFAULT_PROBLOG_DIRECTORY = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY
-			+ SLASH + "problog2.1";
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_FILE = "/tmp/~tmp-output.pl.tmp";
@@ -42,58 +38,13 @@ public class Processor implements SubApp {
 	static final String PYTHON = "python";
 	static final String SPACE = " ";
 	static final String LONG_TAB = "\t    : ";
-	static final String TITLE = "Time from start (ns)" + LONG_TAB + "Task";
-	static final String HELP = ""
-			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"
-			+ "\n"
-			+ "\n  <ontology file>          : file name of the probabilistic ontology, i.e. the OWL file with annotations"
-			+ "\n  <Bayesian network file>  : file name of the Bayesian network"
-			+ "\n  <query file>             : file name of the query"
-			+ "\n  <output file>            : file name of the output"
-			+ "\n  <ProbLog directory>      : (optional) directory where ProbLog is installed"
-			+ "\n"
-			+ "\n Option:"
-			+ "\n   --log                   : shows log"
-			+ "\n"
-			+ "\nExamples:"
-			+ "\n"
-			+ "\n Execution without ProbLog installed:"
-			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl"
-			+ "\n"
-			+ "\n Execution with ProbLog installed:"
-			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl /opt/problog2.1"
-			+ "\n"
-			+ "\n Execution with ProbLog installed showing log:"
-			+ "\n  java -jar born.jar get --log ontology.owl network.pl query.pl output.pl /opt/problog2.1"
-			+ "\n"
-			+ "\n Bayesian network:"
-			+ "\n  0.58::x1."
-			+ "\n  0.35::x2."
-			+ "\n"
-			+ "\n Query:"
-			+ "\n  query(sub('A', 'C'))."
-			+ "\n"
-			+ "\n"
-			+ "\n"
-			+ "\nNote: this program requires the following installed:"
-			+ "\n - Java 8"
-			+ "\n - ProbLog 2.1"
-			+ "\n - Python 2.7+ or 3.2+"
-			+ "\n"
-			+ "\nIf ProbLog is not installed, this program downloads ProbLog from:"
-			+ "\n   "
-			+ DEFAULT_PROBLOG_DOWNLOAD_URI
-			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
-			+ "\n" //
-			+ "\n" //
-			+ "\n";
 
 	private boolean isShowingLog = false;
 
 	/**
 	 * Constructs a new processor.
 	 */
-	public Processor() {
+	public ProcessorCore() {
 	}
 
 	/**
@@ -261,85 +212,48 @@ public class Processor implements SubApp {
 		return process.waitFor();
 	}
 
-	@Override
-	public boolean isValid(String[] args) {
-		return (((args.length == 4) && !args[0].equals(LOGGING_OPTION))
-				|| (args.length == 5) || ((args.length == 6) && args[0]
-				.equals(LOGGING_OPTION)));
-	}
+	public String run(ProcessorConfiguration conf, long start) {
+		StringBuffer sbuf = new StringBuffer();
+		try {
+			log("Start. Each row shows nanoseconds from start and task that is starting.",
+					start);
 
-	@Override
-	public String getHelp() {
-		return HELP;
-	}
-
-	@Override
-	public String run(String[] args) {
-		long start = System.nanoTime();
-		if (isValid(args)) {
-			StringBuffer sbuf = new StringBuffer();
-			try {
-				String[] newArgs = null;
-				if (args[0].equals(LOGGING_OPTION)) {
-					newArgs = new String[args.length - 1];
-					System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-					this.isShowingLog = true;
-				} else {
-					newArgs = new String[args.length];
-					System.arraycopy(args, 0, newArgs, 0, args.length);
-					this.isShowingLog = false;
-				}
-
-				log("Start. Each row shows nanoseconds from start and task that is starting.",
-						start);
-
-				String ontologyFileName = newArgs[0];
-				String bayesianNetworkFileName = newArgs[1];
-				String queryFileName = newArgs[2];
-				String outputFileName = newArgs[3];
-				String problogDirectory = null;
-
-				if (newArgs.length == 5) {
-					problogDirectory = newArgs[4];
-				} else {
-					problogDirectory = DEFAULT_PROBLOG_DIRECTORY;
-					downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
-					decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
-							DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-					installProblog(start, problogDirectory);
-				}
-
-				String info = createProblogFile(start, ontologyFileName,
-						bayesianNetworkFileName, queryFileName);
-				log(info, start);
-
-				int exitVal = executeProblog(start, problogDirectory,
-						outputFileName);
-
-				log("End and show results.", start);
-
-				File outputFile = new File(outputFileName);
-				if (outputFile.exists()) {
-					show(sbuf, new InputStreamReader(new FileInputStream(
-							outputFile)));
-
-				} else {
-					sbuf.append("No results. Exit value: '" + exitVal + "'.");
-
-				}
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			} catch (OWLOntologyCreationException e) {
-				throw new RuntimeException(e);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			} catch (URISyntaxException e) {
-				throw new RuntimeException(e);
+			if (conf.isProblogNeeded()) {
+				downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
+				decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
+						DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+				installProblog(start, conf.getProblogDirectory());
 			}
-			return sbuf.toString();
-		} else {
-			return getHelp();
+
+			String info = createProblogFile(start, conf.getOntologyFileName(),
+					conf.getBayesianNetworkFileName(), conf.getQueryFileName());
+			log(info, start);
+
+			int exitVal = executeProblog(start, conf.getProblogDirectory(),
+					conf.getOutputFileName());
+
+			log("End and show results.", start);
+
+			File outputFile = new File(conf.getOutputFileName());
+			if (outputFile.exists()) {
+				show(sbuf, new InputStreamReader(
+						new FileInputStream(outputFile)));
+
+			} else {
+				sbuf.append("No results. Exit value: '" + exitVal + "'.");
+
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(e);
 		}
+
+		return sbuf.toString();
 	}
 
 }

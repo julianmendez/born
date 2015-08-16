@@ -1,8 +1,6 @@
 package de.tudresden.inf.lat.born.owlapi.splitter;
 
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+//for OWL API 3.5.1
+import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
@@ -20,14 +20,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.core.term.SubApp;
-
-//for OWL API 3.5.1
-import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 //for OWL API 4.0.2
 //import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
@@ -36,16 +30,15 @@ import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
  * @author Julian Mendez
  *
  */
-public class Splitter implements SubApp {
+public class SplitterCore {
 
 	public static final String COLON_COLON = "::";
 	public static final String POINT = ".";
-	public static final String HELP = "Parameters: <input ontology> <output ontology> <Bayesian network>";
 
 	/**
 	 * Constructs a new splitter.
 	 */
-	public Splitter() {
+	public SplitterCore() {
 	}
 
 	/**
@@ -144,38 +137,16 @@ public class Splitter implements SubApp {
 
 	}
 
-	@Override
-	public String getHelp() {
-		return HELP;
-	}
-
-	@Override
-	public boolean isValid(String args[]) {
-		return (args.length == 3);
-	}
-
-	@Override
-	public String run(String args[]) {
-		if (isValid(args)) {
-			Splitter instance = new Splitter();
-			try {
-				InputStream in = new FileInputStream(args[0]);
-				OutputStream outOnt = new FileOutputStream(args[1]);
-				OutputStream outNet = new FileOutputStream(args[2]);
-				instance.split(in, outOnt, outNet);
-				in.close();
-				outNet.close();
-				outOnt.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			} catch (OWLRendererException e) {
-				throw new RuntimeException(e);
-			} catch (OWLOntologyCreationException e) {
-				throw new RuntimeException(e);
-			}
-			return "Done.";
-		} else {
-			return getHelp();
+	public void run(SplitterConfiguration conf) {
+		try {
+			split(conf.getInputOntology(), conf.getOutputOntology(),
+					conf.getBayesianNetwork());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLRendererException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

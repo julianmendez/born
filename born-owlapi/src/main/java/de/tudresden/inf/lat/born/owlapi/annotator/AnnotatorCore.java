@@ -1,7 +1,5 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -9,6 +7,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Set;
 
+//for OWL API 3.5.1
+import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
@@ -17,14 +17,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.core.term.SubApp;
-
-//for OWL API 3.5.1
-import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 //for OWL API 4.0.2
 //import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
-
 
 /**
  * An object of this class add annotations with variables to an OWL ontology.
@@ -33,11 +27,10 @@ import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
  * @author Julian Mendez
  *
  */
-public class Annotator implements SubApp {
+public class AnnotatorCore {
 
-	public static final String COLON_COLON = "::";
-	public static final String POINT = ".";
-	public static final String HELP = "Parameters: <input ontology> <output ontology> [<threshold> [<number of variables>] ]";
+	public AnnotatorCore() {
+	}
 
 	OWLOntology loadOWLOntology(InputStream input)
 			throws OWLOntologyCreationException {
@@ -68,45 +61,18 @@ public class Annotator implements SubApp {
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
 	}
 
-	@Override
-	public String getHelp() {
-		return HELP;
-	}
-
-	@Override
-	public boolean isValid(String[] args) {
-		return (2 <= args.length) && (args.length <= 4);
-	}
-
-	@Override
-	public String run(String args[]) {
-		if (isValid(args)) {
-			Annotator instance = new Annotator();
-			double threshold = 1;
-			if (args.length >= 3) {
-				threshold = Double.parseDouble(args[2]);
-			}
-			int maxNumberOfVars = Integer.MAX_VALUE;
-			if (args.length >= 4) {
-				maxNumberOfVars = Integer.parseInt(args[3]);
-			}
-			try {
-				InputStream in = new FileInputStream(args[0]);
-				OutputStream outOnt = new FileOutputStream(args[1]);
-				instance.annotate(in, outOnt, threshold, maxNumberOfVars);
-				in.close();
-				outOnt.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			} catch (OWLRendererException e) {
-				throw new RuntimeException(e);
-			} catch (OWLOntologyCreationException e) {
-				throw new RuntimeException(e);
-			}
-			return "Done.";
-		} else {
-			return getHelp();
+	public void run(AnnotatorConfiguration conf) {
+		try {
+			annotate(conf.getInputOntology(), conf.getOutputOntology(),
+					conf.getThreshold(), conf.getMaxNumberOfVars());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLRendererException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
 		}
+
 	}
 
 }
