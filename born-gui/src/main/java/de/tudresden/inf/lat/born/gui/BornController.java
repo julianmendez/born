@@ -70,8 +70,7 @@ public class BornController implements ActionListener {
 						.loadOntologyFromOntologyDocument(file);
 				getModel().getProcessorConfiguration().setOntologyFileName(
 						file.getAbsolutePath());
-				getModel().setInputOntology(
-						owlInputOntology);
+				getModel().setInputOntology(owlInputOntology);
 				update();
 			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
@@ -112,18 +111,18 @@ public class BornController implements ActionListener {
 	 * initialized.
 	 */
 	private void init() {
-		getView().addButtonSelectInputOntologyFileListener(this,
-				actionSelectInputOntologyFile);
-		getView().addButtonSelectBayesianNetworkFileListener(this,
-				actionSelectBayesianNetworkFile);
-		getView().addButtonComputeInferenceListener(this,
-				actionComputeInference);
+		// getView().addButtonSelectInputOntologyFileListener(this,
+		// actionSelectInputOntologyFile);
+		// getView().addButtonSelectBayesianNetworkFileListener(this,
+		// actionSelectBayesianNetworkFile);
+		// getView().addButtonComputeInferenceListener(this,
+		// actionComputeInference);
 
 		reset();
 	}
 
 	public void reset() {
-		getView().setButtonComputeInferenceEnabled(false);
+		// getView().setButtonComputeInferenceEnabled(false);
 	}
 
 	public void update() {
