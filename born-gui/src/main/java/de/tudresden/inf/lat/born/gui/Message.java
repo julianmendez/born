@@ -37,5 +37,6 @@ public interface Message {
 	String tooltipTextFieldOutputOntologyFile = "the output ontology is annotated using the given threshold and number of variables";
 	String textThreshold = "threshold between 0 and 1 (e.g. 0.3)";
 	String tooltipTextFieldThreshold = "the threshold is a number between 0 and 1 to determine the probability to annotate an axiom";
+	String tooltipAnnotatorRun = "execute annotator";
 
 }

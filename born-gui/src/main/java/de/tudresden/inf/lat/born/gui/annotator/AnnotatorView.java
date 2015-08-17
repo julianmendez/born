@@ -150,8 +150,7 @@ public class AnnotatorView extends JPanel {
 
 		JPanel smallPanel = new JPanel();
 		smallPanel.setAlignmentX(CENTER_ALIGNMENT);
-		this.buttonComputeInference
-				.setToolTipText(Message.tooltipComputeInference);
+		this.buttonComputeInference.setToolTipText(Message.tooltipAnnotatorRun);
 		smallPanel.add(this.buttonComputeInference);
 		ret.add(smallPanel);
 
