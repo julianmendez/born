@@ -34,7 +34,7 @@ public class AnnotatorView extends JPanel {
 	private JButton buttonComputeInference = new JButton(
 			Message.textComputeInference);
 	private JTextField textInputOntologyFile = new JTextField();
-	private JTextField textBayesianNetworkFile = new JTextField();
+	private JTextField textOutputOntologyFile = new JTextField();
 	private JTextField textThreshold = new JTextField();
 	private JTextField textMaxNumberOfVar = new JTextField();
 	private final AnnotatorConfiguration model;
@@ -109,8 +109,8 @@ public class AnnotatorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.textBayesianNetworkFile.addActionListener(listener);
-		this.textBayesianNetworkFile.setActionCommand(actionCommand);
+		this.textOutputOntologyFile.addActionListener(listener);
+		this.textOutputOntologyFile.setActionCommand(actionCommand);
 	}
 
 	public void addTextFieldThresholdListener(ActionListener listener,
@@ -179,20 +179,15 @@ public class AnnotatorView extends JPanel {
 		largePanel.add(Box.createVerticalStrut(gap));
 
 		JLabel labelBayesianNetworkFile = new JLabel(
-				Message.textBayesianNetworkFile);
+				Message.textOutputOntolgoyFile);
 		labelBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 
 		largePanel.add(labelBayesianNetworkFile);
 
-		this.buttonSelectBayesianNetworkFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
-
-		largePanel.add(this.buttonSelectBayesianNetworkFile);
-
-		this.textBayesianNetworkFile
-				.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
-		this.textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textBayesianNetworkFile);
+		this.textOutputOntologyFile
+				.setToolTipText(Message.tooltipTextFieldOutputOntologyFile);
+		this.textOutputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		largePanel.add(this.textOutputOntologyFile);
 
 		largePanel.add(Box.createVerticalStrut(gap));
 

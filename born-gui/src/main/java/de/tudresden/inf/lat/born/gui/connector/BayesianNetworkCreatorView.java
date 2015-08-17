@@ -30,7 +30,7 @@ public class BayesianNetworkCreatorView extends JPanel {
 	private JButton buttonComputeInference = new JButton(
 			Message.textComputeInference);
 	private JTextField textListOfParents = new JTextField();
-	private JTextField textOutputFile = new JTextField();
+	private JTextField textOutputBayesianNetwork = new JTextField();
 	private final BayesianNetworkCreatorConfiguration model;
 
 	public BayesianNetworkCreatorView(BayesianNetworkCreatorConfiguration model) {
@@ -64,8 +64,8 @@ public class BayesianNetworkCreatorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.textOutputFile.addActionListener(listener);
-		this.textOutputFile.setActionCommand(actionCommand);
+		this.textOutputBayesianNetwork.addActionListener(listener);
+		this.textOutputBayesianNetwork.setActionCommand(actionCommand);
 	}
 
 	private JPanel createPanel() {
@@ -90,9 +90,10 @@ public class BayesianNetworkCreatorView extends JPanel {
 		largePanel.setAlignmentX(CENTER_ALIGNMENT);
 		largePanel.setLayout(new BoxLayout(largePanel, BoxLayout.Y_AXIS));
 
-		JLabel labelQueryFile = new JLabel(Message.textQuery);
-		labelQueryFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(labelQueryFile);
+		JLabel labelListOfParents = new JLabel(
+				Message.textTextFieldListOfParents);
+		labelListOfParents.setAlignmentX(LEFT_ALIGNMENT);
+		largePanel.add(labelListOfParents);
 
 		this.textListOfParents
 				.setToolTipText(Message.tooltipTextFieldListOfParents);
@@ -101,14 +102,18 @@ public class BayesianNetworkCreatorView extends JPanel {
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		JLabel labelOutputFile = new JLabel(Message.textOutput);
-		labelOutputFile.setHorizontalAlignment(SwingConstants.CENTER);
-		largePanel.add(labelOutputFile);
+		JLabel labelOutputBayesianNetwork = new JLabel(
+				Message.textOutputBayesianNetwork);
+		labelOutputBayesianNetwork
+				.setHorizontalAlignment(SwingConstants.CENTER);
+		largePanel.add(labelOutputBayesianNetwork);
 
-		this.textOutputFile.setToolTipText(Message.tooltipTextFieldOutputFile);
-		this.textOutputFile.setMinimumSize(new Dimension(width, height));
-		this.textOutputFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textOutputFile);
+		this.textOutputBayesianNetwork
+				.setToolTipText(Message.tooltipTextFieldOutputBayesianNetwork);
+		this.textOutputBayesianNetwork.setMinimumSize(new Dimension(width,
+				height));
+		this.textOutputBayesianNetwork.setAlignmentX(LEFT_ALIGNMENT);
+		largePanel.add(this.textOutputBayesianNetwork);
 
 		ret.add(largePanel);
 
