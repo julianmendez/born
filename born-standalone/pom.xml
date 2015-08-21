@@ -5,7 +5,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>born-build-standalone</artifactId>
+	<artifactId>born-standalone</artifactId>
 	<packaging>bundle</packaging>
 
 	<dependencies>
