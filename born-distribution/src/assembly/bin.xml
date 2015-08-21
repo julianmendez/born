@@ -15,51 +15,101 @@
 	<fileSets>
 
 		<fileSet>
-			<directory>${basedir}/../born-build-library/target</directory>
+			<directory>${basedir}/../target</directory>
 			<includes>
+				<include>born-parent-${project.version}.pom</include>
+				<include>born-parent-${project.version}.pom.asc</include>
+			</includes>
+			<outputDirectory>modules/born-parent</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>${basedir}/../born-owlapi/target</directory>
+			<includes>
+				<include>born-owlapi-${project.version}.jar</include>
+				<include>born-owlapi-${project.version}-sources.jar</include>
+				<include>born-owlapi-${project.version}-javadoc.jar</include>
+				<include>born-owlapi-${project.version}.pom</include>
+				<include>born-owlapi-${project.version}.jar.asc</include>
+				<include>born-owlapi-${project.version}-sources.jar.asc</include>
+				<include>born-owlapi-${project.version}-javadoc.jar.asc</include>
+				<include>born-owlapi-${project.version}.pom.asc</include>
+			</includes>
+			<outputDirectory>modules/born-owlapi</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>${basedir}/../born-gui/target</directory>
+			<includes>
+				<include>born-gui-${project.version}.jar</include>
+				<include>born-gui-${project.version}-sources.jar</include>
+				<include>born-gui-${project.version}-javadoc.jar</include>
+				<include>born-gui-${project.version}.pom</include>
+				<include>born-gui-${project.version}.jar.asc</include>
+				<include>born-gui-${project.version}-sources.jar.asc</include>
+				<include>born-gui-${project.version}-javadoc.jar.asc</include>
+				<include>born-gui-${project.version}.pom.asc</include>
+			</includes>
+			<outputDirectory>modules/born-gui</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>${basedir}/../born-protege/target</directory>
+			<includes>
+				<include>born-protege-${project.version}.jar</include>
+				<include>born-protege-${project.version}-sources.jar</include>
+				<include>born-protege-${project.version}-javadoc.jar</include>
+				<include>born-protege-${project.version}.pom</include>
+				<include>born-protege-${project.version}.jar.asc</include>
+				<include>born-protege-${project.version}-sources.jar.asc</include>
+				<include>born-protege-${project.version}-javadoc.jar.asc</include>
+				<include>born-protege-${project.version}.pom.asc</include>
+			</includes>
+			<outputDirectory>modules/born-protege</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>${basedir}/../born-library/target</directory>
+			<includes>
+				<include>born-${project.version}.jar</include>
+				<include>born-${project.version}-sources.jar</include>
 				<include>born-${project.version}-javadoc.jar</include>
+				<include>born-${project.version}.pom</include>
+				<include>born-${project.version}.jar.asc</include>
+				<include>born-${project.version}-sources.jar.asc</include>
+				<include>born-${project.version}-javadoc.jar.asc</include>
+				<include>born-${project.version}.pom.asc</include>
 			</includes>
 			<outputDirectory>library</outputDirectory>
 		</fileSet>
 
 		<fileSet>
-			<directory>${basedir}/../born-build-plugin/target</directory>
+			<directory>${basedir}/../born-plugin/target</directory>
 			<includes>
-				<include>de.tudresden.inf.lat.born-javadoc.jar</include>
+				<include>${project.groupId}-${project.version}.jar</include>
+				<include>${project.groupId}-${project.version}-sources.jar</include>
+				<include>${project.groupId}-${project.version}-javadoc.jar</include>
+				<include>${project.groupId}-${project.version}.pom</include>
+				<include>${project.groupId}-${project.version}.jar.asc</include>
+				<include>${project.groupId}-${project.version}-sources.jar.asc</include>
+				<include>${project.groupId}-${project.version}-javadoc.jar.asc</include>
+				<include>${project.groupId}-${project.version}.pom.asc</include>
 			</includes>
 			<outputDirectory>plugin</outputDirectory>
 		</fileSet>
 
-	</fileSets>
-
-	<files>
-
-		<file>
-			<source>${basedir}/../born-build-library/target/born-${project.version}.jar</source>
-			<outputDirectory>library</outputDirectory>
-		</file>
-
-		<file>
-			<source>${basedir}/../born-build-library/target/born-${project.version}-sources.jar</source>
-			<outputDirectory>library</outputDirectory>
-		</file>
-
-		<file>
-			<source>${basedir}/../born-build-standalone/target/born.jar</source>
+		<fileSet>
+			<directory>${basedir}/../born-standalone/target</directory>
+			<includes>
+				<include>born.jar</include>
+				<include>born.jar.asc</include>
+				<include>born.pom</include>
+				<include>born.pom.asc</include>
+			</includes>
 			<outputDirectory>standalone</outputDirectory>
-		</file>
+		</fileSet>
 
-		<file>
-			<source>${basedir}/../born-build-plugin/target/de.tudresden.inf.lat.born.jar</source>
-			<outputDirectory>plugin</outputDirectory>
-		</file>
-
-		<file>
-			<source>${basedir}/../born-build-plugin/target/de.tudresden.inf.lat.born-sources.jar</source>
-			<outputDirectory>plugin</outputDirectory>
-		</file>
-
-	</files>
+	</fileSets>
 
 </assembly>
 
