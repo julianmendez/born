@@ -53,9 +53,10 @@
 		<module>born-owlapi</module>
 		<module>born-gui</module>
 		<module>born-protege</module>
-		<module>born-build-library</module>
-		<module>born-build-plugin</module>
-		<module>born-build-standalone</module>
+
+		<module>born-library</module>
+		<module>born-plugin</module>
+		<module>born-standalone</module>
 		<module>born-distribution</module>
 	</modules>
 
