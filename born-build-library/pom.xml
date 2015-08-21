@@ -96,7 +96,7 @@
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
-							LICENSE=../LICENSE
+							LICENSE.txt=../LICENSE.txt
 						</Include-Resource>
 					</instructions>
 				</configuration>
