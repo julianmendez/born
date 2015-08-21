@@ -92,6 +92,7 @@
 						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
 						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
 						<Import-Package>${import.package}</Import-Package>
+						<Main-Class>${mainClass}</Main-Class>
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
 							@born-owlapi-${project.version}.jar,
