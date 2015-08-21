@@ -34,7 +34,7 @@
 
 	<build>
 
-		<finalName>${project.groupId}</finalName>
+		<finalName>${project.groupId}-${project.version}</finalName>
 
 		<plugins>
 
