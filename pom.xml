@@ -205,16 +205,6 @@
 		<developerConnection>scm:git:https://github.com/julianmendez/born.git</developerConnection>
 	</scm>
 
-	<repositories>
-
-		<repository>
-			<id>bornrepository</id>
-			<name>BORN local Maven repository</name>
-			<url>file:${project.basedir}/../born-distribution/lib</url>
-		</repository>
-
-	</repositories>
-
 	<profiles>
 
 		<profile>
