@@ -22,7 +22,7 @@
 
 		<dependency>
 			<groupId>de.tu-dresden.inf.lat.jcel</groupId>
-			<artifactId>jcel</artifactId>
+			<artifactId>jcel-owlapi</artifactId>
 		</dependency>
 
 	</dependencies>

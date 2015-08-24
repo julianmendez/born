@@ -27,7 +27,7 @@
 
 		<mainClass>de.tudresden.inf.lat.born.main.BornStandalone</mainClass>
 
-		<bundle.classpath>.,lib/born/born-owlapi/0.2.0-SNAPSHOT/born-owlapi-0.2.0-SNAPSHOT.jar,lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar</bundle.classpath>
+		<bundle.classpath>.</bundle.classpath>
 		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
 		<import.package>javax.accessibility,javax.swing,javax.swing.border,org.osgi.framework,org.protege.editor.core.ui.workspace,*</import.package>
 	</properties>
@@ -99,7 +99,11 @@
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							@born-protege-${project.version}.jar,
-							lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar=../born-distribution/lib/de/tu-dresden/inf/lat/jcel/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar,
+							@jcel-coreontology-0.22.0.jar,
+							@jcel-core-0.22.0.jar,
+							@jcel-ontology-0.22.0.jar,
+							@jcel-reasoner-0.22.0.jar,
+							@jcel-owlapi-0.22.0.jar,
 							LICENSE.txt=../LICENSE.txt
 						</Include-Resource>
 					</instructions>
