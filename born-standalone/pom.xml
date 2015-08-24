@@ -187,7 +187,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>de.tudresden.inf.lat.born;singleton:=true</Bundle-SymbolicName>
+						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>born</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Category>protege</Bundle-Category>
