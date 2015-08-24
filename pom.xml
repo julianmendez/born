@@ -5,7 +5,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.tudresden.inf.lat.born</groupId>
+	<groupId>de.tu-dresden.inf.lat.born</groupId>
 	<artifactId>born-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>0.2.0-SNAPSHOT</version>

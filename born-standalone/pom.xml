@@ -162,7 +162,7 @@
 	</dependencies>
 
 	<parent>
-		<groupId>de.tudresden.inf.lat.born</groupId>
+		<groupId>de.tu-dresden.inf.lat.born</groupId>
 		<artifactId>born-parent</artifactId>
 		<version>0.2.0-SNAPSHOT</version>
 	</parent>
