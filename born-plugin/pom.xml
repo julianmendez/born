@@ -99,7 +99,7 @@
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							@born-protege-${project.version}.jar,
-							lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar=../born-distribution/lib/de/tudresden/inf/lat/jcel/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar,
+							lib/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar=../born-distribution/lib/de/tu-dresden/inf/lat/jcel/jcel/0.22.0-SNAPSHOT/jcel-0.22.0-SNAPSHOT.jar,
 							LICENSE.txt=../LICENSE.txt
 						</Include-Resource>
 					</instructions>

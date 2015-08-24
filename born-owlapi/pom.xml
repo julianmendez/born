@@ -21,7 +21,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>de.tudresden.inf.lat.jcel</groupId>
+			<groupId>de.tu-dresden.inf.lat.jcel</groupId>
 			<artifactId>jcel</artifactId>
 		</dependency>
 
