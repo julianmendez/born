@@ -20,7 +20,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  * 
  * @author Julian Mendez
  */
-public class AnnotatorView extends JPanel {
+public class TestMakerView extends JPanel {
 
 	private static final long serialVersionUID = -7460256750941145085L;
 
@@ -39,7 +39,7 @@ public class AnnotatorView extends JPanel {
 	private JTextField textMaxNumberOfVar = new JTextField();
 	private final AnnotatorConfiguration model;
 
-	public AnnotatorView(AnnotatorConfiguration model) {
+	public TestMakerView(AnnotatorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}

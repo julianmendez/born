@@ -20,7 +20,7 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigu
  * 
  * @author Julian Mendez
  */
-public class BayesianNetworkCreatorView extends JPanel {
+public class ExampleMakerView extends JPanel {
 
 	private static final long serialVersionUID = -3286416871432282437L;
 
@@ -33,7 +33,7 @@ public class BayesianNetworkCreatorView extends JPanel {
 	private JTextField textOutputBayesianNetwork = new JTextField();
 	private final BayesianNetworkCreatorConfiguration model;
 
-	public BayesianNetworkCreatorView(BayesianNetworkCreatorConfiguration model) {
+	public ExampleMakerView(BayesianNetworkCreatorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}

@@ -7,10 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import de.tudresden.inf.lat.born.gui.examplemaker.BayesianNetworkCreatorView;
-import de.tudresden.inf.lat.born.gui.experimentmaker.SplitterView;
+import de.tudresden.inf.lat.born.gui.examplemaker.ExampleMakerView;
+import de.tudresden.inf.lat.born.gui.experimentmaker.ExperimentMakerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
-import de.tudresden.inf.lat.born.gui.testmaker.AnnotatorView;
+import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 
 /**
  * This is the main panel.
@@ -23,9 +23,9 @@ public class BornView extends JPanel {
 
 	private final BornModel model;
 	private final ProcessorView processorView;
-	private final AnnotatorView annotatorView;
-	private final SplitterView splitterView;
-	private final BayesianNetworkCreatorView bayesianNetworkCreatorView;
+	private final TestMakerView testMakerView;
+	private final ExperimentMakerView experimentMakerView;
+	private final ExampleMakerView exampleMakerView;
 
 	public BornView(BornModel model) {
 		if (model == null) {
@@ -35,11 +35,11 @@ public class BornView extends JPanel {
 		this.model = model;
 		this.processorView = new ProcessorView(
 				this.model.getProcessorConfiguration());
-		this.annotatorView = new AnnotatorView(
+		this.testMakerView = new TestMakerView(
 				this.model.getAnnotatorConfiguration());
-		this.splitterView = new SplitterView(
+		this.experimentMakerView = new ExperimentMakerView(
 				this.model.getSplitterConfiguration());
-		this.bayesianNetworkCreatorView = new BayesianNetworkCreatorView(
+		this.exampleMakerView = new ExampleMakerView(
 				this.model.getBayesianNetworkCreatorConfiguration());
 
 		add(createPanel());
@@ -57,11 +57,11 @@ public class BornView extends JPanel {
 
 		tabbedPane.addTab("Processor", icon, this.processorView,
 				"processes an ontology to get the subsumption value");
-		tabbedPane.addTab("Annotator", icon, this.annotatorView,
+		tabbedPane.addTab("Test", icon, this.testMakerView,
 				"annotates an ontology");
-		tabbedPane.addTab("Splitter", icon, this.splitterView,
+		tabbedPane.addTab("Experiments", icon, this.experimentMakerView,
 				"splits an ontology");
-		tabbedPane.addTab("Connector", icon, this.bayesianNetworkCreatorView,
+		tabbedPane.addTab("Examples", icon, this.exampleMakerView,
 				"creates a Bayesian network");
 
 		add(tabbedPane);
@@ -79,23 +79,23 @@ public class BornView extends JPanel {
 		return this.processorView;
 	}
 
-	public AnnotatorView getAnnotatorView() {
-		return this.annotatorView;
+	public TestMakerView getTestMakerView() {
+		return this.testMakerView;
 	}
 
-	public SplitterView getSplitterView() {
-		return this.splitterView;
+	public ExperimentMakerView getExperimentMakerView() {
+		return this.experimentMakerView;
 	}
 
-	public BayesianNetworkCreatorView getBayesianNetworkCreatorView() {
-		return this.bayesianNetworkCreatorView;
+	public ExampleMakerView getExampleMakerView() {
+		return this.exampleMakerView;
 	}
 
 	public void update() {
 		this.processorView.update();
-		this.annotatorView.update();
-		this.splitterView.update();
-		this.bayesianNetworkCreatorView.update();
+		this.testMakerView.update();
+		this.experimentMakerView.update();
+		this.exampleMakerView.update();
 	}
 
 }

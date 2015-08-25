@@ -18,7 +18,7 @@ import de.tudresden.inf.lat.born.owlapi.splitter.SplitterConfiguration;
  * 
  * @author Julian Mendez
  */
-public class SplitterView extends JPanel {
+public class ExperimentMakerView extends JPanel {
 
 	private static final long serialVersionUID = -7105856642163451498L;
 
@@ -35,7 +35,7 @@ public class SplitterView extends JPanel {
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private final SplitterConfiguration model;
 
-	public SplitterView(SplitterConfiguration model) {
+	public ExperimentMakerView(SplitterConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
