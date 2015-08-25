@@ -123,7 +123,7 @@ public class ProcessorController implements ActionListener {
 	}
 
 	public void reset() {
-		// getView().setButtonComputeInferenceEnabled(false);
+
 	}
 
 	public void update() {
