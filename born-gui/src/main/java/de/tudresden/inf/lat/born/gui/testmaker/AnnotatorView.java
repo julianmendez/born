@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.gui.annotator;
+package de.tudresden.inf.lat.born.gui.testmaker;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;

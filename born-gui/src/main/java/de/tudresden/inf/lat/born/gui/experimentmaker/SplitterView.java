@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.gui.splitter;
+package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
 

@@ -7,10 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import de.tudresden.inf.lat.born.gui.annotator.AnnotatorView;
-import de.tudresden.inf.lat.born.gui.connector.BayesianNetworkCreatorView;
+import de.tudresden.inf.lat.born.gui.examplemaker.BayesianNetworkCreatorView;
+import de.tudresden.inf.lat.born.gui.experimentmaker.SplitterView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
-import de.tudresden.inf.lat.born.gui.splitter.SplitterView;
+import de.tudresden.inf.lat.born.gui.testmaker.AnnotatorView;
 
 /**
  * This is the main panel.

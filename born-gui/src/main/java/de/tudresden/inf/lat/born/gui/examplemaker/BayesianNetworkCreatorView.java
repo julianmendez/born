@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.gui.connector;
+package de.tudresden.inf.lat.born.gui.examplemaker;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
