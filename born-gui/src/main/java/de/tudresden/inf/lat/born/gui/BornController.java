@@ -3,8 +3,6 @@ package de.tudresden.inf.lat.born.gui;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.gui.processor.ProcessorController;
-import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
  * This class is a controller for the main panel.
@@ -29,8 +27,8 @@ public class BornController {
 	public BornController(BornView view, OWLOntologyManager ontologyManager) {
 		this.view = view;
 		this.owlOntologyManager = ontologyManager;
-		this.processorController = new ProcessorController(new ProcessorView(
-				new ProcessorConfiguration()), ontologyManager);
+		this.processorController = new ProcessorController(
+				view.getProcessorView(), ontologyManager);
 		reset();
 	}
 
