@@ -28,6 +28,7 @@ public class ProcessorView extends JPanel {
 	private static final long serialVersionUID = -3489883631448640992L;
 
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
+	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_file.pl";
 
 	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
 			this.getClass().getClassLoader()
@@ -287,10 +288,15 @@ public class ProcessorView extends JPanel {
 		}
 	}
 
+	void updateOutputFileName() {
+		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
+	}
+
 	public void update() {
 		updateInputOntologyFile();
 		updateBayesianNetworkFile();
 		updateQuery();
+		updateOutputFileName();
 	}
 
 	public void setResult(String result) {

@@ -86,6 +86,7 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionComputeInference() {
+		update();
 		long start = System.nanoTime();
 		ProcessorCore core = new ProcessorCore();
 		String result = core.run(getModel(), start);
