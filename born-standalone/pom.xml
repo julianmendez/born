@@ -170,7 +170,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<mainClass>de.tudresden.inf.lat.born.owlapi.main.BornMain</mainClass>
+		<mainClass>de.tudresden.inf.lat.born.main.Main</mainClass>
 
 		<import.package>javax.accessibility, javax.swing, javax.swing.border, org.osgi.framework, org.protege.editor.core.ui.workspace, *</import.package>
 	</properties>
