@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
+import java.io.InputStream;
+
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
 /**
@@ -9,36 +11,37 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  */
 public class ProcessorConfiguration {
 
-	private String ontologyFileName;
-	private String bayesianNetworkFileName;
-	private String queryFileName;
+	private InputStream ontologyInputStream;
+	private InputStream bayesianNetworkInputStream;
+	private InputStream queryInputStream;
 	private String outputFileName;
 	private String problogDirectory;
 	private boolean problogNeeded = true;
 	private boolean showingLog = true;
 
-	public String getOntologyFileName() {
-		return ontologyFileName;
+	public InputStream getOntologyInputStream() {
+		return ontologyInputStream;
 	}
 
-	public void setOntologyFileName(String ontologyFileName) {
-		this.ontologyFileName = ontologyFileName;
+	public void setOntologyInputStream(InputStream ontologyInputStream) {
+		this.ontologyInputStream = ontologyInputStream;
 	}
 
-	public String getBayesianNetworkFileName() {
-		return bayesianNetworkFileName;
+	public InputStream getBayesianNetworkInputStream() {
+		return bayesianNetworkInputStream;
 	}
 
-	public void setBayesianNetworkFileName(String bayesianNetworkFileName) {
-		this.bayesianNetworkFileName = bayesianNetworkFileName;
+	public void setBayesianNetworkInputStream(
+			InputStream bayesianNetworkInputStream) {
+		this.bayesianNetworkInputStream = bayesianNetworkInputStream;
 	}
 
-	public String getQueryFileName() {
-		return queryFileName;
+	public InputStream getQueryInputStream() {
+		return queryInputStream;
 	}
 
-	public void setQueryFileName(String queryFileName) {
-		this.queryFileName = queryFileName;
+	public void setQueryInputStream(InputStream queryInputStream) {
+		this.queryInputStream = queryInputStream;
 	}
 
 	public String getOutputFileName() {
@@ -81,10 +84,12 @@ public class ProcessorConfiguration {
 			return false;
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
-			return getOntologyFileName().equals(other.getOntologyFileName())
-					&& getBayesianNetworkFileName().equals(
-							other.getBayesianNetworkFileName())
-					&& getQueryFileName().equals(other.getQueryFileName())
+			return getOntologyInputStream().equals(
+					other.getOntologyInputStream())
+					&& getBayesianNetworkInputStream().equals(
+							other.getBayesianNetworkInputStream())
+					&& getQueryInputStream()
+							.equals(other.getQueryInputStream())
 					&& getOutputFileName().equals(other.getOutputFileName())
 					&& getProblogDirectory()
 							.equals(other.getProblogDirectory())
@@ -95,18 +100,18 @@ public class ProcessorConfiguration {
 
 	@Override
 	public int hashCode() {
-		return this.ontologyFileName.hashCode()
+		return this.ontologyInputStream.hashCode()
 				+ 0x1F
-				* (this.bayesianNetworkFileName.hashCode() + 0x1F * (this.queryFileName
-						.hashCode() + 0x1F * (this.ontologyFileName.hashCode() + 0x1F * (this.problogDirectory
-						.hashCode()))));
+				* (this.bayesianNetworkInputStream.hashCode() + 0x1F * (this.queryInputStream
+						.hashCode() + 0x1F * (this.ontologyInputStream
+						.hashCode() + 0x1F * (this.problogDirectory.hashCode()))));
 	}
 
 	@Override
 	public String toString() {
-		return this.ontologyFileName.toString() + " "
-				+ this.bayesianNetworkFileName.toString() + " "
-				+ this.queryFileName.toString() + " "
+		return this.ontologyInputStream.toString() + " "
+				+ this.bayesianNetworkInputStream.toString() + " "
+				+ this.queryInputStream.toString() + " "
 				+ this.outputFileName.toString() + " "
 				+ this.problogDirectory.toString() + " " + this.showingLog
 				+ " " + this.problogNeeded;

@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URI;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
@@ -103,9 +105,14 @@ public class ProcessorSubApp implements SubApp {
 				conf.setShowingLog(false);
 			}
 
-			conf.setOntologyFileName(newArgs[0]);
-			conf.setBayesianNetworkFileName(newArgs[1]);
-			conf.setQueryFileName(newArgs[2]);
+			try {
+				conf.setOntologyInputStream(new FileInputStream(newArgs[0]));
+				conf.setBayesianNetworkInputStream(new FileInputStream(
+						newArgs[1]));
+				conf.setQueryInputStream(new FileInputStream(newArgs[2]));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 			conf.setOutputFileName(newArgs[3]);
 			conf.setProblogDirectory(null);
 

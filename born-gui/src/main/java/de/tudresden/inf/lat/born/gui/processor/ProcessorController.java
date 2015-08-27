@@ -6,11 +6,10 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 
 /**
  * This class is a controller for the main panel.
@@ -60,7 +59,7 @@ public class ProcessorController implements ActionListener {
 		}
 	}
 
-	private void executeActionSelectInputOntologyFile() {
+	void executeActionSelectInputOntologyFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
@@ -68,31 +67,29 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			try {
-				OWLOntology owlInputOntology = this.owlOntologyManager
-						.loadOntologyFromOntologyDocument(file);
-				getModel().setOntologyFileName(file.getAbsolutePath());
-				update();
-			} catch (OWLOntologyCreationException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-
-	private void executeActionSelectBayesianNetworkFile() {
-		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showOpenDialog(getView());
-		File file = null;
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = fileChooser.getSelectedFile();
-		}
-		if (file != null) {
+			getView().setInputOntologyFile(file.getAbsolutePath());
 			update();
 		}
 	}
 
-	private void executeActionComputeInference() {
+	void executeActionSelectBayesianNetworkFile() {
+		JFileChooser fileChooser = new JFileChooser();
+		int returnVal = fileChooser.showOpenDialog(getView());
+		File file = null;
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
+		}
+		if (file != null) {
+			getView().setBayesianNetworkFile(file.getAbsolutePath());
+			update();
+		}
+	}
 
+	void executeActionComputeInference() {
+		long start = System.nanoTime();
+		ProcessorCore core = new ProcessorCore();
+		String result = core.run(getModel(), start);
+		getView().setResult(result);
 	}
 
 	public ProcessorConfiguration getModel() {

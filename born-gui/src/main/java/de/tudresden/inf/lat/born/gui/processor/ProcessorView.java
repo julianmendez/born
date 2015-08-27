@@ -2,6 +2,9 @@ package de.tudresden.inf.lat.born.gui.processor;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,6 +26,8 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 public class ProcessorView extends JPanel {
 
 	private static final long serialVersionUID = -3489883631448640992L;
+
+	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
 			this.getClass().getClassLoader()
@@ -233,10 +238,63 @@ public class ProcessorView extends JPanel {
 		this.buttonComputeInference.setEnabled(b);
 	}
 
+	public String getInputOntologyFile() {
+		return this.textInputOntologyFile.getText();
+	}
+
+	public void setInputOntologyFile(String fileName) {
+		this.textInputOntologyFile.setText(fileName);
+	}
+
+	public String getBayesianNetworkFile() {
+		return this.textBayesianNetworkFile.getText();
+	}
+
+	public void setBayesianNetworkFile(String fileName) {
+		this.textBayesianNetworkFile.setText(fileName);
+	}
+
+	void updateInputOntologyFile() {
+		String inputOntologyFile = getInputOntologyFile();
+		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
+			try {
+				getModel().setOntologyInputStream(
+						new FileInputStream(inputOntologyFile));
+			} catch (IOException e) {
+				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+			}
+		}
+	}
+
+	void updateBayesianNetworkFile() {
+		String bayesianNetworkFile = getBayesianNetworkFile();
+		if (bayesianNetworkFile != null
+				&& !bayesianNetworkFile.trim().isEmpty()) {
+			try {
+				getModel().setBayesianNetworkInputStream(
+						new FileInputStream(bayesianNetworkFile));
+			} catch (IOException e) {
+				setBayesianNetworkFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+			}
+		}
+	}
+
+	void updateQuery() {
+		String query = this.textQueryFile.getText();
+		if (query != null && !query.trim().isEmpty()) {
+			getModel().setQueryInputStream(
+					new ByteArrayInputStream(query.getBytes()));
+		}
+	}
+
 	public void update() {
-		this.textInputOntologyFile.setText(getModel().getOntologyFileName());
-		this.textBayesianNetworkFile.setText(getModel()
-				.getBayesianNetworkFileName());
+		updateInputOntologyFile();
+		updateBayesianNetworkFile();
+		updateQuery();
+	}
+
+	public void setResult(String result) {
+		this.textOutputFile.setText(result);
 	}
 
 }

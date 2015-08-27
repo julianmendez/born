@@ -10,10 +10,10 @@ public interface Message {
 	String iconOpenInputOntologyFile = "img/folder.png";
 	String textComputeInference = ">";
 
-	String textInputOntologyFile = "input ontology file";
-	String textBayesianNetworkFile = "Bayesian network file";
-	String textQuery = "query";
-	String textOutput = "output";
+	String textInputOntologyFile = "input ontology file (e.g. \"ontology.owl\")";
+	String textBayesianNetworkFile = "Bayesian network file (e.g. \"network.pl\")";
+	String textQuery = "query (e.g. \"query(sub('A', 'B')).\" )";
+	String textOutput = "console output";
 
 	String tooltipTextFieldInputOntologyFile = "select the input ontology file";
 	String tooltipTextFieldBayesianNetworkFile = "select the Bayesian network file";
