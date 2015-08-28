@@ -100,21 +100,15 @@ public class ProcessorConfiguration {
 
 	@Override
 	public int hashCode() {
-		return this.ontologyInputStream.hashCode()
-				+ 0x1F
-				* (this.bayesianNetworkInputStream.hashCode() + 0x1F * (this.queryInputStream
-						.hashCode() + 0x1F * (this.ontologyInputStream
-						.hashCode() + 0x1F * (this.problogDirectory.hashCode()))));
+		return toString().hashCode();
 	}
 
 	@Override
 	public String toString() {
-		return this.ontologyInputStream.toString() + " "
-				+ this.bayesianNetworkInputStream.toString() + " "
-				+ this.queryInputStream.toString() + " "
-				+ this.outputFileName.toString() + " "
-				+ this.problogDirectory.toString() + " " + this.showingLog
-				+ " " + this.problogNeeded;
+		return this.ontologyInputStream + " " + this.bayesianNetworkInputStream
+				+ " " + this.queryInputStream + " " + this.outputFileName + " "
+				+ this.problogDirectory + " " + this.showingLog + " "
+				+ this.problogNeeded;
 	}
 
 }

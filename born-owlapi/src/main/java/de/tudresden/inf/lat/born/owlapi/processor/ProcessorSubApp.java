@@ -18,11 +18,10 @@ import de.tudresden.inf.lat.born.core.term.SubApp;
 public class ProcessorSubApp implements SubApp {
 
 	static final String LOGGING_OPTION = "--log";
-	static final String SLASH = "/";
-	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
-			.create("https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip");
-	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
-	static final String DEFAULT_PROBLOG_DIRECTORY = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY
+	static final String SLASH = ProcessorCore.SLASH;
+	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProcessorCore.DEFAULT_PROBLOG_DOWNLOAD_URI;
+	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY;
+	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY
 			+ SLASH + "problog2.1";
 	static final String HELP = ""
 			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"

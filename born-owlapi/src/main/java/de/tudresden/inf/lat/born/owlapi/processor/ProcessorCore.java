@@ -175,8 +175,8 @@ public class ProcessorCore {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(ontologyInputStream,
-				bayesianNetworkInputStream, queryInputStream, new FileOutputStream(
-						PROBLOG_OUTPUT_FILE));
+				bayesianNetworkInputStream, queryInputStream,
+				new FileOutputStream(PROBLOG_OUTPUT_FILE));
 		return ret;
 
 	}
@@ -224,8 +224,10 @@ public class ProcessorCore {
 				installProblog(start, conf.getProblogDirectory());
 			}
 
-			String info = createProblogFile(start, conf.getOntologyInputStream(),
-					conf.getBayesianNetworkInputStream(), conf.getQueryInputStream());
+			String info = createProblogFile(start,
+					conf.getOntologyInputStream(),
+					conf.getBayesianNetworkInputStream(),
+					conf.getQueryInputStream());
 			log(info, start);
 
 			int exitVal = executeProblog(start, conf.getProblogDirectory(),

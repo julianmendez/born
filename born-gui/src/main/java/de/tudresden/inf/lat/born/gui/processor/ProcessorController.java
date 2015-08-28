@@ -10,6 +10,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
  * This class is a controller for the main panel.
@@ -21,6 +22,8 @@ public class ProcessorController implements ActionListener {
 	private static final String actionSelectInputOntologyFile = "open file";
 	private static final String actionSelectBayesianNetworkFile = "Bayesian network file";
 	private static final String actionComputeInference = "compute inference";
+
+	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 
 	private final OWLOntologyManager owlOntologyManager;
 
@@ -116,6 +119,8 @@ public class ProcessorController implements ActionListener {
 				actionSelectBayesianNetworkFile);
 		getView().addButtonComputeInferenceListener(this,
 				actionComputeInference);
+
+		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
 
 		reset();
 	}
