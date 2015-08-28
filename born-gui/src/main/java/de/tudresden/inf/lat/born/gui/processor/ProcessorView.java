@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -41,8 +42,8 @@ public class ProcessorView extends JPanel {
 			Message.textComputeInference);
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
-	private JTextField textQueryFile = new JTextField();
-	private JTextField textOutputFile = new JTextField();
+	private JTextArea textQueryFile = new JTextArea();
+	private JTextArea textOutputFile = new JTextArea();
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
@@ -91,58 +92,6 @@ public class ProcessorView extends JPanel {
 
 		this.buttonComputeInference.addActionListener(listener);
 		this.buttonComputeInference.setActionCommand(actionCommand);
-	}
-
-	public void addTextFieldInputOntologyFileListener(ActionListener listener,
-			String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		this.textInputOntologyFile.addActionListener(listener);
-		this.textInputOntologyFile.setActionCommand(actionCommand);
-	}
-
-	public void addTextFieldBayesianNetworkFileListener(
-			ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		this.textBayesianNetworkFile.addActionListener(listener);
-		this.textBayesianNetworkFile.setActionCommand(actionCommand);
-	}
-
-	public void addTextFieldQueryFileListener(ActionListener listener,
-			String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		this.textQueryFile.addActionListener(listener);
-		this.textQueryFile.setActionCommand(actionCommand);
-	}
-
-	public void addTextFieldOutputFileListener(ActionListener listener,
-			String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		this.textOutputFile.addActionListener(listener);
-		this.textOutputFile.setActionCommand(actionCommand);
 	}
 
 	private JPanel createPanel() {
