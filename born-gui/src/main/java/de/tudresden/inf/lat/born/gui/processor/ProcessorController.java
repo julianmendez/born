@@ -25,6 +25,8 @@ public class ProcessorController implements ActionListener {
 
 	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 
+	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
+
 	private final OWLOntologyManager owlOntologyManager;
 
 	private final ProcessorView view;
@@ -120,6 +122,7 @@ public class ProcessorController implements ActionListener {
 		getView().addButtonComputeInferenceListener(this,
 				actionComputeInference);
 
+		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
 
 		reset();
