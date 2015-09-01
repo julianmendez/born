@@ -37,8 +37,9 @@ public class ProcessorView extends JPanel {
 	private JButton buttonSelectBayesianNetworkFile = new JButton(
 			new ImageIcon(this.getClass().getClassLoader()
 					.getResource(Message.iconOpenInputOntologyFile)));
-	private JButton buttonComputeInference = new JButton(
-			Message.textComputeInference);
+	private JButton buttonComputeInference = new JButton(new ImageIcon(this
+			.getClass().getClassLoader()
+			.getResource(Message.iconComputeInference)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private JTextArea textQueryFile = new JTextArea();

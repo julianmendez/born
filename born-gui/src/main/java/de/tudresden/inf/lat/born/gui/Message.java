@@ -7,8 +7,8 @@ package de.tudresden.inf.lat.born.gui;
  */
 public interface Message {
 
-	String iconOpenInputOntologyFile = "icons/folder.png";
-	String textComputeInference = ">";
+	String iconOpenInputOntologyFile = "icons/openfolder-16x16.png";
+	String iconComputeInference = "icons/play-16x16.png";
 
 	String textInputOntologyFile = "input ontology file (e.g. \"ontology.owl\")";
 	String textBayesianNetworkFile = "Bayesian network file (e.g. \"network.pl\")";
