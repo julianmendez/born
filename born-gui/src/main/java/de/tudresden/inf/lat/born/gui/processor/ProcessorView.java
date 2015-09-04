@@ -10,11 +10,11 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.ScrollPaneConstants;
 
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
@@ -42,8 +42,12 @@ public class ProcessorView extends JPanel {
 			.getResource(Message.iconComputeInference)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
-	private JTextArea textQueryFile = new JTextArea();
-	private JTextArea textOutputFile = new JTextArea();
+	private JTextArea textConsoleInput = new JTextArea();
+	private JScrollPane scrollConsoleInput = new JScrollPane(
+			this.textConsoleInput);
+	private JTextArea textConsoleOutput = new JTextArea();
+	private JScrollPane scrollConsoleOutput = new JScrollPane(
+			this.textConsoleOutput);
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
@@ -94,6 +98,15 @@ public class ProcessorView extends JPanel {
 		this.buttonComputeInference.setActionCommand(actionCommand);
 	}
 
+	JTextField newLabel(String text) {
+		JTextField ret = new JTextField(text);
+		ret.setEditable(false);
+		ret.setBackground(null);
+		ret.setBorder(null);
+		ret.setAlignmentX(LEFT_ALIGNMENT);
+		return ret;
+	}
+
 	private JPanel createPanel() {
 
 		JPanel ret = new JPanel();
@@ -116,11 +129,7 @@ public class ProcessorView extends JPanel {
 		largePanel.setAlignmentX(CENTER_ALIGNMENT);
 		largePanel.setLayout(new BoxLayout(largePanel, BoxLayout.Y_AXIS));
 
-		JLabel labelInputOntologyFile = new JLabel(
-				Message.textInputOntologyFile);
-		labelInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
-
-		largePanel.add(labelInputOntologyFile);
+		largePanel.add(newLabel(Message.textInputOntologyFile));
 
 		this.buttonSelectInputOntologyFile
 				.setToolTipText(Message.tooltipOpenInputOntologyFile);
@@ -133,11 +142,7 @@ public class ProcessorView extends JPanel {
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		JLabel labelBayesianNetworkFile = new JLabel(
-				Message.textBayesianNetworkFile);
-		labelBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-
-		largePanel.add(labelBayesianNetworkFile);
+		largePanel.add(newLabel(Message.textBayesianNetworkFile));
 
 		this.buttonSelectBayesianNetworkFile
 				.setToolTipText(Message.tooltipOpenInputOntologyFile);
@@ -151,25 +156,29 @@ public class ProcessorView extends JPanel {
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		JLabel labelQueryFile = new JLabel(Message.textQuery);
-		labelQueryFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(labelQueryFile);
+		largePanel.add(newLabel(Message.textQuery));
 
-		this.textQueryFile
+		this.textConsoleInput
 				.setToolTipText(Message.tooltipTextFieldListOfParents);
-		this.textQueryFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textQueryFile);
+		this.textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
+
+		this.scrollConsoleInput
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+		largePanel.add(this.scrollConsoleInput);
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		JLabel labelOutputFile = new JLabel(Message.textOutput);
-		labelOutputFile.setHorizontalAlignment(SwingConstants.CENTER);
-		largePanel.add(labelOutputFile);
+		largePanel.add(newLabel(Message.textOutput));
 
-		this.textOutputFile.setToolTipText(Message.tooltipTextFieldOutputFile);
-		this.textOutputFile.setMinimumSize(new Dimension(width, height));
-		this.textOutputFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textOutputFile);
+		this.textConsoleOutput
+				.setToolTipText(Message.tooltipTextFieldOutputFile);
+		this.textConsoleOutput.setMinimumSize(new Dimension(width, height));
+		this.textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
+		this.scrollConsoleOutput
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+		largePanel.add(this.scrollConsoleOutput);
 
 		ret.add(largePanel);
 
@@ -230,7 +239,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	void updateQuery() {
-		String query = this.textQueryFile.getText();
+		String query = this.textConsoleInput.getText();
 		if (query != null && !query.trim().isEmpty()) {
 			getModel().setQueryInputStream(
 					new ByteArrayInputStream(query.getBytes()));
@@ -244,7 +253,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setResult(String result) {
-		this.textOutputFile.setText(result);
+		this.textConsoleOutput.setText(result);
 	}
 
 }
