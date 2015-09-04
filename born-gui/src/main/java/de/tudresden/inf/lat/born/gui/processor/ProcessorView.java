@@ -42,7 +42,7 @@ public class ProcessorView extends JPanel {
 	private JTextArea textConsoleInput = new JTextArea();
 	private JScrollPane scrollConsoleInput = new JScrollPane(this.textConsoleInput);
 	private JTextArea textConsoleOutput = new JTextArea();
-	private JScrollPane scrollConsoleOutput = new JScrollPane(this.textConsoleOutput);
+	private JScrollPane scrollConsoleOutput = new JScrollPane();
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
@@ -51,7 +51,8 @@ public class ProcessorView extends JPanel {
 		}
 
 		this.model = model;
-		add(createPanel());
+		setLayout(null);
+		createPanel();
 	}
 
 	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
@@ -90,63 +91,51 @@ public class ProcessorView extends JPanel {
 		this.buttonComputeInference.setActionCommand(actionCommand);
 	}
 
-	private JPanel createPanel() {
-
-		JPanel largePanel = new JPanel();
-		largePanel.setAlignmentX(CENTER_ALIGNMENT);
-		largePanel.setLayout(new BoxLayout(largePanel, BoxLayout.Y_AXIS));
+	private void createPanel() {
 
 		int width = 280;
 		int height = 28;
-		int gap = 4;
+
+		buttonComputeInference.setBounds(184, 439, 54, 28);
+		add(buttonComputeInference);
 
 		this.buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
-		largePanel.add(this.buttonComputeInference);
-
-		// largePanel.add(newLabel(Message.textInputOntologyFile));
+		buttonSelectInputOntologyFile.setBounds(168, 135, 54, 28);
+		add(buttonSelectInputOntologyFile);
 
 		this.buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
-		largePanel.add(this.buttonSelectInputOntologyFile);
+		textInputOntologyFile.setBounds(282, 43, 228, 45);
+		add(textInputOntologyFile);
 
 		this.textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		this.textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textInputOntologyFile);
 
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		// largePanel.add(newLabel(Message.textBayesianNetworkFile));
+		buttonSelectBayesianNetworkFile.setBounds(168, 48, 54, 28);
+		add(buttonSelectBayesianNetworkFile);
 
 		this.buttonSelectBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
-
-		largePanel.add(this.buttonSelectBayesianNetworkFile);
+		textBayesianNetworkFile.setBounds(282, 135, 228, 45);
+		add(textBayesianNetworkFile);
 
 		this.textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		this.textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textBayesianNetworkFile);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		// largePanel.add(newLabel(Message.textQuery));
 
 		this.textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		this.textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
+		scrollConsoleInput.setBounds(282, 228, 228, 65);
+		add(scrollConsoleInput);
 
 		this.scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		largePanel.add(this.scrollConsoleInput);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		// largePanel.add(newLabel(Message.textOutput));
+		scrollConsoleOutput.setBounds(282, 345, 228, 65);
+		add(scrollConsoleOutput);
+		this.scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollConsoleOutput.setViewportView(textConsoleOutput);
 
 		this.textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
 		this.textConsoleOutput.setMinimumSize(new Dimension(width, height));
 		this.textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
-		this.scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		largePanel.add(this.scrollConsoleOutput);
-
-		return largePanel;
 	}
 
 	public ProcessorConfiguration getModel() {
