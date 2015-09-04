@@ -51,7 +51,7 @@ public class BornView extends JPanel {
 		ret.setLayout(new GridLayout(1, 1));
 
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.setPreferredSize(new Dimension(600, 400));
+		tabbedPane.setPreferredSize(new Dimension(1024, 768));
 
 		ImageIcon icon = null;
 
