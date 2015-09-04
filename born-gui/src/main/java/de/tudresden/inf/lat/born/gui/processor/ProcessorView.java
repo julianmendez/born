@@ -30,24 +30,19 @@ public class ProcessorView extends JPanel {
 
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
-	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
-			this.getClass().getClassLoader()
-					.getResource(Message.iconOpenInputOntologyFile)));
+	private JButton buttonSelectInputOntologyFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenInputOntologyFile)));
 
 	private JButton buttonSelectBayesianNetworkFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader()
-					.getResource(Message.iconOpenInputOntologyFile)));
-	private JButton buttonComputeInference = new JButton(new ImageIcon(this
-			.getClass().getClassLoader()
-			.getResource(Message.iconComputeInference)));
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenInputOntologyFile)));
+	private JButton buttonComputeInference = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconComputeInference)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private JTextArea textConsoleInput = new JTextArea();
-	private JScrollPane scrollConsoleInput = new JScrollPane(
-			this.textConsoleInput);
+	private JScrollPane scrollConsoleInput = new JScrollPane(this.textConsoleInput);
 	private JTextArea textConsoleOutput = new JTextArea();
-	private JScrollPane scrollConsoleOutput = new JScrollPane(
-			this.textConsoleOutput);
+	private JScrollPane scrollConsoleOutput = new JScrollPane(this.textConsoleOutput);
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
@@ -59,8 +54,7 @@ public class ProcessorView extends JPanel {
 		add(createPanel());
 	}
 
-	public void addButtonSelectInputOntologyFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -72,8 +66,7 @@ public class ProcessorView extends JPanel {
 		this.buttonSelectInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonSelectBayesianNetworkFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addButtonSelectBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -85,8 +78,7 @@ public class ProcessorView extends JPanel {
 		this.buttonSelectBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonComputeInferenceListener(ActionListener listener,
-			String actionCommand) {
+	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -98,91 +90,63 @@ public class ProcessorView extends JPanel {
 		this.buttonComputeInference.setActionCommand(actionCommand);
 	}
 
-	JTextField newLabel(String text) {
-		JTextField ret = new JTextField(text);
-		ret.setEditable(false);
-		ret.setBackground(null);
-		ret.setBorder(null);
-		ret.setAlignmentX(LEFT_ALIGNMENT);
-		return ret;
-	}
-
 	private JPanel createPanel() {
-
-		JPanel ret = new JPanel();
-		ret.setLayout(new BoxLayout(ret, BoxLayout.Y_AXIS));
-
-		int width = 280;
-		int height = 28;
-		int gap = 4;
-
-		JPanel smallPanel = new JPanel();
-		smallPanel.setAlignmentX(CENTER_ALIGNMENT);
-		this.buttonComputeInference
-				.setToolTipText(Message.tooltipComputeInference);
-		smallPanel.add(this.buttonComputeInference);
-		ret.add(smallPanel);
-
-		ret.add(Box.createVerticalStrut(gap));
 
 		JPanel largePanel = new JPanel();
 		largePanel.setAlignmentX(CENTER_ALIGNMENT);
 		largePanel.setLayout(new BoxLayout(largePanel, BoxLayout.Y_AXIS));
 
-		largePanel.add(newLabel(Message.textInputOntologyFile));
+		int width = 280;
+		int height = 28;
+		int gap = 4;
 
-		this.buttonSelectInputOntologyFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		this.buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
+		largePanel.add(this.buttonComputeInference);
+
+		// largePanel.add(newLabel(Message.textInputOntologyFile));
+
+		this.buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		largePanel.add(this.buttonSelectInputOntologyFile);
 
-		this.textInputOntologyFile
-				.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		this.textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		this.textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		largePanel.add(this.textInputOntologyFile);
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		largePanel.add(newLabel(Message.textBayesianNetworkFile));
+		// largePanel.add(newLabel(Message.textBayesianNetworkFile));
 
-		this.buttonSelectBayesianNetworkFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		this.buttonSelectBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
 		largePanel.add(this.buttonSelectBayesianNetworkFile);
 
-		this.textBayesianNetworkFile
-				.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
+		this.textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		this.textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 		largePanel.add(this.textBayesianNetworkFile);
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		largePanel.add(newLabel(Message.textQuery));
+		// largePanel.add(newLabel(Message.textQuery));
 
-		this.textConsoleInput
-				.setToolTipText(Message.tooltipTextFieldListOfParents);
+		this.textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		this.textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
-		this.scrollConsoleInput
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		this.scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		largePanel.add(this.scrollConsoleInput);
 
 		largePanel.add(Box.createVerticalStrut(gap));
 
-		largePanel.add(newLabel(Message.textOutput));
+		// largePanel.add(newLabel(Message.textOutput));
 
-		this.textConsoleOutput
-				.setToolTipText(Message.tooltipTextFieldOutputFile);
+		this.textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
 		this.textConsoleOutput.setMinimumSize(new Dimension(width, height));
 		this.textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
-		this.scrollConsoleOutput
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		this.scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		largePanel.add(this.scrollConsoleOutput);
 
-		ret.add(largePanel);
-
-		return ret;
+		return largePanel;
 	}
 
 	public ProcessorConfiguration getModel() {
@@ -217,8 +181,7 @@ public class ProcessorView extends JPanel {
 		String inputOntologyFile = getInputOntologyFile();
 		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
 			try {
-				getModel().setOntologyInputStream(
-						new FileInputStream(inputOntologyFile));
+				getModel().setOntologyInputStream(new FileInputStream(inputOntologyFile));
 			} catch (IOException e) {
 				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
@@ -227,11 +190,9 @@ public class ProcessorView extends JPanel {
 
 	void updateBayesianNetworkFile() {
 		String bayesianNetworkFile = getBayesianNetworkFile();
-		if (bayesianNetworkFile != null
-				&& !bayesianNetworkFile.trim().isEmpty()) {
+		if (bayesianNetworkFile != null && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
-				getModel().setBayesianNetworkInputStream(
-						new FileInputStream(bayesianNetworkFile));
+				getModel().setBayesianNetworkInputStream(new FileInputStream(bayesianNetworkFile));
 			} catch (IOException e) {
 				setBayesianNetworkFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
@@ -241,8 +202,7 @@ public class ProcessorView extends JPanel {
 	void updateQuery() {
 		String query = this.textConsoleInput.getText();
 		if (query != null && !query.trim().isEmpty()) {
-			getModel().setQueryInputStream(
-					new ByteArrayInputStream(query.getBytes()));
+			getModel().setQueryInputStream(new ByteArrayInputStream(query.getBytes()));
 		}
 	}
 
