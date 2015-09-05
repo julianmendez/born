@@ -1,19 +1,15 @@
 package de.tudresden.inf.lat.born.gui.testmaker;
 
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import javax.swing.JLabel;
 
 /**
  * This is the panel for the annotator.
@@ -24,21 +20,22 @@ public class TestMakerView extends JPanel {
 
 	private static final long serialVersionUID = -7460256750941145085L;
 
-	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
-			this.getClass().getClassLoader()
-					.getResource(Message.iconOpenFile)));
-
-	private JButton buttonSelectBayesianNetworkFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader()
-					.getResource(Message.iconOpenFile)));
-	private JButton buttonComputeInference = new JButton(new ImageIcon(this
-			.getClass().getClassLoader()
-			.getResource(Message.iconComputeInference)));
+	private JButton buttonSelectInputOntologyFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
+	private JButton buttonSelectOutputOntologyFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconSaveFile)));
+	private JButton buttonAnnotateOntology = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconRun)));
+	
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textOutputOntologyFile = new JTextField();
 	private JTextField textThreshold = new JTextField();
 	private JTextField textMaxNumberOfVar = new JTextField();
 	private final AnnotatorConfiguration model;
+	private final JLabel lblNewLabel = new JLabel("input ontology");
+	private final JLabel lblOutputOntology = new JLabel("output ontology");
+	private final JLabel lblThr = new JLabel("threshold [0,1]");
+	private final JLabel lblVariables = new JLabel("numbero of vars");
 
 	public TestMakerView(AnnotatorConfiguration model) {
 		if (model == null) {
@@ -46,11 +43,10 @@ public class TestMakerView extends JPanel {
 		}
 
 		this.model = model;
-		add(createPanel());
+		createPanel();
 	}
 
-	public void addButtonSelectInputOntologyFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -62,8 +58,7 @@ public class TestMakerView extends JPanel {
 		this.buttonSelectInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonSelectBayesianNetworkFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addButtonSelectOutputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -71,12 +66,11 @@ public class TestMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonSelectBayesianNetworkFile.addActionListener(listener);
-		this.buttonSelectBayesianNetworkFile.setActionCommand(actionCommand);
+		this.buttonSelectOutputOntologyFile.addActionListener(listener);
+		this.buttonSelectOutputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonComputeInferenceListener(ActionListener listener,
-			String actionCommand) {
+	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -84,12 +78,11 @@ public class TestMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonComputeInference.addActionListener(listener);
-		this.buttonComputeInference.setActionCommand(actionCommand);
+		this.buttonAnnotateOntology.addActionListener(listener);
+		this.buttonAnnotateOntology.setActionCommand(actionCommand);
 	}
 
-	public void addTextFieldInputOntologyFileListener(ActionListener listener,
-			String actionCommand) {
+	public void addTextFieldInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -101,8 +94,7 @@ public class TestMakerView extends JPanel {
 		this.textInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addTextFieldBayesianNetworkFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addTextFieldBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -114,8 +106,7 @@ public class TestMakerView extends JPanel {
 		this.textOutputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addTextFieldThresholdListener(ActionListener listener,
-			String actionCommand) {
+	public void addTextFieldThresholdListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -127,8 +118,7 @@ public class TestMakerView extends JPanel {
 		this.textThreshold.setActionCommand(actionCommand);
 	}
 
-	public void addTextFieldMaxNumberOfVarListener(ActionListener listener,
-			String actionCommand) {
+	public void addTextFieldMaxNumberOfVarListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -140,80 +130,54 @@ public class TestMakerView extends JPanel {
 		this.textMaxNumberOfVar.setActionCommand(actionCommand);
 	}
 
-	private JPanel createPanel() {
+	void createPanel() {
 
-		JPanel ret = new JPanel();
-		ret.setLayout(new BoxLayout(ret, BoxLayout.Y_AXIS));
+		setLayout(null);
 
-		int width = 280;
-		int height = 28;
-		int gap = 4;
+		buttonSelectInputOntologyFile.setBounds(140, 101, 50, 26);
+		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonSelectInputOntologyFile);
 
-		JPanel smallPanel = new JPanel();
-		smallPanel.setAlignmentX(CENTER_ALIGNMENT);
-		this.buttonComputeInference.setToolTipText(Message.tooltipAnnotatorRun);
-		smallPanel.add(this.buttonComputeInference);
-		ret.add(smallPanel);
+		textInputOntologyFile.setBounds(277, 101, 196, 40);
+		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		add(textInputOntologyFile);
 
-		ret.add(Box.createVerticalStrut(gap));
+		buttonSelectOutputOntologyFile.setBounds(140, 184, 50, 26);
+		buttonSelectOutputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonSelectOutputOntologyFile);
 
-		JPanel largePanel = new JPanel();
-		largePanel.setAlignmentX(CENTER_ALIGNMENT);
-		largePanel.setLayout(new BoxLayout(largePanel, BoxLayout.Y_AXIS));
+		textOutputOntologyFile.setBounds(277, 186, 196, 34);
+		textOutputOntologyFile.setToolTipText(Message.tooltipTextFieldOutputOntologyFile);
+		textOutputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		add(textOutputOntologyFile);
 
-		JLabel labelInputOntologyFile = new JLabel(
-				Message.textInputOntologyFile);
-		labelInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		textThreshold.setBounds(277, 265, 196, 34);
+		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
+		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
+		add(textThreshold);
 
-		largePanel.add(labelInputOntologyFile);
+		textMaxNumberOfVar.setBounds(282, 339, 191, 34);
+		textMaxNumberOfVar.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
+		textMaxNumberOfVar.setAlignmentX(LEFT_ALIGNMENT);
+		add(textMaxNumberOfVar);
 
-		this.buttonSelectInputOntologyFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
-		largePanel.add(this.buttonSelectInputOntologyFile);
+		buttonAnnotateOntology.setBounds(140, 419, 50, 26);
+		buttonAnnotateOntology.setToolTipText(Message.tooltipAnnotatorRun);
+		add(buttonAnnotateOntology);
+		lblNewLabel.setBounds(140, 144, 120, 15);
+		
+		add(lblNewLabel);
+		lblOutputOntology.setBounds(140, 222, 120, 15);
+		
+		add(lblOutputOntology);
+		lblThr.setBounds(133, 274, 126, 15);
+		
+		add(lblThr);
+		lblVariables.setBounds(140, 348, 124, 15);
+		
+		add(lblVariables);
 
-		this.textInputOntologyFile
-				.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
-		this.textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textInputOntologyFile);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		JLabel labelBayesianNetworkFile = new JLabel(
-				Message.textOutputOntolgoyFile);
-		labelBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-
-		largePanel.add(labelBayesianNetworkFile);
-
-		this.textOutputOntologyFile
-				.setToolTipText(Message.tooltipTextFieldOutputOntologyFile);
-		this.textOutputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textOutputOntologyFile);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		JLabel labelQueryFile = new JLabel(Message.textThreshold);
-		labelQueryFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(labelQueryFile);
-
-		this.textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
-		this.textThreshold.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textThreshold);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		JLabel labelOutputFile = new JLabel(Message.textMaxNumberOfVar);
-		labelOutputFile.setHorizontalAlignment(SwingConstants.CENTER);
-		largePanel.add(labelOutputFile);
-
-		this.textMaxNumberOfVar
-				.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
-		this.textMaxNumberOfVar.setMinimumSize(new Dimension(width, height));
-		this.textMaxNumberOfVar.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textMaxNumberOfVar);
-
-		ret.add(largePanel);
-
-		return ret;
 	}
 
 	public AnnotatorConfiguration getModel() {
@@ -225,7 +189,7 @@ public class TestMakerView extends JPanel {
 	}
 
 	public void setButtonComputeInferenceEnabled(boolean b) {
-		this.buttonComputeInference.setEnabled(b);
+		this.buttonAnnotateOntology.setEnabled(b);
 	}
 
 	public void update() {

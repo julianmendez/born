@@ -29,7 +29,7 @@ public class ExampleMakerView extends JPanel {
 					.getResource(Message.iconOpenFile)));
 	private JButton buttonComputeInference = new JButton(new ImageIcon(this
 			.getClass().getClassLoader()
-			.getResource(Message.iconComputeInference)));
+			.getResource(Message.iconRun)));
 	private JTextField textListOfParents = new JTextField();
 	private JTextField textOutputBayesianNetwork = new JTextField();
 	private final BayesianNetworkCreatorConfiguration model;

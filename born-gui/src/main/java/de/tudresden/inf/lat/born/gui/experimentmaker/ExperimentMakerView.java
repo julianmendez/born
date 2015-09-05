@@ -31,7 +31,7 @@ public class ExperimentMakerView extends JPanel {
 					.getResource(Message.iconOpenFile)));
 	private JButton buttonComputeInference = new JButton(new ImageIcon(this
 			.getClass().getClassLoader()
-			.getResource(Message.iconComputeInference)));
+			.getResource(Message.iconRun)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private final SplitterConfiguration model;

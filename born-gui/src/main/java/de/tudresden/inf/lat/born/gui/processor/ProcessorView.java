@@ -37,7 +37,7 @@ public class ProcessorView extends JPanel {
 	private JButton buttonWriteConsoleOutputFile = new JButton(
 			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconSaveFile)));
 	private JButton buttonComputeInference = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconComputeInference)));
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconRun)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private JTextArea textConsoleInput = new JTextArea();
@@ -92,7 +92,7 @@ public class ProcessorView extends JPanel {
 		this.buttonComputeInference.setActionCommand(actionCommand);
 	}
 
-	private void createPanel() {
+	void createPanel() {
 
 		JLabel lblNewLabel = new JLabel("ontology");
 		lblNewLabel.setBounds(168, 83, 70, 15);
