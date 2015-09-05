@@ -82,7 +82,7 @@ public class ExampleMakerView extends JPanel {
 		textOutputBayesianNetwork.setAlignmentX(LEFT_ALIGNMENT);
 		add(textOutputBayesianNetwork);
 
-		buttonLoadExample.setIcon(BornIcon.RUN);
+		buttonLoadExample.setIcon(BornIcon.REFRESH);
 		buttonLoadExample.setBounds(25, 175, 50, 28);
 		buttonLoadExample.setToolTipText(Message.tooltipComputeInference);
 		add(buttonLoadExample);

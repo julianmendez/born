@@ -19,12 +19,14 @@ public class BornIcon {
 	public static final String OPEN_FILE_PATH = "icons/openfolder.png";
 	public static final String SAVE_FILE_PATH = "icons/floppydisk.png";
 	public static final String RUN_PATH = "icons/play.png";
+	public static final String REFRESH_PATH = "icons/refresh.png";
 
 	public static final int DEFAULT_ICON_SIZE = 24;
 
 	public static final ImageIcon OPEN_FILE = createIcon(OPEN_FILE_PATH, DEFAULT_ICON_SIZE);
 	public static final ImageIcon SAVE_FILE = createIcon(SAVE_FILE_PATH, DEFAULT_ICON_SIZE);
 	public static final ImageIcon RUN = createIcon(RUN_PATH, DEFAULT_ICON_SIZE);
+	public static final ImageIcon REFRESH = createIcon(REFRESH_PATH, DEFAULT_ICON_SIZE);
 
 	/**
 	 * Creates an icon with the given size. If the path is invalid, this method
