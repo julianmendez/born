@@ -2,12 +2,12 @@ package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.splitter.SplitterConfiguration;
 
@@ -20,12 +20,9 @@ public class ExperimentMakerView extends JPanel {
 
 	private static final long serialVersionUID = -7105856642163451498L;
 
-	private JButton buttonSelectInputOntologyFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
-	private JButton buttonSelectOutputOntologyFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconSaveFile)));
-	private JButton buttonCreateOntology = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconRun)));
+	private JButton buttonSelectInputOntologyFile = new JButton();
+	private JButton buttonSelectOutputOntologyFile = new JButton(BornIcon.SAVE_FILE);
+	private JButton buttonCreateOntology = new JButton(BornIcon.RUN);
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private final SplitterConfiguration model;
@@ -108,11 +105,12 @@ public class ExperimentMakerView extends JPanel {
 		lblInput.setBounds(31, 62, 70, 15);
 		add(lblInput);
 
+		buttonSelectInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputOntologyFile.setBounds(31, 22, 50, 26);
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectInputOntologyFile);
 
-		textInputOntologyFile.setBounds(154, 24, 215, 36);
+		textInputOntologyFile.setBounds(154, 24, 215, 26);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		add(textInputOntologyFile);
@@ -121,15 +119,17 @@ public class ExperimentMakerView extends JPanel {
 		lblOutput.setBounds(31, 143, 70, 15);
 		add(lblOutput);
 
+		buttonSelectOutputOntologyFile.setIcon(BornIcon.SAVE_FILE);
 		buttonSelectOutputOntologyFile.setBounds(31, 102, 50, 26);
 		buttonSelectOutputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectOutputOntologyFile);
 
-		textBayesianNetworkFile.setBounds(154, 102, 215, 36);
+		textBayesianNetworkFile.setBounds(154, 102, 215, 26);
 		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 		add(textBayesianNetworkFile);
 
+		buttonCreateOntology.setIcon(BornIcon.RUN);
 		buttonCreateOntology.setBounds(31, 197, 50, 26);
 		buttonCreateOntology.setToolTipText(Message.tooltipComputeInference);
 		add(buttonCreateOntology);

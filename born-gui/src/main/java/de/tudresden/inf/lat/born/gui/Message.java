@@ -7,9 +7,7 @@ package de.tudresden.inf.lat.born.gui;
  */
 public interface Message {
 
-	String iconOpenFile = "icons/openfolder-16x16.png";
-	String iconSaveFile = "icons/floppydisk-16x16.png";
-	String iconRun = "icons/play-16x16.png";
+
 
 	String textInputOntologyFile = "input ontology file (e.g. \"ontology.owl\")";
 	String textBayesianNetworkFile = "Bayesian network file (e.g. \"network.pl\")";

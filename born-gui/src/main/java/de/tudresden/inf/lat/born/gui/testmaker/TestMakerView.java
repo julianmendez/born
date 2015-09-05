@@ -2,14 +2,14 @@ package de.tudresden.inf.lat.born.gui.testmaker;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import javax.swing.JLabel;
 
 /**
  * This is the panel for the annotator.
@@ -20,12 +20,9 @@ public class TestMakerView extends JPanel {
 
 	private static final long serialVersionUID = -7460256750941145085L;
 
-	private JButton buttonSelectInputOntologyFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
-	private JButton buttonSelectOutputOntologyFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconSaveFile)));
-	private JButton buttonAnnotateOntology = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconRun)));
+	private JButton buttonSelectInputOntologyFile = new JButton();
+	private JButton buttonSelectOutputOntologyFile = new JButton();
+	private JButton buttonAnnotateOntology = new JButton();
 	
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textOutputOntologyFile = new JTextField();
@@ -35,7 +32,7 @@ public class TestMakerView extends JPanel {
 	private final JLabel lblNewLabel = new JLabel("input ontology");
 	private final JLabel lblOutputOntology = new JLabel("output ontology");
 	private final JLabel lblThr = new JLabel("threshold [0,1]");
-	private final JLabel lblVariables = new JLabel("numbero of vars");
+	private final JLabel lblVariables = new JLabel("number of vars");
 
 	public TestMakerView(AnnotatorConfiguration model) {
 		if (model == null) {
@@ -134,34 +131,37 @@ public class TestMakerView extends JPanel {
 
 		setLayout(null);
 
+		buttonSelectInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputOntologyFile.setBounds(140, 101, 50, 26);
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectInputOntologyFile);
 
-		textInputOntologyFile.setBounds(277, 101, 196, 40);
+		textInputOntologyFile.setBounds(277, 101, 196, 26);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		add(textInputOntologyFile);
 
+		buttonSelectOutputOntologyFile.setIcon(BornIcon.SAVE_FILE);
 		buttonSelectOutputOntologyFile.setBounds(140, 184, 50, 26);
 		buttonSelectOutputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectOutputOntologyFile);
 
-		textOutputOntologyFile.setBounds(277, 186, 196, 34);
+		textOutputOntologyFile.setBounds(277, 186, 196, 26);
 		textOutputOntologyFile.setToolTipText(Message.tooltipTextFieldOutputOntologyFile);
 		textOutputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		add(textOutputOntologyFile);
 
-		textThreshold.setBounds(277, 265, 196, 34);
+		textThreshold.setBounds(277, 265, 196, 24);
 		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
-		textMaxNumberOfVar.setBounds(282, 339, 191, 34);
+		textMaxNumberOfVar.setBounds(282, 339, 191, 24);
 		textMaxNumberOfVar.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
 		textMaxNumberOfVar.setAlignmentX(LEFT_ALIGNMENT);
 		add(textMaxNumberOfVar);
 
+		buttonAnnotateOntology.setIcon(BornIcon.RUN);
 		buttonAnnotateOntology.setBounds(140, 419, 50, 26);
 		buttonAnnotateOntology.setToolTipText(Message.tooltipAnnotatorRun);
 		add(buttonAnnotateOntology);
@@ -171,7 +171,7 @@ public class TestMakerView extends JPanel {
 		lblOutputOntology.setBounds(140, 222, 120, 15);
 		
 		add(lblOutputOntology);
-		lblThr.setBounds(133, 274, 126, 15);
+		lblThr.setBounds(140, 274, 126, 15);
 		
 		add(lblThr);
 		lblVariables.setBounds(140, 348, 124, 15);
