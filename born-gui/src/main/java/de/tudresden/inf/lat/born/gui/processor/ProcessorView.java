@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -93,6 +94,10 @@ public class ProcessorView extends JPanel {
 
 	private void createPanel() {
 
+		JLabel lblNewLabel = new JLabel("ontology");
+		lblNewLabel.setBounds(168, 83, 70, 15);
+		add(lblNewLabel);
+
 		buttonSelectInputOntologyFile.setBounds(168, 43, 54, 28);
 		add(buttonSelectInputOntologyFile);
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
@@ -102,16 +107,24 @@ public class ProcessorView extends JPanel {
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 
-		buttonSelectBayesianNetworkFile.setBounds(168, 150, 54, 28);
+		JLabel lblNewLabel_1 = new JLabel("Bayesian network");
+		lblNewLabel_1.setBounds(168, 184, 128, 15);
+		add(lblNewLabel_1);
+
+		buttonSelectBayesianNetworkFile.setBounds(168, 135, 54, 28);
 		add(buttonSelectBayesianNetworkFile);
 		buttonSelectBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		textBayesianNetworkFile.setBounds(282, 150, 228, 45);
+		textBayesianNetworkFile.setBounds(299, 135, 228, 45);
 		add(textBayesianNetworkFile);
 		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 
-		buttonReadConsoleInputFile.setBounds(168, 248, 54, 28);
+		JLabel lblInput = new JLabel("input");
+		lblInput.setBounds(168, 283, 70, 15);
+		add(lblInput);
+
+		buttonReadConsoleInputFile.setBounds(168, 246, 54, 28);
 		add(buttonReadConsoleInputFile);
 		buttonReadConsoleInputFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
@@ -125,6 +138,10 @@ public class ProcessorView extends JPanel {
 		add(scrollConsoleInput);
 		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollConsoleInput.setViewportView(textConsoleInput);
+
+		JLabel lblOutput = new JLabel("output");
+		lblOutput.setBounds(168, 395, 70, 15);
+		add(lblOutput);
 
 		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
 		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
