@@ -2,8 +2,6 @@ package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,16 +20,12 @@ public class ExperimentMakerView extends JPanel {
 
 	private static final long serialVersionUID = -7105856642163451498L;
 
-	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
-			this.getClass().getClassLoader()
-					.getResource(Message.iconOpenFile)));
-
-	private JButton buttonSelectBayesianNetworkFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader()
-					.getResource(Message.iconOpenFile)));
-	private JButton buttonComputeInference = new JButton(new ImageIcon(this
-			.getClass().getClassLoader()
-			.getResource(Message.iconRun)));
+	private JButton buttonSelectInputOntologyFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
+	private JButton buttonSelectOutputOntologyFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconSaveFile)));
+	private JButton buttonCreateOntology = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconRun)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private final SplitterConfiguration model;
@@ -42,11 +36,10 @@ public class ExperimentMakerView extends JPanel {
 		}
 
 		this.model = model;
-		add(createPanel());
+		createPanel();
 	}
 
-	public void addButtonSelectInputOntologyFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -58,8 +51,7 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonSelectInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonSelectBayesianNetworkFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addButtonSelectBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -67,12 +59,11 @@ public class ExperimentMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonSelectBayesianNetworkFile.addActionListener(listener);
-		this.buttonSelectBayesianNetworkFile.setActionCommand(actionCommand);
+		this.buttonSelectOutputOntologyFile.addActionListener(listener);
+		this.buttonSelectOutputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonComputeInferenceListener(ActionListener listener,
-			String actionCommand) {
+	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -80,12 +71,11 @@ public class ExperimentMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonComputeInference.addActionListener(listener);
-		this.buttonComputeInference.setActionCommand(actionCommand);
+		this.buttonCreateOntology.addActionListener(listener);
+		this.buttonCreateOntology.setActionCommand(actionCommand);
 	}
 
-	public void addTextFieldInputOntologyFileListener(ActionListener listener,
-			String actionCommand) {
+	public void addTextFieldInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -97,8 +87,7 @@ public class ExperimentMakerView extends JPanel {
 		this.textInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addTextFieldBayesianNetworkFileListener(
-			ActionListener listener, String actionCommand) {
+	public void addTextFieldBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -110,64 +99,40 @@ public class ExperimentMakerView extends JPanel {
 		this.textBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
-	private JPanel createPanel() {
+	void createPanel() {
 
-		JPanel ret = new JPanel();
-		ret.setLayout(new BoxLayout(ret, BoxLayout.Y_AXIS));
+		setAlignmentX(CENTER_ALIGNMENT);
+		setLayout(null);
 
-		int gap = 4;
+		JLabel lblInput = new JLabel("input");
+		lblInput.setBounds(31, 62, 70, 15);
+		add(lblInput);
 
-		JPanel smallPanel = new JPanel();
-		smallPanel.setAlignmentX(CENTER_ALIGNMENT);
-		this.buttonComputeInference
-				.setToolTipText(Message.tooltipComputeInference);
-		smallPanel.add(this.buttonComputeInference);
-		ret.add(smallPanel);
+		buttonSelectInputOntologyFile.setBounds(31, 22, 50, 26);
+		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonSelectInputOntologyFile);
 
-		ret.add(Box.createVerticalStrut(gap));
+		textInputOntologyFile.setBounds(154, 24, 215, 36);
+		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		add(textInputOntologyFile);
 
-		JPanel largePanel = new JPanel();
-		largePanel.setAlignmentX(CENTER_ALIGNMENT);
-		largePanel.setLayout(new BoxLayout(largePanel, BoxLayout.Y_AXIS));
+		JLabel lblOutput = new JLabel("output");
+		lblOutput.setBounds(31, 143, 70, 15);
+		add(lblOutput);
 
-		JLabel labelInputOntologyFile = new JLabel(
-				Message.textInputOntologyFile);
-		labelInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		buttonSelectOutputOntologyFile.setBounds(31, 102, 50, 26);
+		buttonSelectOutputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonSelectOutputOntologyFile);
 
-		largePanel.add(labelInputOntologyFile);
+		textBayesianNetworkFile.setBounds(154, 102, 215, 36);
+		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
+		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+		add(textBayesianNetworkFile);
 
-		this.buttonSelectInputOntologyFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
-		largePanel.add(this.buttonSelectInputOntologyFile);
-
-		this.textInputOntologyFile
-				.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
-		this.textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textInputOntologyFile);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		JLabel labelBayesianNetworkFile = new JLabel(
-				Message.textBayesianNetworkFile);
-		labelBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-
-		largePanel.add(labelBayesianNetworkFile);
-
-		this.buttonSelectBayesianNetworkFile
-				.setToolTipText(Message.tooltipOpenInputOntologyFile);
-
-		largePanel.add(this.buttonSelectBayesianNetworkFile);
-
-		this.textBayesianNetworkFile
-				.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
-		this.textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-		largePanel.add(this.textBayesianNetworkFile);
-
-		largePanel.add(Box.createVerticalStrut(gap));
-
-		ret.add(largePanel);
-
-		return ret;
+		buttonCreateOntology.setBounds(31, 197, 50, 26);
+		buttonCreateOntology.setToolTipText(Message.tooltipComputeInference);
+		add(buttonCreateOntology);
 	}
 
 	public SplitterConfiguration getModel() {
@@ -179,7 +144,7 @@ public class ExperimentMakerView extends JPanel {
 	}
 
 	public void setButtonComputeInferenceEnabled(boolean b) {
-		this.buttonComputeInference.setEnabled(b);
+		this.buttonCreateOntology.setEnabled(b);
 	}
 
 	public void update() {
