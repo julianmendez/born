@@ -1,13 +1,10 @@
 package de.tudresden.inf.lat.born.gui.processor;
 
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,17 +28,20 @@ public class ProcessorView extends JPanel {
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private JButton buttonSelectInputOntologyFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenInputOntologyFile)));
-
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
 	private JButton buttonSelectBayesianNetworkFile = new JButton(
-			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenInputOntologyFile)));
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
+	private JButton buttonReadConsoleInputFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconOpenFile)));
+	private JButton buttonWriteConsoleOutputFile = new JButton(
+			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconSaveFile)));
 	private JButton buttonComputeInference = new JButton(
 			new ImageIcon(this.getClass().getClassLoader().getResource(Message.iconComputeInference)));
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private JTextArea textConsoleInput = new JTextArea();
-	private JScrollPane scrollConsoleInput = new JScrollPane(this.textConsoleInput);
 	private JTextArea textConsoleOutput = new JTextArea();
+	private JScrollPane scrollConsoleInput = new JScrollPane();
 	private JScrollPane scrollConsoleOutput = new JScrollPane();
 	private final ProcessorConfiguration model;
 
@@ -93,48 +93,54 @@ public class ProcessorView extends JPanel {
 
 	private void createPanel() {
 
-		int width = 280;
-		int height = 28;
-
-		buttonComputeInference.setBounds(184, 439, 54, 28);
-		add(buttonComputeInference);
-
-		this.buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
-		buttonSelectInputOntologyFile.setBounds(168, 135, 54, 28);
+		buttonSelectInputOntologyFile.setBounds(168, 43, 54, 28);
 		add(buttonSelectInputOntologyFile);
+		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		this.buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		textInputOntologyFile.setBounds(282, 43, 228, 45);
 		add(textInputOntologyFile);
+		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 
-		this.textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
-		this.textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
-
-		buttonSelectBayesianNetworkFile.setBounds(168, 48, 54, 28);
+		buttonSelectBayesianNetworkFile.setBounds(168, 150, 54, 28);
 		add(buttonSelectBayesianNetworkFile);
+		buttonSelectBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		this.buttonSelectBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		textBayesianNetworkFile.setBounds(282, 150, 228, 45);
+		add(textBayesianNetworkFile);
+		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
+		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+
+		buttonReadConsoleInputFile.setBounds(168, 248, 54, 28);
+		add(buttonReadConsoleInputFile);
+		buttonReadConsoleInputFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+
 		textBayesianNetworkFile.setBounds(282, 135, 228, 45);
 		add(textBayesianNetworkFile);
 
-		this.textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
-		this.textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
+		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
-		this.textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
-		this.textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
-		scrollConsoleInput.setBounds(282, 228, 228, 65);
+		scrollConsoleInput.setBounds(282, 246, 228, 65);
 		add(scrollConsoleInput);
+		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollConsoleInput.setViewportView(textConsoleInput);
 
-		this.scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-		scrollConsoleOutput.setBounds(282, 345, 228, 65);
-		add(scrollConsoleOutput);
-		this.scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
+		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
 		scrollConsoleOutput.setViewportView(textConsoleOutput);
 
-		this.textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
-		this.textConsoleOutput.setMinimumSize(new Dimension(width, height));
-		this.textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
+		buttonWriteConsoleOutputFile.setBounds(168, 355, 54, 28);
+		add(buttonWriteConsoleOutputFile);
+		buttonWriteConsoleOutputFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+
+		scrollConsoleOutput.setBounds(282, 355, 228, 65);
+		add(scrollConsoleOutput);
+		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+		buttonComputeInference.setBounds(168, 476, 54, 28);
+		add(buttonComputeInference);
+		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
 
 	}
 
@@ -204,5 +210,4 @@ public class ProcessorView extends JPanel {
 	public void setResult(String result) {
 		this.textConsoleOutput.setText(result);
 	}
-
 }

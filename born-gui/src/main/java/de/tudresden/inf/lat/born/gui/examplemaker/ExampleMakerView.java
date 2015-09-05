@@ -26,7 +26,7 @@ public class ExampleMakerView extends JPanel {
 
 	private JButton buttonSelectInputOntologyFile = new JButton(new ImageIcon(
 			this.getClass().getClassLoader()
-					.getResource(Message.iconOpenInputOntologyFile)));
+					.getResource(Message.iconOpenFile)));
 	private JButton buttonComputeInference = new JButton(new ImageIcon(this
 			.getClass().getClassLoader()
 			.getResource(Message.iconComputeInference)));
