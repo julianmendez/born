@@ -16,17 +16,17 @@ import javax.swing.ImageIcon;
  */
 public class BornIcon {
 
-	public static final String OPEN_FILE_PATH = "icons/openfolder.png";
-	public static final String SAVE_FILE_PATH = "icons/floppydisk.png";
-	public static final String RUN_PATH = "icons/play.png";
-	public static final String REFRESH_PATH = "icons/refresh.png";
+	public static final String PATH_OPEN_FILE = "icons/openfolder.png";
+	public static final String PATH_SAVE_FILE = "icons/floppydisk.png";
+	public static final String PATH_RUN = "icons/play.png";
+	public static final String PATH_REFRESH = "icons/refresh.png";
 
 	public static final int DEFAULT_ICON_SIZE = 24;
 
-	public static final ImageIcon OPEN_FILE = createIcon(OPEN_FILE_PATH, DEFAULT_ICON_SIZE);
-	public static final ImageIcon SAVE_FILE = createIcon(SAVE_FILE_PATH, DEFAULT_ICON_SIZE);
-	public static final ImageIcon RUN = createIcon(RUN_PATH, DEFAULT_ICON_SIZE);
-	public static final ImageIcon REFRESH = createIcon(REFRESH_PATH, DEFAULT_ICON_SIZE);
+	public static final ImageIcon OPEN_FILE = createIcon(PATH_OPEN_FILE);
+	public static final ImageIcon SAVE_FILE = createIcon(PATH_SAVE_FILE);
+	public static final ImageIcon RUN = createIcon(PATH_RUN);
+	public static final ImageIcon REFRESH = createIcon(PATH_REFRESH);
 
 	/**
 	 * Creates an icon with the given size. If the path is invalid, this method
@@ -59,6 +59,15 @@ public class BornIcon {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	/**
+	 * Returns an icon created with the default size for the given path.
+	 * 
+	 * @path path of icon
+	 */
+	public static ImageIcon createIcon(String path) {
+		return createIcon(path, DEFAULT_ICON_SIZE);
 	}
 
 }
