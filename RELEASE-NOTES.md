@@ -14,7 +14,7 @@
 ```
 $ mvn clean install
 ```
-* release: `target/born-0.23.0.zip`
+* release: `target/born-0.2.0.zip`
 * plug-in: `born-plugin/target/de.tu-dresden.inf.lat.born-0.2.0.jar`
 
 
