@@ -13,7 +13,7 @@
 	<extension id="BornTab" point="org.protege.editor.core.application.WorkspaceTab">
 		<label value="BORN"/>
 		<class value="org.protege.editor.core.ui.workspace.WorkspaceViewsTab"/>
-		<defaultViewConfigFileName value="viewconfig-tab.xml"/>
+		<defaultViewConfigFileName value="born.layout.xml"/>
 		<index value="A"/>
 		<editorKitId value="OWLEditorKit"/>
 	</extension>

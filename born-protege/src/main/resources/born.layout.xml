@@ -4,7 +4,7 @@
         <HSNode splits="0.125 0.125">
             <CNode>
                 <Component label="BORN">
-                    <Property id="pluginId" value="de.tudresden.inf.lat.born.BornMain"/>
+                    <Property id="pluginId" value="de.tu-dresden.inf.lat.born.BornMain"/>
                 </Component>
             </CNode>
             <VSNode splits="0.0625 0.0625">
