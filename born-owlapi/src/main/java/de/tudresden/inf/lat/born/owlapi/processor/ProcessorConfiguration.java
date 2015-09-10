@@ -31,8 +31,7 @@ public class ProcessorConfiguration {
 		return bayesianNetworkInputStream;
 	}
 
-	public void setBayesianNetworkInputStream(
-			InputStream bayesianNetworkInputStream) {
+	public void setBayesianNetworkInputStream(InputStream bayesianNetworkInputStream) {
 		this.bayesianNetworkInputStream = bayesianNetworkInputStream;
 	}
 
@@ -84,17 +83,12 @@ public class ProcessorConfiguration {
 			return false;
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
-			return getOntologyInputStream().equals(
-					other.getOntologyInputStream())
-					&& getBayesianNetworkInputStream().equals(
-							other.getBayesianNetworkInputStream())
-					&& getQueryInputStream()
-							.equals(other.getQueryInputStream())
+			return getOntologyInputStream().equals(other.getOntologyInputStream())
+					&& getBayesianNetworkInputStream().equals(other.getBayesianNetworkInputStream())
+					&& getQueryInputStream().equals(other.getQueryInputStream())
 					&& getOutputFileName().equals(other.getOutputFileName())
-					&& getProblogDirectory()
-							.equals(other.getProblogDirectory())
-					&& (isShowingLog() == other.isShowingLog())
-					&& (isProblogNeeded() == other.isProblogNeeded());
+					&& getProblogDirectory().equals(other.getProblogDirectory())
+					&& (isShowingLog() == other.isShowingLog()) && (isProblogNeeded() == other.isProblogNeeded());
 		}
 	}
 
@@ -105,10 +99,8 @@ public class ProcessorConfiguration {
 
 	@Override
 	public String toString() {
-		return this.ontologyInputStream + " " + this.bayesianNetworkInputStream
-				+ " " + this.queryInputStream + " " + this.outputFileName + " "
-				+ this.problogDirectory + " " + this.showingLog + " "
-				+ this.problogNeeded;
+		return this.ontologyInputStream + " " + this.bayesianNetworkInputStream + " " + this.queryInputStream + " "
+				+ this.outputFileName + " " + this.problogDirectory + " " + this.showingLog + " " + this.problogNeeded;
 	}
 
 }
