@@ -19,8 +19,10 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
  */
 public class ProcessorController implements ActionListener {
 
-	private static final String actionSelectInputOntologyFile = "open file";
-	private static final String actionSelectBayesianNetworkFile = "Bayesian network file";
+	private static final String actionInputOntology = "open file";
+	private static final String actionBayesianNetwork = "Bayesian network file";
+	private static final String actionConsoleInput = "read console";
+	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
 
 	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
@@ -39,8 +41,7 @@ public class ProcessorController implements ActionListener {
 	 * @param ontologyManager
 	 *            an OWL ontology manager
 	 */
-	public ProcessorController(ProcessorView view,
-			OWLOntologyManager ontologyManager) {
+	public ProcessorController(ProcessorView view, OWLOntologyManager ontologyManager) {
 		this.view = view;
 		this.owlOntologyManager = ontologyManager;
 		init();
@@ -53,10 +54,14 @@ public class ProcessorController implements ActionListener {
 		}
 
 		String cmd = e.getActionCommand();
-		if (cmd.equals(actionSelectInputOntologyFile)) {
-			executeActionSelectInputOntologyFile();
-		} else if (cmd.equals(actionSelectBayesianNetworkFile)) {
-			executeActionSelectBayesianNetworkFile();
+		if (cmd.equals(actionInputOntology)) {
+			executeActionInputOntology();
+		} else if (cmd.equals(actionBayesianNetwork)) {
+			executeActionBayesianNetwork();
+		} else if (cmd.equals(actionConsoleInput)) {
+			executeActionConsoleInput();
+		} else if (cmd.equals(actionConsoleOutput)) {
+			executeActionConsoleOutput();
 		} else if (cmd.equals(actionComputeInference)) {
 			executeActionComputeInference();
 		} else {
@@ -64,7 +69,7 @@ public class ProcessorController implements ActionListener {
 		}
 	}
 
-	void executeActionSelectInputOntologyFile() {
+	void executeActionInputOntology() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
@@ -72,12 +77,12 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setInputOntologyFile(file.getAbsolutePath());
+			getView().setInputOntology(file.getAbsolutePath());
 			update();
 		}
 	}
 
-	void executeActionSelectBayesianNetworkFile() {
+	void executeActionBayesianNetwork() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
@@ -85,7 +90,33 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setBayesianNetworkFile(file.getAbsolutePath());
+			getView().setBayesianNetwork(file.getAbsolutePath());
+			update();
+		}
+	}
+
+	void executeActionConsoleInput() {
+		JFileChooser fileChooser = new JFileChooser();
+		int returnVal = fileChooser.showOpenDialog(getView());
+		File file = null;
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
+		}
+		if (file != null) {
+			getView().setConsoleInput(file.getAbsolutePath());
+			update();
+		}
+	}
+
+	void executeActionConsoleOutput() {
+		JFileChooser fileChooser = new JFileChooser();
+		int returnVal = fileChooser.showSaveDialog(getView());
+		File file = null;
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
+		}
+		if (file != null) {
+			getView().setConsoleOutput(file.getAbsolutePath());
 			update();
 		}
 	}
@@ -115,12 +146,11 @@ public class ProcessorController implements ActionListener {
 	 * initialized.
 	 */
 	private void init() {
-		getView().addButtonSelectInputOntologyFileListener(this,
-				actionSelectInputOntologyFile);
-		getView().addButtonSelectBayesianNetworkFileListener(this,
-				actionSelectBayesianNetworkFile);
-		getView().addButtonComputeInferenceListener(this,
-				actionComputeInference);
+		getView().addButtonInputOntologyListener(this, actionInputOntology);
+		getView().addButtonBayesianNetworkListener(this, actionBayesianNetwork);
+		getView().addButtonConsoleInputListener(this, actionConsoleInput);
+		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
+		getView().addButtonComputeInferenceListener(this, actionComputeInference);
 
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
