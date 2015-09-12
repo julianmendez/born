@@ -50,7 +50,6 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<finalName>${project.groupId}</finalName>
 							<formats>
 								<format>jar</format>
 							</formats>
@@ -67,7 +66,6 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<finalName>${project.groupId}</finalName>
 							<descriptors>
 								<descriptor>${basedir}/src/assembly/javadoc.xml</descriptor>
 							</descriptors>
