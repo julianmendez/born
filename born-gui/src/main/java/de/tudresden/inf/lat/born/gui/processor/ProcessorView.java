@@ -257,9 +257,9 @@ public class ProcessorView extends JPanel {
 	String read(Reader r) throws IOException {
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader in = new BufferedReader(r);
-		for (String line = in.readLine(); line != null;) {
-			line = in.readLine();
+		for (String line = in.readLine(); line != null; line = in.readLine()) {
 			sbuf.append(line);
+			sbuf.append("\n");
 		}
 		return sbuf.toString();
 	}
