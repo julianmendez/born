@@ -2,11 +2,15 @@ package de.tudresden.inf.lat.born.gui.processor;
 
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
+import java.io.Writer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -188,6 +192,26 @@ public class ProcessorView extends JPanel {
 
 	}
 
+	String read(Reader r) throws IOException {
+		StringBuffer sbuf = new StringBuffer();
+		BufferedReader in = new BufferedReader(r);
+		for (String line = in.readLine(); line != null; line = in.readLine()) {
+			sbuf.append(line);
+			sbuf.append("\n");
+		}
+		return sbuf.toString();
+	}
+
+	void write(Reader input, Writer output) throws IOException {
+		BufferedWriter out = new BufferedWriter(output);
+		BufferedReader in = new BufferedReader(input);
+		for (String line = in.readLine(); line != null; line = in.readLine()) {
+			out.write(line);
+			out.newLine();
+		}
+		out.flush();
+	}
+
 	public ProcessorConfiguration getModel() {
 		return this.model;
 	}
@@ -212,8 +236,31 @@ public class ProcessorView extends JPanel {
 		return this.textConsoleInput.getText();
 	}
 
-	public void setConsoleInput(String fileName) {
-		this.textConsoleInput.setText(fileName);
+	public void setConsoleInput(String text) {
+		this.textConsoleInput.setText(text);
+	}
+
+	public void readConsoleInput(String consoleInputFile) {
+		if (consoleInputFile != null && !consoleInputFile.trim().isEmpty()) {
+			try {
+				String text = read(new FileReader(consoleInputFile));
+				this.textConsoleInput.setText(text);
+				updateQuery();
+			} catch (IOException e) {
+				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+			}
+		}
+	}
+
+	public void writeConsoleOutput(String consoleOutputFile) {
+		if (consoleOutputFile != null && !consoleOutputFile.trim().isEmpty()) {
+			try {
+				String text = this.textConsoleOutput.getText();
+				write(new StringReader(text), new FileWriter(consoleOutputFile));
+			} catch (IOException e) {
+				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+			}
+		}
 	}
 
 	public String getConsoleOutput() {
@@ -254,25 +301,10 @@ public class ProcessorView extends JPanel {
 		}
 	}
 
-	String read(Reader r) throws IOException {
-		StringBuffer sbuf = new StringBuffer();
-		BufferedReader in = new BufferedReader(r);
-		for (String line = in.readLine(); line != null; line = in.readLine()) {
-			sbuf.append(line);
-			sbuf.append("\n");
-		}
-		return sbuf.toString();
-	}
-
-	void updateConsoleInputFile() {
-		String consoleInputFile = getConsoleInput();
-		if (consoleInputFile != null && !consoleInputFile.trim().isEmpty()) {
-			try {
-				String text = read(new FileReader(consoleInputFile));
-				this.textConsoleInput.setText(text);
-			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			}
+	void updateQuery() {
+		String query = this.textConsoleInput.getText();
+		if (query != null && !query.trim().isEmpty()) {
+			getModel().setQueryInputStream(new ByteArrayInputStream(query.getBytes()));
 		}
 	}
 
@@ -281,21 +313,6 @@ public class ProcessorView extends JPanel {
 		if (consoleOutputFile != null && !consoleOutputFile.trim().isEmpty()) {
 			setResult(consoleOutputFile);
 		}
-	}
-
-	void updateQuery() {
-		String query = this.textConsoleInput.getText();
-		if (query != null && !query.trim().isEmpty()) {
-			getModel().setQueryInputStream(new ByteArrayInputStream(query.getBytes()));
-		}
-	}
-
-	public void update() {
-		updateInputOntologyFile();
-		updateBayesianNetworkFile();
-		updateQuery();
-		updateConsoleInputFile();
-		updateConsoleOutputFile();
 	}
 
 	public void setResult(String result) {

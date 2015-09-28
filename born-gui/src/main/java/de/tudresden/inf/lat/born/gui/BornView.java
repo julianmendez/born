@@ -92,7 +92,6 @@ public class BornView extends JPanel {
 	}
 
 	public void update() {
-		this.processorView.update();
 		this.testMakerView.update();
 		this.experimentMakerView.update();
 		this.exampleMakerView.update();

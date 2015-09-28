@@ -78,7 +78,6 @@ public class ProcessorController implements ActionListener {
 		}
 		if (file != null) {
 			getView().setInputOntology(file.getAbsolutePath());
-			update();
 		}
 	}
 
@@ -91,7 +90,6 @@ public class ProcessorController implements ActionListener {
 		}
 		if (file != null) {
 			getView().setBayesianNetwork(file.getAbsolutePath());
-			update();
 		}
 	}
 
@@ -103,8 +101,7 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setConsoleInput(file.getAbsolutePath());
-			update();
+			getView().readConsoleInput(file.getAbsolutePath());
 		}
 	}
 
@@ -116,13 +113,11 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setConsoleOutput(file.getAbsolutePath());
-			update();
+			getView().writeConsoleOutput(file.getAbsolutePath());
 		}
 	}
 
 	void executeActionComputeInference() {
-		update();
 		long start = System.nanoTime();
 		ProcessorCore core = new ProcessorCore();
 		String result = core.run(getModel(), start);
@@ -160,10 +155,6 @@ public class ProcessorController implements ActionListener {
 
 	public void reset() {
 
-	}
-
-	public void update() {
-		getView().update();
 	}
 
 }
