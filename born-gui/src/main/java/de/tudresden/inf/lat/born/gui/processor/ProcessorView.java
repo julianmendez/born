@@ -40,6 +40,7 @@ public class ProcessorView extends JPanel {
 	private JButton buttonConsoleInput = new JButton();
 	private JButton buttonConsoleOutput = new JButton();
 	private JButton buttonComputeInference = new JButton();
+	private JLabel labelProgress = new JLabel("computing ...");
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private JTextArea textConsoleInput = new JTextArea();
@@ -190,6 +191,10 @@ public class ProcessorView extends JPanel {
 		add(buttonComputeInference);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
 
+		labelProgress.setBounds(168, 516, 99, 15);
+		labelProgress.setVisible(false);
+		add(labelProgress);
+
 	}
 
 	String read(Reader r) throws IOException {
@@ -317,6 +322,18 @@ public class ProcessorView extends JPanel {
 
 	public void setResult(String result) {
 		this.textConsoleOutput.setText(result);
+	}
+
+	public void setComputing(boolean status) {
+		labelProgress.setVisible(status);
+	}
+
+	public void setButtonsEnabled(boolean status) {
+		buttonInputOntologyFile.setEnabled(status);
+		buttonBayesianNetwork.setEnabled(status);
+		buttonConsoleInput.setEnabled(status);
+		buttonConsoleOutput.setEnabled(status);
+		buttonComputeInference.setEnabled(status);
 	}
 
 }

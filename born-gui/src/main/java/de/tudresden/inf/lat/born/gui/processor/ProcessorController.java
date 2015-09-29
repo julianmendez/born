@@ -19,6 +19,26 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
  */
 public class ProcessorController implements ActionListener {
 
+	/**
+	 * This class lets the processor run in a separate thread.
+	 * 
+	 * @author Julian Mendez
+	 *
+	 */
+	class ProcessorRunner extends Thread {
+
+		public void run() {
+			long start = System.nanoTime();
+			ProcessorCore core = new ProcessorCore();
+			String result = core.run(getModel(), start);
+
+			getView().setResult(result);
+			getView().setComputing(false);
+			getView().setButtonsEnabled(true);
+		}
+
+	}
+
 	private static final String actionInputOntology = "open file";
 	private static final String actionBayesianNetwork = "Bayesian network file";
 	private static final String actionConsoleInput = "read console";
@@ -32,6 +52,8 @@ public class ProcessorController implements ActionListener {
 	private final OWLOntologyManager owlOntologyManager;
 
 	private final ProcessorView view;
+
+	private ProcessorRunner processorRunner;
 
 	/**
 	 * Constructs a new controller.
@@ -118,10 +140,10 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionComputeInference() {
-		long start = System.nanoTime();
-		ProcessorCore core = new ProcessorCore();
-		String result = core.run(getModel(), start);
-		getView().setResult(result);
+		getView().setButtonsEnabled(false);
+		getView().setComputing(true);
+		processorRunner = new ProcessorRunner();
+		processorRunner.start();
 	}
 
 	public ProcessorConfiguration getModel() {
