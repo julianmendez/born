@@ -227,6 +227,7 @@ public class ProcessorView extends JPanel {
 
 	public void setInputOntology(String fileName) {
 		this.textInputOntologyFile.setText(fileName);
+		updateInputOntologyFile();
 	}
 
 	public String getBayesianNetwork() {
@@ -235,6 +236,7 @@ public class ProcessorView extends JPanel {
 
 	public void setBayesianNetwork(String fileName) {
 		this.textBayesianNetworkFile.setText(fileName);
+		updateBayesianNetworkFile();
 	}
 
 	public String getConsoleInput() {
@@ -243,6 +245,7 @@ public class ProcessorView extends JPanel {
 
 	public void setConsoleInput(String text) {
 		this.textConsoleInput.setText(text);
+		updateQuery();
 	}
 
 	public void readConsoleInput(String consoleInputFile) {
@@ -310,13 +313,6 @@ public class ProcessorView extends JPanel {
 		String query = this.textConsoleInput.getText();
 		if (query != null && !query.trim().isEmpty()) {
 			getModel().setQueryInputStream(new ByteArrayInputStream(query.getBytes()));
-		}
-	}
-
-	void updateConsoleOutputFile() {
-		String consoleOutputFile = getConsoleOutput();
-		if (consoleOutputFile != null && !consoleOutputFile.trim().isEmpty()) {
-			setResult(consoleOutputFile);
 		}
 	}
 
