@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import de.tudresden.inf.lat.born.gui.examplemaker.ExampleMakerView;
 import de.tudresden.inf.lat.born.gui.experimentmaker.ExperimentMakerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
@@ -25,7 +24,6 @@ public class BornView extends JPanel {
 	private final ProcessorView processorView;
 	private final TestMakerView testMakerView;
 	private final ExperimentMakerView experimentMakerView;
-	private final ExampleMakerView exampleMakerView;
 
 	public BornView(BornModel model) {
 		if (model == null) {
@@ -33,14 +31,9 @@ public class BornView extends JPanel {
 		}
 
 		this.model = model;
-		this.processorView = new ProcessorView(
-				this.model.getProcessorConfiguration());
-		this.testMakerView = new TestMakerView(
-				this.model.getAnnotatorConfiguration());
-		this.experimentMakerView = new ExperimentMakerView(
-				this.model.getSplitterConfiguration());
-		this.exampleMakerView = new ExampleMakerView(
-				this.model.getBayesianNetworkCreatorConfiguration());
+		this.processorView = new ProcessorView(this.model.getProcessorConfiguration());
+		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());
+		this.experimentMakerView = new ExperimentMakerView(this.model.getProcessorConfiguration());
 
 		add(createPanel());
 	}
@@ -55,12 +48,9 @@ public class BornView extends JPanel {
 
 		ImageIcon icon = null;
 
-		tabbedPane.addTab("Processor", icon, this.processorView,
-				"processes an ontology to get the subsumption value");
-		tabbedPane.addTab("Test", icon, this.testMakerView,
-				"annotates an ontology");
-		tabbedPane.addTab("Experiments", icon, this.experimentMakerView,
-				"creates and runs experiments");
+		tabbedPane.addTab("Processor", icon, this.processorView, "processes an ontology to get the subsumption value");
+		tabbedPane.addTab("Test", icon, this.testMakerView, "annotates an ontology");
+		tabbedPane.addTab("Experiments", icon, this.experimentMakerView, "creates and runs experiments");
 
 		add(tabbedPane);
 
@@ -85,14 +75,9 @@ public class BornView extends JPanel {
 		return this.experimentMakerView;
 	}
 
-	public ExampleMakerView getExampleMakerView() {
-		return this.exampleMakerView;
-	}
-
 	public void update() {
 		this.testMakerView.update();
 		this.experimentMakerView.update();
-		this.exampleMakerView.update();
 	}
 
 }
