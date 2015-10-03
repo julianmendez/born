@@ -170,12 +170,12 @@ public class ProcessorCore {
 	 *             if something went wrong with the I/O
 	 */
 	String createProblogFile(long start, InputStream ontologyInputStream,
-			InputStream bayesianNetworkInputStream, InputStream queryInputStream)
+			InputStream bayesianNetworkInputStream, String query)
 			throws OWLOntologyCreationException, IOException {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(ontologyInputStream,
-				bayesianNetworkInputStream, queryInputStream,
+				bayesianNetworkInputStream, query,
 				new FileOutputStream(PROBLOG_OUTPUT_FILE));
 		return ret;
 
@@ -227,7 +227,7 @@ public class ProcessorCore {
 			String info = createProblogFile(start,
 					conf.getOntologyInputStream(),
 					conf.getBayesianNetworkInputStream(),
-					conf.getQueryInputStream());
+					conf.getQuery());
 			log(info, start);
 
 			int exitVal = executeProblog(start, conf.getProblogDirectory(),

@@ -1,6 +1,8 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
 
@@ -86,6 +88,17 @@ public class ProcessorSubApp implements SubApp {
 		return HELP;
 	}
 
+	String readFile(String fileName) throws IOException {
+		StringBuffer ret = new StringBuffer();
+		BufferedReader input = new BufferedReader(new FileReader(fileName));
+		for (String line = input.readLine(); line != null; line = input.readLine()) {
+			ret.append(line);
+			ret.append("\n");
+		}
+		input.close();
+		return ret.toString();
+	}
+
 	@Override
 	public String run(String[] args) {
 		long start = System.nanoTime();
@@ -108,7 +121,7 @@ public class ProcessorSubApp implements SubApp {
 				conf.setOntologyInputStream(new FileInputStream(newArgs[0]));
 				conf.setBayesianNetworkInputStream(new FileInputStream(
 						newArgs[1]));
-				conf.setQueryInputStream(new FileInputStream(newArgs[2]));
+				conf.setQuery(readFile(newArgs[2]));
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

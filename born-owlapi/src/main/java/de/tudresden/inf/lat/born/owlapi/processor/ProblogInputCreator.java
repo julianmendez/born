@@ -184,7 +184,7 @@ public class ProblogInputCreator {
 	}
 
 	public String createProblogFile(InputStream ontologyInputStream,
-			InputStream networkInputStream, InputStream queriesInputStream,
+			InputStream networkInputStream,String query,
 			OutputStream resultOutputStream) throws IOException,
 			OWLOntologyCreationException {
 
@@ -196,12 +196,10 @@ public class ProblogInputCreator {
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
 		ProblogProgram program = new ProblogProgram();
-		String queryListAddendum = readFile(new InputStreamReader(
-				queriesInputStream));
-		program.setQueryListAddendum(queryListAddendum);
+		program.setQueryListAddendum(query);
 
 		Set<String> relevantSymbols = parseRelevantSymbols(new StringReader(
-				queryListAddendum));
+				query));
 
 		IntegerOntologyObjectFactory factory = new IntegerOntologyObjectFactoryImpl();
 		Translator translator = new Translator(owlOntology

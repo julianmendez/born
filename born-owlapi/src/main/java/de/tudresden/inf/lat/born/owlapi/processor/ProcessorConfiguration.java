@@ -13,7 +13,7 @@ public class ProcessorConfiguration {
 
 	private InputStream ontologyInputStream;
 	private InputStream bayesianNetworkInputStream;
-	private InputStream queryInputStream;
+	private String query;
 	private String outputFileName;
 	private String problogDirectory;
 	private boolean problogNeeded = true;
@@ -35,12 +35,12 @@ public class ProcessorConfiguration {
 		this.bayesianNetworkInputStream = bayesianNetworkInputStream;
 	}
 
-	public InputStream getQueryInputStream() {
-		return queryInputStream;
+	public String getQuery() {
+		return query;
 	}
 
-	public void setQueryInputStream(InputStream queryInputStream) {
-		this.queryInputStream = queryInputStream;
+	public void setQuery(String query) {
+		this.query = query;
 	}
 
 	public String getOutputFileName() {
@@ -85,7 +85,7 @@ public class ProcessorConfiguration {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
 			return getOntologyInputStream().equals(other.getOntologyInputStream())
 					&& getBayesianNetworkInputStream().equals(other.getBayesianNetworkInputStream())
-					&& getQueryInputStream().equals(other.getQueryInputStream())
+					&& getQuery().equals(other.getQuery())
 					&& getOutputFileName().equals(other.getOutputFileName())
 					&& getProblogDirectory().equals(other.getProblogDirectory())
 					&& (isShowingLog() == other.isShowingLog()) && (isProblogNeeded() == other.isProblogNeeded());
@@ -99,7 +99,7 @@ public class ProcessorConfiguration {
 
 	@Override
 	public String toString() {
-		return this.ontologyInputStream + " " + this.bayesianNetworkInputStream + " " + this.queryInputStream + " "
+		return this.ontologyInputStream + " " + this.bayesianNetworkInputStream + " " + this.query + " "
 				+ this.outputFileName + " " + this.problogDirectory + " " + this.showingLog + " " + this.problogNeeded;
 	}
 

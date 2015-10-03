@@ -3,7 +3,6 @@ package de.tudresden.inf.lat.born.gui.processor;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -312,12 +311,12 @@ public class ProcessorView extends JPanel {
 	void updateQuery() {
 		String query = this.textConsoleInput.getText();
 		if (query != null && !query.trim().isEmpty()) {
-			getModel().setQueryInputStream(new ByteArrayInputStream(query.getBytes()));
+			getModel().setQuery(query);
 		}
 	}
-	
+
 	public void update() {
-		updateInputOntologyFile() ;
+		updateInputOntologyFile();
 		updateBayesianNetworkFile();
 		updateQuery();
 	}
