@@ -1,7 +1,11 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 
+import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
 /**
@@ -12,7 +16,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 public class ProcessorConfiguration {
 
 	private InputStream ontologyInputStream;
-	private InputStream bayesianNetworkInputStream;
+	private String bayesianNetwork;
 	private String query;
 	private String outputFileName;
 	private String problogDirectory;
@@ -27,12 +31,12 @@ public class ProcessorConfiguration {
 		this.ontologyInputStream = ontologyInputStream;
 	}
 
-	public InputStream getBayesianNetworkInputStream() {
-		return bayesianNetworkInputStream;
+	public String getBayesianNetwork() {
+		return bayesianNetwork;
 	}
 
-	public void setBayesianNetworkInputStream(InputStream bayesianNetworkInputStream) {
-		this.bayesianNetworkInputStream = bayesianNetworkInputStream;
+	public void setBayesianNetwork(String bayesianNetwork) {
+		this.bayesianNetwork = bayesianNetwork;
 	}
 
 	public String getQuery() {
@@ -84,8 +88,7 @@ public class ProcessorConfiguration {
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
 			return getOntologyInputStream().equals(other.getOntologyInputStream())
-					&& getBayesianNetworkInputStream().equals(other.getBayesianNetworkInputStream())
-					&& getQuery().equals(other.getQuery())
+					&& getBayesianNetwork().equals(other.getBayesianNetwork()) && getQuery().equals(other.getQuery())
 					&& getOutputFileName().equals(other.getOutputFileName())
 					&& getProblogDirectory().equals(other.getProblogDirectory())
 					&& (isShowingLog() == other.isShowingLog()) && (isProblogNeeded() == other.isProblogNeeded());
@@ -99,8 +102,27 @@ public class ProcessorConfiguration {
 
 	@Override
 	public String toString() {
-		return this.ontologyInputStream + " " + this.bayesianNetworkInputStream + " " + this.query + " "
-				+ this.outputFileName + " " + this.problogDirectory + " " + this.showingLog + " " + this.problogNeeded;
+		return this.ontologyInputStream + " " + this.bayesianNetwork + " " + this.query + " " + this.outputFileName
+				+ " " + this.problogDirectory + " " + this.showingLog + " " + this.problogNeeded;
+	}
+
+	/**
+	 * Returns a string after reading the reader.
+	 * 
+	 * @param reader
+	 *            reader
+	 * @return a string after reading the reader
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	public static String read(Reader reader) throws IOException {
+		StringBuffer sbuf = new StringBuffer();
+		BufferedReader input = new BufferedReader(reader);
+		for (String line = input.readLine(); line != null; line = input.readLine()) {
+			sbuf.append(line);
+			sbuf.append(Symbol.NEW_LINE_CHAR);
+		}
+		return sbuf.toString();
 	}
 
 }

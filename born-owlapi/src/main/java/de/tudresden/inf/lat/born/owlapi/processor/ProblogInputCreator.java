@@ -1,10 +1,8 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
@@ -60,23 +58,12 @@ public class ProblogInputCreator {
 	private static final String NUMBER_OF_NORM_AXIOMS_MSG = "  Number of normalized axioms: ";
 	private static final String NUMBER_OF_AXIOMS_IN_MODULE = "  Number of axioms in module: ";
 
-	String readFile(Reader reader) throws IOException {
-		StringBuffer sbuf = new StringBuffer();
-		BufferedReader in = new BufferedReader(reader);
-		for (String line = ""; line != null; line = in.readLine()) {
-			sbuf.append(line);
-			sbuf.append(Symbol.NEW_LINE_CHAR);
-		}
-		return sbuf.toString();
-	}
-
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
 		List<Token> identifiers = new ArrayList<Token>();
 		for (Token t : tokens) {
-			if (t.getType().equals(TokenType.IDENTIFIER)
-					|| t.getType().equals(TokenType.CONSTANT)) {
+			if (t.getType().equals(TokenType.IDENTIFIER) || t.getType().equals(TokenType.CONSTANT)) {
 				identifiers.add(t);
 			}
 		}
@@ -105,8 +92,7 @@ public class ProblogInputCreator {
 		return completionRules;
 	}
 
-	OWLOntology loadOWLOntology(InputStream input)
-			throws OWLOntologyCreationException {
+	OWLOntology loadOWLOntology(InputStream input) throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
 	}
@@ -118,8 +104,7 @@ public class ProblogInputCreator {
 		writer.close();
 	}
 
-	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory,
-			Set<NormalizedIntegerAxiom> axioms) {
+	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms) {
 		List<Clause> ret = new ArrayList<Clause>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
@@ -140,8 +125,8 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
-	List<Clause> getClauses(IntegerOntologyObjectFactory factory,
-			Set<NormalizedIntegerAxiom> axioms) throws IOException {
+	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms)
+			throws IOException {
 
 		List<Clause> ontology = new ArrayList<Clause>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
@@ -154,19 +139,16 @@ public class ProblogInputCreator {
 		return ontology;
 	}
 
-	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory,
-			Set<String> symbolStrSet) {
+	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
 		Map<String, Integer> map = new TreeMap<String, Integer>();
-		for (Integer id : factory.getEntityManager().getEntities(
-				IntegerEntityType.CLASS, false)) {
+		for (Integer id : factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)) {
 			map.put(factory.getEntityManager().getName(id), id);
 		}
 
 		Set<Integer> ret = new TreeSet<Integer>();
 		for (String symbolStr0 : symbolStrSet) {
 			String symbolStr = symbolStr0;
-			if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR)
-					&& symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
+			if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
 				symbolStr = symbolStr.substring(1);
 				symbolStr = symbolStr.substring(0, symbolStr.length() - 1);
 			}
@@ -183,10 +165,8 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
-	public String createProblogFile(InputStream ontologyInputStream,
-			InputStream networkInputStream,String query,
-			OutputStream resultOutputStream) throws IOException,
-			OWLOntologyCreationException {
+	public String createProblogFile(InputStream ontologyInputStream, String bayesianNetwork, String query,
+			OutputStream resultOutputStream) throws IOException, OWLOntologyCreationException {
 
 		StringBuffer sbuf = new StringBuffer();
 		sbuf.append(Symbol.NEW_LINE_CHAR);
@@ -198,20 +178,16 @@ public class ProblogInputCreator {
 		ProblogProgram program = new ProblogProgram();
 		program.setQueryListAddendum(query);
 
-		Set<String> relevantSymbols = parseRelevantSymbols(new StringReader(
-				query));
+		Set<String> relevantSymbols = parseRelevantSymbols(new StringReader(query));
 
 		IntegerOntologyObjectFactory factory = new IntegerOntologyObjectFactoryImpl();
-		Translator translator = new Translator(owlOntology
-				.getOWLOntologyManager().getOWLDataFactory(), factory);
-		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology
-				.getAxioms());
+		Translator translator = new Translator(owlOntology.getOWLOntologyManager().getOWLDataFactory(), factory);
+		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology.getAxioms());
 		sbuf.append(NUMBER_OF_AXIOMS_MSG + axioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
 		OntologyNormalizer normalizer = new OntologyNormalizer();
-		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(
-				axioms, factory);
+		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
 		sbuf.append(NUMBER_OF_NORM_AXIOMS_MSG + normalizedAxioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
@@ -219,8 +195,7 @@ public class ProblogInputCreator {
 		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
 
 		Set<Integer> emptySet = Collections.emptySet();
-		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(
-				normalizedAxioms, setOfClasses, emptySet);
+		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses, emptySet);
 		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
@@ -228,9 +203,7 @@ public class ProblogInputCreator {
 
 		program.setCompletionRules(getCompletionRules());
 
-		String bayesianNetworkAddendum = readFile(new InputStreamReader(
-				networkInputStream));
-		program.setBayesianNetworkAddendum(bayesianNetworkAddendum);
+		program.setBayesianNetworkAddendum(bayesianNetwork);
 
 		write(new OutputStreamWriter(resultOutputStream), program);
 

@@ -196,16 +196,6 @@ public class ProcessorView extends JPanel {
 
 	}
 
-	String read(Reader r) throws IOException {
-		StringBuffer sbuf = new StringBuffer();
-		BufferedReader in = new BufferedReader(r);
-		for (String line = in.readLine(); line != null; line = in.readLine()) {
-			sbuf.append(line);
-			sbuf.append("\n");
-		}
-		return sbuf.toString();
-	}
-
 	void write(Reader input, Writer output) throws IOException {
 		BufferedWriter out = new BufferedWriter(output);
 		BufferedReader in = new BufferedReader(input);
@@ -250,7 +240,7 @@ public class ProcessorView extends JPanel {
 	public void readConsoleInput(String consoleInputFile) {
 		if (consoleInputFile != null && !consoleInputFile.trim().isEmpty()) {
 			try {
-				String text = read(new FileReader(consoleInputFile));
+				String text = ProcessorConfiguration.read(new FileReader(consoleInputFile));
 				this.textConsoleInput.setText(text);
 				updateQuery();
 			} catch (IOException e) {
@@ -301,7 +291,7 @@ public class ProcessorView extends JPanel {
 		String bayesianNetworkFile = getBayesianNetwork();
 		if (bayesianNetworkFile != null && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
-				getModel().setBayesianNetworkInputStream(new FileInputStream(bayesianNetworkFile));
+				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
 			} catch (IOException e) {
 				setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}

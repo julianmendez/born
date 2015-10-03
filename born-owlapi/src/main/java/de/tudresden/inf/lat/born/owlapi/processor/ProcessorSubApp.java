@@ -1,6 +1,5 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,8 +22,8 @@ public class ProcessorSubApp implements SubApp {
 	static final String SLASH = ProcessorCore.SLASH;
 	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProcessorCore.DEFAULT_PROBLOG_DOWNLOAD_URI;
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY;
-	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY
-			+ SLASH + "problog2.1";
+	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH
+			+ "problog2.1";
 	static final String HELP = ""
 			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"
 			+ "\n"
@@ -32,39 +31,19 @@ public class ProcessorSubApp implements SubApp {
 			+ "\n  <Bayesian network file>  : file name of the Bayesian network"
 			+ "\n  <query file>             : file name of the query"
 			+ "\n  <output file>            : file name of the output"
-			+ "\n  <ProbLog directory>      : (optional) directory where ProbLog is installed"
-			+ "\n"
-			+ "\n Option:"
-			+ "\n   --log                   : shows log"
-			+ "\n"
-			+ "\nExamples:"
-			+ "\n"
+			+ "\n  <ProbLog directory>      : (optional) directory where ProbLog is installed" + "\n" + "\n Option:"
+			+ "\n   --log                   : shows log" + "\n" + "\nExamples:" + "\n"
 			+ "\n Execution without ProbLog installed:"
-			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl"
-			+ "\n"
+			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl" + "\n"
 			+ "\n Execution with ProbLog installed:"
-			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl /opt/problog2.1"
-			+ "\n"
+			+ "\n  java -jar born.jar get ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n"
 			+ "\n Execution with ProbLog installed showing log:"
-			+ "\n  java -jar born.jar get --log ontology.owl network.pl query.pl output.pl /opt/problog2.1"
-			+ "\n"
-			+ "\n Bayesian network:"
-			+ "\n  0.58::x1."
-			+ "\n  0.35::x2."
-			+ "\n"
-			+ "\n Query:"
-			+ "\n  query(sub('A', 'C'))."
-			+ "\n"
-			+ "\n"
-			+ "\n"
-			+ "\nNote: this program requires the following installed:"
-			+ "\n - Java 8"
-			+ "\n - ProbLog 2.1"
-			+ "\n - Python 2.7+ or 3.2+"
-			+ "\n"
-			+ "\nIf ProbLog is not installed, this program downloads ProbLog from:"
-			+ "\n   "
-			+ DEFAULT_PROBLOG_DOWNLOAD_URI
+			+ "\n  java -jar born.jar get --log ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n"
+			+ "\n Bayesian network:" + "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:"
+			+ "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
+			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
+			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
+			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
 			+ "\n" //
 			+ "\n" //
@@ -78,25 +57,13 @@ public class ProcessorSubApp implements SubApp {
 
 	@Override
 	public boolean isValid(String[] args) {
-		return (((args.length == 4) && !args[0].equals(LOGGING_OPTION))
-				|| (args.length == 5) || ((args.length == 6) && args[0]
-				.equals(LOGGING_OPTION)));
+		return (((args.length == 4) && !args[0].equals(LOGGING_OPTION)) || (args.length == 5)
+				|| ((args.length == 6) && args[0].equals(LOGGING_OPTION)));
 	}
 
 	@Override
 	public String getHelp() {
 		return HELP;
-	}
-
-	String readFile(String fileName) throws IOException {
-		StringBuffer ret = new StringBuffer();
-		BufferedReader input = new BufferedReader(new FileReader(fileName));
-		for (String line = input.readLine(); line != null; line = input.readLine()) {
-			ret.append(line);
-			ret.append("\n");
-		}
-		input.close();
-		return ret.toString();
 	}
 
 	@Override
@@ -119,9 +86,8 @@ public class ProcessorSubApp implements SubApp {
 
 			try {
 				conf.setOntologyInputStream(new FileInputStream(newArgs[0]));
-				conf.setBayesianNetworkInputStream(new FileInputStream(
-						newArgs[1]));
-				conf.setQuery(readFile(newArgs[2]));
+				conf.setBayesianNetwork(ProcessorConfiguration.read(new FileReader(newArgs[1])));
+				conf.setQuery(ProcessorConfiguration.read(new FileReader(newArgs[2])));
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
