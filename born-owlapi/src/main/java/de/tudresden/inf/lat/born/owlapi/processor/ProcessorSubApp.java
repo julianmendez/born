@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
 
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
 /**
@@ -85,10 +87,12 @@ public class ProcessorSubApp implements SubApp {
 			}
 
 			try {
-				conf.setOntologyInputStream(new FileInputStream(newArgs[0]));
+				conf.setOntology(ProcessorConfiguration.readOntology(new FileInputStream(newArgs[0])));
 				conf.setBayesianNetwork(ProcessorConfiguration.read(new FileReader(newArgs[1])));
 				conf.setQuery(ProcessorConfiguration.read(new FileReader(newArgs[2])));
 			} catch (IOException e) {
+				throw new RuntimeException(e);
+			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
 			}
 			conf.setOutputFileName(newArgs[3]);

@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
@@ -15,7 +20,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  */
 public class ProcessorConfiguration {
 
-	private InputStream ontologyInputStream;
+	private OWLOntology ontology;
 	private String bayesianNetwork;
 	private String query;
 	private String outputFileName;
@@ -23,12 +28,12 @@ public class ProcessorConfiguration {
 	private boolean problogNeeded = true;
 	private boolean showingLog = true;
 
-	public InputStream getOntologyInputStream() {
-		return ontologyInputStream;
+	public OWLOntology getOntology() {
+		return ontology;
 	}
 
-	public void setOntologyInputStream(InputStream ontologyInputStream) {
-		this.ontologyInputStream = ontologyInputStream;
+	public void setOntology(OWLOntology ontologyInputStream) {
+		this.ontology = ontologyInputStream;
 	}
 
 	public String getBayesianNetwork() {
@@ -87,9 +92,8 @@ public class ProcessorConfiguration {
 			return false;
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
-			return getOntologyInputStream().equals(other.getOntologyInputStream())
-					&& getBayesianNetwork().equals(other.getBayesianNetwork()) && getQuery().equals(other.getQuery())
-					&& getOutputFileName().equals(other.getOutputFileName())
+			return getOntology().equals(other.getOntology()) && getBayesianNetwork().equals(other.getBayesianNetwork())
+					&& getQuery().equals(other.getQuery()) && getOutputFileName().equals(other.getOutputFileName())
 					&& getProblogDirectory().equals(other.getProblogDirectory())
 					&& (isShowingLog() == other.isShowingLog()) && (isProblogNeeded() == other.isProblogNeeded());
 		}
@@ -102,8 +106,8 @@ public class ProcessorConfiguration {
 
 	@Override
 	public String toString() {
-		return this.ontologyInputStream + " " + this.bayesianNetwork + " " + this.query + " " + this.outputFileName
-				+ " " + this.problogDirectory + " " + this.showingLog + " " + this.problogNeeded;
+		return this.ontology + " " + this.bayesianNetwork + " " + this.query + " " + this.outputFileName + " "
+				+ this.problogDirectory + " " + this.showingLog + " " + this.problogNeeded;
 	}
 
 	/**
@@ -123,6 +127,20 @@ public class ProcessorConfiguration {
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		}
 		return sbuf.toString();
+	}
+
+	/**
+	 * Returns an OWL ontology after reading the input stream.
+	 * 
+	 * @param input
+	 *            input stream
+	 * @return an OWL ontology after reading the input stream
+	 * @throws OWLOntologyCreationException
+	 *             if something goes wrong with ontology creation
+	 */
+	public static OWLOntology readOntology(InputStream input) throws OWLOntologyCreationException {
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		return manager.loadOntologyFromOntologyDocument(input);
 	}
 
 }

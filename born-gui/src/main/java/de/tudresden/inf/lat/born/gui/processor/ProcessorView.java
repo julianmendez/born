@@ -19,6 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
@@ -280,8 +282,10 @@ public class ProcessorView extends JPanel {
 		String inputOntologyFile = getInputOntology();
 		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
 			try {
-				getModel().setOntologyInputStream(new FileInputStream(inputOntologyFile));
+				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
 			} catch (IOException e) {
+				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+			} catch (OWLOntologyCreationException e) {
 				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
 		}

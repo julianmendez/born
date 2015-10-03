@@ -2,7 +2,6 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
@@ -16,10 +15,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.core.rule.BR1Rule;
 import de.tudresden.inf.lat.born.core.rule.BR2Rule;
@@ -92,11 +89,6 @@ public class ProblogInputCreator {
 		return completionRules;
 	}
 
-	OWLOntology loadOWLOntology(InputStream input) throws OWLOntologyCreationException {
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		return manager.loadOntologyFromOntologyDocument(input);
-	}
-
 	void write(Writer output, ProblogProgram program) throws IOException {
 		BufferedWriter writer = new BufferedWriter(output);
 		writer.write(program.asString());
@@ -165,13 +157,12 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
-	public String createProblogFile(InputStream ontologyInputStream, String bayesianNetwork, String query,
+	public String createProblogFile(OWLOntology owlOntology, String bayesianNetwork, String query,
 			OutputStream resultOutputStream) throws IOException, OWLOntologyCreationException {
 
 		StringBuffer sbuf = new StringBuffer();
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
-		OWLOntology owlOntology = loadOWLOntology(ontologyInputStream);
 		sbuf.append(NUMBER_OF_OWL_AXIOMS_MSG + owlOntology.getAxiomCount());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 

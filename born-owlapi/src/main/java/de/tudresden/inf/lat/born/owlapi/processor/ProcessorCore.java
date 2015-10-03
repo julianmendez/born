@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
@@ -13,6 +12,7 @@ import java.net.URISyntaxException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
+import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
@@ -171,23 +171,23 @@ public class ProcessorCore {
 	 * 
 	 * @param start
 	 *            execution start
-	 * @param ontologyFileName
-	 *            file name of the OWL ontology
-	 * @param bayesianNetworkFileName
-	 *            file name of the Bayesian network
-	 * @param queryFileName
-	 *            file name of the query
+	 * @param ontology
+	 *            OWL ontology
+	 * @param bayesianNetwork
+	 *            Bayesian network
+	 * @param query
+	 *            query
 	 * @return the content of the Problog input file
 	 * @throws OWLOntologyCreationException
 	 *             if the ontology was not created
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	String createProblogFile(long start, InputStream ontologyInputStream, String bayesianNetwork, String query)
+	String createProblogFile(long start, OWLOntology ontology, String bayesianNetwork, String query)
 			throws OWLOntologyCreationException, IOException {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
-		String ret = instance.createProblogFile(ontologyInputStream, bayesianNetwork, query,
+		String ret = instance.createProblogFile(ontology, bayesianNetwork, query,
 				new FileOutputStream(PROBLOG_OUTPUT_FILE));
 		return ret;
 
@@ -233,8 +233,7 @@ public class ProcessorCore {
 				installProblog(start, conf.getProblogDirectory());
 			}
 
-			String info = createProblogFile(start, conf.getOntologyInputStream(), conf.getBayesianNetwork(),
-					conf.getQuery());
+			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery());
 			log(info, start);
 
 			int exitVal = executeProblog(start, conf.getProblogDirectory(), conf.getOutputFileName());
