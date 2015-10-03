@@ -131,7 +131,7 @@ public class ProcessorView extends JPanel {
 		add(buttonInputOntologyFile);
 		buttonInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		textInputOntologyFile.setBounds(282, 43, 228, 28);
+		textInputOntologyFile.setBounds(282, 43, 688, 28);
 		add(textInputOntologyFile);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
@@ -145,7 +145,7 @@ public class ProcessorView extends JPanel {
 		add(buttonBayesianNetwork);
 		buttonBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		textBayesianNetworkFile.setBounds(282, 152, 228, 28);
+		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
 		add(textBayesianNetworkFile);
 		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
@@ -159,13 +159,13 @@ public class ProcessorView extends JPanel {
 		add(buttonConsoleInput);
 		buttonConsoleInput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		textBayesianNetworkFile.setBounds(282, 135, 228, 28);
+		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
 		add(textBayesianNetworkFile);
 
 		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
-		scrollConsoleInput.setBounds(282, 246, 228, 65);
+		scrollConsoleInput.setBounds(282, 246, 688, 65);
 		add(scrollConsoleInput);
 		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollConsoleInput.setViewportView(textConsoleInput);
@@ -183,7 +183,7 @@ public class ProcessorView extends JPanel {
 		add(buttonConsoleOutput);
 		buttonConsoleOutput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		scrollConsoleOutput.setBounds(282, 355, 228, 65);
+		scrollConsoleOutput.setBounds(282, 355, 688, 65);
 		add(scrollConsoleOutput);
 		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 

@@ -60,9 +60,7 @@ public class BornView extends JPanel {
 		tabbedPane.addTab("Test", icon, this.testMakerView,
 				"annotates an ontology");
 		tabbedPane.addTab("Experiments", icon, this.experimentMakerView,
-				"splits an ontology");
-		tabbedPane.addTab("Examples", icon, this.exampleMakerView,
-				"creates a Bayesian network");
+				"creates and runs experiments");
 
 		add(tabbedPane);
 
