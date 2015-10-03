@@ -142,6 +142,7 @@ public class ProcessorController implements ActionListener {
 	void executeActionComputeInference() {
 		getView().setButtonsEnabled(false);
 		getView().setComputing(true);
+		getView().update();
 		processorRunner = new ProcessorRunner();
 		processorRunner.start();
 	}

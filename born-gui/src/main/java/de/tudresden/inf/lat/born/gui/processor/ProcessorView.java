@@ -315,6 +315,12 @@ public class ProcessorView extends JPanel {
 			getModel().setQueryInputStream(new ByteArrayInputStream(query.getBytes()));
 		}
 	}
+	
+	public void update() {
+		updateInputOntologyFile() ;
+		updateBayesianNetworkFile();
+		updateQuery();
+	}
 
 	public void setResult(String result) {
 		this.textConsoleOutput.setText(result);
