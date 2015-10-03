@@ -49,7 +49,7 @@ public class BornView extends JPanel {
 		ImageIcon icon = null;
 
 		tabbedPane.addTab("Processor", icon, this.processorView, "processes an ontology to get the subsumption value");
-		tabbedPane.addTab("Test", icon, this.testMakerView, "annotates an ontology");
+		tabbedPane.addTab("Test", icon, this.testMakerView, "helps in the creation of test data");
 		tabbedPane.addTab("Experiments", icon, this.experimentMakerView, "creates and runs experiments");
 
 		add(tabbedPane);
@@ -76,8 +76,6 @@ public class BornView extends JPanel {
 	}
 
 	public void update() {
-		this.testMakerView.update();
-		this.experimentMakerView.update();
 	}
 
 }

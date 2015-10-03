@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.gui;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.gui.experimentmaker.ExperimentMakerController;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorController;
 
 /**
@@ -12,6 +13,8 @@ import de.tudresden.inf.lat.born.gui.processor.ProcessorController;
 public class BornController {
 
 	private ProcessorController processorController;
+	private ExperimentMakerController experimentMakerController;
+
 	private final OWLOntologyManager owlOntologyManager;
 
 	private final BornView view;
@@ -27,8 +30,8 @@ public class BornController {
 	public BornController(BornView view, OWLOntologyManager ontologyManager) {
 		this.view = view;
 		this.owlOntologyManager = ontologyManager;
-		this.processorController = new ProcessorController(
-				view.getProcessorView(), ontologyManager);
+		this.processorController = new ProcessorController(view.getProcessorView(), ontologyManager);
+		this.experimentMakerController = new ExperimentMakerController(view.getExperimentMakerView(), ontologyManager);
 		reset();
 	}
 
@@ -46,6 +49,7 @@ public class BornController {
 
 	public void reset() {
 		this.processorController.reset();
+		this.experimentMakerController.reset();
 	}
 
 	public void update() {
@@ -54,6 +58,10 @@ public class BornController {
 
 	public ProcessorController getProcessorController() {
 		return this.processorController;
+	}
+
+	public ExperimentMakerController getExperimentMakerController() {
+		return this.experimentMakerController;
 	}
 
 }

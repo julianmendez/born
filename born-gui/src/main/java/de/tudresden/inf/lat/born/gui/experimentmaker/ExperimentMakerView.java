@@ -1,15 +1,11 @@
 package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
-import java.io.Writer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -198,16 +194,6 @@ public class ExperimentMakerView extends JPanel {
 
 	}
 
-	void write(Reader input, Writer output) throws IOException {
-		BufferedWriter out = new BufferedWriter(output);
-		BufferedReader in = new BufferedReader(input);
-		for (String line = in.readLine(); line != null; line = in.readLine()) {
-			out.write(line);
-			out.newLine();
-		}
-		out.flush();
-	}
-
 	public ProcessorConfiguration getModel() {
 		return this.model;
 	}
@@ -255,7 +241,7 @@ public class ExperimentMakerView extends JPanel {
 		if (consoleOutputFile != null && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = this.textConsoleOutput.getText();
-				write(new StringReader(text), new FileWriter(consoleOutputFile));
+				ProcessorConfiguration.write(new StringReader(text), new FileWriter(consoleOutputFile));
 			} catch (IOException e) {
 				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}

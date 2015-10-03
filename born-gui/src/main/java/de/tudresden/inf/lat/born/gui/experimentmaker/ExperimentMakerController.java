@@ -39,8 +39,8 @@ public class ExperimentMakerController implements ActionListener {
 
 	}
 
-	private static final String actionInputOntology = "open file";
-	private static final String actionBayesianNetwork = "Bayesian network file";
+	private static final String actionInputOntology = "select directory of ontologies";
+	private static final String actionBayesianNetwork = "select directory of Bayesian network files";
 	private static final String actionConsoleInput = "read console";
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
@@ -53,7 +53,7 @@ public class ExperimentMakerController implements ActionListener {
 
 	private final ExperimentMakerView view;
 
-	private ExperimentMakerRunner processorRunner;
+	private ExperimentMakerRunner experimentMakerRunner;
 
 	/**
 	 * Constructs a new controller.
@@ -93,6 +93,7 @@ public class ExperimentMakerController implements ActionListener {
 
 	void executeActionInputOntology() {
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -105,6 +106,7 @@ public class ExperimentMakerController implements ActionListener {
 
 	void executeActionBayesianNetwork() {
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -143,8 +145,8 @@ public class ExperimentMakerController implements ActionListener {
 		getView().setButtonsEnabled(false);
 		getView().setComputing(true);
 		getView().update();
-		processorRunner = new ExperimentMakerRunner();
-		processorRunner.start();
+		experimentMakerRunner = new ExperimentMakerRunner();
+		experimentMakerRunner.start();
 	}
 
 	public ProcessorConfiguration getModel() {

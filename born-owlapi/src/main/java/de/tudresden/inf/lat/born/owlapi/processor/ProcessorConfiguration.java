@@ -1,9 +1,11 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.io.Writer;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -127,6 +129,26 @@ public class ProcessorConfiguration {
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		}
 		return sbuf.toString();
+	}
+
+	/**
+	 * Transfers the content read from a Reader to a Writer.
+	 * 
+	 * @param reader
+	 *            reader
+	 * @param writer
+	 *            writer
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	public static void write(Reader reader, Writer writer) throws IOException {
+		BufferedWriter output = new BufferedWriter(writer);
+		BufferedReader input = new BufferedReader(reader);
+		for (String line = input.readLine(); line != null; line = input.readLine()) {
+			output.write(line);
+			output.newLine();
+		}
+		output.flush();
 	}
 
 	/**
