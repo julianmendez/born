@@ -7,7 +7,14 @@ package de.tudresden.inf.lat.born.gui;
  */
 public interface Message {
 
+	String tabProcessor = "Reasoner";
+	String tooltipProcessor = "processes an ontology to get the subsumption value";
 
+	String tabTestMaker = "Tests";
+	String tooltipTestMaker = "helps in the creation of test data";
+
+	String tabExperminentMaker = "Expreriments";
+	String tooltipExperimentMaker = "creates and runs experiments";
 
 	String textInputOntologyFile = "input ontology file (e.g. \"ontology.owl\")";
 	String textBayesianNetworkFile = "Bayesian network file (e.g. \"network.pl\")";

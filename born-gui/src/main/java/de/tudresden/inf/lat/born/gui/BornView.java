@@ -48,9 +48,10 @@ public class BornView extends JPanel {
 
 		ImageIcon icon = null;
 
-		tabbedPane.addTab("Processor", icon, this.processorView, "processes an ontology to get the subsumption value");
-		tabbedPane.addTab("Test", icon, this.testMakerView, "helps in the creation of test data");
-		tabbedPane.addTab("Experiments", icon, this.experimentMakerView, "creates and runs experiments");
+		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView,
+				Message.tooltipProcessor);
+		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView,Message.tooltipTestMaker );
+		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView,Message.tooltipExperimentMaker);
 
 		add(tabbedPane);
 
