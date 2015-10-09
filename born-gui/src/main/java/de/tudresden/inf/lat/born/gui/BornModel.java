@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.gui;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.splitter.SplitterConfiguration;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
@@ -18,6 +19,7 @@ public class BornModel {
 	private ProcessorConfiguration processorConfiguration = new ProcessorConfiguration();
 	private SplitterConfiguration splitterConfiguration = new SplitterConfiguration();
 	private BayesianNetworkCreatorConfiguration bayesianNetworkCreatorConfiguration = new BayesianNetworkCreatorConfiguration();
+	private MultiProcessorConfiguration multiProcessorConfiguration = new MultiProcessorConfiguration();
 
 	private OWLOntology inputOntology = null;
 	private String output = null;
@@ -26,8 +28,7 @@ public class BornModel {
 		return annotatorConfiguration;
 	}
 
-	public void setAnnotatorConfiguration(
-			AnnotatorConfiguration annotatorConfiguration) {
+	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
 		this.annotatorConfiguration = annotatorConfiguration;
 	}
 
@@ -35,8 +36,7 @@ public class BornModel {
 		return processorConfiguration;
 	}
 
-	public void setProcessorConfiguration(
-			ProcessorConfiguration processorConfiguration) {
+	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
 		this.processorConfiguration = processorConfiguration;
 	}
 
@@ -44,8 +44,7 @@ public class BornModel {
 		return splitterConfiguration;
 	}
 
-	public void setSplitterConfiguration(
-			SplitterConfiguration splitterConfiguration) {
+	public void setSplitterConfiguration(SplitterConfiguration splitterConfiguration) {
 		this.splitterConfiguration = splitterConfiguration;
 	}
 
@@ -56,6 +55,14 @@ public class BornModel {
 	public void setBayesianNetworkCreatorConfiguration(
 			BayesianNetworkCreatorConfiguration bayesianNetworkCreatorConfiguration) {
 		this.bayesianNetworkCreatorConfiguration = bayesianNetworkCreatorConfiguration;
+	}
+
+	public MultiProcessorConfiguration getMultiProcessorConfiguration() {
+		return multiProcessorConfiguration;
+	}
+
+	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
+		this.multiProcessorConfiguration = multiProcessorConfiguration;
 	}
 
 	public OWLOntology getInputOntology() {

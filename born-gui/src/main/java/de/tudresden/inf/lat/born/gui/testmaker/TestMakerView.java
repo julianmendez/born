@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
 /**
  * This is the panel for the annotator.
@@ -23,7 +24,7 @@ public class TestMakerView extends JPanel {
 	private JButton buttonSelectInputOntologyFile = new JButton();
 	private JButton buttonSelectOutputOntologyFile = new JButton();
 	private JButton buttonAnnotateOntology = new JButton();
-	
+
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textOutputOntologyFile = new JTextField();
 	private JTextField textThreshold = new JTextField();
@@ -34,10 +35,13 @@ public class TestMakerView extends JPanel {
 	private final JLabel lblThr = new JLabel("threshold [0,1]");
 	private final JLabel lblVariables = new JLabel("number of vars");
 
-	public TestMakerView(AnnotatorConfiguration model) {
+	public TestMakerView(AnnotatorConfiguration model, BayesianNetworkCreatorConfiguration model1) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
+
+		// TODO add second model
+		// FIXME model1 is not considered
 
 		this.model = model;
 		createPanel();
@@ -166,16 +170,16 @@ public class TestMakerView extends JPanel {
 		buttonAnnotateOntology.setToolTipText(Message.tooltipAnnotatorRun);
 		add(buttonAnnotateOntology);
 		lblNewLabel.setBounds(140, 144, 120, 15);
-		
+
 		add(lblNewLabel);
 		lblOutputOntology.setBounds(140, 222, 120, 15);
-		
+
 		add(lblOutputOntology);
 		lblThr.setBounds(140, 274, 126, 15);
-		
+
 		add(lblThr);
 		lblVariables.setBounds(140, 348, 124, 15);
-		
+
 		add(lblVariables);
 
 	}

@@ -8,7 +8,7 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
@@ -30,7 +30,8 @@ public class ExperimentMakerController implements ActionListener {
 		public void run() {
 			long start = System.nanoTime();
 			ProcessorCore core = new ProcessorCore();
-			String result = core.run(getModel(), start);
+			// FIXME
+			String result = ""; // core.run(getModel(), start);
 
 			getView().setResult(result);
 			getView().setComputing(false);
@@ -149,7 +150,7 @@ public class ExperimentMakerController implements ActionListener {
 		experimentMakerRunner.start();
 	}
 
-	public ProcessorConfiguration getModel() {
+	public MultiProcessorConfiguration getModel() {
 		return getView().getModel();
 	}
 
@@ -172,7 +173,7 @@ public class ExperimentMakerController implements ActionListener {
 		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
 
-		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
+		// getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
 
 		reset();

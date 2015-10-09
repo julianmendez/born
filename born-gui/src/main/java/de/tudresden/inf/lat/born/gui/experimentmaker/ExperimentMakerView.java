@@ -1,7 +1,6 @@
 package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,10 +14,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
@@ -44,9 +42,9 @@ public class ExperimentMakerView extends JPanel {
 	private JTextArea textConsoleOutput = new JTextArea();
 	private JScrollPane scrollConsoleInput = new JScrollPane();
 	private JScrollPane scrollConsoleOutput = new JScrollPane();
-	private final ProcessorConfiguration model;
+	private final MultiProcessorConfiguration model;
 
-	public ExperimentMakerView(ProcessorConfiguration model) {
+	public ExperimentMakerView(MultiProcessorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -194,7 +192,7 @@ public class ExperimentMakerView extends JPanel {
 
 	}
 
-	public ProcessorConfiguration getModel() {
+	public MultiProcessorConfiguration getModel() {
 		return this.model;
 	}
 
@@ -204,7 +202,7 @@ public class ExperimentMakerView extends JPanel {
 
 	public void setInputOntology(String fileName) {
 		this.textInputOntologyFile.setText(fileName);
-		updateInputOntologyFile();
+		updateInputOntologyDirectory();
 	}
 
 	public String getBayesianNetwork() {
@@ -213,7 +211,7 @@ public class ExperimentMakerView extends JPanel {
 
 	public void setBayesianNetwork(String fileName) {
 		this.textBayesianNetworkFile.setText(fileName);
-		updateBayesianNetworkFile();
+		updateBayesianNetworkDirectory();
 	}
 
 	public String getConsoleInput() {
@@ -264,40 +262,40 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonComputeInference.setEnabled(b);
 	}
 
-	void updateInputOntologyFile() {
+	void updateInputOntologyDirectory() {
 		String inputOntologyFile = getInputOntology();
 		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
-			try {
-				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
-			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			} catch (OWLOntologyCreationException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			}
+//			try {
+//				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
+//			} catch (IOException e) {
+//				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+//			} catch (OWLOntologyCreationException e) {
+//				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+//			}
 		}
 	}
 
-	void updateBayesianNetworkFile() {
+	void updateBayesianNetworkDirectory() {
 		String bayesianNetworkFile = getBayesianNetwork();
 		if (bayesianNetworkFile != null && !bayesianNetworkFile.trim().isEmpty()) {
-			try {
-				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
-			} catch (IOException e) {
-				setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
-			}
+//			try {
+//				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
+//			} catch (IOException e) {
+//				setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
+//			}
 		}
 	}
 
 	void updateQuery() {
 		String query = this.textConsoleInput.getText();
 		if (query != null && !query.trim().isEmpty()) {
-			getModel().setQuery(query);
+			// getModel().setQuery(query);
 		}
 	}
 
 	public void update() {
-		updateInputOntologyFile();
-		updateBayesianNetworkFile();
+		updateInputOntologyDirectory();
+		updateBayesianNetworkDirectory();
 		updateQuery();
 	}
 

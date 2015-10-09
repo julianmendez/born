@@ -32,8 +32,8 @@ public class BornView extends JPanel {
 
 		this.model = model;
 		this.processorView = new ProcessorView(this.model.getProcessorConfiguration());
-		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());
-		this.experimentMakerView = new ExperimentMakerView(this.model.getProcessorConfiguration());
+		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration(), this.model.getBayesianNetworkCreatorConfiguration());
+		this.experimentMakerView = new ExperimentMakerView(this.model.getMultiProcessorConfiguration());
 
 		add(createPanel());
 	}
