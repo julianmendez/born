@@ -1,23 +1,15 @@
 package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringReader;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
  * This is the panel to compute inference.
@@ -26,22 +18,21 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
  */
 public class ExperimentMakerView extends JPanel {
 
-	private static final long serialVersionUID = -3489883631448640992L;
+	private static final long serialVersionUID = 8987374313881883318L;
 
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
-	private JButton buttonInputOntologyFile = new JButton();
-	private JButton buttonBayesianNetwork = new JButton();
-	private JButton buttonConsoleInput = new JButton();
-	private JButton buttonConsoleOutput = new JButton();
+	private JButton buttonInputOntologyDirectory = new JButton();
+	private JButton buttonBayesianNetworkDirectory = new JButton();
+	private JButton buttonOutputDirectory = new JButton();
+	private JButton buttonUpdateSeed = new JButton();
 	private JButton buttonComputeInference = new JButton();
 	private JLabel labelProgress = new JLabel("computing ...");
-	private JTextField textInputOntologyFile = new JTextField();
-	private JTextField textBayesianNetworkFile = new JTextField();
-	private JTextArea textConsoleInput = new JTextArea();
-	private JTextArea textConsoleOutput = new JTextArea();
-	private JScrollPane scrollConsoleInput = new JScrollPane();
-	private JScrollPane scrollConsoleOutput = new JScrollPane();
+	private JTextField textInputOntologyDirectory = new JTextField();
+	private JTextField textBayesianNetworkDirectory = new JTextField();
+	private JTextField textNumberOfQueries = new JTextField();
+	private JTextField textOutputDirectory = new JTextField();
+	private JTextField textSeed = new JTextField();
 	private final MultiProcessorConfiguration model;
 
 	public ExperimentMakerView(MultiProcessorConfiguration model) {
@@ -62,8 +53,8 @@ public class ExperimentMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonInputOntologyFile.addActionListener(listener);
-		this.buttonInputOntologyFile.setActionCommand(actionCommand);
+		this.buttonInputOntologyDirectory.addActionListener(listener);
+		this.buttonInputOntologyDirectory.setActionCommand(actionCommand);
 	}
 
 	public void addButtonBayesianNetworkListener(ActionListener listener, String actionCommand) {
@@ -74,8 +65,8 @@ public class ExperimentMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonBayesianNetwork.addActionListener(listener);
-		this.buttonBayesianNetwork.setActionCommand(actionCommand);
+		this.buttonBayesianNetworkDirectory.addActionListener(listener);
+		this.buttonBayesianNetworkDirectory.setActionCommand(actionCommand);
 	}
 
 	public void addButtonConsoleInputListener(ActionListener listener, String actionCommand) {
@@ -86,8 +77,8 @@ public class ExperimentMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonConsoleInput.addActionListener(listener);
-		this.buttonConsoleInput.setActionCommand(actionCommand);
+		this.buttonOutputDirectory.addActionListener(listener);
+		this.buttonOutputDirectory.setActionCommand(actionCommand);
 	}
 
 	public void addButtonConsoleOutputListener(ActionListener listener, String actionCommand) {
@@ -98,8 +89,8 @@ public class ExperimentMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonConsoleOutput.addActionListener(listener);
-		this.buttonConsoleOutput.setActionCommand(actionCommand);
+		this.buttonUpdateSeed.addActionListener(listener);
+		this.buttonUpdateSeed.setActionCommand(actionCommand);
 	}
 
 	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
@@ -116,75 +107,76 @@ public class ExperimentMakerView extends JPanel {
 
 	void createPanel() {
 
-		JLabel lblNewLabel = new JLabel("ontology");
-		lblNewLabel.setBounds(168, 83, 70, 15);
-		add(lblNewLabel);
+		JLabel lblInputOntologyDirectory = new JLabel(Message.textInputOntologyDirectory);
+		lblInputOntologyDirectory.setBounds(168, 83, 70, 15);
+		add(lblInputOntologyDirectory);
 
-		buttonInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
-		buttonInputOntologyFile.setBounds(168, 43, 54, 28);
-		add(buttonInputOntologyFile);
-		buttonInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonInputOntologyDirectory.setIcon(BornIcon.OPEN_FILE);
+		buttonInputOntologyDirectory.setBounds(168, 43, 54, 28);
+		buttonInputOntologyDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonInputOntologyDirectory);
 
-		textInputOntologyFile.setBounds(282, 43, 688, 28);
-		add(textInputOntologyFile);
-		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
-		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		textInputOntologyDirectory.setBounds(282, 43, 688, 28);
+		textInputOntologyDirectory.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textInputOntologyDirectory.setAlignmentX(LEFT_ALIGNMENT);
+		add(textInputOntologyDirectory);
 
-		JLabel lblNewLabel_1 = new JLabel("Bayesian network");
-		lblNewLabel_1.setBounds(168, 184, 128, 15);
-		add(lblNewLabel_1);
+		JLabel lblBayesianNetworkDirectory = new JLabel(Message.textBayesianNetworkDirectory);
+		lblBayesianNetworkDirectory.setBounds(168, 185, 128, 15);
+		add(lblBayesianNetworkDirectory);
 
-		buttonBayesianNetwork.setIcon(BornIcon.OPEN_FILE);
-		buttonBayesianNetwork.setBounds(168, 135, 54, 28);
-		add(buttonBayesianNetwork);
-		buttonBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonBayesianNetworkDirectory.setIcon(BornIcon.OPEN_FILE);
+		buttonBayesianNetworkDirectory.setBounds(168, 135, 54, 28);
+		buttonBayesianNetworkDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonBayesianNetworkDirectory);
 
-		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
-		add(textBayesianNetworkFile);
-		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
-		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+		textBayesianNetworkDirectory.setBounds(282, 135, 688, 28);
+		textBayesianNetworkDirectory.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
+		textBayesianNetworkDirectory.setAlignmentX(LEFT_ALIGNMENT);
+		add(textBayesianNetworkDirectory);
 
-		JLabel lblInput = new JLabel("input");
+		JLabel lblInput = new JLabel(Message.textInputOntologyDirectory);
 		lblInput.setBounds(168, 283, 70, 15);
 		add(lblInput);
 
-		buttonConsoleInput.setIcon(BornIcon.OPEN_FILE);
-		buttonConsoleInput.setBounds(168, 246, 54, 28);
-		add(buttonConsoleInput);
-		buttonConsoleInput.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonOutputDirectory.setIcon(BornIcon.OPEN_FILE);
+		buttonOutputDirectory.setBounds(168, 243, 54, 28);
+		buttonOutputDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonOutputDirectory);
 
-		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
-		add(textBayesianNetworkFile);
+		textOutputDirectory = new JTextField();
+		textOutputDirectory.setToolTipText(Message.tooltipTextFieldOutputOntologyDirectory);
+		textOutputDirectory.setAlignmentX(LEFT_ALIGNMENT);
+		textOutputDirectory.setBounds(282, 243, 688, 28);
+		add(textOutputDirectory);
 
-		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
-		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
+		JLabel lblNumberOfQueries = new JLabel(Message.textNumberOfQueries);
+		lblNumberOfQueries.setBounds(168, 395, 70, 15);
+		add(lblNumberOfQueries);
 
-		scrollConsoleInput.setBounds(282, 246, 688, 65);
-		add(scrollConsoleInput);
-		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollConsoleInput.setViewportView(textConsoleInput);
+		textNumberOfQueries.setBounds(282, 366, 106, 28);
+		textNumberOfQueries.setToolTipText(Message.tooltipTextFieldNumberOfQueries);
+		textNumberOfQueries.setAlignmentX(LEFT_ALIGNMENT);
+		add(textNumberOfQueries);
 
-		JLabel lblOutput = new JLabel("output");
-		lblOutput.setBounds(168, 395, 70, 15);
-		add(lblOutput);
+		JLabel lblSeed = new JLabel(Message.textSeed);
+		lblSeed.setBounds(443, 416, 70, 15);
+		add(lblSeed);
 
-		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
-		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
-		scrollConsoleOutput.setViewportView(textConsoleOutput);
+		textSeed.setBounds(540, 366, 89, 28);
+		textSeed.setToolTipText(Message.tooltipTextFieldSeed);
+		textSeed.setAlignmentX(LEFT_ALIGNMENT);
+		add(textSeed);
 
-		buttonConsoleOutput.setIcon(BornIcon.SAVE_FILE);
-		buttonConsoleOutput.setBounds(168, 355, 54, 28);
-		add(buttonConsoleOutput);
-		buttonConsoleOutput.setToolTipText(Message.tooltipOpenInputOntologyFile);
-
-		scrollConsoleOutput.setBounds(282, 355, 688, 65);
-		add(scrollConsoleOutput);
-		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		buttonUpdateSeed.setIcon(BornIcon.REFRESH);
+		buttonUpdateSeed.setBounds(433, 366, 54, 28);
+		buttonUpdateSeed.setToolTipText(Message.tooltipButtonUpdateSeed);
+		add(buttonUpdateSeed);
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
 		buttonComputeInference.setBounds(168, 476, 54, 28);
-		add(buttonComputeInference);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
+		add(buttonComputeInference);
 
 		labelProgress.setBounds(168, 516, 99, 15);
 		labelProgress.setVisible(false);
@@ -196,66 +188,35 @@ public class ExperimentMakerView extends JPanel {
 		return this.model;
 	}
 
-	public String getInputOntology() {
-		return this.textInputOntologyFile.getText();
+	public String getInputOntologyDirectory() {
+		return this.textInputOntologyDirectory.getText();
 	}
 
-	public void setInputOntology(String fileName) {
-		this.textInputOntologyFile.setText(fileName);
+	public void setInputOntologyDirectory(String fileName) {
+		this.textInputOntologyDirectory.setText(fileName);
 		updateInputOntologyDirectory();
 	}
 
-	public String getBayesianNetwork() {
-		return this.textBayesianNetworkFile.getText();
+	public String getBayesianNetworkDirectory() {
+		return this.textBayesianNetworkDirectory.getText();
 	}
 
-	public void setBayesianNetwork(String fileName) {
-		this.textBayesianNetworkFile.setText(fileName);
+	public void setBayesianNetworkDirectory(String fileName) {
+		this.textBayesianNetworkDirectory.setText(fileName);
 		updateBayesianNetworkDirectory();
 	}
 
-	public String getConsoleInput() {
-		return this.textConsoleInput.getText();
+	public String getOutputDirectory() {
+		return this.textOutputDirectory.getText();
 	}
 
-	public void setConsoleInput(String text) {
-		this.textConsoleInput.setText(text);
-		updateQuery();
-	}
-
-	public void readConsoleInput(String consoleInputFile) {
-		if (consoleInputFile != null && !consoleInputFile.trim().isEmpty()) {
-			try {
-				String text = ProcessorConfiguration.read(new FileReader(consoleInputFile));
-				this.textConsoleInput.setText(text);
-				updateQuery();
-			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			}
-		}
-	}
-
-	public void writeConsoleOutput(String consoleOutputFile) {
-		if (consoleOutputFile != null && !consoleOutputFile.trim().isEmpty()) {
-			try {
-				String text = this.textConsoleOutput.getText();
-				ProcessorConfiguration.write(new StringReader(text), new FileWriter(consoleOutputFile));
-			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			}
-		}
-	}
-
-	public String getConsoleOutput() {
-		return this.textConsoleOutput.getText();
-	}
-
-	public void setConsoleOutput(String fileName) {
-		this.textConsoleOutput.setText(fileName);
+	public void setOutputDirectory(String fileName) {
+		this.textOutputDirectory.setText(fileName);
+		updateOutputDirectory();
 	}
 
 	public void setButtonLoadEnabled(boolean b) {
-		this.buttonInputOntologyFile.setEnabled(b);
+		this.buttonInputOntologyDirectory.setEnabled(b);
 	}
 
 	public void setButtonComputeInferenceEnabled(boolean b) {
@@ -263,55 +224,96 @@ public class ExperimentMakerView extends JPanel {
 	}
 
 	void updateInputOntologyDirectory() {
-		String inputOntologyFile = getInputOntology();
-		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
-//			try {
-//				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
-//			} catch (IOException e) {
-//				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-//			} catch (OWLOntologyCreationException e) {
-//				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-//			}
+		String inputOntologyDirectory = getInputOntologyDirectory();
+		if (inputOntologyDirectory != null && !inputOntologyDirectory.trim().isEmpty()) {
+			// try {
+			// getModel().setOntology(ProcessorConfiguration.readOntology(new
+			// FileInputStream(inputOntologyFile)));
+			// } catch (IOException e) {
+			// setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+			// } catch (OWLOntologyCreationException e) {
+			// setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+			// }
 		}
 	}
 
 	void updateBayesianNetworkDirectory() {
-		String bayesianNetworkFile = getBayesianNetwork();
-		if (bayesianNetworkFile != null && !bayesianNetworkFile.trim().isEmpty()) {
-//			try {
-//				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
-//			} catch (IOException e) {
-//				setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
-//			}
+		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
+		if (bayesianNetworkDirectory != null && !bayesianNetworkDirectory.trim().isEmpty()) {
+			// try {
+			// getModel().setBayesianNetwork(ProcessorConfiguration.read(new
+			// FileReader(bayesianNetworkFile)));
+			// } catch (IOException e) {
+			// setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
+			// }
 		}
 	}
 
-	void updateQuery() {
-		String query = this.textConsoleInput.getText();
-		if (query != null && !query.trim().isEmpty()) {
-			// getModel().setQuery(query);
+	void updateOutputDirectory() {
+		String outputDirectory = getOutputDirectory();
+		if (outputDirectory != null && !outputDirectory.trim().isEmpty()) {
+			// try {
+			// getModel().setBayesianNetwork(ProcessorConfiguration.read(new
+			// FileReader(bayesianNetworkFile)));
+			// } catch (IOException e) {
+			// setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
+			// }
 		}
+	}
+
+	void updateSeed() {
+		String seedStr = this.textSeed.getText();
+		int seed = 0;
+		try {
+			seed = Integer.parseInt(seedStr);
+		} catch (NumberFormatException e) {
+		}
+		this.textSeed.setText("" + seed);
+		this.model.setSeed(seed);
+	}
+
+	void updateNumberOfQueries() {
+		String numberOfQueriesStr = this.textNumberOfQueries.getText();
+		int numberOfQueries = 0;
+		try {
+			numberOfQueries = Integer.parseInt(numberOfQueriesStr);
+		} catch (NumberFormatException e) {
+		}
+		this.textSeed.setText("" + numberOfQueries);
+		this.model.setNumberOfQueries(numberOfQueries);
 	}
 
 	public void update() {
 		updateInputOntologyDirectory();
 		updateBayesianNetworkDirectory();
-		updateQuery();
+		updateOutputDirectory();
+		updateSeed();
 	}
 
 	public void setResult(String result) {
-		this.textConsoleOutput.setText(result);
 	}
 
 	public void setComputing(boolean status) {
 		labelProgress.setVisible(status);
 	}
 
+	public String getNumebrOfQueries() {
+		return this.textNumberOfQueries.getText();
+	}
+
+	public String getSeed() {
+		return this.textSeed.getText();
+	}
+
+	public void setSeed(String seed) {
+		this.textSeed.setText(seed);
+	}
+
 	public void setButtonsEnabled(boolean status) {
-		buttonInputOntologyFile.setEnabled(status);
-		buttonBayesianNetwork.setEnabled(status);
-		buttonConsoleInput.setEnabled(status);
-		buttonConsoleOutput.setEnabled(status);
+		buttonInputOntologyDirectory.setEnabled(status);
+		buttonBayesianNetworkDirectory.setEnabled(status);
+		buttonOutputDirectory.setEnabled(status);
+		buttonUpdateSeed.setEnabled(status);
 		buttonComputeInference.setEnabled(status);
 	}
 

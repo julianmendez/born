@@ -21,11 +21,25 @@ public interface Message {
 	String textQuery = "query (e.g. \"query(sub('A', 'B')).\" )";
 	String textOutput = "console output";
 
+	String textInputOntologyDirectory = "input ontology directory (e.g. \"ontologies/\")";
+	String textBayesianNetworkDirectory = "Bayesian network directory (e.g. \"networks/\")";
+	String textOutputDirectory = "output directory (e.g. \"results/\")";
+	String textNumberOfQueries = "number of queries";
+	String textSeed = "seed";
+
 	String tooltipTextFieldInputOntologyFile = "select the input ontology file";
 	String tooltipTextFieldBayesianNetworkFile = "select the Bayesian network file";
 	String tooltipTextFieldListOfParents = "select query file";
 
+	String tooltipTextFieldInputOntologyDirectory = "select the input ontology directory";
+	String tooltipTextFieldBayesianNetworkDirectory = "select the Bayesian network directory";
+	String tooltipTextFieldOutputOntologyDirectory = "select the input ontology directory";
+	String tooltipTextFieldNumberOfQueries = "define the number of queries";
+	String tooltipTextFieldSeed = "define the seed to generate the pseudorandom numbers";
+
 	String tooltipOpenInputOntologyFile = "opens an input ontology file";
+
+	String tooltipButtonUpdateSeed = "update the seed with a new random number";
 
 	// Processor
 	String tooltipComputeInference = "compute inference";

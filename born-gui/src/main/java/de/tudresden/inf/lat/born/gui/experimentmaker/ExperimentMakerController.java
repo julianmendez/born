@@ -78,13 +78,13 @@ public class ExperimentMakerController implements ActionListener {
 
 		String cmd = e.getActionCommand();
 		if (cmd.equals(actionInputOntology)) {
-			executeActionInputOntology();
+			executeActionInputOntologyDirectory();
 		} else if (cmd.equals(actionBayesianNetwork)) {
-			executeActionBayesianNetwork();
+			executeActionBayesianNetworkDirectory();
 		} else if (cmd.equals(actionConsoleInput)) {
-			executeActionConsoleInput();
+			executeActionOutputDirectory();
 		} else if (cmd.equals(actionConsoleOutput)) {
-			executeActionConsoleOutput();
+			executeActionUpdateSeed();
 		} else if (cmd.equals(actionComputeInference)) {
 			executeActionComputeInference();
 		} else {
@@ -92,7 +92,7 @@ public class ExperimentMakerController implements ActionListener {
 		}
 	}
 
-	void executeActionInputOntology() {
+	void executeActionInputOntologyDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView());
@@ -101,11 +101,11 @@ public class ExperimentMakerController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setInputOntology(file.getAbsolutePath());
+			getView().setInputOntologyDirectory(file.getAbsolutePath());
 		}
 	}
 
-	void executeActionBayesianNetwork() {
+	void executeActionBayesianNetworkDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView());
@@ -114,32 +114,27 @@ public class ExperimentMakerController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setBayesianNetwork(file.getAbsolutePath());
+			getView().setBayesianNetworkDirectory(file.getAbsolutePath());
 		}
 	}
 
-	void executeActionConsoleInput() {
+	void executeActionOutputDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
-			getView().readConsoleInput(file.getAbsolutePath());
-		}
+		// if (file != null) {
+		// getView().readConsoleInput(file.getAbsolutePath());
+		// }
 	}
 
-	void executeActionConsoleOutput() {
-		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showSaveDialog(getView());
-		File file = null;
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = fileChooser.getSelectedFile();
-		}
-		if (file != null) {
-			getView().writeConsoleOutput(file.getAbsolutePath());
-		}
+	void executeActionUpdateSeed() {
+		double number = Math.random();
+		int seed = (int) (number * 1000);
+		getView().setSeed("" + seed);
 	}
 
 	void executeActionComputeInference() {
