@@ -119,11 +119,11 @@ public class ProcessorView extends JPanel {
 	void createPanel() {
 
 		JLabel lblNewLabel = new JLabel("ontology");
-		lblNewLabel.setBounds(168, 83, 70, 15);
+		lblNewLabel.setBounds(282, 83, 70, 15);
 		add(lblNewLabel);
 
 		buttonInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
-		buttonInputOntologyFile.setBounds(168, 43, 54, 28);
+		buttonInputOntologyFile.setBounds(213, 43, 54, 28);
 		add(buttonInputOntologyFile);
 		buttonInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
@@ -133,11 +133,11 @@ public class ProcessorView extends JPanel {
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 
 		JLabel lblNewLabel_1 = new JLabel("Bayesian network");
-		lblNewLabel_1.setBounds(168, 184, 128, 15);
+		lblNewLabel_1.setBounds(282, 175, 128, 15);
 		add(lblNewLabel_1);
 
 		buttonBayesianNetwork.setIcon(BornIcon.OPEN_FILE);
-		buttonBayesianNetwork.setBounds(168, 135, 54, 28);
+		buttonBayesianNetwork.setBounds(213, 135, 54, 28);
 		add(buttonBayesianNetwork);
 		buttonBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
@@ -147,11 +147,11 @@ public class ProcessorView extends JPanel {
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 
 		JLabel lblInput = new JLabel("input");
-		lblInput.setBounds(168, 283, 70, 15);
+		lblInput.setBounds(282, 323, 70, 15);
 		add(lblInput);
 
 		buttonConsoleInput.setIcon(BornIcon.OPEN_FILE);
-		buttonConsoleInput.setBounds(168, 246, 54, 28);
+		buttonConsoleInput.setBounds(213, 254, 54, 28);
 		add(buttonConsoleInput);
 		buttonConsoleInput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
@@ -167,7 +167,7 @@ public class ProcessorView extends JPanel {
 		scrollConsoleInput.setViewportView(textConsoleInput);
 
 		JLabel lblOutput = new JLabel("output");
-		lblOutput.setBounds(168, 395, 70, 15);
+		lblOutput.setBounds(282, 444, 70, 15);
 		add(lblOutput);
 
 		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
@@ -175,7 +175,7 @@ public class ProcessorView extends JPanel {
 		scrollConsoleOutput.setViewportView(textConsoleOutput);
 
 		buttonConsoleOutput.setIcon(BornIcon.SAVE_FILE);
-		buttonConsoleOutput.setBounds(168, 355, 54, 28);
+		buttonConsoleOutput.setBounds(213, 361, 54, 28);
 		add(buttonConsoleOutput);
 		buttonConsoleOutput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
@@ -184,11 +184,11 @@ public class ProcessorView extends JPanel {
 		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
-		buttonComputeInference.setBounds(168, 476, 54, 28);
+		buttonComputeInference.setBounds(213, 476, 54, 28);
 		add(buttonComputeInference);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
 
-		labelProgress.setBounds(168, 516, 99, 15);
+		labelProgress.setBounds(223, 517, 99, 15);
 		labelProgress.setVisible(false);
 		add(labelProgress);
 

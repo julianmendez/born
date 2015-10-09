@@ -107,12 +107,12 @@ public class ExperimentMakerView extends JPanel {
 
 	void createPanel() {
 
-		JLabel lblInputOntologyDirectory = new JLabel(Message.textInputOntologyDirectory);
-		lblInputOntologyDirectory.setBounds(168, 83, 70, 15);
+		JLabel lblInputOntologyDirectory = new JLabel("ontology directory");
+		lblInputOntologyDirectory.setBounds(292, 83, 128, 15);
 		add(lblInputOntologyDirectory);
 
 		buttonInputOntologyDirectory.setIcon(BornIcon.OPEN_FILE);
-		buttonInputOntologyDirectory.setBounds(168, 43, 54, 28);
+		buttonInputOntologyDirectory.setBounds(216, 43, 54, 28);
 		buttonInputOntologyDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonInputOntologyDirectory);
 
@@ -121,12 +121,12 @@ public class ExperimentMakerView extends JPanel {
 		textInputOntologyDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		add(textInputOntologyDirectory);
 
-		JLabel lblBayesianNetworkDirectory = new JLabel(Message.textBayesianNetworkDirectory);
-		lblBayesianNetworkDirectory.setBounds(168, 185, 128, 15);
+		JLabel lblBayesianNetworkDirectory = new JLabel("Bayesian network directory");
+		lblBayesianNetworkDirectory.setBounds(292, 186, 220, 15);
 		add(lblBayesianNetworkDirectory);
 
 		buttonBayesianNetworkDirectory.setIcon(BornIcon.OPEN_FILE);
-		buttonBayesianNetworkDirectory.setBounds(168, 135, 54, 28);
+		buttonBayesianNetworkDirectory.setBounds(216, 135, 54, 28);
 		buttonBayesianNetworkDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonBayesianNetworkDirectory);
 
@@ -135,50 +135,50 @@ public class ExperimentMakerView extends JPanel {
 		textBayesianNetworkDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		add(textBayesianNetworkDirectory);
 
-		JLabel lblInput = new JLabel(Message.textInputOntologyDirectory);
-		lblInput.setBounds(168, 283, 70, 15);
+		JLabel lblInput = new JLabel("output directory");
+		lblInput.setBounds(292, 283, 128, 15);
 		add(lblInput);
 
 		buttonOutputDirectory.setIcon(BornIcon.OPEN_FILE);
-		buttonOutputDirectory.setBounds(168, 243, 54, 28);
-		buttonOutputDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonOutputDirectory.setBounds(216, 243, 54, 28);
+		buttonOutputDirectory.setToolTipText(Message.tooltipButtonOutputDirectory);
 		add(buttonOutputDirectory);
 
 		textOutputDirectory = new JTextField();
-		textOutputDirectory.setToolTipText(Message.tooltipTextFieldOutputOntologyDirectory);
+		textOutputDirectory.setToolTipText(Message.tooltipTextFieldOutputDirectory);
 		textOutputDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		textOutputDirectory.setBounds(282, 243, 688, 28);
 		add(textOutputDirectory);
 
 		JLabel lblNumberOfQueries = new JLabel(Message.textNumberOfQueries);
-		lblNumberOfQueries.setBounds(168, 395, 70, 15);
+		lblNumberOfQueries.setBounds(292, 381, 140, 15);
 		add(lblNumberOfQueries);
 
-		textNumberOfQueries.setBounds(282, 366, 106, 28);
+		textNumberOfQueries.setBounds(290, 341, 106, 28);
 		textNumberOfQueries.setToolTipText(Message.tooltipTextFieldNumberOfQueries);
 		textNumberOfQueries.setAlignmentX(LEFT_ALIGNMENT);
 		add(textNumberOfQueries);
 
 		JLabel lblSeed = new JLabel(Message.textSeed);
-		lblSeed.setBounds(443, 416, 70, 15);
+		lblSeed.setBounds(550, 381, 70, 15);
 		add(lblSeed);
 
-		textSeed.setBounds(540, 366, 89, 28);
+		textSeed.setBounds(540, 341, 89, 28);
 		textSeed.setToolTipText(Message.tooltipTextFieldSeed);
 		textSeed.setAlignmentX(LEFT_ALIGNMENT);
 		add(textSeed);
 
 		buttonUpdateSeed.setIcon(BornIcon.REFRESH);
-		buttonUpdateSeed.setBounds(433, 366, 54, 28);
+		buttonUpdateSeed.setBounds(474, 341, 54, 28);
 		buttonUpdateSeed.setToolTipText(Message.tooltipButtonUpdateSeed);
 		add(buttonUpdateSeed);
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
-		buttonComputeInference.setBounds(168, 476, 54, 28);
+		buttonComputeInference.setBounds(227, 429, 54, 28);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
 		add(buttonComputeInference);
 
-		labelProgress.setBounds(168, 516, 99, 15);
+		labelProgress.setBounds(237, 478, 99, 15);
 		labelProgress.setVisible(false);
 		add(labelProgress);
 

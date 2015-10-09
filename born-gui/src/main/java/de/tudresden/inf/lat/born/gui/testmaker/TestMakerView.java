@@ -136,7 +136,7 @@ public class TestMakerView extends JPanel {
 		setLayout(null);
 
 		buttonSelectInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
-		buttonSelectInputOntologyFile.setBounds(140, 101, 50, 26);
+		buttonSelectInputOntologyFile.setBounds(215, 101, 50, 26);
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectInputOntologyFile);
 
@@ -146,7 +146,7 @@ public class TestMakerView extends JPanel {
 		add(textInputOntologyFile);
 
 		buttonSelectOutputOntologyFile.setIcon(BornIcon.SAVE_FILE);
-		buttonSelectOutputOntologyFile.setBounds(140, 184, 50, 26);
+		buttonSelectOutputOntologyFile.setBounds(215, 186, 50, 26);
 		buttonSelectOutputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectOutputOntologyFile);
 
@@ -166,19 +166,19 @@ public class TestMakerView extends JPanel {
 		add(textMaxNumberOfVar);
 
 		buttonAnnotateOntology.setIcon(BornIcon.RUN);
-		buttonAnnotateOntology.setBounds(140, 419, 50, 26);
+		buttonAnnotateOntology.setBounds(215, 425, 50, 26);
 		buttonAnnotateOntology.setToolTipText(Message.tooltipAnnotatorRun);
 		add(buttonAnnotateOntology);
-		lblNewLabel.setBounds(140, 144, 120, 15);
+		lblNewLabel.setBounds(287, 139, 120, 15);
 
 		add(lblNewLabel);
-		lblOutputOntology.setBounds(140, 222, 120, 15);
+		lblOutputOntology.setBounds(277, 224, 120, 15);
 
 		add(lblOutputOntology);
-		lblThr.setBounds(140, 274, 126, 15);
+		lblThr.setBounds(281, 300, 126, 15);
 
 		add(lblThr);
-		lblVariables.setBounds(140, 348, 124, 15);
+		lblVariables.setBounds(277, 391, 124, 15);
 
 		add(lblVariables);
 

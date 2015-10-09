@@ -33,12 +33,12 @@ public interface Message {
 
 	String tooltipTextFieldInputOntologyDirectory = "select the input ontology directory";
 	String tooltipTextFieldBayesianNetworkDirectory = "select the Bayesian network directory";
-	String tooltipTextFieldOutputOntologyDirectory = "select the input ontology directory";
+	String tooltipTextFieldOutputDirectory = "select the output directory";
 	String tooltipTextFieldNumberOfQueries = "define the number of queries";
 	String tooltipTextFieldSeed = "define the seed to generate the pseudorandom numbers";
 
 	String tooltipOpenInputOntologyFile = "opens an input ontology file";
-
+	String tooltipButtonOutputDirectory = "select the output directory";
 	String tooltipButtonUpdateSeed = "update the seed with a new random number";
 
 	// Processor
