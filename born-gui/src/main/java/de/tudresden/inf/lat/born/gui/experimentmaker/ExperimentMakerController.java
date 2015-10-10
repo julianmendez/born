@@ -23,6 +23,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
  * @author Julian Mendez
  */
 public class ExperimentMakerController implements ActionListener {
+	public static final String CSV_EXTENSION = ".csv";
 	public static final String SLASH = "/";
 
 	/**
@@ -40,7 +41,7 @@ public class ExperimentMakerController implements ActionListener {
 			String outputDirectory = model.getOutputDirectory();
 			for (OntologyAndNetwork ontNet : ontologyList) {
 				String result = resultIt.next();
-				String fileName = outputDirectory + SLASH + ontNet.getOntologyName();
+				String fileName = outputDirectory + SLASH + ontNet.getOntologyName() + CSV_EXTENSION;
 				FileWriter fileWriter = new FileWriter(fileName);
 				fileWriter.write(result);
 				fileWriter.flush();

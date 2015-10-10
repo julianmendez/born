@@ -32,9 +32,8 @@ public class ExperimentMakerView extends JPanel {
 
 	private static final long serialVersionUID = 8987374313881883318L;
 
-	public static final String OWL_EXTENSION = "owl";
-	public static final String PL_EXTENSION = "pl";
-	public static final String CSV_EXTENSION = "csv";
+	public static final String OWL_EXTENSION = ".owl";
+	public static final String PL_EXTENSION = ".pl";
 
 	public static final String SLASH = "/";
 
@@ -126,7 +125,7 @@ public class ExperimentMakerView extends JPanel {
 	void createPanel() {
 
 		JLabel lblInputOntologyDirectory = new JLabel("ontology directory");
-		lblInputOntologyDirectory.setBounds(292, 83, 128, 15);
+		lblInputOntologyDirectory.setBounds(292, 83, 178, 15);
 		add(lblInputOntologyDirectory);
 
 		buttonInputOntologyDirectory.setIcon(BornIcon.OPEN_FILE);
@@ -242,28 +241,41 @@ public class ExperimentMakerView extends JPanel {
 	}
 
 	List<OntologyAndNetwork> getOntologyAndNetworkList(String ontologyDirectory, String bayesianNetworkDirectory) {
+		if (ontologyDirectory == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (bayesianNetworkDirectory == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
 		try {
-			File file = new File(ontologyDirectory);
-			File[] files = file.listFiles();
-			Arrays.sort(files);
-
 			List<OntologyAndNetwork> ret = new ArrayList<OntologyAndNetwork>();
+			if (!ontologyDirectory.isEmpty() && !bayesianNetworkDirectory.isEmpty()) {
+				File file = new File(ontologyDirectory);
+				File[] files = file.listFiles();
+				Arrays.sort(files);
 
-			for (int index = 0; index < files.length; index++) {
-				String ontologyFileName = files[index].getName();
-				String ontologyName = ontologyFileName.substring(0, ontologyFileName.length() - OWL_EXTENSION.length());
+				for (int index = 0; index < files.length; index++) {
 
-				File ontologyFile = new File(ontologyDirectory + SLASH + ontologyName + OWL_EXTENSION);
-				File bayesianNetworkFile = new File(bayesianNetworkDirectory + SLASH + ontologyName + PL_EXTENSION);
+					String fileName = files[index].getName();
+					if (fileName.endsWith(OWL_EXTENSION)) {
+						String ontologyName = fileName.substring(0, fileName.length() - OWL_EXTENSION.length());
 
-				OWLOntology owlOntology = ProcessorConfiguration.readOntology(new FileInputStream(ontologyFile));
+						File ontologyFile = new File(ontologyDirectory + SLASH + ontologyName + OWL_EXTENSION);
+						File bayesianNetworkFile = new File(
+								bayesianNetworkDirectory + SLASH + ontologyName + PL_EXTENSION);
 
-				String bayesianNetwork = "";
-				if (bayesianNetworkFile.exists()) {
-					bayesianNetwork = ProcessorConfiguration.read(new FileReader(bayesianNetworkFile));
+						OWLOntology owlOntology = ProcessorConfiguration
+								.readOntology(new FileInputStream(ontologyFile));
+
+						String bayesianNetwork = "";
+						if (bayesianNetworkFile.exists()) {
+							bayesianNetwork = ProcessorConfiguration.read(new FileReader(bayesianNetworkFile));
+						}
+
+						ret.add(new OntologyAndNetwork(owlOntology, bayesianNetwork));
+					}
 				}
-
-				ret.add(new OntologyAndNetwork(owlOntology, bayesianNetwork));
 			}
 			return ret;
 
@@ -272,7 +284,6 @@ public class ExperimentMakerView extends JPanel {
 		} catch (OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 
 	void updateInputOntologyDirectory() {
