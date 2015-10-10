@@ -1,15 +1,27 @@
 package de.tudresden.inf.lat.born.gui.experimentmaker;
 
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.OntologyAndNetwork;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
  * This is the panel to compute inference.
@@ -19,6 +31,12 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurati
 public class ExperimentMakerView extends JPanel {
 
 	private static final long serialVersionUID = 8987374313881883318L;
+
+	public static final String OWL_EXTENSION = "owl";
+	public static final String PL_EXTENSION = "pl";
+	public static final String CSV_EXTENSION = "csv";
+
+	public static final String SLASH = "/";
 
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
@@ -223,41 +241,60 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonComputeInference.setEnabled(b);
 	}
 
+	List<OntologyAndNetwork> getOntologyAndNetworkList(String ontologyDirectory, String bayesianNetworkDirectory) {
+		try {
+			File file = new File(ontologyDirectory);
+			File[] files = file.listFiles();
+			Arrays.sort(files);
+
+			List<OntologyAndNetwork> ret = new ArrayList<OntologyAndNetwork>();
+
+			for (int index = 0; index < files.length; index++) {
+				String ontologyFileName = files[index].getName();
+				String ontologyName = ontologyFileName.substring(0, ontologyFileName.length() - OWL_EXTENSION.length());
+
+				File ontologyFile = new File(ontologyDirectory + SLASH + ontologyName + OWL_EXTENSION);
+				File bayesianNetworkFile = new File(bayesianNetworkDirectory + SLASH + ontologyName + PL_EXTENSION);
+
+				OWLOntology owlOntology = ProcessorConfiguration.readOntology(new FileInputStream(ontologyFile));
+
+				String bayesianNetwork = "";
+				if (bayesianNetworkFile.exists()) {
+					bayesianNetwork = ProcessorConfiguration.read(new FileReader(bayesianNetworkFile));
+				}
+
+				ret.add(new OntologyAndNetwork(owlOntology, bayesianNetwork));
+			}
+			return ret;
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
 	void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
 		if (inputOntologyDirectory != null && !inputOntologyDirectory.trim().isEmpty()) {
-			// try {
-			// getModel().setOntology(ProcessorConfiguration.readOntology(new
-			// FileInputStream(inputOntologyFile)));
-			// } catch (IOException e) {
-			// setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			// } catch (OWLOntologyCreationException e) {
-			// setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
-			// }
+			getModel().setOntologyList(
+					getOntologyAndNetworkList(getInputOntologyDirectory(), getBayesianNetworkDirectory()));
 		}
 	}
 
 	void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
 		if (bayesianNetworkDirectory != null && !bayesianNetworkDirectory.trim().isEmpty()) {
-			// try {
-			// getModel().setBayesianNetwork(ProcessorConfiguration.read(new
-			// FileReader(bayesianNetworkFile)));
-			// } catch (IOException e) {
-			// setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
-			// }
+			getModel().setOntologyList(
+					getOntologyAndNetworkList(getInputOntologyDirectory(), getBayesianNetworkDirectory()));
 		}
 	}
 
 	void updateOutputDirectory() {
 		String outputDirectory = getOutputDirectory();
 		if (outputDirectory != null && !outputDirectory.trim().isEmpty()) {
-			// try {
-			// getModel().setBayesianNetwork(ProcessorConfiguration.read(new
-			// FileReader(bayesianNetworkFile)));
-			// } catch (IOException e) {
-			// setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
-			// }
+			getModel().setOutputDirectory(outputDirectory);
 		}
 	}
 

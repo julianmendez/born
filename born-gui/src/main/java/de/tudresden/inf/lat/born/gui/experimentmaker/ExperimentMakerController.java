@@ -3,13 +3,18 @@ package de.tudresden.inf.lat.born.gui.experimentmaker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.OntologyAndNetwork;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
@@ -18,6 +23,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
  * @author Julian Mendez
  */
 public class ExperimentMakerController implements ActionListener {
+	public static final String SLASH = "/";
 
 	/**
 	 * This class lets the processor run in a separate thread.
@@ -27,13 +33,32 @@ public class ExperimentMakerController implements ActionListener {
 	 */
 	class ExperimentMakerRunner extends Thread {
 
+		void storeResults(List<String> list) throws IOException {
+			Iterator<String> resultIt = list.iterator();
+			MultiProcessorConfiguration model = getModel();
+			List<OntologyAndNetwork> ontologyList = model.getOntologyList();
+			String outputDirectory = model.getOutputDirectory();
+			for (OntologyAndNetwork ontNet : ontologyList) {
+				String result = resultIt.next();
+				String fileName = outputDirectory + SLASH + ontNet.getOntologyName();
+				FileWriter fileWriter = new FileWriter(fileName);
+				fileWriter.write(result);
+				fileWriter.flush();
+				fileWriter.close();
+			}
+
+		}
+
 		public void run() {
 			long start = System.nanoTime();
-			ProcessorCore core = new ProcessorCore();
-			// FIXME
-			String result = ""; // core.run(getModel(), start);
+			MultiProcessorCore core = new MultiProcessorCore();
+			List<String> results = core.run(getModel(), start);
 
-			getView().setResult(result);
+			try {
+				storeResults(results);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 			getView().setComputing(false);
 			getView().setButtonsEnabled(true);
 		}
@@ -126,9 +151,9 @@ public class ExperimentMakerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		// if (file != null) {
-		// getView().readConsoleInput(file.getAbsolutePath());
-		// }
+		if (file != null) {
+			getView().setOutputDirectory(file.getAbsolutePath());
+		}
 	}
 
 	void executeActionUpdateSeed() {

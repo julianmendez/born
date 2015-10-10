@@ -13,7 +13,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 public class MultiProcessorConfiguration {
 
 	private List<OntologyAndNetwork> ontologyList = new ArrayList<OntologyAndNetwork>();
-	private List<String> outputFileNameList;
+	private String outputDirectory;
 	private String problogDirectory;
 	private boolean problogNeeded = true;
 	private boolean showingLog = true;
@@ -28,12 +28,12 @@ public class MultiProcessorConfiguration {
 		this.ontologyList = ontologyList;
 	}
 
-	public List<String> getOutputFileNameList() {
-		return outputFileNameList;
+	public String getOutputDirectory() {
+		return outputDirectory;
 	}
 
-	public void setOutputFileNameList(List<String> outputFileNameList) {
-		this.outputFileNameList = outputFileNameList;
+	public void setOutputDirectory(String outputDirectory) {
+		this.outputDirectory = outputDirectory;
 	}
 
 	public int getNumberOfQueries() {
@@ -86,7 +86,7 @@ public class MultiProcessorConfiguration {
 			MultiProcessorConfiguration other = (MultiProcessorConfiguration) obj;
 			return getOntologyList().equals(other.getOntologyList())
 					&& (getNumberOfQueries() == other.getNumberOfQueries()) && (getSeed() == other.getSeed())
-					&& getOutputFileNameList().equals(other.getOutputFileNameList())
+					&& getOutputDirectory().equals(other.getOutputDirectory())
 					&& getProblogDirectory().equals(other.getProblogDirectory())
 					&& (isShowingLog() == other.isShowingLog()) && (isProblogNeeded() == other.isProblogNeeded());
 		}
@@ -100,7 +100,7 @@ public class MultiProcessorConfiguration {
 	@Override
 	public String toString() {
 		return this.ontologyList.size() + " ontologies, number of queries=" + this.numberOfQueries + ", seed="
-				+ this.seed + " " + this.outputFileNameList + " " + this.problogDirectory + " " + this.showingLog + " "
+				+ this.seed + " " + this.outputDirectory + " " + this.problogDirectory + " " + this.showingLog + " "
 				+ this.problogNeeded;
 	}
 

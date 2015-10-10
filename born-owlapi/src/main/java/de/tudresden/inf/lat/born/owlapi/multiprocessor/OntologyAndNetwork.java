@@ -3,18 +3,38 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
- * An object of this class is a pair OWL ontology - Bayesian network.
+ * An object of this class is a tuple containing an ontology name, an OWL
+ * ontology, and a Bayesian network. The ontology name can be a file name, but
+ * that is not mandatory.
  * 
  * @author Julian Mendez
  *
  */
 public class OntologyAndNetwork {
 
+	private final String ontologyName;
 	private final OWLOntology owlOntology;
 	private final String bayesianNetwork;
 
 	/**
-	 * Constructs a new pair OWL ontology - Bayesian network.
+	 * Constructs a new ontology and Bayesian network object with an empty
+	 * Bayesian network.
+	 * 
+	 * @param owlOntology
+	 *            OWL ontology
+	 */
+	public OntologyAndNetwork(OWLOntology owlOntology) {
+		this(owlOntology, "");
+	}
+
+	/**
+	 * Constructs a new ontology and Bayesian network object. The ontology name
+	 * is the OWL ontology ID.
+	 * 
+	 * @param owlOntology
+	 *            OWL ontology
+	 * @param bayesianNetwork
+	 *            Bayesian network in ProbLog syntaxs
 	 */
 	public OntologyAndNetwork(OWLOntology owlOntology, String bayesianNetwork) {
 		if (owlOntology == null) {
@@ -25,7 +45,43 @@ public class OntologyAndNetwork {
 		}
 
 		this.owlOntology = owlOntology;
+		this.ontologyName = owlOntology.getOntologyID().toString();
 		this.bayesianNetwork = bayesianNetwork;
+	}
+
+	/**
+	 * Constructs a new ontology and Bayesian network object.
+	 * 
+	 * @param ontologyName
+	 *            ontology name
+	 * @param owlOntology
+	 *            OWL ontology
+	 * @param bayesianNetwork
+	 *            Bayesian network in ProbLog syntaxs
+	 */
+	public OntologyAndNetwork(String ontologyName, OWLOntology owlOntology, String bayesianNetwork) {
+		if (ontologyName == null) {
+			throw new IllegalArgumentException("Null arguments.");
+		}
+		if (owlOntology == null) {
+			throw new IllegalArgumentException("Null arguments.");
+		}
+		if (bayesianNetwork == null) {
+			throw new IllegalArgumentException("Null arguments.");
+		}
+
+		this.ontologyName = ontologyName;
+		this.owlOntology = owlOntology;
+		this.bayesianNetwork = bayesianNetwork;
+	}
+
+	/**
+	 * Returns the ontology name.
+	 * 
+	 * @return the ontology name
+	 */
+	public String getOntologyName() {
+		return this.ontologyName;
 	}
 
 	/**
@@ -48,7 +104,8 @@ public class OntologyAndNetwork {
 
 	@Override
 	public int hashCode() {
-		return this.owlOntology.hashCode() + 0x1F * this.bayesianNetwork.hashCode();
+		return this.ontologyName.hashCode()
+				+ 0x1F * (this.owlOntology.hashCode() + 0x1F * this.bayesianNetwork.hashCode());
 	}
 
 	@Override
@@ -57,7 +114,8 @@ public class OntologyAndNetwork {
 			return true;
 		} else if (obj instanceof OntologyAndNetwork) {
 			OntologyAndNetwork other = (OntologyAndNetwork) obj;
-			return getOntology().equals(other.getOntology()) && getBayesianNetwork().equals(other.getBayesianNetwork());
+			return getOntologyName().equals(other.getOntologyName()) && getOntology().equals(other.getOntology())
+					&& getBayesianNetwork().equals(other.getBayesianNetwork());
 		} else {
 			return false;
 		}
@@ -65,7 +123,7 @@ public class OntologyAndNetwork {
 
 	@Override
 	public String toString() {
-		return getBayesianNetwork() + "\n\n" + getOntology();
+		return getOntologyName() + ":\n" + getBayesianNetwork() + "\n\n" + getOntology();
 	}
 
 }
