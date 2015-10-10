@@ -37,12 +37,45 @@ public class PseudorandomNumberGenerator {
 	}
 
 	/**
+	 * Returns a number obtained using a pseudorandom number generator that is
+	 * greater than or equal to 0, and less than the given number.
+	 * 
+	 * @param bound
+	 *            bound
+	 * @return a number obtained using a pseudorandom number generator that is
+	 *         greater than or equal to 0, and less than the given number
+	 */
+	public int nextInt(int bound) {
+		if (bound < 1) {
+			throw new IllegalArgumentException("Bound must be a positive number.");
+		} else if (bound == 1) {
+			return 0;
+		} else {
+			int ret = nextInt();
+			if (ret < 0) {
+				ret = (-1) * ret;
+			}
+			return ret % bound;
+		}
+	}
+
+	/**
 	 * Returns the seed.
 	 * 
 	 * @return the seed
 	 */
 	public int getSeed() {
 		return this.seed;
+	}
+
+	/**
+	 * Sets the seed.
+	 * 
+	 * @param seed
+	 *            seed
+	 */
+	public void setSeed(int seed) {
+		this.seed = seed;
 	}
 
 }
