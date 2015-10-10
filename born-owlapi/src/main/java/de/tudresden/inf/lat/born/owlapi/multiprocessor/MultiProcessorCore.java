@@ -8,7 +8,6 @@ import java.util.TreeSet;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 
-import de.tudresden.inf.lat.born.owlapi.processor.OntologyAndNetwork;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 

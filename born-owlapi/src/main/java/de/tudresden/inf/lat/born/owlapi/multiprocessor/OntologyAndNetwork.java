@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.owlapi.processor;
+package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 

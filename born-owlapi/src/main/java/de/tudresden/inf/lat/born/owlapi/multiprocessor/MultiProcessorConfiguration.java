@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.OntologyAndNetwork;
 
 /**
  * 
