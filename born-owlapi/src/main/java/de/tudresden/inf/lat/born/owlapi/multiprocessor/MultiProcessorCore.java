@@ -22,6 +22,7 @@ public class MultiProcessorCore {
 	public static final char TAB_CHAR = '\t';
 	public static final char NEW_LINE_CHAR = '\n';
 	public static final char SLASH_CHAR = '/';
+	public static final String TEMP_FILE_SUFFIX = ".tmp";
 
 	/**
 	 * Constructs a new multi processor core.
@@ -63,7 +64,8 @@ public class MultiProcessorCore {
 			ProcessorConfiguration configuration = new ProcessorConfiguration();
 			configuration.setOntology(ontPair.getOntology());
 			configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
-			configuration.setOutputFileName(conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName());
+			configuration.setOutputFileName(
+					conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName() + TEMP_FILE_SUFFIX);
 			List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 			StringBuffer sbuf = new StringBuffer();
 
