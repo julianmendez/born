@@ -336,6 +336,7 @@ public class ExperimentMakerView extends JPanel {
 		updateBayesianNetworkDirectory();
 		updateOutputDirectory();
 		updateSeed();
+		updateNumberOfQueries();
 	}
 
 	public void setResult(String result) {
