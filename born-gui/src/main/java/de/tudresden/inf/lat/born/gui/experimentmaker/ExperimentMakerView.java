@@ -327,7 +327,7 @@ public class ExperimentMakerView extends JPanel {
 			numberOfQueries = Integer.parseInt(numberOfQueriesStr);
 		} catch (NumberFormatException e) {
 		}
-		this.textSeed.setText("" + numberOfQueries);
+		this.textNumberOfQueries.setText("" + numberOfQueries);
 		this.model.setNumberOfQueries(numberOfQueries);
 	}
 
