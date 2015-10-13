@@ -273,7 +273,7 @@ public class ExperimentMakerView extends JPanel {
 							bayesianNetwork = ProcessorConfiguration.read(new FileReader(bayesianNetworkFile));
 						}
 
-						ret.add(new OntologyAndNetwork(owlOntology, bayesianNetwork));
+						ret.add(new OntologyAndNetwork(ontologyName, owlOntology, bayesianNetwork));
 					}
 				}
 			}
