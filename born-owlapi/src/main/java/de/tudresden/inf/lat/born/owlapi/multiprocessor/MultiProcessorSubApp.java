@@ -1,5 +1,6 @@
 package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -96,6 +97,11 @@ public class MultiProcessorSubApp implements SubApp {
 
 			MultiProcessorCore core = new MultiProcessorCore();
 			List<String> result = core.run(conf, start);
+			try {
+				core.storeResults(conf, result);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 			sbuf.append(result);
 
 			return sbuf.toString();

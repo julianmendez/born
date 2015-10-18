@@ -3,9 +3,11 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -30,7 +32,7 @@ public class MultiProcessorCore {
 	public static final char NEW_LINE_CHAR = '\n';
 	public static final char SLASH_CHAR = '/';
 	public static final String TEMP_FILE_SUFFIX = ".tmp";
-
+	public static final String CSV_EXTENSION = ".csv";
 	public static final String OWL_EXTENSION = ".owl";
 	public static final String PL_EXTENSION = ".pl";
 
@@ -139,6 +141,20 @@ public class MultiProcessorCore {
 			throw new RuntimeException(e);
 		} catch (OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public void storeResults(MultiProcessorConfiguration conf, List<String> list) throws IOException {
+		Iterator<String> resultIt = list.iterator();
+		List<OntologyAndNetwork> ontologyList = conf.getOntologyList();
+		String outputDirectory = conf.getOutputDirectory();
+		for (OntologyAndNetwork ontNet : ontologyList) {
+			String result = resultIt.next();
+			String fileName = outputDirectory + SLASH_CHAR + ontNet.getOntologyName() + CSV_EXTENSION;
+			FileWriter fileWriter = new FileWriter(fileName);
+			fileWriter.write(result);
+			fileWriter.flush();
+			fileWriter.close();
 		}
 	}
 
