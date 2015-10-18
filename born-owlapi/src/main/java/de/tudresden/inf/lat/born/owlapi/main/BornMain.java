@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorSubApp;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorSubApp;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 import de.tudresden.inf.lat.born.owlapi.splitter.SplitterSubApp;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorSubApp;
@@ -24,10 +25,11 @@ public class BornMain implements SubApp {
 	static final String LINE = "----------------------------------------------------------------";
 
 	public BornMain() {
-		this.subAppMap.put("get", new ProcessorSubApp());
-		this.subAppMap.put("put", new AnnotatorSubApp());
-		this.subAppMap.put("split", new SplitterSubApp());
-		this.subAppMap.put("link", new BayesianNetworkCreatorSubApp());
+		this.subAppMap.put(ProcessorSubApp.COMMAND, new ProcessorSubApp());
+		this.subAppMap.put(MultiProcessorSubApp.COMMAND, new MultiProcessorSubApp());
+		this.subAppMap.put(AnnotatorSubApp.COMMAND, new AnnotatorSubApp());
+		this.subAppMap.put(SplitterSubApp.COMMAND, new SplitterSubApp());
+		this.subAppMap.put(BayesianNetworkCreatorSubApp.COMMAND, new BayesianNetworkCreatorSubApp());
 	}
 
 	@Override

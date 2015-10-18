@@ -19,6 +19,7 @@ import de.tudresden.inf.lat.born.core.term.SubApp;
  */
 public class BayesianNetworkCreatorSubApp implements SubApp {
 
+	public static final String COMMAND = "link";
 	public static final String HELP = "Parameters: <list of parents> <output file>"
 			+ "\n\nExample of parameters: \"1,1,2,3,5,8\" network.pl"
 			+ "\n\nThe example creates a Bayesian network with:"

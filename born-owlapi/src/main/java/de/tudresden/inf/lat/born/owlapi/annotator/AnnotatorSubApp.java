@@ -26,6 +26,7 @@ public class AnnotatorSubApp implements SubApp {
 	public static final String COLON_COLON = "::";
 	public static final String POINT = ".";
 	public static final String HELP = "Parameters: <input ontology> <output ontology> [<threshold> [<number of variables>] ]";
+	public static final String COMMAND = "put";
 
 	@Override
 	public String getHelp() {

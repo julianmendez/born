@@ -24,6 +24,7 @@ import de.tudresden.inf.lat.born.core.term.SubApp;
 public class SplitterSubApp implements SubApp {
 
 	public static final String HELP = "Parameters: <input ontology> <output ontology> <Bayesian network>";
+	public static final String COMMAND = "split";
 
 	/**
 	 * Constructs a new splitter.
