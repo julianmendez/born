@@ -91,7 +91,7 @@ public class MultiProcessorCore {
 				sbuf.append(TAB_CHAR);
 				sbuf.append(query.getSuperClass().getIRI());
 				sbuf.append(TAB_CHAR);
-				sbuf.append(result);
+				sbuf.append(result.trim());
 				sbuf.append(NEW_LINE_CHAR);
 			}
 			ret.add(sbuf.toString());
