@@ -1,12 +1,18 @@
 package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
@@ -19,10 +25,14 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
  *
  */
 public class MultiProcessorCore {
+
 	public static final char TAB_CHAR = '\t';
 	public static final char NEW_LINE_CHAR = '\n';
 	public static final char SLASH_CHAR = '/';
 	public static final String TEMP_FILE_SUFFIX = ".tmp";
+
+	public static final String OWL_EXTENSION = ".owl";
+	public static final String PL_EXTENSION = ".pl";
 
 	/**
 	 * Constructs a new multi processor core.
@@ -83,6 +93,53 @@ public class MultiProcessorCore {
 			ret.add(sbuf.toString());
 		}
 		return ret;
+	}
+
+	public static List<OntologyAndNetwork> getOntologyAndNetworkList(String ontologyDirectory,
+			String bayesianNetworkDirectory) {
+		if (ontologyDirectory == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (bayesianNetworkDirectory == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		try {
+			List<OntologyAndNetwork> ret = new ArrayList<OntologyAndNetwork>();
+			if (!ontologyDirectory.isEmpty() && !bayesianNetworkDirectory.isEmpty()) {
+				File file = new File(ontologyDirectory);
+				File[] files = file.listFiles();
+				Arrays.sort(files);
+
+				for (int index = 0; index < files.length; index++) {
+
+					String fileName = files[index].getName();
+					if (fileName.endsWith(OWL_EXTENSION)) {
+						String ontologyName = fileName.substring(0, fileName.length() - OWL_EXTENSION.length());
+
+						File ontologyFile = new File(ontologyDirectory + SLASH_CHAR + ontologyName + OWL_EXTENSION);
+						File bayesianNetworkFile = new File(
+								bayesianNetworkDirectory + SLASH_CHAR + ontologyName + PL_EXTENSION);
+
+						OWLOntology owlOntology = ProcessorConfiguration
+								.readOntology(new FileInputStream(ontologyFile));
+
+						String bayesianNetwork = "";
+						if (bayesianNetworkFile.exists()) {
+							bayesianNetwork = ProcessorConfiguration.read(new FileReader(bayesianNetworkFile));
+						}
+
+						ret.add(new OntologyAndNetwork(ontologyName, owlOntology, bayesianNetwork));
+					}
+				}
+			}
+			return ret;
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
