@@ -78,6 +78,8 @@ public class MultiProcessorCore {
 			configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
 			configuration.setOutputFileName(
 					conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName() + TEMP_FILE_SUFFIX);
+			configuration.setProblogDirectory(conf.getProblogDirectory());
+			configuration.setShowingLog(conf.isShowingLog());
 			List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 			StringBuffer sbuf = new StringBuffer();
 
