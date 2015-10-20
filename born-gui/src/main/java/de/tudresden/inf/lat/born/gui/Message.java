@@ -13,7 +13,7 @@ public interface Message {
 	String tabTestMaker = "Tests";
 	String tooltipTestMaker = "helps in the creation of test data";
 
-	String tabExperminentMaker = "Expreriments";
+	String tabExperminentMaker = "Experiments";
 	String tooltipExperimentMaker = "creates and runs experiments";
 
 	String textInputOntologyFile = "input ontology file (e.g. \"ontology.owl\")";
