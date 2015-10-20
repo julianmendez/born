@@ -23,12 +23,21 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 public class ProcessorConfiguration {
 
 	private OWLOntology ontology;
-	private String bayesianNetwork;
-	private String query;
-	private String outputFileName;
-	private String problogDirectory;
+	private String bayesianNetwork = "";
+	private String query = "";
+	private String outputFileName = "";
+	private String problogDirectory = "";
 	private boolean problogNeeded = true;
 	private boolean showingLog = true;
+
+	public ProcessorConfiguration() {
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		try {
+			this.ontology = manager.createOntology();
+		} catch (OWLOntologyCreationException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public OWLOntology getOntology() {
 		return ontology;

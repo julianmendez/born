@@ -159,6 +159,21 @@ public class ProblogInputCreator {
 
 	public String createProblogFile(OWLOntology owlOntology, String bayesianNetwork, String query,
 			OutputStream resultOutputStream) throws IOException, OWLOntologyCreationException {
+		if (owlOntology == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		if (bayesianNetwork == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		if (query == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		if (resultOutputStream == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
 
 		StringBuffer sbuf = new StringBuffer();
 		sbuf.append(Symbol.NEW_LINE_CHAR);
