@@ -34,7 +34,7 @@ public class OntologyAndNetwork {
 	 * @param owlOntology
 	 *            OWL ontology
 	 * @param bayesianNetwork
-	 *            Bayesian network in ProbLog syntaxs
+	 *            Bayesian network in ProbLog syntax
 	 */
 	public OntologyAndNetwork(OWLOntology owlOntology, String bayesianNetwork) {
 		if (owlOntology == null) {
@@ -57,7 +57,7 @@ public class OntologyAndNetwork {
 	 * @param owlOntology
 	 *            OWL ontology
 	 * @param bayesianNetwork
-	 *            Bayesian network in ProbLog syntaxs
+	 *            Bayesian network in ProbLog syntax
 	 */
 	public OntologyAndNetwork(String ontologyName, OWLOntology owlOntology, String bayesianNetwork) {
 		if (ontologyName == null) {
@@ -85,7 +85,7 @@ public class OntologyAndNetwork {
 	}
 
 	/**
-	 * Returns the OWL ontology;
+	 * Returns the OWL ontology.
 	 * 
 	 * @return the OWL ontology
 	 */
