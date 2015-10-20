@@ -6,7 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -21,7 +24,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
  */
 public class ExampleLoader {
 
-	public static final String EXAMPLES_DIRECTORY = "examples";
+	public static final String EXAMPLES_DIRECTORY = "examples/";
 
 	public static final char NEW_LINE_CHAR = '\n';
 
@@ -35,15 +38,20 @@ public class ExampleLoader {
 	 * Constructs a new example loader.
 	 */
 	public ExampleLoader() {
-		List<File> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
+		reset();
+	}
+
+	public void reset() {
 		List<ExampleConfiguration> examples = null;
 		try {
+			List<File> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
 			examples = getOntologyAndNetworkFiles(listOfExamples);
 		} catch (OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		this.exampleConfigurations.clear();
 		this.exampleConfigurations.addAll(examples);
 	}
 
@@ -56,7 +64,21 @@ public class ExampleLoader {
 		return this.exampleConfigurations;
 	}
 
-	List<File> getExampleFiles(String path) {
+	List<File> getExampleFilesFromJar(File file, String path) throws IOException {
+		List<File> ret = new ArrayList<File>();
+		JarFile jarFile = new JarFile(file);
+		Enumeration<JarEntry> jarEntries = jarFile.entries();
+		while (jarEntries.hasMoreElements()) {
+			String fileName = jarEntries.nextElement().getName();
+			if (fileName.startsWith(path)) {
+				ret.add(new File(fileName));
+			}
+		}
+		jarFile.close();
+		return ret;
+	}
+
+	List<File> getExampleFilesFromDirectory(String path) {
 		List<File> ret = new ArrayList<File>();
 		URL url = ExampleLoader.class.getClassLoader().getResource(path);
 		if (url != null) {
@@ -65,6 +87,26 @@ public class ExampleLoader {
 			for (int index = 0; index < list.length; index++) {
 				ret.add(list[index]);
 			}
+		}
+		return ret;
+	}
+
+	/**
+	 * Returns the files in the directory path.
+	 * 
+	 * @param path
+	 *            path
+	 * @return the files in the directory path
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	public List<File> getExampleFiles(String path) throws IOException {
+		List<File> ret = new ArrayList<File>();
+		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+		if (jarFile.isFile()) {
+			ret.addAll(getExampleFilesFromJar(jarFile, path));
+		} else {
+			ret.addAll(getExampleFilesFromDirectory(path));
 		}
 		return ret;
 	}
@@ -97,7 +139,18 @@ public class ExampleLoader {
 		return sbuf.toString();
 	}
 
-	List<ExampleConfiguration> getOntologyAndNetworkFiles(List<File> list)
+	/**
+	 * Returns a list of example configurations based on a list of files.
+	 * 
+	 * @param list
+	 *            list of files
+	 * @return a list of example configurations based on a list of files
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 * @throws OWLOntologyCreationException
+	 *             if something goes wrong with the creation of the ontologies
+	 */
+	public List<ExampleConfiguration> getOntologyAndNetworkFiles(List<File> list)
 			throws IOException, OWLOntologyCreationException {
 		List<ExampleConfiguration> ret = new ArrayList<ExampleConfiguration>();
 		List<File> owlFiles = getFilesWithExtension(list, OWL_EXTENSION);
