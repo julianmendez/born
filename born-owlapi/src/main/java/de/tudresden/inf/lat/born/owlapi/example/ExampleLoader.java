@@ -2,8 +2,11 @@ package de.tudresden.inf.lat.born.owlapi.example;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -44,7 +47,7 @@ public class ExampleLoader {
 	public void reset() {
 		List<ExampleConfiguration> examples = null;
 		try {
-			List<File> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
+			List<String> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
 			examples = getOntologyAndNetworkFiles(listOfExamples);
 		} catch (OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
@@ -64,28 +67,28 @@ public class ExampleLoader {
 		return this.exampleConfigurations;
 	}
 
-	List<File> getExampleFilesFromJar(File file, String path) throws IOException {
-		List<File> ret = new ArrayList<File>();
+	List<String> getExampleFilesFromJar(File file, String path) throws IOException {
+		List<String> ret = new ArrayList<String>();
 		JarFile jarFile = new JarFile(file);
 		Enumeration<JarEntry> jarEntries = jarFile.entries();
 		while (jarEntries.hasMoreElements()) {
 			String fileName = jarEntries.nextElement().getName();
 			if (fileName.startsWith(path)) {
-				ret.add(new File(fileName));
+				ret.add(fileName);
 			}
 		}
 		jarFile.close();
 		return ret;
 	}
 
-	List<File> getExampleFilesFromDirectory(String path) {
-		List<File> ret = new ArrayList<File>();
+	List<String> getExampleFilesFromDirectory(String path) {
+		List<String> ret = new ArrayList<String>();
 		URL url = ExampleLoader.class.getClassLoader().getResource(path);
 		if (url != null) {
 			File f = new File(url.getPath());
 			File[] list = f.listFiles();
 			for (int index = 0; index < list.length; index++) {
-				ret.add(list[index]);
+				ret.add(list[index].getAbsolutePath());
 			}
 		}
 		return ret;
@@ -100,8 +103,8 @@ public class ExampleLoader {
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	public List<File> getExampleFiles(String path) throws IOException {
-		List<File> ret = new ArrayList<File>();
+	public List<String> getExampleFiles(String path) throws IOException {
+		List<String> ret = new ArrayList<String>();
 		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
 		if (jarFile.isFile()) {
 			ret.addAll(getExampleFilesFromJar(jarFile, path));
@@ -111,32 +114,47 @@ public class ExampleLoader {
 		return ret;
 	}
 
-	List<File> getFilesWithExtension(List<File> list, String extension) {
-		List<File> ret = new ArrayList<File>();
-		for (File file : list) {
-			String fileName = file.getAbsolutePath();
+	List<String> getFilesWithExtension(List<String> list, String extension) {
+		List<String> ret = new ArrayList<String>();
+		for (String fileName : list) {
 			if (fileName.endsWith(extension)) {
-				ret.add(file);
+				ret.add(fileName);
 			}
 		}
 		return ret;
 	}
 
-	OWLOntology readOntology(File file) throws OWLOntologyCreationException {
+	OWLOntology readOntology(InputStream input) throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology ret = manager.loadOntologyFromOntologyDocument(file);
+		OWLOntology ret = manager.loadOntologyFromOntologyDocument(input);
 		return ret;
 	}
 
-	String getFile(String fileName) throws IOException {
+	String getFile(InputStream input) throws IOException {
 		StringBuffer sbuf = new StringBuffer();
-		BufferedReader reader = new BufferedReader(new FileReader(fileName));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		for (String line = reader.readLine(); line != null; line = reader.readLine()) {
 			sbuf.append(line);
 			sbuf.append(NEW_LINE_CHAR);
 		}
 		reader.close();
 		return sbuf.toString();
+	}
+
+	public InputStream getInputStreamForFile(String fileName) throws FileNotFoundException {
+		InputStream owlInputStream;
+		if (isInJar()) {
+			owlInputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+		} else {
+			owlInputStream = new FileInputStream(fileName);
+		}
+		return owlInputStream;
+
+	}
+
+	public boolean isInJar() {
+		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+		return (jarFile != null) && (jarFile.isFile());
 	}
 
 	/**
@@ -150,21 +168,20 @@ public class ExampleLoader {
 	 * @throws OWLOntologyCreationException
 	 *             if something goes wrong with the creation of the ontologies
 	 */
-	public List<ExampleConfiguration> getOntologyAndNetworkFiles(List<File> list)
+	public List<ExampleConfiguration> getOntologyAndNetworkFiles(List<String> list)
 			throws IOException, OWLOntologyCreationException {
 		List<ExampleConfiguration> ret = new ArrayList<ExampleConfiguration>();
-		List<File> owlFiles = getFilesWithExtension(list, OWL_EXTENSION);
+		List<String> owlFiles = getFilesWithExtension(list, OWL_EXTENSION);
 
-		for (File owlFile : owlFiles) {
-			String fileName = owlFile.getAbsolutePath();
+		for (String fileName : owlFiles) {
 			String fileNamePrefix = fileName.substring(0, fileName.length() - OWL_EXTENSION.length());
 			String bayesianNetworkFileName = fileNamePrefix + NETWORK_EXTENSION;
 			String queryFileName = fileNamePrefix + QUERY_EXTENSION;
 
-			String owlOntologyName = owlFile.getName();
-			OWLOntology owlOntology = readOntology(owlFile);
-			String bayesianNetwork = getFile(bayesianNetworkFileName);
-			String query = getFile(queryFileName);
+			String owlOntologyName = fileName;
+			OWLOntology owlOntology = readOntology(getInputStreamForFile(owlOntologyName));
+			String bayesianNetwork = getFile(getInputStreamForFile(bayesianNetworkFileName));
+			String query = getFile(getInputStreamForFile(queryFileName));
 
 			ExampleConfiguration exampleConf = new ExampleConfiguration(owlOntologyName, owlOntology, bayesianNetwork,
 					query);
