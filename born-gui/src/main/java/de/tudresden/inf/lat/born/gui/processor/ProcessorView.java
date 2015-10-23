@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -44,6 +45,7 @@ public class ProcessorView extends JPanel {
 	private JTextArea textConsoleOutput = new JTextArea();
 	private JScrollPane scrollConsoleInput = new JScrollPane();
 	private JScrollPane scrollConsoleOutput = new JScrollPane();
+	private JComboBox comboBoxExample = new JComboBox();
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
@@ -114,6 +116,18 @@ public class ProcessorView extends JPanel {
 
 		this.buttonComputeInference.addActionListener(listener);
 		this.buttonComputeInference.setActionCommand(actionCommand);
+	}
+
+	public void addComboBoxExampleListener(ActionListener listener, String actionCommand) {
+		if (listener == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (actionCommand == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		this.comboBoxExample.addActionListener(listener);
+		this.comboBoxExample.setActionCommand(actionCommand);
 	}
 
 	void createPanel() {
@@ -192,6 +206,9 @@ public class ProcessorView extends JPanel {
 		labelProgress.setVisible(false);
 		add(labelProgress);
 
+		comboBoxExample.setBounds(585, 476, 187, 28);
+		add(comboBoxExample);
+
 	}
 
 	public ProcessorConfiguration getModel() {
@@ -264,6 +281,10 @@ public class ProcessorView extends JPanel {
 		this.buttonComputeInference.setEnabled(b);
 	}
 
+	public void setComboBoxExampleEnabled(boolean b) {
+		this.comboBoxExample.setEnabled(b);
+	}
+
 	void updateInputOntologyFile() {
 		String inputOntologyFile = getInputOntology();
 		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
@@ -315,6 +336,7 @@ public class ProcessorView extends JPanel {
 		buttonConsoleInput.setEnabled(status);
 		buttonConsoleOutput.setEnabled(status);
 		buttonComputeInference.setEnabled(status);
+		comboBoxExample.setEnabled(status);
 	}
 
 }
