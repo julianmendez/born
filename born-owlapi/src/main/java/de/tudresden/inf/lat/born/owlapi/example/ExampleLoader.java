@@ -30,6 +30,7 @@ public class ExampleLoader {
 	public static final String EXAMPLES_DIRECTORY = "examples/";
 
 	public static final char NEW_LINE_CHAR = '\n';
+	public static final char SLASH_CHAR = '/';
 
 	public static final String OWL_EXTENSION = ".owl";
 	public static final String NETWORK_EXTENSION = ".pl";
@@ -103,7 +104,7 @@ public class ExampleLoader {
 
 	List<String> getExampleFilesFromDirectory(String path) {
 		List<String> ret = new ArrayList<String>();
-		URL url = ExampleLoader.class.getClassLoader().getResource(path);
+		URL url = getClass().getClassLoader().getResource(path);
 		if (url != null) {
 			File f = new File(url.getPath());
 			File[] list = f.listFiles();
@@ -161,6 +162,15 @@ public class ExampleLoader {
 		return sbuf.toString();
 	}
 
+	String getFileName(String fileNameWithPath) {
+		String ret = fileNameWithPath;
+		int lastIndex = fileNameWithPath.lastIndexOf(SLASH_CHAR);
+		if (lastIndex != -1) {
+			ret = fileNameWithPath.substring(lastIndex + 1);
+		}
+		return ret;
+	}
+
 	public InputStream getInputStreamForFile(String fileName) throws FileNotFoundException {
 		InputStream owlInputStream;
 		if (isInJar()) {
@@ -203,8 +213,8 @@ public class ExampleLoader {
 			String bayesianNetwork = getFile(getInputStreamForFile(bayesianNetworkFileName));
 			String query = getFile(getInputStreamForFile(queryFileName));
 
-			ExampleConfiguration exampleConf = new ExampleConfiguration(owlOntologyName, owlOntology, bayesianNetwork,
-					query);
+			ExampleConfiguration exampleConf = new ExampleConfiguration(getFileName(fileNamePrefix), owlOntology,
+					bayesianNetwork, query);
 
 			ret.add(exampleConf);
 		}

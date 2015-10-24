@@ -18,8 +18,7 @@ public class ExampleConfiguration {
 	private final String query;
 
 	/**
-	 * Constructs a new ontology and Bayesian network object. The ontology name
-	 * is the OWL ontology ID.
+	 * Constructs a new ontology and Bayesian network object.
 	 * 
 	 * @param ontologyName
 	 *            ontology name
