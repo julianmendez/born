@@ -154,7 +154,7 @@ public class ProcessorController implements ActionListener {
 	void executeActionComputeInference() {
 		getView().setButtonsEnabled(false);
 		getView().setComputing(true);
-		getView().update();
+		getView().updateQuery();
 		processorRunner = new ProcessorRunner();
 		processorRunner.start();
 	}
@@ -175,6 +175,8 @@ public class ProcessorController implements ActionListener {
 
 		getView().setConsoleInput(exampleConfiguration.getQuery());
 		getModel().setQuery(exampleConfiguration.getQuery());
+
+		getView().setConsoleOutput("");
 	}
 
 	public ProcessorConfiguration getModel() {

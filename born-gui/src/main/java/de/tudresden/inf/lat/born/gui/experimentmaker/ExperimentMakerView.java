@@ -21,7 +21,6 @@ public class ExperimentMakerView extends JPanel {
 
 	private static final long serialVersionUID = 8987374313881883318L;
 
-
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private JButton buttonInputOntologyDirectory = new JButton();
@@ -121,6 +120,7 @@ public class ExperimentMakerView extends JPanel {
 		textInputOntologyDirectory.setBounds(282, 43, 688, 28);
 		textInputOntologyDirectory.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyDirectory.setAlignmentX(LEFT_ALIGNMENT);
+		textInputOntologyDirectory.setEditable(false);
 		add(textInputOntologyDirectory);
 
 		JLabel lblBayesianNetworkDirectory = new JLabel("Bayesian network directory");
@@ -135,6 +135,7 @@ public class ExperimentMakerView extends JPanel {
 		textBayesianNetworkDirectory.setBounds(282, 135, 688, 28);
 		textBayesianNetworkDirectory.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkDirectory.setAlignmentX(LEFT_ALIGNMENT);
+		textBayesianNetworkDirectory.setEditable(false);
 		add(textBayesianNetworkDirectory);
 
 		JLabel lblInput = new JLabel("output directory");
@@ -147,9 +148,10 @@ public class ExperimentMakerView extends JPanel {
 		add(buttonOutputDirectory);
 
 		textOutputDirectory = new JTextField();
+		textOutputDirectory.setBounds(282, 243, 688, 28);
 		textOutputDirectory.setToolTipText(Message.tooltipTextFieldOutputDirectory);
 		textOutputDirectory.setAlignmentX(LEFT_ALIGNMENT);
-		textOutputDirectory.setBounds(282, 243, 688, 28);
+		textOutputDirectory.setEditable(false);
 		add(textOutputDirectory);
 
 		JLabel lblNumberOfQueries = new JLabel(Message.textNumberOfQueries);
@@ -228,16 +230,16 @@ public class ExperimentMakerView extends JPanel {
 	void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
 		if (inputOntologyDirectory != null && !inputOntologyDirectory.trim().isEmpty()) {
-			getModel().setOntologyList(
-					MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(), getBayesianNetworkDirectory()));
+			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
+					getBayesianNetworkDirectory()));
 		}
 	}
 
 	void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
 		if (bayesianNetworkDirectory != null && !bayesianNetworkDirectory.trim().isEmpty()) {
-			getModel().setOntologyList(
-					MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(), getBayesianNetworkDirectory()));
+			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
+					getBayesianNetworkDirectory()));
 		}
 	}
 
