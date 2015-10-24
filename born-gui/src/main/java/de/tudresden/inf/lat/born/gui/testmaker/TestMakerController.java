@@ -3,6 +3,12 @@ package de.tudresden.inf.lat.born.gui.testmaker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
 
@@ -10,6 +16,8 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
 
 /**
  * This class is a controller for the test maker.
@@ -87,6 +95,27 @@ public class TestMakerController implements ActionListener {
 		}
 	}
 
+	List<Integer> parseIntegers(String str) {
+		List<Integer> ret = new ArrayList<Integer>();
+		StringTokenizer stok = new StringTokenizer(str, ",");
+		while (stok.hasMoreTokens()) {
+			try {
+				ret.add(Integer.parseInt(stok.nextToken()));
+			} catch (NumberFormatException e) {
+			}
+		}
+		return ret;
+	}
+
+	void createBayesianNetwork(OutputStream output) {
+		List<Integer> listOfParents = parseIntegers(getView().getListOfParents());
+		BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfiguration();
+		conf.setDependencies(listOfParents);
+		conf.setOutput(output);
+		BayesianNetworkCreatorCore core = new BayesianNetworkCreatorCore();
+		core.run(conf);
+	}
+
 	void executeActionSaveBayesianNetwork() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showSaveDialog(getView());
@@ -95,7 +124,11 @@ public class TestMakerController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			// getView().writeConsoleOutput(file.getAbsolutePath());
+			try {
+				createBayesianNetwork(new FileOutputStream(file));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 

@@ -32,14 +32,14 @@ public class TestMakerView extends JPanel {
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textThreshold = new JTextField();
 	private JTextField textMaxNumberOfVar = new JTextField();
-
 	private JTextField textListOfParents = new JTextField();
 
-	private final AnnotatorConfiguration model;
 	private final JLabel lblInputOntology = new JLabel("input ontology");
 	private final JLabel lblThreshold = new JLabel("threshold [0,1]");
 	private final JLabel lblNumberOfVariables = new JLabel("number of vars");
 	private final JLabel lblListOfParents = new JLabel("list of parents (e.g. \"1,1,2,3,5,8\")");
+
+	private final AnnotatorConfiguration model;
 
 	public TestMakerView(AnnotatorConfiguration model, BayesianNetworkCreatorConfiguration model1) {
 		if (model == null) {
@@ -239,6 +239,14 @@ public class TestMakerView extends JPanel {
 
 	public void setMaxNumberOfVar(String fileName) {
 		textMaxNumberOfVar.setText(fileName);
+	}
+
+	public String getListOfParents() {
+		return textListOfParents.getText();
+	}
+
+	public void setListOfParents(String fileName) {
+		textListOfParents.setText(fileName);
 	}
 
 }
