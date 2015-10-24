@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -132,6 +133,7 @@ public class ExampleLoader {
 		} else {
 			ret.addAll(getExampleFilesFromDirectory(path));
 		}
+		Collections.sort(ret);
 		return ret;
 	}
 
