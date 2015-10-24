@@ -35,14 +35,14 @@ public class ProcessorView extends JPanel {
 
 	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
-	private JButton buttonInputOntologyFile = new JButton();
-	private JButton buttonBayesianNetwork = new JButton();
+	private JButton buttonOntologyFile = new JButton();
+	private JButton buttonBayesianNetworkFile = new JButton();
 	private JButton buttonConsoleInput = new JButton();
 	private JButton buttonConsoleOutput = new JButton();
 	private JButton buttonComputeInference = new JButton();
 	private JButton buttonUpdateExample = new JButton();
 	private JLabel labelProgress = new JLabel("computing ...");
-	private JTextField textInputOntologyFile = new JTextField();
+	private JTextField textOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
 	private JTextArea textConsoleInput = new JTextArea();
 	private JTextArea textConsoleOutput = new JTextArea();
@@ -61,7 +61,7 @@ public class ProcessorView extends JPanel {
 		createPanel();
 	}
 
-	public void addButtonInputOntologyListener(ActionListener listener, String actionCommand) {
+	public void addButtonOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -69,11 +69,11 @@ public class ProcessorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonInputOntologyFile.addActionListener(listener);
-		this.buttonInputOntologyFile.setActionCommand(actionCommand);
+		buttonOntologyFile.addActionListener(listener);
+		buttonOntologyFile.setActionCommand(actionCommand);
 	}
 
-	public void addButtonBayesianNetworkListener(ActionListener listener, String actionCommand) {
+	public void addButtonBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -81,8 +81,8 @@ public class ProcessorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonBayesianNetwork.addActionListener(listener);
-		this.buttonBayesianNetwork.setActionCommand(actionCommand);
+		buttonBayesianNetworkFile.addActionListener(listener);
+		buttonBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
 	public void addButtonConsoleInputListener(ActionListener listener, String actionCommand) {
@@ -93,8 +93,8 @@ public class ProcessorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonConsoleInput.addActionListener(listener);
-		this.buttonConsoleInput.setActionCommand(actionCommand);
+		buttonConsoleInput.addActionListener(listener);
+		buttonConsoleInput.setActionCommand(actionCommand);
 	}
 
 	public void addButtonConsoleOutputListener(ActionListener listener, String actionCommand) {
@@ -105,8 +105,8 @@ public class ProcessorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonConsoleOutput.addActionListener(listener);
-		this.buttonConsoleOutput.setActionCommand(actionCommand);
+		buttonConsoleOutput.addActionListener(listener);
+		buttonConsoleOutput.setActionCommand(actionCommand);
 	}
 
 	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
@@ -117,20 +117,8 @@ public class ProcessorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.buttonComputeInference.addActionListener(listener);
-		this.buttonComputeInference.setActionCommand(actionCommand);
-	}
-
-	public void addButtonUpdateExampleListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		this.buttonUpdateExample.addActionListener(listener);
-		this.buttonUpdateExample.setActionCommand(actionCommand);
+		buttonComputeInference.addActionListener(listener);
+		buttonComputeInference.setActionCommand(actionCommand);
 	}
 
 	public void addComboBoxExampleListener(ActionListener listener, String actionCommand) {
@@ -141,8 +129,20 @@ public class ProcessorView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		this.comboBoxExample.addActionListener(listener);
-		this.comboBoxExample.setActionCommand(actionCommand);
+		comboBoxExample.addActionListener(listener);
+		comboBoxExample.setActionCommand(actionCommand);
+	}
+
+	public void addButtonUpdateExampleListener(ActionListener listener, String actionCommand) {
+		if (listener == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (actionCommand == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		buttonUpdateExample.addActionListener(listener);
+		buttonUpdateExample.setActionCommand(actionCommand);
 	}
 
 	void createPanel() {
@@ -151,24 +151,24 @@ public class ProcessorView extends JPanel {
 		lblNewLabel.setBounds(282, 83, 70, 15);
 		add(lblNewLabel);
 
-		buttonInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
-		buttonInputOntologyFile.setBounds(213, 43, 54, 28);
-		add(buttonInputOntologyFile);
-		buttonInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonOntologyFile.setIcon(BornIcon.OPEN_FILE);
+		buttonOntologyFile.setBounds(213, 43, 54, 28);
+		add(buttonOntologyFile);
+		buttonOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
-		textInputOntologyFile.setBounds(282, 43, 688, 28);
-		add(textInputOntologyFile);
-		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
-		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		textOntologyFile.setBounds(282, 43, 688, 28);
+		add(textOntologyFile);
+		textOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 
 		JLabel lblNewLabel_1 = new JLabel("Bayesian network");
 		lblNewLabel_1.setBounds(282, 175, 128, 15);
 		add(lblNewLabel_1);
 
-		buttonBayesianNetwork.setIcon(BornIcon.OPEN_FILE);
-		buttonBayesianNetwork.setBounds(213, 135, 54, 28);
-		add(buttonBayesianNetwork);
-		buttonBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
+		buttonBayesianNetworkFile.setBounds(213, 135, 54, 28);
+		add(buttonBayesianNetworkFile);
+		buttonBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 
 		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
 		add(textBayesianNetworkFile);
@@ -233,34 +233,31 @@ public class ProcessorView extends JPanel {
 	}
 
 	public ProcessorConfiguration getModel() {
-		return this.model;
+		return model;
 	}
 
-	public String getInputOntology() {
-		return this.textInputOntologyFile.getText();
+	public String getOntologyFile() {
+		return textOntologyFile.getText();
 	}
 
-	public void setInputOntology(String fileName) {
-		this.textInputOntologyFile.setText(fileName);
-		updateInputOntologyFile();
+	public void setOntologyFile(String fileName) {
+		textOntologyFile.setText(fileName);
 	}
 
-	public String getBayesianNetwork() {
-		return this.textBayesianNetworkFile.getText();
+	public String getBayesianNetworkFile() {
+		return textBayesianNetworkFile.getText();
 	}
 
-	public void setBayesianNetwork(String fileName) {
-		this.textBayesianNetworkFile.setText(fileName);
-		updateBayesianNetworkFile();
+	public void setBayesianNetworkFile(String fileName) {
+		textBayesianNetworkFile.setText(fileName);
 	}
 
 	public String getConsoleInput() {
-		return this.textConsoleInput.getText();
+		return textConsoleInput.getText();
 	}
 
 	public void setConsoleInput(String text) {
-		this.textConsoleInput.setText(text);
-		updateQuery();
+		textConsoleInput.setText(text);
 	}
 
 	public void readConsoleInput(String consoleInputFile) {
@@ -270,7 +267,7 @@ public class ProcessorView extends JPanel {
 				this.textConsoleInput.setText(text);
 				updateQuery();
 			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
 		}
 	}
@@ -281,70 +278,74 @@ public class ProcessorView extends JPanel {
 				String text = this.textConsoleOutput.getText();
 				ProcessorConfiguration.write(new StringReader(text), new FileWriter(consoleOutputFile));
 			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
 		}
 	}
 
 	public String getConsoleOutput() {
-		return this.textConsoleOutput.getText();
+		return textConsoleOutput.getText();
 	}
 
 	public void setConsoleOutput(String fileName) {
-		this.textConsoleOutput.setText(fileName);
+		textConsoleOutput.setText(fileName);
 	}
 
 	public void setButtonLoadEnabled(boolean b) {
-		this.buttonInputOntologyFile.setEnabled(b);
+		buttonOntologyFile.setEnabled(b);
 	}
 
 	public void setButtonComputeInferenceEnabled(boolean b) {
-		this.buttonComputeInference.setEnabled(b);
+		buttonComputeInference.setEnabled(b);
 	}
 
 	public void setComboBoxExampleEnabled(boolean b) {
-		this.comboBoxExample.setEnabled(b);
+		comboBoxExample.setEnabled(b);
 	}
 
-	void updateInputOntologyFile() {
-		String inputOntologyFile = getInputOntology();
+	public int getComboBoxExampleIndex() {
+		return comboBoxExample.getSelectedIndex();
+	}
+
+	void updateOntologyFile() {
+		String inputOntologyFile = getOntologyFile();
 		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
 			try {
 				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
 			} catch (IOException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			} catch (OWLOntologyCreationException e) {
-				setInputOntology(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
 		}
 	}
 
 	void updateBayesianNetworkFile() {
-		String bayesianNetworkFile = getBayesianNetwork();
+		String bayesianNetworkFile = getBayesianNetworkFile();
 		if (bayesianNetworkFile != null && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
 				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
 			} catch (IOException e) {
-				setBayesianNetwork(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setBayesianNetworkFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
 		}
 	}
 
 	void updateQuery() {
-		String query = this.textConsoleInput.getText();
+		String query = textConsoleInput.getText();
 		if (query != null && !query.trim().isEmpty()) {
 			getModel().setQuery(query);
 		}
 	}
 
 	public void update() {
-		updateInputOntologyFile();
+		updateOntologyFile();
 		updateBayesianNetworkFile();
 		updateQuery();
 	}
 
 	public void setResult(String result) {
-		this.textConsoleOutput.setText(result);
+		textConsoleOutput.setText(result);
 	}
 
 	public void setComputing(boolean status) {
@@ -352,17 +353,18 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setButtonsEnabled(boolean status) {
-		buttonInputOntologyFile.setEnabled(status);
-		buttonBayesianNetwork.setEnabled(status);
+		buttonOntologyFile.setEnabled(status);
+		buttonBayesianNetworkFile.setEnabled(status);
 		buttonConsoleInput.setEnabled(status);
 		buttonConsoleOutput.setEnabled(status);
 		buttonComputeInference.setEnabled(status);
+		buttonUpdateExample.setEnabled(status);
 		comboBoxExample.setEnabled(status);
 	}
 
-	public void setExamples(Collection<ExampleConfiguration> examples) {
+	public void addExamples(Collection<ExampleConfiguration> examples) {
 		for (ExampleConfiguration configuration : examples) {
-			this.comboBoxExample.addItem(configuration.getOntologyName());
+			comboBoxExample.addItem(configuration.getOntologyName());
 		}
 	}
 

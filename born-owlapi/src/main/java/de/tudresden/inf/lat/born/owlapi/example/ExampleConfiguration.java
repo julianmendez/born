@@ -4,8 +4,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
  * An object of this class is an example configuration. It is a tuple containing
- * an ontology name, an OWL ontology, a Bayesian network, and a query. The
- * ontology name can be a file name, but that is not mandatory.
+ * an ontology name, an ontology file name, an OWL ontology, a Bayesian network
+ * file name, a Bayesian network, and a query.
  * 
  * @author Julian Mendez
  *
@@ -13,7 +13,9 @@ import org.semanticweb.owlapi.model.OWLOntology;
 public class ExampleConfiguration {
 
 	private final String ontologyName;
+	private final String ontologyFileName;
 	private final OWLOntology owlOntology;
+	private final String bayesianNetworkFileName;
 	private final String bayesianNetwork;
 	private final String query;
 
@@ -29,11 +31,18 @@ public class ExampleConfiguration {
 	 * @param query
 	 *            query (in ProbLog syntax)
 	 */
-	public ExampleConfiguration(String ontologyName, OWLOntology owlOntology, String bayesianNetwork, String query) {
+	public ExampleConfiguration(String ontologyName, String ontologyFileName, OWLOntology owlOntology,
+			String bayesianNetworkFileName, String bayesianNetwork, String query) {
 		if (ontologyName == null) {
 			throw new IllegalArgumentException("Null arguments.");
 		}
+		if (ontologyFileName == null) {
+			throw new IllegalArgumentException("Null arguments.");
+		}
 		if (owlOntology == null) {
+			throw new IllegalArgumentException("Null arguments.");
+		}
+		if (bayesianNetworkFileName == null) {
 			throw new IllegalArgumentException("Null arguments.");
 		}
 		if (bayesianNetwork == null) {
@@ -43,8 +52,10 @@ public class ExampleConfiguration {
 			throw new IllegalArgumentException("Null arguments.");
 		}
 
-		this.owlOntology = owlOntology;
 		this.ontologyName = ontologyName;
+		this.ontologyFileName = ontologyFileName;
+		this.owlOntology = owlOntology;
+		this.bayesianNetworkFileName = bayesianNetworkFileName;
 		this.bayesianNetwork = bayesianNetwork;
 		this.query = query;
 	}
@@ -59,12 +70,30 @@ public class ExampleConfiguration {
 	}
 
 	/**
+	 * Returns the ontology file name.
+	 * 
+	 * @return the ontology file name
+	 */
+	public String getOntologyFileName() {
+		return this.ontologyFileName;
+	}
+
+	/**
 	 * Returns the OWL ontology.
 	 * 
 	 * @return the OWL ontology
 	 */
 	public OWLOntology getOntology() {
 		return this.owlOntology;
+	}
+
+	/**
+	 * Returns the Bayesian network file name.
+	 * 
+	 * @return the Bayesian network file name
+	 */
+	public String getBayesianNetworkFileName() {
+		return this.bayesianNetworkFileName;
 	}
 
 	/**
@@ -87,8 +116,9 @@ public class ExampleConfiguration {
 
 	@Override
 	public int hashCode() {
-		return this.ontologyName.hashCode() + 0x1F * (this.owlOntology.hashCode()
-				+ 0x1F * (this.bayesianNetwork.hashCode() + 0x1F * this.query.hashCode()));
+		return this.ontologyName.hashCode() + 0x1F * (this.ontologyFileName.hashCode()
+				+ 0x1F * (this.owlOntology.hashCode() + 0x1F * (this.bayesianNetworkFileName.hashCode()
+						+ 0x1F * (this.bayesianNetwork.hashCode() + 0x1F * this.query.hashCode()))));
 	}
 
 	@Override
@@ -97,7 +127,10 @@ public class ExampleConfiguration {
 			return true;
 		} else if (obj instanceof ExampleConfiguration) {
 			ExampleConfiguration other = (ExampleConfiguration) obj;
-			return getOntologyName().equals(other.getOntologyName()) && getOntology().equals(other.getOntology())
+			return getOntologyName().equals(other.getOntologyName())
+					&& getOntologyFileName().equals(other.getOntologyFileName())
+					&& getOntology().equals(other.getOntology())
+					&& getBayesianNetworkFileName().equals(other.getBayesianNetworkFileName())
 					&& getBayesianNetwork().equals(other.getBayesianNetwork()) && getQuery().equals(other.getQuery());
 		} else {
 			return false;
@@ -106,8 +139,9 @@ public class ExampleConfiguration {
 
 	@Override
 	public String toString() {
-		return "\nname = " + getOntologyName() + "\n\nBayesian network = " + getBayesianNetwork() + "\n\nontology = "
-				+ getOntology() + "\n\nquery = " + getQuery() + "\n\n";
+		return "\nname = " + getOntologyName() + "\nontology file = " + getOntologyFileName()
+				+ "\nBayesian network file = " + getBayesianNetworkFileName() + "\n\nBayesian network = "
+				+ getBayesianNetwork() + "\n\nontology = " + getOntology() + "\n\nquery = " + getQuery() + "\n\n";
 	}
 
 }

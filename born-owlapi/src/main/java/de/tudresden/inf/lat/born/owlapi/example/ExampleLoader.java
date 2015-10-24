@@ -213,8 +213,8 @@ public class ExampleLoader {
 			String bayesianNetwork = getFile(getInputStreamForFile(bayesianNetworkFileName));
 			String query = getFile(getInputStreamForFile(queryFileName));
 
-			ExampleConfiguration exampleConf = new ExampleConfiguration(getFileName(fileNamePrefix), owlOntology,
-					bayesianNetwork, query);
+			ExampleConfiguration exampleConf = new ExampleConfiguration(getFileName(fileNamePrefix), owlOntologyName,
+					owlOntology, bayesianNetworkFileName, bayesianNetwork, query);
 
 			ret.add(exampleConf);
 		}

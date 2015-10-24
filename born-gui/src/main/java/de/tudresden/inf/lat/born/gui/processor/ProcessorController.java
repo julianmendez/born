@@ -8,6 +8,7 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
@@ -46,6 +47,7 @@ public class ProcessorController implements ActionListener {
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
 	private static final String actionComboBoxExample = "choose example";
+	private static final String actionUpdateExample = "update example";
 
 	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 
@@ -92,6 +94,8 @@ public class ProcessorController implements ActionListener {
 			executeActionComputeInference();
 		} else if (cmd.equals(actionComboBoxExample)) {
 			executeActionComboBoxExample();
+		} else if (cmd.equals(actionUpdateExample)) {
+			executeActionUpdateExample();
 		} else {
 			throw new IllegalStateException();
 		}
@@ -105,7 +109,8 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setInputOntology(file.getAbsolutePath());
+			getView().setOntologyFile(file.getAbsolutePath());
+			getView().updateOntologyFile();
 		}
 	}
 
@@ -117,7 +122,8 @@ public class ProcessorController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			getView().setBayesianNetwork(file.getAbsolutePath());
+			getView().setBayesianNetworkFile(file.getAbsolutePath());
+			getView().updateBayesianNetworkFile();
 		}
 	}
 
@@ -154,6 +160,21 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionComboBoxExample() {
+		// ignore this action
+	}
+
+	void executeActionUpdateExample() {
+		int index = getView().getComboBoxExampleIndex();
+		ExampleConfiguration exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
+
+		getView().setOntologyFile(exampleConfiguration.getOntologyFileName());
+		getView().updateOntologyFile();
+
+		getView().setBayesianNetworkFile(exampleConfiguration.getBayesianNetworkFileName());
+		getView().updateBayesianNetworkFile();
+
+		getView().setConsoleInput(exampleConfiguration.getQuery());
+		getView().updateQuery();
 	}
 
 	public ProcessorConfiguration getModel() {
@@ -173,14 +194,15 @@ public class ProcessorController implements ActionListener {
 	 * initialized.
 	 */
 	private void init() {
-		getView().addButtonInputOntologyListener(this, actionInputOntology);
-		getView().addButtonBayesianNetworkListener(this, actionBayesianNetwork);
+		getView().addButtonOntologyFileListener(this, actionInputOntology);
+		getView().addButtonBayesianNetworkFileListener(this, actionBayesianNetwork);
 		getView().addButtonConsoleInputListener(this, actionConsoleInput);
 		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
 		getView().addComboBoxExampleListener(this, actionComboBoxExample);
+		getView().addButtonUpdateExampleListener(this, actionUpdateExample);
 
-		getView().setExamples(this.exampleLoader.getExampleConfigurations());
+		getView().addExamples(this.exampleLoader.getExampleConfigurations());
 
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
