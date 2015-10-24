@@ -4,6 +4,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.gui.experimentmaker.ExperimentMakerController;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorController;
+import de.tudresden.inf.lat.born.gui.testmaker.TestMakerController;
 
 /**
  * This class is a controller for the main panel.
@@ -14,6 +15,7 @@ public class BornController {
 
 	private ProcessorController processorController;
 	private ExperimentMakerController experimentMakerController;
+	private TestMakerController testMakerController;
 
 	private final OWLOntologyManager owlOntologyManager;
 
@@ -32,6 +34,7 @@ public class BornController {
 		this.owlOntologyManager = ontologyManager;
 		this.processorController = new ProcessorController(view.getProcessorView(), ontologyManager);
 		this.experimentMakerController = new ExperimentMakerController(view.getExperimentMakerView(), ontologyManager);
+		this.testMakerController = new TestMakerController(view.getTestMakerView(), ontologyManager);
 		reset();
 	}
 
@@ -50,6 +53,7 @@ public class BornController {
 	public void reset() {
 		this.processorController.reset();
 		this.experimentMakerController.reset();
+		this.testMakerController.reset();
 	}
 
 	public void update() {
@@ -62,6 +66,10 @@ public class BornController {
 
 	public ExperimentMakerController getExperimentMakerController() {
 		return this.experimentMakerController;
+	}
+
+	public TestMakerController getTestMakerController() {
+		return this.testMakerController;
 	}
 
 }
