@@ -44,18 +44,38 @@ public class ExampleLoader {
 		reset();
 	}
 
+	/**
+	 * Re-reads all example configurations. If something goes wrong with
+	 * input/output, this method assumes that the set is empty and prints the
+	 * stack trace.
+	 */
 	public void reset() {
 		List<ExampleConfiguration> examples = null;
 		try {
-			List<String> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
-			examples = getOntologyAndNetworkFiles(listOfExamples);
+			examples = readExampleConfigurations();
+
 		} catch (OWLOntologyCreationException e) {
-			throw new RuntimeException(e);
+			examples = new ArrayList<ExampleConfiguration>();
+			e.printStackTrace();
+
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			examples = new ArrayList<ExampleConfiguration>();
+			e.printStackTrace();
+
 		}
 		this.exampleConfigurations.clear();
 		this.exampleConfigurations.addAll(examples);
+	}
+
+	/**
+	 * Returns the example configurations forcing a re-read.
+	 * 
+	 * @return the example configurations forcing a re-read
+	 */
+	public List<ExampleConfiguration> readExampleConfigurations() throws OWLOntologyCreationException, IOException {
+		List<String> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
+		List<ExampleConfiguration> examples = getOntologyAndNetworkFiles(listOfExamples);
+		return examples;
 	}
 
 	/**
