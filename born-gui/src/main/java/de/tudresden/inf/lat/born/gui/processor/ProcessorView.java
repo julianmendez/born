@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,6 +21,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
+import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
@@ -337,6 +339,12 @@ public class ProcessorView extends JPanel {
 		buttonConsoleOutput.setEnabled(status);
 		buttonComputeInference.setEnabled(status);
 		comboBoxExample.setEnabled(status);
+	}
+
+	public void setExamples(Collection<ExampleConfiguration> examples) {
+		for (ExampleConfiguration configuration : examples) {
+			this.comboBoxExample.addItem(configuration.getOntologyName());
+		}
 	}
 
 }

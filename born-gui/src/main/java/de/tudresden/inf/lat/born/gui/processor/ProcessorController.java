@@ -8,6 +8,7 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
@@ -44,6 +45,7 @@ public class ProcessorController implements ActionListener {
 	private static final String actionConsoleInput = "read console";
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
+	private static final String actionComboBoxExample = "choose example";
 
 	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 
@@ -54,6 +56,8 @@ public class ProcessorController implements ActionListener {
 	private final ProcessorView view;
 
 	private ProcessorRunner processorRunner;
+
+	private final ExampleLoader exampleLoader = new ExampleLoader();
 
 	/**
 	 * Constructs a new controller.
@@ -86,6 +90,8 @@ public class ProcessorController implements ActionListener {
 			executeActionConsoleOutput();
 		} else if (cmd.equals(actionComputeInference)) {
 			executeActionComputeInference();
+		} else if (cmd.equals(actionComboBoxExample)) {
+			executeActionComboBoxExample();
 		} else {
 			throw new IllegalStateException();
 		}
@@ -147,6 +153,9 @@ public class ProcessorController implements ActionListener {
 		processorRunner.start();
 	}
 
+	void executeActionComboBoxExample() {
+	}
+
 	public ProcessorConfiguration getModel() {
 		return getView().getModel();
 	}
@@ -169,11 +178,15 @@ public class ProcessorController implements ActionListener {
 		getView().addButtonConsoleInputListener(this, actionConsoleInput);
 		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
+		getView().addComboBoxExampleListener(this, actionComboBoxExample);
+
+		getView().setExamples(this.exampleLoader.getExampleConfigurations());
 
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
 
 		reset();
+
 	}
 
 	public void reset() {
