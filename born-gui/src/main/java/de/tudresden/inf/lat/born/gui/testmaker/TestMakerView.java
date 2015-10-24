@@ -31,12 +31,12 @@ public class TestMakerView extends JPanel {
 
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textThreshold = new JTextField();
-	private JTextField textMaxNumberOfVar = new JTextField();
+	private JTextField textMaxNumberOfVars = new JTextField();
 	private JTextField textListOfParents = new JTextField();
 
 	private final JLabel lblInputOntology = new JLabel("input ontology");
 	private final JLabel lblThreshold = new JLabel("threshold [0,1]");
-	private final JLabel lblNumberOfVariables = new JLabel("number of vars");
+	private final JLabel lblMaxNumberOfVars = new JLabel("maximum number of variables");
 	private final JLabel lblListOfParents = new JLabel("list of parents (e.g. \"1,1,2,3,5,8\")");
 
 	private final AnnotatorConfiguration model;
@@ -133,8 +133,8 @@ public class TestMakerView extends JPanel {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		textMaxNumberOfVar.addActionListener(listener);
-		textMaxNumberOfVar.setActionCommand(actionCommand);
+		textMaxNumberOfVars.addActionListener(listener);
+		textMaxNumberOfVars.setActionCommand(actionCommand);
 	}
 
 	void createPanel() {
@@ -162,19 +162,19 @@ public class TestMakerView extends JPanel {
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
-		textMaxNumberOfVar.setBounds(586, 186, 259, 28);
-		textMaxNumberOfVar.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
-		textMaxNumberOfVar.setAlignmentX(LEFT_ALIGNMENT);
-		add(textMaxNumberOfVar);
+		textMaxNumberOfVars.setBounds(586, 186, 259, 28);
+		textMaxNumberOfVars.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
+		textMaxNumberOfVars.setAlignmentX(LEFT_ALIGNMENT);
+		add(textMaxNumberOfVars);
 
 		lblInputOntology.setBounds(287, 139, 120, 15);
 		add(lblInputOntology);
 
-		lblThreshold.setBounds(291, 222, 126, 15);
+		lblThreshold.setBounds(277, 222, 259, 15);
 		add(lblThreshold);
 
-		lblNumberOfVariables.setBounds(596, 222, 124, 15);
-		add(lblNumberOfVariables);
+		lblMaxNumberOfVars.setBounds(596, 222, 249, 15);
+		add(lblMaxNumberOfVars);
 
 		lblListOfParents.setBounds(277, 473, 328, 15);
 		add(lblListOfParents);
@@ -214,7 +214,20 @@ public class TestMakerView extends JPanel {
 		}
 	}
 
-	public void update() {
+	public void updateThreshold() {
+		try {
+			double th = Double.parseDouble(textThreshold.getText());
+			getModel().setThreshold(th);
+		} catch (NumberFormatException e) {
+		}
+	}
+
+	public void updateMaxNumberOfVars() {
+		try {
+			int maxNumberOfVars = Integer.parseInt(textMaxNumberOfVars.getText());
+			getModel().setMaxNumberOfVars(maxNumberOfVars);
+		} catch (NumberFormatException e) {
+		}
 	}
 
 	public String getInputOntologyFile() {
@@ -234,11 +247,11 @@ public class TestMakerView extends JPanel {
 	}
 
 	public String getMaxNumberOfVar() {
-		return textMaxNumberOfVar.getText();
+		return textMaxNumberOfVars.getText();
 	}
 
 	public void setMaxNumberOfVar(String fileName) {
-		textMaxNumberOfVar.setText(fileName);
+		textMaxNumberOfVars.setText(fileName);
 	}
 
 	public String getListOfParents() {

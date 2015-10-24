@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorCore;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
@@ -83,6 +84,15 @@ public class TestMakerController implements ActionListener {
 		}
 	}
 
+	void annotateOntology(OutputStream output) {
+		getView().updateThreshold();
+		getView().updateMaxNumberOfVars();
+		AnnotatorConfiguration conf = getModel();
+		conf.setOutputOntology(output);
+		AnnotatorCore core = new AnnotatorCore();
+		core.run(conf);
+	}
+
 	void executeActionSelectOutputOntologyFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showSaveDialog(getView());
@@ -91,7 +101,11 @@ public class TestMakerController implements ActionListener {
 			file = fileChooser.getSelectedFile();
 		}
 		if (file != null) {
-			// getView().writeConsoleOutput(file.getAbsolutePath());
+			try {
+				annotateOntology(new FileOutputStream(file));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
