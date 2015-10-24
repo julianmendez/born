@@ -168,13 +168,13 @@ public class ProcessorController implements ActionListener {
 		ExampleConfiguration exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
 
 		getView().setOntologyFile(exampleConfiguration.getOntologyFileName());
-		getView().updateOntologyFile();
+		getModel().setOntology(exampleConfiguration.getOntology());
 
 		getView().setBayesianNetworkFile(exampleConfiguration.getBayesianNetworkFileName());
-		getView().updateBayesianNetworkFile();
+		getModel().setBayesianNetwork(exampleConfiguration.getBayesianNetwork());
 
 		getView().setConsoleInput(exampleConfiguration.getQuery());
-		getView().updateQuery();
+		getModel().setQuery(exampleConfiguration.getQuery());
 	}
 
 	public ProcessorConfiguration getModel() {
