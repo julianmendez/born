@@ -1,6 +1,8 @@
 package de.tudresden.inf.lat.born.gui.testmaker;
 
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,11 +21,12 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigu
  */
 public class TestMakerView extends JPanel {
 
+	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
+
 	private static final long serialVersionUID = -7460256750941145085L;
 
 	private JButton buttonSelectInputOntologyFile = new JButton();
 	private JButton buttonSaveOntologyFile = new JButton();
-
 	private JButton buttonSaveBayesianNetwork = new JButton();
 
 	private JTextField textInputOntologyFile = new JTextField();
@@ -33,10 +36,9 @@ public class TestMakerView extends JPanel {
 	private JTextField textListOfParents = new JTextField();
 
 	private final AnnotatorConfiguration model;
-	private final JLabel lblNewLabel = new JLabel("input ontology");
-	private final JLabel lblThr = new JLabel("threshold [0,1]");
-	private final JLabel lblVariables = new JLabel("number of vars");
-
+	private final JLabel lblInputOntology = new JLabel("input ontology");
+	private final JLabel lblThreshold = new JLabel("threshold [0,1]");
+	private final JLabel lblNumberOfVariables = new JLabel("number of vars");
 	private final JLabel lblListOfParents = new JLabel("list of parents (e.g. \"1,1,2,3,5,8\")");
 
 	public TestMakerView(AnnotatorConfiguration model, BayesianNetworkCreatorConfiguration model1) {
@@ -144,9 +146,10 @@ public class TestMakerView extends JPanel {
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectInputOntologyFile);
 
-		textInputOntologyFile.setBounds(277, 101, 821, 26);
+		textInputOntologyFile.setBounds(277, 101, 688, 28);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
+		textInputOntologyFile.setEditable(false);
 		add(textInputOntologyFile);
 
 		buttonSaveOntologyFile.setIcon(BornIcon.SAVE_FILE);
@@ -154,24 +157,24 @@ public class TestMakerView extends JPanel {
 		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSaveOntologyFile);
 
-		textThreshold.setBounds(277, 186, 259, 24);
+		textThreshold.setBounds(277, 186, 259, 28);
 		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
-		textMaxNumberOfVar.setBounds(586, 186, 259, 24);
+		textMaxNumberOfVar.setBounds(586, 186, 259, 28);
 		textMaxNumberOfVar.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
 		textMaxNumberOfVar.setAlignmentX(LEFT_ALIGNMENT);
 		add(textMaxNumberOfVar);
 
-		lblNewLabel.setBounds(287, 139, 120, 15);
-		add(lblNewLabel);
+		lblInputOntology.setBounds(287, 139, 120, 15);
+		add(lblInputOntology);
 
-		lblThr.setBounds(291, 222, 126, 15);
-		add(lblThr);
+		lblThreshold.setBounds(291, 222, 126, 15);
+		add(lblThreshold);
 
-		lblVariables.setBounds(596, 222, 124, 15);
-		add(lblVariables);
+		lblNumberOfVariables.setBounds(596, 222, 124, 15);
+		add(lblNumberOfVariables);
 
 		lblListOfParents.setBounds(277, 473, 328, 15);
 		add(lblListOfParents);
@@ -181,7 +184,7 @@ public class TestMakerView extends JPanel {
 		buttonSaveBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSaveBayesianNetwork);
 
-		textListOfParents.setBounds(277, 425, 817, 24);
+		textListOfParents.setBounds(277, 425, 688, 28);
 		textListOfParents.setToolTipText(Message.tooltipTextFieldThreshold);
 		textListOfParents.setAlignmentX(LEFT_ALIGNMENT);
 		add(textListOfParents);
@@ -200,7 +203,42 @@ public class TestMakerView extends JPanel {
 		buttonSaveBayesianNetwork.setEnabled(b);
 	}
 
+	void updateOntologyFile() {
+		String inputOntologyFile = getInputOntologyFile();
+		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
+			try {
+				getModel().setInputOntology(new FileInputStream(inputOntologyFile));
+			} catch (IOException e) {
+				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+			}
+		}
+	}
+
 	public void update() {
+	}
+
+	public String getInputOntologyFile() {
+		return textInputOntologyFile.getText();
+	}
+
+	public void setInputOntologyFile(String fileName) {
+		textInputOntologyFile.setText(fileName);
+	}
+
+	public String getThreshold() {
+		return textThreshold.getText();
+	}
+
+	public void setThreshold(String fileName) {
+		textThreshold.setText(fileName);
+	}
+
+	public String getMaxNumberOfVar() {
+		return textMaxNumberOfVar.getText();
+	}
+
+	public void setMaxNumberOfVar(String fileName) {
+		textMaxNumberOfVar.setText(fileName);
 	}
 
 }
