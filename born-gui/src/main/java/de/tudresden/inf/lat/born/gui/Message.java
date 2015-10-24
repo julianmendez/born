@@ -47,6 +47,8 @@ public interface Message {
 	String tooltipTextFieldMaxNumberOfVar = "maximum number of variables";
 	String textOutputBayesianNetwork = "output (e.g. network.pl)";
 	String tooltipTextFieldOutputFile = "select the output file";
+	String tooltipButtonUpdateExample = "load the selected example";
+	String tooltipComboBoxExample = "select example";
 
 	// Connector
 	String tooltipTextFieldOutputBayesianNetwork = "file name of Bayesian network generated according to the given list of parents";

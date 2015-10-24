@@ -40,6 +40,7 @@ public class ProcessorView extends JPanel {
 	private JButton buttonConsoleInput = new JButton();
 	private JButton buttonConsoleOutput = new JButton();
 	private JButton buttonComputeInference = new JButton();
+	private JButton buttonUpdateExample = new JButton();
 	private JLabel labelProgress = new JLabel("computing ...");
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textBayesianNetworkFile = new JTextField();
@@ -118,6 +119,18 @@ public class ProcessorView extends JPanel {
 
 		this.buttonComputeInference.addActionListener(listener);
 		this.buttonComputeInference.setActionCommand(actionCommand);
+	}
+
+	public void addButtonUpdateExampleListener(ActionListener listener, String actionCommand) {
+		if (listener == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+		if (actionCommand == null) {
+			throw new IllegalArgumentException("Null argument.");
+		}
+
+		this.buttonUpdateExample.addActionListener(listener);
+		this.buttonUpdateExample.setActionCommand(actionCommand);
 	}
 
 	public void addComboBoxExampleListener(ActionListener listener, String actionCommand) {
@@ -208,8 +221,14 @@ public class ProcessorView extends JPanel {
 		labelProgress.setVisible(false);
 		add(labelProgress);
 
-		comboBoxExample.setBounds(585, 476, 187, 28);
+		comboBoxExample.setBounds(702, 476, 268, 28);
+		comboBoxExample.setToolTipText(Message.tooltipComboBoxExample);
 		add(comboBoxExample);
+
+		buttonUpdateExample.setIcon(BornIcon.REFRESH);
+		buttonUpdateExample.setBounds(620, 476, 54, 28);
+		buttonUpdateExample.setToolTipText(Message.tooltipButtonUpdateExample);
+		add(buttonUpdateExample);
 
 	}
 
