@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
 /**
  * This is the panel for the annotator.
@@ -41,13 +40,10 @@ public class TestMakerView extends JPanel {
 
 	private final AnnotatorConfiguration model;
 
-	public TestMakerView(AnnotatorConfiguration model, BayesianNetworkCreatorConfiguration model1) {
+	public TestMakerView(AnnotatorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
-
-		// TODO add second model
-		// FIXME model1 is not considered
 
 		this.model = model;
 		createPanel();

@@ -32,7 +32,7 @@ public class BornView extends JPanel {
 
 		this.model = model;
 		this.processorView = new ProcessorView(this.model.getProcessorConfiguration());
-		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration(), this.model.getBayesianNetworkCreatorConfiguration());
+		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());
 		this.experimentMakerView = new ExperimentMakerView(this.model.getMultiProcessorConfiguration());
 
 		add(createPanel());
@@ -48,10 +48,9 @@ public class BornView extends JPanel {
 
 		ImageIcon icon = null;
 
-		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView,
-				Message.tooltipProcessor);
-		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView,Message.tooltipTestMaker );
-		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView,Message.tooltipExperimentMaker);
+		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView, Message.tooltipProcessor);
+		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView, Message.tooltipTestMaker);
+		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView, Message.tooltipExperimentMaker);
 
 		add(tabbedPane);
 
