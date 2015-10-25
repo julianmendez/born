@@ -42,11 +42,11 @@ Details on the versions of those requirements are available in the release notes
 ### Modules
 
 BORN is implemented with the following modules:
-* `born-owlapi` : contains the core of BORN, especially all the data structures needed for the communication with ProbLog. It also includes the communication with the OWL API
+* `born-owlapi` : contains the core of BORN, especially all the data structures needed for the communication with ProbLog. It also includes the communication with the OWL API.
 * `born-gui` : contains all the classes for the graphical user interface (GUI) using the model–view–controller pattern (MVC). Each panel in the visual interface has a view and a controller class in this package, but the model is in `born-owlapi`.
 * `born-protege` : contains the configuration files and classes for Prot&eacute;g&eacute; to run BORN as a Prot&eacute;g&eacute; plug-in.
 * `born-library` : contains Maven configuration files to create the BORN library, i.e. the BORN classes.
-* `born-plugin`: contains Maven configuration files to create the Protege plug-in.
+* `born-plugin`: contains Maven configuration files to create the Prot&eacute;g&eacute; plug-in.
 * `born-standalone`: contains Maven configuration files to create a JAR file to use BORN as a standalone.
 * `born-distribution`: contains Maven configuration files to create a single ZIP to distribute all deliverables of BORN, including source code and Javadoc.
 
@@ -54,19 +54,19 @@ BORN is implemented with the following modules:
 ### Packages
 
 `born-owlapi` can be sudivided in 3 groups of packages:
-* `de.tudresden.inf.lat.born.core.*`: contains data structures and interfaces
-* `de.tudresden.inf.lat.born.owlapi.*`: contains classes to read and write files using the OWL API
-* `de.tudresden.inf.lat.born.problog.*`: contains classes to read and write files used for ProbLog
+* `de.tudresden.inf.lat.born.core.*`: contains data structures and interfaces.
+* `de.tudresden.inf.lat.born.owlapi.*`: contains classes to read and write files using the OWL API.
+* `de.tudresden.inf.lat.born.problog.*`: contains classes to read and write files used for ProbLog.
 
 `born-owlapi` contains classes to run BORN from the command line. BORN offers several options, which are shown when it is executed with the option `--help`. Each option is a *command*, and it receives its own parameters.
 
 Technically each command is implemented in its own package. Each command has the following classes:
 * `-Configuration`: contains the configuration (parameters) of the command, which is also used as model in the visual interface. 
-* `-Core`: contains the methods to execute the command itself, which may include the communication with ProbLog or the OWL API
+* `-Core`: contains the methods to execute the command itself, which may include the communication with ProbLog or the OWL API.
 * `-SubApp`: is a snippet used to register this command in the list of commands, containing the help and some parsing methods to read the arguments from the command line.
 
 `born-gui` has a package for each panel, and a package to integrate them using tabs. Each package contains:
-* `-View`: contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder) 
+* `-View`: contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder). 
 * `-Controller`: contains the behavior for the provided view, using the `-Configuration` class as model.  The controller uses the `-Core` class and might run it in a separate thread, to avoid blocking the whole application.
 
 
