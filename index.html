@@ -44,10 +44,10 @@ lightweight <a href="http://dl.kr.org/">Description Logic</a> EL. Bayesian Ontol
 family of probabilistic ontology languages that allow to encode probabilistic information
 over the axioms of an ontology with the help of a Bayesian network. BORN uses
 the <a href="http://owlcs.github.io/owlapi/">OWL API</a> to
-read <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2 EL</a> ontologies.</p>
+read <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2 EL</a> ontologies, and it can be used as a <a href="http://protege.stanford.edu/">Protégé</a> plug-in.</p>
 
-<h3>
-<a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Source code</h3>
+<h2>
+<a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Source code</h2>
 
 <p>To clone and compile the project:</p>
 
@@ -56,8 +56,8 @@ $ cd born
 $ mvn clean install
 </code></pre>
 
-<h3>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>This software is distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License Version 2.0</a>.</p>
 
@@ -66,8 +66,72 @@ $ mvn clean install
 
 <p>See <a href="http://github.com/julianmendez/born/blob/master/RELEASE-NOTES.md">release notes</a>.</p>
 
+<h2>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+
+<p>BORN has a hybrid architecture that uses <a href="http://www.oracle.com/technetwork/java/index.html">Java</a> and <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>. In addition to Java, BORN requires having <a href="https://www.python.org/">Python</a> installed, because it is used to execute ProbLog. If ProbLog is not installed, BORN automatically downloads the most recent version of ProbLog, and uses it to solve the queries.
+Details on the versions of those requirements are available in the release notes.</p>
+
 <h3>
-<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h3>
+<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modules</h3>
+
+<p>BORN is implemented with the following modules:</p>
+
+<ul>
+<li>
+<code>born-owlapi</code> : contains the core of BORN, especially all the data structures needed for the communication with ProbLog. It also includes the communication with the OWL API.</li>
+<li>
+<code>born-gui</code> : contains all the classes for the graphical user interface (GUI) using the model–view–controller pattern (MVC). Each panel in the visual interface has a view and a controller class in this package, but the model is in <code>born-owlapi</code>.</li>
+<li>
+<code>born-protege</code> : contains the configuration files and classes for Protégé to run BORN as a Protégé plug-in.</li>
+<li>
+<code>born-library</code> : contains Maven configuration files to create the BORN library, i.e. the BORN classes.</li>
+<li>
+<code>born-plugin</code>: contains Maven configuration files to create the Protégé plug-in.</li>
+<li>
+<code>born-standalone</code>: contains Maven configuration files to create a JAR file to use BORN as a standalone.</li>
+<li>
+<code>born-distribution</code>: contains Maven configuration files to create a single ZIP to distribute all deliverables of BORN, including source code and Javadoc.</li>
+</ul>
+
+<h3>
+<a id="packages" class="anchor" href="#packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Packages</h3>
+
+<p><code>born-owlapi</code> can be sudivided in 3 groups of packages:</p>
+
+<ul>
+<li>
+<code>de.tudresden.inf.lat.born.core.*</code>: contains data structures and interfaces.</li>
+<li>
+<code>de.tudresden.inf.lat.born.owlapi.*</code>: contains classes to read and write files using the OWL API.</li>
+<li>
+<code>de.tudresden.inf.lat.born.problog.*</code>: contains classes to read and write files used for ProbLog.</li>
+</ul>
+
+<p><code>born-owlapi</code> contains classes to run BORN from the command line. BORN offers several options, which are shown when it is executed with the option <code>--help</code>. Each option is a <em>command</em>, and it receives its own parameters.</p>
+
+<p>Technically each command is implemented in its own package. Each command has the following classes:</p>
+
+<ul>
+<li>
+<code>-Configuration</code>: contains the configuration (parameters) of the command, which is also used as model in the visual interface. </li>
+<li>
+<code>-Core</code>: contains the methods to execute the command itself, which may include the communication with ProbLog or the OWL API.</li>
+<li>
+<code>-SubApp</code>: is a snippet used to register this command in the list of commands, containing the help and some parsing methods to read the arguments from the command line.</li>
+</ul>
+
+<p><code>born-gui</code> has a package for each panel, and a package to integrate them using tabs. Each package contains:</p>
+
+<ul>
+<li>
+<code>-View</code>: contains the visual components, but not their behavior. This class can be edited using <a href="https://projects.eclipse.org/projects/tools.windowbuilder">WindowBuilder</a>. </li>
+<li>
+<code>-Controller</code>: contains the behavior for the provided view, using the <code>-Configuration</code> class as model.  The controller uses the <code>-Core</code> class and might run it in a separate thread, to avoid blocking the whole application.</li>
+</ul>
+
+<h2>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>In case you need more information, please contact <a href="https://github.com/julianmendez" class="user-mention">@julianmendez</a> .</p>
         </section>
