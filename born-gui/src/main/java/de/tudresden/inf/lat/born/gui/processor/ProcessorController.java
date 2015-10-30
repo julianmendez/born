@@ -208,13 +208,6 @@ public class ProcessorController implements ActionListener {
 
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
-
-		reset();
-
-	}
-
-	public void reset() {
-
 	}
 
 }

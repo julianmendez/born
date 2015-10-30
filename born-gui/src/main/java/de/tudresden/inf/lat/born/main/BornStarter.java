@@ -16,8 +16,7 @@ import de.tudresden.inf.lat.born.gui.BornView;
  * 
  * @author Julian Mendez
  */
-public class BornStarter implements OWLOntologyChangeListener,
-		OWLOntologyLoaderListener {
+public class BornStarter implements OWLOntologyChangeListener, OWLOntologyLoaderListener {
 
 	private final OWLOntologyManager ontologyManager;
 	private final BornController panel;
@@ -34,11 +33,9 @@ public class BornStarter implements OWLOntologyChangeListener,
 		}
 
 		this.ontologyManager = manager;
-		this.panel = new BornController(new BornView(new BornModel()),
-				this.ontologyManager);
+		this.panel = new BornController(new BornView(new BornModel()), this.ontologyManager);
 		getOWLOntologyManager().addOntologyLoaderListener(this);
 		getOWLOntologyManager().addOntologyChangeListener(this);
-		reset();
 	}
 
 	@Override
@@ -47,7 +44,6 @@ public class BornStarter implements OWLOntologyChangeListener,
 			throw new IllegalArgumentException("Null argument.");
 		}
 
-		reset();
 	}
 
 	public OWLOntologyManager getOWLOntologyManager() {
@@ -63,11 +59,8 @@ public class BornStarter implements OWLOntologyChangeListener,
 		if (change == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
-		reset();
-	}
 
-	public void reset() {
-		this.panel.reset();
+		// TODO
 	}
 
 	@Override
@@ -75,9 +68,7 @@ public class BornStarter implements OWLOntologyChangeListener,
 		if (event == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
-	}
 
-	public void removeListeners() {
 		// TODO
 	}
 

@@ -7,18 +7,16 @@ import de.tudresden.inf.lat.born.gui.processor.ProcessorController;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerController;
 
 /**
- * This class is a controller for the main panel.
+ * This is the controller of the graphical user interface.
  * 
  * @author Julian Mendez
  */
 public class BornController {
 
-	private ProcessorController processorController;
-	private ExperimentMakerController experimentMakerController;
-	private TestMakerController testMakerController;
-
+	private final ProcessorController processorController;
+	private final TestMakerController testMakerController;
+	private final ExperimentMakerController experimentMakerController;
 	private final OWLOntologyManager owlOntologyManager;
-
 	private final BornView view;
 
 	/**
@@ -35,35 +33,58 @@ public class BornController {
 		this.processorController = new ProcessorController(view.getProcessorView(), ontologyManager);
 		this.experimentMakerController = new ExperimentMakerController(view.getExperimentMakerView(), ontologyManager);
 		this.testMakerController = new TestMakerController(view.getTestMakerView(), ontologyManager);
-		reset();
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public BornModel getModel() {
 		return getView().getModel();
 	}
 
+	/**
+	 * Returns the OWL ontology manager.
+	 * 
+	 * @return the OWL ontology manager
+	 */
 	public OWLOntologyManager getOWLOntologyManager() {
 		return this.owlOntologyManager;
 	}
 
+	/**
+	 * Returns the view.
+	 * 
+	 * @return the view
+	 */
 	public BornView getView() {
 		return this.view;
 	}
 
-	public void reset() {
-		this.processorController.reset();
-		this.experimentMakerController.reset();
-		this.testMakerController.reset();
-	}
-
+	/**
+	 * Returns the processor controller.
+	 * 
+	 * @return the processor controller
+	 */
 	public ProcessorController getProcessorController() {
 		return this.processorController;
 	}
 
+	/**
+	 * Returns the experiment maker controller.
+	 * 
+	 * @return the experiment maker controller
+	 */
 	public ExperimentMakerController getExperimentMakerController() {
 		return this.experimentMakerController;
 	}
 
+	/**
+	 * Returns the test maker controller.
+	 * 
+	 * @return the test maker controller
+	 */
 	public TestMakerController getTestMakerController() {
 		return this.testMakerController;
 	}

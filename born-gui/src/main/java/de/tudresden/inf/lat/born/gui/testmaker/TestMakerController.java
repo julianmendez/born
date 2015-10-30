@@ -168,8 +168,4 @@ public class TestMakerController implements ActionListener {
 		getView().addButtonSaveBayesianNetworkListener(this, actionSaveBayesianNetwork);
 	}
 
-	public void reset() {
-
-	}
-
 }

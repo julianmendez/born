@@ -29,7 +29,6 @@ public class ExperimentMakerController implements ActionListener {
 	 */
 	class ExperimentMakerRunner extends Thread {
 
-
 		public void run() {
 			long start = System.nanoTime();
 			MultiProcessorCore core = new MultiProcessorCore();
@@ -176,12 +175,6 @@ public class ExperimentMakerController implements ActionListener {
 
 		// getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
-
-		reset();
-	}
-
-	public void reset() {
-
 	}
 
 }
