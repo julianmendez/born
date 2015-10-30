@@ -48,7 +48,7 @@ public class ProcessorView extends JPanel {
 	private JTextArea textConsoleOutput = new JTextArea();
 	private JScrollPane scrollConsoleInput = new JScrollPane();
 	private JScrollPane scrollConsoleOutput = new JScrollPane();
-	private JComboBox comboBoxExample = new JComboBox();
+	private JComboBox<String> comboBoxExample = new JComboBox<String>();
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
