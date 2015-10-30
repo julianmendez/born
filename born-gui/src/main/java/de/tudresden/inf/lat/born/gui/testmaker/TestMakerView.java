@@ -12,9 +12,12 @@ import javax.swing.JTextField;
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
 /**
- * This is the panel for the annotator.
+ * This is the panel for the test maker. This class contains a model for the
+ * annotator ({@link AnnotatorConfiguration}), but not for the Bayesian network
+ * creator ({@link BayesianNetworkCreatorConfiguration}).
  * 
  * @author Julian Mendez
  */
@@ -40,6 +43,12 @@ public class TestMakerView extends JPanel {
 
 	private final AnnotatorConfiguration model;
 
+	/**
+	 * Constructs a new test maker view.
+	 * 
+	 * @param model
+	 *            model
+	 */
 	public TestMakerView(AnnotatorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -49,6 +58,14 @@ public class TestMakerView extends JPanel {
 		createPanel();
 	}
 
+	/**
+	 * Adds an action listener to the button to select the input.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -61,6 +78,14 @@ public class TestMakerView extends JPanel {
 		buttonSelectInputOntologyFile.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the button to select the output.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addButtonSelectOutputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -73,6 +98,14 @@ public class TestMakerView extends JPanel {
 		buttonSaveOntologyFile.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the button to save the Bayesian network.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addButtonSaveBayesianNetworkListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -85,6 +118,14 @@ public class TestMakerView extends JPanel {
 		buttonSaveBayesianNetwork.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the text field of the input ontology.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addTextFieldInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -97,6 +138,14 @@ public class TestMakerView extends JPanel {
 		textInputOntologyFile.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the text field of the list of parents.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addTextFieldListOfParentsListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -109,6 +158,14 @@ public class TestMakerView extends JPanel {
 		textListOfParents.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the text field of the threshold.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addTextFieldThresholdListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -121,6 +178,15 @@ public class TestMakerView extends JPanel {
 		textThreshold.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the text field of the maximum number of
+	 * variables.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addTextFieldMaxNumberOfVarListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -133,6 +199,9 @@ public class TestMakerView extends JPanel {
 		textMaxNumberOfVars.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Creates the panel.
+	 */
 	void createPanel() {
 
 		setLayout(null);
@@ -187,18 +256,38 @@ public class TestMakerView extends JPanel {
 
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public AnnotatorConfiguration getModel() {
 		return model;
 	}
 
-	public void setButtonLoadEnabled(boolean b) {
-		buttonSelectInputOntologyFile.setEnabled(b);
+	/**
+	 * Changes the state of the load button between enabled and disabled.
+	 * 
+	 * @param isEnabled
+	 *            value to define if this is enabled
+	 */
+	public void setButtonLoadEnabled(boolean isEnabled) {
+		buttonSelectInputOntologyFile.setEnabled(isEnabled);
 	}
 
-	public void setButtonComputeInferenceEnabled(boolean b) {
-		buttonSaveBayesianNetwork.setEnabled(b);
+	/**
+	 * Changes the state of the compute button between enabled and disabled.
+	 * 
+	 * @param isEnabled
+	 *            value to define if this is enabled
+	 */
+	public void setButtonComputeInferenceEnabled(boolean isEnabled) {
+		buttonSaveBayesianNetwork.setEnabled(isEnabled);
 	}
 
+	/**
+	 * Updates the ontology file.
+	 */
 	void updateOntologyFile() {
 		String inputOntologyFile = getInputOntologyFile();
 		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
@@ -210,6 +299,9 @@ public class TestMakerView extends JPanel {
 		}
 	}
 
+	/**
+	 * Updates the threshold.
+	 */
 	public void updateThreshold() {
 		try {
 			double th = Double.parseDouble(textThreshold.getText());
@@ -218,6 +310,9 @@ public class TestMakerView extends JPanel {
 		}
 	}
 
+	/**
+	 * Updates the maximum number of variables.
+	 */
 	public void updateMaxNumberOfVars() {
 		try {
 			int maxNumberOfVars = Integer.parseInt(textMaxNumberOfVars.getText());
@@ -226,36 +321,80 @@ public class TestMakerView extends JPanel {
 		}
 	}
 
+	/**
+	 * Returns the input ontology file.
+	 * 
+	 * @return the input ontology file
+	 */
 	public String getInputOntologyFile() {
 		return textInputOntologyFile.getText();
 	}
 
+	/**
+	 * Sets the input ontology file.
+	 * 
+	 * @param fileName
+	 *            file name
+	 */
 	public void setInputOntologyFile(String fileName) {
 		textInputOntologyFile.setText(fileName);
 	}
 
+	/**
+	 * Returns the threshold.
+	 * 
+	 * @return the threshold
+	 */
 	public String getThreshold() {
 		return textThreshold.getText();
 	}
 
-	public void setThreshold(String fileName) {
-		textThreshold.setText(fileName);
+	/**
+	 * Sets the threshold.
+	 * 
+	 * @param threshold
+	 *            the threshold
+	 */
+	public void setThreshold(String threshold) {
+		textThreshold.setText(threshold);
 	}
 
+	/**
+	 * Returns the maximum number of variables.
+	 * 
+	 * @return the maximum number of variables
+	 */
 	public String getMaxNumberOfVar() {
 		return textMaxNumberOfVars.getText();
 	}
 
-	public void setMaxNumberOfVar(String fileName) {
-		textMaxNumberOfVars.setText(fileName);
+	/**
+	 * Sets the maximum number of variables.
+	 * 
+	 * @param maxNumberOfVars
+	 *            the maximum number of variables
+	 */
+	public void setMaxNumberOfVar(String maxNumberOfVars) {
+		textMaxNumberOfVars.setText(maxNumberOfVars);
 	}
 
+	/**
+	 * Returns the list of parents.
+	 * 
+	 * @return the list of parents
+	 */
 	public String getListOfParents() {
 		return textListOfParents.getText();
 	}
 
-	public void setListOfParents(String fileName) {
-		textListOfParents.setText(fileName);
+	/**
+	 * Sets the list of parents.
+	 * 
+	 * @param listOfParents
+	 *            the list of parents
+	 */
+	public void setListOfParents(String listOfParents) {
+		textListOfParents.setText(listOfParents);
 	}
 
 }

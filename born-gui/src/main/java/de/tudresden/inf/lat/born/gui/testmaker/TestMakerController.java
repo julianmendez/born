@@ -146,14 +146,29 @@ public class TestMakerController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public AnnotatorConfiguration getModel() {
 		return getView().getModel();
 	}
 
+	/**
+	 * Returns the OWL ontology manager.
+	 * 
+	 * @return the OWL ontology manager
+	 */
 	public OWLOntologyManager getOWLOntologyManager() {
 		return this.owlOntologyManager;
 	}
 
+	/**
+	 * Returns the view.
+	 * 
+	 * @return the view
+	 */
 	public TestMakerView getView() {
 		return this.view;
 	}

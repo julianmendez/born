@@ -44,12 +44,23 @@ public class BornStarter implements OWLOntologyChangeListener, OWLOntologyLoader
 			throw new IllegalArgumentException("Null argument.");
 		}
 
+		// TODO
 	}
 
+	/**
+	 * Returns the OWL ontology manager.
+	 * 
+	 * @return the OWL ontology manager
+	 */
 	public OWLOntologyManager getOWLOntologyManager() {
 		return this.ontologyManager;
 	}
 
+	/**
+	 * Returns the panel.
+	 * 
+	 * @return the panel
+	 */
 	public BornController getPanel() {
 		return this.panel;
 	}
