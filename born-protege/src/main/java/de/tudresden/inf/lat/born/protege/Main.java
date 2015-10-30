@@ -20,7 +20,6 @@ public class Main extends AbstractOWLClassViewComponent {
 
 	@Override
 	public void disposeView() {
-		this.bornStarter.removeListeners();
 	}
 
 	/**
