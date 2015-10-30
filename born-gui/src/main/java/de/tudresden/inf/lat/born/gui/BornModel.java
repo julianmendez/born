@@ -5,7 +5,7 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurati
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
- * This is the model of the BORN graphical user interface.
+ * This is the model of the graphical user interface.
  * 
  * @author Julian Mendez
  *
