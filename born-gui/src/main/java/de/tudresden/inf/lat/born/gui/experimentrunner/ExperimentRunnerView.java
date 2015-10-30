@@ -17,7 +17,7 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
  * 
  * @author Julian Mendez
  */
-public class ExperimentMakerView extends JPanel {
+public class ExperimentRunnerView extends JPanel {
 
 	private static final long serialVersionUID = 8987374313881883318L;
 
@@ -42,7 +42,7 @@ public class ExperimentMakerView extends JPanel {
 	 * @param model
 	 *            model
 	 */
-	public ExperimentMakerView(MultiProcessorConfiguration model) {
+	public ExperimentRunnerView(MultiProcessorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}

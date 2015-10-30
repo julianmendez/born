@@ -19,7 +19,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
  * 
  * @author Julian Mendez
  */
-public class ExperimentMakerController implements ActionListener {
+public class ExperimentRunnerController implements ActionListener {
 
 	/**
 	 * This class lets the multi processor run in a separate thread.
@@ -58,7 +58,7 @@ public class ExperimentMakerController implements ActionListener {
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
-	private final ExperimentMakerView view;
+	private final ExperimentRunnerView view;
 	private ExperimentMakerRunner experimentMakerRunner;
 
 	/**
@@ -69,7 +69,7 @@ public class ExperimentMakerController implements ActionListener {
 	 * @param ontologyManager
 	 *            an OWL ontology manager
 	 */
-	public ExperimentMakerController(ExperimentMakerView view, OWLOntologyManager ontologyManager) {
+	public ExperimentRunnerController(ExperimentRunnerView view, OWLOntologyManager ontologyManager) {
 		this.view = view;
 		this.owlOntologyManager = ontologyManager;
 		init();
@@ -188,7 +188,7 @@ public class ExperimentMakerController implements ActionListener {
 	 * 
 	 * @return the view
 	 */
-	public ExperimentMakerView getView() {
+	public ExperimentRunnerView getView() {
 		return this.view;
 	}
 

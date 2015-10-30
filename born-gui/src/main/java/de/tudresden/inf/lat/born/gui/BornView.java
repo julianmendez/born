@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentMakerView;
+import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 
@@ -23,7 +23,7 @@ public class BornView extends JPanel {
 	private final BornModel model;
 	private final ProcessorView processorView;
 	private final TestMakerView testMakerView;
-	private final ExperimentMakerView experimentMakerView;
+	private final ExperimentRunnerView experimentMakerView;
 
 	/**
 	 * Constructs a new view.
@@ -39,7 +39,7 @@ public class BornView extends JPanel {
 		this.model = model;
 		this.processorView = new ProcessorView(this.model.getProcessorConfiguration());
 		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());
-		this.experimentMakerView = new ExperimentMakerView(this.model.getMultiProcessorConfiguration());
+		this.experimentMakerView = new ExperimentRunnerView(this.model.getMultiProcessorConfiguration());
 
 		add(createPanel());
 	}
@@ -102,7 +102,7 @@ public class BornView extends JPanel {
 	 * 
 	 * @return the experiment maker view
 	 */
-	public ExperimentMakerView getExperimentMakerView() {
+	public ExperimentRunnerView getExperimentMakerView() {
 		return this.experimentMakerView;
 	}
 
