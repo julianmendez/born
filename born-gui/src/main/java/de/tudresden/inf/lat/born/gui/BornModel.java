@@ -1,84 +1,82 @@
 package de.tudresden.inf.lat.born.gui;
 
-import org.semanticweb.owlapi.model.OWLOntology;
-
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.splitter.SplitterConfiguration;
-import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
 /**
+ * This is the model of the BORN graphical user interface.
  * 
  * @author Julian Mendez
  *
  */
 public class BornModel {
 
-	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfiguration();
 	private ProcessorConfiguration processorConfiguration = new ProcessorConfiguration();
-	private SplitterConfiguration splitterConfiguration = new SplitterConfiguration();
-	private BayesianNetworkCreatorConfiguration bayesianNetworkCreatorConfiguration = new BayesianNetworkCreatorConfiguration();
+	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfiguration();
 	private MultiProcessorConfiguration multiProcessorConfiguration = new MultiProcessorConfiguration();
 
-	private OWLOntology inputOntology = null;
-	private String output = null;
+	/**
+	 * Constructs a new BORN model.
+	 */
+	public BornModel() {
+	}
 
+	/**
+	 * Returns the annotator configuration.
+	 * 
+	 * @return the annotator configuration
+	 */
 	public AnnotatorConfiguration getAnnotatorConfiguration() {
 		return annotatorConfiguration;
 	}
 
+	/**
+	 * Sets the annotator configuration.
+	 * 
+	 * @param annotatorConfiguration
+	 *            annotator configuration
+	 */
 	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
 		this.annotatorConfiguration = annotatorConfiguration;
 	}
 
+	/**
+	 * Returns the processor configuration.
+	 * 
+	 * @return the processor configuration
+	 */
 	public ProcessorConfiguration getProcessorConfiguration() {
 		return processorConfiguration;
 	}
 
+	/**
+	 * Sets the processor configuration.
+	 * 
+	 * @param processorConfiguration
+	 *            processor configuration
+	 */
 	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
 		this.processorConfiguration = processorConfiguration;
 	}
 
-	public SplitterConfiguration getSplitterConfiguration() {
-		return splitterConfiguration;
-	}
-
-	public void setSplitterConfiguration(SplitterConfiguration splitterConfiguration) {
-		this.splitterConfiguration = splitterConfiguration;
-	}
-
-	public BayesianNetworkCreatorConfiguration getBayesianNetworkCreatorConfiguration() {
-		return bayesianNetworkCreatorConfiguration;
-	}
-
-	public void setBayesianNetworkCreatorConfiguration(
-			BayesianNetworkCreatorConfiguration bayesianNetworkCreatorConfiguration) {
-		this.bayesianNetworkCreatorConfiguration = bayesianNetworkCreatorConfiguration;
-	}
-
+	/**
+	 * Returns the multi processor configuration.
+	 * 
+	 * @return
+	 */
 	public MultiProcessorConfiguration getMultiProcessorConfiguration() {
 		return multiProcessorConfiguration;
 	}
 
+	/**
+	 * Sets the multi processor configuration.
+	 * 
+	 * @param multiProcessorConfiguration
+	 *            multi processor configuration
+	 */
 	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
 		this.multiProcessorConfiguration = multiProcessorConfiguration;
-	}
-
-	public OWLOntology getInputOntology() {
-		return this.inputOntology;
-	}
-
-	public void setInputOntology(OWLOntology ontology) {
-		this.inputOntology = ontology;
-	}
-
-	public String getOutput() {
-		return this.output;
-	}
-
-	public void setOutput(String output) {
-		this.output = output;
 	}
 
 }
