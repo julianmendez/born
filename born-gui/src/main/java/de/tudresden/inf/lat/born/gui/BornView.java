@@ -12,7 +12,7 @@ import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 
 /**
- * This is the main panel.
+ * This is the view of the graphical user interface.
  * 
  * @author Julian Mendez
  */
@@ -25,6 +25,12 @@ public class BornView extends JPanel {
 	private final TestMakerView testMakerView;
 	private final ExperimentMakerView experimentMakerView;
 
+	/**
+	 * Constructs a new view.
+	 * 
+	 * @param model
+	 *            model
+	 */
 	public BornView(BornModel model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -38,7 +44,12 @@ public class BornView extends JPanel {
 		add(createPanel());
 	}
 
-	private JPanel createPanel() {
+	/**
+	 * Returns the panel.
+	 * 
+	 * @return the panel
+	 */
+	JPanel createPanel() {
 
 		JPanel ret = new JPanel();
 		ret.setLayout(new GridLayout(1, 1));
@@ -59,23 +70,40 @@ public class BornView extends JPanel {
 		return ret;
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public BornModel getModel() {
 		return this.model;
 	}
 
+	/**
+	 * Returns the processor view.
+	 * 
+	 * @return the processor view
+	 */
 	public ProcessorView getProcessorView() {
 		return this.processorView;
 	}
 
+	/**
+	 * Returns the test maker view.
+	 * 
+	 * @return the test maker view
+	 */
 	public TestMakerView getTestMakerView() {
 		return this.testMakerView;
 	}
 
+	/**
+	 * Returns the experiment maker view.
+	 * 
+	 * @return the experiment maker view
+	 */
 	public ExperimentMakerView getExperimentMakerView() {
 		return this.experimentMakerView;
-	}
-
-	public void update() {
 	}
 
 }

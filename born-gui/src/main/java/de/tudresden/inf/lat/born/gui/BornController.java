@@ -56,10 +56,6 @@ public class BornController {
 		this.testMakerController.reset();
 	}
 
-	public void update() {
-		getView().update();
-	}
-
 	public ProcessorController getProcessorController() {
 		return this.processorController;
 	}
