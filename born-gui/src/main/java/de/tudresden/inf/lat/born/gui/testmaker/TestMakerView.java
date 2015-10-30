@@ -59,7 +59,7 @@ public class TestMakerView extends JPanel {
 	}
 
 	/**
-	 * Adds an action listener to the button to select the input.
+	 * Adds an action listener to the button to select the input ontology.
 	 * 
 	 * @param listener
 	 *            listener
@@ -79,7 +79,7 @@ public class TestMakerView extends JPanel {
 	}
 
 	/**
-	 * Adds an action listener to the button to select the output.
+	 * Adds an action listener to the button to select the output ontology.
 	 * 
 	 * @param listener
 	 *            listener
@@ -266,23 +266,23 @@ public class TestMakerView extends JPanel {
 	}
 
 	/**
-	 * Changes the state of the load button between enabled and disabled.
+	 * Changes the state of the load button to enabled or disabled.
 	 * 
-	 * @param isEnabled
-	 *            value to define if this is enabled
+	 * @param status
+	 *            value to define if the button is enabled
 	 */
-	public void setButtonLoadEnabled(boolean isEnabled) {
-		buttonSelectInputOntologyFile.setEnabled(isEnabled);
+	public void setButtonLoadEnabled(boolean status) {
+		buttonSelectInputOntologyFile.setEnabled(status);
 	}
 
 	/**
-	 * Changes the state of the compute button between enabled and disabled.
+	 * Changes the state of the compute button to enabled or disabled.
 	 * 
-	 * @param isEnabled
-	 *            value to define if this is enabled
+	 * @param status
+	 *            value to define if the button is enabled
 	 */
-	public void setButtonComputeInferenceEnabled(boolean isEnabled) {
-		buttonSaveBayesianNetwork.setEnabled(isEnabled);
+	public void setButtonComputeInferenceEnabled(boolean status) {
+		buttonSaveBayesianNetwork.setEnabled(status);
 	}
 
 	/**

@@ -169,8 +169,8 @@ public class ExperimentMakerController implements ActionListener {
 	private void init() {
 		getView().addButtonInputOntologyListener(this, actionInputOntology);
 		getView().addButtonBayesianNetworkListener(this, actionBayesianNetwork);
-		getView().addButtonConsoleInputListener(this, actionConsoleInput);
-		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
+		getView().addButtonOutputDirectoryListener(this, actionConsoleInput);
+		getView().addButtonUpdateSeedListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
 
 		// getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);

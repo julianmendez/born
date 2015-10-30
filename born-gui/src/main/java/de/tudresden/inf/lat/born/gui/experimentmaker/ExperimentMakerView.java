@@ -13,7 +13,7 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurati
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
 
 /**
- * This is the panel to compute inference.
+ * This is the panel for the experiment maker.
  * 
  * @author Julian Mendez
  */
@@ -36,6 +36,12 @@ public class ExperimentMakerView extends JPanel {
 	private JTextField textSeed = new JTextField();
 	private final MultiProcessorConfiguration model;
 
+	/**
+	 * Constructs a new panel for the experiment maker.
+	 * 
+	 * @param model
+	 *            model
+	 */
 	public ExperimentMakerView(MultiProcessorConfiguration model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -46,6 +52,14 @@ public class ExperimentMakerView extends JPanel {
 		createPanel();
 	}
 
+	/**
+	 * Adds an action listener to the button to select the input ontology.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addButtonInputOntologyListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -58,6 +72,14 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonInputOntologyDirectory.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the button to select the Bayesian network.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addButtonBayesianNetworkListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -70,7 +92,15 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonBayesianNetworkDirectory.setActionCommand(actionCommand);
 	}
 
-	public void addButtonConsoleInputListener(ActionListener listener, String actionCommand) {
+	/**
+	 * Adds an action listener to the button to select the output directory.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	public void addButtonOutputDirectoryListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -82,7 +112,15 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonOutputDirectory.setActionCommand(actionCommand);
 	}
 
-	public void addButtonConsoleOutputListener(ActionListener listener, String actionCommand) {
+	/**
+	 * Adds an action listener to the button to update the seed.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	public void addButtonUpdateSeedListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -94,6 +132,14 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonUpdateSeed.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Adds an action listener to the button to compute the inference.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -106,6 +152,9 @@ public class ExperimentMakerView extends JPanel {
 		this.buttonComputeInference.setActionCommand(actionCommand);
 	}
 
+	/**
+	 * Creates the panel.
+	 */
 	void createPanel() {
 
 		JLabel lblInputOntologyDirectory = new JLabel("ontology directory");
@@ -188,45 +237,98 @@ public class ExperimentMakerView extends JPanel {
 
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public MultiProcessorConfiguration getModel() {
 		return this.model;
 	}
 
+	/**
+	 * Returns the directory of the input ontologies.
+	 * 
+	 * @return the directory of the input ontologies
+	 */
 	public String getInputOntologyDirectory() {
 		return this.textInputOntologyDirectory.getText();
 	}
 
-	public void setInputOntologyDirectory(String fileName) {
-		this.textInputOntologyDirectory.setText(fileName);
+	/**
+	 * Sets the directory of the input ontologies.
+	 * 
+	 * @param directoryName
+	 *            directory
+	 */
+	public void setInputOntologyDirectory(String directoryName) {
+		this.textInputOntologyDirectory.setText(directoryName);
 		updateInputOntologyDirectory();
 	}
 
+	/**
+	 * Returns the directory of the Bayesian networks.
+	 * 
+	 * @return the directory of the Bayesian networks
+	 */
 	public String getBayesianNetworkDirectory() {
 		return this.textBayesianNetworkDirectory.getText();
 	}
 
-	public void setBayesianNetworkDirectory(String fileName) {
-		this.textBayesianNetworkDirectory.setText(fileName);
+	/**
+	 * Set the directory of the Bayesian networks.
+	 * 
+	 * @param directoryName
+	 *            directory
+	 */
+	public void setBayesianNetworkDirectory(String directoryName) {
+		this.textBayesianNetworkDirectory.setText(directoryName);
 		updateBayesianNetworkDirectory();
 	}
 
+	/**
+	 * Returns the output directory.
+	 * 
+	 * @return the output directory
+	 */
 	public String getOutputDirectory() {
 		return this.textOutputDirectory.getText();
 	}
 
-	public void setOutputDirectory(String fileName) {
-		this.textOutputDirectory.setText(fileName);
+	/**
+	 * Sets the output directory.
+	 * 
+	 * @param directoryName
+	 *            directory
+	 */
+	public void setOutputDirectory(String directoryName) {
+		this.textOutputDirectory.setText(directoryName);
 		updateOutputDirectory();
 	}
 
-	public void setButtonLoadEnabled(boolean b) {
-		this.buttonInputOntologyDirectory.setEnabled(b);
+	/**
+	 * Changes the state of the load button to enabled or disabled.
+	 * 
+	 * @param status
+	 *            value to define if the button is enabled
+	 */
+	public void setButtonLoadEnabled(boolean status) {
+		this.buttonInputOntologyDirectory.setEnabled(status);
 	}
 
-	public void setButtonComputeInferenceEnabled(boolean b) {
-		this.buttonComputeInference.setEnabled(b);
+	/**
+	 * Changes the state of the compute button to enabled or disabled.
+	 * 
+	 * @param status
+	 *            value to define if the button is enabled
+	 */
+	public void setButtonComputeInferenceEnabled(boolean status) {
+		this.buttonComputeInference.setEnabled(status);
 	}
 
+	/**
+	 * Updates the directory of ontologies.
+	 */
 	void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
 		if (inputOntologyDirectory != null && !inputOntologyDirectory.trim().isEmpty()) {
@@ -235,6 +337,9 @@ public class ExperimentMakerView extends JPanel {
 		}
 	}
 
+	/**
+	 * Updates the directory of Bayesian networks.
+	 */
 	void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
 		if (bayesianNetworkDirectory != null && !bayesianNetworkDirectory.trim().isEmpty()) {
@@ -243,6 +348,9 @@ public class ExperimentMakerView extends JPanel {
 		}
 	}
 
+	/**
+	 * Updates the output directory.
+	 */
 	void updateOutputDirectory() {
 		String outputDirectory = getOutputDirectory();
 		if (outputDirectory != null && !outputDirectory.trim().isEmpty()) {
@@ -250,6 +358,9 @@ public class ExperimentMakerView extends JPanel {
 		}
 	}
 
+	/**
+	 * Updates the seed for the pseudorandom number generator.
+	 */
 	void updateSeed() {
 		String seedStr = this.textSeed.getText();
 		int seed = 0;
@@ -261,6 +372,9 @@ public class ExperimentMakerView extends JPanel {
 		this.model.setSeed(seed);
 	}
 
+	/**
+	 * Updates the number of queries.
+	 */
 	void updateNumberOfQueries() {
 		String numberOfQueriesStr = this.textNumberOfQueries.getText();
 		int numberOfQueries = 0;
@@ -272,6 +386,9 @@ public class ExperimentMakerView extends JPanel {
 		this.model.setNumberOfQueries(numberOfQueries);
 	}
 
+	/**
+	 * Updates the visual components.
+	 */
 	public void update() {
 		updateInputOntologyDirectory();
 		updateBayesianNetworkDirectory();
@@ -280,25 +397,51 @@ public class ExperimentMakerView extends JPanel {
 		updateNumberOfQueries();
 	}
 
-	public void setResult(String result) {
-	}
-
+	/**
+	 * Makes visible or invisible the label that shows that the reasoner is
+	 * running.
+	 * 
+	 * @param status
+	 *            value to define if the label is visible
+	 */
 	public void setComputing(boolean status) {
 		labelProgress.setVisible(status);
 	}
 
+	/**
+	 * Returns the number of queries.
+	 * 
+	 * @return the number of queries
+	 */
 	public String getNumebrOfQueries() {
 		return this.textNumberOfQueries.getText();
 	}
 
+	/**
+	 * Returns the seed.
+	 * 
+	 * @return the seed
+	 */
 	public String getSeed() {
 		return this.textSeed.getText();
 	}
 
+	/**
+	 * Sets the seed for the pseudorandom number generator.
+	 * 
+	 * @param seed
+	 *            the seed
+	 */
 	public void setSeed(String seed) {
 		this.textSeed.setText(seed);
 	}
 
+	/**
+	 * Changes the state of all buttons to enabled or disabled.
+	 * 
+	 * @param status
+	 *            value to define if the buttons are enabled
+	 */
 	public void setButtonsEnabled(boolean status) {
 		buttonInputOntologyDirectory.setEnabled(status);
 		buttonBayesianNetworkDirectory.setEnabled(status);
