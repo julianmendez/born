@@ -22,13 +22,16 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 public class ExperimentMakerController implements ActionListener {
 
 	/**
-	 * This class lets the processor run in a separate thread.
+	 * This class lets the multi processor run in a separate thread.
 	 * 
 	 * @author Julian Mendez
 	 *
 	 */
 	class ExperimentMakerRunner extends Thread {
 
+		/**
+		 * Runs the experiments.
+		 */
 		public void run() {
 			long start = System.nanoTime();
 			MultiProcessorCore core = new MultiProcessorCore();
@@ -52,13 +55,10 @@ public class ExperimentMakerController implements ActionListener {
 	private static final String actionComputeInference = "compute inference";
 
 	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
-
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
-
 	private final ExperimentMakerView view;
-
 	private ExperimentMakerRunner experimentMakerRunner;
 
 	/**
@@ -97,6 +97,9 @@ public class ExperimentMakerController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Opens a dialog and choose the directory of ontologies.
+	 */
 	void executeActionInputOntologyDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -110,6 +113,9 @@ public class ExperimentMakerController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Opens a dialog and choose the directory of Bayesian networks.
+	 */
 	void executeActionBayesianNetworkDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -123,6 +129,9 @@ public class ExperimentMakerController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Open a dialog and choose the directory for the results.
+	 */
 	void executeActionOutputDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -136,12 +145,18 @@ public class ExperimentMakerController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Updates the seed for the pseudorandom number generator.
+	 */
 	void executeActionUpdateSeed() {
 		double number = Math.random();
 		int seed = (int) (number * 1000);
 		getView().setSeed("" + seed);
 	}
 
+	/**
+	 * Runs the experiments for the given ontologies and Bayesian networks.
+	 */
 	void executeActionComputeInference() {
 		getView().setButtonsEnabled(false);
 		getView().setComputing(true);
@@ -150,14 +165,29 @@ public class ExperimentMakerController implements ActionListener {
 		experimentMakerRunner.start();
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public MultiProcessorConfiguration getModel() {
 		return getView().getModel();
 	}
 
+	/**
+	 * Returns the OWL ontology manager.
+	 * 
+	 * @return the OWL ontology manager
+	 */
 	public OWLOntologyManager getOWLOntologyManager() {
 		return this.owlOntologyManager;
 	}
 
+	/**
+	 * Returns the view.
+	 * 
+	 * @return the view
+	 */
 	public ExperimentMakerView getView() {
 		return this.view;
 	}
@@ -166,7 +196,7 @@ public class ExperimentMakerController implements ActionListener {
 	 * Initializes the data and GUI. This method is called when the view is
 	 * initialized.
 	 */
-	private void init() {
+	void init() {
 		getView().addButtonInputOntologyListener(this, actionInputOntology);
 		getView().addButtonBayesianNetworkListener(this, actionBayesianNetwork);
 		getView().addButtonOutputDirectoryListener(this, actionConsoleInput);
