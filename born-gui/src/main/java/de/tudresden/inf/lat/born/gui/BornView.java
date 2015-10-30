@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import de.tudresden.inf.lat.born.gui.experimentmaker.ExperimentMakerView;
+import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentMakerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 

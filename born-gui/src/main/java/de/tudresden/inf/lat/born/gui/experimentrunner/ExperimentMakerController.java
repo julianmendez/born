@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.gui.experimentmaker;
+package de.tudresden.inf.lat.born.gui.experimentrunner;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -2,7 +2,7 @@ package de.tudresden.inf.lat.born.gui;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.gui.experimentmaker.ExperimentMakerController;
+import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentMakerController;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorController;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerController;
 
