@@ -13,7 +13,7 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurati
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
 
 /**
- * This is the panel for the experiment maker.
+ * This is the panel for the experiment runner.
  * 
  * @author Julian Mendez
  */
@@ -37,7 +37,7 @@ public class ExperimentRunnerView extends JPanel {
 	private final MultiProcessorConfiguration model;
 
 	/**
-	 * Constructs a new panel for the experiment maker.
+	 * Constructs a new panel for the experiment runner.
 	 * 
 	 * @param model
 	 *            model
