@@ -50,15 +50,11 @@ public class ProcessorController implements ActionListener {
 	private static final String actionUpdateExample = "update example";
 
 	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
-
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
-
 	private final ProcessorView view;
-
 	private ProcessorRunner processorRunner;
-
 	private final ExampleLoader exampleLoader = new ExampleLoader();
 
 	/**
@@ -179,14 +175,29 @@ public class ProcessorController implements ActionListener {
 		getView().setConsoleOutput("");
 	}
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	public ProcessorConfiguration getModel() {
 		return getView().getModel();
 	}
 
+	/**
+	 * Returns the OWL ontology manager.
+	 * 
+	 * @return the OWL ontology manager
+	 */
 	public OWLOntologyManager getOWLOntologyManager() {
 		return this.owlOntologyManager;
 	}
 
+	/**
+	 * Returns the view.
+	 * 
+	 * @return the view
+	 */
 	public ProcessorView getView() {
 		return this.view;
 	}
