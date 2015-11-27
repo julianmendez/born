@@ -13,6 +13,17 @@ the [OWL API](http://owlcs.github.io/owlapi/) to
 read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it can be used as a [Prot&eacute;g&eacute;](http://protege.stanford.edu/) plug-in.
 
 
+## Dependency
+
+```xml
+<dependency>
+  <groupId>de.tu-dresden.inf.lat.jcel</groupId>
+  <artifactId>jcel-owlapi</artifactId>
+  <version>0.23.0</version>
+</dependency>
+```
+
+
 ## Source code
 
 To clone and compile the project:
