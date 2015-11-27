@@ -35,6 +35,33 @@ $ cd born
 $ mvn clean install
 ```
 
+The library, its sources and its Javadoc will be in `born-library/target`, the plug-in will be in `born-plugin/target`, the standalone will be in `born-standalone/target`, and the release ZIP file will be in `target`.
+
+To compile the project offline, first download the dependencies:
+```
+$ mvn dependency:go-offline
+```
+and once offline, use:
+```
+$ mvn --offline clean install
+```
+
+The bundles uploaded to [Sonatype](https://oss.sonatype.org/) are created with:
+```
+$ mvn clean install -DperformRelease=true
+```
+and then on each module:
+```
+$ cd target
+$ jar -cf bundle.jar born-*
+```
+and on the main directory:
+```
+$ cd target
+$ jar -cf bundle.jar born-parent-*
+```
+
+
 ## License
 
 This software is distributed under the [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
