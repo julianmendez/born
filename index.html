@@ -1,43 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
     <title>born by julianmendez</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <section class="page-header">
+      <h1 class="project-name">born</h1>
+      <h2 class="project-tagline">Bayesian Ontology Reasoner</h2>
+      <a href="https://github.com/julianmendez/born" class="btn">View on GitHub</a>
+      <a href="https://github.com/julianmendez/born/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/julianmendez/born/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <header>
-          <h1>born</h1>
-          <h2>Bayesian Ontology Reasoner</h2>
-        </header>
-
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/julianmendez/born/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/julianmendez/born/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/julianmendez/born" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
+    <section class="main-content">
+      <h1>
 <a id="born" class="anchor" href="#born" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://julianmendez.github.io/born/">BORN</a>
 </h1>
 
 <p><em>Bayesian Ontology Reasoner</em></p>
 
-<p><a href="https://travis-ci.org/julianmendez/born"><img src="https://travis-ci.org/julianmendez/born.png?branch=master" alt="Build Status"></a></p>
+<p><a href="https://travis-ci.org/julianmendez/born"><img src="https://travis-ci.org/julianmendez/born.png?branch=master" alt="Build Status"></a>
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.tu-dresden.inf.lat.born%22"><img src="https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg" alt="Maven Central"></a></p>
 
 <p><strong>BORN</strong> is a probabilistic reasoner for BEL (Bayesian EL), which is an extension of the
 lightweight <a href="http://dl.kr.org/">Description Logic</a> EL. Bayesian Ontology Languages are a
@@ -47,6 +36,15 @@ the <a href="http://owlcs.github.io/owlapi/">OWL API</a> to
 read <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2 EL</a> ontologies, and it can be used as a <a href="http://protege.stanford.edu/">Protégé</a> plug-in.</p>
 
 <h2>
+<a id="dependency" class="anchor" href="#dependency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependency</h2>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+  &lt;<span class="pl-ent">groupId</span>&gt;de.tu-dresden.inf.lat.born&lt;/<span class="pl-ent">groupId</span>&gt;
+  &lt;<span class="pl-ent">artifactId</span>&gt;born-gui&lt;/<span class="pl-ent">artifactId</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;0.2.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<h2>
 <a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Source code</h2>
 
 <p>To clone and compile the project:</p>
@@ -54,6 +52,35 @@ read <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2 EL</a> ontolog
 <pre><code>$ git clone https://github.com/julianmendez/born.git
 $ cd born
 $ mvn clean install
+</code></pre>
+
+<p>The library, its sources and its Javadoc will be in <code>born-library/target</code>, the plug-in will be in <code>born-plugin/target</code>, the standalone will be in <code>born-standalone/target</code>, and the release ZIP file will be in <code>target</code>.</p>
+
+<p>To compile the project offline, first download the dependencies:</p>
+
+<pre><code>$ mvn dependency:go-offline
+</code></pre>
+
+<p>and once offline, use:</p>
+
+<pre><code>$ mvn --offline clean install
+</code></pre>
+
+<p>The bundles uploaded to <a href="https://oss.sonatype.org/">Sonatype</a> are created with:</p>
+
+<pre><code>$ mvn clean install -DperformRelease=true
+</code></pre>
+
+<p>and then on each module:</p>
+
+<pre><code>$ cd target
+$ jar -cf bundle.jar born-*
+</code></pre>
+
+<p>and on the main directory:</p>
+
+<pre><code>$ cd target
+$ jar -cf bundle.jar born-parent-*
 </code></pre>
 
 <h2>
@@ -134,15 +161,15 @@ Details on the versions of those requirements are available in the release notes
 <a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>In case you need more information, please contact <a href="https://github.com/julianmendez" class="user-mention">@julianmendez</a> .</p>
-        </section>
 
-        <footer>
-          born is maintained by <a href="https://github.com/julianmendez">julianmendez</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/julianmendez/born">born</a> is maintained by <a href="https://github.com/julianmendez">julianmendez</a>.</span>
 
-        
-      </div>
-    </div>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
