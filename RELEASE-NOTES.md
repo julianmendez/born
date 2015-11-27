@@ -3,13 +3,14 @@
 
 | version | release date | Java | OWL API | Protégé       | ProbLog | Python     |
 |:--------|:-------------|:----:|:-------:|:-------------:|:-------:|:----------:|
-| v0.2.0  | *unreleased* | 7    | 3.5.1   | 5.0.0-beta-17 | 2.1     | 2.7 or 3.2 |
+| v0.2.0  | 2015-11-27   | 7    | 3.5.1   | 5.0.0-beta-17 | 2.1     | 2.7 or 3.2 |
 | v0.1.1  | 2015-06-02   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |              
 | v0.1.0  | 2015-04-14   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |
 
 
 ### v0.2.0
-*(unreleased)*
+*2015-11-27*
+* includes graphical user interface
 * build commands:
 ```
 $ mvn clean install
