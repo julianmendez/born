@@ -30,7 +30,7 @@
 	<parent>
 		<groupId>de.tu-dresden.inf.lat.born</groupId>
 		<artifactId>born-parent</artifactId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>0.2.0</version>
 	</parent>
 
 	<properties>
