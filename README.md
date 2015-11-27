@@ -3,6 +3,7 @@
 
 
 [![Build Status](https://travis-ci.org/julianmendez/born.png?branch=master)](https://travis-ci.org/julianmendez/born)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](http://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
 
 
 **BORN** is a probabilistic reasoner for BEL (Bayesian EL), which is an extension of the
