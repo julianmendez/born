@@ -17,9 +17,9 @@ read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it
 
 ```xml
 <dependency>
-  <groupId>de.tu-dresden.inf.lat.jcel</groupId>
-  <artifactId>jcel-owlapi</artifactId>
-  <version>0.23.0</version>
+  <groupId>de.tu-dresden.inf.lat.born</groupId>
+  <artifactId>born-gui</artifactId>
+  <version>0.2.0</version>
 </dependency>
 ```
 
