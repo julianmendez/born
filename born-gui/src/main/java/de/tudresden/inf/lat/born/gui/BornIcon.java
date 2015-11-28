@@ -64,7 +64,9 @@ public class BornIcon {
 	/**
 	 * Returns an icon created with the default size for the given path.
 	 * 
-	 * @param path of icon
+	 * @param path
+	 *            of icon
+	 * @return an icon created with the default size for the given path
 	 */
 	public static ImageIcon createIcon(String path) {
 		return createIcon(path, DEFAULT_ICON_SIZE);

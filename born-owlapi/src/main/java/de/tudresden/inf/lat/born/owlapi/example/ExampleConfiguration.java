@@ -24,10 +24,14 @@ public class ExampleConfiguration {
 	 * 
 	 * @param ontologyName
 	 *            ontology name
+	 * @param ontologyFileName
+	 *            ontology file name
 	 * @param owlOntology
 	 *            OWL ontology
+	 * @param bayesianNetworkFileName
+	 *            Bayesian network file name
 	 * @param bayesianNetwork
-	 *            Bayesian network (in ProbLog syntax)
+	 *            Bayesian network
 	 * @param query
 	 *            query (in ProbLog syntax)
 	 */

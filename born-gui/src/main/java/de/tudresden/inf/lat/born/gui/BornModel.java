@@ -63,7 +63,7 @@ public class BornModel {
 	/**
 	 * Returns the multi processor configuration.
 	 * 
-	 * @return
+	 * @return the multi processor configuration
 	 */
 	public MultiProcessorConfiguration getMultiProcessorConfiguration() {
 		return multiProcessorConfiguration;

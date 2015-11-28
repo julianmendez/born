@@ -73,6 +73,11 @@ public class ExampleLoader {
 	 * Returns the example configurations forcing a re-read.
 	 * 
 	 * @return the example configurations forcing a re-read
+	 * @throws OWLOntologyCreationException
+	 *             if something goes wrong with the ontology creation
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 * 
 	 */
 	public List<ExampleConfiguration> readExampleConfigurations() throws OWLOntologyCreationException, IOException {
 		List<String> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
