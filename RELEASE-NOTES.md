@@ -13,6 +13,8 @@
 * includes a graphical user interface with integrated examples
 * adds the following command:
  * experiment runner: runs the processor on multiple files
+* uses the OWL API 3.5.1
+* runs on Java 7
 * requires ProbLog 2.1 installed or downloads it from
 https://bitbucket.org/problog/problog/get/master.zip
 * build commands:
@@ -40,11 +42,11 @@ $ mvn clean install
  * annotator: add annotations with variables (x0, x1, x2, ...) to an OWL ontology
  * splitter:  splits a probabilistic OWL ontology in two parts: an OWL ontology with variables, and a Bayesian network
  * network creator: creates a Bayesian network using randomized values with the ProbLog syntax
-* uses the OWL API 3.5.0
 * can be used as a library or executed as a standalone
-* requires ProbLog 2.1 installed or downloads it from https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip
+* uses the OWL API 3.5.0
+* runs on Java 8
 * requires Python 2.7+ or 3.2+ installed
-* uses Java 8
+* requires ProbLog 2.1 installed or downloads it from https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip
 * build commands:
 ```
 $ mvn clean install
