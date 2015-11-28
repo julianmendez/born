@@ -11,6 +11,8 @@
 ### v0.2.0
 *2015-11-28*
 * includes a graphical user interface with examples
+* requires ProbLog 2.1 installed or downloads it from
+https://bitbucket.org/problog/problog/get/master.zip
 * build commands:
 ```
 $ mvn clean install
