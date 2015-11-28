@@ -9,7 +9,7 @@
 
 
 ### v0.2.0
-*2015-11-30*
+*(2015-11-30)*
 * includes a graphical user interface with integrated examples
 * adds the following command:
  * experiment runner: runs the processor on multiple files
