@@ -3,14 +3,14 @@
 
 | version | release date | Java | OWL API | Protégé       | ProbLog | Python     |
 |:--------|:-------------|:----:|:-------:|:-------------:|:-------:|:----------:|
-| v0.2.0  | 2015-11-27   | 7    | 3.5.1   | 5.0.0-beta-17 | 2.1     | 2.7 or 3.2 |
-| v0.1.1  | 2015-06-02   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |              
+| v0.2.0  | 2015-11-28   | 7    | 3.5.1   | 5.0.0-beta-17 | 2.1     | 2.7 or 3.2 |
+| v0.1.1  | 2015-06-02   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 | 
 | v0.1.0  | 2015-04-14   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |
 
 
 ### v0.2.0
-*2015-11-27*
-* includes graphical user interface
+*2015-11-28*
+* includes a graphical user interface with examples
 * build commands:
 ```
 $ mvn clean install
@@ -30,6 +30,13 @@ $ mvn clean install
 
 ### v0.1.0
 *(2015-04-14)*
+* includes the following commands:
+ * processor: produces a ProbLog file and executes ProbLog to obtain the result
+ * annotator: add annotations with variables (x0, x1, x2, ...) to an OWL ontology
+ * splitter:  splits a probabilistic OWL ontology in two parts: an OWL ontology with variables, and a Bayesian network
+ * network creator: creates a Bayesian network using the ProbLog syntax
+* uses the OWL API 3.5.0
+* can be used as a library or executed as a standalone
 * build commands:
 ```
 $ mvn clean install
