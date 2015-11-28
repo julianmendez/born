@@ -34,9 +34,12 @@ $ mvn clean install
  * processor: produces a ProbLog file and executes ProbLog to obtain the result
  * annotator: add annotations with variables (x0, x1, x2, ...) to an OWL ontology
  * splitter:  splits a probabilistic OWL ontology in two parts: an OWL ontology with variables, and a Bayesian network
- * network creator: creates a Bayesian network using the ProbLog syntax
+ * network creator: creates a Bayesian network using randomized values with the ProbLog syntax
 * uses the OWL API 3.5.0
 * can be used as a library or executed as a standalone
+* requires ProbLog 2.1 installed or downloads it from https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip
+* requires Python 2.7+ or 3.2+ installed
+* uses Java 8
 * build commands:
 ```
 $ mvn clean install
