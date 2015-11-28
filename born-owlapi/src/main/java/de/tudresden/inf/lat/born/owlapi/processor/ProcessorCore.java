@@ -29,7 +29,7 @@ public class ProcessorCore {
 
 	static final String SLASH = "/";
 	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
-			.create("https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip");
+			.create("https://bitbucket.org/problog/problog/get/master.zip");
 	static final String DEFAULT_PROBLOG_ZIP_FILE = "problog-2.1-SNAPSHOT.zip";
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
 	static final String PROBLOG_CLI = "problog-cli.py";
