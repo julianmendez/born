@@ -10,9 +10,9 @@
 
 ### v0.2.0
 *2015-11-30*
-* includes a graphical user interface with examples
+* includes a graphical user interface with integrated examples
 * adds the following command:
- * experiment: runs the processor on multiple files
+ * experiment runner: runs the processor on multiple files
 * requires ProbLog 2.1 installed or downloads it from
 https://bitbucket.org/problog/problog/get/master.zip
 * build commands:
@@ -25,6 +25,7 @@ $ mvn clean install
 
 ### v0.1.1
 *(2015-06-02)*
+* improves completion rules
 * build commands:
 ```
 $ mvn clean install
