@@ -31,8 +31,7 @@ public class Decompressor {
 	 */
 	void storeFile(InputStream inputStream, File outputFile) throws IOException {
 		BufferedInputStream input = new BufferedInputStream(inputStream);
-		BufferedOutputStream output = new BufferedOutputStream(
-				new FileOutputStream(outputFile));
+		BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(outputFile));
 		for (int ch = input.read(); ch != -1; ch = input.read()) {
 			output.write(ch);
 		}
@@ -41,18 +40,19 @@ public class Decompressor {
 	}
 
 	/**
-	 * Decompresses a ZIP file.
+	 * Decompresses a ZIP file and returns the first decompressed entry. If the
+	 * ZIP file contains only one directory on the root, this returned is this
+	 * directory.
 	 * 
 	 * @param compressedFile
 	 *            compressed file
 	 * @param outputDirectory
 	 *            output directory
+	 * @return the first decompressed entry
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-
-	public void decompress(File compressedFile, File outputDirectory)
-			throws IOException {
+	public ZipEntry decompress(File compressedFile, File outputDirectory) throws IOException {
 		if (compressedFile == null) {
 			throw new IllegalArgumentException("Null argument.");
 		}
@@ -60,13 +60,15 @@ public class Decompressor {
 			throw new IllegalArgumentException("Null argument.");
 		}
 
+		ZipEntry ret = null;
 		if (!outputDirectory.exists()) {
 			outputDirectory.mkdirs();
 		}
-		ZipInputStream input = new ZipInputStream(new FileInputStream(
-				compressedFile));
-		for (ZipEntry entry = input.getNextEntry(); (entry != null); entry = input
-				.getNextEntry()) {
+		ZipInputStream input = new ZipInputStream(new FileInputStream(compressedFile));
+		for (ZipEntry entry = input.getNextEntry(); (entry != null); entry = input.getNextEntry()) {
+			if (ret == null) {
+				ret = entry;
+			}
 
 			String fileName = entry.getName();
 			File newFile = new File(outputDirectory + File.separator + fileName);
@@ -82,6 +84,7 @@ public class Decompressor {
 		}
 		input.closeEntry();
 		input.close();
+		return ret;
 	}
 
 }

@@ -25,8 +25,6 @@ public class ProcessorSubApp implements SubApp {
 	public static final String COMMAND = "get";
 	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProcessorCore.DEFAULT_PROBLOG_DOWNLOAD_URI;
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY;
-	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH
-			+ "problog2.1";
 	static final String HELP = ""
 			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"
 			+ "\n"
@@ -97,13 +95,12 @@ public class ProcessorSubApp implements SubApp {
 				throw new RuntimeException(e);
 			}
 			conf.setOutputFileName(newArgs[3]);
-			conf.setProblogDirectory(null);
 
 			if (newArgs.length == 5) {
 				conf.setProblogDirectory(newArgs[4]);
 				conf.setProblogNeeded(false);
 			} else {
-				conf.setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
+				conf.setProblogDirectory(null);
 				conf.setProblogNeeded(true);
 			}
 

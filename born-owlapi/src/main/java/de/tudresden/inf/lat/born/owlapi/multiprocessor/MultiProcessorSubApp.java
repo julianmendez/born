@@ -21,7 +21,6 @@ public class MultiProcessorSubApp implements SubApp {
 	static final String LOGGING_OPTION = "--log";
 	public static final String COMMAND = "experiment";
 	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProcessorSubApp.DEFAULT_PROBLOG_DOWNLOAD_URI;
-	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 	static final String HELP = ""
 			+ "\nParameters: [--log] <directory of ontologies> <directory of Bayesian networks> <number of queries> <seed> <directory of results> [<ProbLog directory>]"
 			+ "\n"
@@ -85,13 +84,12 @@ public class MultiProcessorSubApp implements SubApp {
 			conf.setNumberOfQueries(Integer.parseInt(newArgs[2]));
 			conf.setSeed(Integer.parseInt(newArgs[3]));
 			conf.setOutputDirectory(newArgs[4]);
-			conf.setProblogDirectory(null);
 
 			if (newArgs.length == 6) {
 				conf.setProblogDirectory(newArgs[5]);
 				conf.setProblogNeeded(false);
 			} else {
-				conf.setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
+				conf.setProblogDirectory(null);
 				conf.setProblogNeeded(true);
 			}
 

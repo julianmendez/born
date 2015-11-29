@@ -12,7 +12,6 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
  * This class is a controller for the main panel.
@@ -54,7 +53,6 @@ public class ExperimentRunnerController implements ActionListener {
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
 
-	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
@@ -204,7 +202,6 @@ public class ExperimentRunnerController implements ActionListener {
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
 
 		// getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
-		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
 	}
 
 }

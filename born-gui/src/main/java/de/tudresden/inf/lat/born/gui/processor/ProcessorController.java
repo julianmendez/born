@@ -12,7 +12,6 @@ import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
  * This class is a controller for the main panel.
@@ -49,7 +48,6 @@ public class ProcessorController implements ActionListener {
 	private static final String actionComboBoxExample = "choose example";
 	private static final String actionUpdateExample = "update example";
 
-	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
@@ -218,7 +216,6 @@ public class ProcessorController implements ActionListener {
 		getView().addExamples(this.exampleLoader.getExampleConfigurations());
 
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
-		getModel().setProblogDirectory(DEFAULT_PROBLOG_DIRECTORY);
 	}
 
 }

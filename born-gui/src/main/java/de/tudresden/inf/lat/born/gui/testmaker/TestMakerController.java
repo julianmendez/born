@@ -16,7 +16,6 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorCore;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
 
@@ -30,8 +29,6 @@ public class TestMakerController implements ActionListener {
 	private static final String actionSelectInputOntologyFile = "open input ontology";
 	private static final String actionSelectOutputOntologyFile = "save output ontology";
 	private static final String actionSaveBayesianNetwork = "save Bayesian network";
-
-	public static final String DEFAULT_PROBLOG_DIRECTORY = ProcessorSubApp.DEFAULT_PROBLOG_DIRECTORY;
 
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 

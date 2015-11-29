@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.zip.ZipEntry;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -28,8 +29,7 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 public class ProcessorCore {
 
 	static final String SLASH = "/";
-	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
-			.create("https://bitbucket.org/problog/problog/get/master.zip");
+	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI.create("https://bitbucket.org/problog/problog/get/master.zip");
 	static final String DEFAULT_PROBLOG_ZIP_FILE = "problog-2.1-SNAPSHOT.zip";
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
 	static final String PROBLOG_CLI = "problog-cli.py";
@@ -119,10 +119,11 @@ public class ProcessorCore {
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	void decompressProblog(long start, String problogZipFile, String problogDirectory) throws IOException {
+	String decompressProblog(long start, String problogZipFile, String problogDirectory) throws IOException {
 		log("Decompress ProbLog.", start);
 		Decompressor installer = new Decompressor();
-		installer.decompress(new File(problogZipFile), new File(problogDirectory));
+		ZipEntry directory = installer.decompress(new File(problogZipFile), new File(problogDirectory));
+		return directory.getName();
 	}
 
 	/**
@@ -228,7 +229,9 @@ public class ProcessorCore {
 
 			if (conf.isProblogNeeded()) {
 				downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
-				decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE, DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+				String directory = decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
+						DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+				conf.setProblogDirectory(DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH + directory);
 				updatePermissions(start, conf.getProblogDirectory());
 				installProblog(start, conf.getProblogDirectory());
 			}
