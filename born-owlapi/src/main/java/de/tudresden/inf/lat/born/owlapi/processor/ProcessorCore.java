@@ -20,8 +20,8 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
 /**
- * An object of this class processes an OWL ontology, produces a Problog file,
- * and executes Problog to obtain the result.
+ * An object of this class processes an OWL ontology, produces a ProbLog file,
+ * and executes ProbLog to obtain the result.
  * 
  * @author Julian Mendez
  *
@@ -88,12 +88,12 @@ public class ProcessorCore {
 	}
 
 	/**
-	 * Downloads Problog from the default download URI.
+	 * Downloads ProbLog from the default download URI.
 	 * 
 	 * @param start
 	 *            execution start
 	 * @param problogZipFile
-	 *            file name of the Problog ZIP file
+	 *            file name of the ProbLog ZIP file
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 * @throws URISyntaxException
@@ -108,14 +108,14 @@ public class ProcessorCore {
 	}
 
 	/**
-	 * Decompresses the Problog ZIP file.
+	 * Decompresses the ProbLog ZIP file.
 	 * 
 	 * @param start
 	 *            execution start
 	 * @param problogZipFile
-	 *            file name of Problog ZIP file
+	 *            file name of ProbLog ZIP file
 	 * @param problogDirectory
-	 *            directory where Problog is being installed
+	 *            directory where ProbLog is being installed
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
@@ -132,7 +132,7 @@ public class ProcessorCore {
 	 * @param start
 	 *            execution start
 	 * @param problogDirectory
-	 *            directory where Problog is being installed
+	 *            directory where ProbLog is being installed
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
@@ -144,13 +144,13 @@ public class ProcessorCore {
 	}
 
 	/**
-	 * Installs Problog. This is necessary because just decompressing the ZIP
+	 * Installs ProbLog. This is necessary because just decompressing the ZIP
 	 * file is not enough.
 	 * 
 	 * @param start
 	 *            execution start
 	 * @param problogDirectory
-	 *            directory where Problog has been installed
+	 *            directory where ProbLog has been installed
 	 * @return the exit value given by the operating system
 	 * @throws IOException
 	 *             if something goes wrong with I/O
@@ -167,7 +167,7 @@ public class ProcessorCore {
 	}
 
 	/**
-	 * Creates the content of the Problog input file and returns this content as
+	 * Creates the content of the ProbLog input file and returns this content as
 	 * a string.
 	 * 
 	 * @param start
@@ -178,7 +178,7 @@ public class ProcessorCore {
 	 *            Bayesian network
 	 * @param query
 	 *            query
-	 * @return the content of the Problog input file
+	 * @return the content of the ProbLog input file
 	 * @throws OWLOntologyCreationException
 	 *             if the ontology was not created
 	 * @throws IOException
@@ -195,13 +195,13 @@ public class ProcessorCore {
 	}
 
 	/**
-	 * Executes Problog and returns the exit value given by the operating
+	 * Executes ProbLog and returns the exit value given by the operating
 	 * system.
 	 * 
 	 * @param start
 	 *            execution start
 	 * @param problogDirectory
-	 *            directory where Problog is installed
+	 *            directory where ProbLog is installed
 	 * @param outputFileName
 	 *            file name of output
 	 * @return the exit value given by the operating system

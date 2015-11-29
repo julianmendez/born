@@ -7,7 +7,7 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is a completion rule for Problog.
+ * This is a completion rule for ProbLog.
  * <ul>
  * <li>CR-1 : <b>if</b> X \u2291 A &isin; S, A \u2291 B &isin; <i>T</i><br>
  * <b>then</b> S := S &cup; {X \u2291 B}</li>

@@ -9,7 +9,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
  * An object of this class processes an set of OWL ontology files, produces a
- * Problog file, and executes Problog to obtain the result.
+ * ProbLog file, and executes ProbLog to obtain the result.
  * 
  * @see MultiProcessorCore
  * 

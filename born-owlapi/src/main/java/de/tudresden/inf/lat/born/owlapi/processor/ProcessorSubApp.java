@@ -10,8 +10,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
 /**
- * An object of this class processes an OWL ontology, produces a Problog file,
- * and executes Problog to obtain the result.
+ * An object of this class processes an OWL ontology, produces a ProbLog file,
+ * and executes ProbLog to obtain the result.
  * 
  * @see ProcessorCore
  * 

@@ -10,7 +10,7 @@ import de.tudresden.inf.lat.born.core.term.ProbClause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 
 /**
- * An object of this class models a Problog program as needed for the
+ * An object of this class models a ProbLog program as needed for the
  * translation.
  * 
  * @author Julian Mendez

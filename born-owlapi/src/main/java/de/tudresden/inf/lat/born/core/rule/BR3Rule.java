@@ -7,7 +7,7 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is an optimization rule for Problog.
+ * This is an optimization rule for ProbLog.
  * <ul>
  * <li><b>if</b>X \u2291 B &isin; <i>T</i><br>
  * <b>then</b> S := S &cup; {X \u2291 B}</li>
