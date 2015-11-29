@@ -32,28 +32,23 @@ public class AnnotatorCore {
 	public AnnotatorCore() {
 	}
 
-	OWLOntology loadOWLOntology(InputStream input)
-			throws OWLOntologyCreationException {
+	OWLOntology loadOWLOntology(InputStream input) throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
 	}
 
-	void storeOWLOntology(OWLOntology ontology,
-			OutputStream ontologyOutputStream) throws IOException,
-			OWLRendererException {
+	void storeOWLOntology(OWLOntology ontology, OutputStream ontologyOutputStream)
+			throws IOException, OWLRendererException {
 		AbstractOWLRenderer renderer = new OWLXMLRenderer();
 		Writer writer = new OutputStreamWriter(ontologyOutputStream);
 		renderer.render(ontology, writer);
 		writer.flush();
 	}
 
-	public void annotate(InputStream ontologyInputStream,
-			OutputStream newOntologyOutputStream, double threshold,
-			int maxNumberOfVars) throws IOException,
-			OWLOntologyCreationException, OWLRendererException {
+	public void annotate(InputStream ontologyInputStream, OutputStream newOntologyOutputStream, double threshold,
+			int maxNumberOfVars) throws IOException, OWLOntologyCreationException, OWLRendererException {
 		OWLOntology ont = loadOWLOntology(ontologyInputStream);
-		AnnotationCreator processor = new AnnotationCreator(
-				ont.getOWLOntologyManager(), threshold, maxNumberOfVars);
+		AnnotationCreator processor = new AnnotationCreator(ont.getOWLOntologyManager(), threshold, maxNumberOfVars);
 		Set<OWLAxiom> axioms = ont.getAxioms();
 		for (OWLAxiom axiom : axioms) {
 			axiom.accept(processor);
@@ -63,8 +58,7 @@ public class AnnotatorCore {
 
 	public void run(AnnotatorConfiguration conf) {
 		try {
-			annotate(conf.getInputOntology(), conf.getOutputOntology(),
-					conf.getThreshold(), conf.getMaxNumberOfVars());
+			annotate(conf.getInputOntology(), conf.getOutputOntology(), conf.getThreshold(), conf.getMaxNumberOfVars());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} catch (OWLRendererException e) {

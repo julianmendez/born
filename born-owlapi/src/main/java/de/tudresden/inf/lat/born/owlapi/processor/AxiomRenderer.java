@@ -84,8 +84,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		if (identifier == IntegerEntityManager.topClassId) {
 			return c.top();
 		} else {
-			String name = this.factory.getEntityManager().getName(identifier)
-					.trim();
+			String name = this.factory.getEntityManager().getName(identifier).trim();
 			return c.newCons(APOSTROPHE + name + APOSTROPHE);
 		}
 	}
@@ -105,8 +104,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 			return c.rule(str, preconditions);
 
 		} else {
-			throw new RuntimeException("Too many annotations in axiom: "
-					+ annotations.toString());
+			throw new RuntimeException("Too many annotations in axiom: " + annotations.toString());
 
 		}
 	}

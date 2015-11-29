@@ -61,8 +61,7 @@ public class TermImpl implements Term {
 		}
 
 		if (isLong(name) || isDouble(name) || isVariable(name)) {
-			throw new IllegalArgumentException("Invalid functor: '" + name
-					+ "'. ");
+			throw new IllegalArgumentException("Invalid functor: '" + name + "'. ");
 		}
 		if (arguments.isEmpty()) {
 			this.termType = Term.Type.ATOM;
@@ -179,18 +178,14 @@ public class TermImpl implements Term {
 			return false;
 		} else {
 			Term other = (Term) obj;
-			return getType().equals(other.getType())
-					&& getName().equals(other.getName())
+			return getType().equals(other.getType()) && getName().equals(other.getName())
 					&& getArguments().equals(other.getArguments());
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		return this.name.hashCode()
-				+ 0x1F
-				* (this.arguments.hashCode() + 0x1F * Term.Type.values()
-						.hashCode());
+		return this.name.hashCode() + 0x1F * (this.arguments.hashCode() + 0x1F * Term.Type.values().hashCode());
 	}
 
 	@Override

@@ -34,7 +34,6 @@ public interface Symbol {
 	char NEW_LINE_CHAR = '\n';
 	char SPACE_CHAR = ' ';
 
-	URI PROBABILITY_URI = URI
-			.create("http://lat.inf.tu-dresden.de/systems/born#probability");
+	URI PROBABILITY_URI = URI.create("http://lat.inf.tu-dresden.de/systems/born#probability");
 
 }

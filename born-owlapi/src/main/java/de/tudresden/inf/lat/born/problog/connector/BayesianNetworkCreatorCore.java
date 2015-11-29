@@ -31,16 +31,13 @@ public class BayesianNetworkCreatorCore {
 	}
 
 	Term newTerm(int variableIndex, boolean isNegative) {
-		return new TermImpl((isNegative ? NEGATION_PREFIX : "")
-				+ VARIABLE_PREFIX + variableIndex);
+		return new TermImpl((isNegative ? NEGATION_PREFIX : "") + VARIABLE_PREFIX + variableIndex);
 	}
 
 	List<Integer> chooseDependencies(int variableIndex, int parents) {
 		if ((variableIndex < 0) || (parents < 0) || (parents > variableIndex)) {
-			throw new IllegalArgumentException(
-					"It is not possible to create dependencies for "
-							+ VARIABLE_PREFIX + variableIndex + " with "
-							+ parents + " parents.");
+			throw new IllegalArgumentException("It is not possible to create dependencies for " + VARIABLE_PREFIX
+					+ variableIndex + " with " + parents + " parents.");
 		}
 
 		Set<Integer> chosen = new TreeSet<Integer>();
@@ -58,14 +55,12 @@ public class BayesianNetworkCreatorCore {
 		return ret;
 	}
 
-	ProbClause renderClause(int variableIndex, List<Integer> dependencies,
-			List<Boolean> permutation, double probability) {
+	ProbClause renderClause(int variableIndex, List<Integer> dependencies, List<Boolean> permutation,
+			double probability) {
 		if (dependencies.size() != permutation.size()) {
-			throw new IllegalArgumentException(
-					"It is not possible to create a probabilistic clause with these values:"
-							+ " variable index '" + variableIndex
-							+ "' with dependencies '" + dependencies
-							+ "' with state '" + permutation + "'.");
+			throw new IllegalArgumentException("It is not possible to create a probabilistic clause with these values:"
+					+ " variable index '" + variableIndex + "' with dependencies '" + dependencies + "' with state '"
+					+ permutation + "'.");
 		}
 
 		Term head = newTerm(variableIndex, false);
@@ -76,8 +71,7 @@ public class BayesianNetworkCreatorCore {
 			body.add(newTerm(dependencyIndex, isNegative));
 		}
 
-		ProbClause ret = new ProbClauseImpl(head, body,
-				asAnnotation(probability));
+		ProbClause ret = new ProbClauseImpl(head, body, asAnnotation(probability));
 		return ret;
 	}
 
@@ -93,11 +87,9 @@ public class BayesianNetworkCreatorCore {
 		List<ProbClause> ret = new ArrayList<ProbClause>();
 		List<Integer> dependencies = chooseDependencies(variableIndex, parents);
 		boolean valid = true;
-		for (Permutation permutation = new Permutation(parents); valid; valid = permutation
-				.computeNextPermutation()) {
+		for (Permutation permutation = new Permutation(parents); valid; valid = permutation.computeNextPermutation()) {
 			double probability = Math.random();
-			ret.add(renderClause(variableIndex, dependencies,
-					permutation.getPermutation(), probability));
+			ret.add(renderClause(variableIndex, dependencies, permutation.getPermutation(), probability));
 		}
 		return ret;
 	}
@@ -108,8 +100,7 @@ public class BayesianNetworkCreatorCore {
 		for (int parents = 0; parents < variables.size(); parents++) {
 			int n = variables.get(parents);
 			for (int currVar = 0; currVar < n; currVar++) {
-				List<ProbClause> current = computeDependencies(variableIndex,
-						parents);
+				List<ProbClause> current = computeDependencies(variableIndex, parents);
 				ret.addAll(current);
 				variableIndex++;
 			}
@@ -117,8 +108,7 @@ public class BayesianNetworkCreatorCore {
 		return ret;
 	}
 
-	public void write(Writer writer, List<ProbClause> network)
-			throws IOException {
+	public void write(Writer writer, List<ProbClause> network) throws IOException {
 		BufferedWriter output = new BufferedWriter(writer);
 		for (ProbClause clause : network) {
 			output.append(clause.asString());

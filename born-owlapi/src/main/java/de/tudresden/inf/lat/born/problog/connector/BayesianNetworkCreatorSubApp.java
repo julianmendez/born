@@ -22,13 +22,9 @@ public class BayesianNetworkCreatorSubApp implements SubApp {
 	public static final String COMMAND = "link";
 	public static final String HELP = "Parameters: <list of parents> <output file>"
 			+ "\n\nExample of parameters: \"1,1,2,3,5,8\" network.pl"
-			+ "\n\nThe example creates a Bayesian network with:"
-			+ "\n  1 independent variable (no parents),"
-			+ "\n  1 variable with 1 parent,"
-			+ "\n  2 variables with 2 parents,"
-			+ "\n  3 variables with 3 parents,"
-			+ "\n  5 variables with 4 parents,"
-			+ "\n  and 8 variables with 5 parents.";
+			+ "\n\nThe example creates a Bayesian network with:" + "\n  1 independent variable (no parents),"
+			+ "\n  1 variable with 1 parent," + "\n  2 variables with 2 parents," + "\n  3 variables with 3 parents,"
+			+ "\n  5 variables with 4 parents," + "\n  and 8 variables with 5 parents.";
 
 	public BayesianNetworkCreatorSubApp() {
 	}

@@ -16,8 +16,7 @@ package de.tudresden.inf.lat.born.owlapi.main;
  * 
  * @see BornReasoner
  */
-public class UnsupportedReasonerOperationInBornException extends
-		UnsupportedOperationException {
+public class UnsupportedReasonerOperationInBornException extends UnsupportedOperationException {
 
 	private static final long serialVersionUID = 5757365447889383439L;
 
@@ -29,8 +28,7 @@ public class UnsupportedReasonerOperationInBornException extends
 		super(message);
 	}
 
-	public UnsupportedReasonerOperationInBornException(String message,
-			Throwable cause) {
+	public UnsupportedReasonerOperationInBornException(String message, Throwable cause) {
 		super(message, cause);
 	}
 

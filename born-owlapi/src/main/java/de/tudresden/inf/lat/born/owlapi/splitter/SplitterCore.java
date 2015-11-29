@@ -49,8 +49,7 @@ public class SplitterCore {
 	 * @return the ontology provided by the given input stream
 	 * @throws OWLOntologyCreationException
 	 */
-	OWLOntology loadOWLOntology(InputStream input)
-			throws OWLOntologyCreationException {
+	OWLOntology loadOWLOntology(InputStream input) throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
 	}
@@ -67,9 +66,8 @@ public class SplitterCore {
 	 * @throws OWLRendererException
 	 *             if the ontology could not be rendered
 	 */
-	void storeOWLOntology(OWLOntology ontology,
-			OutputStream ontologyOutputStream) throws IOException,
-			OWLRendererException {
+	void storeOWLOntology(OWLOntology ontology, OutputStream ontologyOutputStream)
+			throws IOException, OWLRendererException {
 		AbstractOWLRenderer renderer = new OWLXMLRenderer();
 		Writer writer = new OutputStreamWriter(ontologyOutputStream);
 		renderer.render(ontology, writer);
@@ -88,10 +86,9 @@ public class SplitterCore {
 	 * @throws IOException
 	 *             if something went wrong with the I/P
 	 */
-	void storeBayesianNetwork(List<String> keyOrder, Map<String, String> map,
-			OutputStream outputNetwork) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-				outputNetwork));
+	void storeBayesianNetwork(List<String> keyOrder, Map<String, String> map, OutputStream outputNetwork)
+			throws IOException {
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputNetwork));
 		for (String key : keyOrder) {
 			String value = map.get(key);
 			writer.append(value);
@@ -120,27 +117,22 @@ public class SplitterCore {
 	 * @throws OWLRendererException
 	 *             if the OWL ontology could not be rendered
 	 */
-	public void split(InputStream ontologyInputStream,
-			OutputStream newOntologyOutputStream,
-			OutputStream networkOutputStream) throws IOException,
-			OWLOntologyCreationException, OWLRendererException {
+	public void split(InputStream ontologyInputStream, OutputStream newOntologyOutputStream,
+			OutputStream networkOutputStream) throws IOException, OWLOntologyCreationException, OWLRendererException {
 		OWLOntology ont = loadOWLOntology(ontologyInputStream);
-		AnnotationProcessor processor = new AnnotationProcessor(
-				ont.getOWLOntologyManager());
+		AnnotationProcessor processor = new AnnotationProcessor(ont.getOWLOntologyManager());
 		Set<OWLAxiom> axioms = ont.getAxioms();
 		for (OWLAxiom axiom : axioms) {
 			axiom.accept(processor);
 		}
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
-		storeBayesianNetwork(processor.getVariables(), processor.getNetwork(),
-				networkOutputStream);
+		storeBayesianNetwork(processor.getVariables(), processor.getNetwork(), networkOutputStream);
 
 	}
 
 	public void run(SplitterConfiguration conf) {
 		try {
-			split(conf.getInputOntology(), conf.getOutputOntology(),
-					conf.getBayesianNetwork());
+			split(conf.getInputOntology(), conf.getOutputOntology(), conf.getBayesianNetwork());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} catch (OWLRendererException e) {

@@ -29,14 +29,13 @@ public class MultiProcessorSubApp implements SubApp {
 			+ "\n  <number of queries>               : number of queries to generate"
 			+ "\n  <seed>                            : seed used by the pseudorandom number generator"
 			+ "\n  <directory of results>            : directory to write the output files, each output file has the ontology name and a '.csv' extension"
-			+ "\n  <ProbLog directory>               : (optional) directory where ProbLog is installed" + "\n" + "\n Option:"
-			+ "\n   --log                            : shows log" + "\n" + "\nExamples:" + "\n"
-			+ "\n Execution without ProbLog installed:"
-			+ "\n  java -jar born.jar " + COMMAND + " ontologies/ networks/ 10 127 results/" + "\n"
-			+ "\n Execution with ProbLog installed:"
+			+ "\n  <ProbLog directory>               : (optional) directory where ProbLog is installed" + "\n"
+			+ "\n Option:" + "\n   --log                            : shows log" + "\n" + "\nExamples:" + "\n"
+			+ "\n Execution without ProbLog installed:" + "\n  java -jar born.jar " + COMMAND
+			+ " ontologies/ networks/ 10 127 results/" + "\n" + "\n Execution with ProbLog installed:"
 			+ "\n  java -jar born.jar " + COMMAND + " ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
-			+ "\n Execution with ProbLog installed showing log:"
-			+ "\n  java -jar born.jar " + COMMAND + " --log ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
+			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
+			+ " --log ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
 			+ "\nNote: this program requires the following installed:" + "\n - Java 7 or Java 8" + "\n - ProbLog 2.1"
 			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
 			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI

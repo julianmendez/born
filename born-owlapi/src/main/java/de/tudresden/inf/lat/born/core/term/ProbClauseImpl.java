@@ -64,8 +64,7 @@ public class ProbClauseImpl implements ProbClause {
 		if (this.probability.equals(CERTAIN)) {
 			return this.clause.asString();
 		} else {
-			return this.probability + Symbol.COLON_COLON
-					+ this.clause.asString();
+			return this.probability + Symbol.COLON_COLON + this.clause.asString();
 		}
 	}
 
@@ -77,8 +76,7 @@ public class ProbClauseImpl implements ProbClause {
 			return false;
 		} else {
 			Clause other = (Clause) obj;
-			if (getHead().equals(other.getHead())
-					&& getBody().equals(other.getBody())) {
+			if (getHead().equals(other.getHead()) && getBody().equals(other.getBody())) {
 				if (obj instanceof ProbClause) {
 					ProbClause otherProb = (ProbClause) other;
 					return getProbability().equals(otherProb.getProbability());

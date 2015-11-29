@@ -55,10 +55,8 @@ public class FormulaConstructor {
 	public Term newVar(String name) {
 		Term ret = new TermImpl(name);
 		if (!(ret.getType().equals(Term.Type.VARIABLE))) {
-			throw new IllegalArgumentException(
-					"Invalid variable name: '"
-							+ name
-							+ "'. A variable name must start with a capital letter or with an underscore ('_').");
+			throw new IllegalArgumentException("Invalid variable name: '" + name
+					+ "'. A variable name must start with a capital letter or with an underscore ('_').");
 		}
 		return ret;
 	}

@@ -34,14 +34,12 @@ public class ProcessorSubApp implements SubApp {
 			+ "\n  <output file>            : file name of the output"
 			+ "\n  <ProbLog directory>      : (optional) directory where ProbLog is installed" + "\n" + "\n Option:"
 			+ "\n   --log                   : shows log" + "\n" + "\nExamples:" + "\n"
-			+ "\n Execution without ProbLog installed:"
-			+ "\n  java -jar born.jar " + COMMAND + " ontology.owl network.pl query.pl output.pl" + "\n"
-			+ "\n Execution with ProbLog installed:"
+			+ "\n Execution without ProbLog installed:" + "\n  java -jar born.jar " + COMMAND
+			+ " ontology.owl network.pl query.pl output.pl" + "\n" + "\n Execution with ProbLog installed:"
 			+ "\n  java -jar born.jar " + COMMAND + " ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n"
-			+ "\n Execution with ProbLog installed showing log:"
-			+ "\n  java -jar born.jar " + COMMAND + " --log ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n"
-			+ "\n Bayesian network:" + "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:"
-			+ "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
+			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
+			+ " --log ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n" + "\n Bayesian network:"
+			+ "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:" + "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
 			+ "\nNote: this program requires the following installed:" + "\n - Java 7 or Java 8" + "\n - ProbLog 2.1"
 			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
 			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI

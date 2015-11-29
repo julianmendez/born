@@ -24,22 +24,19 @@ public class TokenCreator {
 				char ch = str.charAt(i);
 				if (Character.isLetterOrDigit(ch) && mode.equals(Mode.CODE)) {
 					token.append(ch);
-				} else if ((ch == Symbol.APOSTROPHE_CHAR)
-						&& mode.equals(Mode.CODE)) {
+				} else if ((ch == Symbol.APOSTROPHE_CHAR) && mode.equals(Mode.CODE)) {
 					ret.add(new TokenImpl(token.toString(), lineNumber));
 					token = new StringBuffer();
 					token.append(ch);
 					mode = Mode.CONSTANT;
 
-				} else if ((ch == Symbol.APOSTROPHE_CHAR)
-						&& mode.equals(Mode.CONSTANT)) {
+				} else if ((ch == Symbol.APOSTROPHE_CHAR) && mode.equals(Mode.CONSTANT)) {
 					token.append(ch);
 					ret.add(new TokenImpl(token.toString(), lineNumber));
 					token = new StringBuffer();
 					mode = Mode.CODE;
 
-				} else if ((ch == Symbol.PERCENT_CHAR)
-						&& mode.equals(Mode.CODE)) {
+				} else if ((ch == Symbol.PERCENT_CHAR) && mode.equals(Mode.CODE)) {
 					ret.add(new TokenImpl(token.toString(), lineNumber));
 					token = new StringBuffer();
 					token.append(ch);
@@ -56,15 +53,12 @@ public class TokenCreator {
 						ret.add(new TokenImpl("" + ch, lineNumber));
 					}
 
-				} else if (mode.equals(Mode.CONSTANT)
-						|| mode.equals(Mode.COMMENT)) {
+				} else if (mode.equals(Mode.CONSTANT) || mode.equals(Mode.COMMENT)) {
 					token.append(ch);
 
 				} else {
-					throw new IllegalStateException(
-							"Illegal state while parsing '" + str
-									+ "' at position " + i + " of line "
-									+ lineNumber + ".");
+					throw new IllegalStateException("Illegal state while parsing '" + str + "' at position " + i
+							+ " of line " + lineNumber + ".");
 				}
 
 				i += 1;
@@ -80,8 +74,7 @@ public class TokenCreator {
 		List<Token> ret = new ArrayList<Token>();
 		if (tokens != null) {
 			for (Token token : tokens) {
-				if (!token.getType().equals(TokenType.BLANK)
-						&& !token.getType().equals(TokenType.COMMENT)) {
+				if (!token.getType().equals(TokenType.BLANK) && !token.getType().equals(TokenType.COMMENT)) {
 					ret.add(token);
 				}
 			}
@@ -98,8 +91,7 @@ public class TokenCreator {
 			line = in.readLine();
 			if (line != null) {
 				lineNumber += 1;
-				ret.addAll(removeBlanksAndComments(createTokens(line,
-						lineNumber)));
+				ret.addAll(removeBlanksAndComments(createTokens(line, lineNumber)));
 			}
 		}
 		return ret;

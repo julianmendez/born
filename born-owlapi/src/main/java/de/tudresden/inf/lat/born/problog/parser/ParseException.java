@@ -17,8 +17,7 @@ public class ParseException extends RuntimeException {
 	}
 
 	public ParseException(String message, Token token) {
-		super(message + "Line " + token.getLineNumber() + ": '"
-				+ token.getValue() + "'.");
+		super(message + "Line " + token.getLineNumber() + ": '" + token.getValue() + "'.");
 	}
 
 }

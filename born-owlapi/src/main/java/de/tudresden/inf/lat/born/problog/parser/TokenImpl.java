@@ -63,15 +63,13 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isString(String str) {
-		return ((str != null) && str.trim().length() >= 2
-				&& str.startsWith("" + Symbol.QUOTES_CHAR) && str.endsWith(""
-				+ Symbol.QUOTES_CHAR));
+		return ((str != null) && str.trim().length() >= 2 && str.startsWith("" + Symbol.QUOTES_CHAR)
+				&& str.endsWith("" + Symbol.QUOTES_CHAR));
 	}
 
 	boolean isConstantWithApostrophes(String str) {
-		return ((str != null) && str.trim().length() >= 2
-				&& str.startsWith("" + Symbol.APOSTROPHE_CHAR) && str
-					.endsWith("" + Symbol.APOSTROPHE_CHAR));
+		return ((str != null) && str.trim().length() >= 2 && str.startsWith("" + Symbol.APOSTROPHE_CHAR)
+				&& str.endsWith("" + Symbol.APOSTROPHE_CHAR));
 	}
 
 	boolean isIdentifier(String str) {
@@ -81,12 +79,10 @@ public class TokenImpl implements Token {
 			boolean ret = true;
 			for (int i = 0; ret && (i < str.length()); i++) {
 				char ch = str.charAt(i);
-				ret = ret
-						&& (Character.isLetterOrDigit(ch) || (ch == Symbol.UNDERSCORE_CHAR));
+				ret = ret && (Character.isLetterOrDigit(ch) || (ch == Symbol.UNDERSCORE_CHAR));
 			}
 			char ch = str.charAt(0);
-			ret = ret
-					&& (Character.isLetter(ch) || (ch == Symbol.UNDERSCORE_CHAR));
+			ret = ret && (Character.isLetter(ch) || (ch == Symbol.UNDERSCORE_CHAR));
 			return ret;
 		}
 	}
@@ -147,22 +143,19 @@ public class TokenImpl implements Token {
 			return false;
 		} else {
 			Token other = (Token) obj;
-			return getType().equals(other.getType())
-					&& getValue().equals(other.getValue())
+			return getType().equals(other.getType()) && getValue().equals(other.getValue())
 					&& (getLineNumber() == other.getLineNumber());
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		return this.tokenType.hashCode() + 0x1F
-				* (this.tokenValue.hashCode() + 0x1F * this.lineNumber);
+		return this.tokenType.hashCode() + 0x1F * (this.tokenValue.hashCode() + 0x1F * this.lineNumber);
 	}
 
 	@Override
 	public String toString() {
-		return "[" + getType().toString().toLowerCase() + ":" + getLineNumber()
-				+ "]" + getValue();
+		return "[" + getType().toString().toLowerCase() + ":" + getLineNumber() + "]" + getValue();
 	}
 
 }

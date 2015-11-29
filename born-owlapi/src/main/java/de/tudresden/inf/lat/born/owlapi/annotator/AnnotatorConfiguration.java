@@ -56,24 +56,20 @@ public class AnnotatorConfiguration {
 		} else {
 			AnnotatorConfiguration other = (AnnotatorConfiguration) obj;
 			return getInputOntology().equals(other.getInputOntology())
-					&& getOutputOntology().equals(other.getOutputOntology())
-					&& getThreshold() == other.getThreshold()
+					&& getOutputOntology().equals(other.getOutputOntology()) && getThreshold() == other.getThreshold()
 					&& getMaxNumberOfVars() == other.getMaxNumberOfVars();
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		return this.inputOntology.hashCode()
-				+ 0x1F
-				* (this.outputOntology.hashCode() + 0x1F * ((new Double(
-						this.threshold)).hashCode() + 0x1F * this.maxNumberOfVars));
+		return this.inputOntology.hashCode() + 0x1F * (this.outputOntology.hashCode()
+				+ 0x1F * ((new Double(this.threshold)).hashCode() + 0x1F * this.maxNumberOfVars));
 	}
 
 	@Override
 	public String toString() {
-		return this.inputOntology.toString() + " "
-				+ this.outputOntology.toString() + " " + this.threshold + " "
+		return this.inputOntology.toString() + " " + this.outputOntology.toString() + " " + this.threshold + " "
 				+ this.maxNumberOfVars;
 	}
 

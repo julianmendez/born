@@ -27,8 +27,7 @@ public class TokenCreatorTest {
 			"\n";
 
 	@Test
-	public void testCreateTokens0() throws OWLRendererException,
-			OWLOntologyCreationException, IOException {
+	public void testCreateTokens0() throws OWLRendererException, OWLOntologyCreationException, IOException {
 		List<Token> expected = new ArrayList<Token>();
 		expected.add(new TokenImpl("sub", 1));
 		expected.add(new TokenImpl("(", 1));
@@ -55,8 +54,7 @@ public class TokenCreatorTest {
 	}
 
 	@Test
-	public void testCreateTokens1() throws OWLRendererException,
-			OWLOntologyCreationException, IOException {
+	public void testCreateTokens1() throws OWLRendererException, OWLOntologyCreationException, IOException {
 		List<Token> expected = new ArrayList<Token>();
 		expected.add(new TokenImpl("sub", 4));
 		expected.add(new TokenImpl("(", 4));

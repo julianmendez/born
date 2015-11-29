@@ -32,8 +32,7 @@ public class BornReasonerFactory implements OWLReasonerFactory {
 	}
 
 	@Override
-	public BornReasoner createNonBufferingReasoner(OWLOntology ontology,
-			OWLReasonerConfiguration configuration)
+	public BornReasoner createNonBufferingReasoner(OWLOntology ontology, OWLReasonerConfiguration configuration)
 			throws IllegalConfigurationException {
 		if (ontology == null) {
 			throw new IllegalArgumentException("Null argument.");
@@ -55,8 +54,7 @@ public class BornReasonerFactory implements OWLReasonerFactory {
 	}
 
 	@Override
-	public BornReasoner createReasoner(OWLOntology ontology,
-			OWLReasonerConfiguration configuration)
+	public BornReasoner createReasoner(OWLOntology ontology, OWLReasonerConfiguration configuration)
 			throws IllegalConfigurationException {
 		if (ontology == null) {
 			throw new IllegalArgumentException("Null argument.");

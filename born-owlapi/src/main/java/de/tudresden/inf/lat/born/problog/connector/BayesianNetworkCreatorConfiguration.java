@@ -37,8 +37,7 @@ public class BayesianNetworkCreatorConfiguration {
 			return false;
 		} else {
 			BayesianNetworkCreatorConfiguration other = (BayesianNetworkCreatorConfiguration) obj;
-			return getDependencies().equals(other.getDependencies())
-					&& getOutput().equals(other.getOutput());
+			return getDependencies().equals(other.getDependencies()) && getOutput().equals(other.getOutput());
 		}
 	}
 

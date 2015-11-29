@@ -55,15 +55,12 @@ public class SplitterConfiguration {
 	@Override
 	public int hashCode() {
 		return this.inputOntology.hashCode()
-				+ 0x1F
-				* (this.outputOntology.hashCode() + 0x1F * this.bayesianNetwork
-						.hashCode());
+				+ 0x1F * (this.outputOntology.hashCode() + 0x1F * this.bayesianNetwork.hashCode());
 	}
 
 	@Override
 	public String toString() {
-		return this.inputOntology.toString() + " "
-				+ this.outputOntology.toString() + " "
+		return this.inputOntology.toString() + " " + this.outputOntology.toString() + " "
 				+ this.bayesianNetwork.toString();
 	}
 
