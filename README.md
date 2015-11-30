@@ -14,8 +14,11 @@ the [OWL API](http://owlcs.github.io/owlapi/) to
 read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it can be used as a [Prot&eacute;g&eacute;](http://protege.stanford.edu/) plug-in.
 
 
-## Dependency
+## Download
 
+* [all-in-one ZIP file](https://lat.inf.tu-dresden.de/systems/born/files/born/0.2.0/zip/born-0.2.0.zip)
+* [The Central Repository](https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/)
+* as dependency
 ```xml
 <dependency>
   <groupId>de.tu-dresden.inf.lat.born</groupId>
