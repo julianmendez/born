@@ -40,7 +40,7 @@ public class BayesianNetworkCreatorCore {
 					+ variableIndex + " with " + parents + " parents.");
 		}
 
-		Set<Integer> chosen = new TreeSet<Integer>();
+		Set<Integer> chosen = new TreeSet<>();
 		for (int index = 0; index < parents; index++) {
 			double dependency = Math.random() * variableIndex;
 			chosen.add((int) dependency);
@@ -50,7 +50,7 @@ public class BayesianNetworkCreatorCore {
 			chosen.add(index);
 		}
 
-		List<Integer> ret = new ArrayList<Integer>();
+		List<Integer> ret = new ArrayList<>();
 		ret.addAll(chosen);
 		return ret;
 	}
@@ -64,7 +64,7 @@ public class BayesianNetworkCreatorCore {
 		}
 
 		Term head = newTerm(variableIndex, false);
-		List<Term> body = new ArrayList<Term>();
+		List<Term> body = new ArrayList<>();
 		for (int index = 0; (index < dependencies.size()); index++) {
 			int dependencyIndex = dependencies.get(index);
 			boolean isNegative = permutation.get(index);
@@ -84,7 +84,7 @@ public class BayesianNetworkCreatorCore {
 	}
 
 	List<ProbClause> computeDependencies(int variableIndex, int parents) {
-		List<ProbClause> ret = new ArrayList<ProbClause>();
+		List<ProbClause> ret = new ArrayList<>();
 		List<Integer> dependencies = chooseDependencies(variableIndex, parents);
 		boolean valid = true;
 		for (Permutation permutation = new Permutation(parents); valid; valid = permutation.computeNextPermutation()) {
@@ -95,7 +95,7 @@ public class BayesianNetworkCreatorCore {
 	}
 
 	public List<ProbClause> createNetwork(List<Integer> variables) {
-		List<ProbClause> ret = new ArrayList<ProbClause>();
+		List<ProbClause> ret = new ArrayList<>();
 		int variableIndex = 0;
 		for (int parents = 0; parents < variables.size(); parents++) {
 			int n = variables.get(parents);

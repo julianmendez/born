@@ -15,7 +15,7 @@ public class ClauseImpl implements Clause {
 	public static final String TAB = "   ";
 
 	private final Term head;
-	private final List<Term> body = new ArrayList<Term>();
+	private final List<Term> body = new ArrayList<>();
 
 	/**
 	 * Constructs an empty clause.

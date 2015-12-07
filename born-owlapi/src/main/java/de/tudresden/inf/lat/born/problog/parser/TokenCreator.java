@@ -15,7 +15,7 @@ public class TokenCreator {
 	}
 
 	List<Token> createTokens(String str, int lineNumber) {
-		List<Token> ret = new ArrayList<Token>();
+		List<Token> ret = new ArrayList<>();
 		if (str != null && !str.isEmpty()) {
 			Mode mode = Mode.CODE;
 			StringBuffer token = new StringBuffer();
@@ -71,7 +71,7 @@ public class TokenCreator {
 	}
 
 	List<Token> removeBlanksAndComments(List<Token> tokens) {
-		List<Token> ret = new ArrayList<Token>();
+		List<Token> ret = new ArrayList<>();
 		if (tokens != null) {
 			for (Token token : tokens) {
 				if (!token.getType().equals(TokenType.BLANK) && !token.getType().equals(TokenType.COMMENT)) {
@@ -83,7 +83,7 @@ public class TokenCreator {
 	}
 
 	public List<Token> createTokens(Reader reader) throws IOException {
-		List<Token> ret = new ArrayList<Token>();
+		List<Token> ret = new ArrayList<>();
 		BufferedReader in = new BufferedReader(reader);
 		int lineNumber = 0;
 		String line = "";

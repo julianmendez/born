@@ -18,7 +18,7 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorSubApp;
  */
 public class BornMain implements SubApp {
 
-	private Map<String, SubApp> subAppMap = new TreeMap<String, SubApp>();
+	private Map<String, SubApp> subAppMap = new TreeMap<>();
 
 	static final String HELP = "\nBORN - Bayesian Ontology Reasoner"
 			+ "\n\nParameters: <command> [<command parameters>]" + "\n\n";

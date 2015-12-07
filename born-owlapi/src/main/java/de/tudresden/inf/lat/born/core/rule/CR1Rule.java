@@ -32,7 +32,7 @@ public class CR1Rule implements CompletionRule {
 		Term b = c.newVar("B");
 
 		Term head = c.sub(x, b);
-		List<Term> body = new ArrayList<Term>();
+		List<Term> body = new ArrayList<>();
 		body.add(c.subs(a, b));
 		body.add(c.sub(x, a));
 		body.add(c.con(x));

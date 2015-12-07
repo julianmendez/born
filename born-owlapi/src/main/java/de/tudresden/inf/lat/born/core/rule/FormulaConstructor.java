@@ -71,7 +71,7 @@ public class FormulaConstructor {
 	 * @return the result of applying the functor to one parameter
 	 */
 	public Term fun(String name, Term term) {
-		List<Term> arguments = new ArrayList<Term>();
+		List<Term> arguments = new ArrayList<>();
 		arguments.add(term);
 		return new TermImpl(name, arguments);
 	}
@@ -88,7 +88,7 @@ public class FormulaConstructor {
 	 * @return the result of applying the functor to two parameters
 	 */
 	public Term fun(String name, Term left, Term right) {
-		List<Term> arguments = new ArrayList<Term>();
+		List<Term> arguments = new ArrayList<>();
 		arguments.add(left);
 		arguments.add(right);
 		return new TermImpl(name, arguments);
@@ -178,7 +178,7 @@ public class FormulaConstructor {
 	}
 
 	public Clause query(Term query) {
-		List<Term> list = new ArrayList<Term>();
+		List<Term> list = new ArrayList<>();
 		list.add(query);
 		TermImpl term = new TermImpl(QUERY, list);
 		List<Term> emptyList = Collections.emptyList();

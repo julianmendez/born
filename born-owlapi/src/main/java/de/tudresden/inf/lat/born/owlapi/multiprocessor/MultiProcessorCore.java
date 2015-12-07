@@ -43,8 +43,8 @@ public class MultiProcessorCore {
 	}
 
 	List<OWLClass> getClasses(OWLOntology ontology) {
-		List<OWLClass> listOfClasses = new ArrayList<OWLClass>();
-		Set<OWLClass> treeSet = new TreeSet<OWLClass>();
+		List<OWLClass> listOfClasses = new ArrayList<>();
+		Set<OWLClass> treeSet = new TreeSet<>();
 		treeSet.addAll(ontology.getClassesInSignature());
 		listOfClasses.addAll(treeSet);
 		return listOfClasses;
@@ -59,7 +59,7 @@ public class MultiProcessorCore {
 
 	List<SubsumptionQuery> getQueries(OWLOntology ontology, int numberOfQueries, PseudorandomNumberGenerator random) {
 		List<OWLClass> listOfClasses = getClasses(ontology);
-		List<SubsumptionQuery> listOfQueries = new ArrayList<SubsumptionQuery>();
+		List<SubsumptionQuery> listOfQueries = new ArrayList<>();
 		for (int i = 0; i < numberOfQueries; i++) {
 			listOfQueries.add(getNextQuery(listOfClasses, random));
 		}
@@ -67,7 +67,7 @@ public class MultiProcessorCore {
 	}
 
 	public List<String> run(MultiProcessorConfiguration conf, long start) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		PseudorandomNumberGenerator random = new PseudorandomNumberGenerator(conf.getSeed());
 		ProcessorCore core = new ProcessorCore();
 
@@ -109,7 +109,7 @@ public class MultiProcessorCore {
 		}
 
 		try {
-			List<OntologyAndNetwork> ret = new ArrayList<OntologyAndNetwork>();
+			List<OntologyAndNetwork> ret = new ArrayList<>();
 			if (!ontologyDirectory.isEmpty() && !bayesianNetworkDirectory.isEmpty()) {
 				File file = new File(ontologyDirectory);
 				File[] files = file.listFiles();

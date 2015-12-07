@@ -37,7 +37,7 @@ public class ExampleLoader {
 	public static final String NETWORK_EXTENSION = ".pl";
 	public static final String QUERY_EXTENSION = ".query";
 
-	private List<ExampleConfiguration> exampleConfigurations = new ArrayList<ExampleConfiguration>();
+	private List<ExampleConfiguration> exampleConfigurations = new ArrayList<>();
 
 	/**
 	 * Constructs a new example loader.
@@ -57,11 +57,11 @@ public class ExampleLoader {
 			examples = readExampleConfigurations();
 
 		} catch (OWLOntologyCreationException e) {
-			examples = new ArrayList<ExampleConfiguration>();
+			examples = new ArrayList<>();
 			e.printStackTrace();
 
 		} catch (IOException e) {
-			examples = new ArrayList<ExampleConfiguration>();
+			examples = new ArrayList<>();
 			e.printStackTrace();
 
 		}
@@ -95,7 +95,7 @@ public class ExampleLoader {
 	}
 
 	List<String> getExampleFilesFromJar(File file, String path) throws IOException {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		JarFile jarFile = new JarFile(file);
 		Enumeration<JarEntry> jarEntries = jarFile.entries();
 		while (jarEntries.hasMoreElements()) {
@@ -109,7 +109,7 @@ public class ExampleLoader {
 	}
 
 	List<String> getExampleFilesFromDirectory(String path) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		URL url = getClass().getClassLoader().getResource(path);
 		if (url != null) {
 			File f = new File(url.getPath());
@@ -131,7 +131,7 @@ public class ExampleLoader {
 	 *             if something goes wrong with I/O
 	 */
 	public List<String> getExampleFiles(String path) throws IOException {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
 		if (jarFile.isFile()) {
 			ret.addAll(getExampleFilesFromJar(jarFile, path));
@@ -143,7 +143,7 @@ public class ExampleLoader {
 	}
 
 	List<String> getFilesWithExtension(List<String> list, String extension) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		for (String fileName : list) {
 			if (fileName.endsWith(extension)) {
 				ret.add(fileName);
@@ -207,7 +207,7 @@ public class ExampleLoader {
 	 */
 	public List<ExampleConfiguration> getOntologyAndNetworkFiles(List<String> list)
 			throws IOException, OWLOntologyCreationException {
-		List<ExampleConfiguration> ret = new ArrayList<ExampleConfiguration>();
+		List<ExampleConfiguration> ret = new ArrayList<>();
 		List<String> owlFiles = getFilesWithExtension(list, OWL_EXTENSION);
 
 		for (String fileName : owlFiles) {

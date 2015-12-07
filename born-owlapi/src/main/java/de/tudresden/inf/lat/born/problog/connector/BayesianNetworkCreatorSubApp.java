@@ -41,7 +41,7 @@ public class BayesianNetworkCreatorSubApp implements SubApp {
 	}
 
 	List<Integer> parseIntegers(String listAsStr) {
-		List<Integer> ret = new ArrayList<Integer>();
+		List<Integer> ret = new ArrayList<>();
 		StringTokenizer stok = new StringTokenizer(listAsStr, ",");
 		while (stok.hasMoreTokens()) {
 			String value = stok.nextToken().trim();

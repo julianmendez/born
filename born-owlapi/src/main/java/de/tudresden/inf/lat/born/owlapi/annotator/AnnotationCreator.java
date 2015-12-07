@@ -74,8 +74,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	private final OWLAnnotationProperty annotationProperty;
 	private final OWLDataFactory df;
 	private final OWLOntology owlOntology;
-	private final List<String> variableOrder = new ArrayList<String>();
-	private final Map<String, String> network = new TreeMap<String, String>();
+	private final List<String> variableOrder = new ArrayList<>();
+	private final Map<String, String> network = new TreeMap<>();
 	private int counter = 0;
 	private final int maxNumberOfVars;
 	private final double threshold;

@@ -13,7 +13,7 @@ import java.util.List;
 public class TermImpl implements Term {
 
 	private final String name;
-	private final List<Term> arguments = new ArrayList<Term>();
+	private final List<Term> arguments = new ArrayList<>();
 	private final Term.Type termType;
 
 	/**

@@ -58,19 +58,19 @@ public class ProblogInputCreator {
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
-		List<Token> identifiers = new ArrayList<Token>();
+		List<Token> identifiers = new ArrayList<>();
 		for (Token t : tokens) {
 			if (t.getType().equals(TokenType.IDENTIFIER) || t.getType().equals(TokenType.CONSTANT)) {
 				identifiers.add(t);
 			}
 		}
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		for (Token identifier : identifiers) {
 			list.add(identifier.getValue());
 		}
 		list.remove(FormulaConstructor.QUERY);
 		list.remove(FormulaConstructor.SUB);
-		Set<String> set = new TreeSet<String>();
+		Set<String> set = new TreeSet<>();
 		if (!list.isEmpty()) {
 			set.add(list.iterator().next());
 		}
@@ -78,7 +78,7 @@ public class ProblogInputCreator {
 	}
 
 	List<CompletionRule> getCompletionRules() {
-		List<CompletionRule> completionRules = new ArrayList<CompletionRule>();
+		List<CompletionRule> completionRules = new ArrayList<>();
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
 		completionRules.add(new BR3Rule());
@@ -97,11 +97,11 @@ public class ProblogInputCreator {
 	}
 
 	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms) {
-		List<Clause> ret = new ArrayList<Clause>();
+		List<Clause> ret = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
-		Set<Integer> classes = new TreeSet<Integer>();
-		Set<Integer> objectProperties = new TreeSet<Integer>();
+		Set<Integer> classes = new TreeSet<>();
+		Set<Integer> objectProperties = new TreeSet<>();
 		for (NormalizedIntegerAxiom axiom : axioms) {
 			classes.addAll(axiom.getClassesInSignature());
 			objectProperties.addAll(axiom.getObjectPropertiesInSignature());
@@ -120,7 +120,7 @@ public class ProblogInputCreator {
 	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms)
 			throws IOException {
 
-		List<Clause> ontology = new ArrayList<Clause>();
+		List<Clause> ontology = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 		ontology.addAll(getDeclarations(factory, axioms));
 
@@ -132,12 +132,12 @@ public class ProblogInputCreator {
 	}
 
 	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
-		Map<String, Integer> map = new TreeMap<String, Integer>();
+		Map<String, Integer> map = new TreeMap<>();
 		for (Integer id : factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)) {
 			map.put(factory.getEntityManager().getName(id), id);
 		}
 
-		Set<Integer> ret = new TreeSet<Integer>();
+		Set<Integer> ret = new TreeSet<>();
 		for (String symbolStr0 : symbolStrSet) {
 			String symbolStr = symbolStr0;
 			if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {

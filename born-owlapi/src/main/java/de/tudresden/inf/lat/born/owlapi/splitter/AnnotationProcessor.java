@@ -69,8 +69,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 
 	private final OWLDataFactory df;
 	private final OWLOntology owlOntology;
-	private final List<String> variableOrder = new ArrayList<String>();
-	private final Map<String, String> network = new TreeMap<String, String>();
+	private final List<String> variableOrder = new ArrayList<>();
+	private final Map<String, String> network = new TreeMap<>();
 
 	public AnnotationProcessor(OWLOntologyManager manager) throws OWLOntologyCreationException {
 		this.owlOntology = manager.createOntology();

@@ -23,10 +23,10 @@ public class ProblogProgram {
 	static final String TITLE_BAYESIAN_NETWORK = "%% Bayesian Network";
 	static final String TITLE_QUERIES = "%% Queries";
 
-	private final List<CompletionRule> completionRules = new ArrayList<CompletionRule>();
-	private final List<Clause> ontology = new ArrayList<Clause>();
-	private final List<ProbClause> bayesianNetwork = new ArrayList<ProbClause>();
-	private final List<Clause> queries = new ArrayList<Clause>();
+	private final List<CompletionRule> completionRules = new ArrayList<>();
+	private final List<Clause> ontology = new ArrayList<>();
+	private final List<ProbClause> bayesianNetwork = new ArrayList<>();
+	private final List<Clause> queries = new ArrayList<>();
 	private String bayesianNetworkAddendum;
 	private String queryListAddendum;
 

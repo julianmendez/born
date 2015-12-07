@@ -34,7 +34,7 @@ public class CR3Rule implements CompletionRule {
 		Term r = c.newVar("R");
 
 		Term head = c.sub(x, c.exists(r, b));
-		List<Term> body = new ArrayList<Term>();
+		List<Term> body = new ArrayList<>();
 		body.add(c.subs(a, c.exists(r, b)));
 		body.add(c.sub(x, a));
 		body.add(c.con(x));

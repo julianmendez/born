@@ -12,7 +12,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  */
 public class MultiProcessorConfiguration {
 
-	private List<OntologyAndNetwork> ontologyList = new ArrayList<OntologyAndNetwork>();
+	private List<OntologyAndNetwork> ontologyList = new ArrayList<>();
 	private String outputDirectory;
 	private String problogDirectory;
 	private boolean problogNeeded = true;

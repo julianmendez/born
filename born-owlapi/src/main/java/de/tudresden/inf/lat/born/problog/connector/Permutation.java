@@ -11,7 +11,7 @@ import java.util.List;
  */
 class Permutation {
 
-	private List<Boolean> currentPermutation = new ArrayList<Boolean>();
+	private List<Boolean> currentPermutation = new ArrayList<>();
 
 	/**
 	 * Constructs a permutation with a given size, set to the initial
