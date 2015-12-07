@@ -57,12 +57,8 @@ public class BayesianNetworkCreatorCore {
 		}
 
 		Term head = newTerm(variableIndex, false);
-		List<Term> body = new ArrayList<>();
-		for (int index = 0; (index < dependencies.size()); index++) {
-			int dependencyIndex = dependencies.get(index);
-			boolean isNegative = permutation.get(index);
-			body.add(newTerm(dependencyIndex, isNegative));
-		}
+		List<Term> body = IntStream.range(0, dependencies.size())
+				.mapToObj(x -> newTerm(dependencies.get(x), permutation.get(x))).collect(Collectors.toList());
 
 		ProbClause ret = new ProbClauseImpl(head, body, asAnnotation(probability));
 		return ret;
