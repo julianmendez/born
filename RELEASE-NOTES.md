@@ -3,9 +3,23 @@
 
 | version | release date | Java | OWL API | Protégé       | ProbLog | Python     |
 |:--------|:-------------|:----:|:-------:|:-------------:|:-------:|:----------:|
+| v0.3.0  | (unreleased) | 8    | 4.1.3   | 5.0.0         | 2.1     | 2.7 or 3.2 |
 | v0.2.0  | 2015-11-28   | 7    | 3.5.1   | 5.0.0-beta-17 | 2.1     | 2.7 or 3.2 |
 | v0.1.1  | 2015-06-02   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 | 
 | v0.1.0  | 2015-04-14   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |
+
+
+### v0.3.0
+*(unreleased)*
+* uses the OWL API 4.1.3
+* runs on Java 8
+* can be used as a plug-in for Protégé 5.0.0
+* build commands:
+```
+$ mvn clean install
+```
+* release: `target/born-0.3.0.zip`
+* plug-in: `born-plugin/target/de.tu-dresden.inf.lat.born-0.3.0.jar`
 
 
 ### v0.2.0
@@ -15,6 +29,7 @@
  * experiment runner: runs the processor on multiple files
 * uses the OWL API 3.5.1
 * runs on Java 7
+* can be used as a plug-in for Protégé 5.0.0-beta-17
 * requires ProbLog 2.1 installed or downloads it from
 https://bitbucket.org/problog/problog/get/master.zip
 * build commands:
