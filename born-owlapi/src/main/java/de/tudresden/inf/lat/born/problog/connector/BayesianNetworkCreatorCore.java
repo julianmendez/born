@@ -6,8 +6,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import de.tudresden.inf.lat.born.core.term.ProbClause;
 import de.tudresden.inf.lat.born.core.term.ProbClauseImpl;
@@ -40,18 +41,10 @@ public class BayesianNetworkCreatorCore {
 					+ variableIndex + " with " + parents + " parents.");
 		}
 
-		Set<Integer> chosen = new TreeSet<>();
-		for (int index = 0; index < parents; index++) {
-			double dependency = Math.random() * variableIndex;
-			chosen.add((int) dependency);
-		}
-
-		for (int index = 0; (chosen.size() < parents) && (index < parents); index++) {
-			chosen.add(index);
-		}
-
-		List<Integer> ret = new ArrayList<>();
-		ret.addAll(chosen);
+		Stream<Integer> chosen = IntStream.range(0, parents).mapToObj(x -> ((int) (Math.random() * variableIndex)))
+				.distinct();
+		Stream<Integer> remaining = IntStream.range((int) chosen.count(), parents).mapToObj(x -> x);
+		List<Integer> ret = Stream.concat(chosen, remaining).collect(Collectors.toList());
 		return ret;
 	}
 
