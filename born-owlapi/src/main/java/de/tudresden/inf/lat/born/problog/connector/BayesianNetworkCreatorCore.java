@@ -41,10 +41,10 @@ public class BayesianNetworkCreatorCore {
 					+ variableIndex + " with " + parents + " parents.");
 		}
 
-		Stream<Integer> chosen = IntStream.range(0, parents).mapToObj(x -> ((int) (Math.random() * variableIndex)))
-				.distinct();
-		Stream<Integer> remaining = IntStream.range((int) chosen.count(), parents).mapToObj(x -> x);
-		List<Integer> ret = Stream.concat(chosen, remaining).collect(Collectors.toList());
+		List<Integer> chosen = IntStream.range(0, parents).mapToObj(x -> ((int) (Math.random() * variableIndex)))
+				.distinct().collect(Collectors.toList());
+		List<Integer> remaining = IntStream.range(chosen.size(), parents).mapToObj(x -> x).collect(Collectors.toList());
+		List<Integer> ret = Stream.concat(chosen.stream(), remaining.stream()).collect(Collectors.toList());
 		return ret;
 	}
 
