@@ -9,11 +9,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -80,9 +80,7 @@ public class ExampleLoader {
 	 * 
 	 */
 	public List<ExampleConfiguration> readExampleConfigurations() throws OWLOntologyCreationException, IOException {
-		List<String> listOfExamples = getExampleFiles(EXAMPLES_DIRECTORY);
-		List<ExampleConfiguration> examples = getOntologyAndNetworkFiles(listOfExamples);
-		return examples;
+		return getOntologyAndNetworkFiles(getExampleFiles(EXAMPLES_DIRECTORY));
 	}
 
 	/**
@@ -95,15 +93,9 @@ public class ExampleLoader {
 	}
 
 	List<String> getExampleFilesFromJar(File file, String path) throws IOException {
-		List<String> ret = new ArrayList<>();
 		JarFile jarFile = new JarFile(file);
-		Enumeration<JarEntry> jarEntries = jarFile.entries();
-		while (jarEntries.hasMoreElements()) {
-			String fileName = jarEntries.nextElement().getName();
-			if (fileName.startsWith(path)) {
-				ret.add(fileName);
-			}
-		}
+		List<String> ret = jarFile.stream().map(jf -> jf.getName()).filter(str -> str.startsWith(path))
+				.collect(Collectors.toList());
 		jarFile.close();
 		return ret;
 	}
@@ -113,10 +105,8 @@ public class ExampleLoader {
 		URL url = getClass().getClassLoader().getResource(path);
 		if (url != null) {
 			File f = new File(url.getPath());
-			File[] list = f.listFiles();
-			for (int index = 0; index < list.length; index++) {
-				ret.add(list[index].getAbsolutePath());
-			}
+			List<File> files = Arrays.asList(f.listFiles());
+			files.forEach(e -> ret.add(e.getAbsolutePath()));
 		}
 		return ret;
 	}
@@ -143,13 +133,7 @@ public class ExampleLoader {
 	}
 
 	List<String> getFilesWithExtension(List<String> list, String extension) {
-		List<String> ret = new ArrayList<>();
-		for (String fileName : list) {
-			if (fileName.endsWith(extension)) {
-				ret.add(fileName);
-			}
-		}
-		return ret;
+		return list.stream().filter(f -> f.endsWith(extension)).collect(Collectors.toList());
 	}
 
 	OWLOntology readOntology(InputStream input) throws OWLOntologyCreationException {
