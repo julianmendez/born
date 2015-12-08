@@ -48,22 +48,16 @@ public class ProblogAnnotation implements Annotation {
 		return this.containedValue;
 	}
 
-	AnnotationType getContainedType(String value0) {
-		AnnotationType ret = null;
-		for (AnnotationType current : AnnotationType.values()) {
-			if (value0.endsWith(current.getName())) {
-				ret = current;
-			}
-		}
-		return ret;
+	AnnotationType getContainedType(String value) {
+		return AnnotationType.getValues().stream().filter(x -> value.endsWith(x.getName())).findFirst().get();
 	}
 
-	String getContainedValue(String value0) {
-		String str = value0.trim();
+	String getContainedValue(String value) {
+		String str = value.trim();
 		if (str.startsWith("" + Symbol.QUOTES_CHAR)) {
-			int pos = value0.indexOf(Symbol.QUOTES_CHAR, 1);
+			int pos = value.indexOf(Symbol.QUOTES_CHAR, 1);
 			if (pos != -1) {
-				return value0.substring(1, pos);
+				return value.substring(1, pos);
 			} else {
 				return null;
 			}

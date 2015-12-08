@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.problog.parser;
 
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
 
@@ -93,12 +94,7 @@ public class TokenImpl implements Token {
 		} else if (isConstantWithApostrophes(str)) {
 			return true;
 		} else {
-			boolean ret = true;
-			for (int i = 0; ret && (i < str.length()); i++) {
-				char ch = str.charAt(i);
-				ret = ret && (!Character.isSpaceChar(ch));
-			}
-			return ret;
+			return IntStream.range(0, str.length()).allMatch(x -> !Character.isSpaceChar(str.charAt(x)));
 		}
 	}
 
