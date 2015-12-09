@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -58,16 +59,9 @@ public class ProblogInputCreator {
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
-		List<Token> identifiers = new ArrayList<>();
-		for (Token t : tokens) {
-			if (t.getType().equals(TokenType.IDENTIFIER) || t.getType().equals(TokenType.CONSTANT)) {
-				identifiers.add(t);
-			}
-		}
-		List<String> list = new ArrayList<>();
-		for (Token identifier : identifiers) {
-			list.add(identifier.getValue());
-		}
+		List<String> list = tokens.stream()
+				.filter(t -> (t.getType().equals(TokenType.IDENTIFIER) || t.getType().equals(TokenType.CONSTANT)))
+				.map(t -> t.getValue()).collect(Collectors.toList());
 		list.remove(FormulaConstructor.QUERY);
 		list.remove(FormulaConstructor.SUB);
 		Set<String> set = new TreeSet<>();

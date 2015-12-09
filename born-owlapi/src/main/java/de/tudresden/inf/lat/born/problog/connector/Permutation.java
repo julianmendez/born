@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.problog.connector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * An object this class computes successive permutations in a boolean vector.
@@ -21,9 +22,7 @@ class Permutation {
 	 *            size
 	 */
 	public Permutation(int size) {
-		for (int index = 0; index < size; index++) {
-			this.currentPermutation.add(false);
-		}
+		IntStream.range(0, size).parallel().forEach(x -> this.currentPermutation.add(false));
 	}
 
 	boolean nextValue(boolean value) {

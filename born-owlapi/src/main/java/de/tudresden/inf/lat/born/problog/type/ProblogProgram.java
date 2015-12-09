@@ -96,27 +96,23 @@ public class ProblogProgram {
 
 	String asString(List<Clause> clauses) {
 		StringBuffer sb = new StringBuffer();
-		for (Clause clause : clauses) {
-			sb.append(clause.asString());
-		}
+		clauses.forEach(clause -> sb.append(clause.asString()));
 		return sb.toString();
 	}
 
 	String asStringC(List<CompletionRule> clauses) {
 		StringBuffer sb = new StringBuffer();
-		for (CompletionRule clause : clauses) {
+		clauses.forEach(clause -> {
 			sb.append(clause.asString());
 			sb.append(Symbol.PERCENT_CHAR);
 			sb.append(Symbol.NEW_LINE_CHAR);
-		}
+		});
 		return sb.toString();
 	}
 
 	String asStringP(List<ProbClause> clauses) {
 		StringBuffer sb = new StringBuffer();
-		for (ProbClause clause : clauses) {
-			sb.append(clause.asString());
-		}
+		clauses.forEach(clause -> sb.append(clause.asString()));
 		return sb.toString();
 	}
 

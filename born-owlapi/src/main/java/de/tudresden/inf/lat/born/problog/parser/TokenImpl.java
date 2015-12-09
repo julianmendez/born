@@ -77,14 +77,9 @@ public class TokenImpl implements Token {
 		if ((str == null) || str.trim().isEmpty()) {
 			return false;
 		} else {
-			boolean ret = true;
-			for (int i = 0; ret && (i < str.length()); i++) {
-				char ch = str.charAt(i);
-				ret = ret && (Character.isLetterOrDigit(ch) || (ch == Symbol.UNDERSCORE_CHAR));
-			}
-			char ch = str.charAt(0);
-			ret = ret && (Character.isLetter(ch) || (ch == Symbol.UNDERSCORE_CHAR));
-			return ret;
+			char firstChar = str.charAt(0);
+			return (Character.isLetter(firstChar) || (firstChar == Symbol.UNDERSCORE_CHAR))
+					&& str.chars().allMatch(ch -> (Character.isLetterOrDigit(ch) || (ch == Symbol.UNDERSCORE_CHAR)));
 		}
 	}
 
