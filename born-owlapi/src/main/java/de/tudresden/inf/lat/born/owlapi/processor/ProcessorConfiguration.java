@@ -27,7 +27,6 @@ public class ProcessorConfiguration {
 	private String query = "";
 	private String outputFileName = "";
 	private QueryProcessor queryProcessor = null;
-	private boolean problogNeeded = true;
 	private boolean showingLog = true;
 
 	public ProcessorConfiguration() {
@@ -87,14 +86,6 @@ public class ProcessorConfiguration {
 		this.showingLog = showingLog;
 	}
 
-	public boolean isProblogNeeded() {
-		return problogNeeded;
-	}
-
-	public void setProblogNeeded(boolean problogNeeded) {
-		this.problogNeeded = problogNeeded;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -105,8 +96,8 @@ public class ProcessorConfiguration {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
 			return getOntology().equals(other.getOntology()) && getBayesianNetwork().equals(other.getBayesianNetwork())
 					&& getQuery().equals(other.getQuery()) && getOutputFileName().equals(other.getOutputFileName())
-					&& getQueryProcessor().equals(other.getQueryProcessor()) && (isShowingLog() == other.isShowingLog())
-					&& (isProblogNeeded() == other.isProblogNeeded());
+					&& getQueryProcessor().equals(other.getQueryProcessor())
+					&& (isShowingLog() == other.isShowingLog());
 		}
 	}
 
@@ -118,7 +109,7 @@ public class ProcessorConfiguration {
 	@Override
 	public String toString() {
 		return this.ontology + " " + this.bayesianNetwork + " " + this.query + " " + this.outputFileName + " "
-				+ this.queryProcessor + " " + this.showingLog + " " + this.problogNeeded;
+				+ this.queryProcessor + " " + this.showingLog;
 	}
 
 	/**

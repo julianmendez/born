@@ -87,12 +87,10 @@ public class MultiProcessorSubApp implements SubApp {
 
 			if (newArgs.length == 6) {
 				conf.setQueryProcessor(new ProblogProcessor(newArgs[5]));
-				conf.setProblogNeeded(false);
 			} else {
 				ProblogProcessor queryProcessor = new ProblogProcessor();
 				queryProcessor.startInstallation(start);
 				conf.setQueryProcessor(queryProcessor);
-				conf.setProblogNeeded(true);
 			}
 
 			MultiProcessorCore core = new MultiProcessorCore();

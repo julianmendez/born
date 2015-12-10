@@ -16,7 +16,6 @@ public class MultiProcessorConfiguration {
 	private List<OntologyAndNetwork> ontologyList = new ArrayList<>();
 	private String outputDirectory;
 	private QueryProcessor queryProcessor;
-	private boolean problogNeeded = true;
 	private boolean showingLog = true;
 	private int seed = 1;
 	private int numberOfQueries = 1;
@@ -69,14 +68,6 @@ public class MultiProcessorConfiguration {
 		this.showingLog = showingLog;
 	}
 
-	public boolean isProblogNeeded() {
-		return problogNeeded;
-	}
-
-	public void setProblogNeeded(boolean problogNeeded) {
-		this.problogNeeded = problogNeeded;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -88,8 +79,8 @@ public class MultiProcessorConfiguration {
 			return getOntologyList().equals(other.getOntologyList())
 					&& (getNumberOfQueries() == other.getNumberOfQueries()) && (getSeed() == other.getSeed())
 					&& getOutputDirectory().equals(other.getOutputDirectory())
-					&& getQueryProcessor().equals(other.getQueryProcessor()) && (isShowingLog() == other.isShowingLog())
-					&& (isProblogNeeded() == other.isProblogNeeded());
+					&& getQueryProcessor().equals(other.getQueryProcessor())
+					&& (isShowingLog() == other.isShowingLog());
 		}
 	}
 
@@ -101,8 +92,7 @@ public class MultiProcessorConfiguration {
 	@Override
 	public String toString() {
 		return this.ontologyList.size() + " ontologies, number of queries=" + this.numberOfQueries + ", seed="
-				+ this.seed + " " + this.outputDirectory + " " + this.queryProcessor + " " + this.showingLog + " "
-				+ this.problogNeeded;
+				+ this.seed + " " + this.outputDirectory + " " + this.queryProcessor + " " + this.showingLog;
 	}
 
 }

@@ -95,12 +95,10 @@ public class ProcessorSubApp implements SubApp {
 
 			if (newArgs.length == 5) {
 				conf.setQueryProcessor(new ProblogProcessor(newArgs[4]));
-				conf.setProblogNeeded(false);
 			} else {
 				ProblogProcessor queryProcessor = new ProblogProcessor();
 				queryProcessor.startInstallation(start);
 				conf.setQueryProcessor(queryProcessor);
-				conf.setProblogNeeded(true);
 			}
 
 			ProcessorCore core = new ProcessorCore();
