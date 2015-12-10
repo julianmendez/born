@@ -150,6 +150,18 @@ public class ProblogProcessor implements QueryProcessor {
 		return this.problogDirectory;
 	}
 
+	/**
+	 * Downloads and installs ProbLog.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 * @throws URISyntaxException
+	 *             if some URI is wrong
+	 * @throws InterruptedException
+	 *             if the execution was interrupted
+	 */
 	public void install(long start) throws IOException, URISyntaxException, InterruptedException {
 		downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
 		String directory = decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE, DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
@@ -160,6 +172,9 @@ public class ProblogProcessor implements QueryProcessor {
 
 	/**
 	 * Starts the installation of ProbLog.
+	 * 
+	 * @param start
+	 *            execution start
 	 */
 	public void startInstallation(long start) {
 		Thread thread = new Thread() {
@@ -185,10 +200,6 @@ public class ProblogProcessor implements QueryProcessor {
 	 * @param outputFileName
 	 *            file name of output
 	 * @return the exit value given by the operating system
-	 * @throws InterruptedException
-	 *             if the execution was interrupted
-	 * @throws IOException
-	 *             if something goes wrong with I/O
 	 */
 	public int execute(long start, String outputFileName) {
 		synchronized (this.problogInstallationMonitor) {
