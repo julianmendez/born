@@ -7,17 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.zip.ZipEntry;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
 /**
  * An object of this class processes an OWL ontology, produces a ProbLog file,
@@ -29,20 +24,12 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 public class ProcessorCore {
 
 	static final String SLASH = "/";
-	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI.create("https://bitbucket.org/problog/problog/get/master.zip");
-	static final String DEFAULT_PROBLOG_ZIP_FILE = "problog-2.1-SNAPSHOT.zip";
-	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
 	static final String PROBLOG_CLI = "problog-cli.py";
-	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_FILE = "/tmp/~tmp-output.pl.tmp";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 	static final String SPACE = " ";
 	static final String LONG_TAB = "\t    : ";
-
-	static final String PROBLOG_EXEC_LINUX = "problog/bin/windows/dsharp.exe";
-	static final String PROBLOG_EXEC_DARWIN = "problog/bin/darwin/dsharp";
-	static final String PROBLOG_EXEC_WINDOWS = "problog/bin/linux/dsharp";
 
 	private boolean isShowingLog = false;
 
@@ -85,85 +72,6 @@ public class ProcessorCore {
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
-	}
-
-	/**
-	 * Downloads ProbLog from the default download URI.
-	 * 
-	 * @param start
-	 *            execution start
-	 * @param problogZipFile
-	 *            file name of the ProbLog ZIP file
-	 * @throws IOException
-	 *             if something goes wrong with I/O
-	 * @throws URISyntaxException
-	 *             if the default URI is not valid
-	 */
-	void downloadProblog(long start, String problogZipFile) throws IOException, URISyntaxException {
-		log("Download ProbLog.", start);
-		ReadableByteChannel channel = Channels.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
-		FileOutputStream output = new FileOutputStream(problogZipFile);
-		output.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
-		output.close();
-	}
-
-	/**
-	 * Decompresses the ProbLog ZIP file.
-	 * 
-	 * @param start
-	 *            execution start
-	 * @param problogZipFile
-	 *            file name of ProbLog ZIP file
-	 * @param problogDirectory
-	 *            directory where ProbLog is being installed
-	 * @throws IOException
-	 *             if something goes wrong with I/O
-	 */
-	String decompressProblog(long start, String problogZipFile, String problogDirectory) throws IOException {
-		log("Decompress ProbLog.", start);
-		Decompressor installer = new Decompressor();
-		ZipEntry directory = installer.decompress(new File(problogZipFile), new File(problogDirectory));
-		return directory.getName();
-	}
-
-	/**
-	 * Updates execute permission of key executable files.
-	 * 
-	 * @param start
-	 *            execution start
-	 * @param problogDirectory
-	 *            directory where ProbLog is being installed
-	 * @throws IOException
-	 *             if something goes wrong with I/O
-	 */
-	void updatePermissions(long start, String problogDirectory) throws IOException {
-		log("Update permissions.", start);
-		(new File(problogDirectory + SLASH + PROBLOG_EXEC_LINUX)).setExecutable(true);
-		(new File(problogDirectory + SLASH + PROBLOG_EXEC_DARWIN)).setExecutable(true);
-		(new File(problogDirectory + SLASH + PROBLOG_EXEC_WINDOWS)).setExecutable(true);
-	}
-
-	/**
-	 * Installs ProbLog. This is necessary because just decompressing the ZIP
-	 * file is not enough.
-	 * 
-	 * @param start
-	 *            execution start
-	 * @param problogDirectory
-	 *            directory where ProbLog has been installed
-	 * @return the exit value given by the operating system
-	 * @throws IOException
-	 *             if something goes wrong with I/O
-	 * @throws InterruptedException
-	 *             if the execution was interrupted
-	 */
-	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
-		log("Install ProbLog.", start);
-		String commandLine = PYTHON + SPACE + problogDirectory + SLASH + PROBLOG_CLI + SPACE + PROBLOG_INSTALL_COMMAND;
-		log(commandLine, start);
-		Runtime runtime = Runtime.getRuntime();
-		Process process = runtime.exec(commandLine);
-		return process.waitFor();
 	}
 
 	/**
@@ -228,12 +136,9 @@ public class ProcessorCore {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
 			if (conf.isProblogNeeded()) {
-				downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
-				String directory = decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE,
-						DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-				conf.setProblogDirectory(DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH + directory);
-				updatePermissions(start, conf.getProblogDirectory());
-				installProblog(start, conf.getProblogDirectory());
+				ProblogManager problogManager = new ProblogManager();
+				problogManager.install(start);
+				conf.setProblogDirectory(problogManager.getProblogDirectory());
 			}
 
 			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery());

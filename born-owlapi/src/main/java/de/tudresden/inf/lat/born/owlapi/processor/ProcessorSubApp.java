@@ -23,8 +23,7 @@ public class ProcessorSubApp implements SubApp {
 	static final String LOGGING_OPTION = "--log";
 	static final String SLASH = ProcessorCore.SLASH;
 	public static final String COMMAND = "get";
-	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProcessorCore.DEFAULT_PROBLOG_DOWNLOAD_URI;
-	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = ProcessorCore.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY;
+	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProblogManager.DEFAULT_PROBLOG_DOWNLOAD_URI;
 	static final String HELP = ""
 			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"
 			+ "\n"
@@ -40,7 +39,7 @@ public class ProcessorSubApp implements SubApp {
 			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
 			+ " --log ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n" + "\n Bayesian network:"
 			+ "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:" + "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
-			+ "\nNote: this program requires the following installed:" + "\n - Java 7 or Java 8" + "\n - ProbLog 2.1"
+			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
 			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
 			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."

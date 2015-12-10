@@ -36,7 +36,7 @@ public class MultiProcessorSubApp implements SubApp {
 			+ "\n  java -jar born.jar " + COMMAND + " ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
 			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
 			+ " --log ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
-			+ "\nNote: this program requires the following installed:" + "\n - Java 7 or Java 8" + "\n - ProbLog 2.1"
+			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
 			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
 			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
