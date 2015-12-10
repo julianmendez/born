@@ -37,6 +37,7 @@ public class ProblogProcessor implements QueryProcessor {
 
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
+	private Object problogInstallationMonitor = new Object();
 
 	public ProblogProcessor() {
 		this.problogDirectory = null;
@@ -158,6 +159,24 @@ public class ProblogProcessor implements QueryProcessor {
 	}
 
 	/**
+	 * Starts the installation of ProbLog.
+	 */
+	public void startInstallation(long start) {
+		Thread thread = new Thread() {
+			public void run() {
+				synchronized (problogInstallationMonitor) {
+					try {
+						install(start);
+					} catch (IOException | URISyntaxException | InterruptedException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}
+		};
+		thread.start();
+	}
+
+	/**
 	 * Executes ProbLog and returns the exit value given by the operating
 	 * system.
 	 * 
@@ -172,6 +191,10 @@ public class ProblogProcessor implements QueryProcessor {
 	 *             if something goes wrong with I/O
 	 */
 	public int execute(long start, String outputFileName) {
+		synchronized (this.problogInstallationMonitor) {
+
+		}
+
 		try {
 			log("Execute ProbLog.", start);
 			Runtime runtime = Runtime.getRuntime();

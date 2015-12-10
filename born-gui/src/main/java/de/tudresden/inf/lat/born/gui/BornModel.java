@@ -1,7 +1,10 @@
 package de.tudresden.inf.lat.born.gui;
 
+import java.util.Date;
+
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
@@ -20,6 +23,10 @@ public class BornModel {
 	 * Constructs a new BORN model.
 	 */
 	public BornModel() {
+		ProblogProcessor queryProcessor = new ProblogProcessor();
+		this.processorConfiguration.setQueryProcessor(queryProcessor);
+		this.multiProcessorConfiguration.setQueryProcessor(queryProcessor);
+		queryProcessor.startInstallation((new Date().getTime()));
 	}
 
 	/**

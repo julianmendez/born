@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
 
 /**
  * 
@@ -14,7 +15,7 @@ public class MultiProcessorConfiguration {
 
 	private List<OntologyAndNetwork> ontologyList = new ArrayList<>();
 	private String outputDirectory;
-	private String problogDirectory;
+	private QueryProcessor queryProcessor;
 	private boolean problogNeeded = true;
 	private boolean showingLog = true;
 	private int seed = 1;
@@ -52,12 +53,12 @@ public class MultiProcessorConfiguration {
 		this.seed = seed;
 	}
 
-	public String getProblogDirectory() {
-		return problogDirectory;
+	public QueryProcessor getQueryProcessor() {
+		return queryProcessor;
 	}
 
-	public void setProblogDirectory(String problogDirectory) {
-		this.problogDirectory = problogDirectory;
+	public void setQueryProcessor(QueryProcessor queryProcessor) {
+		this.queryProcessor = queryProcessor;
 	}
 
 	public boolean isShowingLog() {
@@ -87,8 +88,8 @@ public class MultiProcessorConfiguration {
 			return getOntologyList().equals(other.getOntologyList())
 					&& (getNumberOfQueries() == other.getNumberOfQueries()) && (getSeed() == other.getSeed())
 					&& getOutputDirectory().equals(other.getOutputDirectory())
-					&& getProblogDirectory().equals(other.getProblogDirectory())
-					&& (isShowingLog() == other.isShowingLog()) && (isProblogNeeded() == other.isProblogNeeded());
+					&& getQueryProcessor().equals(other.getQueryProcessor()) && (isShowingLog() == other.isShowingLog())
+					&& (isProblogNeeded() == other.isProblogNeeded());
 		}
 	}
 
@@ -100,7 +101,7 @@ public class MultiProcessorConfiguration {
 	@Override
 	public String toString() {
 		return this.ontologyList.size() + " ontologies, number of queries=" + this.numberOfQueries + ", seed="
-				+ this.seed + " " + this.outputDirectory + " " + this.problogDirectory + " " + this.showingLog + " "
+				+ this.seed + " " + this.outputDirectory + " " + this.queryProcessor + " " + this.showingLog + " "
 				+ this.problogNeeded;
 	}
 

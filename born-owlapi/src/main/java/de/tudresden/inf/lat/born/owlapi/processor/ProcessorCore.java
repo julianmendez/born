@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URISyntaxException;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -107,16 +106,12 @@ public class ProcessorCore {
 		try {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
-			ProblogProcessor problogManager = new ProblogProcessor();
-			if (conf.isProblogNeeded()) {
-				problogManager.install(start);
-				conf.setProblogDirectory(problogManager.getProblogDirectory());
-			}
+			QueryProcessor queryProcessor = conf.getQueryProcessor();
 
 			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery());
 			log(info, start);
 
-			int exitVal = problogManager.execute(start, conf.getOutputFileName());
+			int exitVal = queryProcessor.execute(start, conf.getOutputFileName());
 
 			log("End and show results.", start);
 
@@ -128,13 +123,7 @@ public class ProcessorCore {
 				sbuf.append("No results. Exit value: '" + exitVal + "'.");
 
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (OWLOntologyCreationException e) {
-			throw new RuntimeException(e);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		} catch (URISyntaxException e) {
+		} catch (IOException | OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
 		}
 

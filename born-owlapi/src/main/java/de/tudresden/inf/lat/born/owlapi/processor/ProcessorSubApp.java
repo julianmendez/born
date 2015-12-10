@@ -94,10 +94,12 @@ public class ProcessorSubApp implements SubApp {
 			conf.setOutputFileName(newArgs[3]);
 
 			if (newArgs.length == 5) {
-				conf.setProblogDirectory(newArgs[4]);
+				conf.setQueryProcessor(new ProblogProcessor(newArgs[4]));
 				conf.setProblogNeeded(false);
 			} else {
-				conf.setProblogDirectory(null);
+				ProblogProcessor queryProcessor = new ProblogProcessor();
+				queryProcessor.startInstallation(start);
+				conf.setQueryProcessor(queryProcessor);
 				conf.setProblogNeeded(true);
 			}
 

@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.List;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
+import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
@@ -85,10 +86,12 @@ public class MultiProcessorSubApp implements SubApp {
 			conf.setOutputDirectory(newArgs[4]);
 
 			if (newArgs.length == 6) {
-				conf.setProblogDirectory(newArgs[5]);
+				conf.setQueryProcessor(new ProblogProcessor(newArgs[5]));
 				conf.setProblogNeeded(false);
 			} else {
-				conf.setProblogDirectory(null);
+				ProblogProcessor queryProcessor = new ProblogProcessor();
+				queryProcessor.startInstallation(start);
+				conf.setQueryProcessor(queryProcessor);
 				conf.setProblogNeeded(true);
 			}
 
