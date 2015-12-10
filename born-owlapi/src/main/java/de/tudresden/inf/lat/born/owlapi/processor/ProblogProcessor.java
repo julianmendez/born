@@ -17,7 +17,7 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
  * @author Julian Mendez
  *
  */
-public class ProblogProcessor {
+public class ProblogProcessor implements QueryProcessor {
 
 	static final String SLASH = "/";
 	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI.create("https://bitbucket.org/problog/problog/get/master.zip");
@@ -25,6 +25,8 @@ public class ProblogProcessor {
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
+	static final String PROBLOG_OUTPUT_FILE = "/tmp/~tmp-output.pl.tmp";
+	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 	static final String SPACE = " ";
 	static final String LONG_TAB = "\t    : ";
@@ -153,6 +155,35 @@ public class ProblogProcessor {
 		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH + directory;
 		updatePermissions(start, problogDirectory);
 		installProblog(start, problogDirectory);
+	}
+
+	/**
+	 * Executes ProbLog and returns the exit value given by the operating
+	 * system.
+	 * 
+	 * @param start
+	 *            execution start
+	 * @param outputFileName
+	 *            file name of output
+	 * @return the exit value given by the operating system
+	 * @throws InterruptedException
+	 *             if the execution was interrupted
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	public int execute(long start, String outputFileName) {
+		try {
+			log("Execute ProbLog.", start);
+			Runtime runtime = Runtime.getRuntime();
+			String commandLine = PYTHON + SPACE + this.problogDirectory + SLASH + PROBLOG_CLI + SPACE
+					+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE + PROBLOG_OUTPUT_OPTION + SPACE
+					+ (new File(outputFileName)).getAbsolutePath();
+			log(commandLine, start);
+			Process process = runtime.exec(commandLine);
+			return process.waitFor();
+		} catch (InterruptedException | IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

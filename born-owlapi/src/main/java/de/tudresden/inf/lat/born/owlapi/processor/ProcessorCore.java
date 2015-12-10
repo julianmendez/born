@@ -102,41 +102,13 @@ public class ProcessorCore {
 
 	}
 
-	/**
-	 * Executes ProbLog and returns the exit value given by the operating
-	 * system.
-	 * 
-	 * @param start
-	 *            execution start
-	 * @param problogDirectory
-	 *            directory where ProbLog is installed
-	 * @param outputFileName
-	 *            file name of output
-	 * @return the exit value given by the operating system
-	 * @throws InterruptedException
-	 *             if the execution was interrupted
-	 * @throws IOException
-	 *             if something goes wrong with I/O
-	 */
-	int executeProblog(long start, String problogDirectory, String outputFileName)
-			throws InterruptedException, IOException {
-		log("Execute ProbLog.", start);
-		Runtime runtime = Runtime.getRuntime();
-		String commandLine = PYTHON + SPACE + problogDirectory + SLASH + PROBLOG_CLI + SPACE
-				+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE + PROBLOG_OUTPUT_OPTION + SPACE
-				+ (new File(outputFileName)).getAbsolutePath();
-		log(commandLine, start);
-		Process process = runtime.exec(commandLine);
-		return process.waitFor();
-	}
-
 	public String run(ProcessorConfiguration conf, long start) {
 		StringBuffer sbuf = new StringBuffer();
 		try {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
+			ProblogProcessor problogManager = new ProblogProcessor();
 			if (conf.isProblogNeeded()) {
-				ProblogProcessor problogManager = new ProblogProcessor();
 				problogManager.install(start);
 				conf.setProblogDirectory(problogManager.getProblogDirectory());
 			}
@@ -144,7 +116,7 @@ public class ProcessorCore {
 			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery());
 			log(info, start);
 
-			int exitVal = executeProblog(start, conf.getProblogDirectory(), conf.getOutputFileName());
+			int exitVal = problogManager.execute(start, conf.getOutputFileName());
 
 			log("End and show results.", start);
 
