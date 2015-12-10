@@ -17,7 +17,7 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
  * @author Julian Mendez
  *
  */
-public class ProblogManager {
+public class ProblogProcessor {
 
 	static final String SLASH = "/";
 	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI.create("https://bitbucket.org/problog/problog/get/master.zip");
@@ -36,11 +36,11 @@ public class ProblogManager {
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
 
-	public ProblogManager() {
+	public ProblogProcessor() {
 		this.problogDirectory = null;
 	}
 
-	public ProblogManager(String problogDirectory) {
+	public ProblogProcessor(String problogDirectory) {
 		this.problogDirectory = problogDirectory;
 	}
 
@@ -153,6 +153,28 @@ public class ProblogManager {
 		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH + directory;
 		updatePermissions(start, problogDirectory);
 		installProblog(start, problogDirectory);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof ProblogProcessor)) {
+			return false;
+		} else {
+			ProblogProcessor other = (ProblogProcessor) obj;
+			return this.getProblogDirectory().equals(other.getProblogDirectory());
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return this.problogDirectory;
 	}
 
 }

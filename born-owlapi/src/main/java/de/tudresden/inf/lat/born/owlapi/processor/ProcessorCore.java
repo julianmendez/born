@@ -136,7 +136,7 @@ public class ProcessorCore {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
 			if (conf.isProblogNeeded()) {
-				ProblogManager problogManager = new ProblogManager();
+				ProblogProcessor problogManager = new ProblogProcessor();
 				problogManager.install(start);
 				conf.setProblogDirectory(problogManager.getProblogDirectory());
 			}
