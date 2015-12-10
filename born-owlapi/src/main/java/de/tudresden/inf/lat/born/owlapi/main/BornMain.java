@@ -36,7 +36,7 @@ public class BornMain implements SubApp {
 	public String getHelp() {
 		StringBuffer sbuf = new StringBuffer();
 		sbuf.append(HELP);
-		for (String command : this.subAppMap.keySet()) {
+		this.subAppMap.keySet().forEach(command -> {
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 			sbuf.append(LINE);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
@@ -45,7 +45,7 @@ public class BornMain implements SubApp {
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 			sbuf.append(this.subAppMap.get(command).getHelp());
 			sbuf.append(Symbol.NEW_LINE_CHAR);
-		}
+		});
 		return sbuf.toString();
 	}
 

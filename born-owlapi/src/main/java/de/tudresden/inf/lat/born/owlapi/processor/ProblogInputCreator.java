@@ -96,17 +96,13 @@ public class ProblogInputCreator {
 
 		Set<Integer> classes = new TreeSet<>();
 		Set<Integer> objectProperties = new TreeSet<>();
-		for (NormalizedIntegerAxiom axiom : axioms) {
+		axioms.parallelStream().forEach(axiom -> {
 			classes.addAll(axiom.getClassesInSignature());
 			objectProperties.addAll(axiom.getObjectPropertiesInSignature());
-		}
+		});
 
-		for (Integer cls : classes) {
-			ret.add(renderer.renderDeclarationOfClass(cls));
-		}
-		for (Integer objectProperty : objectProperties) {
-			ret.add(renderer.renderDeclarationOfObjectProperty(objectProperty));
-		}
+		classes.forEach(cls -> ret.add(renderer.renderDeclarationOfClass(cls)));
+		objectProperties.forEach(objectProperty -> ret.add(renderer.renderDeclarationOfObjectProperty(objectProperty)));
 
 		return ret;
 	}
@@ -118,36 +114,46 @@ public class ProblogInputCreator {
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 		ontology.addAll(getDeclarations(factory, axioms));
 
-		for (NormalizedIntegerAxiom axiom : axioms) {
+		axioms.forEach(axiom -> {
 			Clause clause = axiom.accept(renderer);
 			ontology.add(clause);
-		}
+		});
 		return ontology;
+	}
+
+	String removeApostrophes(String symbolStr0) {
+		String symbolStr = symbolStr0;
+		if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
+			symbolStr = symbolStr.substring(1);
+			symbolStr = symbolStr.substring(0, symbolStr.length() - 1);
+			return symbolStr;
+		} else {
+			return symbolStr0;
+		}
+	}
+
+	Integer getId(Map<String, Integer> map, String symbolStr0) {
+		String symbolStr = removeApostrophes(symbolStr0);
+		if (symbolStr.equals(FormulaConstructor.TOP)) {
+			return IntegerEntityManager.topClassId;
+		} else {
+			return map.get(symbolStr);
+		}
 	}
 
 	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
 		Map<String, Integer> map = new TreeMap<>();
-		for (Integer id : factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)) {
-			map.put(factory.getEntityManager().getName(id), id);
-		}
+		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
+				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
 
 		Set<Integer> ret = new TreeSet<>();
-		for (String symbolStr0 : symbolStrSet) {
-			String symbolStr = symbolStr0;
-			if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
-				symbolStr = symbolStr.substring(1);
-				symbolStr = symbolStr.substring(0, symbolStr.length() - 1);
-			}
-			Integer id;
-			if (symbolStr.equals(FormulaConstructor.TOP)) {
-				id = IntegerEntityManager.topClassId;
-			} else {
-				id = map.get(symbolStr);
-			}
+		symbolStrSet.forEach(symbolStr -> {
+			Integer id = getId(map, symbolStr);
 			if (id != null) {
 				ret.add(id);
 			}
-		}
+
+		});
 		return ret;
 	}
 

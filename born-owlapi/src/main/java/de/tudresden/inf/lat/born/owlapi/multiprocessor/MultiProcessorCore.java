@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -60,9 +61,9 @@ public class MultiProcessorCore {
 	List<SubsumptionQuery> getQueries(OWLOntology ontology, int numberOfQueries, PseudorandomNumberGenerator random) {
 		List<OWLClass> listOfClasses = getClasses(ontology);
 		List<SubsumptionQuery> listOfQueries = new ArrayList<>();
-		for (int i = 0; i < numberOfQueries; i++) {
+		IntStream.range(0, numberOfQueries).forEach(x -> {
 			listOfQueries.add(getNextQuery(listOfClasses, random));
-		}
+		});
 		return listOfQueries;
 	}
 
@@ -71,7 +72,7 @@ public class MultiProcessorCore {
 		PseudorandomNumberGenerator random = new PseudorandomNumberGenerator(conf.getSeed());
 		ProcessorCore core = new ProcessorCore();
 
-		for (OntologyAndNetwork ontPair : conf.getOntologyList()) {
+		conf.getOntologyList().forEach(ontPair -> {
 
 			ProcessorConfiguration configuration = new ProcessorConfiguration();
 			configuration.setOntology(ontPair.getOntology());
@@ -83,8 +84,7 @@ public class MultiProcessorCore {
 			List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 			StringBuffer sbuf = new StringBuffer();
 
-			for (SubsumptionQuery query : queries) {
-
+			queries.forEach(query -> {
 				configuration.setQuery(query.asProblogString());
 				String result = core.run(configuration, start);
 				sbuf.append(query.getSubClass().getIRI());
@@ -93,9 +93,10 @@ public class MultiProcessorCore {
 				sbuf.append(TAB_CHAR);
 				sbuf.append(result.trim());
 				sbuf.append(NEW_LINE_CHAR);
-			}
+			});
 			ret.add(sbuf.toString());
-		}
+
+		});
 		return ret;
 	}
 

@@ -8,14 +8,12 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 //for OWL API 3.5.1
 import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
-import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -121,13 +119,9 @@ public class SplitterCore {
 			OutputStream networkOutputStream) throws IOException, OWLOntologyCreationException, OWLRendererException {
 		OWLOntology ont = loadOWLOntology(ontologyInputStream);
 		AnnotationProcessor processor = new AnnotationProcessor(ont.getOWLOntologyManager());
-		Set<OWLAxiom> axioms = ont.getAxioms();
-		for (OWLAxiom axiom : axioms) {
-			axiom.accept(processor);
-		}
+		ont.getAxioms().forEach(axiom -> axiom.accept(processor));
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
 		storeBayesianNetwork(processor.getVariables(), processor.getNetwork(), networkOutputStream);
-
 	}
 
 	public void run(SplitterConfiguration conf) {
