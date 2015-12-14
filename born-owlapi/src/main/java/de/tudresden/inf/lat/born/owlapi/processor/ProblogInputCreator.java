@@ -60,8 +60,9 @@ public class ProblogInputCreator {
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
 		List<String> list = tokens.stream()
-				.filter(t -> (t.getType().equals(TokenType.IDENTIFIER) || t.getType().equals(TokenType.CONSTANT)))
-				.map(t -> t.getValue()).collect(Collectors.toList());
+				.filter(token -> (token.getType().equals(TokenType.IDENTIFIER)
+						|| token.getType().equals(TokenType.CONSTANT)))
+				.map(token -> token.getValue()).collect(Collectors.toList());
 		list.remove(FormulaConstructor.QUERY);
 		list.remove(FormulaConstructor.SUB);
 		Set<String> set = new TreeSet<>();

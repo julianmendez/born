@@ -359,7 +359,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void addExamples(Collection<ExampleConfiguration> examples) {
-		examples.forEach(conf -> comboBoxExample.addItem(conf.getOntologyName()));
+		examples.forEach(configuration -> comboBoxExample.addItem(configuration.getOntologyName()));
 	}
 
 }

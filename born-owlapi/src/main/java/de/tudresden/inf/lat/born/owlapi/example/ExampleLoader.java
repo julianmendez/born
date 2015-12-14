@@ -94,7 +94,7 @@ public class ExampleLoader {
 
 	List<String> getExampleFilesFromJar(File file, String path) throws IOException {
 		JarFile jarFile = new JarFile(file);
-		List<String> ret = jarFile.stream().map(jf -> jf.getName()).filter(str -> str.startsWith(path))
+		List<String> ret = jarFile.stream().map(jarEntry -> jarEntry.getName()).filter(fileName -> fileName.startsWith(path))
 				.collect(Collectors.toList());
 		jarFile.close();
 		return ret;
@@ -106,7 +106,7 @@ public class ExampleLoader {
 		if (url != null) {
 			File f = new File(url.getPath());
 			List<File> files = Arrays.asList(f.listFiles());
-			files.forEach(e -> ret.add(e.getAbsolutePath()));
+			files.forEach(elem -> ret.add(elem.getAbsolutePath()));
 		}
 		return ret;
 	}
@@ -133,7 +133,7 @@ public class ExampleLoader {
 	}
 
 	List<String> getFilesWithExtension(List<String> list, String extension) {
-		return list.stream().filter(f -> f.endsWith(extension)).collect(Collectors.toList());
+		return list.stream().filter(fileName -> fileName.endsWith(extension)).collect(Collectors.toList());
 	}
 
 	OWLOntology readOntology(InputStream input) throws OWLOntologyCreationException {
