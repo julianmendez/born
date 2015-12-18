@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -72,10 +73,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	 *            <code>true</code> if and only if the reasoner is buffering
 	 */
 	public BornReasoner(OWLOntology rootOntology, boolean buffering) {
-		if (rootOntology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(rootOntology);
 		logger.fine("configuring BORN reasoner ...");
 		this.rootOntology = rootOntology;
 		logger.fine("resetting reasoner ...");
@@ -96,18 +94,12 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	 */
 	public BornReasoner(OWLOntology rootOntology, boolean buffering, OWLReasonerConfiguration configuration) {
 		this(rootOntology, buffering);
-		if (configuration == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(configuration);
 		this.reasonerConfiguration = configuration;
 	}
 
 	public boolean addAxiom(OWLAxiom axiom) {
-		if (axiom == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(axiom);
 		logger.finer("addAxiom(" + axiom + ")");
 		if (!this.buffering) {
 			resetReasoner();
@@ -157,10 +149,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLClass> getDataPropertyDomains(OWLDataProperty dataProperty, boolean direct)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (dataProperty == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(dataProperty);
 		logger.finer("getDataPropertyDomains(" + dataProperty + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getDataPropertyDomains(OWLDataProperty, boolean)");
@@ -170,13 +159,8 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public Set<OWLLiteral> getDataPropertyValues(OWLNamedIndividual individual, OWLDataProperty dataProperty)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (individual == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (dataProperty == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(individual);
+		Objects.requireNonNull(dataProperty);
 		logger.finer("getDataPropertyValues(" + individual + ", " + dataProperty + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getDataPropertyValues(OWLNamedIndividual, OWLDataProperty)");
@@ -186,10 +170,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLNamedIndividual> getDifferentIndividuals(OWLNamedIndividual individual)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (individual == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(individual);
 		logger.finer("getDifferentIndividuals(" + individual + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getDifferentIndividuals(OWLNamedIndividual)");
@@ -198,10 +179,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLClass> getDisjointClasses(OWLClassExpression classExpression) throws ReasonerInterruptedException,
 			TimeOutException, FreshEntitiesException, InconsistentOntologyException {
-		if (classExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(classExpression);
 		logger.finer("getDisjointClasses(" + classExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getDisjointClasses(OWLClassExpression)");
@@ -211,10 +189,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLDataProperty> getDisjointDataProperties(OWLDataPropertyExpression dataPropertyExpression)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (dataPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(dataPropertyExpression);
 		logger.finer("getDisjointDataProperties(" + dataPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getDisjointDataProperties(OWLDataPropertyExpression)");
@@ -224,10 +199,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLObjectPropertyExpression> getDisjointObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
 					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getDisjointDataProperties(" + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation :  getDisjointObjectProperties(OWLObjectPropertyExpression)");
@@ -235,10 +207,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 
 	@Override
 	public Node<OWLClass> getEquivalentClasses(OWLClassExpression classExpression) {
-		if (classExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(classExpression);
 		logger.finer("getEquivalentClasses(" + classExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation :  getEquivalentClasses(OWLClassExpression)");
@@ -248,10 +217,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public Node<OWLDataProperty> getEquivalentDataProperties(OWLDataProperty dataProperty)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (dataProperty == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(dataProperty);
 		logger.finer("getEquivalentDataProperties(" + dataProperty + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getEquivalentDataProperties(OWLDataProperty)");
@@ -261,10 +227,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public Node<OWLObjectPropertyExpression> getEquivalentObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
 					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getEquivalentObjectProperties(" + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getEquivalentObjectProperties(OWLObjectPropertyExpression)");
@@ -286,10 +249,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLNamedIndividual> getInstances(OWLClassExpression classExpression, boolean direct)
 			throws InconsistentOntologyException, ClassExpressionNotInProfileException, FreshEntitiesException,
 			ReasonerInterruptedException, TimeOutException {
-		if (classExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(classExpression);
 		logger.finer("getInstances(" + classExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getInstances(OWLClassExpression, boolean)");
@@ -299,10 +259,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public Node<OWLObjectPropertyExpression> getInverseObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
 					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getInverseObjectProperties(" + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getInverseObjectProperties(OWLObjectPropertyExpression)");
@@ -312,10 +269,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLClass> getObjectPropertyDomains(OWLObjectPropertyExpression objectPropertyExpression,
 			boolean direct) throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 					TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getObjectPropertyDomains(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getObjectPropertyDomains(OWLObjectPropertyExpression, boolean)");
@@ -325,10 +279,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLClass> getObjectPropertyRanges(OWLObjectPropertyExpression objectPropertyExpression,
 			boolean direct) throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 					TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getObjectPropertyRanges(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getObjectPropertyRanges(OWLObjectPropertyExpression, boolean)");
@@ -338,13 +289,8 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLNamedIndividual> getObjectPropertyValues(OWLNamedIndividual individual,
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
 					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
-		if (individual == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(individual);
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getObjectPropertyValues(" + individual + ", " + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation :  getObjectPropertyValues(OWLNamedIndividual)");
@@ -420,10 +366,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public Node<OWLNamedIndividual> getSameIndividuals(OWLNamedIndividual individual)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (individual == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(individual);
 		logger.finer("getSameIndividuals(" + individual + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSameIndividuals(OWLNamedIndividual)");
@@ -435,10 +378,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 
 	@Override
 	public NodeSet<OWLClass> getSubClasses(OWLClassExpression classExpression, boolean direct) {
-		if (classExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(classExpression);
 		logger.finer("getSubClasses(" + classExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSubClasses(OWLClassExpression, boolean)");
@@ -448,10 +388,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLDataProperty> getSubDataProperties(OWLDataProperty dataProperty, boolean direct)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (dataProperty == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(dataProperty);
 		logger.finer("getSubDataProperties(" + dataProperty + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSubDataProperties(OWLDataProperty, boolean)");
@@ -461,10 +398,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLObjectPropertyExpression> getSubObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression, boolean direct) throws InconsistentOntologyException,
 					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getSubObjectProperties(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSubObjectProperties(OWLObjectPropertyExpression, boolean)");
@@ -474,10 +408,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLClass> getSuperClasses(OWLClassExpression classExpression, boolean direct)
 			throws InconsistentOntologyException, ClassExpressionNotInProfileException, FreshEntitiesException,
 			ReasonerInterruptedException, TimeOutException {
-		if (classExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(classExpression);
 		logger.finer("getSuperClasses(" + classExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSuperClasses(OWLClassExpression, boolean)");
@@ -487,10 +418,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLDataProperty> getSuperDataProperties(OWLDataProperty dataProperty, boolean direct)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (dataProperty == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(dataProperty);
 		logger.finer("getSuperDataProperties(" + dataProperty + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSuperDataProperties(OWLDataProperty, boolean)");
@@ -500,10 +428,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLObjectPropertyExpression> getSuperObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression, boolean direct) throws InconsistentOntologyException,
 					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
-		if (objectPropertyExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getSuperObjectProperties(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSuperObjectProperties(OWLObjectPropertyExpression, boolean)");
@@ -539,10 +464,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	public NodeSet<OWLClass> getTypes(OWLNamedIndividual individual, boolean direct)
 			throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
 			TimeOutException {
-		if (individual == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(individual);
 		logger.finer("getTypes(" + individual + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getTypes(OWLNamedIndividual, boolean)");
@@ -569,10 +491,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public boolean isEntailed(OWLAxiom axiom) throws ReasonerInterruptedException, UnsupportedEntailmentTypeException,
 			TimeOutException, AxiomNotInProfileException, FreshEntitiesException {
-		if (axiom == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(axiom);
 		logger.finer("isEntailed((OWLAxiom) " + axiom + ")");
 		throw new UnsupportedReasonerOperationInBornException("Unsupported operation :  isEntailed(OWLAxiom)");
 	}
@@ -580,10 +499,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public boolean isEntailed(Set<? extends OWLAxiom> axiomSet) throws ReasonerInterruptedException,
 			UnsupportedEntailmentTypeException, TimeOutException, AxiomNotInProfileException, FreshEntitiesException {
-		if (axiomSet == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(axiomSet);
 		logger.finer("isEntailed((Set<? extends OWLAxiom>) " + axiomSet + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : isEntailed(Set<? extends OWLAxiom>)");
@@ -591,10 +507,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 
 	@Override
 	public boolean isEntailmentCheckingSupported(AxiomType<?> axiomType) {
-		if (axiomType == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(axiomType);
 		logger.finer("isEntailmentCheckingSupported(" + axiomType + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : isEntailmentCheckingSupported(AxiomType<?>)");
@@ -602,20 +515,14 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 
 	@Override
 	public boolean isPrecomputed(InferenceType inferenceType) {
-		if (inferenceType == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(inferenceType);
 		logger.finer("isPrecomputed(" + inferenceType + ")");
 		throw new UnsupportedReasonerOperationInBornException("Unsupported operation : isPrecomputed()");
 	}
 
 	@Override
 	public boolean isSatisfiable(OWLClassExpression classExpression) {
-		if (classExpression == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(classExpression);
 		logger.finer("isSatisfiable(" + classExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : isSatisfiable(OWLClassExpression)");
@@ -629,10 +536,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public void precomputeInferences(InferenceType... inferenceTypes)
 			throws ReasonerInterruptedException, TimeOutException, InconsistentOntologyException {
-		if (inferenceTypes == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(inferenceTypes);
 		logger.finer("precomputeInferences(" + inferenceTypes + ")");
 		if (this.reasonerConfiguration != null) {
 			this.reasonerConfiguration.getProgressMonitor().reasonerTaskStarted(ReasonerProgressMonitor.CLASSIFYING);
@@ -650,10 +554,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	}
 
 	public boolean removeAxiom(OWLAxiom axiom) {
-		if (axiom == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(axiom);
 		logger.finer("removeAxiom(" + axiom + ")");
 		this.isUpdateNeeded = true;
 		if (!this.buffering) {

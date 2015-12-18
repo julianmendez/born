@@ -94,8 +94,8 @@ public class ExampleLoader {
 
 	List<String> getExampleFilesFromJar(File file, String path) throws IOException {
 		JarFile jarFile = new JarFile(file);
-		List<String> ret = jarFile.stream().map(jarEntry -> jarEntry.getName()).filter(fileName -> fileName.startsWith(path))
-				.collect(Collectors.toList());
+		List<String> ret = jarFile.stream().map(jarEntry -> jarEntry.getName())
+				.filter(fileName -> fileName.startsWith(path)).collect(Collectors.toList());
 		jarFile.close();
 		return ret;
 	}

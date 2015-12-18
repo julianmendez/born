@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -53,13 +54,8 @@ public class Decompressor {
 	 *             if something goes wrong with I/O
 	 */
 	public ZipEntry decompress(File compressedFile, File outputDirectory) throws IOException {
-		if (compressedFile == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (outputDirectory == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(compressedFile);
+		Objects.requireNonNull(outputDirectory);
 		ZipEntry ret = null;
 		if (!outputDirectory.exists()) {
 			outputDirectory.mkdirs();

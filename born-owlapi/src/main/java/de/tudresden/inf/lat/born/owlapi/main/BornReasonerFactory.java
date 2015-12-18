@@ -6,6 +6,8 @@
 
 package de.tudresden.inf.lat.born.owlapi.main;
 
+import java.util.Objects;
+
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
@@ -24,45 +26,29 @@ public class BornReasonerFactory implements OWLReasonerFactory {
 
 	@Override
 	public BornReasoner createNonBufferingReasoner(OWLOntology ontology) {
-		if (ontology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(ontology);
 		return new BornReasoner(ontology, false);
 	}
 
 	@Override
 	public BornReasoner createNonBufferingReasoner(OWLOntology ontology, OWLReasonerConfiguration configuration)
 			throws IllegalConfigurationException {
-		if (ontology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (configuration == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(configuration);
 		return new BornReasoner(ontology, false, configuration);
 	}
 
 	@Override
 	public BornReasoner createReasoner(OWLOntology ontology) {
-		if (ontology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(ontology);
 		return new BornReasoner(ontology, true);
 	}
 
 	@Override
 	public BornReasoner createReasoner(OWLOntology ontology, OWLReasonerConfiguration configuration)
 			throws IllegalConfigurationException {
-		if (ontology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (configuration == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(configuration);
 		return new BornReasoner(ontology, true, configuration);
 	}
 

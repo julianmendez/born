@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.IntStream;
@@ -102,13 +103,8 @@ public class MultiProcessorCore {
 
 	public static List<OntologyAndNetwork> getOntologyAndNetworkList(String ontologyDirectory,
 			String bayesianNetworkDirectory) {
-		if (ontologyDirectory == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (bayesianNetworkDirectory == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(ontologyDirectory);
+		Objects.requireNonNull(bayesianNetworkDirectory);
 		try {
 			List<OntologyAndNetwork> ret = new ArrayList<>();
 			if (!ontologyDirectory.isEmpty() && !bayesianNetworkDirectory.isEmpty()) {

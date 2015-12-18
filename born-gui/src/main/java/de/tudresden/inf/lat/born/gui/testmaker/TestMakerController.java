@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
@@ -52,10 +53,7 @@ public class TestMakerController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(e);
 		String cmd = e.getActionCommand();
 		if (cmd.equals(actionSelectInputOntologyFile)) {
 			executeActionSelectInputOntologyFile();

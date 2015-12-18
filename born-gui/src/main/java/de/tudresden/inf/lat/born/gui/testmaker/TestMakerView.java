@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.gui.testmaker;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -50,10 +51,7 @@ public class TestMakerView extends JPanel {
 	 *            model
 	 */
 	public TestMakerView(AnnotatorConfiguration model) {
-		if (model == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(model);
 		this.model = model;
 		createPanel();
 	}
@@ -67,13 +65,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonSelectInputOntologyFile.addActionListener(listener);
 		buttonSelectInputOntologyFile.setActionCommand(actionCommand);
 	}
@@ -87,13 +80,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonSelectOutputOntologyFileListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonSaveOntologyFile.addActionListener(listener);
 		buttonSaveOntologyFile.setActionCommand(actionCommand);
 	}
@@ -107,13 +95,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonSaveBayesianNetworkListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonSaveBayesianNetwork.addActionListener(listener);
 		buttonSaveBayesianNetwork.setActionCommand(actionCommand);
 	}
@@ -127,13 +110,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addTextFieldInputOntologyFileListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		textInputOntologyFile.addActionListener(listener);
 		textInputOntologyFile.setActionCommand(actionCommand);
 	}
@@ -147,13 +125,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addTextFieldListOfParentsListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		textListOfParents.addActionListener(listener);
 		textListOfParents.setActionCommand(actionCommand);
 	}
@@ -167,13 +140,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addTextFieldThresholdListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		textThreshold.addActionListener(listener);
 		textThreshold.setActionCommand(actionCommand);
 	}
@@ -188,13 +156,8 @@ public class TestMakerView extends JPanel {
 	 *            action command
 	 */
 	public void addTextFieldMaxNumberOfVarListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		textMaxNumberOfVars.addActionListener(listener);
 		textMaxNumberOfVars.setActionCommand(actionCommand);
 	}

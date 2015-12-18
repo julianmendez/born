@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Objects;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -32,10 +33,7 @@ public class BornView extends JPanel {
 	 *            model
 	 */
 	public BornView(BornModel model) {
-		if (model == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(model);
 		this.model = model;
 		this.processorView = new ProcessorView(this.model.getProcessorConfiguration());
 		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());

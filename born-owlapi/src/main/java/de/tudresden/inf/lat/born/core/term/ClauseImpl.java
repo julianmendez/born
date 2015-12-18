@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.core.term;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Default implementation of a clause.
@@ -33,12 +34,8 @@ public class ClauseImpl implements Clause {
 	 *            body
 	 */
 	public ClauseImpl(Term head, List<Term> body) {
-		if (head == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (body == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
+		Objects.requireNonNull(head);
+		Objects.requireNonNull(body);
 		this.head = head;
 		this.body.addAll(body);
 	}

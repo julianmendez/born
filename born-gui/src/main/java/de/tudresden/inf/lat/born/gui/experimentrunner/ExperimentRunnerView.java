@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.gui.experimentrunner;
 
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -43,10 +44,7 @@ public class ExperimentRunnerView extends JPanel {
 	 *            model
 	 */
 	public ExperimentRunnerView(MultiProcessorConfiguration model) {
-		if (model == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
 		createPanel();
@@ -61,13 +59,8 @@ public class ExperimentRunnerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonInputOntologyListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		this.buttonInputOntologyDirectory.addActionListener(listener);
 		this.buttonInputOntologyDirectory.setActionCommand(actionCommand);
 	}
@@ -81,13 +74,8 @@ public class ExperimentRunnerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonBayesianNetworkListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		this.buttonBayesianNetworkDirectory.addActionListener(listener);
 		this.buttonBayesianNetworkDirectory.setActionCommand(actionCommand);
 	}
@@ -101,13 +89,8 @@ public class ExperimentRunnerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonOutputDirectoryListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		this.buttonOutputDirectory.addActionListener(listener);
 		this.buttonOutputDirectory.setActionCommand(actionCommand);
 	}
@@ -121,13 +104,8 @@ public class ExperimentRunnerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonUpdateSeedListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		this.buttonUpdateSeed.addActionListener(listener);
 		this.buttonUpdateSeed.setActionCommand(actionCommand);
 	}
@@ -141,13 +119,8 @@ public class ExperimentRunnerView extends JPanel {
 	 *            action command
 	 */
 	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		this.buttonComputeInference.addActionListener(listener);
 		this.buttonComputeInference.setActionCommand(actionCommand);
 	}

@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
+import java.util.Objects;
+
 import org.semanticweb.owlapi.model.OWLClass;
 
 /**
@@ -26,13 +28,8 @@ public class SubsumptionQuery {
 	 *            super class
 	 */
 	public SubsumptionQuery(OWLClass subClass, OWLClass superClass) {
-		if (subClass == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (superClass == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(subClass);
+		Objects.requireNonNull(superClass);
 		this.subClass = subClass;
 		this.superClass = superClass;
 	}

@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.core.term;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Default implementation of a clause.
@@ -34,12 +35,8 @@ public class ProbClauseImpl implements ProbClause {
 	 *            probability
 	 */
 	public ProbClauseImpl(Term head, List<Term> body, String probability) {
-		if (head == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (body == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
+		Objects.requireNonNull(head);
+		Objects.requireNonNull(body);
 		this.clause = new ClauseImpl(head, body);
 		this.probability = probability;
 	}

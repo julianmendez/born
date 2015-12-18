@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.JFileChooser;
 
@@ -75,10 +76,7 @@ public class ExperimentRunnerController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(e);
 		String cmd = e.getActionCommand();
 		if (cmd.equals(actionInputOntology)) {
 			executeActionInputOntologyDirectory();

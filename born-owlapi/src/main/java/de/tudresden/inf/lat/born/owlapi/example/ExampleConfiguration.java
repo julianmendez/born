@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.example;
 
+import java.util.Objects;
+
 import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
@@ -37,24 +39,12 @@ public class ExampleConfiguration {
 	 */
 	public ExampleConfiguration(String ontologyName, String ontologyFileName, OWLOntology owlOntology,
 			String bayesianNetworkFileName, String bayesianNetwork, String query) {
-		if (ontologyName == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (ontologyFileName == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (owlOntology == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (bayesianNetworkFileName == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (bayesianNetwork == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (query == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
+		Objects.requireNonNull(ontologyName);
+		Objects.requireNonNull(ontologyFileName);
+		Objects.requireNonNull(owlOntology);
+		Objects.requireNonNull(bayesianNetworkFileName);
+		Objects.requireNonNull(bayesianNetwork);
+		Objects.requireNonNull(query);
 
 		this.ontologyName = ontologyName;
 		this.ontologyFileName = ontologyFileName;

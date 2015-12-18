@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
+import java.util.Objects;
+
 import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
@@ -37,13 +39,8 @@ public class OntologyAndNetwork {
 	 *            Bayesian network in ProbLog syntax
 	 */
 	public OntologyAndNetwork(OWLOntology owlOntology, String bayesianNetwork) {
-		if (owlOntology == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (bayesianNetwork == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-
+		Objects.requireNonNull(owlOntology);
+		Objects.requireNonNull(bayesianNetwork);
 		this.owlOntology = owlOntology;
 		this.ontologyName = owlOntology.getOntologyID().toString();
 		this.bayesianNetwork = bayesianNetwork;
@@ -60,16 +57,9 @@ public class OntologyAndNetwork {
 	 *            Bayesian network in ProbLog syntax
 	 */
 	public OntologyAndNetwork(String ontologyName, OWLOntology owlOntology, String bayesianNetwork) {
-		if (ontologyName == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (owlOntology == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-		if (bayesianNetwork == null) {
-			throw new IllegalArgumentException("Null arguments.");
-		}
-
+		Objects.requireNonNull(ontologyName);
+		Objects.requireNonNull(owlOntology);
+		Objects.requireNonNull(bayesianNetwork);
 		this.ontologyName = ontologyName;
 		this.owlOntology = owlOntology;
 		this.bayesianNetwork = bayesianNetwork;

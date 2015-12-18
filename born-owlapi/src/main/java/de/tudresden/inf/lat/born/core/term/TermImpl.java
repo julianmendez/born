@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.core.term;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Default implementation of a term.
@@ -53,13 +54,8 @@ public class TermImpl implements Term {
 	 *            arguments
 	 */
 	public TermImpl(String name, List<Term> arguments) {
-		if (name == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (arguments == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(arguments);
 		if (isLong(name) || isDouble(name) || isVariable(name)) {
 			throw new IllegalArgumentException("Invalid functor: '" + name + "'. ");
 		}
@@ -84,16 +80,9 @@ public class TermImpl implements Term {
 	 *            right term
 	 */
 	public TermImpl(Term leftTerm, String infixOperator, Term rightTerm) {
-		if (leftTerm == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (infixOperator == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (rightTerm == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(leftTerm);
+		Objects.requireNonNull(infixOperator);
+		Objects.requireNonNull(rightTerm);
 		this.name = infixOperator;
 		this.arguments.add(leftTerm);
 		this.arguments.add(rightTerm);

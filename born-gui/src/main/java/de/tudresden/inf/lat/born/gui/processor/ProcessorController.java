@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.gui.processor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Objects;
 
 import javax.swing.JFileChooser;
 
@@ -71,10 +72,7 @@ public class ProcessorController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(e);
 		String cmd = e.getActionCommand();
 		if (cmd.equals(actionInputOntology)) {
 			executeActionInputOntology();

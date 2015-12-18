@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.problog.type;
 
 import java.net.URI;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.processor.AnnotationType;
@@ -19,10 +20,7 @@ public class ProblogAnnotation implements Annotation {
 	private final String containedValue;
 
 	public ProblogAnnotation(Annotation annotation) {
-		if (annotation == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(annotation);
 		this.annotationProperty = annotation.getAnnotationProperty();
 		this.annotationValue = annotation.getAnnotationValue();
 		this.containedType = getContainedType(this.annotationValue);

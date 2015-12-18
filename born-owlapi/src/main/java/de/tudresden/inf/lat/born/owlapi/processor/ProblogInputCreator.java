@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -160,22 +161,10 @@ public class ProblogInputCreator {
 
 	public String createProblogFile(OWLOntology owlOntology, String bayesianNetwork, String query,
 			OutputStream resultOutputStream) throws IOException, OWLOntologyCreationException {
-		if (owlOntology == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		if (bayesianNetwork == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		if (query == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
-		if (resultOutputStream == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(owlOntology);
+		Objects.requireNonNull(bayesianNetwork);
+		Objects.requireNonNull(query);
+		Objects.requireNonNull(resultOutputStream);
 		StringBuffer sbuf = new StringBuffer();
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 

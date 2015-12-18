@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.Objects;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -52,95 +53,57 @@ public class ProcessorView extends JPanel {
 	private final ProcessorConfiguration model;
 
 	public ProcessorView(ProcessorConfiguration model) {
-		if (model == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
 		createPanel();
 	}
 
 	public void addButtonOntologyFileListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonOntologyFile.addActionListener(listener);
 		buttonOntologyFile.setActionCommand(actionCommand);
 	}
 
 	public void addButtonBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonBayesianNetworkFile.addActionListener(listener);
 		buttonBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
 	public void addButtonConsoleInputListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonConsoleInput.addActionListener(listener);
 		buttonConsoleInput.setActionCommand(actionCommand);
 	}
 
 	public void addButtonConsoleOutputListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonConsoleOutput.addActionListener(listener);
 		buttonConsoleOutput.setActionCommand(actionCommand);
 	}
 
 	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonComputeInference.addActionListener(listener);
 		buttonComputeInference.setActionCommand(actionCommand);
 	}
 
 	public void addComboBoxExampleListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		comboBoxExample.addActionListener(listener);
 		comboBoxExample.setActionCommand(actionCommand);
 	}
 
 	public void addButtonUpdateExampleListener(ActionListener listener, String actionCommand) {
-		if (listener == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-		if (actionCommand == null) {
-			throw new IllegalArgumentException("Null argument.");
-		}
-
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
 		buttonUpdateExample.addActionListener(listener);
 		buttonUpdateExample.setActionCommand(actionCommand);
 	}
