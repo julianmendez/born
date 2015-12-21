@@ -16,7 +16,7 @@ read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it
 
 ## Download
 
-* [all-in-one ZIP file](https://lat.inf.tu-dresden.de/systems/born/files/born/0.2.0/zip/born-0.2.0.zip)
+* [all-in-one ZIP file](http://sourceforge.net/projects/latitude/files/born/0.2.0/born-0.2.0.zip/download)
 * [The Central Repository](https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/)
 * as dependency
 ```xml
