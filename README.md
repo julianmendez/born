@@ -64,6 +64,12 @@ $ cd target
 $ jar -cf bundle.jar born-parent-*
 ```
 
+The version number is updated with:
+```
+$ mvn versions:set -DnewVersion=NEW_VERSION
+```
+where *NEW_VERSION* is the new version.
+
 
 ## License
 
