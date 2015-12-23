@@ -70,6 +70,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.tukaani</groupId>
+			<artifactId>xz</artifactId>
+			<version>1.5</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.openrdf.sesame</groupId>
 			<artifactId>sesame-model</artifactId>
 			<version>2.7.12</version>
@@ -215,6 +221,7 @@
 							@javax.inject-1.jar,
 							@aopalliance-1.0.jar,
 							@commons-io-2.4.jar,
+							@xz-1.5.jar,
 							@sesame-model-2.7.12.jar,
 							@sesame-rio-api-2.7.12.jar,
 							@sesame-rio-binary-2.7.12.jar,
