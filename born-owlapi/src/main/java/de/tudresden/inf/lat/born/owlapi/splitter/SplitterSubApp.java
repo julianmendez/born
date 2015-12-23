@@ -7,10 +7,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
-//for OWL API 3.5.1
-
-//for OWL API 4.0.2
-//import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
