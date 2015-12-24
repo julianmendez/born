@@ -11,6 +11,7 @@
 
 ### v0.3.0
 *(unreleased)*
+* uese jcel 0.23.2
 * uses the OWL API 4.1.3
 * runs on Java 8
 * can be used as a plug-in for Protégé 5.0.0-beta-21
@@ -27,6 +28,7 @@ $ mvn clean install
 * includes a graphical user interface with integrated examples
 * adds the following command:
  * experiment runner: runs the processor on multiple files
+* uese jcel 0.22.0
 * uses the OWL API 3.5.1
 * runs on Java 7
 * can be used as a plug-in for Protégé 5.0.0-beta-17
@@ -58,6 +60,7 @@ $ mvn clean install
  * splitter:  splits a probabilistic OWL ontology in two parts: an OWL ontology with variables, and a Bayesian network
  * network creator: creates a Bayesian network using randomized values with the ProbLog syntax
 * can be used as a library or executed as a standalone
+* uses jcel 0.21.0
 * uses the OWL API 3.5.0
 * runs on Java 8
 * requires Python 2.7+ or 3.2+ installed
