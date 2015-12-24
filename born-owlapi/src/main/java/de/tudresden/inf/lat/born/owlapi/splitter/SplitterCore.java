@@ -9,17 +9,13 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-//for OWL API 3.5.1
-import org.coode.owlapi.owlxml.renderer.OWLXMLRenderer;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
 import org.semanticweb.owlapi.io.OWLRendererException;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-
-//for OWL API 4.0.2
-//import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
+import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
