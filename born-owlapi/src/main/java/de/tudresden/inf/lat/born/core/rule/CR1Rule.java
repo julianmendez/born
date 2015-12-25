@@ -59,7 +59,14 @@ public class CR1Rule implements CompletionRule {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.clause.equals(obj);
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof CR1Rule)) {
+			return false;
+		} else {
+			CR1Rule other = (CR1Rule) obj;
+			return this.clause.equals(other.clause);
+		}
 	}
 
 	@Override

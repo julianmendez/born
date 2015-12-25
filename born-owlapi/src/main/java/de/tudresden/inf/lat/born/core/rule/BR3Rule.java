@@ -54,7 +54,14 @@ public class BR3Rule implements CompletionRule {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.clause.equals(obj);
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof BR3Rule)) {
+			return false;
+		} else {
+			BR3Rule other = (BR3Rule) obj;
+			return this.clause.equals(other.clause);
+		}
 	}
 
 	@Override
