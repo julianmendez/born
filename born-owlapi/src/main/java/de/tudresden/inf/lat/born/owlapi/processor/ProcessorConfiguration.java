@@ -127,6 +127,7 @@ public class ProcessorConfiguration {
 	 *             if something goes wrong with I/O
 	 */
 	public static String read(Reader reader) throws IOException {
+		Objects.requireNonNull(reader);
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader input = new BufferedReader(reader);
 		for (String line = input.readLine(); !Objects.isNull(line); line = input.readLine()) {
@@ -147,6 +148,8 @@ public class ProcessorConfiguration {
 	 *             if something goes wrong with I/O
 	 */
 	public static void write(Reader reader, Writer writer) throws IOException {
+		Objects.requireNonNull(reader);
+		Objects.requireNonNull(writer);
 		BufferedWriter output = new BufferedWriter(writer);
 		BufferedReader input = new BufferedReader(reader);
 		for (String line = input.readLine(); !Objects.isNull(line); line = input.readLine()) {
@@ -166,6 +169,7 @@ public class ProcessorConfiguration {
 	 *             if something goes wrong with ontology creation
 	 */
 	public static OWLOntology readOntology(InputStream input) throws OWLOntologyCreationException {
+		Objects.requireNonNull(input);
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
 	}

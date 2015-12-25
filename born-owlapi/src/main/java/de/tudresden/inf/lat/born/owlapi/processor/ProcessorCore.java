@@ -51,6 +51,8 @@ public class ProcessorCore {
 	 *             if something goes wrong with I/O
 	 */
 	void show(StringBuffer sbuf, Reader input) throws IOException {
+		Objects.requireNonNull(sbuf);
+		Objects.requireNonNull(input);
 		BufferedReader reader = new BufferedReader(input);
 		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
 			sbuf.append(line);
@@ -96,6 +98,9 @@ public class ProcessorCore {
 	 */
 	String createProblogFile(long start, OWLOntology ontology, String bayesianNetwork, String query)
 			throws OWLOntologyCreationException, IOException {
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(bayesianNetwork);
+		Objects.requireNonNull(query);
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(ontology, bayesianNetwork, query,

@@ -28,12 +28,15 @@ public class AnnotatorCore {
 	}
 
 	OWLOntology loadOWLOntology(InputStream input) throws OWLOntologyCreationException {
+		Objects.requireNonNull(input);
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
 	}
 
 	void storeOWLOntology(OWLOntology ontology, OutputStream ontologyOutputStream)
 			throws IOException, OWLRendererException {
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(ontologyOutputStream);
 		AbstractOWLRenderer renderer = new OWLXMLRenderer();
 		Writer writer = new OutputStreamWriter(ontologyOutputStream);
 		renderer.render(ontology, writer);
@@ -42,6 +45,8 @@ public class AnnotatorCore {
 
 	public void annotate(InputStream ontologyInputStream, OutputStream newOntologyOutputStream, double threshold,
 			int maxNumberOfVars) throws IOException, OWLOntologyCreationException, OWLRendererException {
+		Objects.requireNonNull(ontologyInputStream);
+		Objects.requireNonNull(newOntologyOutputStream);
 		OWLOntology ont = loadOWLOntology(ontologyInputStream);
 		AnnotationCreator processor = new AnnotationCreator(ont.getOWLOntologyManager(), threshold, maxNumberOfVars);
 		ont.getAxioms().forEach(axiom -> axiom.accept(processor));

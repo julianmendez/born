@@ -84,6 +84,7 @@ public class TokenCreator {
 	}
 
 	public List<Token> createTokens(Reader reader) throws IOException {
+		Objects.requireNonNull(reader);
 		List<Token> ret = new ArrayList<>();
 		BufferedReader in = new BufferedReader(reader);
 		int lineNumber = 0;

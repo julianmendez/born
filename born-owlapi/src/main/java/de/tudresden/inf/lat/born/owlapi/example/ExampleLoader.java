@@ -173,6 +173,7 @@ public class ExampleLoader {
 	}
 
 	public InputStream getInputStreamForFile(String fileName) throws FileNotFoundException {
+		Objects.requireNonNull(fileName);
 		InputStream owlInputStream;
 		if (isInJar()) {
 			owlInputStream = getClass().getClassLoader().getResourceAsStream(fileName);
@@ -201,6 +202,7 @@ public class ExampleLoader {
 	 */
 	public List<ExampleConfiguration> getOntologyAndNetworkFiles(List<String> list)
 			throws IOException, OWLOntologyCreationException {
+		Objects.requireNonNull(list);
 		List<ExampleConfiguration> ret = new ArrayList<>();
 		List<String> owlFiles = getFilesWithExtension(list, OWL_EXTENSION);
 

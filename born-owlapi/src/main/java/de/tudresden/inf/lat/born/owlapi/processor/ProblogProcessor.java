@@ -79,6 +79,7 @@ public class ProblogProcessor implements QueryProcessor {
 	 *             if the default URI is not valid
 	 */
 	void downloadProblog(long start, String problogZipFile) throws IOException, URISyntaxException {
+		Objects.requireNonNull(problogZipFile);
 		log("Download ProbLog.", start);
 		ReadableByteChannel channel = Channels.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
 		FileOutputStream output = new FileOutputStream(problogZipFile);
@@ -99,6 +100,8 @@ public class ProblogProcessor implements QueryProcessor {
 	 *             if something goes wrong with I/O
 	 */
 	String decompressProblog(long start, String problogZipFile, String problogDirectory) throws IOException {
+		Objects.requireNonNull(problogZipFile);
+		Objects.requireNonNull(problogDirectory);
 		log("Decompress ProbLog.", start);
 		Decompressor installer = new Decompressor();
 		ZipEntry directory = installer.decompress(new File(problogZipFile), new File(problogDirectory));
@@ -116,6 +119,7 @@ public class ProblogProcessor implements QueryProcessor {
 	 *             if something goes wrong with I/O
 	 */
 	void updatePermissions(long start, String problogDirectory) throws IOException {
+		Objects.requireNonNull(problogDirectory);
 		log("Update permissions.", start);
 		(new File(problogDirectory + SLASH + PROBLOG_EXEC_LINUX)).setExecutable(true);
 		(new File(problogDirectory + SLASH + PROBLOG_EXEC_DARWIN)).setExecutable(true);
@@ -137,6 +141,7 @@ public class ProblogProcessor implements QueryProcessor {
 	 *             if the execution was interrupted
 	 */
 	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
+		Objects.requireNonNull(problogDirectory);
 		log("Install ProbLog.", start);
 		String commandLine = PYTHON + SPACE + problogDirectory + SLASH + PROBLOG_CLI + SPACE + PROBLOG_INSTALL_COMMAND;
 		log(commandLine, start);

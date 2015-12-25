@@ -31,6 +31,8 @@ public class Decompressor {
 	 *             if something goes wrong with I/O
 	 */
 	void storeFile(InputStream inputStream, File outputFile) throws IOException {
+		Objects.requireNonNull(inputStream);
+		Objects.requireNonNull(outputFile);
 		BufferedInputStream input = new BufferedInputStream(inputStream);
 		BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(outputFile));
 		for (int ch = input.read(); ch != -1; ch = input.read()) {

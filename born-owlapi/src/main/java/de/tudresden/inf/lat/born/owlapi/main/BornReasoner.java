@@ -531,6 +531,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 
 	@Override
 	public void ontologiesChanged(List<? extends OWLOntologyChange> changes) throws OWLException {
+		Objects.requireNonNull(changes);
 		// TODO not implemented
 	}
 

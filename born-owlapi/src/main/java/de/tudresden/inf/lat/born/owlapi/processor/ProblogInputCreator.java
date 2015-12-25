@@ -58,6 +58,7 @@ public class ProblogInputCreator {
 	private static final String NUMBER_OF_AXIOMS_IN_MODULE = "  Number of axioms in module: ";
 
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
+		Objects.requireNonNull(reader);
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
 		List<String> list = tokens.stream()
@@ -86,6 +87,8 @@ public class ProblogInputCreator {
 	}
 
 	void write(Writer output, ProblogProgram program) throws IOException {
+		Objects.requireNonNull(output);
+		Objects.requireNonNull(program);
 		BufferedWriter writer = new BufferedWriter(output);
 		writer.write(program.asString());
 		writer.flush();
@@ -113,7 +116,8 @@ public class ProblogInputCreator {
 
 	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms)
 			throws IOException {
-
+		Objects.requireNonNull(factory);
+		Objects.requireNonNull(axioms);
 		List<Clause> ontology = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 		ontology.addAll(getDeclarations(factory, axioms));
