@@ -300,6 +300,7 @@ public class TestMakerView extends JPanel {
 	 *            file name
 	 */
 	public void setInputOntologyFile(String fileName) {
+		Objects.requireNonNull(fileName);
 		textInputOntologyFile.setText(fileName);
 	}
 
@@ -319,6 +320,7 @@ public class TestMakerView extends JPanel {
 	 *            the threshold
 	 */
 	public void setThreshold(String threshold) {
+		Objects.requireNonNull(threshold);
 		textThreshold.setText(threshold);
 	}
 
@@ -338,6 +340,7 @@ public class TestMakerView extends JPanel {
 	 *            the maximum number of variables
 	 */
 	public void setMaxNumberOfVar(String maxNumberOfVars) {
+		Objects.requireNonNull(maxNumberOfVars);
 		textMaxNumberOfVars.setText(maxNumberOfVars);
 	}
 
@@ -357,6 +360,7 @@ public class TestMakerView extends JPanel {
 	 *            the list of parents
 	 */
 	public void setListOfParents(String listOfParents) {
+		Objects.requireNonNull(listOfParents);
 		textListOfParents.setText(listOfParents);
 	}
 

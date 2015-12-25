@@ -206,6 +206,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setOntologyFile(String fileName) {
+		Objects.requireNonNull(fileName);
 		textOntologyFile.setText(fileName);
 	}
 
@@ -214,6 +215,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setBayesianNetworkFile(String fileName) {
+		Objects.requireNonNull(fileName);
 		textBayesianNetworkFile.setText(fileName);
 	}
 
@@ -222,10 +224,12 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setConsoleInput(String text) {
+		Objects.requireNonNull(text);
 		textConsoleInput.setText(text);
 	}
 
 	public void readConsoleInput(String consoleInputFile) {
+		Objects.requireNonNull(consoleInputFile);
 		if (!Objects.isNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
 			try {
 				String text = ProcessorConfiguration.read(new FileReader(consoleInputFile));
@@ -238,6 +242,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void writeConsoleOutput(String consoleOutputFile) {
+		Objects.requireNonNull(consoleOutputFile);
 		if (!Objects.isNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = this.textConsoleOutput.getText();
@@ -253,6 +258,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setConsoleOutput(String fileName) {
+		Objects.requireNonNull(fileName);
 		textConsoleOutput.setText(fileName);
 	}
 
@@ -304,6 +310,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void setResult(String result) {
+		Objects.requireNonNull(result);
 		textConsoleOutput.setText(result);
 	}
 
@@ -322,6 +329,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void addExamples(Collection<ExampleConfiguration> examples) {
+		Objects.requireNonNull(examples);
 		examples.forEach(configuration -> comboBoxExample.addItem(configuration.getOntologyName()));
 	}
 

@@ -69,6 +69,8 @@ public class ExperimentRunnerController implements ActionListener {
 	 *            an OWL ontology manager
 	 */
 	public ExperimentRunnerController(ExperimentRunnerView view, OWLOntologyManager ontologyManager) {
+		Objects.requireNonNull(view);
+		Objects.requireNonNull(ontologyManager);
 		this.view = view;
 		this.owlOntologyManager = ontologyManager;
 		init();

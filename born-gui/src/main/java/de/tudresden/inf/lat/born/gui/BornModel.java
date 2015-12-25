@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.gui;
 
 import java.util.Date;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
@@ -45,6 +46,7 @@ public class BornModel {
 	 *            annotator configuration
 	 */
 	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
+		Objects.requireNonNull(annotatorConfiguration);
 		this.annotatorConfiguration = annotatorConfiguration;
 	}
 
@@ -64,6 +66,7 @@ public class BornModel {
 	 *            processor configuration
 	 */
 	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
+		Objects.requireNonNull(processorConfiguration);
 		this.processorConfiguration = processorConfiguration;
 	}
 
@@ -83,6 +86,7 @@ public class BornModel {
 	 *            multi processor configuration
 	 */
 	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
+		Objects.requireNonNull(multiProcessorConfiguration);
 		this.multiProcessorConfiguration = multiProcessorConfiguration;
 	}
 

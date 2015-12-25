@@ -46,6 +46,8 @@ public class TestMakerController implements ActionListener {
 	 *            an OWL ontology manager
 	 */
 	public TestMakerController(TestMakerView view, OWLOntologyManager ontologyManager) {
+		Objects.requireNonNull(view);
+		Objects.requireNonNull(ontologyManager);
 		this.view = view;
 		this.owlOntologyManager = ontologyManager;
 		init();
@@ -80,6 +82,7 @@ public class TestMakerController implements ActionListener {
 	}
 
 	void annotateOntology(OutputStream output) {
+		Objects.requireNonNull(output);
 		getView().updateThreshold();
 		getView().updateMaxNumberOfVars();
 		AnnotatorConfiguration conf = getModel();
@@ -105,6 +108,7 @@ public class TestMakerController implements ActionListener {
 	}
 
 	List<Integer> parseIntegers(String str) {
+		Objects.requireNonNull(str);
 		List<Integer> ret = new ArrayList<Integer>();
 		StringTokenizer stok = new StringTokenizer(str, ",");
 		while (stok.hasMoreTokens()) {
@@ -117,6 +121,7 @@ public class TestMakerController implements ActionListener {
 	}
 
 	void createBayesianNetwork(OutputStream output) {
+		Objects.requireNonNull(output);
 		List<Integer> listOfParents = parseIntegers(getView().getListOfParents());
 		BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfiguration();
 		conf.setDependencies(listOfParents);

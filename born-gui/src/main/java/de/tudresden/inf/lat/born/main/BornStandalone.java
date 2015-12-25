@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.main;
 
 import java.awt.Dimension;
+import java.util.Objects;
 
 import javax.swing.JFrame;
 
@@ -20,6 +21,7 @@ public class BornStandalone {
 	 *            parameters (which are ignored)
 	 */
 	public static void main(String[] args) {
+		Objects.requireNonNull(args);
 		(new BornStandalone()).run();
 	}
 

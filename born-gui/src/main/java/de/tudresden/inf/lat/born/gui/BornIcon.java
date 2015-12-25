@@ -41,6 +41,7 @@ public class BornIcon {
 	 *         invalid
 	 */
 	public static ImageIcon createIcon(String path, int size) {
+		Objects.requireNonNull(path);
 		ImageIcon ret = null;
 		try {
 			URL url = BornIcon.class.getClassLoader().getResource(path);
@@ -70,6 +71,7 @@ public class BornIcon {
 	 * @return an icon created with the default size for the given path
 	 */
 	public static ImageIcon createIcon(String path) {
+		Objects.requireNonNull(path);
 		return createIcon(path, DEFAULT_ICON_SIZE);
 	}
 

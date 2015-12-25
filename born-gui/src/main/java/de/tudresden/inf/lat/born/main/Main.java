@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.main;
 
+import java.util.Objects;
+
 import de.tudresden.inf.lat.born.owlapi.main.BornMain;
 
 /**
@@ -30,6 +32,7 @@ public class Main {
 	 *         empty string, if the graphical user interface was run
 	 */
 	public String run(String[] args) {
+		Objects.requireNonNull(args);
 		if (args.length == 0) {
 			BornStandalone standalone = new BornStandalone();
 			standalone.run();
@@ -48,6 +51,7 @@ public class Main {
 	 *            parameters
 	 */
 	public static void main(String[] args) {
+		Objects.requireNonNull(args);
 		Main instance = new Main();
 		System.out.println(instance.run(args));
 	}

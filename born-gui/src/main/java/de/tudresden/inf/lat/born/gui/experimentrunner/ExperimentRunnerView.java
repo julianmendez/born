@@ -235,6 +235,7 @@ public class ExperimentRunnerView extends JPanel {
 	 *            directory
 	 */
 	public void setInputOntologyDirectory(String directoryName) {
+		Objects.requireNonNull(directoryName);
 		this.textInputOntologyDirectory.setText(directoryName);
 		updateInputOntologyDirectory();
 	}
@@ -255,6 +256,7 @@ public class ExperimentRunnerView extends JPanel {
 	 *            directory
 	 */
 	public void setBayesianNetworkDirectory(String directoryName) {
+		Objects.requireNonNull(directoryName);
 		this.textBayesianNetworkDirectory.setText(directoryName);
 		updateBayesianNetworkDirectory();
 	}
@@ -275,6 +277,7 @@ public class ExperimentRunnerView extends JPanel {
 	 *            directory
 	 */
 	public void setOutputDirectory(String directoryName) {
+		Objects.requireNonNull(directoryName);
 		this.textOutputDirectory.setText(directoryName);
 		updateOutputDirectory();
 	}
@@ -406,6 +409,7 @@ public class ExperimentRunnerView extends JPanel {
 	 *            the seed
 	 */
 	public void setSeed(String seed) {
+		Objects.requireNonNull(seed);
 		this.textSeed.setText(seed);
 	}
 
