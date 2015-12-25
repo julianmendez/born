@@ -94,6 +94,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	 */
 	public BornReasoner(OWLOntology rootOntology, boolean buffering, OWLReasonerConfiguration configuration) {
 		this(rootOntology, buffering);
+		Objects.requireNonNull(rootOntology);
 		Objects.requireNonNull(configuration);
 		this.reasonerConfiguration = configuration;
 	}

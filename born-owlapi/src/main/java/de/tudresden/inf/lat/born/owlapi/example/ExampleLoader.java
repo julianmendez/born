@@ -94,6 +94,8 @@ public class ExampleLoader {
 	}
 
 	List<String> getExampleFilesFromJar(File file, String path) throws IOException {
+		Objects.requireNonNull(file);
+		Objects.requireNonNull(path);
 		JarFile jarFile = new JarFile(file);
 		List<String> ret = jarFile.stream().map(jarEntry -> jarEntry.getName())
 				.filter(fileName -> fileName.startsWith(path)).collect(Collectors.toList());
@@ -102,6 +104,7 @@ public class ExampleLoader {
 	}
 
 	List<String> getExampleFilesFromDirectory(String path) {
+		Objects.requireNonNull(path);
 		List<String> ret = new ArrayList<>();
 		URL url = getClass().getClassLoader().getResource(path);
 		if (!Objects.isNull(url)) {
@@ -122,6 +125,7 @@ public class ExampleLoader {
 	 *             if something goes wrong with I/O
 	 */
 	public List<String> getExampleFiles(String path) throws IOException {
+		Objects.requireNonNull(path);
 		List<String> ret = new ArrayList<>();
 		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
 		if (jarFile.isFile()) {
@@ -134,16 +138,20 @@ public class ExampleLoader {
 	}
 
 	List<String> getFilesWithExtension(List<String> list, String extension) {
+		Objects.requireNonNull(list);
+		Objects.requireNonNull(extension);
 		return list.stream().filter(fileName -> fileName.endsWith(extension)).collect(Collectors.toList());
 	}
 
 	OWLOntology readOntology(InputStream input) throws OWLOntologyCreationException {
+		Objects.requireNonNull(input);
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ret = manager.loadOntologyFromOntologyDocument(input);
 		return ret;
 	}
 
 	String getFile(InputStream input) throws IOException {
+		Objects.requireNonNull(input);
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
@@ -155,6 +163,7 @@ public class ExampleLoader {
 	}
 
 	String getFileName(String fileNameWithPath) {
+		Objects.requireNonNull(fileNameWithPath);
 		String ret = fileNameWithPath;
 		int lastIndex = fileNameWithPath.lastIndexOf(SLASH_CHAR);
 		if (lastIndex != -1) {

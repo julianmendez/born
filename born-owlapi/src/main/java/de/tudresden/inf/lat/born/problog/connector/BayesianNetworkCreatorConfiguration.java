@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.problog.connector;
 
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 
@@ -18,6 +19,7 @@ public class BayesianNetworkCreatorConfiguration {
 	}
 
 	public void setDependencies(List<Integer> dependencies) {
+		Objects.requireNonNull(dependencies);
 		this.dependencies = dependencies;
 	}
 
@@ -26,6 +28,7 @@ public class BayesianNetworkCreatorConfiguration {
 	}
 
 	public void setOutput(OutputStream output) {
+		Objects.requireNonNull(output);
 		this.output = output;
 	}
 

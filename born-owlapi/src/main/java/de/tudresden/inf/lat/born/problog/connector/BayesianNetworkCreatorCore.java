@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -84,6 +85,7 @@ public class BayesianNetworkCreatorCore {
 	}
 
 	public List<ProbClause> createNetwork(List<Integer> variables) {
+		Objects.requireNonNull(variables);
 		List<ProbClause> ret = new ArrayList<>();
 		int variableIndex = 0;
 		for (int parents = 0; parents < variables.size(); parents++) {
@@ -98,6 +100,8 @@ public class BayesianNetworkCreatorCore {
 	}
 
 	public void write(Writer writer, List<ProbClause> network) throws IOException {
+		Objects.requireNonNull(writer);
+		Objects.requireNonNull(network);
 		BufferedWriter output = new BufferedWriter(writer);
 		for (ProbClause clause : network) {
 			output.append(clause.asString());
@@ -107,6 +111,7 @@ public class BayesianNetworkCreatorCore {
 	}
 
 	public void run(BayesianNetworkCreatorConfiguration conf) {
+		Objects.requireNonNull(conf);
 		try {
 			List<ProbClause> network = createNetwork(conf.getDependencies());
 			write(new OutputStreamWriter(conf.getOutput()), network);

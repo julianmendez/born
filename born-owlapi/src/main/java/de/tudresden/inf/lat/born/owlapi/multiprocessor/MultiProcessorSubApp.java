@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
@@ -53,6 +54,7 @@ public class MultiProcessorSubApp implements SubApp {
 
 	@Override
 	public boolean isValid(String[] args) {
+		Objects.requireNonNull(args);
 		return (((args.length == 5) && !args[0].equals(LOGGING_OPTION)) || (args.length == 6)
 				|| ((args.length == 7) && args[0].equals(LOGGING_OPTION)));
 	}
@@ -64,6 +66,7 @@ public class MultiProcessorSubApp implements SubApp {
 
 	@Override
 	public String run(String[] args) {
+		Objects.requireNonNull(args);
 		long start = System.nanoTime();
 		if (isValid(args)) {
 			MultiProcessorConfiguration conf = new MultiProcessorConfiguration();

@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
@@ -25,6 +26,7 @@ public class MultiProcessorConfiguration {
 	}
 
 	public void setOntologyList(List<OntologyAndNetwork> ontologyList) {
+		Objects.requireNonNull(ontologyList);
 		this.ontologyList = ontologyList;
 	}
 
@@ -33,6 +35,7 @@ public class MultiProcessorConfiguration {
 	}
 
 	public void setOutputDirectory(String outputDirectory) {
+		Objects.requireNonNull(outputDirectory);
 		this.outputDirectory = outputDirectory;
 	}
 
@@ -57,6 +60,7 @@ public class MultiProcessorConfiguration {
 	}
 
 	public void setQueryProcessor(QueryProcessor queryProcessor) {
+		Objects.requireNonNull(queryProcessor);
 		this.queryProcessor = queryProcessor;
 	}
 

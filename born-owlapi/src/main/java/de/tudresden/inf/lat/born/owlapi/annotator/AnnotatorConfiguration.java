@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 /**
  * 
@@ -20,6 +21,7 @@ public class AnnotatorConfiguration {
 	}
 
 	public void setInputOntology(InputStream inputOntology) {
+		Objects.requireNonNull(inputOntology);		
 		this.inputOntology = inputOntology;
 	}
 
@@ -28,6 +30,7 @@ public class AnnotatorConfiguration {
 	}
 
 	public void setOutputOntology(OutputStream outputOntology) {
+		Objects.requireNonNull(outputOntology);
 		this.outputOntology = outputOntology;
 	}
 

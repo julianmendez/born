@@ -39,10 +39,12 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	private final IntegerOntologyObjectFactory factory;
 
 	public AxiomRenderer(IntegerOntologyObjectFactory factory) {
+		Objects.requireNonNull(factory);
 		this.factory = factory;
 	}
 
 	String removeDoubleBackslash(String str) {
+		Objects.requireNonNull(str);
 		StringBuffer sbuf = new StringBuffer();
 		boolean backslash = false;
 		for (int index = 0; index < str.length(); index++) {
@@ -111,6 +113,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	}
 
 	public Clause renderDeclarationOfClass(Integer entity) {
+		Objects.requireNonNull(entity);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
 		Set<Annotation> emptySet = Collections.emptySet();
@@ -119,6 +122,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	}
 
 	public Clause renderDeclarationOfObjectProperty(Integer entity) {
+		Objects.requireNonNull(entity);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
 		Set<Annotation> emptySet = Collections.emptySet();
@@ -128,11 +132,13 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 
 	@Override
 	public Clause visit(FunctObjectPropAxiom axiom) {
+		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Clause visit(GCI0Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(axiom.getSubClass());
 		Term b = get(axiom.getSuperClass());
@@ -142,6 +148,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 
 	@Override
 	public Clause visit(GCI1Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a1 = get(axiom.getLeftSubClass());
 		Term a2 = get(axiom.getRightSubClass());
@@ -152,6 +159,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 
 	@Override
 	public Clause visit(GCI2Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(axiom.getSubClass());
 		Term r = get(axiom.getPropertyInSuperClass());
@@ -162,6 +170,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 
 	@Override
 	public Clause visit(GCI3Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term r = get(axiom.getPropertyInSubClass());
 		Term a = get(axiom.getClassInSubClass());
@@ -172,26 +181,31 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 
 	@Override
 	public Clause visit(NominalAxiom axiom) {
+		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Clause visit(RangeAxiom axiom) {
+		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Clause visit(RI1Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Clause visit(RI2Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Clause visit(RI3Axiom axiom) {
+		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 

@@ -93,6 +93,8 @@ public class ProblogInputCreator {
 	}
 
 	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms) {
+		Objects.requireNonNull(factory);
+		Objects.requireNonNull(axioms);
 		List<Clause> ret = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
@@ -144,6 +146,8 @@ public class ProblogInputCreator {
 	}
 
 	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
+		Objects.requireNonNull(factory);
+		Objects.requireNonNull(symbolStrSet);
 		Map<String, Integer> map = new TreeMap<>();
 		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));

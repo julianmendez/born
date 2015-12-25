@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.problog.type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.rule.CompletionRule;
 import de.tudresden.inf.lat.born.core.term.Clause;
@@ -38,6 +39,7 @@ public class ProblogProgram {
 	}
 
 	public void setCompletionRules(List<CompletionRule> completionRules) {
+		Objects.requireNonNull(completionRules);
 		this.completionRules.clear();
 		this.completionRules.addAll(completionRules);
 	}
@@ -47,6 +49,7 @@ public class ProblogProgram {
 	}
 
 	public void setOntology(List<Clause> ontology) {
+		Objects.requireNonNull(ontology);
 		this.ontology.clear();
 		this.ontology.addAll(ontology);
 	}
@@ -56,6 +59,7 @@ public class ProblogProgram {
 	}
 
 	public void setBayesianNetwork(List<ProbClause> bayesianNetwork) {
+		Objects.requireNonNull(bayesianNetwork);
 		this.bayesianNetwork.clear();
 		this.bayesianNetwork.addAll(bayesianNetwork);
 	}
@@ -65,6 +69,7 @@ public class ProblogProgram {
 	}
 
 	public void setBayesianNetworkAddendum(String bayesianNetworkAddendum) {
+		Objects.requireNonNull(bayesianNetworkAddendum);
 		this.bayesianNetworkAddendum = bayesianNetworkAddendum;
 	}
 
@@ -73,6 +78,7 @@ public class ProblogProgram {
 	}
 
 	public void setQueries(List<Clause> queries) {
+		Objects.requireNonNull(queries);
 		this.queries.clear();
 		this.queries.addAll(queries);
 	}
@@ -82,6 +88,7 @@ public class ProblogProgram {
 	}
 
 	public void setQueryListAddendum(String queryListAddendum) {
+		Objects.requireNonNull(queryListAddendum);
 		this.queryListAddendum = queryListAddendum;
 	}
 
@@ -95,12 +102,14 @@ public class ProblogProgram {
 	}
 
 	String asString(List<Clause> clauses) {
+		Objects.requireNonNull(clauses);
 		StringBuffer sb = new StringBuffer();
 		clauses.forEach(clause -> sb.append(clause.asString()));
 		return sb.toString();
 	}
 
 	String asStringC(List<CompletionRule> clauses) {
+		Objects.requireNonNull(clauses);
 		StringBuffer sb = new StringBuffer();
 		clauses.forEach(clause -> {
 			sb.append(clause.asString());
@@ -111,6 +120,7 @@ public class ProblogProgram {
 	}
 
 	String asStringP(List<ProbClause> clauses) {
+		Objects.requireNonNull(clauses);
 		StringBuffer sb = new StringBuffer();
 		clauses.forEach(clause -> sb.append(clause.asString()));
 		return sb.toString();

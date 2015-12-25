@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
@@ -35,11 +36,13 @@ public class SplitterSubApp implements SubApp {
 
 	@Override
 	public boolean isValid(String args[]) {
+		Objects.requireNonNull(args);
 		return (args.length == 3);
 	}
 
 	@Override
 	public String run(String args[]) {
+		Objects.requireNonNull(args);
 		if (isValid(args)) {
 			try {
 				SplitterConfiguration conf = new SplitterConfiguration();

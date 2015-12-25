@@ -17,6 +17,7 @@ public class TokenCreator {
 	}
 
 	List<Token> createTokens(String str, int lineNumber) {
+		Objects.requireNonNull(str);
 		List<Token> ret = new ArrayList<>();
 		if (!Objects.isNull(str) && !str.isEmpty()) {
 			Mode mode = Mode.CODE;

@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.core.rule;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.ClauseImpl;
@@ -40,6 +41,7 @@ public class FormulaConstructor {
 	 * @return new constant
 	 */
 	public Term newCons(String name) {
+		Objects.requireNonNull(name);
 		List<Term> emptyList = Collections.emptyList();
 		return new TermImpl(name, emptyList);
 	}
@@ -53,6 +55,7 @@ public class FormulaConstructor {
 	 */
 
 	public Term newVar(String name) {
+		Objects.requireNonNull(name);
 		Term ret = new TermImpl(name);
 		if (!(ret.getType().equals(Term.Type.VARIABLE))) {
 			throw new IllegalArgumentException("Invalid variable name: '" + name
@@ -71,6 +74,8 @@ public class FormulaConstructor {
 	 * @return the result of applying the functor to one parameter
 	 */
 	public Term fun(String name, Term term) {
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(term);
 		List<Term> arguments = new ArrayList<>();
 		arguments.add(term);
 		return new TermImpl(name, arguments);
@@ -88,6 +93,9 @@ public class FormulaConstructor {
 	 * @return the result of applying the functor to two parameters
 	 */
 	public Term fun(String name, Term left, Term right) {
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(left);
+		Objects.requireNonNull(right);
 		List<Term> arguments = new ArrayList<>();
 		arguments.add(left);
 		arguments.add(right);
@@ -111,6 +119,7 @@ public class FormulaConstructor {
 	 * @return the result of declaring a term as a concept
 	 */
 	public Term con(Term clss) {
+		Objects.requireNonNull(clss);
 		return fun(CON, clss);
 	}
 
@@ -124,6 +133,7 @@ public class FormulaConstructor {
 	 *         property)
 	 */
 	public Term role(Term clss) {
+		Objects.requireNonNull(clss);
 		return fun(ROLE, clss);
 	}
 
@@ -137,6 +147,8 @@ public class FormulaConstructor {
 	 * @return the axiom denoting subsumption
 	 */
 	public Term sub(Term subClass, Term superClass) {
+		Objects.requireNonNull(subClass);
+		Objects.requireNonNull(superClass);
 		return fun(SUB, subClass, superClass);
 	}
 
@@ -150,6 +162,8 @@ public class FormulaConstructor {
 	 * @return the axiom denoting subsumption
 	 */
 	public Term subs(Term subClass, Term superClass) {
+		Objects.requireNonNull(subClass);
+		Objects.requireNonNull(superClass);
 		return fun(SUBS, subClass, superClass);
 	}
 
@@ -166,18 +180,25 @@ public class FormulaConstructor {
 	 * 
 	 */
 	public Term and(Term left, Term right) {
+		Objects.requireNonNull(left);
+		Objects.requireNonNull(right);
 		return fun(AND, left, right);
 	}
 
 	public Term exists(Term property, Term clss) {
+		Objects.requireNonNull(property);
+		Objects.requireNonNull(clss);
 		return fun(EXISTS, property, clss);
 	}
 
 	public Clause rule(Term head, List<Term> body) {
+		Objects.requireNonNull(head);
+		Objects.requireNonNull(body);
 		return new ClauseImpl(head, body);
 	}
 
 	public Clause query(Term query) {
+		Objects.requireNonNull(query);
 		List<Term> list = new ArrayList<>();
 		list.add(query);
 		TermImpl term = new TermImpl(QUERY, list);

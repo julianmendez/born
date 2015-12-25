@@ -44,6 +44,7 @@ public class ProcessorConfiguration {
 	}
 
 	public void setOntology(OWLOntology ontologyInputStream) {
+		Objects.requireNonNull(ontologyInputStream);
 		this.ontology = ontologyInputStream;
 	}
 
@@ -52,6 +53,7 @@ public class ProcessorConfiguration {
 	}
 
 	public void setBayesianNetwork(String bayesianNetwork) {
+		Objects.requireNonNull(bayesianNetwork);
 		this.bayesianNetwork = bayesianNetwork;
 	}
 
@@ -68,6 +70,7 @@ public class ProcessorConfiguration {
 	}
 
 	public void setOutputFileName(String outputFileName) {
+		Objects.requireNonNull(outputFileName);
 		this.outputFileName = outputFileName;
 	}
 
@@ -76,6 +79,7 @@ public class ProcessorConfiguration {
 	}
 
 	public void setQueryProcessor(QueryProcessor queryProcessor) {
+		Objects.requireNonNull(queryProcessor);
 		this.queryProcessor = queryProcessor;
 	}
 

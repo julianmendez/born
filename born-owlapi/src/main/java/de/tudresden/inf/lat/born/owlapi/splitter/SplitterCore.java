@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
@@ -82,6 +83,9 @@ public class SplitterCore {
 	 */
 	void storeBayesianNetwork(List<String> keyOrder, Map<String, String> map, OutputStream outputNetwork)
 			throws IOException {
+		Objects.requireNonNull(keyOrder);
+		Objects.requireNonNull(map);
+		Objects.requireNonNull(outputNetwork);
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputNetwork));
 		for (String key : keyOrder) {
 			String value = map.get(key);
@@ -113,6 +117,9 @@ public class SplitterCore {
 	 */
 	public void split(InputStream ontologyInputStream, OutputStream newOntologyOutputStream,
 			OutputStream networkOutputStream) throws IOException, OWLOntologyCreationException, OWLRendererException {
+		Objects.requireNonNull(ontologyInputStream);
+		Objects.requireNonNull(newOntologyOutputStream);
+		Objects.requireNonNull(networkOutputStream);
 		OWLOntology ont = loadOWLOntology(ontologyInputStream);
 		AnnotationProcessor processor = new AnnotationProcessor(ont.getOWLOntologyManager());
 		ont.getAxioms().forEach(axiom -> axiom.accept(processor));
@@ -121,6 +128,7 @@ public class SplitterCore {
 	}
 
 	public void run(SplitterConfiguration conf) {
+		Objects.requireNonNull(conf);
 		try {
 			split(conf.getInputOntology(), conf.getOutputOntology(), conf.getBayesianNetwork());
 		} catch (IOException e) {

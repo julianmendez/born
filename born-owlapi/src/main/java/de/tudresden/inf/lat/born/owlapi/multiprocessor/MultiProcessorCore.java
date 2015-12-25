@@ -45,6 +45,7 @@ public class MultiProcessorCore {
 	}
 
 	List<OWLClass> getClasses(OWLOntology ontology) {
+		Objects.requireNonNull(ontology);
 		List<OWLClass> listOfClasses = new ArrayList<>();
 		Set<OWLClass> treeSet = new TreeSet<>();
 		treeSet.addAll(ontology.getClassesInSignature());
@@ -53,6 +54,8 @@ public class MultiProcessorCore {
 	}
 
 	SubsumptionQuery getNextQuery(List<OWLClass> listOfClasses, PseudorandomNumberGenerator random) {
+		Objects.requireNonNull(listOfClasses);
+		Objects.requireNonNull(random);
 		int n = listOfClasses.size();
 		int a = random.nextInt(n);
 		int b = random.nextInt(n);
@@ -60,6 +63,8 @@ public class MultiProcessorCore {
 	}
 
 	List<SubsumptionQuery> getQueries(OWLOntology ontology, int numberOfQueries, PseudorandomNumberGenerator random) {
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(random);
 		List<OWLClass> listOfClasses = getClasses(ontology);
 		List<SubsumptionQuery> listOfQueries = new ArrayList<>();
 		IntStream.range(0, numberOfQueries).forEach(x -> {
@@ -69,6 +74,7 @@ public class MultiProcessorCore {
 	}
 
 	public List<String> run(MultiProcessorConfiguration conf, long start) {
+		Objects.requireNonNull(conf);
 		List<String> ret = new ArrayList<>();
 		PseudorandomNumberGenerator random = new PseudorandomNumberGenerator(conf.getSeed());
 		ProcessorCore core = new ProcessorCore();
@@ -144,6 +150,8 @@ public class MultiProcessorCore {
 	}
 
 	public void storeResults(MultiProcessorConfiguration conf, List<String> list) throws IOException {
+		Objects.requireNonNull(conf);
+		Objects.requireNonNull(list);
 		Iterator<String> resultIt = list.iterator();
 		List<OntologyAndNetwork> ontologyList = conf.getOntologyList();
 		String outputDirectory = conf.getOutputDirectory();

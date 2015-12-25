@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Objects;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
@@ -48,6 +49,7 @@ public class AnnotatorCore {
 	}
 
 	public void run(AnnotatorConfiguration conf) {
+		Objects.requireNonNull(conf);
 		try {
 			annotate(conf.getInputOntology(), conf.getOutputOntology(), conf.getThreshold(), conf.getMaxNumberOfVars());
 		} catch (IOException e) {

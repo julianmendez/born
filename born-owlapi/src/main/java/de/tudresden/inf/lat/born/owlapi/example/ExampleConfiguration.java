@@ -45,7 +45,6 @@ public class ExampleConfiguration {
 		Objects.requireNonNull(bayesianNetworkFileName);
 		Objects.requireNonNull(bayesianNetwork);
 		Objects.requireNonNull(query);
-
 		this.ontologyName = ontologyName;
 		this.ontologyFileName = ontologyFileName;
 		this.owlOntology = owlOntology;

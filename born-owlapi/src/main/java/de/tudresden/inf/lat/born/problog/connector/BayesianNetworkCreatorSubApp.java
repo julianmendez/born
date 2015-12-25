@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
@@ -30,6 +31,7 @@ public class BayesianNetworkCreatorSubApp implements SubApp {
 	}
 
 	boolean isValidInput(List<Integer> variables) {
+		Objects.requireNonNull(variables);
 		int accumVars = 0;
 		boolean isValid = true;
 		for (int parents = 0; isValid && (parents < variables.size()); parents++) {

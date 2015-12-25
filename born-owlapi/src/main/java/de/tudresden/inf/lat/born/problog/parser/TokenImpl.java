@@ -28,6 +28,7 @@ public class TokenImpl implements Token {
 	 *            line number
 	 */
 	public TokenImpl(String str, int lineNumber) {
+		Objects.requireNonNull(str);
 		this.tokenValue = str;
 		this.lineNumber = lineNumber;
 		this.tokenType = findType(str);
@@ -53,28 +54,34 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isBlank(String str) {
+		Objects.requireNonNull(str);
 		return (Objects.isNull(str) || str.trim().isEmpty());
 	}
 
 	boolean isComment(String str) {
+		Objects.requireNonNull(str);
 		return (!Objects.isNull(str) && str.startsWith("" + Symbol.PERCENT_CHAR));
 	}
 
 	boolean isSymbol(String str) {
+		Objects.requireNonNull(str);
 		return getSymbols().contains(str);
 	}
 
 	boolean isString(String str) {
+		Objects.requireNonNull(str);
 		return (!Objects.isNull(str) && str.trim().length() >= 2 && str.startsWith("" + Symbol.QUOTES_CHAR)
 				&& str.endsWith("" + Symbol.QUOTES_CHAR));
 	}
 
 	boolean isConstantWithApostrophes(String str) {
+		Objects.requireNonNull(str);
 		return (!Objects.isNull(str) && str.trim().length() >= 2 && str.startsWith("" + Symbol.APOSTROPHE_CHAR)
 				&& str.endsWith("" + Symbol.APOSTROPHE_CHAR));
 	}
 
 	boolean isIdentifier(String str) {
+		Objects.requireNonNull(str);
 		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else {
@@ -85,6 +92,7 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isConstant(String str) {
+		Objects.requireNonNull(str);
 		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else if (isConstantWithApostrophes(str)) {
@@ -95,6 +103,7 @@ public class TokenImpl implements Token {
 	}
 
 	TokenType findType(String str) {
+		Objects.requireNonNull(str);
 		if (isBlank(str)) {
 			return TokenType.BLANK;
 		} else if (isComment(str)) {

@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.splitter;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 /**
  * 
@@ -19,6 +20,7 @@ public class SplitterConfiguration {
 	}
 
 	public void setInputOntology(InputStream inputOntology) {
+		Objects.requireNonNull(inputOntology);
 		this.inputOntology = inputOntology;
 	}
 
@@ -27,6 +29,7 @@ public class SplitterConfiguration {
 	}
 
 	public void setOutputOntology(OutputStream outputOntology) {
+		Objects.requireNonNull(outputOntology);
 		this.outputOntology = outputOntology;
 	}
 
@@ -35,6 +38,7 @@ public class SplitterConfiguration {
 	}
 
 	public void setBayesianNetwork(OutputStream bayesianNetwork) {
+		Objects.requireNonNull(bayesianNetwork);
 		this.bayesianNetwork = bayesianNetwork;
 	}
 

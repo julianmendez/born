@@ -45,6 +45,7 @@ public class ProblogProcessor implements QueryProcessor {
 	}
 
 	public ProblogProcessor(String problogDirectory) {
+		Objects.requireNonNull(problogDirectory);
 		this.problogDirectory = problogDirectory;
 	}
 
@@ -57,6 +58,7 @@ public class ProblogProcessor implements QueryProcessor {
 	 *            execution start
 	 */
 	void log(String str, long start) {
+		Objects.requireNonNull(str);
 		long current = System.nanoTime();
 		String info = "" + (current - start) + LONG_TAB + str;
 		if (this.isShowingLog) {
@@ -203,6 +205,7 @@ public class ProblogProcessor implements QueryProcessor {
 	 * @return the exit value given by the operating system
 	 */
 	public int execute(long start, String outputFileName) {
+		Objects.requireNonNull(outputFileName);
 		synchronized (this.problogInstallationMonitor) {
 
 		}

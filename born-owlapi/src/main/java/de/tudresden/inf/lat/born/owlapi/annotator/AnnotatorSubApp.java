@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
@@ -31,11 +32,13 @@ public class AnnotatorSubApp implements SubApp {
 
 	@Override
 	public boolean isValid(String[] args) {
+		Objects.requireNonNull(args);
 		return (2 <= args.length) && (args.length <= 4);
 	}
 
 	@Override
 	public String run(String args[]) {
+		Objects.requireNonNull(args);
 		if (isValid(args)) {
 			AnnotatorConfiguration conf = new AnnotatorConfiguration();
 

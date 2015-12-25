@@ -52,6 +52,7 @@ public class BornMain implements SubApp {
 
 	@Override
 	public boolean isValid(String[] args) {
+		Objects.requireNonNull(args);
 		if (args.length == 0) {
 			return false;
 		} else {

@@ -32,6 +32,7 @@ public class TermImpl implements Term {
 	 *            variable name
 	 */
 	public TermImpl(String name) {
+		Objects.requireNonNull(name);
 		if (isLong(name)) {
 			this.termType = Term.Type.LONG;
 		} else if (isDouble(name)) {
@@ -90,6 +91,7 @@ public class TermImpl implements Term {
 	}
 
 	public boolean isVariable(String name) {
+		Objects.requireNonNull(name);
 		if (Objects.isNull(name) || name.trim().isEmpty()) {
 			return false;
 		} else {
@@ -99,6 +101,7 @@ public class TermImpl implements Term {
 	}
 
 	public boolean isLong(String name) {
+		Objects.requireNonNull(name);
 		if (Objects.isNull(name) || name.trim().isEmpty()) {
 			return false;
 		} else {
@@ -112,6 +115,7 @@ public class TermImpl implements Term {
 	}
 
 	public boolean isDouble(String name) {
+		Objects.requireNonNull(name);
 		if (Objects.isNull(name) || name.trim().isEmpty()) {
 			return false;
 		} else {

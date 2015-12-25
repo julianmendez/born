@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Objects;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
@@ -55,6 +56,7 @@ public class ProcessorSubApp implements SubApp {
 
 	@Override
 	public boolean isValid(String[] args) {
+		Objects.requireNonNull(args);
 		return (((args.length == 4) && !args[0].equals(LOGGING_OPTION)) || (args.length == 5)
 				|| ((args.length == 6) && args[0].equals(LOGGING_OPTION)));
 	}
@@ -66,6 +68,7 @@ public class ProcessorSubApp implements SubApp {
 
 	@Override
 	public String run(String[] args) {
+		Objects.requireNonNull(args);
 		long start = System.nanoTime();
 		if (isValid(args)) {
 			ProcessorConfiguration conf = new ProcessorConfiguration();

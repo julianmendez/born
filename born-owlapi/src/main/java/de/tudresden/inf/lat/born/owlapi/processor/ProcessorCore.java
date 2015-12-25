@@ -67,6 +67,8 @@ public class ProcessorCore {
 	 *            execution start
 	 */
 	void log(String str, long start) {
+		Objects.requireNonNull(str);
+		Objects.requireNonNull(start);
 		long current = System.nanoTime();
 		String info = "" + (current - start) + LONG_TAB + str;
 		if (this.isShowingLog) {
@@ -103,6 +105,7 @@ public class ProcessorCore {
 	}
 
 	public String run(ProcessorConfiguration conf, long start) {
+		Objects.requireNonNull(conf);
 		StringBuffer sbuf = new StringBuffer();
 		try {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
