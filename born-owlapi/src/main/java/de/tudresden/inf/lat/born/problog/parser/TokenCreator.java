@@ -18,7 +18,7 @@ public class TokenCreator {
 
 	List<Token> createTokens(String str, int lineNumber) {
 		List<Token> ret = new ArrayList<>();
-		if (str != null && !str.isEmpty()) {
+		if (!Objects.isNull(str) && !str.isEmpty()) {
 			Mode mode = Mode.CODE;
 			StringBuffer token = new StringBuffer();
 			int i = 0;
@@ -73,7 +73,7 @@ public class TokenCreator {
 	}
 
 	List<Token> removeBlanksAndComments(List<Token> tokens) {
-		if (Objects.isNull(tokens )) {
+		if (Objects.isNull(tokens)) {
 			return new ArrayList<>();
 		} else {
 			return tokens.stream().filter(
@@ -87,9 +87,9 @@ public class TokenCreator {
 		BufferedReader in = new BufferedReader(reader);
 		int lineNumber = 0;
 		String line = "";
-		while (line != null) {
+		while (!Objects.isNull(line)) {
 			line = in.readLine();
-			if (line != null) {
+			if (!Objects.isNull(line)) {
 				lineNumber += 1;
 				ret.addAll(removeBlanksAndComments(createTokens(line, lineNumber)));
 			}

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.Objects;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -124,7 +125,7 @@ public class ProcessorConfiguration {
 	public static String read(Reader reader) throws IOException {
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader input = new BufferedReader(reader);
-		for (String line = input.readLine(); line != null; line = input.readLine()) {
+		for (String line = input.readLine(); !Objects.isNull(line); line = input.readLine()) {
 			sbuf.append(line);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		}
@@ -144,7 +145,7 @@ public class ProcessorConfiguration {
 	public static void write(Reader reader, Writer writer) throws IOException {
 		BufferedWriter output = new BufferedWriter(writer);
 		BufferedReader input = new BufferedReader(reader);
-		for (String line = input.readLine(); line != null; line = input.readLine()) {
+		for (String line = input.readLine(); !Objects.isNull(line); line = input.readLine()) {
 			output.write(line);
 			output.newLine();
 		}

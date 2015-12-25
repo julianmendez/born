@@ -253,7 +253,7 @@ public class TestMakerView extends JPanel {
 	 */
 	void updateOntologyFile() {
 		String inputOntologyFile = getInputOntologyFile();
-		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
+		if (!Objects.isNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
 				getModel().setInputOntology(new FileInputStream(inputOntologyFile));
 			} catch (IOException e) {

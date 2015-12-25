@@ -100,7 +100,7 @@ public class ProcessorController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().setOntologyFile(file.getAbsolutePath());
 			getView().updateOntologyFile();
 		}
@@ -113,7 +113,7 @@ public class ProcessorController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().setBayesianNetworkFile(file.getAbsolutePath());
 			getView().updateBayesianNetworkFile();
 		}
@@ -126,7 +126,7 @@ public class ProcessorController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().readConsoleInput(file.getAbsolutePath());
 		}
 	}
@@ -138,7 +138,7 @@ public class ProcessorController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().writeConsoleOutput(file.getAbsolutePath());
 		}
 	}

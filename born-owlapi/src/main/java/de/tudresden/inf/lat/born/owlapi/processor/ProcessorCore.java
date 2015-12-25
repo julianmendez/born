@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Objects;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -51,7 +52,7 @@ public class ProcessorCore {
 	 */
 	void show(StringBuffer sbuf, Reader input) throws IOException {
 		BufferedReader reader = new BufferedReader(input);
-		for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
 			sbuf.append(line);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		}

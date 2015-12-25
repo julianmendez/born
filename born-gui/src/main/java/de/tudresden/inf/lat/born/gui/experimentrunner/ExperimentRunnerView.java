@@ -304,7 +304,7 @@ public class ExperimentRunnerView extends JPanel {
 	 */
 	void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
-		if (inputOntologyDirectory != null && !inputOntologyDirectory.trim().isEmpty()) {
+		if (!Objects.isNull(inputOntologyDirectory) && !inputOntologyDirectory.trim().isEmpty()) {
 			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
 					getBayesianNetworkDirectory()));
 		}
@@ -315,7 +315,7 @@ public class ExperimentRunnerView extends JPanel {
 	 */
 	void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
-		if (bayesianNetworkDirectory != null && !bayesianNetworkDirectory.trim().isEmpty()) {
+		if (!Objects.isNull(bayesianNetworkDirectory) && !bayesianNetworkDirectory.trim().isEmpty()) {
 			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
 					getBayesianNetworkDirectory()));
 		}
@@ -326,7 +326,7 @@ public class ExperimentRunnerView extends JPanel {
 	 */
 	void updateOutputDirectory() {
 		String outputDirectory = getOutputDirectory();
-		if (outputDirectory != null && !outputDirectory.trim().isEmpty()) {
+		if (!Objects.isNull(outputDirectory) && !outputDirectory.trim().isEmpty()) {
 			getModel().setOutputDirectory(outputDirectory);
 		}
 	}

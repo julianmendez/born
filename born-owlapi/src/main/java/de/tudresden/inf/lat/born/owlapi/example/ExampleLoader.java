@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
@@ -103,7 +104,7 @@ public class ExampleLoader {
 	List<String> getExampleFilesFromDirectory(String path) {
 		List<String> ret = new ArrayList<>();
 		URL url = getClass().getClassLoader().getResource(path);
-		if (url != null) {
+		if (!Objects.isNull(url)) {
 			File f = new File(url.getPath());
 			List<File> files = Arrays.asList(f.listFiles());
 			files.forEach(elem -> ret.add(elem.getAbsolutePath()));
@@ -145,7 +146,7 @@ public class ExampleLoader {
 	String getFile(InputStream input) throws IOException {
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-		for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
 			sbuf.append(line);
 			sbuf.append(NEW_LINE_CHAR);
 		}
@@ -175,7 +176,7 @@ public class ExampleLoader {
 
 	public boolean isInJar() {
 		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-		return (jarFile != null) && (jarFile.isFile());
+		return !Objects.isNull(jarFile) && (jarFile.isFile());
 	}
 
 	/**

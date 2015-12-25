@@ -226,7 +226,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void readConsoleInput(String consoleInputFile) {
-		if (consoleInputFile != null && !consoleInputFile.trim().isEmpty()) {
+		if (!Objects.isNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
 			try {
 				String text = ProcessorConfiguration.read(new FileReader(consoleInputFile));
 				this.textConsoleInput.setText(text);
@@ -238,7 +238,7 @@ public class ProcessorView extends JPanel {
 	}
 
 	public void writeConsoleOutput(String consoleOutputFile) {
-		if (consoleOutputFile != null && !consoleOutputFile.trim().isEmpty()) {
+		if (!Objects.isNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = this.textConsoleOutput.getText();
 				ProcessorConfiguration.write(new StringReader(text), new FileWriter(consoleOutputFile));
@@ -274,7 +274,7 @@ public class ProcessorView extends JPanel {
 
 	void updateOntologyFile() {
 		String inputOntologyFile = getOntologyFile();
-		if (inputOntologyFile != null && !inputOntologyFile.trim().isEmpty()) {
+		if (!Objects.isNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
 				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
 			} catch (IOException e) {
@@ -287,7 +287,7 @@ public class ProcessorView extends JPanel {
 
 	void updateBayesianNetworkFile() {
 		String bayesianNetworkFile = getBayesianNetworkFile();
-		if (bayesianNetworkFile != null && !bayesianNetworkFile.trim().isEmpty()) {
+		if (!Objects.isNull(bayesianNetworkFile) && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
 				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
 			} catch (IOException e) {
@@ -298,7 +298,7 @@ public class ProcessorView extends JPanel {
 
 	void updateQuery() {
 		String query = textConsoleInput.getText();
-		if (query != null && !query.trim().isEmpty()) {
+		if (!Objects.isNull(query) && !query.trim().isEmpty()) {
 			getModel().setQuery(query);
 		}
 	}

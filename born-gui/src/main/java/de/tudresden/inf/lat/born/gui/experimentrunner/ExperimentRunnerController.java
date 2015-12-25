@@ -104,7 +104,7 @@ public class ExperimentRunnerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().setInputOntologyDirectory(file.getAbsolutePath());
 		}
 	}
@@ -120,7 +120,7 @@ public class ExperimentRunnerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().setBayesianNetworkDirectory(file.getAbsolutePath());
 		}
 	}
@@ -136,7 +136,7 @@ public class ExperimentRunnerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (file != null) {
+		if (!Objects.isNull(file)) {
 			getView().setOutputDirectory(file.getAbsolutePath());
 		}
 	}

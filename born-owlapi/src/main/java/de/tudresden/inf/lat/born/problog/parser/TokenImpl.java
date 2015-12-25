@@ -57,7 +57,7 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isComment(String str) {
-		return ((str != null) && str.startsWith("" + Symbol.PERCENT_CHAR));
+		return (!Objects.isNull(str) && str.startsWith("" + Symbol.PERCENT_CHAR));
 	}
 
 	boolean isSymbol(String str) {
@@ -65,12 +65,12 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isString(String str) {
-		return ((str != null) && str.trim().length() >= 2 && str.startsWith("" + Symbol.QUOTES_CHAR)
+		return (!Objects.isNull(str) && str.trim().length() >= 2 && str.startsWith("" + Symbol.QUOTES_CHAR)
 				&& str.endsWith("" + Symbol.QUOTES_CHAR));
 	}
 
 	boolean isConstantWithApostrophes(String str) {
-		return ((str != null) && str.trim().length() >= 2 && str.startsWith("" + Symbol.APOSTROPHE_CHAR)
+		return (!Objects.isNull(str) && str.trim().length() >= 2 && str.startsWith("" + Symbol.APOSTROPHE_CHAR)
 				&& str.endsWith("" + Symbol.APOSTROPHE_CHAR));
 	}
 
