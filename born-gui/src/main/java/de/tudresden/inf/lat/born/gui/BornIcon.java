@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -24,53 +25,58 @@ public class BornIcon {
 
 	public static final int DEFAULT_ICON_SIZE = 24;
 
-	public static final ImageIcon OPEN_FILE = createIcon(PATH_OPEN_FILE);
-	public static final ImageIcon SAVE_FILE = createIcon(PATH_SAVE_FILE);
-	public static final ImageIcon RUN = createIcon(PATH_RUN);
-	public static final ImageIcon REFRESH = createIcon(PATH_REFRESH);
+	public static final ImageIcon OPEN_FILE = createIcon(PATH_OPEN_FILE).get();
+	public static final ImageIcon SAVE_FILE = createIcon(PATH_SAVE_FILE).get();
+	public static final ImageIcon RUN = createIcon(PATH_RUN).get();
+	public static final ImageIcon REFRESH = createIcon(PATH_REFRESH).get();
 
 	/**
-	 * Creates an icon with the given size. If the path is invalid, this method
-	 * returns <code>null</code>.
+	 * Returns an optional containing an icon with the given size if the path is
+	 * valid, or an empty optional if the size or the path is invalid.
 	 * 
 	 * @param path
 	 *            path of icon
 	 * @param size
 	 *            size of icon
-	 * @return an icon with the given size, or <code>null</code> if the path is
-	 *         invalid
+	 * @return an optional containing an icon with the given size if the path is
+	 *         valid, or an empty optional if the size or the path is invalid
 	 */
-	public static ImageIcon createIcon(String path, int size) {
+	public static Optional<ImageIcon> createIcon(String path, int size) {
 		Objects.requireNonNull(path);
-		ImageIcon ret = null;
-		try {
-			URL url = BornIcon.class.getClassLoader().getResource(path);
-			if (Objects.isNull(url)) {
-				try {
-					throw new IllegalArgumentException("Icon has an invalid path: '" + path + "'.");
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
+		Optional<ImageIcon> ret = Optional.empty();
+		if (size >= 0) {
+			try {
+				URL url = BornIcon.class.getClassLoader().getResource(path);
+				if (Objects.isNull(url)) {
+					try {
+						throw new IllegalArgumentException("Icon has an invalid path: '" + path + "'.");
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					}
+
+				} else {
+					BufferedImage img = ImageIO.read(url);
+					ret = Optional.of(new ImageIcon(img.getScaledInstance(size, size, Image.SCALE_SMOOTH)));
+
 				}
-
-			} else {
-				BufferedImage img = ImageIO.read(url);
-				ret = new ImageIcon(img.getScaledInstance(size, size, Image.SCALE_SMOOTH));
-
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return ret;
 	}
 
 	/**
-	 * Returns an icon created with the default size for the given path.
+	 * Returns an optional containing an icon created with the default size for
+	 * the given path, or an empty optional if the size or the path is invalid.
 	 * 
 	 * @param path
-	 *            of icon
-	 * @return an icon created with the default size for the given path
+	 *            path of icon
+	 * @return an optional containing an icon created with the default size for
+	 *         the given path, or an empty optional if the size or the path is
+	 *         invalid
 	 */
-	public static ImageIcon createIcon(String path) {
+	public static Optional<ImageIcon> createIcon(String path) {
 		Objects.requireNonNull(path);
 		return createIcon(path, DEFAULT_ICON_SIZE);
 	}
