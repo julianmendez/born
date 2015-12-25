@@ -62,7 +62,7 @@ public class Decompressor {
 		}
 		ZipInputStream input = new ZipInputStream(new FileInputStream(compressedFile));
 		for (ZipEntry entry = input.getNextEntry(); (entry != null); entry = input.getNextEntry()) {
-			if (ret == null) {
+			if (Objects.isNull(ret)) {
 				ret = entry;
 			}
 

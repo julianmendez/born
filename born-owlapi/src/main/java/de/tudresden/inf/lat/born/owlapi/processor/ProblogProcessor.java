@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 
 import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
@@ -143,7 +144,7 @@ public class ProblogProcessor implements QueryProcessor {
 	}
 
 	public boolean isProblogNeeded() {
-		return this.problogDirectory == null;
+		return Objects.isNull(this.problogDirectory);
 	}
 
 	public String getProblogDirectory() {

@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -43,7 +44,7 @@ public class BornIcon {
 		ImageIcon ret = null;
 		try {
 			URL url = BornIcon.class.getClassLoader().getResource(path);
-			if (url == null) {
+			if (Objects.isNull(url)) {
 				try {
 					throw new IllegalArgumentException("Icon has an invalid path: '" + path + "'.");
 				} catch (IllegalArgumentException e) {

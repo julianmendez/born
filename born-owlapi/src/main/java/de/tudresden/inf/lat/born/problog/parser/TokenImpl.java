@@ -1,5 +1,6 @@
 package de.tudresden.inf.lat.born.problog.parser;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.IntStream;
@@ -52,7 +53,7 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isBlank(String str) {
-		return ((str == null) || str.trim().isEmpty());
+		return (Objects.isNull(str) || str.trim().isEmpty());
 	}
 
 	boolean isComment(String str) {
@@ -74,7 +75,7 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isIdentifier(String str) {
-		if ((str == null) || str.trim().isEmpty()) {
+		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else {
 			char firstChar = str.charAt(0);
@@ -84,7 +85,7 @@ public class TokenImpl implements Token {
 	}
 
 	boolean isConstant(String str) {
-		if ((str == null) || str.trim().isEmpty()) {
+		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else if (isConstantWithApostrophes(str)) {
 			return true;

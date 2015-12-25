@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
@@ -72,7 +73,7 @@ public class TokenCreator {
 	}
 
 	List<Token> removeBlanksAndComments(List<Token> tokens) {
-		if (tokens == null) {
+		if (Objects.isNull(tokens )) {
 			return new ArrayList<>();
 		} else {
 			return tokens.stream().filter(

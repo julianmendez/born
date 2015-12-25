@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.main;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
@@ -56,7 +57,7 @@ public class BornMain implements SubApp {
 		} else {
 			String command = args[0];
 			SubApp subApp = this.subAppMap.get(command);
-			if (subApp == null) {
+			if (Objects.isNull(subApp)) {
 				return false;
 			} else {
 				String[] newArgs = new String[args.length - 1];

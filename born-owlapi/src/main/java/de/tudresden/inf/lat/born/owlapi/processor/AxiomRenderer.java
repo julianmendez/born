@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
@@ -62,7 +63,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	}
 
 	String getValue(String value) {
-		if (value == null) {
+		if (Objects.isNull(value)) {
 			return "";
 		} else {
 			String str = value.toString().trim();

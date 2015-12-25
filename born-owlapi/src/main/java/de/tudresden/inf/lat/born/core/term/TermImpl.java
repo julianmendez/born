@@ -90,7 +90,7 @@ public class TermImpl implements Term {
 	}
 
 	public boolean isVariable(String name) {
-		if (name == null || name.trim().isEmpty()) {
+		if (Objects.isNull(name) || name.trim().isEmpty()) {
 			return false;
 		} else {
 			char firstChar = name.trim().charAt(0);
@@ -99,7 +99,7 @@ public class TermImpl implements Term {
 	}
 
 	public boolean isLong(String name) {
-		if (name == null || name.trim().isEmpty()) {
+		if (Objects.isNull(name) || name.trim().isEmpty()) {
 			return false;
 		} else {
 			try {
@@ -112,7 +112,7 @@ public class TermImpl implements Term {
 	}
 
 	public boolean isDouble(String name) {
-		if (name == null || name.trim().isEmpty()) {
+		if (Objects.isNull(name) || name.trim().isEmpty()) {
 			return false;
 		} else {
 			try {
