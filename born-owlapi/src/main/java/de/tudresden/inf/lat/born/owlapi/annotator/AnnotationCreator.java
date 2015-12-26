@@ -175,239 +175,239 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	}
 
 	@Override
-	public Boolean visit(OWLSubAnnotationPropertyOfAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSubAnnotationPropertyOfAxiom(a.getSubProperty(), a.getSuperProperty(), empty()));
+	public Boolean visit(OWLSubAnnotationPropertyOfAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSubAnnotationPropertyOfAxiom(axiom.getSubProperty(), axiom.getSuperProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLAnnotationPropertyDomainAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLAnnotationPropertyDomainAxiom(a.getProperty(), a.getDomain(), empty()));
+	public Boolean visit(OWLAnnotationPropertyDomainAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLAnnotationPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLAnnotationPropertyRangeAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLAnnotationPropertyRangeAxiom(a.getProperty(), a.getRange(), empty()));
+	public Boolean visit(OWLAnnotationPropertyRangeAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLAnnotationPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLSubClassOfAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSubClassOfAxiom(a.getSubClass(), a.getSuperClass(), annot()));
+	public Boolean visit(OWLSubClassOfAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSubClassOfAxiom(axiom.getSubClass(), axiom.getSuperClass(), annot()));
 	}
 
 	@Override
-	public Boolean visit(OWLNegativeObjectPropertyAssertionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLNegativeObjectPropertyAssertionAxiom(a.getProperty(), a.getSubject(), a.getObject(),
+	public Boolean visit(OWLNegativeObjectPropertyAssertionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLNegativeObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
 				empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLAsymmetricObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLAsymmetricObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLAsymmetricObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLAsymmetricObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLReflexiveObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLReflexiveObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLReflexiveObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLReflexiveObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDisjointClassesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDisjointClassesAxiom(a.getClassExpressions(), annot()));
+	public Boolean visit(OWLDisjointClassesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDisjointClassesAxiom(axiom.getClassExpressions(), annot()));
 	}
 
 	@Override
-	public Boolean visit(OWLDataPropertyDomainAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDataPropertyDomainAxiom(a.getProperty(), a.getDomain(), empty()));
+	public Boolean visit(OWLDataPropertyDomainAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDataPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLObjectPropertyDomainAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLObjectPropertyDomainAxiom(a.getProperty(), a.getDomain(), empty()));
+	public Boolean visit(OWLObjectPropertyDomainAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLObjectPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLEquivalentObjectPropertiesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLEquivalentObjectPropertiesAxiom(a.getProperties(), empty()));
+	public Boolean visit(OWLEquivalentObjectPropertiesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLEquivalentObjectPropertiesAxiom(axiom.getProperties(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLNegativeDataPropertyAssertionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLNegativeDataPropertyAssertionAxiom(a.getProperty(), a.getSubject(), a.getObject(),
+	public Boolean visit(OWLNegativeDataPropertyAssertionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLNegativeDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
 				empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDifferentIndividualsAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDifferentIndividualsAxiom(a.getIndividuals(), empty()));
+	public Boolean visit(OWLDifferentIndividualsAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDifferentIndividualsAxiom(axiom.getIndividuals(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDisjointDataPropertiesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDisjointDataPropertiesAxiom(a.getProperties(), empty()));
+	public Boolean visit(OWLDisjointDataPropertiesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDisjointDataPropertiesAxiom(axiom.getProperties(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDisjointObjectPropertiesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDisjointObjectPropertiesAxiom(a.getProperties(), empty()));
+	public Boolean visit(OWLDisjointObjectPropertiesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDisjointObjectPropertiesAxiom(axiom.getProperties(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLObjectPropertyRangeAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLObjectPropertyRangeAxiom(a.getProperty(), a.getRange(), empty()));
+	public Boolean visit(OWLObjectPropertyRangeAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLObjectPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLObjectPropertyAssertionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLObjectPropertyAssertionAxiom(a.getProperty(), a.getSubject(), a.getObject(), empty()));
+	public Boolean visit(OWLObjectPropertyAssertionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLFunctionalObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLFunctionalObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLFunctionalObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLFunctionalObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLSubObjectPropertyOfAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSubObjectPropertyOfAxiom(a.getSubProperty(), a.getSuperProperty(), empty()));
+	public Boolean visit(OWLSubObjectPropertyOfAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSubObjectPropertyOfAxiom(axiom.getSubProperty(), axiom.getSuperProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDisjointUnionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDisjointUnionAxiom(a.getOWLClass(), a.getClassExpressions(), annot()));
+	public Boolean visit(OWLDisjointUnionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDisjointUnionAxiom(axiom.getOWLClass(), axiom.getClassExpressions(), annot()));
 	}
 
 	@Override
-	public Boolean visit(OWLDeclarationAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDeclarationAxiom(a.getEntity(), empty()));
+	public Boolean visit(OWLDeclarationAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDeclarationAxiom(axiom.getEntity(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLAnnotationAssertionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLAnnotationAssertionAxiom(a.getProperty(), a.getSubject(), a.getValue(), empty()));
+	public Boolean visit(OWLAnnotationAssertionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLAnnotationAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getValue(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLSymmetricObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSymmetricObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLSymmetricObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSymmetricObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDataPropertyRangeAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDataPropertyRangeAxiom(a.getProperty(), a.getRange(), empty()));
+	public Boolean visit(OWLDataPropertyRangeAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDataPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLFunctionalDataPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLFunctionalDataPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLFunctionalDataPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLFunctionalDataPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLEquivalentDataPropertiesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLEquivalentDataPropertiesAxiom(a.getProperties(), empty()));
+	public Boolean visit(OWLEquivalentDataPropertiesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLEquivalentDataPropertiesAxiom(axiom.getProperties(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLClassAssertionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLClassAssertionAxiom(a.getClassExpression(), a.getIndividual(), annot()));
+	public Boolean visit(OWLClassAssertionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLClassAssertionAxiom(axiom.getClassExpression(), axiom.getIndividual(), annot()));
 	}
 
 	@Override
-	public Boolean visit(OWLEquivalentClassesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLEquivalentClassesAxiom(a.getClassExpressions(), annot()));
+	public Boolean visit(OWLEquivalentClassesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLEquivalentClassesAxiom(axiom.getClassExpressions(), annot()));
 	}
 
 	@Override
-	public Boolean visit(OWLDataPropertyAssertionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDataPropertyAssertionAxiom(a.getProperty(), a.getSubject(), a.getObject(), empty()));
+	public Boolean visit(OWLDataPropertyAssertionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLTransitiveObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLTransitiveObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLTransitiveObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLTransitiveObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLIrreflexiveObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLIrreflexiveObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLIrreflexiveObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLIrreflexiveObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLSubDataPropertyOfAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSubDataPropertyOfAxiom(a.getSubProperty(), a.getSuperProperty(), empty()));
+	public Boolean visit(OWLSubDataPropertyOfAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSubDataPropertyOfAxiom(axiom.getSubProperty(), axiom.getSuperProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLInverseFunctionalObjectPropertyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLInverseFunctionalObjectPropertyAxiom(a.getProperty(), empty()));
+	public Boolean visit(OWLInverseFunctionalObjectPropertyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLInverseFunctionalObjectPropertyAxiom(axiom.getProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLSameIndividualAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSameIndividualAxiom(a.getIndividuals(), empty()));
+	public Boolean visit(OWLSameIndividualAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSameIndividualAxiom(axiom.getIndividuals(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLSubPropertyChainOfAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLSubPropertyChainOfAxiom(a.getPropertyChain(), a.getSuperProperty(), empty()));
+	public Boolean visit(OWLSubPropertyChainOfAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLSubPropertyChainOfAxiom(axiom.getPropertyChain(), axiom.getSuperProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLInverseObjectPropertiesAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLInverseObjectPropertiesAxiom(a.getFirstProperty(), a.getSecondProperty(), empty()));
+	public Boolean visit(OWLInverseObjectPropertiesAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLInverseObjectPropertiesAxiom(axiom.getFirstProperty(), axiom.getSecondProperty(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLHasKeyAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLHasKeyAxiom(a.getClassExpression(), a.getObjectPropertyExpressions(), empty()));
+	public Boolean visit(OWLHasKeyAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLHasKeyAxiom(axiom.getClassExpression(), axiom.getObjectPropertyExpressions(), empty()));
 	}
 
 	@Override
-	public Boolean visit(OWLDatatypeDefinitionAxiom a) {
-		Objects.requireNonNull(a);
-		return add(this.df.getOWLDatatypeDefinitionAxiom(a.getDatatype(), a.getDataRange(), empty()));
+	public Boolean visit(OWLDatatypeDefinitionAxiom axiom) {
+		Objects.requireNonNull(axiom);
+		return add(this.df.getOWLDatatypeDefinitionAxiom(axiom.getDatatype(), axiom.getDataRange(), empty()));
 	}
 
 	@Override
-	public Boolean visit(SWRLRule r) {
-		Objects.requireNonNull(r);
-		return add(this.df.getSWRLRule(r.getBody(), r.getHead(), empty()));
+	public Boolean visit(SWRLRule rule) {
+		Objects.requireNonNull(rule);
+		return add(this.df.getSWRLRule(rule.getBody(), rule.getHead(), empty()));
 	}
 
 }
