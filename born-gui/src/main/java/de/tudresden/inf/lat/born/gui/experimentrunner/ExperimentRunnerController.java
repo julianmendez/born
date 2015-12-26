@@ -101,7 +101,7 @@ public class ExperimentRunnerController implements ActionListener {
 	void executeActionInputOntologyDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -117,7 +117,7 @@ public class ExperimentRunnerController implements ActionListener {
 	void executeActionBayesianNetworkDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -133,7 +133,7 @@ public class ExperimentRunnerController implements ActionListener {
 	void executeActionOutputDirectory() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();

@@ -22,7 +22,7 @@ public class ExperimentRunnerView extends JPanel {
 
 	private static final long serialVersionUID = 8987374313881883318L;
 
-	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
+	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private JButton buttonInputOntologyDirectory = new JButton();
 	private JButton buttonBayesianNetworkDirectory = new JButton();
@@ -305,7 +305,7 @@ public class ExperimentRunnerView extends JPanel {
 	/**
 	 * Updates the directory of ontologies.
 	 */
-	void updateInputOntologyDirectory() {
+	public void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
 		if (!Objects.isNull(inputOntologyDirectory) && !inputOntologyDirectory.trim().isEmpty()) {
 			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
@@ -316,7 +316,7 @@ public class ExperimentRunnerView extends JPanel {
 	/**
 	 * Updates the directory of Bayesian networks.
 	 */
-	void updateBayesianNetworkDirectory() {
+	public void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
 		if (!Objects.isNull(bayesianNetworkDirectory) && !bayesianNetworkDirectory.trim().isEmpty()) {
 			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
@@ -327,7 +327,7 @@ public class ExperimentRunnerView extends JPanel {
 	/**
 	 * Updates the output directory.
 	 */
-	void updateOutputDirectory() {
+	public void updateOutputDirectory() {
 		String outputDirectory = getOutputDirectory();
 		if (!Objects.isNull(outputDirectory) && !outputDirectory.trim().isEmpty()) {
 			getModel().setOutputDirectory(outputDirectory);
@@ -337,7 +337,7 @@ public class ExperimentRunnerView extends JPanel {
 	/**
 	 * Updates the seed for the pseudorandom number generator.
 	 */
-	void updateSeed() {
+	public void updateSeed() {
 		String seedStr = this.textSeed.getText();
 		int seed = 0;
 		try {
@@ -351,7 +351,7 @@ public class ExperimentRunnerView extends JPanel {
 	/**
 	 * Updates the number of queries.
 	 */
-	void updateNumberOfQueries() {
+	public void updateNumberOfQueries() {
 		String numberOfQueriesStr = this.textNumberOfQueries.getText();
 		int numberOfQueries = 0;
 		try {
@@ -425,6 +425,10 @@ public class ExperimentRunnerView extends JPanel {
 		buttonOutputDirectory.setEnabled(status);
 		buttonUpdateSeed.setEnabled(status);
 		buttonComputeInference.setEnabled(status);
+	}
+
+	public JPanel getPanel() {
+		return this;
 	}
 
 }

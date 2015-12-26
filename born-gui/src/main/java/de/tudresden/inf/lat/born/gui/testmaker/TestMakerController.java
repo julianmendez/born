@@ -70,7 +70,7 @@ public class TestMakerController implements ActionListener {
 
 	void executeActionSelectInputOntologyFile() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -93,7 +93,7 @@ public class TestMakerController implements ActionListener {
 
 	void executeActionSelectOutputOntologyFile() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showSaveDialog(getView());
+		int returnVal = fileChooser.showSaveDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -132,7 +132,7 @@ public class TestMakerController implements ActionListener {
 
 	void executeActionSaveBayesianNetwork() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showSaveDialog(getView());
+		int returnVal = fileChooser.showSaveDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();

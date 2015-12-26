@@ -24,7 +24,7 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigu
  */
 public class TestMakerView extends JPanel {
 
-	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
+	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private static final long serialVersionUID = -7460256750941145085L;
 
@@ -251,7 +251,7 @@ public class TestMakerView extends JPanel {
 	/**
 	 * Updates the ontology file.
 	 */
-	void updateOntologyFile() {
+	public void updateOntologyFile() {
 		String inputOntologyFile = getInputOntologyFile();
 		if (!Objects.isNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
@@ -362,6 +362,10 @@ public class TestMakerView extends JPanel {
 	public void setListOfParents(String listOfParents) {
 		Objects.requireNonNull(listOfParents);
 		textListOfParents.setText(listOfParents);
+	}
+
+	public JPanel getPanel() {
+		return this;
 	}
 
 }
