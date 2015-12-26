@@ -31,7 +31,7 @@ public class Main extends AbstractOWLClassViewComponent {
 	public void initialiseClassView() {
 		this.bornStarter = new BornStarter(getOWLModelManager().getOWLOntologyManager());
 		this.setLayout(new BorderLayout());
-		add(this.bornStarter.getPanel().getView(), BorderLayout.CENTER);
+		add(this.bornStarter.getPanel().getView().getPanel(), BorderLayout.CENTER);
 	}
 
 	@Override
