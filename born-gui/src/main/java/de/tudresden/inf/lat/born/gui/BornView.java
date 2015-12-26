@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
+import de.tudresden.inf.lat.born.gui.processor.ProcessorPanel;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 
@@ -35,7 +36,7 @@ public class BornView extends JPanel {
 	public BornView(BornModel model) {
 		Objects.requireNonNull(model);
 		this.model = model;
-		this.processorView = new ProcessorView(this.model.getProcessorConfiguration());
+		this.processorView = new ProcessorPanel(this.model.getProcessorConfiguration());
 		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());
 		this.experimentMakerView = new ExperimentRunnerView(this.model.getMultiProcessorConfiguration());
 
@@ -57,7 +58,7 @@ public class BornView extends JPanel {
 
 		ImageIcon icon = null;
 
-		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView, Message.tooltipProcessor);
+		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView.getPanel(), Message.tooltipProcessor);
 		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView, Message.tooltipTestMaker);
 		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView, Message.tooltipExperimentMaker);
 

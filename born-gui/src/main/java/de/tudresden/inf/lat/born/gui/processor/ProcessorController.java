@@ -97,7 +97,7 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionInputOntology() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -110,7 +110,7 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionBayesianNetwork() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -123,7 +123,7 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionConsoleInput() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showOpenDialog(getView());
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
@@ -135,7 +135,7 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionConsoleOutput() {
 		JFileChooser fileChooser = new JFileChooser();
-		int returnVal = fileChooser.showSaveDialog(getView());
+		int returnVal = fileChooser.showSaveDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
