@@ -8,9 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerPanel;
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorPanel;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
+import de.tudresden.inf.lat.born.gui.testmaker.TestMakerPanel;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 
 /**
@@ -37,8 +39,8 @@ public class BornView extends JPanel {
 		Objects.requireNonNull(model);
 		this.model = model;
 		this.processorView = new ProcessorPanel(this.model.getProcessorConfiguration());
-		this.testMakerView = new TestMakerView(this.model.getAnnotatorConfiguration());
-		this.experimentMakerView = new ExperimentRunnerView(this.model.getMultiProcessorConfiguration());
+		this.testMakerView = new TestMakerPanel(this.model.getAnnotatorConfiguration());
+		this.experimentMakerView = new ExperimentRunnerPanel(this.model.getMultiProcessorConfiguration());
 
 		add(createPanel());
 	}
@@ -59,8 +61,9 @@ public class BornView extends JPanel {
 		ImageIcon icon = null;
 
 		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView.getPanel(), Message.tooltipProcessor);
-		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView, Message.tooltipTestMaker);
-		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView, Message.tooltipExperimentMaker);
+		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView.getPanel(), Message.tooltipTestMaker);
+		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView.getPanel(),
+				Message.tooltipExperimentMaker);
 
 		add(tabbedPane);
 
