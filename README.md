@@ -114,7 +114,8 @@ Technically each command is implemented in its own package. Each command has the
 * `-SubApp`: is a snippet used to register this command in the list of commands, containing the help and some parsing methods to read the arguments from the command line.
 
 `born-gui` has a package for each panel, and a package to integrate them using tabs. Each package contains:
-* `-View`: contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder). 
+* `-View`: contains the interface for the visual components
+* `-Panel`: implements `-View` and contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder). 
 * `-Controller`: contains the behavior for the provided view, using the `-Configuration` class as model.  The controller uses the `-Core` class and might run it in a separate thread, to avoid blocking the whole application.
 
 
