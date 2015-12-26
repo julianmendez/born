@@ -63,7 +63,7 @@ public class SubsumptionQuery {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (Objects.isNull(obj )) {
+		if (Objects.isNull(obj)) {
 			return false;
 		}
 		if (!(obj instanceof SubsumptionQuery)) {

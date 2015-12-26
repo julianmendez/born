@@ -21,7 +21,7 @@ public class AnnotatorConfiguration {
 	}
 
 	public void setInputOntology(InputStream inputOntology) {
-		Objects.requireNonNull(inputOntology);		
+		Objects.requireNonNull(inputOntology);
 		this.inputOntology = inputOntology;
 	}
 

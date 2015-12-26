@@ -153,27 +153,29 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLAnnotationPropertyDomainAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(
-				this.df.getOWLAnnotationPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLAnnotationPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
 	public Boolean visit(OWLAnnotationPropertyRangeAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLAnnotationPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLAnnotationPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
 	public Boolean visit(OWLSubClassOfAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLSubClassOfAxiom(axiom.getSubClass(), axiom.getSuperClass(), reg(axiom.getAnnotations())));
+		return add(
+				this.df.getOWLSubClassOfAxiom(axiom.getSubClass(), axiom.getSuperClass(), reg(axiom.getAnnotations())));
 	}
 
 	@Override
 	public Boolean visit(OWLNegativeObjectPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLNegativeObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
-				reg(axiom.getAnnotations())));
+		return add(this.df.getOWLNegativeObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(),
+				axiom.getObject(), reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -197,13 +199,15 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLDataPropertyDomainAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLDataPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLDataPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
 	public Boolean visit(OWLObjectPropertyDomainAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLObjectPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLObjectPropertyDomainAxiom(axiom.getProperty(), axiom.getDomain(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -215,8 +219,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLNegativeDataPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLNegativeDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
-				reg(axiom.getAnnotations())));
+		return add(this.df.getOWLNegativeDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(),
+				axiom.getObject(), reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -240,14 +244,15 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLObjectPropertyRangeAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLObjectPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLObjectPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
 	public Boolean visit(OWLObjectPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
-				reg(axiom.getAnnotations())));
+		return add(this.df.getOWLObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(),
+				axiom.getObject(), reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -266,7 +271,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLDisjointUnionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLDisjointUnionAxiom(axiom.getOWLClass(), axiom.getClassExpressions(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLDisjointUnionAxiom(axiom.getOWLClass(), axiom.getClassExpressions(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -291,7 +297,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLDataPropertyRangeAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLDataPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLDataPropertyRangeAxiom(axiom.getProperty(), axiom.getRange(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -309,8 +316,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLClassAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(
-				this.df.getOWLClassAssertionAxiom(axiom.getClassExpression(), axiom.getIndividual(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLClassAssertionAxiom(axiom.getClassExpression(), axiom.getIndividual(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -348,7 +355,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLInverseFunctionalObjectPropertyAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLInverseFunctionalObjectPropertyAxiom(axiom.getProperty(), reg(axiom.getAnnotations())));
+		return add(
+				this.df.getOWLInverseFunctionalObjectPropertyAxiom(axiom.getProperty(), reg(axiom.getAnnotations())));
 	}
 
 	@Override
@@ -381,7 +389,8 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLDatatypeDefinitionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLDatatypeDefinitionAxiom(axiom.getDatatype(), axiom.getDataRange(), reg(axiom.getAnnotations())));
+		return add(this.df.getOWLDatatypeDefinitionAxiom(axiom.getDatatype(), axiom.getDataRange(),
+				reg(axiom.getAnnotations())));
 	}
 
 	@Override

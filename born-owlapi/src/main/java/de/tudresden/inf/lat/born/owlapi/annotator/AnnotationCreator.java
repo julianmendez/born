@@ -177,7 +177,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLSubAnnotationPropertyOfAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLSubAnnotationPropertyOfAxiom(axiom.getSubProperty(), axiom.getSuperProperty(), empty()));
+		return add(
+				this.df.getOWLSubAnnotationPropertyOfAxiom(axiom.getSubProperty(), axiom.getSuperProperty(), empty()));
 	}
 
 	@Override
@@ -201,8 +202,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLNegativeObjectPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLNegativeObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
-				empty()));
+		return add(this.df.getOWLNegativeObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(),
+				axiom.getObject(), empty()));
 	}
 
 	@Override
@@ -244,8 +245,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLNegativeDataPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLNegativeDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
-				empty()));
+		return add(this.df.getOWLNegativeDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(),
+				axiom.getObject(), empty()));
 	}
 
 	@Override
@@ -275,7 +276,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLObjectPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(), empty()));
+		return add(this.df.getOWLObjectPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(),
+				axiom.getObject(), empty()));
 	}
 
 	@Override
@@ -305,7 +307,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLAnnotationAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLAnnotationAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getValue(), empty()));
+		return add(this.df.getOWLAnnotationAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getValue(),
+				empty()));
 	}
 
 	@Override
@@ -347,7 +350,8 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLDataPropertyAssertionAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(), empty()));
+		return add(this.df.getOWLDataPropertyAssertionAxiom(axiom.getProperty(), axiom.getSubject(), axiom.getObject(),
+				empty()));
 	}
 
 	@Override
@@ -389,13 +393,15 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	@Override
 	public Boolean visit(OWLInverseObjectPropertiesAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLInverseObjectPropertiesAxiom(axiom.getFirstProperty(), axiom.getSecondProperty(), empty()));
+		return add(this.df.getOWLInverseObjectPropertiesAxiom(axiom.getFirstProperty(), axiom.getSecondProperty(),
+				empty()));
 	}
 
 	@Override
 	public Boolean visit(OWLHasKeyAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		return add(this.df.getOWLHasKeyAxiom(axiom.getClassExpression(), axiom.getObjectPropertyExpressions(), empty()));
+		return add(
+				this.df.getOWLHasKeyAxiom(axiom.getClassExpression(), axiom.getObjectPropertyExpressions(), empty()));
 	}
 
 	@Override
