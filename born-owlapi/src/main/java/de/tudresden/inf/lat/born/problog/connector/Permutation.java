@@ -37,8 +37,6 @@ class Permutation {
 	 * Compute the next permutation, and returns <code>false</code> if starts
 	 * from the initial configuration, and <code>true</code> otherwise.
 	 * 
-	 * @param vector
-	 *            current permutation
 	 * @return <code>false</code> if starts from the initial configuration, and
 	 *         <code>true</code> otherwise
 	 */

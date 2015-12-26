@@ -43,6 +43,7 @@ public class SplitterCore {
 	 *            input stream
 	 * @return the ontology provided by the given input stream
 	 * @throws OWLOntologyCreationException
+	 *             if something went wrong with the ontology creation
 	 */
 	OWLOntology loadOWLOntology(InputStream input) throws OWLOntologyCreationException {
 		Objects.requireNonNull(input);

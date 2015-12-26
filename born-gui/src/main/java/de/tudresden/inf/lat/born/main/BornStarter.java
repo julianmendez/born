@@ -19,6 +19,7 @@ import de.tudresden.inf.lat.born.gui.BornView;
  */
 public class BornStarter implements OWLOntologyChangeListener, OWLOntologyLoaderListener {
 
+	private static final long serialVersionUID = 3923893802046694090L;
 	private final OWLOntologyManager ontologyManager;
 	private final BornController panel;
 
