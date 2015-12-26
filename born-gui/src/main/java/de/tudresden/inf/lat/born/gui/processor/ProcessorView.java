@@ -34,7 +34,7 @@ public class ProcessorView extends JPanel {
 
 	private static final long serialVersionUID = -3489883631448640992L;
 
-	public static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
+	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private JButton buttonOntologyFile = new JButton();
 	private JButton buttonBayesianNetworkFile = new JButton();
@@ -278,7 +278,7 @@ public class ProcessorView extends JPanel {
 		return comboBoxExample.getSelectedIndex();
 	}
 
-	void updateOntologyFile() {
+	public void updateOntologyFile() {
 		String inputOntologyFile = getOntologyFile();
 		if (!Objects.isNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
@@ -291,7 +291,7 @@ public class ProcessorView extends JPanel {
 		}
 	}
 
-	void updateBayesianNetworkFile() {
+	public void updateBayesianNetworkFile() {
 		String bayesianNetworkFile = getBayesianNetworkFile();
 		if (!Objects.isNull(bayesianNetworkFile) && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
@@ -302,7 +302,7 @@ public class ProcessorView extends JPanel {
 		}
 	}
 
-	void updateQuery() {
+	public void updateQuery() {
 		String query = textConsoleInput.getText();
 		if (!Objects.isNull(query) && !query.trim().isEmpty()) {
 			getModel().setQuery(query);
