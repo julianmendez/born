@@ -124,7 +124,7 @@ public class ExampleConfigurationImpl implements ExampleConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (obj instanceof ExampleConfigurationImpl) {
+		} else if (obj instanceof ExampleConfiguration) {
 			ExampleConfiguration other = (ExampleConfiguration) obj;
 			return getOntologyName().equals(other.getOntologyName())
 					&& getOntologyFileName().equals(other.getOntologyFileName())
