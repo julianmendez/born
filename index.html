@@ -154,7 +154,9 @@ Details on the versions of those requirements are available in the release notes
 
 <ul>
 <li>
-<code>-Configuration</code>: contains the configuration (parameters) of the command, which is also used as model in the visual interface. </li>
+<code>-Configuration</code>: contains the interface for the configuration (parameters) of the command line execution, and is also used as model in the visual interface.</li>
+<li>
+<code>-ConfigurationImpl</code>: contains the default implementation of the <code>-Configuration</code> interface. </li>
 <li>
 <code>-Core</code>: contains the methods to execute the command itself, which may include the communication with ProbLog or the OWL API.</li>
 <li>
@@ -165,9 +167,11 @@ Details on the versions of those requirements are available in the release notes
 
 <ul>
 <li>
-<code>-View</code>: contains the visual components, but not their behavior. This class can be edited using <a href="https://projects.eclipse.org/projects/tools.windowbuilder">WindowBuilder</a>. </li>
+<code>-View</code>: contains the interface for the visual components</li>
 <li>
-<code>-Controller</code>: contains the behavior for the provided view, using the <code>-Configuration</code> class as model.  The controller uses the <code>-Core</code> class and might run it in a separate thread, to avoid blocking the whole application.</li>
+<code>-Panel</code>: implements <code>-View</code> and contains the visual components, but not their behavior. This class can be edited using <a href="https://projects.eclipse.org/projects/tools.windowbuilder">WindowBuilder</a>. </li>
+<li>
+<code>-Controller</code>: contains the behavior for the provided view, using the <code>-Configuration</code> interface as model.  The controller uses the <code>-Core</code> class and might run it in a separate thread, to avoid blocking the whole application.</li>
 </ul>
 
 <h2>
