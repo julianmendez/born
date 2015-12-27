@@ -73,7 +73,7 @@ public class MultiProcessorCore {
 		return listOfQueries;
 	}
 
-	public List<String> run(MultiProcessorConfigurationImpl conf, long start) {
+	public List<String> run(MultiProcessorConfiguration conf, long start) {
 		Objects.requireNonNull(conf);
 		List<String> ret = new ArrayList<>();
 		PseudorandomNumberGenerator random = new PseudorandomNumberGenerator(conf.getSeed());
@@ -149,7 +149,7 @@ public class MultiProcessorCore {
 		}
 	}
 
-	public void storeResults(MultiProcessorConfigurationImpl conf, List<String> list) throws IOException {
+	public void storeResults(MultiProcessorConfiguration conf, List<String> list) throws IOException {
 		Objects.requireNonNull(conf);
 		Objects.requireNonNull(list);
 		Iterator<String> resultIt = list.iterator();

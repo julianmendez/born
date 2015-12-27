@@ -11,7 +11,7 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
 
 /**
@@ -168,7 +168,7 @@ public class ExperimentRunnerController implements ActionListener {
 	 * 
 	 * @return the model
 	 */
-	public MultiProcessorConfigurationImpl getModel() {
+	public MultiProcessorConfiguration getModel() {
 		return getView().getModel();
 	}
 

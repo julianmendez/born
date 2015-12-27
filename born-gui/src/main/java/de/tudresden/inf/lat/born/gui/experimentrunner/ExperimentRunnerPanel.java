@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
-import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
 
 /**
@@ -35,7 +35,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	private JTextField textNumberOfQueries = new JTextField();
 	private JTextField textOutputDirectory = new JTextField();
 	private JTextField textSeed = new JTextField();
-	private final MultiProcessorConfigurationImpl model;
+	private final MultiProcessorConfiguration model;
 
 	/**
 	 * Constructs a new panel for the experiment runner.
@@ -43,7 +43,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	 * @param model
 	 *            model
 	 */
-	public ExperimentRunnerPanel(MultiProcessorConfigurationImpl model) {
+	public ExperimentRunnerPanel(MultiProcessorConfiguration model) {
 		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
@@ -221,7 +221,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	 * @return the model
 	 */
 	@Override
-	public MultiProcessorConfigurationImpl getModel() {
+	public MultiProcessorConfiguration getModel() {
 		return this.model;
 	}
 

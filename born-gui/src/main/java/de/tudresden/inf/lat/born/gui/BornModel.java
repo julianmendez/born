@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
@@ -19,7 +20,7 @@ public class BornModel {
 
 	private ProcessorConfigurationImpl processorConfiguration = new ProcessorConfigurationImpl();
 	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfigurationImpl();
-	private MultiProcessorConfigurationImpl multiProcessorConfiguration = new MultiProcessorConfigurationImpl();
+	private MultiProcessorConfiguration multiProcessorConfiguration = new MultiProcessorConfigurationImpl();
 
 	/**
 	 * Constructs a new BORN model.
@@ -76,7 +77,7 @@ public class BornModel {
 	 * 
 	 * @return the multi processor configuration
 	 */
-	public MultiProcessorConfigurationImpl getMultiProcessorConfiguration() {
+	public MultiProcessorConfiguration getMultiProcessorConfiguration() {
 		return multiProcessorConfiguration;
 	}
 
@@ -86,7 +87,7 @@ public class BornModel {
 	 * @param multiProcessorConfiguration
 	 *            multi processor configuration
 	 */
-	public void setMultiProcessorConfiguration(MultiProcessorConfigurationImpl multiProcessorConfiguration) {
+	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
 		Objects.requireNonNull(multiProcessorConfiguration);
 		this.multiProcessorConfiguration = multiProcessorConfiguration;
 	}
