@@ -131,7 +131,7 @@ public class SplitterCore {
 		storeBayesianNetwork(processor.getVariables(), processor.getNetwork(), networkOutputStream);
 	}
 
-	public void run(SplitterConfigurationImpl conf) {
+	public void run(SplitterConfiguration conf) {
 		Objects.requireNonNull(conf);
 		try {
 			split(conf.getInputOntology(), conf.getOutputOntology(), conf.getBayesianNetwork());

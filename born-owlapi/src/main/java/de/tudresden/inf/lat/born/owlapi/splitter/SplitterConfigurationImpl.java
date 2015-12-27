@@ -9,34 +9,40 @@ import java.util.Objects;
  * @author Julian Mendez
  *
  */
-public class SplitterConfigurationImpl {
+public class SplitterConfigurationImpl implements SplitterConfiguration {
 
 	private InputStream inputOntology;
 	private OutputStream outputOntology;
 	private OutputStream bayesianNetwork;
 
+	@Override
 	public InputStream getInputOntology() {
 		return inputOntology;
 	}
 
+	@Override
 	public void setInputOntology(InputStream inputOntology) {
 		Objects.requireNonNull(inputOntology);
 		this.inputOntology = inputOntology;
 	}
 
+	@Override
 	public OutputStream getOutputOntology() {
 		return outputOntology;
 	}
 
+	@Override
 	public void setOutputOntology(OutputStream outputOntology) {
 		Objects.requireNonNull(outputOntology);
 		this.outputOntology = outputOntology;
 	}
 
+	@Override
 	public OutputStream getBayesianNetwork() {
 		return bayesianNetwork;
 	}
 
+	@Override
 	public void setBayesianNetwork(OutputStream bayesianNetwork) {
 		Objects.requireNonNull(bayesianNetwork);
 		this.bayesianNetwork = bayesianNetwork;
@@ -46,10 +52,10 @@ public class SplitterConfigurationImpl {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof SplitterConfigurationImpl)) {
+		} else if (!(obj instanceof SplitterConfiguration)) {
 			return false;
 		} else {
-			SplitterConfigurationImpl other = (SplitterConfigurationImpl) obj;
+			SplitterConfiguration other = (SplitterConfiguration) obj;
 			return getInputOntology().equals(other.getInputOntology())
 					&& getOutputOntology().equals(other.getOutputOntology())
 					&& getBayesianNetwork().equals(other.getBayesianNetwork());
