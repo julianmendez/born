@@ -11,20 +11,64 @@ import java.io.OutputStream;
  */
 public interface AnnotatorConfiguration {
 
+	/**
+	 * Returns the input ontology.
+	 * 
+	 * @return the input ontology
+	 */
 	InputStream getInputOntology();
 
+	/**
+	 * Sets the input ontology.
+	 * 
+	 * @param inputOntology
+	 *            input ontology
+	 */
 	void setInputOntology(InputStream inputOntology);
 
+	/**
+	 * Returns the output ontology.
+	 * 
+	 * @return the output ontology
+	 */
 	OutputStream getOutputOntology();
 
+	/**
+	 * Sets the output ontology.
+	 * 
+	 * @param outputOntology
+	 *            output ontology
+	 */
 	void setOutputOntology(OutputStream outputOntology);
 
+	/**
+	 * Returns the threshold.
+	 * 
+	 * @return the threshold
+	 */
 	double getThreshold();
 
+	/**
+	 * Sets the threshold.
+	 * 
+	 * @param threshold
+	 *            threshold
+	 */
 	void setThreshold(double threshold);
 
+	/**
+	 * Returns the maximum number of variables.
+	 * 
+	 * @return the maximum number of variables
+	 */
 	int getMaxNumberOfVars();
 
+	/**
+	 * Sets the maximum number of variables.
+	 * 
+	 * @param maxNumberOfVars
+	 *            the maximum number of variables
+	 */
 	void setMaxNumberOfVars(int maxNumberOfVars);
 
 }

@@ -11,12 +11,34 @@ import java.util.List;
  */
 public interface BayesianNetworkCreatorConfiguration {
 
+	/**
+	 * Returns the dependencies.
+	 * 
+	 * @return the dependencies
+	 */
 	List<Integer> getDependencies();
 
+	/**
+	 * Sets the dependencies.
+	 * 
+	 * @param dependencies
+	 *            dependencies
+	 */
 	void setDependencies(List<Integer> dependencies);
 
+	/**
+	 * Returns the output.
+	 * 
+	 * @return the output
+	 */
 	OutputStream getOutput();
 
+	/**
+	 * Sets the output.
+	 * 
+	 * @param output
+	 *            output
+	 */
 	void setOutput(OutputStream output);
 
 }
