@@ -3,7 +3,6 @@ package de.tudresden.inf.lat.born.core.term;
 import java.util.List;
 
 /**
- * 
  * This interface models a term.
  * 
  * @author Julian Mendez

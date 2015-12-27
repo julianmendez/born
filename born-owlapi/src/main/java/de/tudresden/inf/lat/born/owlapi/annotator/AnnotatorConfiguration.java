@@ -3,6 +3,12 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * This interface models the configuration of an annotator.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface AnnotatorConfiguration {
 
 	InputStream getInputOntology();

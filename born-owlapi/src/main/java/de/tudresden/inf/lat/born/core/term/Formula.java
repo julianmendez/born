@@ -1,12 +1,12 @@
 package de.tudresden.inf.lat.born.core.term;
 
 /**
- * 
  * This interface models a formula.
  * 
  * @author Julian Mendez
  *
  */
+@FunctionalInterface
 public interface Formula {
 
 	/**

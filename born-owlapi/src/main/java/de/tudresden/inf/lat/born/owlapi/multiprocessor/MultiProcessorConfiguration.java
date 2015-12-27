@@ -4,6 +4,12 @@ import java.util.List;
 
 import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
 
+/**
+ * This interface models the configuration of a multi-processor.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface MultiProcessorConfiguration {
 
 	List<OntologyAndNetwork> getOntologyList();

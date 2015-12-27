@@ -3,7 +3,7 @@ package de.tudresden.inf.lat.born.core.term;
 import java.net.URI;
 
 /**
- * This interface has all the valid symbols.
+ * This interface contains all the valid symbols.
  * 
  * @author Julian Mendez
  *

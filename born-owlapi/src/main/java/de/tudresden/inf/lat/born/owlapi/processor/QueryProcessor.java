@@ -1,11 +1,12 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
 /**
- * Executes a query.
+ * This interface models the query processor.
  * 
  * @author Julian Mendez
  *
  */
+@FunctionalInterface
 public interface QueryProcessor {
 
 	/**

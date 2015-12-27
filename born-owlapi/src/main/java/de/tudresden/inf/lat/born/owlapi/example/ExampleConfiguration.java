@@ -2,6 +2,12 @@ package de.tudresden.inf.lat.born.owlapi.example;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 
+/**
+ * This interface models the configuration of an example.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface ExampleConfiguration {
 
 	/**

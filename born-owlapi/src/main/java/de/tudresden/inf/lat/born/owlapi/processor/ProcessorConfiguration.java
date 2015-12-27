@@ -2,6 +2,12 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 
+/**
+ * This interface models the configuration of a processor.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface ProcessorConfiguration {
 
 	OWLOntology getOntology();
