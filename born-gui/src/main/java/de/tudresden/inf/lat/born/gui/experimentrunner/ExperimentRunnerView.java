@@ -5,6 +5,12 @@ import java.awt.event.ActionListener;
 import de.tudresden.inf.lat.born.gui.common.JPanelView;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 
+/**
+ * This interface models the experiment runner view.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface ExperimentRunnerView extends JPanelView {
 
 	/**
