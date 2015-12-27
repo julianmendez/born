@@ -15,11 +15,11 @@ public class ExampleLoaderTest {
 	@Test
 	public void testGetExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
-		List<ExampleConfigurationImpl> list = loader.getExampleConfigurations();
+		List<ExampleConfiguration> list = loader.getExampleConfigurations();
 		Assert.assertEquals(2, list.size());
 
 		{
-			ExampleConfigurationImpl conf0 = list.get(0);
+			ExampleConfiguration conf0 = list.get(0);
 			Assert.assertEquals("example-0", conf0.getOntologyName());
 			Assert.assertTrue(conf0.getOntologyFileName().endsWith("/examples/example-0.owl"));
 			Assert.assertEquals(
@@ -28,7 +28,7 @@ public class ExampleLoaderTest {
 		}
 
 		{
-			ExampleConfigurationImpl conf1 = list.get(1);
+			ExampleConfiguration conf1 = list.get(1);
 			Assert.assertEquals("example-1", conf1.getOntologyName());
 			Assert.assertTrue(conf1.getOntologyFileName().endsWith("/examples/example-1.owl"));
 			Assert.assertEquals(

@@ -12,7 +12,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
  * @author Julian Mendez
  *
  */
-public class ExampleConfigurationImpl {
+public class ExampleConfigurationImpl implements ExampleConfiguration {
 
 	private final String ontologyName;
 	private final String ontologyFileName;
@@ -58,6 +58,7 @@ public class ExampleConfigurationImpl {
 	 * 
 	 * @return the ontology name
 	 */
+	@Override
 	public String getOntologyName() {
 		return this.ontologyName;
 	}
@@ -67,6 +68,7 @@ public class ExampleConfigurationImpl {
 	 * 
 	 * @return the ontology file name
 	 */
+	@Override
 	public String getOntologyFileName() {
 		return this.ontologyFileName;
 	}
@@ -76,6 +78,7 @@ public class ExampleConfigurationImpl {
 	 * 
 	 * @return the OWL ontology
 	 */
+	@Override
 	public OWLOntology getOntology() {
 		return this.owlOntology;
 	}
@@ -85,6 +88,7 @@ public class ExampleConfigurationImpl {
 	 * 
 	 * @return the Bayesian network file name
 	 */
+	@Override
 	public String getBayesianNetworkFileName() {
 		return this.bayesianNetworkFileName;
 	}
@@ -94,6 +98,7 @@ public class ExampleConfigurationImpl {
 	 * 
 	 * @return the Bayesian network
 	 */
+	@Override
 	public String getBayesianNetwork() {
 		return this.bayesianNetwork;
 	}
@@ -103,6 +108,7 @@ public class ExampleConfigurationImpl {
 	 * 
 	 * @return the query
 	 */
+	@Override
 	public String getQuery() {
 		return this.query;
 	}
@@ -119,7 +125,7 @@ public class ExampleConfigurationImpl {
 		if (this == obj) {
 			return true;
 		} else if (obj instanceof ExampleConfigurationImpl) {
-			ExampleConfigurationImpl other = (ExampleConfigurationImpl) obj;
+			ExampleConfiguration other = (ExampleConfiguration) obj;
 			return getOntologyName().equals(other.getOntologyName())
 					&& getOntologyFileName().equals(other.getOntologyFileName())
 					&& getOntology().equals(other.getOntology())

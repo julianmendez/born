@@ -22,7 +22,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
-import de.tudresden.inf.lat.born.owlapi.example.ExampleConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
@@ -357,7 +357,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
-	public void addExamples(Collection<ExampleConfigurationImpl> examples) {
+	public void addExamples(Collection<ExampleConfiguration> examples) {
 		Objects.requireNonNull(examples);
 		examples.forEach(configuration -> comboBoxExample.addItem(configuration.getOntologyName()));
 	}

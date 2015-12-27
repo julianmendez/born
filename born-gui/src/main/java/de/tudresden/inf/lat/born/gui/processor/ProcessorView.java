@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import javax.swing.JPanel;
 
-import de.tudresden.inf.lat.born.owlapi.example.ExampleConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
@@ -72,7 +72,7 @@ public interface ProcessorView {
 
 	void setButtonsEnabled(boolean status);
 
-	void addExamples(Collection<ExampleConfigurationImpl> examples);
+	void addExamples(Collection<ExampleConfiguration> examples);
 
 	JPanel getPanel();
 
