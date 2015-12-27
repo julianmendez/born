@@ -9,24 +9,28 @@ import java.util.Objects;
  * @author Julian Mendez
  *
  */
-public class BayesianNetworkCreatorConfigurationImpl {
+public class BayesianNetworkCreatorConfigurationImpl implements BayesianNetworkCreatorConfiguration {
 
 	private List<Integer> dependencies;
 	private OutputStream output;
 
+	@Override
 	public List<Integer> getDependencies() {
 		return dependencies;
 	}
 
+	@Override
 	public void setDependencies(List<Integer> dependencies) {
 		Objects.requireNonNull(dependencies);
 		this.dependencies = dependencies;
 	}
 
+	@Override
 	public OutputStream getOutput() {
 		return output;
 	}
 
+	@Override
 	public void setOutput(OutputStream output) {
 		Objects.requireNonNull(output);
 		this.output = output;
@@ -36,10 +40,10 @@ public class BayesianNetworkCreatorConfigurationImpl {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof BayesianNetworkCreatorConfigurationImpl)) {
+		} else if (!(obj instanceof BayesianNetworkCreatorConfiguration)) {
 			return false;
 		} else {
-			BayesianNetworkCreatorConfigurationImpl other = (BayesianNetworkCreatorConfigurationImpl) obj;
+			BayesianNetworkCreatorConfiguration other = (BayesianNetworkCreatorConfiguration) obj;
 			return getDependencies().equals(other.getDependencies()) && getOutput().equals(other.getOutput());
 		}
 	}

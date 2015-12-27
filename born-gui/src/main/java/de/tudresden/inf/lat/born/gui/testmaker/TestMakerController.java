@@ -17,6 +17,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorCore;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigurationImpl;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
 
@@ -123,7 +124,7 @@ public class TestMakerController implements ActionListener {
 	void createBayesianNetwork(OutputStream output) {
 		Objects.requireNonNull(output);
 		List<Integer> listOfParents = parseIntegers(getView().getListOfParents());
-		BayesianNetworkCreatorConfigurationImpl conf = new BayesianNetworkCreatorConfigurationImpl();
+		BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfigurationImpl();
 		conf.setDependencies(listOfParents);
 		conf.setOutput(output);
 		BayesianNetworkCreatorCore core = new BayesianNetworkCreatorCore();
