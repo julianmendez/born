@@ -50,14 +50,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		createPanel();
 	}
 
-	/**
-	 * Adds an action listener to the button to select the input ontology.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonInputOntologyListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -66,14 +58,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		this.buttonInputOntologyDirectory.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the button to select the Bayesian network.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonBayesianNetworkListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -82,14 +66,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		this.buttonBayesianNetworkDirectory.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the button to select the output directory.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonOutputDirectoryListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -98,14 +74,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		this.buttonOutputDirectory.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the button to update the seed.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonUpdateSeedListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -114,14 +82,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		this.buttonUpdateSeed.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the button to compute the inference.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonComputeInferenceListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -215,32 +175,16 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 	}
 
-	/**
-	 * Returns the model.
-	 * 
-	 * @return the model
-	 */
 	@Override
 	public MultiProcessorConfiguration getModel() {
 		return this.model;
 	}
 
-	/**
-	 * Returns the directory of the input ontologies.
-	 * 
-	 * @return the directory of the input ontologies
-	 */
 	@Override
 	public String getInputOntologyDirectory() {
 		return this.textInputOntologyDirectory.getText();
 	}
 
-	/**
-	 * Sets the directory of the input ontologies.
-	 * 
-	 * @param directoryName
-	 *            directory
-	 */
 	@Override
 	public void setInputOntologyDirectory(String directoryName) {
 		Objects.requireNonNull(directoryName);
@@ -248,22 +192,11 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		updateInputOntologyDirectory();
 	}
 
-	/**
-	 * Returns the directory of the Bayesian networks.
-	 * 
-	 * @return the directory of the Bayesian networks
-	 */
 	@Override
 	public String getBayesianNetworkDirectory() {
 		return this.textBayesianNetworkDirectory.getText();
 	}
 
-	/**
-	 * Set the directory of the Bayesian networks.
-	 * 
-	 * @param directoryName
-	 *            directory
-	 */
 	@Override
 	public void setBayesianNetworkDirectory(String directoryName) {
 		Objects.requireNonNull(directoryName);
@@ -271,22 +204,11 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		updateBayesianNetworkDirectory();
 	}
 
-	/**
-	 * Returns the output directory.
-	 * 
-	 * @return the output directory
-	 */
 	@Override
 	public String getOutputDirectory() {
 		return this.textOutputDirectory.getText();
 	}
 
-	/**
-	 * Sets the output directory.
-	 * 
-	 * @param directoryName
-	 *            directory
-	 */
 	@Override
 	public void setOutputDirectory(String directoryName) {
 		Objects.requireNonNull(directoryName);
@@ -294,31 +216,16 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		updateOutputDirectory();
 	}
 
-	/**
-	 * Changes the state of the load button to enabled or disabled.
-	 * 
-	 * @param status
-	 *            value to define if the button is enabled
-	 */
 	@Override
 	public void setButtonLoadEnabled(boolean status) {
 		this.buttonInputOntologyDirectory.setEnabled(status);
 	}
 
-	/**
-	 * Changes the state of the compute button to enabled or disabled.
-	 * 
-	 * @param status
-	 *            value to define if the button is enabled
-	 */
 	@Override
 	public void setButtonComputeInferenceEnabled(boolean status) {
 		this.buttonComputeInference.setEnabled(status);
 	}
 
-	/**
-	 * Updates the directory of ontologies.
-	 */
 	@Override
 	public void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
@@ -328,9 +235,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		}
 	}
 
-	/**
-	 * Updates the directory of Bayesian networks.
-	 */
 	@Override
 	public void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
@@ -340,9 +244,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		}
 	}
 
-	/**
-	 * Updates the output directory.
-	 */
 	@Override
 	public void updateOutputDirectory() {
 		String outputDirectory = getOutputDirectory();
@@ -351,9 +252,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		}
 	}
 
-	/**
-	 * Updates the seed for the pseudorandom number generator.
-	 */
 	@Override
 	public void updateSeed() {
 		String seedStr = this.textSeed.getText();
@@ -366,9 +264,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		this.model.setSeed(seed);
 	}
 
-	/**
-	 * Updates the number of queries.
-	 */
 	@Override
 	public void updateNumberOfQueries() {
 		String numberOfQueriesStr = this.textNumberOfQueries.getText();
@@ -381,9 +276,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		this.model.setNumberOfQueries(numberOfQueries);
 	}
 
-	/**
-	 * Updates the visual components.
-	 */
 	@Override
 	public void update() {
 		updateInputOntologyDirectory();
@@ -393,56 +285,27 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		updateNumberOfQueries();
 	}
 
-	/**
-	 * Makes visible or invisible the label that shows that the reasoner is
-	 * running.
-	 * 
-	 * @param status
-	 *            value to define if the label is visible
-	 */
 	@Override
 	public void setComputing(boolean status) {
 		labelProgress.setVisible(status);
 	}
 
-	/**
-	 * Returns the number of queries.
-	 * 
-	 * @return the number of queries
-	 */
 	@Override
 	public String getNumebrOfQueries() {
 		return this.textNumberOfQueries.getText();
 	}
 
-	/**
-	 * Returns the seed.
-	 * 
-	 * @return the seed
-	 */
 	@Override
 	public String getSeed() {
 		return this.textSeed.getText();
 	}
 
-	/**
-	 * Sets the seed for the pseudorandom number generator.
-	 * 
-	 * @param seed
-	 *            the seed
-	 */
 	@Override
 	public void setSeed(String seed) {
 		Objects.requireNonNull(seed);
 		this.textSeed.setText(seed);
 	}
 
-	/**
-	 * Changes the state of all buttons to enabled or disabled.
-	 * 
-	 * @param status
-	 *            value to define if the buttons are enabled
-	 */
 	@Override
 	public void setButtonsEnabled(boolean status) {
 		buttonInputOntologyDirectory.setEnabled(status);

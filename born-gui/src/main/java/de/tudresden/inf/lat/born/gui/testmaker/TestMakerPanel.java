@@ -56,14 +56,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		createPanel();
 	}
 
-	/**
-	 * Adds an action listener to the button to select the input ontology.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -72,14 +64,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSelectInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the button to select the output ontology.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonSelectOutputOntologyFileListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -88,14 +72,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSaveOntologyFile.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the button to save the Bayesian network.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addButtonSaveBayesianNetworkListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -104,14 +80,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSaveBayesianNetwork.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the text field of the input ontology.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addTextFieldInputOntologyFileListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -120,14 +88,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		textInputOntologyFile.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the text field of the list of parents.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addTextFieldListOfParentsListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -136,14 +96,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		textListOfParents.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the text field of the threshold.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addTextFieldThresholdListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -152,15 +104,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		textThreshold.setActionCommand(actionCommand);
 	}
 
-	/**
-	 * Adds an action listener to the text field of the maximum number of
-	 * variables.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
 	@Override
 	public void addTextFieldMaxNumberOfVarListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
@@ -226,41 +169,21 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 	}
 
-	/**
-	 * Returns the model.
-	 * 
-	 * @return the model
-	 */
 	@Override
 	public AnnotatorConfiguration getModel() {
 		return model;
 	}
 
-	/**
-	 * Changes the state of the load button to enabled or disabled.
-	 * 
-	 * @param status
-	 *            value to define if the button is enabled
-	 */
 	@Override
 	public void setButtonLoadEnabled(boolean status) {
 		buttonSelectInputOntologyFile.setEnabled(status);
 	}
 
-	/**
-	 * Changes the state of the compute button to enabled or disabled.
-	 * 
-	 * @param status
-	 *            value to define if the button is enabled
-	 */
 	@Override
 	public void setButtonComputeInferenceEnabled(boolean status) {
 		buttonSaveBayesianNetwork.setEnabled(status);
 	}
 
-	/**
-	 * Updates the ontology file.
-	 */
 	@Override
 	public void updateOntologyFile() {
 		String inputOntologyFile = getInputOntologyFile();
@@ -273,9 +196,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		}
 	}
 
-	/**
-	 * Updates the threshold.
-	 */
 	@Override
 	public void updateThreshold() {
 		try {
@@ -285,9 +205,6 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		}
 	}
 
-	/**
-	 * Updates the maximum number of variables.
-	 */
 	@Override
 	public void updateMaxNumberOfVars() {
 		try {
@@ -297,88 +214,44 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		}
 	}
 
-	/**
-	 * Returns the input ontology file.
-	 * 
-	 * @return the input ontology file
-	 */
 	@Override
 	public String getInputOntologyFile() {
 		return textInputOntologyFile.getText();
 	}
 
-	/**
-	 * Sets the input ontology file.
-	 * 
-	 * @param fileName
-	 *            file name
-	 */
 	@Override
 	public void setInputOntologyFile(String fileName) {
 		Objects.requireNonNull(fileName);
 		textInputOntologyFile.setText(fileName);
 	}
 
-	/**
-	 * Returns the threshold.
-	 * 
-	 * @return the threshold
-	 */
 	@Override
 	public String getThreshold() {
 		return textThreshold.getText();
 	}
 
-	/**
-	 * Sets the threshold.
-	 * 
-	 * @param threshold
-	 *            the threshold
-	 */
 	@Override
 	public void setThreshold(String threshold) {
 		Objects.requireNonNull(threshold);
 		textThreshold.setText(threshold);
 	}
 
-	/**
-	 * Returns the maximum number of variables.
-	 * 
-	 * @return the maximum number of variables
-	 */
 	@Override
 	public String getMaxNumberOfVar() {
 		return textMaxNumberOfVars.getText();
 	}
 
-	/**
-	 * Sets the maximum number of variables.
-	 * 
-	 * @param maxNumberOfVars
-	 *            the maximum number of variables
-	 */
 	@Override
 	public void setMaxNumberOfVar(String maxNumberOfVars) {
 		Objects.requireNonNull(maxNumberOfVars);
 		textMaxNumberOfVars.setText(maxNumberOfVars);
 	}
 
-	/**
-	 * Returns the list of parents.
-	 * 
-	 * @return the list of parents
-	 */
 	@Override
 	public String getListOfParents() {
 		return textListOfParents.getText();
 	}
 
-	/**
-	 * Sets the list of parents.
-	 * 
-	 * @param listOfParents
-	 *            the list of parents
-	 */
 	@Override
 	public void setListOfParents(String listOfParents) {
 		Objects.requireNonNull(listOfParents);

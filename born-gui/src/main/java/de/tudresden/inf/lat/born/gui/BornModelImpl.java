@@ -33,66 +33,33 @@ public class BornModelImpl implements BornModel {
 		queryProcessor.startInstallation((new Date().getTime()));
 	}
 
-	/**
-	 * Returns the annotator configuration.
-	 * 
-	 * @return the annotator configuration
-	 */
 	@Override
 	public AnnotatorConfiguration getAnnotatorConfiguration() {
 		return annotatorConfiguration;
 	}
 
-	/**
-	 * Sets the annotator configuration.
-	 * 
-	 * @param annotatorConfiguration
-	 *            annotator configuration
-	 */
 	@Override
 	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
 		Objects.requireNonNull(annotatorConfiguration);
 		this.annotatorConfiguration = annotatorConfiguration;
 	}
 
-	/**
-	 * Returns the processor configuration.
-	 * 
-	 * @return the processor configuration
-	 */
 	@Override
 	public ProcessorConfiguration getProcessorConfiguration() {
 		return processorConfiguration;
 	}
 
-	/**
-	 * Sets the processor configuration.
-	 * 
-	 * @param processorConfiguration
-	 *            processor configuration
-	 */
 	@Override
 	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
 		Objects.requireNonNull(processorConfiguration);
 		this.processorConfiguration = processorConfiguration;
 	}
 
-	/**
-	 * Returns the multi processor configuration.
-	 * 
-	 * @return the multi processor configuration
-	 */
 	@Override
 	public MultiProcessorConfiguration getMultiProcessorConfiguration() {
 		return multiProcessorConfiguration;
 	}
 
-	/**
-	 * Sets the multi processor configuration.
-	 * 
-	 * @param multiProcessorConfiguration
-	 *            multi processor configuration
-	 */
 	@Override
 	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
 		Objects.requireNonNull(multiProcessorConfiguration);
