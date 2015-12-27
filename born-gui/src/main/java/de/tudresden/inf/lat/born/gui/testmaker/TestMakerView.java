@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
 public interface TestMakerView {
 
@@ -84,7 +84,7 @@ public interface TestMakerView {
 	 * 
 	 * @return the model
 	 */
-	AnnotatorConfigurationImpl getModel();
+	AnnotatorConfiguration getModel();
 
 	/**
 	 * Changes the state of the load button to enabled or disabled.

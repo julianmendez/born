@@ -15,7 +15,7 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorCore;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigurationImpl;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
@@ -85,7 +85,7 @@ public class TestMakerController implements ActionListener {
 		Objects.requireNonNull(output);
 		getView().updateThreshold();
 		getView().updateMaxNumberOfVars();
-		AnnotatorConfigurationImpl conf = getModel();
+		AnnotatorConfiguration conf = getModel();
 		conf.setOutputOntology(output);
 		AnnotatorCore core = new AnnotatorCore();
 		core.run(conf);
@@ -151,7 +151,7 @@ public class TestMakerController implements ActionListener {
 	 * 
 	 * @return the model
 	 */
-	public AnnotatorConfigurationImpl getModel() {
+	public AnnotatorConfiguration getModel() {
 		return getView().getModel();
 	}
 

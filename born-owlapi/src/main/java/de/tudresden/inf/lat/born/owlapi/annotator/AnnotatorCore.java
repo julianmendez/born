@@ -53,7 +53,7 @@ public class AnnotatorCore {
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
 	}
 
-	public void run(AnnotatorConfigurationImpl conf) {
+	public void run(AnnotatorConfiguration conf) {
 		Objects.requireNonNull(conf);
 		try {
 			annotate(conf.getInputOntology(), conf.getOutputOntology(), conf.getThreshold(), conf.getMaxNumberOfVars());

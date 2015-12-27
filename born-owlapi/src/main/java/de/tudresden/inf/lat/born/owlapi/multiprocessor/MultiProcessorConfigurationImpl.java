@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
 
 /**
@@ -76,7 +76,7 @@ public class MultiProcessorConfigurationImpl {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof AnnotatorConfigurationImpl)) {
+		} else if (!(obj instanceof AnnotatorConfiguration)) {
 			return false;
 		} else {
 			MultiProcessorConfigurationImpl other = (MultiProcessorConfigurationImpl) obj;

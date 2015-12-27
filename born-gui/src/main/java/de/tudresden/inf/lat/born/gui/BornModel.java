@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.gui;
 import java.util.Date;
 import java.util.Objects;
 
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
@@ -17,7 +18,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 public class BornModel {
 
 	private ProcessorConfigurationImpl processorConfiguration = new ProcessorConfigurationImpl();
-	private AnnotatorConfigurationImpl annotatorConfiguration = new AnnotatorConfigurationImpl();
+	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfigurationImpl();
 	private MultiProcessorConfigurationImpl multiProcessorConfiguration = new MultiProcessorConfigurationImpl();
 
 	/**
@@ -35,7 +36,7 @@ public class BornModel {
 	 * 
 	 * @return the annotator configuration
 	 */
-	public AnnotatorConfigurationImpl getAnnotatorConfiguration() {
+	public AnnotatorConfiguration getAnnotatorConfiguration() {
 		return annotatorConfiguration;
 	}
 
@@ -45,7 +46,7 @@ public class BornModel {
 	 * @param annotatorConfiguration
 	 *            annotator configuration
 	 */
-	public void setAnnotatorConfiguration(AnnotatorConfigurationImpl annotatorConfiguration) {
+	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
 		Objects.requireNonNull(annotatorConfiguration);
 		this.annotatorConfiguration = annotatorConfiguration;
 	}
