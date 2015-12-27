@@ -53,61 +53,31 @@ public class ExampleConfigurationImpl implements ExampleConfiguration {
 		this.query = query;
 	}
 
-	/**
-	 * Returns the ontology name.
-	 * 
-	 * @return the ontology name
-	 */
 	@Override
 	public String getOntologyName() {
 		return this.ontologyName;
 	}
 
-	/**
-	 * Returns the ontology file name.
-	 * 
-	 * @return the ontology file name
-	 */
 	@Override
 	public String getOntologyFileName() {
 		return this.ontologyFileName;
 	}
 
-	/**
-	 * Returns the OWL ontology.
-	 * 
-	 * @return the OWL ontology
-	 */
 	@Override
 	public OWLOntology getOntology() {
 		return this.owlOntology;
 	}
 
-	/**
-	 * Returns the Bayesian network file name.
-	 * 
-	 * @return the Bayesian network file name
-	 */
 	@Override
 	public String getBayesianNetworkFileName() {
 		return this.bayesianNetworkFileName;
 	}
 
-	/**
-	 * Returns the Bayesian network.
-	 * 
-	 * @return the Bayesian network
-	 */
 	@Override
 	public String getBayesianNetwork() {
 		return this.bayesianNetwork;
 	}
 
-	/**
-	 * Returns the query.
-	 * 
-	 * @return the query
-	 */
 	@Override
 	public String getQuery() {
 		return this.query;
