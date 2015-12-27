@@ -9,7 +9,7 @@ import org.semanticweb.owlapi.model.OWLOntologyLoaderListener;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.gui.BornController;
-import de.tudresden.inf.lat.born.gui.BornModel;
+import de.tudresden.inf.lat.born.gui.BornModelImpl;
 import de.tudresden.inf.lat.born.gui.BornPanel;
 
 /**
@@ -32,7 +32,7 @@ public class BornStarter implements OWLOntologyChangeListener, OWLOntologyLoader
 	public BornStarter(OWLOntologyManager manager) {
 		Objects.requireNonNull(manager);
 		this.ontologyManager = manager;
-		this.panel = new BornController(new BornPanel(new BornModel()), this.ontologyManager);
+		this.panel = new BornController(new BornPanel(new BornModelImpl()), this.ontologyManager);
 		getOWLOntologyManager().addOntologyLoaderListener(this);
 		getOWLOntologyManager().addOntologyChangeListener(this);
 	}
