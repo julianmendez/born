@@ -18,6 +18,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 
@@ -81,7 +82,7 @@ public class MultiProcessorCore {
 
 		conf.getOntologyList().forEach(ontPair -> {
 
-			ProcessorConfigurationImpl configuration = new ProcessorConfigurationImpl();
+			ProcessorConfiguration configuration = new ProcessorConfigurationImpl();
 			configuration.setOntology(ontPair.getOntology());
 			configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
 			configuration.setOutputFileName(

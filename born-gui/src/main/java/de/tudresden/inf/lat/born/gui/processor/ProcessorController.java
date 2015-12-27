@@ -11,7 +11,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 
 /**
@@ -178,7 +178,7 @@ public class ProcessorController implements ActionListener {
 	 * 
 	 * @return the model
 	 */
-	public ProcessorConfigurationImpl getModel() {
+	public ProcessorConfiguration getModel() {
 		return getView().getModel();
 	}
 

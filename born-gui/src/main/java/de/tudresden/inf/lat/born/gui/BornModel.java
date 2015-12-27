@@ -8,6 +8,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
@@ -18,7 +19,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
  */
 public class BornModel {
 
-	private ProcessorConfigurationImpl processorConfiguration = new ProcessorConfigurationImpl();
+	private ProcessorConfiguration processorConfiguration = new ProcessorConfigurationImpl();
 	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfigurationImpl();
 	private MultiProcessorConfiguration multiProcessorConfiguration = new MultiProcessorConfigurationImpl();
 
@@ -57,7 +58,7 @@ public class BornModel {
 	 * 
 	 * @return the processor configuration
 	 */
-	public ProcessorConfigurationImpl getProcessorConfiguration() {
+	public ProcessorConfiguration getProcessorConfiguration() {
 		return processorConfiguration;
 	}
 
@@ -67,7 +68,7 @@ public class BornModel {
 	 * @param processorConfiguration
 	 *            processor configuration
 	 */
-	public void setProcessorConfiguration(ProcessorConfigurationImpl processorConfiguration) {
+	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
 		Objects.requireNonNull(processorConfiguration);
 		this.processorConfiguration = processorConfiguration;
 	}

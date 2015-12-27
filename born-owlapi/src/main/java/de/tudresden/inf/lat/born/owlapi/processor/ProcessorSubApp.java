@@ -71,7 +71,7 @@ public class ProcessorSubApp implements SubApp {
 		Objects.requireNonNull(args);
 		long start = System.nanoTime();
 		if (isValid(args)) {
-			ProcessorConfigurationImpl conf = new ProcessorConfigurationImpl();
+			ProcessorConfiguration conf = new ProcessorConfigurationImpl();
 
 			StringBuffer sbuf = new StringBuffer();
 			String[] newArgs = null;

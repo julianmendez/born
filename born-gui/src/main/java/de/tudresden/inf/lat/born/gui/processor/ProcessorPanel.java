@@ -23,6 +23,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
@@ -50,9 +51,9 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private JScrollPane scrollConsoleInput = new JScrollPane();
 	private JScrollPane scrollConsoleOutput = new JScrollPane();
 	private JComboBox<String> comboBoxExample = new JComboBox<String>();
-	private final ProcessorConfigurationImpl model;
+	private final ProcessorConfiguration model;
 
-	public ProcessorPanel(ProcessorConfigurationImpl model) {
+	public ProcessorPanel(ProcessorConfiguration model) {
 		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
@@ -205,7 +206,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
-	public ProcessorConfigurationImpl getModel() {
+	public ProcessorConfiguration getModel() {
 		return model;
 	}
 

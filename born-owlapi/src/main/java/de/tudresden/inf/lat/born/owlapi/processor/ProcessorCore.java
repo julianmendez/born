@@ -109,7 +109,7 @@ public class ProcessorCore {
 
 	}
 
-	public String run(ProcessorConfigurationImpl conf, long start) {
+	public String run(ProcessorConfiguration conf, long start) {
 		Objects.requireNonNull(conf);
 		StringBuffer sbuf = new StringBuffer();
 		try {

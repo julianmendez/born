@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.swing.JPanel;
 
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
  * View of processor.
@@ -30,7 +30,7 @@ public interface ProcessorView {
 
 	void addButtonUpdateExampleListener(ActionListener listener, String actionCommand);
 
-	ProcessorConfigurationImpl getModel();
+	ProcessorConfiguration getModel();
 
 	String getOntologyFile();
 

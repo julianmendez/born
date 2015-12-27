@@ -21,7 +21,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  * @author Julian Mendez
  *
  */
-public class ProcessorConfigurationImpl {
+public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	private OWLOntology ontology;
 	private String bayesianNetwork = "";
@@ -39,54 +39,66 @@ public class ProcessorConfigurationImpl {
 		}
 	}
 
+	@Override
 	public OWLOntology getOntology() {
 		return ontology;
 	}
 
+	@Override
 	public void setOntology(OWLOntology ontologyInputStream) {
 		Objects.requireNonNull(ontologyInputStream);
 		this.ontology = ontologyInputStream;
 	}
 
+	@Override
 	public String getBayesianNetwork() {
 		return bayesianNetwork;
 	}
 
+	@Override
 	public void setBayesianNetwork(String bayesianNetwork) {
 		Objects.requireNonNull(bayesianNetwork);
 		this.bayesianNetwork = bayesianNetwork;
 	}
 
+	@Override
 	public String getQuery() {
 		return query;
 	}
 
+	@Override
 	public void setQuery(String query) {
 		this.query = query;
 	}
 
+	@Override
 	public String getOutputFileName() {
 		return outputFileName;
 	}
 
+	@Override
 	public void setOutputFileName(String outputFileName) {
 		Objects.requireNonNull(outputFileName);
 		this.outputFileName = outputFileName;
 	}
 
+	@Override
 	public QueryProcessor getQueryProcessor() {
 		return queryProcessor;
 	}
 
+	@Override
 	public void setQueryProcessor(QueryProcessor queryProcessor) {
 		Objects.requireNonNull(queryProcessor);
 		this.queryProcessor = queryProcessor;
 	}
 
+	@Override
 	public boolean isShowingLog() {
 		return showingLog;
 	}
 
+	@Override
 	public void setShowingLog(boolean showingLog) {
 		this.showingLog = showingLog;
 	}
@@ -98,7 +110,7 @@ public class ProcessorConfigurationImpl {
 		} else if (!(obj instanceof AnnotatorConfiguration)) {
 			return false;
 		} else {
-			ProcessorConfigurationImpl other = (ProcessorConfigurationImpl) obj;
+			ProcessorConfiguration other = (ProcessorConfiguration) obj;
 			return getOntology().equals(other.getOntology()) && getBayesianNetwork().equals(other.getBayesianNetwork())
 					&& getQuery().equals(other.getQuery()) && getOutputFileName().equals(other.getOutputFileName())
 					&& getQueryProcessor().equals(other.getQueryProcessor())
