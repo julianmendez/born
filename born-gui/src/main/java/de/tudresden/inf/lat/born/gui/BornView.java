@@ -6,6 +6,13 @@ import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
 
+/**
+ * This interface models the view of the main panel of the graphical user
+ * interface.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface BornView {
 
 	/**

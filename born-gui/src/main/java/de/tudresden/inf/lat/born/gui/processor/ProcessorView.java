@@ -9,71 +9,256 @@ import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
 /**
- * View of processor.
+ * This interface models the processor view.
  * 
  * @author Julian Mendez
  *
  */
 public interface ProcessorView {
 
+	/**
+	 * Adds an action listener to the button to select the input ontology.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addButtonOntologyFileListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Adds an action listener to the button to select the Bayesian network.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addButtonBayesianNetworkFileListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Adds an action listener to the button to select the console input.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addButtonConsoleInputListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Adds an action listener to the button to select the console output.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addButtonConsoleOutputListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Adds an action listener to the button to compute the inference.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addButtonComputeInferenceListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Adds an action listener to the combo box to select the example.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addComboBoxExampleListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Adds an action listener to the button to update the selected example.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
 	void addButtonUpdateExampleListener(ActionListener listener, String actionCommand);
 
+	/**
+	 * Returns the model.
+	 * 
+	 * @return the model
+	 */
 	ProcessorConfiguration getModel();
 
+	/**
+	 * Returns the ontology file.
+	 * 
+	 * @return the ontology file
+	 */
 	String getOntologyFile();
 
+	/**
+	 * Sets the ontology file
+	 * 
+	 * @param fileName
+	 *            file name
+	 */
 	void setOntologyFile(String fileName);
 
+	/**
+	 * Returns the Bayesian network file.
+	 * 
+	 * @return the Bayesian network file
+	 */
 	String getBayesianNetworkFile();
 
+	/**
+	 * Sets the Bayesian network file
+	 * 
+	 * @param fileName
+	 *            file name
+	 */
 	void setBayesianNetworkFile(String fileName);
 
+	/**
+	 * Returns the console input.
+	 * 
+	 * @return the console input
+	 */
 	String getConsoleInput();
 
+	/**
+	 * Sets the console input.
+	 * 
+	 * @param text
+	 *            text
+	 */
 	void setConsoleInput(String text);
 
+	/**
+	 * Reads the console input file.
+	 * 
+	 * @param consoleInputFile
+	 *            console input file
+	 */
 	void readConsoleInput(String consoleInputFile);
 
+	/**
+	 * Writes the console output fle.
+	 * 
+	 * @param consoleOutputFile
+	 *            console output file
+	 */
 	void writeConsoleOutput(String consoleOutputFile);
 
+	/**
+	 * Returns the console oputput.
+	 * 
+	 * @return the console output
+	 */
 	String getConsoleOutput();
 
-	void setConsoleOutput(String fileName);
+	/**
+	 * Sets the console output.
+	 * 
+	 * @param text
+	 *            text
+	 */
+	void setConsoleOutput(String text);
 
-	void setButtonLoadEnabled(boolean b);
+	/**
+	 * Changes the state of the button to load the ontology between enabled and
+	 * disabled.
+	 * 
+	 * @param status
+	 *            status (<code>true</code> if and only if the button is
+	 *            enabled)
+	 */
+	void setButtonLoadEnabled(boolean status);
 
-	void setButtonComputeInferenceEnabled(boolean b);
+	/**
+	 * Changes the state of the button to compute inference between enabled and
+	 * disabled.
+	 * 
+	 * @param status
+	 *            status (<code>true</code> if and only if the button is
+	 *            enabled)
+	 */
+	void setButtonComputeInferenceEnabled(boolean status);
 
-	void setComboBoxExampleEnabled(boolean b);
+	/**
+	 * Changes the state of the combo box to select the examples between enabled
+	 * and disabled.
+	 * 
+	 * @param status
+	 *            status (<code>true</code> if and only if the button is
+	 *            enabled)
+	 */
+	void setComboBoxExampleEnabled(boolean status);
 
+	/**
+	 * Returns the index of the selected example.
+	 * 
+	 * @return the index of the selected example
+	 */
 	int getComboBoxExampleIndex();
 
+	/**
+	 * Updates the ontology file.
+	 */
 	void updateOntologyFile();
 
+	/**
+	 * Updates the Bayesian network file.
+	 */
 	void updateBayesianNetworkFile();
 
+	/**
+	 * Updates the query.
+	 */
 	void updateQuery();
 
+	/**
+	 * Sets the result.
+	 * 
+	 * @param result
+	 *            result
+	 */
 	void setResult(String result);
 
+	/**
+	 * Changes the status, which says whether the processor is running.
+	 * 
+	 * @param status
+	 *            status
+	 */
 	void setComputing(boolean status);
 
+	/**
+	 * Changes the button state between enabled and disabled.
+	 * 
+	 * @param status
+	 *            status (<code>true</code> if and only if the button is
+	 *            enabled)
+	 */
 	void setButtonsEnabled(boolean status);
 
+	/**
+	 * Adds the given example configurations.
+	 * 
+	 * @param examples
+	 *            example configurations
+	 */
 	void addExamples(Collection<ExampleConfiguration> examples);
 
+	/**
+	 * Returns the panel.
+	 * 
+	 * @return the panel
+	 */
 	JPanel getPanel();
 
 }

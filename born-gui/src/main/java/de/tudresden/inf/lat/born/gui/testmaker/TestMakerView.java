@@ -6,6 +6,13 @@ import javax.swing.JPanel;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
+/**
+ * 
+ * This interface models the test maker view.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface TestMakerView {
 
 	/**
@@ -177,6 +184,11 @@ public interface TestMakerView {
 	 */
 	void setListOfParents(String listOfParents);
 
+	/**
+	 * Returns the panel.
+	 * 
+	 * @return the panel
+	 */
 	JPanel getPanel();
 
 }

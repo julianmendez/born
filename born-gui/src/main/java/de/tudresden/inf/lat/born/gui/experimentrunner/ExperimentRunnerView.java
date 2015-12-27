@@ -195,6 +195,11 @@ public interface ExperimentRunnerView {
 	 */
 	void setButtonsEnabled(boolean status);
 
+	/**
+	 * Returns the panel.
+	 * 
+	 * @return the panel
+	 */
 	JPanel getPanel();
 
 }

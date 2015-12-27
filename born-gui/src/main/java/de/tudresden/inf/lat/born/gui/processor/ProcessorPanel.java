@@ -276,9 +276,9 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
-	public void setConsoleOutput(String fileName) {
-		Objects.requireNonNull(fileName);
-		textConsoleOutput.setText(fileName);
+	public void setConsoleOutput(String text) {
+		Objects.requireNonNull(text);
+		textConsoleOutput.setText(text);
 	}
 
 	@Override

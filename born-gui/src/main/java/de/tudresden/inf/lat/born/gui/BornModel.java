@@ -4,6 +4,13 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
+/**
+ * This interface models the whole configuration of the graphical user
+ * interface.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public interface BornModel {
 
 	/**
