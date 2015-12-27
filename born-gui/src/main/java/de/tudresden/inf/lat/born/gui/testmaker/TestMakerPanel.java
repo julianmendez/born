@@ -13,12 +13,11 @@ import javax.swing.JTextField;
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigurationImpl;
 
 /**
  * This is the panel for the test maker. This class contains a model for the
- * annotator ({@link AnnotatorConfigurationImpl}), but not for the Bayesian
+ * annotator ({@link AnnotatorConfiguration}), but not for the Bayesian
  * network creator ({@link BayesianNetworkCreatorConfigurationImpl}).
  * 
  * @author Julian Mendez

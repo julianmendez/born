@@ -62,7 +62,7 @@ public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof AnnotatorConfigurationImpl)) {
+		} else if (!(obj instanceof AnnotatorConfiguration)) {
 			return false;
 		} else {
 			AnnotatorConfiguration other = (AnnotatorConfiguration) obj;

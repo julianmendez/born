@@ -40,7 +40,7 @@ public class AnnotatorSubApp implements SubApp {
 	public String run(String args[]) {
 		Objects.requireNonNull(args);
 		if (isValid(args)) {
-			AnnotatorConfigurationImpl conf = new AnnotatorConfigurationImpl();
+			AnnotatorConfiguration conf = new AnnotatorConfigurationImpl();
 
 			double threshold = 1;
 			if (args.length >= 3) {
