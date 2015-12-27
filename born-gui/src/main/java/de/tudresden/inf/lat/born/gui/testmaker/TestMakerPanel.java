@@ -12,13 +12,13 @@ import javax.swing.JTextField;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigurationImpl;
 
 /**
  * This is the panel for the test maker. This class contains a model for the
- * annotator ({@link AnnotatorConfiguration}), but not for the Bayesian network
- * creator ({@link BayesianNetworkCreatorConfiguration}).
+ * annotator ({@link AnnotatorConfigurationImpl}), but not for the Bayesian network
+ * creator ({@link BayesianNetworkCreatorConfigurationImpl}).
  * 
  * @author Julian Mendez
  */
@@ -42,7 +42,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	private final JLabel lblMaxNumberOfVars = new JLabel("maximum number of variables");
 	private final JLabel lblListOfParents = new JLabel("list of parents (e.g. \"1,1,2,3,5,8\")");
 
-	private final AnnotatorConfiguration model;
+	private final AnnotatorConfigurationImpl model;
 
 	/**
 	 * Constructs a new test maker view.
@@ -50,7 +50,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	 * @param model
 	 *            model
 	 */
-	public TestMakerPanel(AnnotatorConfiguration model) {
+	public TestMakerPanel(AnnotatorConfigurationImpl model) {
 		Objects.requireNonNull(model);
 		this.model = model;
 		createPanel();
@@ -232,7 +232,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	 * @return the model
 	 */
 	@Override
-	public AnnotatorConfiguration getModel() {
+	public AnnotatorConfigurationImpl getModel() {
 		return model;
 	}
 

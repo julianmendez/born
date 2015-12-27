@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 
 public interface ExperimentRunnerView {
 
@@ -63,7 +63,7 @@ public interface ExperimentRunnerView {
 	 * 
 	 * @return the model
 	 */
-	MultiProcessorConfiguration getModel();
+	MultiProcessorConfigurationImpl getModel();
 
 	/**
 	 * Returns the directory of the input ontologies.

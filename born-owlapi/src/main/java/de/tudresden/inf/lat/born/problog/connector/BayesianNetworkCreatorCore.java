@@ -110,7 +110,7 @@ public class BayesianNetworkCreatorCore {
 		output.flush();
 	}
 
-	public void run(BayesianNetworkCreatorConfiguration conf) {
+	public void run(BayesianNetworkCreatorConfigurationImpl conf) {
 		Objects.requireNonNull(conf);
 		try {
 			List<ProbClause> network = createNetwork(conf.getDependencies());

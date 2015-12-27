@@ -71,7 +71,7 @@ public class ProcessorSubApp implements SubApp {
 		Objects.requireNonNull(args);
 		long start = System.nanoTime();
 		if (isValid(args)) {
-			ProcessorConfiguration conf = new ProcessorConfiguration();
+			ProcessorConfigurationImpl conf = new ProcessorConfigurationImpl();
 
 			StringBuffer sbuf = new StringBuffer();
 			String[] newArgs = null;
@@ -86,9 +86,9 @@ public class ProcessorSubApp implements SubApp {
 			}
 
 			try {
-				conf.setOntology(ProcessorConfiguration.readOntology(new FileInputStream(newArgs[0])));
-				conf.setBayesianNetwork(ProcessorConfiguration.read(new FileReader(newArgs[1])));
-				conf.setQuery(ProcessorConfiguration.read(new FileReader(newArgs[2])));
+				conf.setOntology(ProcessorConfigurationImpl.readOntology(new FileInputStream(newArgs[0])));
+				conf.setBayesianNetwork(ProcessorConfigurationImpl.read(new FileReader(newArgs[1])));
+				conf.setQuery(ProcessorConfigurationImpl.read(new FileReader(newArgs[2])));
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			} catch (OWLOntologyCreationException e) {

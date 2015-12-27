@@ -11,7 +11,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogInputCreator;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
  * 
@@ -25,10 +25,10 @@ public class BornMainTest {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		ProblogInputCreator instance = new ProblogInputCreator();
 
-		OWLOntology ontology = ProcessorConfiguration
+		OWLOntology ontology = ProcessorConfigurationImpl
 				.readOntology(new FileInputStream("src/test/resources/born-example.owl"));
-		String bayesianNetwork = ProcessorConfiguration.read(new FileReader("src/test/resources/network.pl"));
-		String query = ProcessorConfiguration.read(new FileReader("src/test/resources/born-example.pl"));
+		String bayesianNetwork = ProcessorConfigurationImpl.read(new FileReader("src/test/resources/network.pl"));
+		String query = ProcessorConfigurationImpl.read(new FileReader("src/test/resources/born-example.pl"));
 
 		instance.createProblogFile(ontology, bayesianNetwork, query, output);
 		// TODO finish the unit test

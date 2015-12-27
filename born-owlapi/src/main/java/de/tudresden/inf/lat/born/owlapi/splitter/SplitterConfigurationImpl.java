@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Julian Mendez
  *
  */
-public class SplitterConfiguration {
+public class SplitterConfigurationImpl {
 
 	private InputStream inputOntology;
 	private OutputStream outputOntology;
@@ -46,10 +46,10 @@ public class SplitterConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof SplitterConfiguration)) {
+		} else if (!(obj instanceof SplitterConfigurationImpl)) {
 			return false;
 		} else {
-			SplitterConfiguration other = (SplitterConfiguration) obj;
+			SplitterConfigurationImpl other = (SplitterConfigurationImpl) obj;
 			return getInputOntology().equals(other.getInputOntology())
 					&& getOutputOntology().equals(other.getOutputOntology())
 					&& getBayesianNetwork().equals(other.getBayesianNetwork());

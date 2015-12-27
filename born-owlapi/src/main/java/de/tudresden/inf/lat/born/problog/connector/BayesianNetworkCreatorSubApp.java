@@ -71,7 +71,7 @@ public class BayesianNetworkCreatorSubApp implements SubApp {
 	public String run(String[] args) {
 		if (isValid(args)) {
 			try {
-				BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfiguration();
+				BayesianNetworkCreatorConfigurationImpl conf = new BayesianNetworkCreatorConfigurationImpl();
 
 				List<Integer> dependencies = parseIntegers(args[0]);
 				conf.setDependencies(dependencies);

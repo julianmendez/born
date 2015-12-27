@@ -69,7 +69,7 @@ public class MultiProcessorSubApp implements SubApp {
 		Objects.requireNonNull(args);
 		long start = System.nanoTime();
 		if (isValid(args)) {
-			MultiProcessorConfiguration conf = new MultiProcessorConfiguration();
+			MultiProcessorConfigurationImpl conf = new MultiProcessorConfigurationImpl();
 
 			StringBuffer sbuf = new StringBuffer();
 			String[] newArgs = null;

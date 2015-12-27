@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
 
 /**
@@ -12,7 +12,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
  * @author Julian Mendez
  *
  */
-public class MultiProcessorConfiguration {
+public class MultiProcessorConfigurationImpl {
 
 	private List<OntologyAndNetwork> ontologyList = new ArrayList<>();
 	private String outputDirectory;
@@ -76,10 +76,10 @@ public class MultiProcessorConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof AnnotatorConfiguration)) {
+		} else if (!(obj instanceof AnnotatorConfigurationImpl)) {
 			return false;
 		} else {
-			MultiProcessorConfiguration other = (MultiProcessorConfiguration) obj;
+			MultiProcessorConfigurationImpl other = (MultiProcessorConfigurationImpl) obj;
 			return getOntologyList().equals(other.getOntologyList())
 					&& (getNumberOfQueries() == other.getNumberOfQueries()) && (getSeed() == other.getSeed())
 					&& getOutputDirectory().equals(other.getOutputDirectory())

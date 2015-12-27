@@ -9,9 +9,9 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
+import de.tudresden.inf.lat.born.owlapi.example.ExampleConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 
 /**
@@ -159,7 +159,7 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionUpdateExample() {
 		int index = getView().getComboBoxExampleIndex();
-		ExampleConfiguration exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
+		ExampleConfigurationImpl exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
 
 		getView().setOntologyFile(exampleConfiguration.getOntologyFileName());
 		getModel().setOntology(exampleConfiguration.getOntology());
@@ -178,7 +178,7 @@ public class ProcessorController implements ActionListener {
 	 * 
 	 * @return the model
 	 */
-	public ProcessorConfiguration getModel() {
+	public ProcessorConfigurationImpl getModel() {
 		return getView().getModel();
 	}
 

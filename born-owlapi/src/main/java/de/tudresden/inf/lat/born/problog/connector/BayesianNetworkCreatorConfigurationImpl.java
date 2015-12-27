@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Julian Mendez
  *
  */
-public class BayesianNetworkCreatorConfiguration {
+public class BayesianNetworkCreatorConfigurationImpl {
 
 	private List<Integer> dependencies;
 	private OutputStream output;
@@ -36,10 +36,10 @@ public class BayesianNetworkCreatorConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof BayesianNetworkCreatorConfiguration)) {
+		} else if (!(obj instanceof BayesianNetworkCreatorConfigurationImpl)) {
 			return false;
 		} else {
-			BayesianNetworkCreatorConfiguration other = (BayesianNetworkCreatorConfiguration) obj;
+			BayesianNetworkCreatorConfigurationImpl other = (BayesianNetworkCreatorConfigurationImpl) obj;
 			return getDependencies().equals(other.getDependencies()) && getOutput().equals(other.getOutput());
 		}
 	}

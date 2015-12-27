@@ -18,7 +18,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 
 /**
@@ -73,7 +73,7 @@ public class MultiProcessorCore {
 		return listOfQueries;
 	}
 
-	public List<String> run(MultiProcessorConfiguration conf, long start) {
+	public List<String> run(MultiProcessorConfigurationImpl conf, long start) {
 		Objects.requireNonNull(conf);
 		List<String> ret = new ArrayList<>();
 		PseudorandomNumberGenerator random = new PseudorandomNumberGenerator(conf.getSeed());
@@ -81,7 +81,7 @@ public class MultiProcessorCore {
 
 		conf.getOntologyList().forEach(ontPair -> {
 
-			ProcessorConfiguration configuration = new ProcessorConfiguration();
+			ProcessorConfigurationImpl configuration = new ProcessorConfigurationImpl();
 			configuration.setOntology(ontPair.getOntology());
 			configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
 			configuration.setOutputFileName(
@@ -128,12 +128,12 @@ public class MultiProcessorCore {
 						File bayesianNetworkFile = new File(
 								bayesianNetworkDirectory + SLASH_CHAR + ontologyName + PL_EXTENSION);
 
-						OWLOntology owlOntology = ProcessorConfiguration
+						OWLOntology owlOntology = ProcessorConfigurationImpl
 								.readOntology(new FileInputStream(ontologyFile));
 
 						String bayesianNetwork = "";
 						if (bayesianNetworkFile.exists()) {
-							bayesianNetwork = ProcessorConfiguration.read(new FileReader(bayesianNetworkFile));
+							bayesianNetwork = ProcessorConfigurationImpl.read(new FileReader(bayesianNetworkFile));
 						}
 
 						ret.add(new OntologyAndNetwork(ontologyName, owlOntology, bayesianNetwork));
@@ -149,7 +149,7 @@ public class MultiProcessorCore {
 		}
 	}
 
-	public void storeResults(MultiProcessorConfiguration conf, List<String> list) throws IOException {
+	public void storeResults(MultiProcessorConfigurationImpl conf, List<String> list) throws IOException {
 		Objects.requireNonNull(conf);
 		Objects.requireNonNull(list);
 		Iterator<String> resultIt = list.iterator();

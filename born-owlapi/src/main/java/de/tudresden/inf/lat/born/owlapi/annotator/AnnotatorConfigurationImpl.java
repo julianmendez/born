@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Julian Mendez
  *
  */
-public class AnnotatorConfiguration {
+public class AnnotatorConfigurationImpl {
 
 	private InputStream inputOntology;
 	private OutputStream outputOntology;
@@ -54,10 +54,10 @@ public class AnnotatorConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof AnnotatorConfiguration)) {
+		} else if (!(obj instanceof AnnotatorConfigurationImpl)) {
 			return false;
 		} else {
-			AnnotatorConfiguration other = (AnnotatorConfiguration) obj;
+			AnnotatorConfigurationImpl other = (AnnotatorConfigurationImpl) obj;
 			return getInputOntology().equals(other.getInputOntology())
 					&& getOutputOntology().equals(other.getOutputOntology()) && getThreshold() == other.getThreshold()
 					&& getMaxNumberOfVars() == other.getMaxNumberOfVars();

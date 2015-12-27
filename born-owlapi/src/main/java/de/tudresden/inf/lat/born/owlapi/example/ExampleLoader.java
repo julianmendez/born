@@ -38,7 +38,7 @@ public class ExampleLoader {
 	public static final String NETWORK_EXTENSION = ".pl";
 	public static final String QUERY_EXTENSION = ".query";
 
-	private List<ExampleConfiguration> exampleConfigurations = new ArrayList<>();
+	private List<ExampleConfigurationImpl> exampleConfigurations = new ArrayList<>();
 
 	/**
 	 * Constructs a new example loader.
@@ -53,7 +53,7 @@ public class ExampleLoader {
 	 * stack trace.
 	 */
 	public void reset() {
-		List<ExampleConfiguration> examples = null;
+		List<ExampleConfigurationImpl> examples = null;
 		try {
 			examples = readExampleConfigurations();
 
@@ -80,7 +80,7 @@ public class ExampleLoader {
 	 *             if something goes wrong with I/O
 	 * 
 	 */
-	public List<ExampleConfiguration> readExampleConfigurations() throws OWLOntologyCreationException, IOException {
+	public List<ExampleConfigurationImpl> readExampleConfigurations() throws OWLOntologyCreationException, IOException {
 		return getOntologyAndNetworkFiles(getExampleFiles(EXAMPLES_DIRECTORY));
 	}
 
@@ -89,7 +89,7 @@ public class ExampleLoader {
 	 * 
 	 * @return the example configurations
 	 */
-	public List<ExampleConfiguration> getExampleConfigurations() {
+	public List<ExampleConfigurationImpl> getExampleConfigurations() {
 		return this.exampleConfigurations;
 	}
 
@@ -200,10 +200,10 @@ public class ExampleLoader {
 	 * @throws OWLOntologyCreationException
 	 *             if something goes wrong with the creation of the ontologies
 	 */
-	public List<ExampleConfiguration> getOntologyAndNetworkFiles(List<String> list)
+	public List<ExampleConfigurationImpl> getOntologyAndNetworkFiles(List<String> list)
 			throws IOException, OWLOntologyCreationException {
 		Objects.requireNonNull(list);
-		List<ExampleConfiguration> ret = new ArrayList<>();
+		List<ExampleConfigurationImpl> ret = new ArrayList<>();
 		List<String> owlFiles = getFilesWithExtension(list, OWL_EXTENSION);
 
 		for (String fileName : owlFiles) {
@@ -216,7 +216,7 @@ public class ExampleLoader {
 			String bayesianNetwork = getFile(getInputStreamForFile(bayesianNetworkFileName));
 			String query = getFile(getInputStreamForFile(queryFileName));
 
-			ExampleConfiguration exampleConf = new ExampleConfiguration(getFileName(fileNamePrefix), owlOntologyName,
+			ExampleConfigurationImpl exampleConf = new ExampleConfigurationImpl(getFileName(fileNamePrefix), owlOntologyName,
 					owlOntology, bayesianNetworkFileName, bayesianNetwork, query);
 
 			ret.add(exampleConf);

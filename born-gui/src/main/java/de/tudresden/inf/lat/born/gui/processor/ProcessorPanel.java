@@ -22,8 +22,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
-import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.example.ExampleConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
  * This is the panel to compute inference.
@@ -50,9 +50,9 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private JScrollPane scrollConsoleInput = new JScrollPane();
 	private JScrollPane scrollConsoleOutput = new JScrollPane();
 	private JComboBox<String> comboBoxExample = new JComboBox<String>();
-	private final ProcessorConfiguration model;
+	private final ProcessorConfigurationImpl model;
 
-	public ProcessorPanel(ProcessorConfiguration model) {
+	public ProcessorPanel(ProcessorConfigurationImpl model) {
 		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
@@ -205,7 +205,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
-	public ProcessorConfiguration getModel() {
+	public ProcessorConfigurationImpl getModel() {
 		return model;
 	}
 
@@ -247,7 +247,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		Objects.requireNonNull(consoleInputFile);
 		if (!Objects.isNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
 			try {
-				String text = ProcessorConfiguration.read(new FileReader(consoleInputFile));
+				String text = ProcessorConfigurationImpl.read(new FileReader(consoleInputFile));
 				this.textConsoleInput.setText(text);
 				updateQuery();
 			} catch (IOException e) {
@@ -262,7 +262,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		if (!Objects.isNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = this.textConsoleOutput.getText();
-				ProcessorConfiguration.write(new StringReader(text), new FileWriter(consoleOutputFile));
+				ProcessorConfigurationImpl.write(new StringReader(text), new FileWriter(consoleOutputFile));
 			} catch (IOException e) {
 				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
@@ -305,7 +305,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		String inputOntologyFile = getOntologyFile();
 		if (!Objects.isNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
-				getModel().setOntology(ProcessorConfiguration.readOntology(new FileInputStream(inputOntologyFile)));
+				getModel().setOntology(ProcessorConfigurationImpl.readOntology(new FileInputStream(inputOntologyFile)));
 			} catch (IOException e) {
 				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			} catch (OWLOntologyCreationException e) {
@@ -319,7 +319,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		String bayesianNetworkFile = getBayesianNetworkFile();
 		if (!Objects.isNull(bayesianNetworkFile) && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
-				getModel().setBayesianNetwork(ProcessorConfiguration.read(new FileReader(bayesianNetworkFile)));
+				getModel().setBayesianNetwork(ProcessorConfigurationImpl.read(new FileReader(bayesianNetworkFile)));
 			} catch (IOException e) {
 				setBayesianNetworkFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}
@@ -357,7 +357,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
-	public void addExamples(Collection<ExampleConfiguration> examples) {
+	public void addExamples(Collection<ExampleConfigurationImpl> examples) {
 		Objects.requireNonNull(examples);
 		examples.forEach(configuration -> comboBoxExample.addItem(configuration.getOntologyName()));
 	}

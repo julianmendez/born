@@ -14,14 +14,14 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 
 /**
  * 
  * @author Julian Mendez
  *
  */
-public class ProcessorConfiguration {
+public class ProcessorConfigurationImpl {
 
 	private OWLOntology ontology;
 	private String bayesianNetwork = "";
@@ -30,7 +30,7 @@ public class ProcessorConfiguration {
 	private QueryProcessor queryProcessor = null;
 	private boolean showingLog = true;
 
-	public ProcessorConfiguration() {
+	public ProcessorConfigurationImpl() {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		try {
 			this.ontology = manager.createOntology();
@@ -95,10 +95,10 @@ public class ProcessorConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof AnnotatorConfiguration)) {
+		} else if (!(obj instanceof AnnotatorConfigurationImpl)) {
 			return false;
 		} else {
-			ProcessorConfiguration other = (ProcessorConfiguration) obj;
+			ProcessorConfigurationImpl other = (ProcessorConfigurationImpl) obj;
 			return getOntology().equals(other.getOntology()) && getBayesianNetwork().equals(other.getBayesianNetwork())
 					&& getQuery().equals(other.getQuery()) && getOutputFileName().equals(other.getOutputFileName())
 					&& getQueryProcessor().equals(other.getQueryProcessor())

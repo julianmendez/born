@@ -45,7 +45,7 @@ public class SplitterSubApp implements SubApp {
 		Objects.requireNonNull(args);
 		if (isValid(args)) {
 			try {
-				SplitterConfiguration conf = new SplitterConfiguration();
+				SplitterConfigurationImpl conf = new SplitterConfigurationImpl();
 
 				InputStream in = new FileInputStream(args[0]);
 				conf.setInputOntology(in);

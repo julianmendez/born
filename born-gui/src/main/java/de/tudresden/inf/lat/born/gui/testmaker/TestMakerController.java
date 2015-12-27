@@ -15,9 +15,9 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorCore;
-import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
+import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigurationImpl;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
 
 /**
@@ -85,7 +85,7 @@ public class TestMakerController implements ActionListener {
 		Objects.requireNonNull(output);
 		getView().updateThreshold();
 		getView().updateMaxNumberOfVars();
-		AnnotatorConfiguration conf = getModel();
+		AnnotatorConfigurationImpl conf = getModel();
 		conf.setOutputOntology(output);
 		AnnotatorCore core = new AnnotatorCore();
 		core.run(conf);
@@ -123,7 +123,7 @@ public class TestMakerController implements ActionListener {
 	void createBayesianNetwork(OutputStream output) {
 		Objects.requireNonNull(output);
 		List<Integer> listOfParents = parseIntegers(getView().getListOfParents());
-		BayesianNetworkCreatorConfiguration conf = new BayesianNetworkCreatorConfiguration();
+		BayesianNetworkCreatorConfigurationImpl conf = new BayesianNetworkCreatorConfigurationImpl();
 		conf.setDependencies(listOfParents);
 		conf.setOutput(output);
 		BayesianNetworkCreatorCore core = new BayesianNetworkCreatorCore();
@@ -151,7 +151,7 @@ public class TestMakerController implements ActionListener {
 	 * 
 	 * @return the model
 	 */
-	public AnnotatorConfiguration getModel() {
+	public AnnotatorConfigurationImpl getModel() {
 		return getView().getModel();
 	}
 

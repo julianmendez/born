@@ -3,10 +3,10 @@ package de.tudresden.inf.lat.born.gui;
 import java.util.Date;
 import java.util.Objects;
 
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
+import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
  * This is the model of the graphical user interface.
@@ -16,9 +16,9 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
  */
 public class BornModel {
 
-	private ProcessorConfiguration processorConfiguration = new ProcessorConfiguration();
-	private AnnotatorConfiguration annotatorConfiguration = new AnnotatorConfiguration();
-	private MultiProcessorConfiguration multiProcessorConfiguration = new MultiProcessorConfiguration();
+	private ProcessorConfigurationImpl processorConfiguration = new ProcessorConfigurationImpl();
+	private AnnotatorConfigurationImpl annotatorConfiguration = new AnnotatorConfigurationImpl();
+	private MultiProcessorConfigurationImpl multiProcessorConfiguration = new MultiProcessorConfigurationImpl();
 
 	/**
 	 * Constructs a new BORN model.
@@ -35,7 +35,7 @@ public class BornModel {
 	 * 
 	 * @return the annotator configuration
 	 */
-	public AnnotatorConfiguration getAnnotatorConfiguration() {
+	public AnnotatorConfigurationImpl getAnnotatorConfiguration() {
 		return annotatorConfiguration;
 	}
 
@@ -45,7 +45,7 @@ public class BornModel {
 	 * @param annotatorConfiguration
 	 *            annotator configuration
 	 */
-	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
+	public void setAnnotatorConfiguration(AnnotatorConfigurationImpl annotatorConfiguration) {
 		Objects.requireNonNull(annotatorConfiguration);
 		this.annotatorConfiguration = annotatorConfiguration;
 	}
@@ -55,7 +55,7 @@ public class BornModel {
 	 * 
 	 * @return the processor configuration
 	 */
-	public ProcessorConfiguration getProcessorConfiguration() {
+	public ProcessorConfigurationImpl getProcessorConfiguration() {
 		return processorConfiguration;
 	}
 
@@ -65,7 +65,7 @@ public class BornModel {
 	 * @param processorConfiguration
 	 *            processor configuration
 	 */
-	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
+	public void setProcessorConfiguration(ProcessorConfigurationImpl processorConfiguration) {
 		Objects.requireNonNull(processorConfiguration);
 		this.processorConfiguration = processorConfiguration;
 	}
@@ -75,7 +75,7 @@ public class BornModel {
 	 * 
 	 * @return the multi processor configuration
 	 */
-	public MultiProcessorConfiguration getMultiProcessorConfiguration() {
+	public MultiProcessorConfigurationImpl getMultiProcessorConfiguration() {
 		return multiProcessorConfiguration;
 	}
 
@@ -85,7 +85,7 @@ public class BornModel {
 	 * @param multiProcessorConfiguration
 	 *            multi processor configuration
 	 */
-	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
+	public void setMultiProcessorConfiguration(MultiProcessorConfigurationImpl multiProcessorConfiguration) {
 		Objects.requireNonNull(multiProcessorConfiguration);
 		this.multiProcessorConfiguration = multiProcessorConfiguration;
 	}

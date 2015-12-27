@@ -12,7 +12,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
  * @author Julian Mendez
  *
  */
-public class ExampleConfiguration {
+public class ExampleConfigurationImpl {
 
 	private final String ontologyName;
 	private final String ontologyFileName;
@@ -37,7 +37,7 @@ public class ExampleConfiguration {
 	 * @param query
 	 *            query (in ProbLog syntax)
 	 */
-	public ExampleConfiguration(String ontologyName, String ontologyFileName, OWLOntology owlOntology,
+	public ExampleConfigurationImpl(String ontologyName, String ontologyFileName, OWLOntology owlOntology,
 			String bayesianNetworkFileName, String bayesianNetwork, String query) {
 		Objects.requireNonNull(ontologyName);
 		Objects.requireNonNull(ontologyFileName);
@@ -118,8 +118,8 @@ public class ExampleConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (obj instanceof ExampleConfiguration) {
-			ExampleConfiguration other = (ExampleConfiguration) obj;
+		} else if (obj instanceof ExampleConfigurationImpl) {
+			ExampleConfigurationImpl other = (ExampleConfigurationImpl) obj;
 			return getOntologyName().equals(other.getOntologyName())
 					&& getOntologyFileName().equals(other.getOntologyFileName())
 					&& getOntology().equals(other.getOntology())
