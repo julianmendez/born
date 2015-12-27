@@ -2,11 +2,10 @@ package de.tudresden.inf.lat.born.gui.experimentrunner;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-
+import de.tudresden.inf.lat.born.gui.common.JPanelView;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 
-public interface ExperimentRunnerView {
+public interface ExperimentRunnerView extends JPanelView {
 
 	/**
 	 * Adds an action listener to the button to select the input ontology.
@@ -194,12 +193,5 @@ public interface ExperimentRunnerView {
 	 *            value to define if the buttons are enabled
 	 */
 	void setButtonsEnabled(boolean status);
-
-	/**
-	 * Returns the panel.
-	 * 
-	 * @return the panel
-	 */
-	JPanel getPanel();
 
 }

@@ -1,7 +1,6 @@
 package de.tudresden.inf.lat.born.gui;
 
-import javax.swing.JPanel;
-
+import de.tudresden.inf.lat.born.gui.common.JPanelView;
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorView;
 import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
@@ -13,7 +12,7 @@ import de.tudresden.inf.lat.born.gui.testmaker.TestMakerView;
  * @author Julian Mendez
  *
  */
-public interface BornView {
+public interface BornView extends JPanelView {
 
 	/**
 	 * Returns the model.
@@ -42,12 +41,5 @@ public interface BornView {
 	 * @return the experiment maker view
 	 */
 	ExperimentRunnerView getExperimentMakerView();
-
-	/**
-	 * Returns the panel.
-	 * 
-	 * @return the panel
-	 */
-	JPanel getPanel();
 
 }

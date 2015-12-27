@@ -2,8 +2,7 @@ package de.tudresden.inf.lat.born.gui.testmaker;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-
+import de.tudresden.inf.lat.born.gui.common.JPanelView;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
 /**
@@ -13,7 +12,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  * @author Julian Mendez
  *
  */
-public interface TestMakerView {
+public interface TestMakerView extends JPanelView {
 
 	/**
 	 * Adds an action listener to the button to select the input ontology.
@@ -183,12 +182,5 @@ public interface TestMakerView {
 	 *            the list of parents
 	 */
 	void setListOfParents(String listOfParents);
-
-	/**
-	 * Returns the panel.
-	 * 
-	 * @return the panel
-	 */
-	JPanel getPanel();
 
 }

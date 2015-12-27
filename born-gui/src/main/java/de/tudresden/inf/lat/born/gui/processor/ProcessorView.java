@@ -3,8 +3,7 @@ package de.tudresden.inf.lat.born.gui.processor;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-import javax.swing.JPanel;
-
+import de.tudresden.inf.lat.born.gui.common.JPanelView;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 
@@ -14,7 +13,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
  * @author Julian Mendez
  *
  */
-public interface ProcessorView {
+public interface ProcessorView extends JPanelView {
 
 	/**
 	 * Adds an action listener to the button to select the input ontology.
@@ -253,12 +252,5 @@ public interface ProcessorView {
 	 *            example configurations
 	 */
 	void addExamples(Collection<ExampleConfiguration> examples);
-
-	/**
-	 * Returns the panel.
-	 * 
-	 * @return the panel
-	 */
-	JPanel getPanel();
 
 }
