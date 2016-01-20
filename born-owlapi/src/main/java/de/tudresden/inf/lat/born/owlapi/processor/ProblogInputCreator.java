@@ -8,7 +8,6 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,11 +30,11 @@ import de.tudresden.inf.lat.born.core.rule.CompletionRule;
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
+import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
 import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
 import de.tudresden.inf.lat.born.problog.parser.TokenType;
 import de.tudresden.inf.lat.born.problog.type.ProblogProgram;
-import de.tudresden.inf.lat.jcel.core.algorithm.module.ModuleExtractor;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerEntityManager;
 import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerEntityType;
@@ -195,11 +194,10 @@ public class ProblogInputCreator {
 		sbuf.append(NUMBER_OF_NORM_AXIOMS_MSG + normalizedAxioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
-		ModuleExtractor moduleExtractor = new ModuleExtractor();
+		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
 		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
 
-		Set<Integer> emptySet = Collections.emptySet();
-		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses, emptySet);
+		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
 		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
