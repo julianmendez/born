@@ -41,10 +41,9 @@ public class MultiProcessorCore {
 	public static final String OWL_EXTENSION = ".owl";
 	public static final String PL_EXTENSION = ".pl";
 
-	public static final String[] FIRST_LINE = { "ontolgy ID", "ontology file name", "Bayesian network file name",
-			"sub class", "super class", "query and result", "translation time", "normalization time",
-			"module extraction time", "ProbLog reasoning time", "total time", "ontology size",
-			"normalized ontology size", "module size" };
+	public static final String[] FIRST_LINE = { "ontology file name", "Bayesian network file name", "sub class",
+			"super class", "query", "result", "translation time", "normalization time", "module extraction time",
+			"ProbLog reasoning time", "total time", "ontology size", "normalized ontology size", "module size" };
 	public static final List<String> FIRST_LINE_LIST = Arrays.asList(FIRST_LINE);
 
 	/**
@@ -107,12 +106,11 @@ public class MultiProcessorCore {
 	List<String> getInformationList(OntologyAndNetwork ontPair, ProcessorConfiguration configuration,
 			SubsumptionQuery query, ProcessorExecutionResult executionResult) {
 		List<String> ret = new ArrayList<String>();
-		ret.add(configuration.getOntology().getOntologyID().getOntologyIRI().get().toURI().toString());
 		ret.add(ontPair.getOntologyName() + OWL_EXTENSION);
 		ret.add(ontPair.getOntologyName() + PL_EXTENSION);
 		ret.add(query.getSubClass().getIRI().toURI().toString());
 		ret.add(query.getSuperClass().getIRI().toURI().toString());
-		ret.add(executionResult.getResult().trim());
+		ret.add(executionResult.getResult().trim()); // FIXME it has two fields
 		ret.add("" + executionResult.getTranslationTime());
 		ret.add("" + executionResult.getNormalizationTime());
 		ret.add("" + executionResult.getModuleExtractionTime());
@@ -142,6 +140,7 @@ public class MultiProcessorCore {
 			List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 			StringBuffer sbuf = new StringBuffer();
 			sbuf.append(makeLine(FIRST_LINE_LIST));
+			sbuf.append(NEW_LINE_CHAR);
 
 			queries.forEach(query -> {
 				configuration.setQuery(query.asProblogString());

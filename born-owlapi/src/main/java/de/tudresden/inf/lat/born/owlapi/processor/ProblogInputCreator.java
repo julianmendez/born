@@ -190,7 +190,7 @@ public class ProblogInputCreator {
 		Translator translator = new Translator(owlOntology.getOWLOntologyManager().getOWLDataFactory(), factory);
 		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology.getAxioms());
 		executionResult.setTranslationTime(System.nanoTime() - translationStart);
-		executionResult.setModuleSize(axioms.size());
+		executionResult.setOntologySize(axioms.size());
 		sbuf.append(NUMBER_OF_AXIOMS_MSG + axioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
@@ -198,7 +198,7 @@ public class ProblogInputCreator {
 		OntologyNormalizer normalizer = new OntologyNormalizer();
 		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
 		executionResult.setNormalizationTime(System.nanoTime() - normalizationStart);
-		executionResult.setModuleSize(normalizedAxioms.size());
+		executionResult.setNormalizedOntologySize(normalizedAxioms.size());
 		sbuf.append(NUMBER_OF_NORM_AXIOMS_MSG + normalizedAxioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
