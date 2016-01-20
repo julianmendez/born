@@ -213,19 +213,19 @@ public class ProblogProcessor implements QueryProcessor {
 		Objects.requireNonNull(outputFileName);
 		synchronized (this.problogInstallationMonitor) {
 
-		}
+			try {
+				log("Execute ProbLog.", start);
+				Runtime runtime = Runtime.getRuntime();
+				String commandLine = PYTHON + SPACE + this.problogDirectory + SLASH + PROBLOG_CLI + SPACE
+						+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE + PROBLOG_OUTPUT_OPTION + SPACE
+						+ (new File(outputFileName)).getAbsolutePath();
+				log(commandLine, start);
+				Process process = runtime.exec(commandLine);
+				return process.waitFor();
+			} catch (InterruptedException | IOException e) {
+				throw new RuntimeException(e);
+			}
 
-		try {
-			log("Execute ProbLog.", start);
-			Runtime runtime = Runtime.getRuntime();
-			String commandLine = PYTHON + SPACE + this.problogDirectory + SLASH + PROBLOG_CLI + SPACE
-					+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE + PROBLOG_OUTPUT_OPTION + SPACE
-					+ (new File(outputFileName)).getAbsolutePath();
-			log(commandLine, start);
-			Process process = runtime.exec(commandLine);
-			return process.waitFor();
-		} catch (InterruptedException | IOException e) {
-			throw new RuntimeException(e);
 		}
 	}
 
