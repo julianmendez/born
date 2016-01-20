@@ -105,8 +105,9 @@ public class ProcessorSubApp implements SubApp {
 			}
 
 			ProcessorCore core = new ProcessorCore();
-			String result = core.run(conf, start);
-			sbuf.append(result);
+			ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
+			core.run(conf, start, executionResult);
+			sbuf.append(executionResult.getResult());
 
 			return sbuf.toString();
 		} else {

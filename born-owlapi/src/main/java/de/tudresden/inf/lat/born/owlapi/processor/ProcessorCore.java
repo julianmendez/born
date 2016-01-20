@@ -96,28 +96,31 @@ public class ProcessorCore {
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	String createProblogFile(long start, OWLOntology ontology, String bayesianNetwork, String query)
-			throws OWLOntologyCreationException, IOException {
+	String createProblogFile(long start, OWLOntology ontology, String bayesianNetwork, String query,
+			ProcessorExecutionResult executionResult) throws OWLOntologyCreationException, IOException {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(bayesianNetwork);
 		Objects.requireNonNull(query);
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(ontology, bayesianNetwork, query,
-				new FileOutputStream(PROBLOG_OUTPUT_FILE));
+				new FileOutputStream(PROBLOG_OUTPUT_FILE), executionResult);
 		return ret;
 
 	}
 
-	public String run(ProcessorConfiguration conf, long start) {
+	public void run(ProcessorConfiguration conf, long start, ProcessorExecutionResult executionResult) {
+		long processorStart = System.nanoTime();
 		Objects.requireNonNull(conf);
+		Objects.requireNonNull(executionResult);
 		StringBuffer sbuf = new StringBuffer();
 		try {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
 			QueryProcessor queryProcessor = conf.getQueryProcessor();
 
-			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery());
+			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery(),
+					executionResult);
 			log(info, start);
 
 			int exitVal = queryProcessor.execute(start, conf.getOutputFileName());
@@ -136,7 +139,8 @@ public class ProcessorCore {
 			throw new RuntimeException(e);
 		}
 
-		return sbuf.toString();
+		executionResult.setResult(sbuf.toString());
+		executionResult.setTotalTime(System.nanoTime() - processorStart);
 	}
 
 }

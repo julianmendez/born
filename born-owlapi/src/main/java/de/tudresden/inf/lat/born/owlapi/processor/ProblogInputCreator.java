@@ -167,7 +167,8 @@ public class ProblogInputCreator {
 	}
 
 	public String createProblogFile(OWLOntology owlOntology, String bayesianNetwork, String query,
-			OutputStream resultOutputStream) throws IOException, OWLOntologyCreationException {
+			OutputStream resultOutputStream, ProcessorExecutionResult executionResult)
+					throws IOException, OWLOntologyCreationException {
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(bayesianNetwork);
 		Objects.requireNonNull(query);
@@ -184,20 +185,29 @@ public class ProblogInputCreator {
 		Set<String> relevantSymbols = parseRelevantSymbols(new StringReader(query));
 
 		IntegerOntologyObjectFactory factory = new IntegerOntologyObjectFactoryImpl();
+
+		long translationStart = System.nanoTime();
 		Translator translator = new Translator(owlOntology.getOWLOntologyManager().getOWLDataFactory(), factory);
 		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology.getAxioms());
+		executionResult.setTranslationTime(System.nanoTime() - translationStart);
+		executionResult.setModuleSize(axioms.size());
 		sbuf.append(NUMBER_OF_AXIOMS_MSG + axioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
+		long normalizationStart = System.nanoTime();
 		OntologyNormalizer normalizer = new OntologyNormalizer();
 		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
+		executionResult.setNormalizationTime(System.nanoTime() - normalizationStart);
+		executionResult.setModuleSize(normalizedAxioms.size());
 		sbuf.append(NUMBER_OF_NORM_AXIOMS_MSG + normalizedAxioms.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
+		long moduleExtractionStart = System.nanoTime();
 		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
 		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
-
 		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
+		executionResult.setModuleExtractionTime(System.nanoTime() - moduleExtractionStart);
+		executionResult.setModuleSize(module.size());
 		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 

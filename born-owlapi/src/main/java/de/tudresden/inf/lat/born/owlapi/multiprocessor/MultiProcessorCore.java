@@ -21,6 +21,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResult;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
 
 /**
  * An object of this class processed several ontologies with their respective
@@ -38,6 +40,12 @@ public class MultiProcessorCore {
 	public static final String CSV_EXTENSION = ".csv";
 	public static final String OWL_EXTENSION = ".owl";
 	public static final String PL_EXTENSION = ".pl";
+
+	public static final String[] FIRST_LINE = { "ontolgy ID", "ontology file name", "Bayesian network file name",
+			"sub class", "super class", "query and result", "translation time", "normalization time",
+			"module extraction time", "ProbLog reasoning time", "total time", "ontology size",
+			"normalized ontology size", "module size" };
+	public static final List<String> FIRST_LINE_LIST = Arrays.asList(FIRST_LINE);
 
 	/**
 	 * Constructs a new multi processor core.
@@ -74,6 +82,48 @@ public class MultiProcessorCore {
 		return listOfQueries;
 	}
 
+	public String makeLine(List<String> columns) {
+		StringBuilder sb = new StringBuilder();
+		columns.forEach(column -> {
+			sb.append(column);
+			sb.append(TAB_CHAR);
+		});
+		return sb.toString().trim();
+	}
+
+	/**
+	 * Returns the result of one query as presented in the CSV file.
+	 * 
+	 * @param ontPair
+	 *            ontology-network pair
+	 * @param configuration
+	 *            configuration
+	 * @param query
+	 *            query
+	 * @param result
+	 *            result
+	 * @return the result of one query as presented in the CSV file
+	 */
+	List<String> getInformationList(OntologyAndNetwork ontPair, ProcessorConfiguration configuration,
+			SubsumptionQuery query, ProcessorExecutionResult executionResult) {
+		List<String> ret = new ArrayList<String>();
+		ret.add(configuration.getOntology().getOntologyID().getOntologyIRI().get().toURI().toString());
+		ret.add(ontPair.getOntologyName() + OWL_EXTENSION);
+		ret.add(ontPair.getOntologyName() + PL_EXTENSION);
+		ret.add(query.getSubClass().getIRI().toURI().toString());
+		ret.add(query.getSuperClass().getIRI().toURI().toString());
+		ret.add(executionResult.getResult().trim());
+		ret.add("" + executionResult.getTranslationTime());
+		ret.add("" + executionResult.getNormalizationTime());
+		ret.add("" + executionResult.getModuleExtractionTime());
+		ret.add("" + executionResult.getProblogReasoningTime());
+		ret.add("" + executionResult.getTotalTime());
+		ret.add("" + executionResult.getOntologySize());
+		ret.add("" + executionResult.getNormalizedOntologySize());
+		ret.add("" + executionResult.getModuleSize());
+		return ret;
+	}
+
 	public List<String> run(MultiProcessorConfiguration conf, long start) {
 		Objects.requireNonNull(conf);
 		List<String> ret = new ArrayList<>();
@@ -91,15 +141,14 @@ public class MultiProcessorCore {
 			configuration.setShowingLog(conf.isShowingLog());
 			List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 			StringBuffer sbuf = new StringBuffer();
+			sbuf.append(makeLine(FIRST_LINE_LIST));
 
 			queries.forEach(query -> {
 				configuration.setQuery(query.asProblogString());
-				String result = core.run(configuration, start);
-				sbuf.append(query.getSubClass().getIRI());
-				sbuf.append(TAB_CHAR);
-				sbuf.append(query.getSuperClass().getIRI());
-				sbuf.append(TAB_CHAR);
-				sbuf.append(result.trim());
+				ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
+				core.run(configuration, start, executionResult);
+				List<String> informationList = getInformationList(ontPair, configuration, query, executionResult);
+				sbuf.append(makeLine(informationList));
 				sbuf.append(NEW_LINE_CHAR);
 			});
 			ret.add(sbuf.toString());

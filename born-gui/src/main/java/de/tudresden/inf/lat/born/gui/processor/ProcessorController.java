@@ -13,6 +13,8 @@ import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResult;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
 
 /**
  * This class is a controller for the main panel.
@@ -32,9 +34,10 @@ public class ProcessorController implements ActionListener {
 		public void run() {
 			long start = System.nanoTime();
 			ProcessorCore core = new ProcessorCore();
-			String result = core.run(getModel(), start);
+			ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
+			core.run(getModel(), start, executionResult);
 
-			getView().setResult(result);
+			getView().setResult(executionResult.getResult());
 			getView().setComputing(false);
 			getView().setButtonsEnabled(true);
 		}
