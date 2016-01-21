@@ -96,14 +96,15 @@ public class ProcessorCore {
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	String createProblogFile(long start, OWLOntology ontology, String bayesianNetwork, String query,
-			ProcessorExecutionResult executionResult) throws OWLOntologyCreationException, IOException {
+	String createProblogFile(long start, String completionRules, OWLOntology ontology, String bayesianNetwork,
+			String query, ProcessorExecutionResult executionResult) throws OWLOntologyCreationException, IOException {
+		Objects.requireNonNull(completionRules);
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(bayesianNetwork);
 		Objects.requireNonNull(query);
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
-		String ret = instance.createProblogFile(ontology, bayesianNetwork, query,
+		String ret = instance.createProblogFile(completionRules, ontology, bayesianNetwork, query,
 				new FileOutputStream(PROBLOG_OUTPUT_FILE), executionResult);
 		return ret;
 
@@ -119,8 +120,8 @@ public class ProcessorCore {
 
 			QueryProcessor queryProcessor = conf.getQueryProcessor();
 
-			String info = createProblogFile(start, conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery(),
-					executionResult);
+			String info = createProblogFile(start, conf.getCompletionRules(), conf.getOntology(),
+					conf.getBayesianNetwork(), conf.getQuery(), executionResult);
 			log(info, start);
 
 			long queryProcessingStart = System.nanoTime();

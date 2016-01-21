@@ -27,13 +27,14 @@ public class BornMainTest {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		ProblogInputCreator instance = new ProblogInputCreator();
 
+		String completionRules = "";
 		OWLOntology ontology = ProcessorConfigurationImpl
 				.readOntology(new FileInputStream("src/test/resources/born-example.owl"));
 		String bayesianNetwork = ProcessorConfigurationImpl.read(new FileReader("src/test/resources/network.pl"));
 		String query = ProcessorConfigurationImpl.read(new FileReader("src/test/resources/born-example.pl"));
 
 		ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
-		instance.createProblogFile(ontology, bayesianNetwork, query, output, executionResult);
+		instance.createProblogFile(completionRules, ontology, bayesianNetwork, query, output, executionResult);
 		// TODO finish the unit test
 	}
 

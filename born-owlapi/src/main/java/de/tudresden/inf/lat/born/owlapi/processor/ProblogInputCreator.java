@@ -166,9 +166,10 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
-	public String createProblogFile(OWLOntology owlOntology, String bayesianNetwork, String query,
-			OutputStream resultOutputStream, ProcessorExecutionResult executionResult)
+	public String createProblogFile(String completionRules, OWLOntology owlOntology, String bayesianNetwork,
+			String query, OutputStream resultOutputStream, ProcessorExecutionResult executionResult)
 					throws IOException, OWLOntologyCreationException {
+		Objects.requireNonNull(completionRules);
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(bayesianNetwork);
 		Objects.requireNonNull(query);
@@ -213,7 +214,11 @@ public class ProblogInputCreator {
 
 		program.setOntology(getClauses(factory, module));
 
-		program.setCompletionRules(getCompletionRules());
+		if (completionRules.trim().isEmpty()) {
+			program.setCompletionRules(getCompletionRules());
+		} else {
+			// program.setCompletionRules(completionRules);
+		}
 
 		program.setBayesianNetworkAddendum(bayesianNetwork);
 

@@ -11,6 +11,21 @@ import org.semanticweb.owlapi.model.OWLOntology;
 public interface ProcessorConfiguration {
 
 	/**
+	 * Returns the completion rules.
+	 * 
+	 * @return the completion rules
+	 */
+	String getCompletionRules();
+
+	/**
+	 * Sets the completion rules.
+	 * 
+	 * @param completionRules
+	 *            completion rules
+	 */
+	void setCompletionRules(String completionRules);
+
+	/**
 	 * Returns the ontology.
 	 * 
 	 * @return the ontology
@@ -39,21 +54,6 @@ public interface ProcessorConfiguration {
 	 *            Bayesian network
 	 */
 	void setBayesianNetwork(String bayesianNetwork);
-
-	/**
-	 * Returns the completion rules.
-	 * 
-	 * @return the completion rules
-	 */
-	String getCompletionRules();
-
-	/**
-	 * Sets the completion rules.
-	 * 
-	 * @param completionRules
-	 *            completion rules
-	 */
-	void setCompletionRules(String completionRules);
 
 	/**
 	 * Returns the query.
