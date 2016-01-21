@@ -41,6 +41,21 @@ public interface ProcessorConfiguration {
 	void setBayesianNetwork(String bayesianNetwork);
 
 	/**
+	 * Returns the completion rules.
+	 * 
+	 * @return the completion rules
+	 */
+	String getCompletionRules();
+
+	/**
+	 * Sets the completion rules.
+	 * 
+	 * @param completionRules
+	 *            completion rules
+	 */
+	void setCompletionRules(String completionRules);
+
+	/**
 	 * Returns the query.
 	 * 
 	 * @return the query

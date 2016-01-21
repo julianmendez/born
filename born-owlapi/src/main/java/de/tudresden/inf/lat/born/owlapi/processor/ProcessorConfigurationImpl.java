@@ -25,6 +25,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	private OWLOntology ontology;
 	private String bayesianNetwork = "";
+	private String completionRules = "";
 	private String query = "";
 	private String outputFileName = "";
 	private QueryProcessor queryProcessor = null;
@@ -59,6 +60,17 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	public void setBayesianNetwork(String bayesianNetwork) {
 		Objects.requireNonNull(bayesianNetwork);
 		this.bayesianNetwork = bayesianNetwork;
+	}
+
+	@Override
+	public String getCompletionRules() {
+		return this.completionRules;
+	}
+
+	@Override
+	public void setCompletionRules(String completionRules) {
+		Objects.requireNonNull(completionRules);
+		this.completionRules = completionRules;
 	}
 
 	@Override
@@ -112,7 +124,8 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
 			return getOntology().equals(other.getOntology()) && getBayesianNetwork().equals(other.getBayesianNetwork())
-					&& getQuery().equals(other.getQuery()) && getOutputFileName().equals(other.getOutputFileName())
+					&& getCompletionRules().equals(other.getCompletionRules()) && getQuery().equals(other.getQuery())
+					&& getOutputFileName().equals(other.getOutputFileName())
 					&& getQueryProcessor().equals(other.getQueryProcessor())
 					&& (isShowingLog() == other.isShowingLog());
 		}
@@ -120,13 +133,16 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public int hashCode() {
-		return toString().hashCode();
+		return this.completionRules.hashCode()
+				+ 0x1F * (this.ontology.hashCode() + 0x1F * (this.bayesianNetwork.hashCode()
+						+ 0x1F * (this.query.hashCode() + 0x1F * (this.outputFileName.hashCode()
+								+ 0x1F * (this.queryProcessor.hashCode() + 0x1F * (this.showingLog ? 1 : 0))))));
 	}
 
 	@Override
 	public String toString() {
-		return this.ontology + " " + this.bayesianNetwork + " " + this.query + " " + this.outputFileName + " "
-				+ this.queryProcessor + " " + this.showingLog;
+		return this.completionRules + " " + this.ontology + " " + this.bayesianNetwork + " " + this.query + " "
+				+ this.outputFileName + " " + this.queryProcessor + " " + this.showingLog;
 	}
 
 	/**
