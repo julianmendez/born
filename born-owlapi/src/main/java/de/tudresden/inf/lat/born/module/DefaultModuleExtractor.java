@@ -2,7 +2,6 @@
 package de.tudresden.inf.lat.born.module;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -50,6 +49,28 @@ public class DefaultModuleExtractor {
 		return map;
 	}
 
+	Set<NormalizedIntegerAxiom> getAxiomsWithoutEntitiesOnTheLeft(Set<DefaultIdentifierCollector> axioms) {
+		Set<NormalizedIntegerAxiom> ret = new HashSet<>();
+		axioms.forEach(axiom -> {
+			if (axiom.getClassesOnTheLeft().isEmpty() && axiom.getObjectPropertiesOnTheLeft().isEmpty()) {
+				ret.add(axiom.getAxiom());
+			}
+		});
+		return ret;
+	}
+
+	Set<DefaultIdentifierCollector> getAxiomsWithClassesOnTheLeft(Set<Integer> classesToVisit,
+			Map<Integer, Set<DefaultIdentifierCollector>> map) {
+		Set<DefaultIdentifierCollector> ret = new HashSet<>();
+		classesToVisit.forEach(classId -> {
+			Set<DefaultIdentifierCollector> newAxioms = map.get(classId);
+			if (newAxioms != null) {
+				ret.addAll(newAxioms);
+			}
+		});
+		return ret;
+	}
+
 	/**
 	 * Returns a module, i.e. a subset of axioms relevant to answer a query.
 	 * 
@@ -64,11 +85,10 @@ public class DefaultModuleExtractor {
 
 		Set<NormalizedIntegerAxiom> ret = new HashSet<>();
 
-		Set<Integer> classes = new HashSet<>();
-		classes.addAll(setOfClasses);
-
 		Set<DefaultIdentifierCollector> axioms = new HashSet<>();
 		setOfAxioms.forEach(axiom -> axioms.add(new DefaultIdentifierCollector(axiom)));
+
+		ret.addAll(getAxiomsWithoutEntitiesOnTheLeft(axioms));
 
 		Map<Integer, Set<DefaultIdentifierCollector>> map = buildMapOfAxioms(axioms);
 
@@ -79,26 +99,15 @@ public class DefaultModuleExtractor {
 		while (ret.size() > resultSize) {
 			resultSize = ret.size();
 
-			Set<DefaultIdentifierCollector> axiomsToVisit = new HashSet<>();
-			classesToVisit.forEach(classId -> {
-				axiomsToVisit.addAll(map.get(classId));
-			});
+			Set<DefaultIdentifierCollector> axiomsToVisit = getAxiomsWithClassesOnTheLeft(classesToVisit, map);
 			visitedClasses.addAll(classesToVisit);
 			classesToVisit.clear();
 
 			axiomsToVisit.forEach(axiom -> {
-				Set<Integer> classesOnTheLeft = axiom.getClassesOnTheLeft();
-				Set<Integer> objectPropertiesOnTheLeft = axiom.getObjectPropertiesOnTheLeft();
-
-				boolean case0 = !Collections.disjoint(classesOnTheLeft, classes);
-				boolean case1 = (classesOnTheLeft.isEmpty() && objectPropertiesOnTheLeft.isEmpty());
-
-				if (case0 || case1) {
-					classesToVisit.addAll(axiom.getClassesOnTheRight());
-					classesToVisit.removeAll(visitedClasses);
-					ret.add(axiom.getAxiom());
-				}
+				classesToVisit.addAll(axiom.getClassesOnTheRight());
+				ret.add(axiom.getAxiom());
 			});
+			classesToVisit.removeAll(visitedClasses);
 		}
 
 		return ret;
