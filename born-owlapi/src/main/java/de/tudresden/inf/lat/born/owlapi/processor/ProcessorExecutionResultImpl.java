@@ -115,13 +115,44 @@ public class ProcessorExecutionResultImpl implements ProcessorExecutionResult {
 	}
 
 	@Override
+	public int hashCode() {
+		return (int) (this.translationTime //
+				+ 0x1F * (this.normalizationTime //
+						+ 0x1F * (this.moduleExtractionTime //
+								+ 0x1F * (this.problogReasoningTime //
+										+ 0x1F * (this.totalTime //
+												+ 0x1F * (this.ontologySize //
+														+ 0x1F * (this.normalizedOntologySize //
+																+ 0x1F * (this.moduleSize //
+																		+ 0x1F * this.result.hashCode()))))))));
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof ProcessorExecutionResult)) {
+			return false;
+		} else {
+			ProcessorExecutionResult other = (ProcessorExecutionResult) obj;
+			return (getTranslationTime() == other.getTranslationTime())
+					&& (getNormalizationTime() == other.getNormalizationTime())
+					&& (getModuleExtractionTime() == other.getModuleExtractionTime())
+					&& (getProblogReasoningTime() == other.getProblogReasoningTime())
+					&& (getTotalTime() == other.getTotalTime()) && (getOntologySize() == other.getOntologySize())
+					&& (getNormalizedOntologySize() == other.getNormalizedOntologySize())
+					&& (getModuleSize() == other.getModuleSize()) && (getResult().equals(other.getResult()));
+		}
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" [ translation_ns=");
 		sb.append("" + translationTime);
 		sb.append(" , normalization_ns=");
 		sb.append("" + normalizationTime);
-		sb.append(" ,  module_extraction_ns=");
+		sb.append(" , module_extraction_ns=");
 		sb.append("" + moduleExtractionTime);
 		sb.append(" , ProbLog_reasoning_ns=");
 		sb.append("" + problogReasoningTime);
