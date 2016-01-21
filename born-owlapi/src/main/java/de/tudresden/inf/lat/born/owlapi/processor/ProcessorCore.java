@@ -123,7 +123,9 @@ public class ProcessorCore {
 					executionResult);
 			log(info, start);
 
+			long queryProcessingStart = System.nanoTime();
 			int exitVal = queryProcessor.execute(start, conf.getOutputFileName());
+			executionResult.setProblogReasoningTime(System.nanoTime() - queryProcessingStart);
 
 			log("End and show results.", start);
 
