@@ -74,7 +74,7 @@ public class ProblogInputCreator {
 		return set;
 	}
 
-	List<CompletionRule> getDefaultCompletionRules() {
+	public List<CompletionRule> getDefaultCompletionRules() {
 		List<CompletionRule> completionRules = new ArrayList<>();
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());

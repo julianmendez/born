@@ -119,7 +119,7 @@ public class ProblogProgram {
 		return sb.toString();
 	}
 
-	String asStringC(List<CompletionRule> clauses) {
+	public String asStringC(List<CompletionRule> clauses) {
 		Objects.requireNonNull(clauses);
 		StringBuffer sb = new StringBuffer();
 		clauses.forEach(clause -> {

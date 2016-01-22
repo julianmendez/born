@@ -11,10 +11,12 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
+import de.tudresden.inf.lat.born.owlapi.processor.ProblogInputCreator;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResult;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
+import de.tudresden.inf.lat.born.problog.type.ProblogProgram;
 
 /**
  * This class is a controller for the main panel.
@@ -128,7 +130,9 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionResetCompletionRules() {
-		getView().setCompletionRules("");
+		String defaultCompletionRules = (new ProblogProgram())
+				.asStringC((new ProblogInputCreator()).getDefaultCompletionRules());
+		getView().setCompletionRules(defaultCompletionRules);
 	}
 
 	void executeActionConsoleInput() {
