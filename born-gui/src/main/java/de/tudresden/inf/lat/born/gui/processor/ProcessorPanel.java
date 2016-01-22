@@ -35,22 +35,25 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	private static final long serialVersionUID = -3489883631448640992L;
 
-	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
+	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! ";
 
-	private JButton buttonOntologyFile = new JButton();
-	private JButton buttonBayesianNetworkFile = new JButton();
-	private JButton buttonConsoleInput = new JButton();
-	private JButton buttonConsoleOutput = new JButton();
-	private JButton buttonComputeInference = new JButton();
-	private JButton buttonUpdateExample = new JButton();
-	private JLabel labelProgress = new JLabel("computing ...");
-	private JTextField textOntologyFile = new JTextField();
-	private JTextField textBayesianNetworkFile = new JTextField();
-	private JTextArea textConsoleInput = new JTextArea();
-	private JTextArea textConsoleOutput = new JTextArea();
-	private JScrollPane scrollConsoleInput = new JScrollPane();
-	private JScrollPane scrollConsoleOutput = new JScrollPane();
-	private JComboBox<String> comboBoxExample = new JComboBox<String>();
+	private final JButton buttonOntologyFile = new JButton();
+	private final JButton buttonBayesianNetworkFile = new JButton();
+	private final JButton buttonResetCompletionRules = new JButton();
+	private final JButton buttonConsoleInput = new JButton();
+	private final JButton buttonConsoleOutput = new JButton();
+	private final JButton buttonComputeInference = new JButton();
+	private final JButton buttonUpdateExample = new JButton();
+	private final JLabel labelProgress = new JLabel("computing ...");
+	private final JTextField textOntologyFile = new JTextField();
+	private final JTextField textBayesianNetworkFile = new JTextField();
+	private final JTextArea textCompletionRules = new JTextArea();
+	private final JTextArea textConsoleInput = new JTextArea();
+	private final JTextArea textConsoleOutput = new JTextArea();
+	private final JScrollPane scrollCompletionRules = new JScrollPane();
+	private final JScrollPane scrollConsoleInput = new JScrollPane();
+	private final JScrollPane scrollConsoleOutput = new JScrollPane();
+	private final JComboBox<String> comboBoxExample = new JComboBox<String>();
 	private final ProcessorConfiguration model;
 
 	public ProcessorPanel(ProcessorConfiguration model) {
@@ -74,6 +77,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		Objects.requireNonNull(actionCommand);
 		buttonBayesianNetworkFile.addActionListener(listener);
 		buttonBayesianNetworkFile.setActionCommand(actionCommand);
+	}
+
+	@Override
+	public void addButtonResetCompletionRulesListener(ActionListener listener, String actionCommand) {
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
+		buttonResetCompletionRules.addActionListener(listener);
+		buttonResetCompletionRules.setActionCommand(actionCommand);
 	}
 
 	@Override
@@ -118,9 +129,11 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	void createPanel() {
 
-		JLabel lblNewLabel = new JLabel("ontology");
-		lblNewLabel.setBounds(282, 83, 70, 15);
-		add(lblNewLabel);
+		// ontology
+
+		JLabel lblOntology = new JLabel("ontology");
+		lblOntology.setBounds(282, 83, 70, 15);
+		add(lblOntology);
 
 		buttonOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonOntologyFile.setBounds(213, 43, 54, 28);
@@ -133,9 +146,11 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		textOntologyFile.setEditable(false);
 		add(textOntologyFile);
 
-		JLabel lblNewLabel_1 = new JLabel("Bayesian network");
-		lblNewLabel_1.setBounds(282, 175, 128, 15);
-		add(lblNewLabel_1);
+		// Bayesian network
+
+		JLabel lblBayesianNetwork = new JLabel("Bayesian network");
+		lblBayesianNetwork.setBounds(282, 175, 128, 15);
+		add(lblBayesianNetwork);
 
 		buttonBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
 		buttonBayesianNetworkFile.setBounds(213, 135, 54, 28);
@@ -148,58 +163,83 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		textBayesianNetworkFile.setEditable(false);
 		add(textBayesianNetworkFile);
 
+		// rules
+
+		JLabel lblRules = new JLabel("rules");
+		lblRules.setBounds(282, 296, 70, 15);
+		add(lblRules);
+
+		buttonResetCompletionRules.setIcon(BornIcon.REFRESH);
+		buttonResetCompletionRules.setBounds(213, 219, 54, 28);
+		buttonResetCompletionRules.setToolTipText(Message.tooltipButtonResetRules);
+		add(buttonResetCompletionRules);
+
+		textCompletionRules.setToolTipText(Message.tooltipTextFieldListOfParents);
+		textCompletionRules.setAlignmentX(LEFT_ALIGNMENT);
+		textCompletionRules.setBounds(282, 219, 688, 65);
+
+		scrollCompletionRules.setBounds(282, 219, 688, 65);
+		scrollCompletionRules.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollCompletionRules.setViewportView(textCompletionRules);
+		add(scrollCompletionRules);
+
+		// query
+
 		JLabel lblInput = new JLabel("input");
-		lblInput.setBounds(282, 323, 70, 15);
+		lblInput.setBounds(282, 413, 70, 15);
 		add(lblInput);
 
 		buttonConsoleInput.setIcon(BornIcon.OPEN_FILE);
-		buttonConsoleInput.setBounds(213, 254, 54, 28);
+		buttonConsoleInput.setBounds(213, 335, 54, 28);
 		buttonConsoleInput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonConsoleInput);
-
-		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
-		add(textBayesianNetworkFile);
 
 		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
-		scrollConsoleInput.setBounds(282, 246, 688, 65);
+		scrollConsoleInput.setBounds(282, 336, 668, 65);
 		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollConsoleInput.setViewportView(textConsoleInput);
 		add(scrollConsoleInput);
 
+		// result
+
 		JLabel lblOutput = new JLabel("output");
-		lblOutput.setBounds(282, 444, 70, 15);
+		lblOutput.setBounds(282, 538, 70, 15);
 		add(lblOutput);
 
-		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
-		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
-		scrollConsoleOutput.setViewportView(textConsoleOutput);
-
 		buttonConsoleOutput.setIcon(BornIcon.SAVE_FILE);
-		buttonConsoleOutput.setBounds(213, 361, 54, 28);
+		buttonConsoleOutput.setBounds(213, 461, 54, 28);
 		buttonConsoleOutput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonConsoleOutput);
 
-		scrollConsoleOutput.setBounds(282, 355, 688, 65);
+		scrollConsoleOutput.setBounds(282, 461, 688, 65);
 		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollConsoleOutput.setViewportView(textConsoleOutput);
 		add(scrollConsoleOutput);
 
+		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
+		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
+
+		// execution
+
 		buttonComputeInference.setIcon(BornIcon.RUN);
-		buttonComputeInference.setBounds(213, 476, 54, 28);
+		buttonComputeInference.setBounds(213, 573, 54, 28);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
 		add(buttonComputeInference);
 
-		labelProgress.setBounds(223, 517, 99, 15);
+		labelProgress.setBounds(213, 624, 99, 15);
 		labelProgress.setVisible(false);
 		add(labelProgress);
 
-		comboBoxExample.setBounds(702, 476, 268, 28);
+		// examples
+
+		comboBoxExample.setBounds(702, 573, 268, 28);
 		comboBoxExample.setToolTipText(Message.tooltipComboBoxExample);
 		add(comboBoxExample);
 
 		buttonUpdateExample.setIcon(BornIcon.REFRESH);
-		buttonUpdateExample.setBounds(620, 476, 54, 28);
+		buttonUpdateExample.setBounds(622, 573, 54, 28);
 		buttonUpdateExample.setToolTipText(Message.tooltipButtonUpdateExample);
 		add(buttonUpdateExample);
 
@@ -230,6 +270,17 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	public void setBayesianNetworkFile(String fileName) {
 		Objects.requireNonNull(fileName);
 		textBayesianNetworkFile.setText(fileName);
+	}
+
+	@Override
+	public String getCompletionRules() {
+		return textCompletionRules.getText();
+	}
+
+	@Override
+	public void setCompletionRules(String text) {
+		Objects.requireNonNull(text);
+		textCompletionRules.setText(text);
 	}
 
 	@Override
@@ -350,6 +401,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	public void setButtonsEnabled(boolean status) {
 		buttonOntologyFile.setEnabled(status);
 		buttonBayesianNetworkFile.setEnabled(status);
+		buttonResetCompletionRules.setEnabled(status);
 		buttonConsoleInput.setEnabled(status);
 		buttonConsoleOutput.setEnabled(status);
 		buttonComputeInference.setEnabled(status);

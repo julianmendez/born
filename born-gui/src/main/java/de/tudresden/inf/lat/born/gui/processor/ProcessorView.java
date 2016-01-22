@@ -36,6 +36,16 @@ public interface ProcessorView extends JPanelView {
 	void addButtonBayesianNetworkFileListener(ActionListener listener, String actionCommand);
 
 	/**
+	 * Adds an action listener to the button to reset the completion rules.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	void addButtonResetCompletionRulesListener(ActionListener listener, String actionCommand);
+
+	/**
 	 * Adds an action listener to the button to select the console input.
 	 * 
 	 * @param listener
@@ -121,6 +131,21 @@ public interface ProcessorView extends JPanelView {
 	 *            file name
 	 */
 	void setBayesianNetworkFile(String fileName);
+
+	/**
+	 * Returns the completion rules.
+	 * 
+	 * @return the completion rules
+	 */
+	String getCompletionRules();
+
+	/**
+	 * Sets the completion rules.
+	 * 
+	 * @param text
+	 *            text containing completion rules in ProbLog
+	 */
+	void setCompletionRules(String text);
 
 	/**
 	 * Returns the console input.

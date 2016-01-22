@@ -46,6 +46,7 @@ public class ProcessorController implements ActionListener {
 
 	private static final String actionInputOntology = "open file";
 	private static final String actionBayesianNetwork = "Bayesian network file";
+	private static final String actionResetCompletionRules = "reset completion rules";
 	private static final String actionConsoleInput = "read console";
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
@@ -83,6 +84,8 @@ public class ProcessorController implements ActionListener {
 			executeActionInputOntology();
 		} else if (cmd.equals(actionBayesianNetwork)) {
 			executeActionBayesianNetwork();
+		} else if (cmd.equals(actionResetCompletionRules)) {
+			executeActionResetCompletionRules();
 		} else if (cmd.equals(actionConsoleInput)) {
 			executeActionConsoleInput();
 		} else if (cmd.equals(actionConsoleOutput)) {
@@ -122,6 +125,10 @@ public class ProcessorController implements ActionListener {
 			getView().setBayesianNetworkFile(file.getAbsolutePath());
 			getView().updateBayesianNetworkFile();
 		}
+	}
+
+	void executeActionResetCompletionRules() {
+		getView().setCompletionRules("");
 	}
 
 	void executeActionConsoleInput() {
@@ -210,6 +217,7 @@ public class ProcessorController implements ActionListener {
 	private void init() {
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonBayesianNetworkFileListener(this, actionBayesianNetwork);
+		getView().addButtonResetCompletionRulesListener(this, actionResetCompletionRules);
 		getView().addButtonConsoleInputListener(this, actionConsoleInput);
 		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
