@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -73,7 +74,7 @@ public class ProblogInputCreator {
 		return set;
 	}
 
-	List<CompletionRule> getCompletionRules() {
+	List<CompletionRule> getDefaultCompletionRules() {
 		List<CompletionRule> completionRules = new ArrayList<>();
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
@@ -215,9 +216,11 @@ public class ProblogInputCreator {
 		program.setOntology(getClauses(factory, module));
 
 		if (completionRules.trim().isEmpty()) {
-			program.setCompletionRules(getCompletionRules());
+			program.setCompletionRules(getDefaultCompletionRules());
+			program.setAdditionalCompletionRulesAsText("");
 		} else {
-			// program.setCompletionRules(completionRules);
+			program.setCompletionRules(Collections.emptyList());
+			program.setAdditionalCompletionRulesAsText(completionRules);
 		}
 
 		program.setBayesianNetworkAddendum(bayesianNetwork);

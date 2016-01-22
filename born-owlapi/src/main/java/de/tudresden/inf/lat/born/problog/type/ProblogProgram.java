@@ -24,6 +24,8 @@ public class ProblogProgram {
 	static final String TITLE_BAYESIAN_NETWORK = "%% Bayesian Network";
 	static final String TITLE_QUERIES = "%% Queries";
 
+	private String additionalCompletionRulesAsText;
+
 	private final List<CompletionRule> completionRules = new ArrayList<>();
 	private final List<Clause> ontology = new ArrayList<>();
 	private final List<ProbClause> bayesianNetwork = new ArrayList<>();
@@ -42,6 +44,15 @@ public class ProblogProgram {
 		Objects.requireNonNull(completionRules);
 		this.completionRules.clear();
 		this.completionRules.addAll(completionRules);
+	}
+
+	public String getAdditionalCompletionRulesAsText() {
+		return this.additionalCompletionRulesAsText;
+	}
+
+	public void setAdditionalCompletionRulesAsText(String completionRulesAsText) {
+		Objects.requireNonNull(completionRulesAsText);
+		this.additionalCompletionRulesAsText = completionRulesAsText;
 	}
 
 	public List<Clause> getOntology() {
@@ -133,6 +144,8 @@ public class ProblogProgram {
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(asStringC(this.completionRules));
+		sb.append(Symbol.NEW_LINE_CHAR);
+		sb.append(this.additionalCompletionRulesAsText);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(TITLE_ONTOLOGY);
