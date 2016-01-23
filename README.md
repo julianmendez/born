@@ -28,6 +28,22 @@ read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it
 ```
 
 
+## Usage
+
+BORN can be used as a Prot&eacute;g&eacute; plug-in or as a standalone application.
+
+To use it as a Prot&eacute;g&eacute; plug-in, copy the file `born-plugin/target/de.tu-dresden.inf.lat.born-VERSION.jar` into `protege/plugins`, where `VERSION` is BORN's version and `protege` is  Prot&eacute;g&eacute;'s directory.
+
+To use it as a standalone, use file `born-standalone/target/born.jar`, and start the graphical visual interface with:
+```
+java -jar born.jar
+```
+or use the console interface giving parameters. The details can be obtained with:
+```
+java -jar born.jar help
+```
+
+
 ## Source code
 
 To clone and compile the project:
