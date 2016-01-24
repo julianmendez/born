@@ -20,7 +20,7 @@
 
     <section class="main-content">
       <h1>
-<a id="born" class="anchor" href="#born" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://julianmendez.github.io/born/">BORN</a>
+<a id="born" class="anchor" href="#born" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://julianmendez.github.io/born/">BORN</a>
 </h1>
 
 <p><em>Bayesian Ontology Reasoner</em></p>
@@ -36,7 +36,7 @@ the <a href="http://owlcs.github.io/owlapi/">OWL API</a> to
 read <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2 EL</a> ontologies, and it can be used as a <a href="http://protege.stanford.edu/">Protégé</a> plug-in.</p>
 
 <h2>
-<a id="download" class="anchor" href="#download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download</h2>
+<a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h2>
 
 <ul>
 <li><a href="https://sourceforge.net/projects/latitude/files/born/0.2.0/born-0.2.0.zip/download">all-in-one ZIP file</a></li>
@@ -51,7 +51,24 @@ read <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2 EL</a> ontolog
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
 <h2>
-<a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Source code</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>BORN can be used as a Protégé plug-in or as a standalone application.</p>
+
+<p>To use it as a Protégé plug-in, copy the file <code>born-plugin/target/de.tu-dresden.inf.lat.born-VERSION.jar</code> into <code>protege/plugins</code>, where <code>VERSION</code> is BORN's version and <code>protege</code> is  Protégé's directory.</p>
+
+<p>To use it as a standalone, use file <code>born-standalone/target/born.jar</code>, and start the graphical visual interface with:</p>
+
+<pre><code>java -jar born.jar
+</code></pre>
+
+<p>or use the console interface giving parameters. The details can be obtained with:</p>
+
+<pre><code>java -jar born.jar help
+</code></pre>
+
+<h2>
+<a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Source code</h2>
 
 <p>To clone and compile the project:</p>
 
@@ -97,23 +114,23 @@ $ jar -cf bundle.jar born-parent-*
 <p>where <em>NEW_VERSION</em> is the new version.</p>
 
 <h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <p>This software is distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License Version 2.0</a>.</p>
 
 <h2>
-<a id="release-notes" class="anchor" href="#release-notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Release notes</h2>
+<a id="release-notes" class="anchor" href="#release-notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Release notes</h2>
 
 <p>See <a href="http://github.com/julianmendez/born/blob/master/RELEASE-NOTES.md">release notes</a>.</p>
 
 <h2>
-<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Architecture</h2>
 
 <p>BORN has a hybrid architecture that uses <a href="http://www.oracle.com/technetwork/java/index.html">Java</a> and <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>. In addition to Java, BORN requires having <a href="https://www.python.org/">Python</a> installed, because it is used to execute ProbLog. If ProbLog is not installed, BORN automatically downloads the most recent version of ProbLog, and uses it to solve the queries.
 Details on the versions of those requirements are available in the release notes.</p>
 
 <h3>
-<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modules</h3>
+<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modules</h3>
 
 <p>BORN is implemented with the following modules:</p>
 
@@ -135,7 +152,7 @@ Details on the versions of those requirements are available in the release notes
 </ul>
 
 <h3>
-<a id="packages" class="anchor" href="#packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Packages</h3>
+<a id="packages" class="anchor" href="#packages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Packages</h3>
 
 <p><code>born-owlapi</code> can be sudivided in 3 groups of packages:</p>
 
@@ -175,7 +192,7 @@ Details on the versions of those requirements are available in the release notes
 </ul>
 
 <h2>
-<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>In case you need more information, please contact <a href="https://github.com/julianmendez" class="user-mention">@julianmendez</a> .</p>
 
