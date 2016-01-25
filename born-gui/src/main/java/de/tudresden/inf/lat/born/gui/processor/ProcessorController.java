@@ -231,6 +231,8 @@ public class ProcessorController implements ActionListener {
 		getView().addExamples(this.exampleLoader.getExampleConfigurations());
 
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
+
+		executeActionResetCompletionRules();
 	}
 
 }
