@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +40,7 @@ public class MultiProcessorCore {
 	public static final char SLASH_CHAR = '/';
 	public static final String TEMP_FILE_SUFFIX = ".tmp";
 	public static final String CSV_EXTENSION = ".csv";
+	public static final String LOG_EXTENSION = ".log";
 	public static final String OWL_EXTENSION = ".owl";
 	public static final String PL_EXTENSION = ".pl";
 
@@ -133,12 +135,12 @@ public class MultiProcessorCore {
 		return ret;
 	}
 
-	String writeSilent(Writer output, String str) {
+	String write(Writer output, String str) {
 		try {
 			output.write(str);
 			output.flush();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new UncheckedIOException(e);
 		}
 		return str;
 	}
@@ -152,31 +154,36 @@ public class MultiProcessorCore {
 		conf.getOntologyList().forEach(ontPair -> {
 			try {
 
-				String outputFileName = conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName()
+				String resultFileName = conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName()
+						+ LOG_EXTENSION;
+				Writer output = new FileWriter(resultFileName, true);
+
+				String temporaryFileName = conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName()
 						+ TEMP_FILE_SUFFIX;
-				Writer output = new FileWriter(outputFileName);
 				ProcessorConfiguration configuration = new ProcessorConfigurationImpl();
 				configuration.setOntology(ontPair.getOntology());
 				configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
-				configuration.setOutputFileName(outputFileName);
+				configuration.setOutputFileName(temporaryFileName);
 				configuration.setQueryProcessor(conf.getQueryProcessor());
 				configuration.setShowingLog(conf.isShowingLog());
 				List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 
 				StringBuffer sbuf = new StringBuffer();
-				sbuf.append(writeSilent(output, makeLine(FIRST_LINE_LIST) + NEW_LINE_CHAR));
+				sbuf.append(write(output, makeLine(FIRST_LINE_LIST) + NEW_LINE_CHAR));
 
 				queries.forEach(query -> {
 					configuration.setQuery(query.asProblogString());
-					sbuf.append(writeSilent(output, makeLine(getConditions(ontPair, configuration, query))));
+					sbuf.append(write(output, makeLine(getConditions(ontPair, configuration, query))));
 					ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
 					core.run(configuration, start, executionResult);
-					sbuf.append(writeSilent(output, makeLine(getResult(executionResult)) + NEW_LINE_CHAR));
+					sbuf.append(write(output, makeLine(getResult(executionResult)) + NEW_LINE_CHAR));
 				});
 				ret.add(sbuf.toString());
+				output.flush();
+				output.close();
 
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			}
 		});
 		return ret;
@@ -233,7 +240,7 @@ public class MultiProcessorCore {
 		for (OntologyAndNetwork ontNet : ontologyList) {
 			String result = resultIt.next();
 			String fileName = outputDirectory + SLASH_CHAR + ontNet.getOntologyName() + CSV_EXTENSION;
-			FileWriter fileWriter = new FileWriter(fileName);
+			FileWriter fileWriter = new FileWriter(fileName, true);
 			fileWriter.write(result);
 			fileWriter.flush();
 			fileWriter.close();
