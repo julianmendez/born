@@ -46,6 +46,17 @@ public interface ProcessorView extends JPanelView {
 	void addButtonResetCompletionRulesListener(ActionListener listener, String actionCommand);
 
 	/**
+	 * Adds an action listener to the button to go to the previous completion
+	 * rules.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	void addButtonGoToPreviousCompletionRulesListener(ActionListener listener, String actionCommand);
+
+	/**
 	 * Adds an action listener to the button to select the console input.
 	 * 
 	 * @param listener
@@ -231,6 +242,11 @@ public interface ProcessorView extends JPanelView {
 	int getComboBoxExampleIndex();
 
 	/**
+	 * Updates the completion rules.
+	 */
+	void updateCompletionRules();
+
+	/**
 	 * Updates the ontology file.
 	 */
 	void updateOntologyFile();
@@ -262,13 +278,23 @@ public interface ProcessorView extends JPanelView {
 	void setComputing(boolean status);
 
 	/**
-	 * Changes the button state between enabled and disabled.
+	 * Changes the state of all buttons between enabled and disabled.
 	 * 
 	 * @param status
 	 *            status (<code>true</code> if and only if the button is
 	 *            enabled)
 	 */
 	void setButtonsEnabled(boolean status);
+
+	/**
+	 * Changes the state of the go-to-previous-completion-rules button between
+	 * enabled and disabled.
+	 * 
+	 * @param status
+	 *            status (<code>true</code> if and only if the button is
+	 *            enabled)
+	 */
+	void setButtonGoToPreviousCompletionRulesEnabled(boolean status);
 
 	/**
 	 * Adds the given example configurations.

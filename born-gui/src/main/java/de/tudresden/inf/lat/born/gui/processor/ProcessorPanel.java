@@ -40,6 +40,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final JButton buttonOntologyFile = new JButton();
 	private final JButton buttonBayesianNetworkFile = new JButton();
 	private final JButton buttonResetCompletionRules = new JButton();
+	private final JButton buttonGoToPreviousCompletionRules = new JButton();
 	private final JButton buttonConsoleInput = new JButton();
 	private final JButton buttonConsoleOutput = new JButton();
 	private final JButton buttonComputeInference = new JButton();
@@ -85,6 +86,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		Objects.requireNonNull(actionCommand);
 		buttonResetCompletionRules.addActionListener(listener);
 		buttonResetCompletionRules.setActionCommand(actionCommand);
+	}
+
+	@Override
+	public void addButtonGoToPreviousCompletionRulesListener(ActionListener listener, String actionCommand) {
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
+		buttonGoToPreviousCompletionRules.addActionListener(listener);
+		buttonGoToPreviousCompletionRules.setActionCommand(actionCommand);
 	}
 
 	@Override
@@ -171,8 +180,13 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonResetCompletionRules.setIcon(BornIcon.REFRESH);
 		buttonResetCompletionRules.setBounds(213, 219, 54, 28);
-		buttonResetCompletionRules.setToolTipText(Message.tooltipButtonResetRules);
+		buttonResetCompletionRules.setToolTipText(Message.tooltipButtonResetCompletionRules);
 		add(buttonResetCompletionRules);
+
+		buttonGoToPreviousCompletionRules.setIcon(BornIcon.REFRESH);
+		buttonGoToPreviousCompletionRules.setBounds(213, 256, 54, 28);
+		buttonGoToPreviousCompletionRules.setToolTipText(Message.tooltipButtonGoToPreviousCompletionRules);
+		add(buttonGoToPreviousCompletionRules);
 
 		textCompletionRules.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textCompletionRules.setAlignmentX(LEFT_ALIGNMENT);
@@ -338,6 +352,11 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
+	public void setButtonGoToPreviousCompletionRulesEnabled(boolean b) {
+		buttonGoToPreviousCompletionRules.setEnabled(b);
+	}
+
+	@Override
 	public void setButtonComputeInferenceEnabled(boolean b) {
 		buttonComputeInference.setEnabled(b);
 	}
@@ -350,6 +369,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public int getComboBoxExampleIndex() {
 		return comboBoxExample.getSelectedIndex();
+	}
+
+	@Override
+	public void updateCompletionRules() {
+		String completionRules = textCompletionRules.getText();
+		if (!Objects.isNull(completionRules) && !completionRules.trim().isEmpty()) {
+			getModel().setCompletionRules(completionRules);
+		}
 	}
 
 	@Override
@@ -402,6 +429,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonOntologyFile.setEnabled(status);
 		buttonBayesianNetworkFile.setEnabled(status);
 		buttonResetCompletionRules.setEnabled(status);
+		buttonGoToPreviousCompletionRules.setEnabled(status);
 		buttonConsoleInput.setEnabled(status);
 		buttonConsoleOutput.setEnabled(status);
 		buttonComputeInference.setEnabled(status);

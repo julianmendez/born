@@ -31,7 +31,8 @@ public interface Message {
 	String tooltipButtonOutputDirectory = "select the output directory";
 	String tooltipButtonUpdateSeed = "update the seed with a new random number";
 
-	String tooltipButtonResetRules = "reset the completion rules";
+	String tooltipButtonResetCompletionRules = "reset the completion rules";
+	String tooltipButtonGoToPreviousCompletionRules = "go to the previous completion rules";
 
 	// Processor
 	String tooltipComputeInference = "compute inference";

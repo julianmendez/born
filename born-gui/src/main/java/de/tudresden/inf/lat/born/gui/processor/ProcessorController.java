@@ -49,6 +49,7 @@ public class ProcessorController implements ActionListener {
 	private static final String actionInputOntology = "open file";
 	private static final String actionBayesianNetwork = "Bayesian network file";
 	private static final String actionResetCompletionRules = "reset completion rules";
+	private static final String actionGoToPreviousCompletionRules = "go to previous completion rules";
 	private static final String actionConsoleInput = "read console";
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
@@ -61,6 +62,7 @@ public class ProcessorController implements ActionListener {
 	private final ProcessorView view;
 	private ProcessorRunner processorRunner;
 	private final ExampleLoader exampleLoader = new ExampleLoader();
+	private String previousCompletionRules = "";
 
 	/**
 	 * Constructs a new controller.
@@ -88,6 +90,8 @@ public class ProcessorController implements ActionListener {
 			executeActionBayesianNetwork();
 		} else if (cmd.equals(actionResetCompletionRules)) {
 			executeActionResetCompletionRules();
+		} else if (cmd.equals(actionGoToPreviousCompletionRules)) {
+			executeActionGoToPreviousCompletionRules();
 		} else if (cmd.equals(actionConsoleInput)) {
 			executeActionConsoleInput();
 		} else if (cmd.equals(actionConsoleOutput)) {
@@ -135,6 +139,14 @@ public class ProcessorController implements ActionListener {
 		getView().setCompletionRules(defaultCompletionRules);
 	}
 
+	void executeActionGoToPreviousCompletionRules() {
+		if (!this.previousCompletionRules.isEmpty()) {
+			getView().setCompletionRules(this.previousCompletionRules);
+			this.previousCompletionRules = "";
+			getView().setButtonGoToPreviousCompletionRulesEnabled(false);
+		}
+	}
+
 	void executeActionConsoleInput() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
@@ -163,8 +175,10 @@ public class ProcessorController implements ActionListener {
 		getView().setButtonsEnabled(false);
 		getView().setComputing(true);
 		getView().updateQuery();
-		processorRunner = new ProcessorRunner();
-		processorRunner.start();
+		getView().updateCompletionRules();
+		this.previousCompletionRules = getModel().getCompletionRules();
+		this.processorRunner = new ProcessorRunner();
+		this.processorRunner.start();
 	}
 
 	void executeActionComboBoxExample() {
@@ -222,6 +236,7 @@ public class ProcessorController implements ActionListener {
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonBayesianNetworkFileListener(this, actionBayesianNetwork);
 		getView().addButtonResetCompletionRulesListener(this, actionResetCompletionRules);
+		getView().addButtonGoToPreviousCompletionRulesListener(this, actionGoToPreviousCompletionRules);
 		getView().addButtonConsoleInputListener(this, actionConsoleInput);
 		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
