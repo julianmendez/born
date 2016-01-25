@@ -103,7 +103,7 @@ public class ProblogInputCreator {
 
 		Set<Integer> classes = new TreeSet<>();
 		Set<Integer> objectProperties = new TreeSet<>();
-		axioms.parallelStream().forEach(axiom -> {
+		axioms.forEach(axiom -> {
 			classes.addAll(axiom.getClassesInSignature());
 			objectProperties.addAll(axiom.getObjectPropertiesInSignature());
 		});
