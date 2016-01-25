@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -103,7 +104,7 @@ public class TestMakerController implements ActionListener {
 			try {
 				annotateOntology(new FileOutputStream(file));
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			}
 		}
 	}
@@ -142,7 +143,7 @@ public class TestMakerController implements ActionListener {
 			try {
 				createBayesianNetwork(new FileOutputStream(file));
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			}
 		}
 	}

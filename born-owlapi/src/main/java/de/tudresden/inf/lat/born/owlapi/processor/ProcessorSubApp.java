@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.URI;
 import java.util.Objects;
 
@@ -90,7 +91,7 @@ public class ProcessorSubApp implements SubApp {
 				conf.setBayesianNetwork(ProcessorConfigurationImpl.read(new FileReader(newArgs[1])));
 				conf.setQuery(ProcessorConfigurationImpl.read(new FileReader(newArgs[2])));
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			} catch (OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
 			}

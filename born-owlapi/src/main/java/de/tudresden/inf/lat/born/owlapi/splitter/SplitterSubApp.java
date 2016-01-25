@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
@@ -63,7 +64,7 @@ public class SplitterSubApp implements SubApp {
 				outNet.close();
 				outOnt.close();
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			}
 			return "Done.";
 		} else {

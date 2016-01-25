@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,7 +41,7 @@ public class ExperimentRunnerController implements ActionListener {
 			try {
 				core.storeResults(getModel(), results);
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			}
 			getView().setComputing(false);
 			getView().setButtonsEnabled(true);

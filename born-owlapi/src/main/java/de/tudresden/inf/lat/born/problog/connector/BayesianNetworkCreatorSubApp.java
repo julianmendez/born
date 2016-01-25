@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.problog.connector;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -85,7 +86,7 @@ public class BayesianNetworkCreatorSubApp implements SubApp {
 				output.close();
 
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new UncheckedIOException(e);
 			}
 			return "Done.";
 		} else {
