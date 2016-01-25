@@ -23,6 +23,7 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
  */
 public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
+	private boolean hasDefaultCompletionRules = true;
 	private String completionRules = "";
 	private OWLOntology ontology;
 	private String bayesianNetwork = "";
@@ -41,12 +42,22 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	}
 
 	@Override
-	public String getCompletionRules() {
+	public boolean hasDefaultCompletionRules() {
+		return this.hasDefaultCompletionRules;
+	}
+
+	@Override
+	public void setUseOfDefaultCompletionRules(boolean useOfRules) {
+		this.hasDefaultCompletionRules = useOfRules;
+	}
+
+	@Override
+	public String getAdditionalCompletionRules() {
 		return this.completionRules;
 	}
 
 	@Override
-	public void setCompletionRules(String completionRules) {
+	public void setAdditionalCompletionRules(String completionRules) {
 		Objects.requireNonNull(completionRules);
 		this.completionRules = completionRules;
 	}
@@ -123,7 +134,8 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 			return false;
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
-			return getCompletionRules().equals(other.getCompletionRules()) && getOntology().equals(other.getOntology())
+			return getAdditionalCompletionRules().equals(other.getAdditionalCompletionRules())
+					&& getOntology().equals(other.getOntology())
 					&& getBayesianNetwork().equals(other.getBayesianNetwork()) && getQuery().equals(other.getQuery())
 					&& getOutputFileName().equals(other.getOutputFileName())
 					&& getQueryProcessor().equals(other.getQueryProcessor())

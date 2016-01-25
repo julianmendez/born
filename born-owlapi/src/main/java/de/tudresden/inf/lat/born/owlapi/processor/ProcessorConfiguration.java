@@ -11,19 +11,35 @@ import org.semanticweb.owlapi.model.OWLOntology;
 public interface ProcessorConfiguration {
 
 	/**
-	 * Returns the completion rules.
+	 * Tells whether this configuration uses the default completion rules.
 	 * 
-	 * @return the completion rules
+	 * @return <code>true</code> if and only if this configuration uses the
+	 *         default completion rules
 	 */
-	String getCompletionRules();
+	boolean hasDefaultCompletionRules();
 
 	/**
-	 * Sets the completion rules.
+	 * Sets whether this configuration uses the default completion rules.
 	 * 
-	 * @param completionRules
-	 *            completion rules
+	 * @param useOfRules
+	 *            use of the default completion rules
 	 */
-	void setCompletionRules(String completionRules);
+	void setUseOfDefaultCompletionRules(boolean useOfRules);
+
+	/**
+	 * Returns the additional completion rules.
+	 * 
+	 * @return the additional completion rules
+	 */
+	String getAdditionalCompletionRules();
+
+	/**
+	 * Sets the additional completion rules.
+	 * 
+	 * @param additionalCompletionRules
+	 *            additional completion rules
+	 */
+	void setAdditionalCompletionRules(String additionalCompletionRules);
 
 	/**
 	 * Returns the ontology.

@@ -176,7 +176,7 @@ public class ProcessorController implements ActionListener {
 		getView().setComputing(true);
 		getView().updateQuery();
 		getView().updateCompletionRules();
-		this.previousCompletionRules = getModel().getCompletionRules();
+		this.previousCompletionRules = getModel().getAdditionalCompletionRules();
 		this.processorRunner = new ProcessorRunner();
 		this.processorRunner.start();
 	}
@@ -233,6 +233,8 @@ public class ProcessorController implements ActionListener {
 	 * initialized.
 	 */
 	private void init() {
+		getModel().setUseOfDefaultCompletionRules(false);
+
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonBayesianNetworkFileListener(this, actionBayesianNetwork);
 		getView().addButtonResetCompletionRulesListener(this, actionResetCompletionRules);

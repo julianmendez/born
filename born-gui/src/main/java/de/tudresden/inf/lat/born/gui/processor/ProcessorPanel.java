@@ -375,7 +375,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	public void updateCompletionRules() {
 		String completionRules = textCompletionRules.getText();
 		if (!Objects.isNull(completionRules) && !completionRules.trim().isEmpty()) {
-			getModel().setCompletionRules(completionRules);
+			getModel().setAdditionalCompletionRules(completionRules);
 		}
 	}
 
