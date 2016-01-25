@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -91,7 +92,7 @@ public class MultiProcessorCore {
 	}
 
 	/**
-	 * Returns the result of one query as presented in the CSV file.
+	 * Returns the conditions of one query as presented in the CSV file.
 	 * 
 	 * @param ontPair
 	 *            ontology-network pair
@@ -99,17 +100,27 @@ public class MultiProcessorCore {
 	 *            configuration
 	 * @param query
 	 *            query
-	 * @param result
-	 *            result
-	 * @return the result of one query as presented in the CSV file
+	 * @return the conditions of one query as presented in the CSV file
 	 */
-	List<String> getInformationList(OntologyAndNetwork ontPair, ProcessorConfiguration configuration,
-			SubsumptionQuery query, ProcessorExecutionResult executionResult) {
+	List<String> getConditions(OntologyAndNetwork ontPair, ProcessorConfiguration configuration,
+			SubsumptionQuery query) {
 		List<String> ret = new ArrayList<String>();
 		ret.add(ontPair.getOntologyName() + OWL_EXTENSION);
 		ret.add(ontPair.getOntologyName() + PL_EXTENSION);
 		ret.add(query.getSubClass().getIRI().toURI().toString());
 		ret.add(query.getSuperClass().getIRI().toURI().toString());
+		return ret;
+	}
+
+	/**
+	 * Returns the result of one query as presented in the CSV file.
+	 *
+	 * @param executionResult
+	 *            execution result
+	 * @return the result of one query as presented in the CSV file
+	 */
+	List<String> getResult(ProcessorExecutionResult executionResult) {
+		List<String> ret = new ArrayList<String>();
 		ret.add(executionResult.getResult().trim()); // FIXME it has two fields
 		ret.add("" + executionResult.getTranslationTime());
 		ret.add("" + executionResult.getNormalizationTime());
@@ -122,6 +133,16 @@ public class MultiProcessorCore {
 		return ret;
 	}
 
+	String writeSilent(Writer output, String str) {
+		try {
+			output.write(str);
+			output.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return str;
+	}
+
 	public List<String> run(MultiProcessorConfiguration conf, long start) {
 		Objects.requireNonNull(conf);
 		List<String> ret = new ArrayList<>();
@@ -129,29 +150,34 @@ public class MultiProcessorCore {
 		ProcessorCore core = new ProcessorCore();
 
 		conf.getOntologyList().forEach(ontPair -> {
+			try {
 
-			ProcessorConfiguration configuration = new ProcessorConfigurationImpl();
-			configuration.setOntology(ontPair.getOntology());
-			configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
-			configuration.setOutputFileName(
-					conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName() + TEMP_FILE_SUFFIX);
-			configuration.setQueryProcessor(conf.getQueryProcessor());
-			configuration.setShowingLog(conf.isShowingLog());
-			List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
-			StringBuffer sbuf = new StringBuffer();
-			sbuf.append(makeLine(FIRST_LINE_LIST));
-			sbuf.append(NEW_LINE_CHAR);
+				String outputFileName = conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName()
+						+ TEMP_FILE_SUFFIX;
+				Writer output = new FileWriter(outputFileName);
+				ProcessorConfiguration configuration = new ProcessorConfigurationImpl();
+				configuration.setOntology(ontPair.getOntology());
+				configuration.setBayesianNetwork(ontPair.getBayesianNetwork());
+				configuration.setOutputFileName(outputFileName);
+				configuration.setQueryProcessor(conf.getQueryProcessor());
+				configuration.setShowingLog(conf.isShowingLog());
+				List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 
-			queries.forEach(query -> {
-				configuration.setQuery(query.asProblogString());
-				ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
-				core.run(configuration, start, executionResult);
-				List<String> informationList = getInformationList(ontPair, configuration, query, executionResult);
-				sbuf.append(makeLine(informationList));
-				sbuf.append(NEW_LINE_CHAR);
-			});
-			ret.add(sbuf.toString());
+				StringBuffer sbuf = new StringBuffer();
+				sbuf.append(writeSilent(output, makeLine(FIRST_LINE_LIST) + NEW_LINE_CHAR));
 
+				queries.forEach(query -> {
+					configuration.setQuery(query.asProblogString());
+					sbuf.append(writeSilent(output, makeLine(getConditions(ontPair, configuration, query))));
+					ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
+					core.run(configuration, start, executionResult);
+					sbuf.append(writeSilent(output, makeLine(getResult(executionResult)) + NEW_LINE_CHAR));
+				});
+				ret.add(sbuf.toString());
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		});
 		return ret;
 	}
