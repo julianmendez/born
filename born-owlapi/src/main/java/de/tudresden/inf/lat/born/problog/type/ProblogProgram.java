@@ -24,14 +24,14 @@ public class ProblogProgram {
 	static final String TITLE_BAYESIAN_NETWORK = "%% Bayesian Network";
 	static final String TITLE_QUERIES = "%% Queries";
 
-	private String additionalCompletionRulesAsText;
+	private String additionalCompletionRulesAsText = "";
 
 	private final List<CompletionRule> completionRules = new ArrayList<>();
 	private final List<Clause> ontology = new ArrayList<>();
 	private final List<ProbClause> bayesianNetwork = new ArrayList<>();
 	private final List<Clause> queries = new ArrayList<>();
-	private String bayesianNetworkAddendum;
-	private String queryListAddendum;
+	private String bayesianNetworkAddendum = "";
+	private String queryListAddendum = "";
 
 	public ProblogProgram() {
 	}
