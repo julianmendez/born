@@ -134,7 +134,8 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 			return false;
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
-			return getAdditionalCompletionRules().equals(other.getAdditionalCompletionRules())
+			return (hasDefaultCompletionRules() == other.hasDefaultCompletionRules())
+					&& getAdditionalCompletionRules().equals(other.getAdditionalCompletionRules())
 					&& getOntology().equals(other.getOntology())
 					&& getBayesianNetwork().equals(other.getBayesianNetwork()) && getQuery().equals(other.getQuery())
 					&& getOutputFileName().equals(other.getOutputFileName())
@@ -145,16 +146,21 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public int hashCode() {
-		return this.completionRules.hashCode()
-				+ 0x1F * (this.ontology.hashCode() + 0x1F * (this.bayesianNetwork.hashCode()
-						+ 0x1F * (this.query.hashCode() + 0x1F * (this.outputFileName.hashCode()
-								+ 0x1F * (this.queryProcessor.hashCode() + 0x1F * (this.showingLog ? 1 : 0))))));
+		return (this.hasDefaultCompletionRules ? 1 : 0) + //
+				0x1F * (this.completionRules.hashCode() + //
+						0x1F * (this.ontology.hashCode() + //
+								0x1F * (this.bayesianNetwork.hashCode() + //
+										0x1F * (this.query.hashCode() + //
+												0x1F * (this.outputFileName.hashCode() + //
+														0x1F * (this.queryProcessor.hashCode() + //
+																0x1F * (this.showingLog ? 1 : 0)))))));
 	}
 
 	@Override
 	public String toString() {
-		return this.completionRules + " " + this.ontology + " " + this.bayesianNetwork + " " + this.query + " "
-				+ this.outputFileName + " " + this.queryProcessor + " " + this.showingLog;
+		return this.hasDefaultCompletionRules + "  " + this.completionRules + " " + this.ontology + " "
+				+ this.bayesianNetwork + " " + this.query + " " + this.outputFileName + " " + this.queryProcessor + " "
+				+ this.showingLog;
 	}
 
 	/**
