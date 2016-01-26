@@ -137,14 +137,11 @@ public class ProcessorController implements ActionListener {
 		String defaultCompletionRules = (new ProblogProgram())
 				.asStringC((new ProblogInputCreator()).getDefaultCompletionRules());
 		getView().setCompletionRules(defaultCompletionRules);
+		this.previousCompletionRules = defaultCompletionRules;
 	}
 
 	void executeActionGoToPreviousCompletionRules() {
-		if (!this.previousCompletionRules.isEmpty()) {
-			getView().setCompletionRules(this.previousCompletionRules);
-			this.previousCompletionRules = "";
-			getView().setButtonGoToPreviousCompletionRulesEnabled(false);
-		}
+		getView().setCompletionRules(this.previousCompletionRules);
 	}
 
 	void executeActionConsoleInput() {
@@ -234,6 +231,7 @@ public class ProcessorController implements ActionListener {
 	 */
 	private void init() {
 		getModel().setUseOfDefaultCompletionRules(false);
+		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonBayesianNetworkFileListener(this, actionBayesianNetwork);
@@ -246,8 +244,6 @@ public class ProcessorController implements ActionListener {
 		getView().addButtonUpdateExampleListener(this, actionUpdateExample);
 
 		getView().addExamples(this.exampleLoader.getExampleConfigurations());
-
-		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 
 		executeActionResetCompletionRules();
 	}
