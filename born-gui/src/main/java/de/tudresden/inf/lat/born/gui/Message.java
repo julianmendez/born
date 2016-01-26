@@ -32,7 +32,7 @@ public interface Message {
 	String tooltipButtonUpdateSeed = "update the seed with a new random number";
 
 	String tooltipButtonResetCompletionRules = "reset the completion rules";
-	String tooltipButtonGoToPreviousCompletionRules = "go to the previous completion rules";
+	String tooltipButtonGoToPreviousCompletionRules = "go to the previous to the last used completion rules";
 
 	// Processor
 	String tooltipComputeInference = "compute inference";

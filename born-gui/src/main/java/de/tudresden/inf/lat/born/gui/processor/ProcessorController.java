@@ -62,7 +62,8 @@ public class ProcessorController implements ActionListener {
 	private final ProcessorView view;
 	private ProcessorRunner processorRunner;
 	private final ExampleLoader exampleLoader = new ExampleLoader();
-	private String previousCompletionRules = "";
+	private String lastUsedCompletionRules = "";
+	private String previousToLastUsedCompletionRules = "";
 
 	/**
 	 * Constructs a new controller.
@@ -137,11 +138,13 @@ public class ProcessorController implements ActionListener {
 		String defaultCompletionRules = (new ProblogProgram())
 				.asStringC((new ProblogInputCreator()).getDefaultCompletionRules());
 		getView().setCompletionRules(defaultCompletionRules);
-		this.previousCompletionRules = defaultCompletionRules;
+		updatePreviousToLastUsedCompletionRules(defaultCompletionRules);
+		updatePreviousToLastUsedCompletionRules(defaultCompletionRules);
 	}
 
 	void executeActionGoToPreviousCompletionRules() {
-		getView().setCompletionRules(this.previousCompletionRules);
+		this.lastUsedCompletionRules = this.previousToLastUsedCompletionRules;
+		getView().setCompletionRules(this.previousToLastUsedCompletionRules);
 	}
 
 	void executeActionConsoleInput() {
@@ -173,7 +176,7 @@ public class ProcessorController implements ActionListener {
 		getView().setComputing(true);
 		getView().updateQuery();
 		getView().updateCompletionRules();
-		this.previousCompletionRules = getModel().getAdditionalCompletionRules();
+		updatePreviousToLastUsedCompletionRules(getModel().getAdditionalCompletionRules());
 		this.processorRunner = new ProcessorRunner();
 		this.processorRunner.start();
 	}
@@ -229,7 +232,7 @@ public class ProcessorController implements ActionListener {
 	 * Initializes the data and GUI. This method is called when the view is
 	 * initialized.
 	 */
-	private void init() {
+	void init() {
 		getModel().setUseOfDefaultCompletionRules(false);
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 
@@ -246,6 +249,11 @@ public class ProcessorController implements ActionListener {
 		getView().addExamples(this.exampleLoader.getExampleConfigurations());
 
 		executeActionResetCompletionRules();
+	}
+
+	void updatePreviousToLastUsedCompletionRules(String current) {
+		this.previousToLastUsedCompletionRules = this.lastUsedCompletionRules;
+		this.lastUsedCompletionRules = current;
 	}
 
 }
