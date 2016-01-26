@@ -10,6 +10,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 
+import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
 /**
@@ -20,21 +21,24 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
  */
 public class ProblogProcessor implements QueryProcessor {
 
-	static final String SLASH = "/";
+	static final String FILE_SEPARATOR = Symbol.FILE_SEPARATOR;
 	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI.create("https://bitbucket.org/problog/problog/get/master.zip");
 	static final String DEFAULT_PROBLOG_ZIP_FILE = "problog-2.1-SNAPSHOT.zip";
-	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = "/tmp";
+	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = FILE_SEPARATOR + "tmp";
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
-	static final String PROBLOG_OUTPUT_FILE = "/tmp/~tmp-output.pl.tmp";
+	static final String PROBLOG_OUTPUT_FILE = FILE_SEPARATOR + "tmp" + FILE_SEPARATOR + "~tmp-output.pl.tmp";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 	static final String SPACE = " ";
 	static final String LONG_TAB = "\t    : ";
 
-	static final String PROBLOG_EXEC_LINUX = "problog/bin/windows/dsharp.exe";
-	static final String PROBLOG_EXEC_DARWIN = "problog/bin/darwin/dsharp";
-	static final String PROBLOG_EXEC_WINDOWS = "problog/bin/linux/dsharp";
+	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
+			+ FILE_SEPARATOR + "dsharp.exe";
+	static final String PROBLOG_EXEC_DARWIN = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "darwin"
+			+ FILE_SEPARATOR + "dsharp";
+	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
+			+ FILE_SEPARATOR + "dsharp";
 
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
@@ -121,9 +125,9 @@ public class ProblogProcessor implements QueryProcessor {
 	void updatePermissions(long start, String problogDirectory) throws IOException {
 		Objects.requireNonNull(problogDirectory);
 		log("Update permissions.", start);
-		(new File(problogDirectory + SLASH + PROBLOG_EXEC_LINUX)).setExecutable(true);
-		(new File(problogDirectory + SLASH + PROBLOG_EXEC_DARWIN)).setExecutable(true);
-		(new File(problogDirectory + SLASH + PROBLOG_EXEC_WINDOWS)).setExecutable(true);
+		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_LINUX)).setExecutable(true);
+		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_DARWIN)).setExecutable(true);
+		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_WINDOWS)).setExecutable(true);
 	}
 
 	/**
@@ -143,7 +147,8 @@ public class ProblogProcessor implements QueryProcessor {
 	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
 		Objects.requireNonNull(problogDirectory);
 		log("Install ProbLog.", start);
-		String commandLine = PYTHON + SPACE + problogDirectory + SLASH + PROBLOG_CLI + SPACE + PROBLOG_INSTALL_COMMAND;
+		String commandLine = PYTHON + SPACE + problogDirectory + FILE_SEPARATOR + PROBLOG_CLI + SPACE
+				+ PROBLOG_INSTALL_COMMAND;
 		log(commandLine, start);
 		Runtime runtime = Runtime.getRuntime();
 		Process process = runtime.exec(commandLine);
@@ -173,7 +178,7 @@ public class ProblogProcessor implements QueryProcessor {
 	public void install(long start) throws IOException, URISyntaxException, InterruptedException {
 		downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
 		String directory = decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE, DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + SLASH + directory;
+		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
 		updatePermissions(start, problogDirectory);
 		installProblog(start, problogDirectory);
 	}
@@ -216,7 +221,7 @@ public class ProblogProcessor implements QueryProcessor {
 			try {
 				log("Execute ProbLog.", start);
 				Runtime runtime = Runtime.getRuntime();
-				String commandLine = PYTHON + SPACE + this.problogDirectory + SLASH + PROBLOG_CLI + SPACE
+				String commandLine = PYTHON + SPACE + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI + SPACE
 						+ (new File(PROBLOG_OUTPUT_FILE)).getAbsolutePath() + SPACE + PROBLOG_OUTPUT_OPTION + SPACE
 						+ (new File(outputFileName)).getAbsolutePath();
 				log(commandLine, start);
