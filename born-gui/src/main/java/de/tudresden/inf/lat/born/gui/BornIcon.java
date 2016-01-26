@@ -22,6 +22,7 @@ public class BornIcon {
 	public static final String PATH_SAVE_FILE = "icons/floppydisk.png";
 	public static final String PATH_RUN = "icons/play.png";
 	public static final String PATH_REFRESH = "icons/refresh.png";
+	public static final String PATH_BACK = "icons/back.png";
 
 	public static final int DEFAULT_ICON_SIZE = 24;
 
@@ -29,6 +30,7 @@ public class BornIcon {
 	public static final ImageIcon SAVE_FILE = createIcon(PATH_SAVE_FILE).get();
 	public static final ImageIcon RUN = createIcon(PATH_RUN).get();
 	public static final ImageIcon REFRESH = createIcon(PATH_REFRESH).get();
+	public static final ImageIcon BACK = createIcon(PATH_BACK).get();
 
 	/**
 	 * Returns an optional containing an icon with the given size if the path is

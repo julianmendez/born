@@ -183,7 +183,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonResetCompletionRules.setToolTipText(Message.tooltipButtonResetCompletionRules);
 		add(buttonResetCompletionRules);
 
-		buttonGoToPreviousCompletionRules.setIcon(BornIcon.REFRESH);
+		buttonGoToPreviousCompletionRules.setIcon(BornIcon.BACK);
 		buttonGoToPreviousCompletionRules.setBounds(213, 256, 54, 28);
 		buttonGoToPreviousCompletionRules.setToolTipText(Message.tooltipButtonGoToPreviousCompletionRules);
 		add(buttonGoToPreviousCompletionRules);
