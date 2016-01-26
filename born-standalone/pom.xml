@@ -178,7 +178,7 @@
 
 		<mainClass>de.tudresden.inf.lat.born.main.Main</mainClass>
 
-		<import.package>javax.accessibility, javax.swing, javax.swing.border, org.osgi.framework, org.protege.editor.core.ui.workspace, *</import.package>
+		<import.package>javax.accessibility,javax.swing,javax.swing.border,org.osgi.framework,org.protege.editor.core.ui.workspace,*</import.package>
 	</properties>
 
 	<build>
@@ -193,6 +193,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<Private-Package></Private-Package>
 						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>born</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>

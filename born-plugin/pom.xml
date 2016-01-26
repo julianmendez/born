@@ -81,6 +81,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<Private-Package></Private-Package>
 						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>BORN</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>
