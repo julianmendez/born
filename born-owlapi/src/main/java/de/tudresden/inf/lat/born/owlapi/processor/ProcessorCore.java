@@ -23,9 +23,9 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
  */
 public class ProcessorCore {
 
-	static final String SLASH = "/";
 	static final String PROBLOG_CLI = "problog-cli.py";
-	static final String PROBLOG_OUTPUT_FILE = "/tmp/~tmp-output.pl.tmp";
+	static final String PROBLOG_OUTPUT_FILE = Symbol.FILE_SEPARATOR + "tmp" + Symbol.FILE_SEPARATOR
+			+ "~tmp-output.pl.tmp";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 	static final String SPACE = " ";

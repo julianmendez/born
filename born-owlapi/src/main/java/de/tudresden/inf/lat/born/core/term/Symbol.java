@@ -36,4 +36,8 @@ public interface Symbol {
 
 	URI PROBABILITY_URI = URI.create("http://lat.inf.tu-dresden.de/systems/born#probability");
 
+	String FILE_SEPARATOR = System.getProperty("file.separator");
+
+	String LINE_SEPARATOR = System.getProperty("line.separator");
+
 }

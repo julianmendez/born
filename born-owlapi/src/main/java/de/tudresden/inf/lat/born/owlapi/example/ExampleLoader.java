@@ -21,6 +21,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.core.term.Symbol;
+
 /**
  * An object of this class loads all the examples provided in the distribution.
  * 
@@ -30,9 +32,6 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 public class ExampleLoader {
 
 	public static final String EXAMPLES_DIRECTORY = "examples/";
-
-	public static final char NEW_LINE_CHAR = '\n';
-	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
 	public static final String OWL_EXTENSION = ".owl";
 	public static final String NETWORK_EXTENSION = ".pl";
@@ -156,7 +155,7 @@ public class ExampleLoader {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
 			sbuf.append(line);
-			sbuf.append(NEW_LINE_CHAR);
+			sbuf.append(Symbol.LINE_SEPARATOR);
 		}
 		reader.close();
 		return sbuf.toString();
@@ -165,9 +164,9 @@ public class ExampleLoader {
 	String getFileName(String fileNameWithPath) {
 		Objects.requireNonNull(fileNameWithPath);
 		String ret = fileNameWithPath;
-		int lastIndex = fileNameWithPath.lastIndexOf(FILE_SEPARATOR);
+		int lastIndex = fileNameWithPath.lastIndexOf(Symbol.FILE_SEPARATOR);
 		if (lastIndex != -1) {
-			ret = fileNameWithPath.substring(lastIndex + FILE_SEPARATOR.length());
+			ret = fileNameWithPath.substring(lastIndex + Symbol.FILE_SEPARATOR.length());
 		}
 		return ret;
 	}

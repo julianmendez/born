@@ -20,6 +20,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
@@ -36,8 +37,8 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
 public class MultiProcessorCore {
 
 	public static final char TAB_CHAR = '\t';
-	public static final char NEW_LINE_CHAR = '\n';
-	public static final char SLASH_CHAR = '/';
+	public static final String LINE_SEPARATOR = Symbol.LINE_SEPARATOR;
+	public static final String FILE_SEPARATOR = Symbol.FILE_SEPARATOR;
 	public static final String TEMP_FILE_SUFFIX = ".tmp";
 	public static final String CSV_EXTENSION = ".csv";
 	public static final String LOG_EXTENSION = ".log";
@@ -154,11 +155,11 @@ public class MultiProcessorCore {
 		conf.getOntologyList().forEach(ontPair -> {
 			try {
 
-				String resultFileName = conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName()
+				String resultFileName = conf.getOutputDirectory() + FILE_SEPARATOR + ontPair.getOntologyName()
 						+ LOG_EXTENSION;
 				Writer output = new FileWriter(resultFileName, true);
 
-				String temporaryFileName = conf.getOutputDirectory() + SLASH_CHAR + ontPair.getOntologyName()
+				String temporaryFileName = conf.getOutputDirectory() + FILE_SEPARATOR + ontPair.getOntologyName()
 						+ TEMP_FILE_SUFFIX;
 				ProcessorConfiguration configuration = new ProcessorConfigurationImpl();
 				configuration.setOntology(ontPair.getOntology());
@@ -169,14 +170,14 @@ public class MultiProcessorCore {
 				List<SubsumptionQuery> queries = getQueries(ontPair.getOntology(), conf.getNumberOfQueries(), random);
 
 				StringBuffer sbuf = new StringBuffer();
-				sbuf.append(write(output, makeLine(FIRST_LINE_LIST) + NEW_LINE_CHAR));
+				sbuf.append(write(output, makeLine(FIRST_LINE_LIST) + LINE_SEPARATOR));
 
 				queries.forEach(query -> {
 					configuration.setQuery(query.asProblogString());
 					sbuf.append(write(output, makeLine(getConditions(ontPair, configuration, query))));
 					ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
 					core.run(configuration, start, executionResult);
-					sbuf.append(write(output, makeLine(getResult(executionResult)) + NEW_LINE_CHAR));
+					sbuf.append(write(output, makeLine(getResult(executionResult)) + LINE_SEPARATOR));
 				});
 				ret.add(sbuf.toString());
 				output.flush();
@@ -206,9 +207,9 @@ public class MultiProcessorCore {
 					if (fileName.endsWith(OWL_EXTENSION)) {
 						String ontologyName = fileName.substring(0, fileName.length() - OWL_EXTENSION.length());
 
-						File ontologyFile = new File(ontologyDirectory + SLASH_CHAR + ontologyName + OWL_EXTENSION);
+						File ontologyFile = new File(ontologyDirectory + FILE_SEPARATOR + ontologyName + OWL_EXTENSION);
 						File bayesianNetworkFile = new File(
-								bayesianNetworkDirectory + SLASH_CHAR + ontologyName + PL_EXTENSION);
+								bayesianNetworkDirectory + FILE_SEPARATOR + ontologyName + PL_EXTENSION);
 
 						OWLOntology owlOntology = ProcessorConfigurationImpl
 								.readOntology(new FileInputStream(ontologyFile));
@@ -239,7 +240,7 @@ public class MultiProcessorCore {
 		String outputDirectory = conf.getOutputDirectory();
 		for (OntologyAndNetwork ontNet : ontologyList) {
 			String result = resultIt.next();
-			String fileName = outputDirectory + SLASH_CHAR + ontNet.getOntologyName() + CSV_EXTENSION;
+			String fileName = outputDirectory + FILE_SEPARATOR + ontNet.getOntologyName() + CSV_EXTENSION;
 			FileWriter fileWriter = new FileWriter(fileName, true);
 			fileWriter.write(result);
 			fileWriter.flush();
