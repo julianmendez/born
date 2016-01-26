@@ -1,7 +1,6 @@
 package de.tudresden.inf.lat.born.protege;
 
 import java.awt.BorderLayout;
-import java.util.Objects;
 
 import org.protege.editor.owl.ui.view.cls.AbstractOWLClassViewComponent;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -36,7 +35,6 @@ public class Main extends AbstractOWLClassViewComponent {
 
 	@Override
 	protected OWLClass updateView(OWLClass selectedClass) {
-		Objects.requireNonNull(selectedClass);
 		return selectedClass;
 	}
 
