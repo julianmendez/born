@@ -14,7 +14,6 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 
 /**
  * 
@@ -130,7 +129,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof AnnotatorConfiguration)) {
+		} else if (!(obj instanceof ProcessorConfiguration)) {
 			return false;
 		} else {
 			ProcessorConfiguration other = (ProcessorConfiguration) obj;
