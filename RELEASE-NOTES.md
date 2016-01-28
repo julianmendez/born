@@ -11,6 +11,7 @@
 
 ### v0.3.0
 *(unreleased)*
+* uses a faster implementation of module extraction
 * uses jcel 0.23.2
 * uses the OWL API 4.1.3
 * runs on Java 8
