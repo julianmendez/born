@@ -149,7 +149,7 @@ public class ProblogInputCreator {
 		}
 	}
 
-	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
+	public Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
 		Objects.requireNonNull(factory);
 		Objects.requireNonNull(symbolStrSet);
 		Map<String, Integer> map = new TreeMap<>();
