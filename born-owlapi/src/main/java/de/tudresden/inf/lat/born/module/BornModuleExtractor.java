@@ -37,7 +37,7 @@ import de.tudresden.inf.lat.jcel.ontology.normalization.OntologyNormalizer;
 import de.tudresden.inf.lat.jcel.owlapi.translator.Translator;
 
 /**
- * Module extractor
+ * This is an executable class to extract a module.
  * 
  * @author Julian Mendez
  *
