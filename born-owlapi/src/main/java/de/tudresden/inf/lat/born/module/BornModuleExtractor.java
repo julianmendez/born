@@ -10,14 +10,23 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnull;
+
 import org.semanticweb.owlapi.functional.renderer.OWLFunctionalSyntaxRenderer;
 import org.semanticweb.owlapi.io.OWLRenderer;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLException;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogInputCreator;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
+import de.tudresden.inf.lat.jcel.coreontology.axiom.Annotation;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.FunctObjectPropAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI0Axiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI1Axiom;
@@ -47,70 +56,92 @@ public class BornModuleExtractor {
 	class AxiomTranslatorToOwl implements NormalizedIntegerAxiomVisitor<OWLAxiom> {
 
 		private Translator translator;
+		private OWLOntology ontology;
 
-		public AxiomTranslatorToOwl(Translator translator) {
+		public AxiomTranslatorToOwl(@Nonnull Translator translator, @Nonnull OWLOntology ontology) {
 			Objects.requireNonNull(translator);
+			Objects.requireNonNull(ontology);
 			this.translator = translator;
+			this.ontology = ontology;
 		}
 
 		@Override
-		public OWLAxiom visit(FunctObjectPropAxiom arg0) {
+		public OWLAxiom visit(FunctObjectPropAxiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(GCI0Axiom arg0) {
+		public OWLAxiom visit(GCI0Axiom axiom) {
+			OWLClass owlSubClass = translator.getTranslationRepository().getOWLClass(axiom.getSubClass());
+			OWLClass owlSuperClass = translator.getTranslationRepository().getOWLClass(axiom.getSuperClass());
+			Set<OWLAnnotation> owlAnnotations = translateAnnotations(axiom.getAnnotations());
+			OWLDataFactory dataFactory = ontology.getOWLOntologyManager().getOWLDataFactory();
+			return dataFactory.getOWLSubClassOfAxiom(owlSubClass, owlSuperClass, owlAnnotations);
+		}
+
+		@Override
+		public OWLAxiom visit(GCI1Axiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(GCI1Axiom arg0) {
+		public OWLAxiom visit(GCI2Axiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(GCI2Axiom arg0) {
+		public OWLAxiom visit(GCI3Axiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(GCI3Axiom arg0) {
+		public OWLAxiom visit(NominalAxiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(NominalAxiom arg0) {
+		public OWLAxiom visit(RangeAxiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(RangeAxiom arg0) {
+		public OWLAxiom visit(RI1Axiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(RI1Axiom arg0) {
+		public OWLAxiom visit(RI2Axiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public OWLAxiom visit(RI2Axiom arg0) {
+		public OWLAxiom visit(RI3Axiom axiom) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
-		public OWLAxiom visit(RI3Axiom arg0) {
-			// TODO Auto-generated method stub
-			return null;
+		OWLAnnotation translateAnnotation(Annotation annotation) {
+			OWLDataFactory factory = ontology.getOWLOntologyManager().getOWLDataFactory();
+			OWLAnnotationProperty owlAnnotationProperty = factory
+					.getOWLAnnotationProperty(IRI.create(annotation.getAnnotationProperty()));
+			OWLAnnotationValue owlAnnotationValue = factory
+					.getOWLLiteral(annotation.getAnnotationProperty().toString());
+			OWLAnnotation owlAnnotation = factory.getOWLAnnotation(owlAnnotationProperty, owlAnnotationValue);
+			return owlAnnotation;
+		}
+
+		Set<OWLAnnotation> translateAnnotations(Set<Annotation> annotations) {
+			Set<OWLAnnotation> owlAnnotations = new HashSet<>();
+			annotations.forEach(annotation -> owlAnnotations.add(translateAnnotation(annotation)));
+			return owlAnnotations;
 		}
 
 	}
@@ -148,7 +179,7 @@ public class BornModuleExtractor {
 		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
 
 		Set<OWLAxiom> newAxioms = new HashSet<OWLAxiom>();
-		AxiomTranslatorToOwl translatorToOwl = new AxiomTranslatorToOwl(translator);
+		AxiomTranslatorToOwl translatorToOwl = new AxiomTranslatorToOwl(translator, owlOntology);
 		module.forEach(axiom -> newAxioms.add(axiom.accept(translatorToOwl)));
 
 		OWLOntology newOwlOntology = owlOntology.getOWLOntologyManager().createOntology(newAxioms);
