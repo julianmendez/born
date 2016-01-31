@@ -152,7 +152,7 @@ public class BornModuleExtractor {
 	Set<String> readClasses(String fileName) throws IOException {
 		Set<String> ret = new TreeSet<String>();
 		BufferedReader reader = new BufferedReader(new FileReader(fileName));
-		for (String line = reader.readLine(); line != null; reader.readLine()) {
+		for (String line = reader.readLine(); Objects.nonNull(line); reader.readLine()) {
 			ret.add(reader.readLine().trim());
 		}
 		reader.close();

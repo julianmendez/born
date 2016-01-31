@@ -64,7 +64,7 @@ public class DefaultModuleExtractor {
 		Set<DefaultIdentifierCollector> ret = new HashSet<>();
 		classesToVisit.forEach(classId -> {
 			Set<DefaultIdentifierCollector> newAxioms = map.get(classId);
-			if (newAxioms != null) {
+			if (Objects.nonNull(newAxioms)) {
 				ret.addAll(newAxioms);
 			}
 		});
