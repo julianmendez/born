@@ -229,7 +229,8 @@ public class BornModuleExtractor {
 		Set<String> ret = new TreeSet<>();
 		BufferedReader reader = new BufferedReader(new FileReader(fileName));
 		for (String line = reader.readLine(); Objects.nonNull(line); reader.readLine()) {
-			ret.add(reader.readLine().trim());
+			ret.add(line.trim());
+			line = reader.readLine();
 		}
 		reader.close();
 		return ret;
@@ -283,7 +284,7 @@ public class BornModuleExtractor {
 		}
 	}
 
-	public static void args(String[] args) throws IOException, OWLException {
+	public static void main(String[] args) throws IOException, OWLException {
 		(new BornModuleExtractor()).run(args);
 	}
 
