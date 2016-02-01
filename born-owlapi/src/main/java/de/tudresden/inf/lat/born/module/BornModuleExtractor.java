@@ -9,12 +9,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.functional.renderer.OWLFunctionalSyntaxRenderer;
 import org.semanticweb.owlapi.io.OWLRenderer;
 import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLException;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogInputCreator;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
@@ -62,18 +66,29 @@ public class BornModuleExtractor {
 		Translator translator = new Translator(owlOntology.getOWLOntologyManager().getOWLDataFactory(), factory);
 		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology.getAxioms());
 
-		OntologyNormalizer normalizer = new OntologyNormalizer();
-		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
-
-		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
+		Set<NormalizedIntegerAxiom> normalizedAxioms = (new OntologyNormalizer()).normalize(axioms, factory);
 
 		ProblogInputCreator creator = new ProblogInputCreator();
 		Set<Integer> setOfClasses = creator.getSetOfClasses(factory, relevantSymbols);
-		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
 
-		Set<OWLAxiom> newAxioms = new HashSet<>();
-		ReverseAxiomTranslator translatorToOwl = new ReverseAxiomTranslator(translator, owlOntology);
-		module.forEach(axiom -> newAxioms.add(axiom.accept(translatorToOwl)));
+		Set<Integer> classesInSignature = new HashSet<>();
+		(new DefaultModuleExtractor()).extractModule(normalizedAxioms, setOfClasses)
+				.forEach(axiom -> classesInSignature.addAll(axiom.getClassesInSignature()));
+
+		Set<OWLClass> moduleOwlClasses = classesInSignature.stream()
+				.filter(cls -> !translator.getOntologyObjectFactory().getEntityManager().isAuxiliary(cls))
+				.map(intClass -> translator.getTranslationRepository().getOWLClass(intClass))
+				.collect(Collectors.toSet());
+
+		Set<OWLAxiom> newAxioms = owlOntology.getAxioms().stream().filter(axiom -> //
+
+		((axiom instanceof OWLSubClassOfAxiom) && ((OWLSubClassOfAxiom) axiom).getSubClass().getClassesInSignature()
+				.stream().anyMatch(owlClass -> moduleOwlClasses.contains(owlClass))) //
+
+				|| ((axiom instanceof OWLEquivalentClassesAxiom) && ((OWLEquivalentClassesAxiom) axiom)
+						.getClassesInSignature().stream().anyMatch(owlClass -> moduleOwlClasses.contains(owlClass))) //
+
+		).collect(Collectors.toSet());
 
 		OWLOntology newOwlOntology = owlOntology.getOWLOntologyManager().createOntology(newAxioms);
 
