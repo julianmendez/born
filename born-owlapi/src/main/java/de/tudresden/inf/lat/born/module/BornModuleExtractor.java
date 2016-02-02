@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.semanticweb.owlapi.functional.renderer.OWLFunctionalSyntaxRenderer;
 import org.semanticweb.owlapi.io.OWLRenderer;
@@ -45,9 +46,9 @@ import de.tudresden.inf.lat.jcel.owlapi.translator.Translator;
 public class BornModuleExtractor {
 
 	public static final String HELP = "Parameters: \n" + //
-			"  <ontology file> <signature file> <module file> : extract a module from <ontology file> using signature in <signature file> and store it in <module file>\n"
+			"  <ontology file> <signature file> <module file> : extract a module from <ontology file> using signature in <signature file> and store it in <module file> (<signature file> cannot be a valid number)\n"
 			+ //
-			"  <ontology file> <count file> : choose a random class from <ontology file> and append a line that contains the class and its module size to <count file>\n"
+			"  <ontology file> <repetitions> <count file> : choose <repetitions> random classes from <ontology file> and append to <count file> a line for each class that contains the class and its module size\n"
 			+ //
 			"";
 
@@ -56,7 +57,8 @@ public class BornModuleExtractor {
 	public BornModuleExtractor() {
 	}
 
-	public void countRandom(String ontologyFileName, String countFile) throws IOException, OWLException {
+	public void countRandom(String ontologyFileName, int repetitions, String countFile)
+			throws IOException, OWLException {
 		Objects.requireNonNull(ontologyFileName);
 
 		OWLOntology owlOntology = ProcessorConfigurationImpl.readOntology(new FileInputStream(ontologyFileName));
@@ -64,10 +66,15 @@ public class BornModuleExtractor {
 		List<OWLClass> list = new ArrayList<>();
 		list.addAll(owlOntology.getClassesInSignature());
 
-		OWLClass chosenOwlClass = list.get((new Random()).nextInt(list.size()));
-		Set<OWLClass> signature = Collections.singleton(chosenOwlClass);
-
-		appendPair(countFile, chosenOwlClass, extractModule(owlOntology, signature).getAxiomCount());
+		IntStream.range(0, repetitions).forEach(index -> {
+			OWLClass chosenOwlClass = list.get((new Random()).nextInt(list.size()));
+			Set<OWLClass> signature = Collections.singleton(chosenOwlClass);
+			try {
+				appendPair(countFile, chosenOwlClass, extractModule(owlOntology, signature).getAxiomCount());
+			} catch (IOException | OWLOntologyCreationException e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	public void extractModule(String ontologyFileName, String signatureFileName, String moduleFileName)
@@ -120,31 +127,6 @@ public class BornModuleExtractor {
 		return owlOntology.getOWLOntologyManager().createOntology(newAxioms);
 	}
 
-	public void run(String[] args) throws IOException, OWLException {
-	}
-
-	public static void main(String[] args) throws IOException, OWLException {
-		Objects.requireNonNull(args);
-		if (args.length == 2) {
-			String ontologyFileName = args[0];
-			String countFileName = args[1];
-			BornModuleExtractor instance = new BornModuleExtractor();
-			instance.countRandom(ontologyFileName, countFileName);
-
-		} else if (args.length == 3) {
-			String ontologyFileName = args[0];
-			String signatureFileName = args[1];
-			String moduleFileName = args[2];
-			BornModuleExtractor instance = new BornModuleExtractor();
-			instance.extractModule(ontologyFileName, signatureFileName, moduleFileName);
-
-		} else {
-			System.out.println(HELP);
-
-		}
-
-	}
-
 	Set<String> readClasses(String fileName) throws IOException {
 		Objects.requireNonNull(fileName);
 		Set<String> ret = new TreeSet<>();
@@ -177,6 +159,33 @@ public class BornModuleExtractor {
 		output.newLine();
 		output.flush();
 		output.close();
+	}
+
+	public static void main(String[] args) throws IOException, OWLException {
+		Objects.requireNonNull(args);
+		if (args.length == 3) {
+			boolean storingModuleMode = false;
+			int repetitions = 1;
+			try {
+				repetitions = Integer.parseInt(args[1]);
+			} catch (NumberFormatException e) {
+				storingModuleMode = true;
+			}
+			String ontologyFileName = args[0];
+			String outputFileName = args[2];
+			BornModuleExtractor instance = new BornModuleExtractor();
+
+			if (storingModuleMode) {
+				String signatureFileName = args[1];
+				instance.extractModule(ontologyFileName, signatureFileName, outputFileName);
+			} else {
+				instance.countRandom(ontologyFileName, repetitions, outputFileName);
+			}
+
+		} else {
+			System.out.println(HELP);
+
+		}
 	}
 
 }
