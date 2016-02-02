@@ -81,13 +81,10 @@ public class BornModuleExtractor {
 				.collect(Collectors.toSet());
 
 		Set<OWLAxiom> newAxioms = owlOntology.getAxioms().stream().filter(axiom -> //
-
-		((axiom instanceof OWLSubClassOfAxiom) && ((OWLSubClassOfAxiom) axiom).getSubClass().getClassesInSignature()
+		(((axiom instanceof OWLSubClassOfAxiom) && ((OWLSubClassOfAxiom) axiom).getSubClass().getClassesInSignature()
 				.stream().anyMatch(owlClass -> moduleOwlClasses.contains(owlClass))) //
-
 				|| ((axiom instanceof OWLEquivalentClassesAxiom) && ((OWLEquivalentClassesAxiom) axiom)
-						.getClassesInSignature().stream().anyMatch(owlClass -> moduleOwlClasses.contains(owlClass))) //
-
+						.getClassesInSignature().stream().anyMatch(owlClass -> moduleOwlClasses.contains(owlClass)))) //
 		).collect(Collectors.toSet());
 
 		OWLOntology newOwlOntology = owlOntology.getOWLOntologyManager().createOntology(newAxioms);
