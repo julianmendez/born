@@ -190,7 +190,7 @@ public class ReverseAxiomTranslator implements NormalizedIntegerAxiomVisitor<OWL
 		return dataFactory.getOWLSubPropertyChainOfAxiom(owlPropertyList, owlSuperProperty, owlAnnotations);
 	}
 
-	OWLAnnotation translateAnnotation(Annotation annotation) {
+	OWLAnnotation translateAnnotation(@Nonnull Annotation annotation) {
 		Objects.requireNonNull(annotation);
 		OWLDataFactory factory = ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLAnnotationProperty owlAnnotationProperty = factory
@@ -200,7 +200,7 @@ public class ReverseAxiomTranslator implements NormalizedIntegerAxiomVisitor<OWL
 		return owlAnnotation;
 	}
 
-	Set<OWLAnnotation> translateAnnotations(Set<Annotation> annotations) {
+	Set<OWLAnnotation> translateAnnotations(@Nonnull Set<Annotation> annotations) {
 		Objects.requireNonNull(annotations);
 		Set<OWLAnnotation> owlAnnotations = new HashSet<>();
 		annotations.forEach(annotation -> owlAnnotations.add(translateAnnotation(annotation)));
