@@ -7,12 +7,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.semanticweb.owlapi.functional.renderer.OWLFunctionalSyntaxRenderer;
 import org.semanticweb.owlapi.io.OWLRenderer;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLException;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
@@ -24,6 +25,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 public class OntologyFilter {
 
 	public static final String HELP = "Parameters: <input ontology> <output ontology>";
+	public static final String NEW_ONTOLOGY_SUFFIX = "-filtered";
 
 	public OWLOntology readOntology(String ontologyFileName) throws OWLOntologyCreationException, IOException {
 		Objects.requireNonNull(ontologyFileName);
@@ -36,24 +38,28 @@ public class OntologyFilter {
 		Set<OWLAxiom> newAxioms = owlOntology.getAxioms().stream() //
 				.filter(axiom -> filter.accept(axiom)) //
 				.collect(Collectors.toSet());
-		return owlOntology.getOWLOntologyManager().createOntology(newAxioms);
+		IRI oldOntologyIri = owlOntology.getOntologyID().getOntologyIRI().get();
+		IRI newOntologyIri = IRI.create(oldOntologyIri.toURI().toASCIIString() + NEW_ONTOLOGY_SUFFIX);
+		return owlOntology.getOWLOntologyManager().createOntology(newAxioms, newOntologyIri);
 	}
 
-	public void storeOntology(OWLOntology owlOntology, String fileName) throws IOException, OWLException {
+	public void storeOntology(OWLOntology owlOntology, String fileName, OWLRenderer renderer)
+			throws IOException, OWLException {
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(fileName);
-		OWLRenderer renderer = new OWLFunctionalSyntaxRenderer();
+		Objects.requireNonNull(renderer);
 		FileOutputStream output = new FileOutputStream(fileName);
 		renderer.render(owlOntology, output);
 		output.flush();
 		output.close();
 	}
 
-	public void filter(String ontologyFileName, String filteredOntologyFileName, OwlAxiomFilter filter)
-			throws IOException, OWLException {
+	public void filter(String ontologyFileName, String filteredOntologyFileName, OwlAxiomFilter filter,
+			OWLRenderer renderer) throws IOException, OWLException {
 		Objects.requireNonNull(ontologyFileName);
 		Objects.requireNonNull(filteredOntologyFileName);
-		storeOntology(filterOntology(readOntology(ontologyFileName), filter), filteredOntologyFileName);
+		Objects.requireNonNull(renderer);
+		storeOntology(filterOntology(readOntology(ontologyFileName), filter), filteredOntologyFileName, renderer);
 	}
 
 	public static void main(String[] args) throws IOException, OWLException {
@@ -62,7 +68,7 @@ public class OntologyFilter {
 			String ontologyFileName = args[0];
 			String outputFileName = args[1];
 			OntologyFilter instance = new OntologyFilter();
-			instance.filter(ontologyFileName, outputFileName, new ElAxiomFilter());
+			instance.filter(ontologyFileName, outputFileName, new ElAxiomFilter(), new OWLXMLRenderer());
 
 		} else {
 			System.out.println(HELP);
