@@ -73,6 +73,8 @@ import org.semanticweb.owlapi.model.SWRLRule;
  */
 public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter {
 
+	public final boolean withAnnotations;
+
 	class ElPropertyExpressionFilter implements OWLPropertyExpressionVisitorEx<Boolean> {
 
 		public ElPropertyExpressionFilter() {
@@ -199,26 +201,31 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 	}
 
 	public ElAxiomFilter() {
+		this.withAnnotations = true;
+	}
+
+	public ElAxiomFilter(boolean withAnnotations) {
+		this.withAnnotations = withAnnotations;
 	}
 
 	@Override
 	public Boolean visit(OWLAnnotationAssertionAxiom axiom) {
-		return false;
+		return this.withAnnotations;
 	}
 
 	@Override
 	public Boolean visit(OWLSubAnnotationPropertyOfAxiom axiom) {
-		return false;
+		return this.withAnnotations;
 	}
 
 	@Override
 	public Boolean visit(OWLAnnotationPropertyDomainAxiom axiom) {
-		return false;
+		return this.withAnnotations;
 	}
 
 	@Override
 	public Boolean visit(OWLAnnotationPropertyRangeAxiom axiom) {
-		return false;
+		return this.withAnnotations;
 	}
 
 	@Override
