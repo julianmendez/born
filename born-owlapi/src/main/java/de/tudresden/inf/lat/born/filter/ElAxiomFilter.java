@@ -223,8 +223,8 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 
 	@Override
 	public Boolean visit(OWLSubClassOfAxiom axiom) {
-
-		return false;
+		ElClassExpressionFilter filter = new ElClassExpressionFilter();
+		return axiom.getSubClass().accept(filter) && axiom.getSuperClass().accept(filter);
 	}
 
 	@Override
@@ -334,7 +334,8 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 
 	@Override
 	public Boolean visit(OWLEquivalentClassesAxiom axiom) {
-		return false;
+		ElClassExpressionFilter filter = new ElClassExpressionFilter();
+		return axiom.getClassExpressions().stream().allMatch(classExpression -> classExpression.accept(filter));
 	}
 
 	@Override
@@ -389,7 +390,7 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 
 	@Override
 	public Boolean visit(OWLDeclarationAxiom axiom) {
-		return false;
+		return axiom.getEntity().isOWLClass() || axiom.getEntity().isOWLObjectProperty();
 	}
 
 	@Override
