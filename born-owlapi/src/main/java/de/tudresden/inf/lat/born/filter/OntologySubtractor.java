@@ -18,6 +18,8 @@ import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
+ * An object of this class is a tool to get the result of subtracting one
+ * ontology from another one.
  * 
  * @author Julian Mendez
  *

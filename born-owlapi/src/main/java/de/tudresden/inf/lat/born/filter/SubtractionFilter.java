@@ -6,6 +6,8 @@ import java.util.Set;
 import org.semanticweb.owlapi.model.OWLAxiom;
 
 /**
+ * An object of this class is an axiom filter that determines whether a given
+ * axiom belongs to predefined set.
  * 
  * @author Julian Mendez
  *

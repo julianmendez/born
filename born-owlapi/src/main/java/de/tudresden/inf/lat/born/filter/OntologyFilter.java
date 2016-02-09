@@ -18,6 +18,8 @@ import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
+ * An object of this class is a tool to filter the EL subset of axioms of a
+ * given ontology.
  * 
  * @author Julian Mendez
  *

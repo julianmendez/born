@@ -67,6 +67,8 @@ import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.SWRLRule;
 
 /**
+ * An object of this class is an axiom filter that determines whether an axiom
+ * uses only EL constructs.
  * 
  * @author Julian Mendez
  *

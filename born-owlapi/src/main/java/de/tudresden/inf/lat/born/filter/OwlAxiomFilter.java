@@ -3,6 +3,8 @@ package de.tudresden.inf.lat.born.filter;
 import org.semanticweb.owlapi.model.OWLAxiom;
 
 /**
+ * This models an OWL axiom filter. Every class implementing this interface has
+ * a criterion to determine whether a given OWL axiom is accepted.
  * 
  * @author Julian Mendez
  *
