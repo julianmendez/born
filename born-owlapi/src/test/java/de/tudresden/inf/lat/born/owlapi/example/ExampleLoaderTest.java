@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * This is a unit test for {@link ExampleLoader}.
  * 
  * @author Julian Mendez
  *
