@@ -17,6 +17,7 @@ public class SubtractionFilter implements OwlAxiomFilter {
 	private Set<OWLAxiom> setOfAxioms;
 
 	public SubtractionFilter(Set<OWLAxiom> setOfAxioms) {
+		Objects.requireNonNull(setOfAxioms);
 		this.setOfAxioms = setOfAxioms;
 	}
 

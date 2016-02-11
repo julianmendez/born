@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.filter;
 
+import java.util.Objects;
+
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAnnotationPropertyDomainAxiom;
@@ -409,6 +411,7 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 
 	@Override
 	public boolean accept(OWLAxiom axiom) {
+		Objects.requireNonNull(axiom);
 		return axiom.accept(this);
 	}
 
