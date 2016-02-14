@@ -63,7 +63,7 @@ public class Decompressor {
 			outputDirectory.mkdirs();
 		}
 		ZipInputStream input = new ZipInputStream(new FileInputStream(compressedFile));
-		for (ZipEntry entry = input.getNextEntry(); !Objects.isNull(entry); entry = input.getNextEntry()) {
+		for (ZipEntry entry = input.getNextEntry(); Objects.nonNull(entry); entry = input.getNextEntry()) {
 			if (Objects.isNull(ret)) {
 				ret = entry;
 			}
