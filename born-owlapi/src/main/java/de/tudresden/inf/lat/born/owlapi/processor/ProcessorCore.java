@@ -54,7 +54,7 @@ public class ProcessorCore {
 		Objects.requireNonNull(sbuf);
 		Objects.requireNonNull(input);
 		BufferedReader reader = new BufferedReader(input);
-		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
+		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
 			sbuf.append(line);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		}

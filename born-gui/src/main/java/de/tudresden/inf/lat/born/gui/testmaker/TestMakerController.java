@@ -77,7 +77,7 @@ public class TestMakerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (!Objects.isNull(file)) {
+		if (Objects.nonNull(file)) {
 			getView().setInputOntologyFile(file.getAbsolutePath());
 			getView().updateOntologyFile();
 		}
@@ -100,7 +100,7 @@ public class TestMakerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (!Objects.isNull(file)) {
+		if (Objects.nonNull(file)) {
 			try {
 				annotateOntology(new FileOutputStream(file));
 			} catch (IOException e) {
@@ -139,7 +139,7 @@ public class TestMakerController implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
 		}
-		if (!Objects.isNull(file)) {
+		if (Objects.nonNull(file)) {
 			try {
 				createBayesianNetwork(new FileOutputStream(file));
 			} catch (IOException e) {

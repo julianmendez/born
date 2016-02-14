@@ -229,7 +229,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	@Override
 	public void updateInputOntologyDirectory() {
 		String inputOntologyDirectory = getInputOntologyDirectory();
-		if (!Objects.isNull(inputOntologyDirectory) && !inputOntologyDirectory.trim().isEmpty()) {
+		if (Objects.nonNull(inputOntologyDirectory) && !inputOntologyDirectory.trim().isEmpty()) {
 			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
 					getBayesianNetworkDirectory()));
 		}
@@ -238,7 +238,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	@Override
 	public void updateBayesianNetworkDirectory() {
 		String bayesianNetworkDirectory = getBayesianNetworkDirectory();
-		if (!Objects.isNull(bayesianNetworkDirectory) && !bayesianNetworkDirectory.trim().isEmpty()) {
+		if (Objects.nonNull(bayesianNetworkDirectory) && !bayesianNetworkDirectory.trim().isEmpty()) {
 			getModel().setOntologyList(MultiProcessorCore.getOntologyAndNetworkList(getInputOntologyDirectory(),
 					getBayesianNetworkDirectory()));
 		}
@@ -247,7 +247,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	@Override
 	public void updateOutputDirectory() {
 		String outputDirectory = getOutputDirectory();
-		if (!Objects.isNull(outputDirectory) && !outputDirectory.trim().isEmpty()) {
+		if (Objects.nonNull(outputDirectory) && !outputDirectory.trim().isEmpty()) {
 			getModel().setOutputDirectory(outputDirectory);
 		}
 	}

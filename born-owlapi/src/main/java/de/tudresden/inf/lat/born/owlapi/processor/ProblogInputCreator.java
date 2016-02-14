@@ -159,7 +159,7 @@ public class ProblogInputCreator {
 		Set<Integer> ret = new TreeSet<>();
 		symbolStrSet.forEach(symbolStr -> {
 			Integer id = getId(map, symbolStr);
-			if (!Objects.isNull(id)) {
+			if (Objects.nonNull(id)) {
 				ret.add(id);
 			}
 

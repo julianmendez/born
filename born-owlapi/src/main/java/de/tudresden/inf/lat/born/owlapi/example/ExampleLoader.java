@@ -106,7 +106,7 @@ public class ExampleLoader {
 		Objects.requireNonNull(path);
 		List<String> ret = new ArrayList<>();
 		URL url = getClass().getClassLoader().getResource(path);
-		if (!Objects.isNull(url)) {
+		if (Objects.nonNull(url)) {
 			File f = new File(url.getPath());
 			List<File> files = Arrays.asList(f.listFiles());
 			files.forEach(elem -> ret.add(elem.getAbsolutePath()));
@@ -153,7 +153,7 @@ public class ExampleLoader {
 		Objects.requireNonNull(input);
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-		for (String line = reader.readLine(); !Objects.isNull(line); line = reader.readLine()) {
+		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
 			sbuf.append(line);
 			sbuf.append(Symbol.LINE_SEPARATOR);
 		}
@@ -185,7 +185,7 @@ public class ExampleLoader {
 
 	public boolean isInJar() {
 		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-		return !Objects.isNull(jarFile) && (jarFile.isFile());
+		return Objects.nonNull(jarFile) && (jarFile.isFile());
 	}
 
 	/**

@@ -311,7 +311,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void readConsoleInput(String consoleInputFile) {
 		Objects.requireNonNull(consoleInputFile);
-		if (!Objects.isNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
+		if (Objects.nonNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
 			try {
 				String text = ProcessorConfigurationImpl.read(new FileReader(consoleInputFile));
 				this.textConsoleInput.setText(text);
@@ -325,7 +325,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void writeConsoleOutput(String consoleOutputFile) {
 		Objects.requireNonNull(consoleOutputFile);
-		if (!Objects.isNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
+		if (Objects.nonNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = this.textConsoleOutput.getText();
 				ProcessorConfigurationImpl.write(new StringReader(text), new FileWriter(consoleOutputFile));
@@ -374,7 +374,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void updateCompletionRules() {
 		String completionRules = textCompletionRules.getText();
-		if (!Objects.isNull(completionRules) && !completionRules.trim().isEmpty()) {
+		if (Objects.nonNull(completionRules) && !completionRules.trim().isEmpty()) {
 			getModel().setAdditionalCompletionRules(completionRules);
 		}
 	}
@@ -382,7 +382,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void updateOntologyFile() {
 		String inputOntologyFile = getOntologyFile();
-		if (!Objects.isNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
+		if (Objects.nonNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
 				getModel().setOntology(ProcessorConfigurationImpl.readOntology(new FileInputStream(inputOntologyFile)));
 			} catch (IOException e) {
@@ -396,7 +396,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void updateBayesianNetworkFile() {
 		String bayesianNetworkFile = getBayesianNetworkFile();
-		if (!Objects.isNull(bayesianNetworkFile) && !bayesianNetworkFile.trim().isEmpty()) {
+		if (Objects.nonNull(bayesianNetworkFile) && !bayesianNetworkFile.trim().isEmpty()) {
 			try {
 				getModel().setBayesianNetwork(ProcessorConfigurationImpl.read(new FileReader(bayesianNetworkFile)));
 			} catch (IOException e) {
@@ -408,7 +408,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void updateQuery() {
 		String query = textConsoleInput.getText();
-		if (!Objects.isNull(query) && !query.trim().isEmpty()) {
+		if (Objects.nonNull(query) && !query.trim().isEmpty()) {
 			getModel().setQuery(query);
 		}
 	}

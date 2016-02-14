@@ -19,7 +19,7 @@ public class TokenCreator {
 	List<Token> createTokens(String str, int lineNumber) {
 		Objects.requireNonNull(str);
 		List<Token> ret = new ArrayList<>();
-		if (!Objects.isNull(str) && !str.isEmpty()) {
+		if (Objects.nonNull(str) && !str.isEmpty()) {
 			Mode mode = Mode.CODE;
 			StringBuffer token = new StringBuffer();
 			int i = 0;
@@ -89,9 +89,9 @@ public class TokenCreator {
 		BufferedReader in = new BufferedReader(reader);
 		int lineNumber = 0;
 		String line = "";
-		while (!Objects.isNull(line)) {
+		while (Objects.nonNull(line)) {
 			line = in.readLine();
-			if (!Objects.isNull(line)) {
+			if (Objects.nonNull(line)) {
 				lineNumber += 1;
 				ret.addAll(removeBlanksAndComments(createTokens(line, lineNumber)));
 			}

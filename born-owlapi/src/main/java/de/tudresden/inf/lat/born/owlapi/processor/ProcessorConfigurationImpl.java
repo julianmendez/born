@@ -175,7 +175,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 		Objects.requireNonNull(reader);
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader input = new BufferedReader(reader);
-		for (String line = input.readLine(); !Objects.isNull(line); line = input.readLine()) {
+		for (String line = input.readLine(); Objects.nonNull(line); line = input.readLine()) {
 			sbuf.append(line);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		}
@@ -197,7 +197,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 		Objects.requireNonNull(writer);
 		BufferedWriter output = new BufferedWriter(writer);
 		BufferedReader input = new BufferedReader(reader);
-		for (String line = input.readLine(); !Objects.isNull(line); line = input.readLine()) {
+		for (String line = input.readLine(); Objects.nonNull(line); line = input.readLine()) {
 			output.write(line);
 			output.newLine();
 		}

@@ -540,7 +540,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 			throws ReasonerInterruptedException, TimeOutException, InconsistentOntologyException {
 		Objects.requireNonNull(inferenceTypes);
 		logger.finer("precomputeInferences(" + inferenceTypes + ")");
-		if (!Objects.isNull(this.reasonerConfiguration)) {
+		if (Objects.nonNull(this.reasonerConfiguration)) {
 			this.reasonerConfiguration.getProgressMonitor().reasonerTaskStarted(ReasonerProgressMonitor.CLASSIFYING);
 			this.reasonerConfiguration.getProgressMonitor().reasonerTaskBusy();
 		}
@@ -550,7 +550,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 		resetReasoner();
 		logger.finer("BORN prepared the ontology in " + ((new Date()).getTime() - start.getTime()) + "ms");
 
-		if (!Objects.isNull(this.reasonerConfiguration)) {
+		if (Objects.nonNull(this.reasonerConfiguration)) {
 			this.reasonerConfiguration.getProgressMonitor().reasonerTaskStopped();
 		}
 	}
