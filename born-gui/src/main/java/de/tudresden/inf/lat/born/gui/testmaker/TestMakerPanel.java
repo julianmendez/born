@@ -135,12 +135,12 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSaveOntologyFile);
 
-		textThreshold.setBounds(277, 186, 259, 28);
+		textThreshold.setBounds(706, 186, 259, 28);
 		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
-		textMaxNumberOfVars.setBounds(586, 186, 259, 28);
+		textMaxNumberOfVars.setBounds(277, 186, 259, 28);
 		textMaxNumberOfVars.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
 		textMaxNumberOfVars.setAlignmentX(LEFT_ALIGNMENT);
 		add(textMaxNumberOfVars);
@@ -148,10 +148,10 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		lblInputOntology.setBounds(287, 139, 120, 15);
 		add(lblInputOntology);
 
-		lblThreshold.setBounds(277, 222, 259, 15);
+		lblThreshold.setBounds(716, 226, 259, 15);
 		add(lblThreshold);
 
-		lblMaxNumberOfVars.setBounds(596, 222, 249, 15);
+		lblMaxNumberOfVars.setBounds(287, 226, 249, 15);
 		add(lblMaxNumberOfVars);
 
 		lblListOfParents.setBounds(277, 473, 328, 15);

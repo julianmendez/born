@@ -211,7 +211,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
-		scrollConsoleInput.setBounds(282, 336, 668, 65);
+		scrollConsoleInput.setBounds(282, 335, 688, 66);
 		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollConsoleInput.setViewportView(textConsoleInput);
 		add(scrollConsoleInput);
