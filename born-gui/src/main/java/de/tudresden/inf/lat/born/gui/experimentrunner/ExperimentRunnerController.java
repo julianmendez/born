@@ -110,7 +110,7 @@ public class ExperimentRunnerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setInputOntologyDirectory(file.getAbsolutePath());
-			this.lastPath = file.getParentFile();
+			this.lastPath = file;
 		}
 	}
 
@@ -127,7 +127,7 @@ public class ExperimentRunnerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setBayesianNetworkDirectory(file.getAbsolutePath());
-			this.lastPath = file.getParentFile();
+			this.lastPath = file;
 		}
 	}
 
@@ -144,7 +144,7 @@ public class ExperimentRunnerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setOutputDirectory(file.getAbsolutePath());
-			this.lastPath = file.getParentFile();
+			this.lastPath = file;
 		}
 	}
 
