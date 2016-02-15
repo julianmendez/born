@@ -91,7 +91,7 @@ public class MultiProcessorCore {
 			sb.append(column);
 			sb.append(TAB_CHAR);
 		});
-		return sb.toString().trim();
+		return sb.toString();
 	}
 
 	/**
@@ -124,7 +124,14 @@ public class MultiProcessorCore {
 	 */
 	List<String> getResult(ProcessorExecutionResult executionResult) {
 		List<String> ret = new ArrayList<String>();
-		ret.add(executionResult.getResult().trim()); // FIXME it has two fields
+
+		String result = executionResult.getResult().trim();
+		if (result.indexOf(TAB_CHAR) == -1) {
+			// the result must have two fields
+			result += TAB_CHAR;
+		}
+
+		ret.add(result);
 		ret.add("" + executionResult.getTranslationTime());
 		ret.add("" + executionResult.getNormalizationTime());
 		ret.add("" + executionResult.getModuleExtractionTime());
@@ -177,7 +184,7 @@ public class MultiProcessorCore {
 					sbuf.append(write(output, makeLine(getConditions(ontPair, configuration, query))));
 					ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
 					core.run(configuration, start, executionResult);
-					sbuf.append(write(output, makeLine(getResult(executionResult)) + LINE_SEPARATOR));
+					sbuf.append(write(output, makeLine(getResult(executionResult)).trim() + LINE_SEPARATOR));
 				});
 				ret.add(sbuf.toString());
 				output.flush();
