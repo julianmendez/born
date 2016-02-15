@@ -36,8 +36,8 @@ public class TestMakerController implements ActionListener {
 	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
-
 	private final TestMakerView view;
+	private File lastPath = null;
 
 	/**
 	 * Constructs a new controller.
@@ -71,7 +71,7 @@ public class TestMakerController implements ActionListener {
 	}
 
 	void executeActionSelectInputOntologyFile() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -80,6 +80,7 @@ public class TestMakerController implements ActionListener {
 		if (Objects.nonNull(file)) {
 			getView().setInputOntologyFile(file.getAbsolutePath());
 			getView().updateOntologyFile();
+			this.lastPath = file.getParentFile();
 		}
 	}
 
@@ -94,7 +95,7 @@ public class TestMakerController implements ActionListener {
 	}
 
 	void executeActionSelectOutputOntologyFile() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showSaveDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -103,6 +104,7 @@ public class TestMakerController implements ActionListener {
 		if (Objects.nonNull(file)) {
 			try {
 				annotateOntology(new FileOutputStream(file));
+				this.lastPath = file.getParentFile();
 			} catch (IOException e) {
 				throw new UncheckedIOException(e);
 			}
@@ -133,7 +135,7 @@ public class TestMakerController implements ActionListener {
 	}
 
 	void executeActionSaveBayesianNetwork() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showSaveDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -142,6 +144,7 @@ public class TestMakerController implements ActionListener {
 		if (Objects.nonNull(file)) {
 			try {
 				createBayesianNetwork(new FileOutputStream(file));
+				this.lastPath = file.getParentFile();
 			} catch (IOException e) {
 				throw new UncheckedIOException(e);
 			}

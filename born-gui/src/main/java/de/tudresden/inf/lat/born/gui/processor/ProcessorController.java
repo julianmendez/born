@@ -64,6 +64,7 @@ public class ProcessorController implements ActionListener {
 	private final ExampleLoader exampleLoader = new ExampleLoader();
 	private String lastUsedCompletionRules = "";
 	private String previousToLastUsedCompletionRules = "";
+	private File lastPath = null;
 
 	/**
 	 * Constructs a new controller.
@@ -109,7 +110,7 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionInputOntology() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -118,11 +119,12 @@ public class ProcessorController implements ActionListener {
 		if (Objects.nonNull(file)) {
 			getView().setOntologyFile(file.getAbsolutePath());
 			getView().updateOntologyFile();
+			this.lastPath = file.getParentFile();
 		}
 	}
 
 	void executeActionBayesianNetwork() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -131,6 +133,7 @@ public class ProcessorController implements ActionListener {
 		if (Objects.nonNull(file)) {
 			getView().setBayesianNetworkFile(file.getAbsolutePath());
 			getView().updateBayesianNetworkFile();
+			this.lastPath = file.getParentFile();
 		}
 	}
 
@@ -148,7 +151,7 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionConsoleInput() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -156,11 +159,12 @@ public class ProcessorController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().readConsoleInput(file.getAbsolutePath());
+			this.lastPath = file.getParentFile();
 		}
 	}
 
 	void executeActionConsoleOutput() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showSaveDialog(getView().getPanel());
 		File file = null;
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -168,6 +172,7 @@ public class ProcessorController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().writeConsoleOutput(file.getAbsolutePath());
+			this.lastPath = file.getParentFile();
 		}
 	}
 

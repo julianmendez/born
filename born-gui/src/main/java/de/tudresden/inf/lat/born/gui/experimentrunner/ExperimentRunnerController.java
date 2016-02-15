@@ -60,6 +60,7 @@ public class ExperimentRunnerController implements ActionListener {
 	private final OWLOntologyManager owlOntologyManager;
 	private final ExperimentRunnerView view;
 	private ExperimentMakerRunner experimentMakerRunner;
+	private File lastPath = null;
 
 	/**
 	 * Constructs a new controller.
@@ -100,7 +101,7 @@ public class ExperimentRunnerController implements ActionListener {
 	 * Opens a dialog and choose the directory of ontologies.
 	 */
 	void executeActionInputOntologyDirectory() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
@@ -109,6 +110,7 @@ public class ExperimentRunnerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setInputOntologyDirectory(file.getAbsolutePath());
+			this.lastPath = file.getParentFile();
 		}
 	}
 
@@ -116,7 +118,7 @@ public class ExperimentRunnerController implements ActionListener {
 	 * Opens a dialog and choose the directory of Bayesian networks.
 	 */
 	void executeActionBayesianNetworkDirectory() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
@@ -125,6 +127,7 @@ public class ExperimentRunnerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setBayesianNetworkDirectory(file.getAbsolutePath());
+			this.lastPath = file.getParentFile();
 		}
 	}
 
@@ -132,7 +135,7 @@ public class ExperimentRunnerController implements ActionListener {
 	 * Open a dialog and choose the directory for the results.
 	 */
 	void executeActionOutputDirectory() {
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
 		File file = null;
@@ -141,6 +144,7 @@ public class ExperimentRunnerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setOutputDirectory(file.getAbsolutePath());
+			this.lastPath = file.getParentFile();
 		}
 	}
 
