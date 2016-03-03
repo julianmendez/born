@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.filter;
+package de.tudresden.inf.lat.born.tool.filter;
 
 import java.util.Objects;
 import java.util.Set;
