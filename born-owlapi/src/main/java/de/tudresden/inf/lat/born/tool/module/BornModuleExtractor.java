@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.module;
+package de.tudresden.inf.lat.born.tool.module;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,6 +29,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 
+import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
 import de.tudresden.inf.lat.jcel.ontology.axiom.complex.ComplexIntegerAxiom;
