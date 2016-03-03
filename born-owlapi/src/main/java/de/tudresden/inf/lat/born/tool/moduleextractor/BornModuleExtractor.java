@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.tool.module;
+package de.tudresden.inf.lat.born.tool.moduleextractor;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
