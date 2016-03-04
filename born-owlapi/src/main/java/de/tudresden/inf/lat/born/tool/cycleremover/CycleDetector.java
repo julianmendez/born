@@ -281,15 +281,19 @@ public class CycleDetector implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 	}
 
 	boolean add(OWLClass owlSubClass, OWLClass owlSuperClass) {
+		this.translator.getTranslationRepository().addClass(owlSubClass);
 		int subClass = translator.getTranslationRepository().getId(owlSubClass);
+		this.translator.getTranslationRepository().addClass(owlSuperClass);
 		int superClass = translator.getTranslationRepository().getId(owlSuperClass);
 		return this.dependencyGraph.addAncestor(subClass, superClass);
 	}
 
 	boolean check(OWLClass owlSubClass, OWLClass owlSuperClass) {
+		this.translator.getTranslationRepository().addClass(owlSubClass);
 		int subClass = translator.getTranslationRepository().getId(owlSubClass);
+		this.translator.getTranslationRepository().addClass(owlSuperClass);
 		int superClass = translator.getTranslationRepository().getId(owlSuperClass);
-		return this.dependencyGraph.getSubsumers(superClass).contains(subClass);
+		return !this.dependencyGraph.getSubsumers(superClass).contains(subClass);
 	}
 
 }
