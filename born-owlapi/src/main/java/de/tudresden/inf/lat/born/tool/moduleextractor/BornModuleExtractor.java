@@ -18,7 +18,6 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.semanticweb.owlapi.functional.renderer.OWLFunctionalSyntaxRenderer;
 import org.semanticweb.owlapi.io.OWLRenderer;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -28,6 +27,7 @@ import org.semanticweb.owlapi.model.OWLException;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
@@ -78,8 +78,8 @@ public class BornModuleExtractor {
 		});
 	}
 
-	public void extractModule(String ontologyFileName, String signatureFileName, String moduleFileName)
-			throws IOException, OWLException {
+	public void extractModule(String ontologyFileName, String signatureFileName, String moduleFileName,
+			OWLRenderer renderer) throws IOException, OWLException {
 		Objects.requireNonNull(ontologyFileName);
 		Objects.requireNonNull(signatureFileName);
 		Objects.requireNonNull(moduleFileName);
@@ -91,7 +91,7 @@ public class BornModuleExtractor {
 						.getOWLClass(IRI.create(classStr))) //
 				.collect(Collectors.toSet());
 
-		storeOntology(extractModule(owlOntology, signature), moduleFileName);
+		storeOntology(extractModule(owlOntology, signature), moduleFileName, renderer);
 	}
 
 	public OWLOntology extractModule(OWLOntology owlOntology, Set<OWLClass> signature)
@@ -140,10 +140,11 @@ public class BornModuleExtractor {
 		return ret;
 	}
 
-	void storeOntology(OWLOntology owlOntology, String fileName) throws OWLException, IOException {
+	void storeOntology(OWLOntology owlOntology, String fileName, OWLRenderer renderer)
+			throws OWLException, IOException {
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(fileName);
-		OWLRenderer renderer = new OWLFunctionalSyntaxRenderer();
+		Objects.requireNonNull(renderer);
 		FileOutputStream output = new FileOutputStream(fileName);
 		renderer.render(owlOntology, output);
 		output.flush();
@@ -178,7 +179,7 @@ public class BornModuleExtractor {
 
 			if (storingModuleMode) {
 				String signatureFileName = args[1];
-				instance.extractModule(ontologyFileName, signatureFileName, outputFileName);
+				instance.extractModule(ontologyFileName, signatureFileName, outputFileName, new OWLXMLRenderer());
 			} else {
 				instance.countRandom(ontologyFileName, repetitions, outputFileName);
 			}

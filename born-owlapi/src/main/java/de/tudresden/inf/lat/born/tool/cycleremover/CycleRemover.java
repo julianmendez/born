@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.semanticweb.owlapi.functional.renderer.OWLFunctionalSyntaxRenderer;
 import org.semanticweb.owlapi.io.OWLRenderer;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -15,6 +14,7 @@ import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLException;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
@@ -54,17 +54,20 @@ public class CycleRemover {
 		return owlOntology.getOWLOntologyManager().createOntology(newAxioms, newOntologyIri);
 	}
 
-	void removeCycle(String ontologyFileName, String outputFileName) throws OWLException, IOException {
+	void removeCycle(String ontologyFileName, String outputFileName, OWLRenderer renderer)
+			throws OWLException, IOException {
 		Objects.requireNonNull(ontologyFileName);
 		Objects.requireNonNull(outputFileName);
+		Objects.requireNonNull(renderer);
 		OWLOntology owlOntology = ProcessorConfigurationImpl.readOntology(new FileInputStream(ontologyFileName));
-		storeOntology(removeCycles(owlOntology), outputFileName);
+		storeOntology(removeCycles(owlOntology), outputFileName, renderer);
 	}
 
-	void storeOntology(OWLOntology owlOntology, String fileName) throws OWLException, IOException {
+	void storeOntology(OWLOntology owlOntology, String fileName, OWLRenderer renderer)
+			throws OWLException, IOException {
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(fileName);
-		OWLRenderer renderer = new OWLFunctionalSyntaxRenderer();
+		Objects.requireNonNull(renderer);
 		FileOutputStream output = new FileOutputStream(fileName);
 		renderer.render(owlOntology, output);
 		output.flush();
@@ -77,7 +80,7 @@ public class CycleRemover {
 			String ontologyFileName = args[0];
 			String outputFileName = args[1];
 			CycleRemover instance = new CycleRemover();
-			instance.removeCycle(ontologyFileName, outputFileName);
+			instance.removeCycle(ontologyFileName, outputFileName, new OWLXMLRenderer());
 
 		} else {
 			System.out.println(HELP);
