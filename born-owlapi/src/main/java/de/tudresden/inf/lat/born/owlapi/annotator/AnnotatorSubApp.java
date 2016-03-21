@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Objects;
+import java.util.Set;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
@@ -23,7 +24,7 @@ public class AnnotatorSubApp implements SubApp {
 
 	public static final String COLON_COLON = "::";
 	public static final String POINT = ".";
-	public static final String HELP = "Parameters: <input ontology> <output ontology> [<threshold> [<number of variables>] ]";
+	public static final String HELP = "Parameters: <input ontology> <output ontology> [<threshold> <input Bayesian network>]";
 	public static final String COMMAND = "put";
 
 	@Override
@@ -49,15 +50,12 @@ public class AnnotatorSubApp implements SubApp {
 			}
 			conf.setThreshold(threshold);
 
-			int maxNumberOfVars = Integer.MAX_VALUE;
-			if (args.length >= 4) {
-				maxNumberOfVars = Integer.parseInt(args[3]);
-			}
-			conf.setMaxNumberOfVars(maxNumberOfVars);
-
 			try {
 				InputStream in = new FileInputStream(args[0]);
 				conf.setInputOntology(in);
+
+				Set<String> bayesianNetworkVariables = AnnotationCreator.extractVariables(new FileInputStream(args[3]));
+				conf.setInputBayesianNetworkVariables(bayesianNetworkVariables);
 
 				OutputStream outOnt = new FileOutputStream(args[1]);
 				conf.setOutputOntology(outOnt);

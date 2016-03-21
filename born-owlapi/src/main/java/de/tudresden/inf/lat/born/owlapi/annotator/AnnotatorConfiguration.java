@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Set;
 
 /**
  * This interface models the configuration of an annotator.
@@ -57,18 +58,18 @@ public interface AnnotatorConfiguration {
 	void setThreshold(double threshold);
 
 	/**
-	 * Returns the maximum number of variables.
+	 * Returns the variables of the input Bayesian network.
 	 * 
-	 * @return the maximum number of variables
+	 * @return the variables of the input Bayesian network
 	 */
-	int getMaxNumberOfVars();
+	Set<String> getInputBayesianNetworkVariables();
 
 	/**
-	 * Sets the maximum number of variables.
+	 * Sets the variables of the input Bayesian network.
 	 * 
-	 * @param maxNumberOfVars
-	 *            the maximum number of variables
+	 * @param variables
+	 *            variables of the input Bayesian network
 	 */
-	void setMaxNumberOfVars(int maxNumberOfVars);
+	void setInputBayesianNetworkVariables(Set<String> variables);
 
 }

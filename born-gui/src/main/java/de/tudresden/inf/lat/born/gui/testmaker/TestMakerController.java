@@ -30,6 +30,7 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorCore;
 public class TestMakerController implements ActionListener {
 
 	private static final String actionSelectInputOntologyFile = "open input ontology";
+	private static final String actionSelectInputBayesianNetworkFile = "open input Bayesian network";
 	private static final String actionSelectOutputOntologyFile = "save output ontology";
 	private static final String actionSaveBayesianNetwork = "save Bayesian network";
 
@@ -61,6 +62,8 @@ public class TestMakerController implements ActionListener {
 		String cmd = e.getActionCommand();
 		if (cmd.equals(actionSelectInputOntologyFile)) {
 			executeActionSelectInputOntologyFile();
+		} else if (cmd.equals(actionSelectInputBayesianNetworkFile)) {
+			executeActionSelectInputBayesianNetworkFile();
 		} else if (cmd.equals(actionSelectOutputOntologyFile)) {
 			executeActionSelectOutputOntologyFile();
 		} else if (cmd.equals(actionSaveBayesianNetwork)) {
@@ -79,7 +82,21 @@ public class TestMakerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			getView().setInputOntologyFile(file.getAbsolutePath());
-			getView().updateOntologyFile();
+			getView().updateInputOntologyFile();
+			this.lastPath = file.getParentFile();
+		}
+	}
+
+	void executeActionSelectInputBayesianNetworkFile() {
+		JFileChooser fileChooser = new JFileChooser(this.lastPath);
+		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
+		File file = null;
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
+		}
+		if (Objects.nonNull(file)) {
+			getView().setInputBayesianNetworkFile(file.getAbsolutePath());
+			getView().updateInputBayesianNetworkFile();
 			this.lastPath = file.getParentFile();
 		}
 	}
@@ -87,7 +104,6 @@ public class TestMakerController implements ActionListener {
 	void annotateOntology(OutputStream output) {
 		Objects.requireNonNull(output);
 		getView().updateThreshold();
-		getView().updateMaxNumberOfVars();
 		AnnotatorConfiguration conf = getModel();
 		conf.setOutputOntology(output);
 		AnnotatorCore core = new AnnotatorCore();
@@ -184,6 +200,7 @@ public class TestMakerController implements ActionListener {
 	 */
 	private void init() {
 		getView().addButtonSelectInputOntologyFileListener(this, actionSelectInputOntologyFile);
+		getView().addButtonSelectInputBayesianNetworkFileListener(this, actionSelectInputBayesianNetworkFile);
 		getView().addButtonSelectOutputOntologyFileListener(this, actionSelectOutputOntologyFile);
 		getView().addButtonSaveBayesianNetworkListener(this, actionSaveBayesianNetwork);
 	}

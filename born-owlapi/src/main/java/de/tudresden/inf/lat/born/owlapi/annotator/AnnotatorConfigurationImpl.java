@@ -3,6 +3,7 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * 
@@ -12,9 +13,9 @@ import java.util.Objects;
 public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 
 	private InputStream inputOntology;
+	private Set<String> inputBayesianNetworkVariables;
 	private OutputStream outputOntology;
 	private double threshold;
-	private int maxNumberOfVars;
 
 	@Override
 	public InputStream getInputOntology() {
@@ -49,13 +50,14 @@ public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 	}
 
 	@Override
-	public int getMaxNumberOfVars() {
-		return maxNumberOfVars;
+	public Set<String> getInputBayesianNetworkVariables() {
+		return inputBayesianNetworkVariables;
 	}
 
 	@Override
-	public void setMaxNumberOfVars(int maxNumberOfVars) {
-		this.maxNumberOfVars = maxNumberOfVars;
+	public void setInputBayesianNetworkVariables(Set<String> inputBayesianNetworkVariables) {
+		Objects.requireNonNull(inputBayesianNetworkVariables);
+		this.inputBayesianNetworkVariables = inputBayesianNetworkVariables;
 	}
 
 	@Override
@@ -68,20 +70,20 @@ public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 			AnnotatorConfiguration other = (AnnotatorConfiguration) obj;
 			return getInputOntology().equals(other.getInputOntology())
 					&& getOutputOntology().equals(other.getOutputOntology()) && getThreshold() == other.getThreshold()
-					&& getMaxNumberOfVars() == other.getMaxNumberOfVars();
+					&& getInputBayesianNetworkVariables().equals(other.getInputBayesianNetworkVariables());
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		return this.inputOntology.hashCode() + 0x1F * (this.outputOntology.hashCode()
-				+ 0x1F * ((new Double(this.threshold)).hashCode() + 0x1F * this.maxNumberOfVars));
+		return this.inputOntology.hashCode() + 0x1F * (this.outputOntology.hashCode() + 0x1F
+				* ((new Double(this.threshold)).hashCode() + 0x1F * this.inputBayesianNetworkVariables.hashCode()));
 	}
 
 	@Override
 	public String toString() {
 		return this.inputOntology.toString() + " " + this.outputOntology.toString() + " " + this.threshold + " "
-				+ this.maxNumberOfVars;
+				+ this.inputBayesianNetworkVariables.toString();
 	}
 
 }

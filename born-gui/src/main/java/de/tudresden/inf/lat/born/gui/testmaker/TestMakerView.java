@@ -25,6 +25,17 @@ public interface TestMakerView extends JPanelView {
 	void addButtonSelectInputOntologyFileListener(ActionListener listener, String actionCommand);
 
 	/**
+	 * Adds an action listener to the button to select the input Bayesian
+	 * network.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	void addButtonSelectInputBayesianNetworkFileListener(ActionListener listener, String actionCommand);
+
+	/**
 	 * Adds an action listener to the button to select the output ontology.
 	 * 
 	 * @param listener
@@ -111,7 +122,7 @@ public interface TestMakerView extends JPanelView {
 	/**
 	 * Updates the ontology file.
 	 */
-	void updateOntologyFile();
+	void updateInputOntologyFile();
 
 	/**
 	 * Updates the threshold.
@@ -121,7 +132,7 @@ public interface TestMakerView extends JPanelView {
 	/**
 	 * Updates the maximum number of variables.
 	 */
-	void updateMaxNumberOfVars();
+	void updateInputBayesianNetworkFile();
 
 	/**
 	 * Returns the input ontology file.
@@ -158,7 +169,7 @@ public interface TestMakerView extends JPanelView {
 	 * 
 	 * @return the maximum number of variables
 	 */
-	String getMaxNumberOfVar();
+	String getInputBayesianNetworkFile();
 
 	/**
 	 * Sets the maximum number of variables.
@@ -166,7 +177,7 @@ public interface TestMakerView extends JPanelView {
 	 * @param maxNumberOfVars
 	 *            the maximum number of variables
 	 */
-	void setMaxNumberOfVar(String maxNumberOfVars);
+	void setInputBayesianNetworkFile(String maxNumberOfVars);
 
 	/**
 	 * Returns the list of parents.

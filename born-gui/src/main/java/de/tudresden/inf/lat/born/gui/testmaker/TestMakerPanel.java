@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
+import de.tudresden.inf.lat.born.owlapi.annotator.AnnotationCreator;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
@@ -29,17 +30,18 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	private static final long serialVersionUID = -7460256750941145085L;
 
 	private JButton buttonSelectInputOntologyFile = new JButton();
+	private JButton buttonSelectInputBayesianNetworkFile = new JButton();
 	private JButton buttonSaveOntologyFile = new JButton();
 	private JButton buttonSaveBayesianNetwork = new JButton();
 
 	private JTextField textInputOntologyFile = new JTextField();
 	private JTextField textThreshold = new JTextField();
-	private JTextField textMaxNumberOfVars = new JTextField();
+	private JTextField textInputBayesianNetworkFile = new JTextField();
 	private JTextField textListOfParents = new JTextField();
 
 	private final JLabel lblInputOntology = new JLabel("input ontology");
 	private final JLabel lblThreshold = new JLabel("threshold [0,1]");
-	private final JLabel lblMaxNumberOfVars = new JLabel("maximum number of variables");
+	private final JLabel lblInputBayesianNetwork = new JLabel("input Bayesian network");
 	private final JLabel lblListOfParents = new JLabel("list of parents (e.g. \"1,1,2,3,5,8\")");
 
 	private final AnnotatorConfiguration model;
@@ -62,6 +64,14 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		Objects.requireNonNull(actionCommand);
 		buttonSelectInputOntologyFile.addActionListener(listener);
 		buttonSelectInputOntologyFile.setActionCommand(actionCommand);
+	}
+
+	@Override
+	public void addButtonSelectInputBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
+		buttonSelectInputBayesianNetworkFile.addActionListener(listener);
+		buttonSelectInputBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
 	@Override
@@ -108,8 +118,8 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	public void addTextFieldMaxNumberOfVarListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
 		Objects.requireNonNull(actionCommand);
-		textMaxNumberOfVars.addActionListener(listener);
-		textMaxNumberOfVars.setActionCommand(actionCommand);
+		textInputBayesianNetworkFile.addActionListener(listener);
+		textInputBayesianNetworkFile.setActionCommand(actionCommand);
 	}
 
 	/**
@@ -124,6 +134,11 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectInputOntologyFile);
 
+		buttonSelectInputBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
+		buttonSelectInputBayesianNetworkFile.setBounds(215, 188, 50, 26);
+		buttonSelectInputBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonSelectInputBayesianNetworkFile);
+
 		textInputOntologyFile.setBounds(277, 101, 688, 28);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
@@ -131,38 +146,38 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		add(textInputOntologyFile);
 
 		buttonSaveOntologyFile.setIcon(BornIcon.SAVE_FILE);
-		buttonSaveOntologyFile.setBounds(215, 265, 50, 26);
+		buttonSaveOntologyFile.setBounds(215, 348, 50, 26);
 		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSaveOntologyFile);
 
-		textThreshold.setBounds(706, 186, 259, 28);
+		textThreshold.setBounds(277, 281, 259, 28);
 		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
-		textMaxNumberOfVars.setBounds(277, 186, 259, 28);
-		textMaxNumberOfVars.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
-		textMaxNumberOfVars.setAlignmentX(LEFT_ALIGNMENT);
-		add(textMaxNumberOfVars);
+		textInputBayesianNetworkFile.setBounds(277, 186, 688, 28);
+		textInputBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
+		textInputBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+		add(textInputBayesianNetworkFile);
 
 		lblInputOntology.setBounds(287, 139, 120, 15);
 		add(lblInputOntology);
 
-		lblThreshold.setBounds(716, 226, 259, 15);
+		lblThreshold.setBounds(287, 321, 259, 15);
 		add(lblThreshold);
 
-		lblMaxNumberOfVars.setBounds(287, 226, 249, 15);
-		add(lblMaxNumberOfVars);
+		lblInputBayesianNetwork.setBounds(287, 226, 249, 15);
+		add(lblInputBayesianNetwork);
 
-		lblListOfParents.setBounds(277, 473, 328, 15);
+		lblListOfParents.setBounds(278, 516, 328, 15);
 		add(lblListOfParents);
 
 		buttonSaveBayesianNetwork.setIcon(BornIcon.SAVE_FILE);
-		buttonSaveBayesianNetwork.setBounds(215, 505, 50, 26);
+		buttonSaveBayesianNetwork.setBounds(215, 550, 50, 26);
 		buttonSaveBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSaveBayesianNetwork);
 
-		textListOfParents.setBounds(277, 425, 688, 28);
+		textListOfParents.setBounds(277, 476, 688, 28);
 		textListOfParents.setToolTipText(Message.tooltipTextFieldThreshold);
 		textListOfParents.setAlignmentX(LEFT_ALIGNMENT);
 		add(textListOfParents);
@@ -185,7 +200,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	}
 
 	@Override
-	public void updateOntologyFile() {
+	public void updateInputOntologyFile() {
 		String inputOntologyFile = getInputOntologyFile();
 		if (Objects.nonNull(inputOntologyFile) && !inputOntologyFile.trim().isEmpty()) {
 			try {
@@ -206,11 +221,15 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	}
 
 	@Override
-	public void updateMaxNumberOfVars() {
-		try {
-			int maxNumberOfVars = Integer.parseInt(textMaxNumberOfVars.getText());
-			getModel().setMaxNumberOfVars(maxNumberOfVars);
-		} catch (NumberFormatException e) {
+	public void updateInputBayesianNetworkFile() {
+		String inputBayesianNetworkFile = getInputBayesianNetworkFile();
+		if (Objects.nonNull(inputBayesianNetworkFile) && !inputBayesianNetworkFile.trim().isEmpty()) {
+			try {
+				getModel().setInputBayesianNetworkVariables(
+						AnnotationCreator.extractVariables(new FileInputStream(inputBayesianNetworkFile)));
+			} catch (IOException e) {
+				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+			}
 		}
 	}
 
@@ -237,14 +256,14 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	}
 
 	@Override
-	public String getMaxNumberOfVar() {
-		return textMaxNumberOfVars.getText();
+	public String getInputBayesianNetworkFile() {
+		return textInputBayesianNetworkFile.getText();
 	}
 
 	@Override
-	public void setMaxNumberOfVar(String maxNumberOfVars) {
-		Objects.requireNonNull(maxNumberOfVars);
-		textMaxNumberOfVars.setText(maxNumberOfVars);
+	public void setInputBayesianNetworkFile(String inputBayesianNetworkFile) {
+		Objects.requireNonNull(inputBayesianNetworkFile);
+		textInputBayesianNetworkFile.setText(inputBayesianNetworkFile);
 	}
 
 	@Override

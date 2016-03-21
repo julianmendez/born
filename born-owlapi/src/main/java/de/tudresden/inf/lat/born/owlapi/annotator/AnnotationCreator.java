@@ -1,5 +1,6 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,9 +77,10 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	private final OWLDataFactory df;
 	private final OWLOntology owlOntology;
 	private final List<String> variableOrder = new ArrayList<>();
+	private final Set<String> bayesianNetworkVariableSet = new TreeSet<>();
+	private final List<String> bayesianNetworkVariableList = new ArrayList<>();
 	private final Map<String, String> network = new TreeMap<>();
 	private int counter = 0;
-	private final int maxNumberOfVars;
 	private final double threshold;
 
 	/**
@@ -88,24 +90,34 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	 *            OWL ontology manager
 	 * @param threshold
 	 *            threshold
-	 * @param maxNumberOfVars
-	 *            maximum number of variables
+	 * @param bayesianNetworkVariables
+	 *            variables of the input Bayesian network
 	 * @throws OWLOntologyCreationException
 	 *             if something went wrong while creating the OWL ontology
 	 */
-	public AnnotationCreator(OWLOntologyManager manager, double threshold, int maxNumberOfVars)
+	public AnnotationCreator(OWLOntologyManager manager, double threshold, Set<String> bayesianNetworkVariables)
 			throws OWLOntologyCreationException {
 		Objects.requireNonNull(manager);
+		Objects.requireNonNull(bayesianNetworkVariables);
 		this.owlOntology = manager.createOntology();
 		this.df = manager.getOWLDataFactory();
 		IRI probabilityIri = IRI.create(Symbol.PROBABILITY_URI);
 		this.annotationProperty = manager.getOWLDataFactory().getOWLAnnotationProperty(probabilityIri);
 		this.threshold = threshold;
-		this.maxNumberOfVars = maxNumberOfVars;
+		this.bayesianNetworkVariableSet.addAll(bayesianNetworkVariables);
+		this.bayesianNetworkVariableList.addAll(bayesianNetworkVariables);
+	}
+
+	public static Set<String> extractVariables(InputStream inputStream) {
+		throw new UnsupportedOperationException(); // TODO
 	}
 
 	public List<String> getVariables() {
 		return Collections.unmodifiableList(this.variableOrder);
+	}
+
+	public Set<String> getBayesianNetworkVariables() {
+		return Collections.unmodifiableSet(this.bayesianNetworkVariableSet);
 	}
 
 	public String getValue(String variable) {
@@ -142,11 +154,10 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
 	String getNextVariable() {
 		this.counter++;
-		if (this.counter > this.maxNumberOfVars) {
+		if (this.counter > this.bayesianNetworkVariableList.size()) {
 			this.counter = 0;
 		}
-
-		return VARIABLE_PREFIX + this.counter;
+		return this.bayesianNetworkVariableList.get(counter);
 	}
 
 	OWLAnnotation createNewAnnotation() {
