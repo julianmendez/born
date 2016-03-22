@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -60,6 +62,8 @@ import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.SWRLRule;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
+import de.tudresden.inf.lat.born.problog.parser.Token;
+import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
 
 /**
  * An object of this annotates an ontology, axiom by axiom.
@@ -71,6 +75,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
 	public static final String VARIABLE_PREFIX = "x";
 	public static final String QUOTES = "\"";
+	public static final String PROBABILITY_OPERATOR = "::";
 
 	private final OWLAnnotationProperty annotationProperty;
 	private final OWLDataFactory df;
@@ -108,7 +113,26 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	}
 
 	public static Set<String> extractVariables(String bayesianNetwork) {
-		throw new UnsupportedOperationException(); // TODO
+		Set<String> variables = new TreeSet<>();
+		try {
+			StringReader reader = new StringReader(bayesianNetwork);
+			TokenCreator instance = new TokenCreator();
+			List<Token> tokens = instance.createTokens(reader);
+			int[] colons = new int[1];
+			colons[0] = 0;
+			tokens.forEach(token -> {
+				if (colons[0] == 2) {
+					variables.add(token.getValue());
+					colons[0] = 0;
+				} else if (token.getValue().equals("" + Symbol.COLON_CHAR)) {
+					colons[0] = colons[0] + 1;
+				} else {
+					colons[0] = 0;
+				}
+			});
+		} catch (IOException e) {
+		}
+		return variables;
 	}
 
 	public List<String> getVariables() {
