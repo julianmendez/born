@@ -139,26 +139,27 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSelectInputBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonSelectInputBayesianNetworkFile);
 
+		buttonSaveOntologyFile.setIcon(BornIcon.SAVE_FILE);
+		buttonSaveOntologyFile.setBounds(215, 348, 50, 26);
+		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		add(buttonSaveOntologyFile);
+
 		textInputOntologyFile.setBounds(277, 101, 688, 28);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		textInputOntologyFile.setEditable(false);
 		add(textInputOntologyFile);
 
-		buttonSaveOntologyFile.setIcon(BornIcon.SAVE_FILE);
-		buttonSaveOntologyFile.setBounds(215, 348, 50, 26);
-		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
-		add(buttonSaveOntologyFile);
+		textInputBayesianNetworkFile.setBounds(277, 186, 688, 28);
+		textInputBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
+		textInputBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
+		textInputBayesianNetworkFile.setEditable(false);
+		add(textInputBayesianNetworkFile);
 
 		textThreshold.setBounds(277, 281, 259, 28);
 		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
-
-		textInputBayesianNetworkFile.setBounds(277, 186, 688, 28);
-		textInputBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
-		textInputBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
-		add(textInputBayesianNetworkFile);
 
 		lblInputOntology.setBounds(287, 139, 120, 15);
 		add(lblInputOntology);
