@@ -1,6 +1,5 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,7 +107,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 		this.bayesianNetworkVariableList.addAll(bayesianNetworkVariables);
 	}
 
-	public static Set<String> extractVariables(InputStream inputStream) {
+	public static Set<String> extractVariables(String bayesianNetwork) {
 		throw new UnsupportedOperationException(); // TODO
 	}
 

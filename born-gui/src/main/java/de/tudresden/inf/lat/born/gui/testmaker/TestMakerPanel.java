@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.gui.testmaker;
 
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import de.tudresden.inf.lat.born.gui.BornIcon;
 import de.tudresden.inf.lat.born.gui.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotationCreator;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
 
 /**
@@ -226,8 +228,8 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		String inputBayesianNetworkFile = getInputBayesianNetworkFile();
 		if (Objects.nonNull(inputBayesianNetworkFile) && !inputBayesianNetworkFile.trim().isEmpty()) {
 			try {
-				getModel().setInputBayesianNetworkVariables(
-						AnnotationCreator.extractVariables(new FileInputStream(inputBayesianNetworkFile)));
+				getModel().setInputBayesianNetworkVariables(AnnotationCreator
+						.extractVariables(ProcessorConfigurationImpl.read(new FileReader(inputBayesianNetworkFile))));
 			} catch (IOException e) {
 				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
 			}

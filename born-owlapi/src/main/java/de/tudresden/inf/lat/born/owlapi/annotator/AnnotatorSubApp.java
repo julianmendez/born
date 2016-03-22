@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
  * An object of this class add annotations with variables to an OWL ontology.
@@ -54,7 +56,8 @@ public class AnnotatorSubApp implements SubApp {
 				InputStream in = new FileInputStream(args[0]);
 				conf.setInputOntology(in);
 
-				Set<String> bayesianNetworkVariables = AnnotationCreator.extractVariables(new FileInputStream(args[3]));
+				Set<String> bayesianNetworkVariables = AnnotationCreator
+						.extractVariables(ProcessorConfigurationImpl.read(new FileReader(args[3])));
 				conf.setInputBayesianNetworkVariables(bayesianNetworkVariables);
 
 				OutputStream outOnt = new FileOutputStream(args[1]);
