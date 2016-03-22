@@ -177,7 +177,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
 	String getNextVariable() {
 		this.counter++;
-		if (this.counter > this.bayesianNetworkVariableList.size()) {
+		if (this.counter >= this.bayesianNetworkVariableList.size()) {
 			this.counter = 0;
 		}
 		return this.bayesianNetworkVariableList.get(counter);
