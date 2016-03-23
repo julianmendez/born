@@ -300,7 +300,8 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 
 	@Override
 	public Boolean visit(OWLObjectPropertyAssertionAxiom axiom) {
-		return false;
+		ElPropertyExpressionFilter filter = new ElPropertyExpressionFilter();
+		return axiom.getProperty().accept(filter);
 	}
 
 	@Override
@@ -340,7 +341,8 @@ public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 
 	@Override
 	public Boolean visit(OWLClassAssertionAxiom axiom) {
-		return false;
+		ElClassExpressionFilter filter = new ElClassExpressionFilter();
+		return axiom.getClassExpression().accept(filter);
 	}
 
 	@Override
