@@ -7,12 +7,7 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is a basic completion rule for ProbLog.
- * <ul>
- * <li><b>if</b> X is concept in <i>T</i><br>
- * <b>then</b> S := S &cup; {X \u2291 X}</li>
- * </ul>
- * <br>
+ * This is a rule for ProbLog.
  * 
  * @author Julian Mendez
  *
@@ -22,16 +17,16 @@ public class BR1Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR-1 rule.
+	 * Constructs a new BR 5 rule.
 	 */
 	public BR1Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
 
-		Term head = c.subx(x, x);
+		Term head = c.coni(x);
 		List<Term> body = new ArrayList<>();
-		body.add(c.coni(x));
+		body.add(c.con(x));
 
 		this.clause = c.rule(head, body);
 	}

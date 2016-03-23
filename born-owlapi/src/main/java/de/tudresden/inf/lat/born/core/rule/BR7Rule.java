@@ -17,19 +17,21 @@ public class BR7Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR 7 rule.
+	 * Constructs a new BR 8 rule.
 	 */
 	public BR7Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
+		Term r = c.newVar("R");
 		Term x = c.newVar("X");
 		Term b = c.newVar("B");
 
-		Term head = c.subx(x, b);
+		Term head = c.subx(x, c.exists(r, b));
 		List<Term> body = new ArrayList<>();
-		body.add(c.insts(x, b));
+		body.add(c.insts(r, x, b));
+		body.add(c.role(r));
 		body.add(c.indiv(x));
-		body.add(c.con(b));
+		body.add(c.indiv(b));
 
 		this.clause = c.rule(head, body);
 	}

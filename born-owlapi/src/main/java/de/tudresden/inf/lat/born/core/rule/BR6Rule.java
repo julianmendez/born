@@ -17,16 +17,19 @@ public class BR6Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR 6 rule.
+	 * Constructs a new BR 7 rule.
 	 */
 	public BR6Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
+		Term b = c.newVar("B");
 
-		Term head = c.coni(x);
+		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
+		body.add(c.insts(x, b));
 		body.add(c.indiv(x));
+		body.add(c.con(b));
 
 		this.clause = c.rule(head, body);
 	}
