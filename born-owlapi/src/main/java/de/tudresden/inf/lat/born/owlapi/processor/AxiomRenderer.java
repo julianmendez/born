@@ -117,7 +117,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
 		Set<Annotation> emptySet = Collections.emptySet();
-		Clause clause = ax(c.con(a), emptySet);
+		Clause clause = ax(c.coni(a), emptySet);
 		return clause;
 	}
 

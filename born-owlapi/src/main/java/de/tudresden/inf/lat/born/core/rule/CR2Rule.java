@@ -33,15 +33,15 @@ public class CR2Rule implements CompletionRule {
 		Term a2 = c.newVar("A2");
 		Term b = c.newVar("B");
 
-		Term head = c.sub(x, b);
+		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
 		body.add(c.subs(c.and(a1, a2), b));
-		body.add(c.sub(x, a1));
-		body.add(c.sub(x, a2));
-		body.add(c.con(x));
-		body.add(c.con(a1));
-		body.add(c.con(a2));
-		body.add(c.con(b));
+		body.add(c.subx(x, a1));
+		body.add(c.subx(x, a2));
+		body.add(c.coni(x));
+		body.add(c.coni(a1));
+		body.add(c.coni(a2));
+		body.add(c.coni(b));
 
 		this.clause = c.rule(head, body);
 	}

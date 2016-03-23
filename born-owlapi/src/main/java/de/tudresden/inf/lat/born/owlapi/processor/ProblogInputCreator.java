@@ -66,7 +66,7 @@ public class ProblogInputCreator {
 						|| token.getType().equals(TokenType.CONSTANT)))
 				.map(token -> token.getValue()).collect(Collectors.toList());
 		list.remove(FormulaConstructor.QUERY);
-		list.remove(FormulaConstructor.SUB);
+		list.remove(FormulaConstructor.SUBX);
 		Set<String> set = new TreeSet<>();
 		if (!list.isEmpty()) {
 			set.add(list.iterator().next());
