@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.core.rule.BR10Rule;
+import de.tudresden.inf.lat.born.core.rule.FR3Rule;
 import de.tudresden.inf.lat.born.core.rule.BR1Rule;
 import de.tudresden.inf.lat.born.core.rule.BR2Rule;
 import de.tudresden.inf.lat.born.core.rule.BR3Rule;
@@ -28,8 +28,8 @@ import de.tudresden.inf.lat.born.core.rule.BR4Rule;
 import de.tudresden.inf.lat.born.core.rule.BR5Rule;
 import de.tudresden.inf.lat.born.core.rule.BR6Rule;
 import de.tudresden.inf.lat.born.core.rule.BR7Rule;
-import de.tudresden.inf.lat.born.core.rule.BR8Rule;
-import de.tudresden.inf.lat.born.core.rule.BR9Rule;
+import de.tudresden.inf.lat.born.core.rule.FR1Rule;
+import de.tudresden.inf.lat.born.core.rule.FR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR1Rule;
 import de.tudresden.inf.lat.born.core.rule.CR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR3Rule;
@@ -83,6 +83,9 @@ public class ProblogInputCreator {
 
 	public List<CompletionRule> getDefaultCompletionRules() {
 		List<CompletionRule> completionRules = new ArrayList<>();
+		completionRules.add(new FR1Rule());
+		completionRules.add(new FR2Rule());
+		completionRules.add(new FR3Rule());
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
 		completionRules.add(new BR3Rule());
@@ -90,9 +93,6 @@ public class ProblogInputCreator {
 		completionRules.add(new BR5Rule());
 		completionRules.add(new BR6Rule());
 		completionRules.add(new BR7Rule());
-		completionRules.add(new BR8Rule());
-		completionRules.add(new BR9Rule());
-		completionRules.add(new BR10Rule());
 		completionRules.add(new CR1Rule());
 		completionRules.add(new CR2Rule());
 		completionRules.add(new CR3Rule());

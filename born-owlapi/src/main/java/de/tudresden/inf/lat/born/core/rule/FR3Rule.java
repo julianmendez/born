@@ -12,14 +12,14 @@ import de.tudresden.inf.lat.born.core.term.Term;
  * @author Julian Mendez
  *
  */
-public class BR10Rule implements CompletionRule {
+public class FR3Rule implements CompletionRule {
 
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR 10 rule.
+	 * Constructs a new FR 3 rule.
 	 */
-	public BR10Rule() {
+	public FR3Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term r = c.newVar("R");
@@ -55,10 +55,10 @@ public class BR10Rule implements CompletionRule {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof BR10Rule)) {
+		} else if (!(obj instanceof FR3Rule)) {
 			return false;
 		} else {
-			BR10Rule other = (BR10Rule) obj;
+			FR3Rule other = (FR3Rule) obj;
 			return this.clause.equals(other.clause);
 		}
 	}
