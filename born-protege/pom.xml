@@ -12,6 +12,12 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>born-owlapi</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>born-gui</artifactId>
 			<version>${project.version}</version>
 		</dependency>
