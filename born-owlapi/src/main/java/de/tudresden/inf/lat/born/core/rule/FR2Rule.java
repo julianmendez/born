@@ -17,7 +17,7 @@ public class FR2Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new FR 2 rule.
+	 * Constructs a new FR-2 rule.
 	 */
 	public FR2Rule() {
 		FormulaConstructor c = new FormulaConstructor();

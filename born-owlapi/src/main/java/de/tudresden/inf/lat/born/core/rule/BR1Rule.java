@@ -17,7 +17,7 @@ public class BR1Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR 5 rule.
+	 * Constructs a new BR-1 rule.
 	 */
 	public BR1Rule() {
 		FormulaConstructor c = new FormulaConstructor();

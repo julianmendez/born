@@ -22,7 +22,7 @@ public class BR3Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR-1 rule.
+	 * Constructs a new BR-3 rule.
 	 */
 	public BR3Rule() {
 		FormulaConstructor c = new FormulaConstructor();

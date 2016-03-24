@@ -17,7 +17,7 @@ public class FR3Rule implements CompletionRule {
 	private final Clause clause;
 
 	/**
-	 * Constructs a new FR 3 rule.
+	 * Constructs a new FR-3 rule.
 	 */
 	public FR3Rule() {
 		FormulaConstructor c = new FormulaConstructor();
