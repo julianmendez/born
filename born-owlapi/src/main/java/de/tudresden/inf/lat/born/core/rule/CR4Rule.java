@@ -36,7 +36,7 @@ public class CR4Rule implements CompletionRule {
 
 		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subs(c.exists(r, a), b));
+		body.add(c.gci(c.exists(r, a), b));
 		body.add(c.subx(x, c.exists(r, y)));
 		body.add(c.subx(y, a));
 		body.add(c.coni(x));

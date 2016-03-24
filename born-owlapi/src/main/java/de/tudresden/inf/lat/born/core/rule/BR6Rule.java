@@ -27,7 +27,7 @@ public class BR6Rule implements CompletionRule {
 
 		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.insts(x, b));
+		body.add(c.assertion(x, b));
 		body.add(c.indiv(x));
 		body.add(c.con(b));
 

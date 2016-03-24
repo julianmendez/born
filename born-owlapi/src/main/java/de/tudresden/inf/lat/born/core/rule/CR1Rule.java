@@ -33,7 +33,7 @@ public class CR1Rule implements CompletionRule {
 
 		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subs(a, b));
+		body.add(c.gci(a, b));
 		body.add(c.subx(x, a));
 		body.add(c.coni(x));
 		body.add(c.coni(a));

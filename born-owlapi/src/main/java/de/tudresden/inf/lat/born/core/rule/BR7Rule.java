@@ -28,7 +28,7 @@ public class BR7Rule implements CompletionRule {
 
 		Term head = c.subx(x, c.exists(r, b));
 		List<Term> body = new ArrayList<>();
-		body.add(c.insts(r, x, b));
+		body.add(c.assertion(r, x, b));
 		body.add(c.role(r));
 		body.add(c.indiv(x));
 		body.add(c.indiv(b));

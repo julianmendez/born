@@ -32,7 +32,7 @@ public class BR5Rule implements CompletionRule {
 
 		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subs(x, b));
+		body.add(c.gci(x, b));
 
 		this.clause = c.rule(head, body);
 	}

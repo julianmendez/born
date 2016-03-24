@@ -35,7 +35,7 @@ public class CR2Rule implements CompletionRule {
 
 		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subs(c.and(a1, a2), b));
+		body.add(c.gci(c.and(a1, a2), b));
 		body.add(c.subx(x, a1));
 		body.add(c.subx(x, a2));
 		body.add(c.coni(x));

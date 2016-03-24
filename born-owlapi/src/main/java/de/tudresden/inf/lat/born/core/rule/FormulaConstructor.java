@@ -25,9 +25,9 @@ public class FormulaConstructor {
 	public static final String INDIV = "indiv";
 	public static final String SUB = "sub";
 	public static final String SUBX = "subx";
-	public static final String SUBS = "subs";
+	public static final String GCI = "gci";
 	public static final String INST = "inst";
-	public static final String INSTS = "insts";
+	public static final String ASSERTION = "assertion";
 	public static final String EXISTS = "exists";
 	public static final String AND = "and";
 	public static final String QUERY = "query";
@@ -230,10 +230,10 @@ public class FormulaConstructor {
 	 *            super class
 	 * @return the axiom denoting a subsumption declared in the ontology
 	 */
-	public Term subs(Term subClass, Term superClass) {
+	public Term gci(Term subClass, Term superClass) {
 		Objects.requireNonNull(subClass);
 		Objects.requireNonNull(superClass);
-		return fun(SUBS, subClass, superClass);
+		return fun(GCI, subClass, superClass);
 	}
 
 	/**
@@ -260,10 +260,10 @@ public class FormulaConstructor {
 	 *            class
 	 * @return the axiom denoting an concept assertion declared in the ontology
 	 */
-	public Term insts(Term indiv, Term clss) {
+	public Term assertion(Term indiv, Term clss) {
 		Objects.requireNonNull(indiv);
 		Objects.requireNonNull(clss);
-		return fun(INSTS, indiv, clss);
+		return fun(ASSERTION, indiv, clss);
 	}
 
 	/**
@@ -295,11 +295,11 @@ public class FormulaConstructor {
 	 *            right individual
 	 * @return the axiom denoting a role assertion declared in the ontology
 	 */
-	public Term insts(Term role, Term indiv0, Term indiv1) {
+	public Term assertion(Term role, Term indiv0, Term indiv1) {
 		Objects.requireNonNull(indiv0);
 		Objects.requireNonNull(indiv1);
 		Objects.requireNonNull(role);
-		return fun(INSTS, role, indiv0, indiv1);
+		return fun(ASSERTION, role, indiv0, indiv1);
 	}
 
 	/**
