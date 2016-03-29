@@ -168,15 +168,15 @@ public class FormulaConstructor {
 	}
 
 	/**
-	 * Returns the construction of the intersection of two concepts (or
-	 * classses).
+	 * Returns the construction of the intersection of two concepts (or class
+	 * expressions).
 	 * 
 	 * @param left
 	 *            first term
 	 * @param right
 	 *            second term
-	 * @return the construction of the intersection of two concepts (or
-	 *         classses).
+	 * @return the construction of the intersection of two concepts (or class
+	 *         expressions)
 	 * 
 	 */
 	public Term and(Term left, Term right) {
@@ -185,18 +185,46 @@ public class FormulaConstructor {
 		return fun(AND, left, right);
 	}
 
+	/**
+	 * Returns the construction of an existential restriction.
+	 * 
+	 * @param property
+	 *            object property
+	 * @param clss
+	 *            class expression
+	 * @return the construction of an existential restriction
+	 * 
+	 */
 	public Term exists(Term property, Term clss) {
 		Objects.requireNonNull(property);
 		Objects.requireNonNull(clss);
 		return fun(EXISTS, property, clss);
 	}
 
+	/**
+	 * Returns the construction of a rule.
+	 * 
+	 * @param head
+	 *            head of the rule
+	 * @param body
+	 *            body of the rule
+	 * @return the construction of a rule
+	 * 
+	 */
 	public Clause rule(Term head, List<Term> body) {
 		Objects.requireNonNull(head);
 		Objects.requireNonNull(body);
 		return new ClauseImpl(head, body);
 	}
 
+	/**
+	 * Returns the construction of a query.
+	 * 
+	 * @param query
+	 *            query
+	 * @return the construction of a query
+	 * 
+	 */
 	public Clause query(Term query) {
 		Objects.requireNonNull(query);
 		List<Term> list = new ArrayList<>();
