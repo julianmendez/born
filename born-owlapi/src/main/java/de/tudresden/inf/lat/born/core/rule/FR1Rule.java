@@ -27,9 +27,9 @@ public class FR1Rule implements CompletionRule {
 
 		Term head = c.sub(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subx(x, b));
 		body.add(c.con(x));
 		body.add(c.con(b));
+		body.add(c.subx(x, b));
 
 		this.clause = c.rule(head, body);
 	}

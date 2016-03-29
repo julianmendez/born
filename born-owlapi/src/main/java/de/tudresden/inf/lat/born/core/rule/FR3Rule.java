@@ -28,10 +28,10 @@ public class FR3Rule implements CompletionRule {
 
 		Term head = c.inst(r, x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subx(x, c.exists(r, b)));
 		body.add(c.role(r));
 		body.add(c.indiv(x));
 		body.add(c.indiv(b));
+		body.add(c.subx(x, c.exists(r, b)));
 
 		this.clause = c.rule(head, body);
 	}
