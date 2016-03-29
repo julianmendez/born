@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.core.rule.FR3Rule;
 import de.tudresden.inf.lat.born.core.rule.BR1Rule;
 import de.tudresden.inf.lat.born.core.rule.BR2Rule;
 import de.tudresden.inf.lat.born.core.rule.BR3Rule;
@@ -28,13 +27,14 @@ import de.tudresden.inf.lat.born.core.rule.BR4Rule;
 import de.tudresden.inf.lat.born.core.rule.BR5Rule;
 import de.tudresden.inf.lat.born.core.rule.BR6Rule;
 import de.tudresden.inf.lat.born.core.rule.BR7Rule;
-import de.tudresden.inf.lat.born.core.rule.FR1Rule;
-import de.tudresden.inf.lat.born.core.rule.FR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR1Rule;
 import de.tudresden.inf.lat.born.core.rule.CR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR3Rule;
 import de.tudresden.inf.lat.born.core.rule.CR4Rule;
 import de.tudresden.inf.lat.born.core.rule.CompletionRule;
+import de.tudresden.inf.lat.born.core.rule.FR1Rule;
+import de.tudresden.inf.lat.born.core.rule.FR2Rule;
+import de.tudresden.inf.lat.born.core.rule.FR3Rule;
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
@@ -73,7 +73,7 @@ public class ProblogInputCreator {
 						|| token.getType().equals(TokenType.CONSTANT)))
 				.map(token -> token.getValue()).collect(Collectors.toList());
 		list.remove(FormulaConstructor.QUERY);
-		list.remove(FormulaConstructor.SUBX);
+		list.remove(FormulaConstructor.SUB);
 		Set<String> set = new TreeSet<>();
 		if (!list.isEmpty()) {
 			set.add(list.iterator().next());
