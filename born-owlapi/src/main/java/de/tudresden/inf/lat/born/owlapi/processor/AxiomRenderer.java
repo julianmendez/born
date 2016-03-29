@@ -143,7 +143,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		Term a = get(axiom.getSubClass());
 		Term b = get(axiom.getSuperClass());
 
-		return ax(c.subs(a, b), axiom.getAnnotations());
+		return ax(c.gci(a, b), axiom.getAnnotations());
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		Term a2 = get(axiom.getRightSubClass());
 		Term b = get(axiom.getSuperClass());
 
-		return ax(c.subs(c.and(a1, a2), b), axiom.getAnnotations());
+		return ax(c.gci(c.and(a1, a2), b), axiom.getAnnotations());
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		Term r = get(axiom.getPropertyInSuperClass());
 		Term b = get(axiom.getClassInSuperClass());
 
-		return ax(c.subs(a, c.exists(r, b)), axiom.getAnnotations());
+		return ax(c.gci(a, c.exists(r, b)), axiom.getAnnotations());
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		Term a = get(axiom.getClassInSubClass());
 		Term b = get(axiom.getSuperClass());
 
-		return ax(c.subs(c.exists(r, a), b), axiom.getAnnotations());
+		return ax(c.gci(c.exists(r, a), b), axiom.getAnnotations());
 	}
 
 	@Override

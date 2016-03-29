@@ -32,7 +32,7 @@ public class BR3Rule implements CompletionRule {
 
 		Term head = c.sub(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.subs(x, b));
+		body.add(c.gci(x, b));
 
 		this.clause = c.rule(head, body);
 	}

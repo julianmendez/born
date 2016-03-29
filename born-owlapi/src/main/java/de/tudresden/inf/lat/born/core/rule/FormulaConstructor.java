@@ -22,7 +22,7 @@ public class FormulaConstructor {
 	public static final String CON = "con";
 	public static final String ROLE = "role";
 	public static final String SUB = "sub";
-	public static final String SUBS = "subs";
+	public static final String GCI = "gci";
 	public static final String EXISTS = "exists";
 	public static final String AND = "and";
 	public static final String QUERY = "query";
@@ -161,10 +161,10 @@ public class FormulaConstructor {
 	 *            super class
 	 * @return the axiom denoting subsumption
 	 */
-	public Term subs(Term subClass, Term superClass) {
+	public Term gci(Term subClass, Term superClass) {
 		Objects.requireNonNull(subClass);
 		Objects.requireNonNull(superClass);
-		return fun(SUBS, subClass, superClass);
+		return fun(GCI, subClass, superClass);
 	}
 
 	/**
