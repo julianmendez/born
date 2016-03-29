@@ -117,14 +117,17 @@ public class ProblogInputCreator {
 
 		Set<Integer> classes = new TreeSet<>();
 		Set<Integer> objectProperties = new TreeSet<>();
+		Set<Integer> individuals = new TreeSet<>();
 		axioms.forEach(axiom -> {
 			classes.addAll(axiom.getClassesInSignature());
 			objectProperties.addAll(axiom.getObjectPropertiesInSignature());
+			individuals.addAll(axiom.getIndividualsInSignature());
 		});
 
 		classes.forEach(cls -> ret.add(renderer.renderDeclarationOfClass(cls)));
 		objectProperties.forEach(objectProperty -> ret.add(renderer.renderDeclarationOfObjectProperty(objectProperty)));
-
+		individuals.forEach(individual-> ret.add(renderer.renderDeclarationOfIndividual(individual)));
+		
 		return ret;
 	}
 

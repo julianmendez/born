@@ -117,7 +117,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
 		Set<Annotation> emptySet = Collections.emptySet();
-		Clause clause = ax(c.coni(a), emptySet);
+		Clause clause = ax(c.con(a), emptySet);
 		return clause;
 	}
 
@@ -127,6 +127,15 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		Term a = get(entity);
 		Set<Annotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.role(a), emptySet);
+		return clause;
+	}
+
+	public Clause renderDeclarationOfIndividual(Integer entity) {
+		Objects.requireNonNull(entity);
+		FormulaConstructor c = new FormulaConstructor();
+		Term a = get(entity);
+		Set<Annotation> emptySet = Collections.emptySet();
+		Clause clause = ax(c.indiv(a), emptySet);
 		return clause;
 	}
 
