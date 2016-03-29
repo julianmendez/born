@@ -10,7 +10,7 @@ import de.tudresden.inf.lat.born.core.term.Term;
  * This is a basic completion rule for ProbLog.
  * <ul>
  * <li><b>if</b> X is concept in <i>T</i><br>
- * <b>then</b> S := S &cup; {X \u2291 B}</li>
+ * <b>then</b> S := S &cup; {X \u2291 X}</li>
  * </ul>
  * <br>
  * 
