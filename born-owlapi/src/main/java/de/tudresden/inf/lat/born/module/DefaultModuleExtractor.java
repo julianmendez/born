@@ -80,15 +80,14 @@ public class DefaultModuleExtractor {
 	 *            set of classes
 	 * @return a module, i.e. a subset of axioms relevant to answer a query
 	 */
-	public Set<NormalizedIntegerAxiom> extractModule(Collection<NormalizedIntegerAxiom> setOfAxioms,
-			Set<Integer> setOfClasses) {
+	public Module extractModule(Collection<NormalizedIntegerAxiom> setOfAxioms, Set<Integer> setOfClasses) {
 
-		Set<NormalizedIntegerAxiom> ret = new HashSet<>();
+		Set<NormalizedIntegerAxiom> newAxioms = new HashSet<>();
 
 		Set<DefaultIdentifierCollector> axioms = new HashSet<>();
 		setOfAxioms.forEach(axiom -> axioms.add(new DefaultIdentifierCollector(axiom)));
 
-		ret.addAll(getAxiomsWithoutEntitiesOnTheLeft(axioms));
+		newAxioms.addAll(getAxiomsWithoutEntitiesOnTheLeft(axioms));
 
 		Map<Integer, Set<DefaultIdentifierCollector>> map = buildMapOfAxioms(axioms);
 
@@ -96,8 +95,8 @@ public class DefaultModuleExtractor {
 		Set<Integer> classesToVisit = new HashSet<Integer>();
 		classesToVisit.addAll(setOfClasses);
 		int resultSize = -1;
-		while (ret.size() > resultSize) {
-			resultSize = ret.size();
+		while (newAxioms.size() > resultSize) {
+			resultSize = newAxioms.size();
 
 			Set<DefaultIdentifierCollector> axiomsToVisit = getAxiomsWithClassesOnTheLeft(classesToVisit, map);
 			visitedClasses.addAll(classesToVisit);
@@ -105,12 +104,12 @@ public class DefaultModuleExtractor {
 
 			axiomsToVisit.forEach(axiom -> {
 				classesToVisit.addAll(axiom.getClassesOnTheRight());
-				ret.add(axiom.getAxiom());
+				newAxioms.add(axiom.getAxiom());
 			});
 			classesToVisit.removeAll(visitedClasses);
 		}
 
-		return ret;
+		return new Module(visitedClasses, newAxioms);
 	}
 
 }

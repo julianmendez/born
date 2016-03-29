@@ -39,6 +39,7 @@ import de.tudresden.inf.lat.born.core.rule.RR4Rule;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
+import de.tudresden.inf.lat.born.module.Module;
 import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
 import de.tudresden.inf.lat.born.problog.parser.TokenType;
@@ -110,19 +111,31 @@ public class ProblogInputCreator {
 		writer.close();
 	}
 
-	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms) {
+	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Module module) {
 		Objects.requireNonNull(factory);
-		Objects.requireNonNull(axioms);
+		Objects.requireNonNull(module);
 		List<Clause> ret = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
 		Set<Integer> classes = new TreeSet<>();
 		Set<Integer> objectProperties = new TreeSet<>();
 		Set<Integer> individuals = new TreeSet<>();
-		axioms.forEach(axiom -> {
-			classes.addAll(axiom.getClassesInSignature());
+		Set<Integer> entities = module.getEntities();
+		entities.forEach(entity -> {
+			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
+				individuals.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
+				classes.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.OBJECT_PROPERTY)) {
+				objectProperties.add(entity);
+			} else {
+				throw new IllegalStateException("Entity of unknown type: '" + entity + "'.");
+			}
+		});
+		module.getAxioms().forEach(axiom -> {
+			// classes.addAll(axiom.getClassesInSignature());
 			objectProperties.addAll(axiom.getObjectPropertiesInSignature());
-			individuals.addAll(axiom.getIndividualsInSignature());
+			// individuals.addAll(axiom.getIndividualsInSignature());
 		});
 
 		classes.forEach(cls -> ret.add(renderer.renderDeclarationOfClass(cls)));
@@ -132,15 +145,15 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
-	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms)
-			throws IOException {
+	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Module module) throws IOException {
 		Objects.requireNonNull(factory);
-		Objects.requireNonNull(axioms);
+		Objects.requireNonNull(module);
+
 		List<Clause> ontology = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
-		ontology.addAll(getDeclarations(factory, axioms));
+		ontology.addAll(getDeclarations(factory, module));
 
-		axioms.forEach(axiom -> {
+		module.getAxioms().forEach(axiom -> {
 			Clause clause = axiom.accept(renderer);
 			ontology.add(clause);
 		});
@@ -225,10 +238,10 @@ public class ProblogInputCreator {
 		long moduleExtractionStart = System.nanoTime();
 		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
 		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
-		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
+		Module module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
 		executionResult.setModuleExtractionTime(System.nanoTime() - moduleExtractionStart);
-		executionResult.setModuleSize(module.size());
-		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.size());
+		executionResult.setModuleSize(module.getAxioms().size());
+		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.getAxioms().size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
 		program.setOntology(getClauses(factory, module));
