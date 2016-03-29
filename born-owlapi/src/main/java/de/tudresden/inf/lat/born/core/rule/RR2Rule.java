@@ -12,24 +12,21 @@ import de.tudresden.inf.lat.born.core.term.Term;
  * @author Julian Mendez
  *
  */
-public class BR6Rule implements CompletionRule {
+public class RR2Rule implements CompletionRule {
 
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR-6 rule.
+	 * Constructs a new RR-2 rule.
 	 */
-	public BR6Rule() {
+	public RR2Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
-		Term b = c.newVar("B");
 
-		Term head = c.subx(x, b);
+		Term head = c.coni(x);
 		List<Term> body = new ArrayList<>();
 		body.add(c.indiv(x));
-		body.add(c.con(b));
-		body.add(c.assertion(x, b));
 
 		this.clause = c.rule(head, body);
 	}
@@ -53,10 +50,10 @@ public class BR6Rule implements CompletionRule {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof BR6Rule)) {
+		} else if (!(obj instanceof RR2Rule)) {
 			return false;
 		} else {
-			BR6Rule other = (BR6Rule) obj;
+			RR2Rule other = (RR2Rule) obj;
 			return this.clause.equals(other.clause);
 		}
 	}

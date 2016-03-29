@@ -7,10 +7,10 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is a basic completion rule for ProbLog.
+ * This is an optimization rule for ProbLog.
  * <ul>
- * <li><b>if</b> X is concept in <i>T</i><br>
- * <b>then</b> S := S &cup; {X \u2291 X}</li>
+ * <li><b>if</b>X \u2291 B &isin; <i>T</i><br>
+ * <b>then</b> S := S &cup; {X \u2291 B}</li>
  * </ul>
  * <br>
  * 
@@ -28,10 +28,11 @@ public class BR3Rule implements CompletionRule {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
+		Term b = c.newVar("B");
 
-		Term head = c.subx(x, x);
+		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.coni(x));
+		body.add(c.gci(x, b));
 
 		this.clause = c.rule(head, body);
 	}

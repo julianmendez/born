@@ -7,31 +7,26 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is a basic completion rule for ProbLog.
- * <ul>
- * <li><b>if</b> X is concept in <i>T</i><br>
- * <b>then</b> S := S &cup; {X \u2291 \u22A4 }</li>
- * </ul>
- * <br>
+ * This is a rule for ProbLog.
  * 
  * @author Julian Mendez
  *
  */
-public class BR4Rule implements CompletionRule {
+public class RR1Rule implements CompletionRule {
 
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR-4 rule.
+	 * Constructs a new RR-1 rule.
 	 */
-	public BR4Rule() {
+	public RR1Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
 
-		Term head = c.subx(x, c.top());
+		Term head = c.coni(x);
 		List<Term> body = new ArrayList<>();
-		body.add(c.coni(x));
+		body.add(c.con(x));
 
 		this.clause = c.rule(head, body);
 	}
@@ -55,10 +50,10 @@ public class BR4Rule implements CompletionRule {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof BR4Rule)) {
+		} else if (!(obj instanceof RR1Rule)) {
 			return false;
 		} else {
-			BR4Rule other = (BR4Rule) obj;
+			RR1Rule other = (RR1Rule) obj;
 			return this.clause.equals(other.clause);
 		}
 	}

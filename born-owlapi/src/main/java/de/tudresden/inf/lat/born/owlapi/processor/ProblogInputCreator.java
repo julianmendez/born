@@ -23,10 +23,6 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import de.tudresden.inf.lat.born.core.rule.BR1Rule;
 import de.tudresden.inf.lat.born.core.rule.BR2Rule;
 import de.tudresden.inf.lat.born.core.rule.BR3Rule;
-import de.tudresden.inf.lat.born.core.rule.BR4Rule;
-import de.tudresden.inf.lat.born.core.rule.BR5Rule;
-import de.tudresden.inf.lat.born.core.rule.BR6Rule;
-import de.tudresden.inf.lat.born.core.rule.BR7Rule;
 import de.tudresden.inf.lat.born.core.rule.CR1Rule;
 import de.tudresden.inf.lat.born.core.rule.CR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR3Rule;
@@ -36,6 +32,10 @@ import de.tudresden.inf.lat.born.core.rule.FR1Rule;
 import de.tudresden.inf.lat.born.core.rule.FR2Rule;
 import de.tudresden.inf.lat.born.core.rule.FR3Rule;
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
+import de.tudresden.inf.lat.born.core.rule.RR1Rule;
+import de.tudresden.inf.lat.born.core.rule.RR2Rule;
+import de.tudresden.inf.lat.born.core.rule.RR3Rule;
+import de.tudresden.inf.lat.born.core.rule.RR4Rule;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
@@ -86,13 +86,13 @@ public class ProblogInputCreator {
 		completionRules.add(new FR1Rule());
 		completionRules.add(new FR2Rule());
 		completionRules.add(new FR3Rule());
+		completionRules.add(new RR1Rule());
+		completionRules.add(new RR2Rule());
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
 		completionRules.add(new BR3Rule());
-		completionRules.add(new BR4Rule());
-		completionRules.add(new BR5Rule());
-		completionRules.add(new BR6Rule());
-		completionRules.add(new BR7Rule());
+		completionRules.add(new RR3Rule());
+		completionRules.add(new RR4Rule());
 		completionRules.add(new CR1Rule());
 		completionRules.add(new CR2Rule());
 		completionRules.add(new CR3Rule());
@@ -126,8 +126,8 @@ public class ProblogInputCreator {
 
 		classes.forEach(cls -> ret.add(renderer.renderDeclarationOfClass(cls)));
 		objectProperties.forEach(objectProperty -> ret.add(renderer.renderDeclarationOfObjectProperty(objectProperty)));
-		individuals.forEach(individual-> ret.add(renderer.renderDeclarationOfIndividual(individual)));
-		
+		individuals.forEach(individual -> ret.add(renderer.renderDeclarationOfIndividual(individual)));
+
 		return ret;
 	}
 

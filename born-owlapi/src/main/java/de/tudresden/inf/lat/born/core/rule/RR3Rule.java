@@ -7,24 +7,19 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is an optimization rule for ProbLog.
- * <ul>
- * <li><b>if</b>X \u2291 B &isin; <i>T</i><br>
- * <b>then</b> S := S &cup; {X \u2291 B}</li>
- * </ul>
- * <br>
+ * This is a rule for ProbLog.
  * 
  * @author Julian Mendez
  *
  */
-public class BR5Rule implements CompletionRule {
+public class RR3Rule implements CompletionRule {
 
 	private final Clause clause;
 
 	/**
-	 * Constructs a new BR-5 rule.
+	 * Constructs a new RR-3 rule.
 	 */
-	public BR5Rule() {
+	public RR3Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
@@ -32,7 +27,9 @@ public class BR5Rule implements CompletionRule {
 
 		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.gci(x, b));
+		body.add(c.indiv(x));
+		body.add(c.con(b));
+		body.add(c.assertion(x, b));
 
 		this.clause = c.rule(head, body);
 	}
@@ -56,10 +53,10 @@ public class BR5Rule implements CompletionRule {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof BR5Rule)) {
+		} else if (!(obj instanceof RR3Rule)) {
 			return false;
 		} else {
-			BR5Rule other = (BR5Rule) obj;
+			RR3Rule other = (RR3Rule) obj;
 			return this.clause.equals(other.clause);
 		}
 	}
