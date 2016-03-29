@@ -17,7 +17,7 @@ public class ExampleLoaderTest {
 	public void testGetExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
 		List<ExampleConfiguration> list = loader.getExampleConfigurations();
-		Assert.assertEquals(2, list.size());
+		Assert.assertEquals(3, list.size());
 
 		{
 			ExampleConfiguration conf0 = list.get(0);
@@ -35,6 +35,15 @@ public class ExampleLoaderTest {
 			Assert.assertEquals(
 					"query(sub('http://lat.inf.tu-dresden.de/systems/born/born-example#a', 'http://lat.inf.tu-dresden.de/systems/born/born-example#e')).\n\n",
 					conf1.getQuery());
+		}
+
+		{
+			ExampleConfiguration conf2 = list.get(2);
+			Assert.assertEquals("example-2", conf2.getOntologyName());
+			Assert.assertTrue(conf2.getOntologyFileName().endsWith("/examples/example-2.owl"));
+			Assert.assertEquals(
+					"query(sub('http://lat.inf.tu-dresden.de/systems/born/born-example#a', 'http://lat.inf.tu-dresden.de/systems/born/born-example#e')).\n\n",
+					conf2.getQuery());
 		}
 
 	}
