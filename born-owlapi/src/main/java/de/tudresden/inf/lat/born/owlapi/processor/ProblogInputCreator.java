@@ -36,6 +36,9 @@ import de.tudresden.inf.lat.born.core.rule.RR1Rule;
 import de.tudresden.inf.lat.born.core.rule.RR2Rule;
 import de.tudresden.inf.lat.born.core.rule.RR3Rule;
 import de.tudresden.inf.lat.born.core.rule.RR4Rule;
+import de.tudresden.inf.lat.born.core.rule.TR1Rule;
+import de.tudresden.inf.lat.born.core.rule.TR2Rule;
+import de.tudresden.inf.lat.born.core.rule.TR3Rule;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
@@ -99,6 +102,9 @@ public class ProblogInputCreator {
 		completionRules.add(new CR2Rule());
 		completionRules.add(new CR3Rule());
 		completionRules.add(new CR4Rule());
+		completionRules.add(new TR1Rule());
+		completionRules.add(new TR2Rule());
+		completionRules.add(new TR3Rule());
 		return completionRules;
 	}
 
