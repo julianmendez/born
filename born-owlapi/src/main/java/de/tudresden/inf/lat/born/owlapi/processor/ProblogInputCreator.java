@@ -75,12 +75,23 @@ public class ProblogInputCreator {
 				.filter(token -> (token.getType().equals(TokenType.IDENTIFIER)
 						|| token.getType().equals(TokenType.CONSTANT)))
 				.map(token -> token.getValue()).collect(Collectors.toList());
-		list.remove(FormulaConstructor.QUERY);
-		list.remove(FormulaConstructor.SUB);
-		list.remove(FormulaConstructor.INST);
+
 		Set<String> set = new TreeSet<>();
-		if (!list.isEmpty()) {
-			set.add(list.iterator().next());
+		if (list.get(0).equals(FormulaConstructor.QUERY)) {
+			list.remove(FormulaConstructor.QUERY);
+			if (list.get(0).equals(FormulaConstructor.SUB)) {
+				list.remove(FormulaConstructor.SUB);
+				if (!list.isEmpty()) {
+					set.add(list.iterator().next());
+				}
+			} else if (list.get(0).equals(FormulaConstructor.INST)) {
+				list.remove(FormulaConstructor.INST);
+				if (list.size() > 2) {
+					set.add(list.get(1));
+				} else if (list.size() > 1) {
+					set.add(list.get(0));
+				}
+			}
 		}
 		return set;
 	}
