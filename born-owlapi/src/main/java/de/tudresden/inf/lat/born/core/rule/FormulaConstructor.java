@@ -252,21 +252,6 @@ public class FormulaConstructor {
 	}
 
 	/**
-	 * Returns the axiom denoting an concept assertion declared in the ontology.
-	 * 
-	 * @param indiv
-	 *            individual
-	 * @param clss
-	 *            class
-	 * @return the axiom denoting an concept assertion declared in the ontology
-	 */
-	public Term assertion(Term indiv, Term clss) {
-		Objects.requireNonNull(indiv);
-		Objects.requireNonNull(clss);
-		return fun(ASSERTION, indiv, clss);
-	}
-
-	/**
 	 * Returns the axiom denoting a role assertion.
 	 * 
 	 * @param role
@@ -282,24 +267,6 @@ public class FormulaConstructor {
 		Objects.requireNonNull(indiv1);
 		Objects.requireNonNull(role);
 		return fun(INST, role, indiv0, indiv1);
-	}
-
-	/**
-	 * Returns the axiom denoting a role assertion declared in the ontology.
-	 * 
-	 * @param role
-	 *            role
-	 * @param indiv0
-	 *            left individual
-	 * @param indiv1
-	 *            right individual
-	 * @return the axiom denoting a role assertion declared in the ontology
-	 */
-	public Term assertion(Term role, Term indiv0, Term indiv1) {
-		Objects.requireNonNull(indiv0);
-		Objects.requireNonNull(indiv1);
-		Objects.requireNonNull(role);
-		return fun(ASSERTION, role, indiv0, indiv1);
 	}
 
 	/**

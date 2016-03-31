@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -34,8 +35,6 @@ import de.tudresden.inf.lat.born.core.rule.FR3Rule;
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
 import de.tudresden.inf.lat.born.core.rule.RR1Rule;
 import de.tudresden.inf.lat.born.core.rule.RR2Rule;
-import de.tudresden.inf.lat.born.core.rule.RR3Rule;
-import de.tudresden.inf.lat.born.core.rule.RR4Rule;
 import de.tudresden.inf.lat.born.core.rule.TR1Rule;
 import de.tudresden.inf.lat.born.core.rule.TR2Rule;
 import de.tudresden.inf.lat.born.core.rule.TR3Rule;
@@ -96,8 +95,6 @@ public class ProblogInputCreator {
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
 		completionRules.add(new BR3Rule());
-		completionRules.add(new RR3Rule());
-		completionRules.add(new RR4Rule());
 		completionRules.add(new CR1Rule());
 		completionRules.add(new CR2Rule());
 		completionRules.add(new CR3Rule());
@@ -186,11 +183,13 @@ public class ProblogInputCreator {
 		}
 	}
 
-	public Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
+	public Set<Integer> getSetOfEntities(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
 		Objects.requireNonNull(factory);
 		Objects.requireNonNull(symbolStrSet);
 		Map<String, Integer> map = new TreeMap<>();
 		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
+				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
+		factory.getEntityManager().getEntities(IntegerEntityType.INDIVIDUAL, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
 
 		Set<Integer> ret = new TreeSet<>();
@@ -243,7 +242,21 @@ public class ProblogInputCreator {
 
 		long moduleExtractionStart = System.nanoTime();
 		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
-		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
+		Set<Integer> setOfEntities = getSetOfEntities(factory, relevantSymbols);
+
+		Set<Integer> setOfClasses = new TreeSet<>();
+		setOfEntities.forEach(entity -> {
+			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
+				setOfClasses.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
+				setOfClasses.add(entity);
+				Optional<Integer> classForIndivOpt = factory.getEntityManager().getAuxiliaryNominal(entity);
+				if (classForIndivOpt.isPresent()) {
+					setOfClasses.add(classForIndivOpt.get());
+				}
+			}
+		});
+
 		Module module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
 		executionResult.setModuleExtractionTime(System.nanoTime() - moduleExtractionStart);
 		executionResult.setModuleSize(module.getAxioms().size());
