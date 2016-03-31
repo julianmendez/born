@@ -1,0 +1,2 @@
+query(inst('http://lat.inf.tu-dresden.de/systems/born/born-example#r', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i0', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i1')).
+
