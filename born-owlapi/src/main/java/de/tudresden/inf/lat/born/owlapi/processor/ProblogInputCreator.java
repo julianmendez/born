@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -61,6 +62,8 @@ import de.tudresden.inf.lat.jcel.owlapi.translator.Translator;
  *
  */
 public class ProblogInputCreator {
+
+	private static final Logger logger = Logger.getLogger(ProblogInputCreator.class.getName());
 
 	private static final String NUMBER_OF_OWL_AXIOMS_MSG = "  Number of OWL axioms: ";
 	private static final String NUMBER_OF_AXIOMS_MSG = "  Number of axioms: ";
@@ -236,8 +239,12 @@ public class ProblogInputCreator {
 		IntegerOntologyObjectFactory factory = new IntegerOntologyObjectFactoryImpl();
 
 		long translationStart = System.nanoTime();
+		logger.fine("OWL Axioms: " + owlOntology.getAxioms());
+
 		Translator translator = new Translator(owlOntology.getOWLOntologyManager().getOWLDataFactory(), factory);
 		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology.getAxioms());
+		logger.fine("Integer Axioms: " + axioms);
+
 		executionResult.setTranslationTime(System.nanoTime() - translationStart);
 		executionResult.setOntologySize(axioms.size());
 		sbuf.append(NUMBER_OF_AXIOMS_MSG + axioms.size());
@@ -246,6 +253,8 @@ public class ProblogInputCreator {
 		long normalizationStart = System.nanoTime();
 		OntologyNormalizer normalizer = new OntologyNormalizer();
 		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
+		logger.fine("Normalized Axioms: " + normalizedAxioms);
+
 		executionResult.setNormalizationTime(System.nanoTime() - normalizationStart);
 		executionResult.setNormalizedOntologySize(normalizedAxioms.size());
 		sbuf.append(NUMBER_OF_NORM_AXIOMS_MSG + normalizedAxioms.size());
@@ -269,21 +278,29 @@ public class ProblogInputCreator {
 		});
 
 		Module module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
+		logger.fine("Module: " + module.getAxioms());
+
 		executionResult.setModuleExtractionTime(System.nanoTime() - moduleExtractionStart);
 		executionResult.setModuleSize(module.getAxioms().size());
 		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.getAxioms().size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
-		program.setOntology(getClauses(factory, module));
+		List<Clause> clauses = getClauses(factory, module);
+		program.setOntology(clauses);
+		logger.fine("Clauses: " + program.getClauses());
 
 		if (useOfDefaultCompletionRules) {
 			program.setCompletionRules(getDefaultCompletionRules());
 		} else {
 			program.setCompletionRules(Collections.emptyList());
 		}
+		logger.fine("Completion Rules: " + program.getCompletionRules());
+
 		program.setAdditionalCompletionRulesAsText(additionalCompletionRules);
+		logger.fine("Additional Completion Rules: " + program.getAdditionalCompletionRulesAsText());
 
 		program.setBayesianNetworkAddendum(bayesianNetwork);
+		logger.fine("Bayesian Network: " + program.getBayesianNetworkAddendum());
 
 		write(new OutputStreamWriter(resultOutputStream), program);
 
