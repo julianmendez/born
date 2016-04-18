@@ -278,7 +278,8 @@ public class ProblogInputCreator {
 		});
 
 		Module module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
-		logger.fine("Module: " + module.getAxioms());
+		logger.fine("Module entities: " + module.getEntities());
+		logger.fine("Module axioms: " + module.getAxioms());
 
 		executionResult.setModuleExtractionTime(System.nanoTime() - moduleExtractionStart);
 		executionResult.setModuleSize(module.getAxioms().size());
