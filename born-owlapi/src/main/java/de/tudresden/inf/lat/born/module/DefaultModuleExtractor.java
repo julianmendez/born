@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
+import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerAxiom;
 
 /**
  * An object of this class is a module extractor, i.e. it can extract a subset
@@ -71,6 +73,16 @@ public class DefaultModuleExtractor {
 		return ret;
 	}
 
+	Set<Integer> getEntities(IntegerAxiom axiom) {
+		Set<Integer> ret = new TreeSet<>();
+		ret.addAll(axiom.getClassesInSignature());
+		ret.addAll(axiom.getObjectPropertiesInSignature());
+		ret.addAll(axiom.getIndividualsInSignature());
+		ret.addAll(axiom.getDataPropertiesInSignature());
+		ret.addAll(axiom.getDatatypesInSignature());
+		return ret;
+	}
+
 	/**
 	 * Returns a module, i.e. a subset of axioms relevant to answer a query.
 	 * 
@@ -91,8 +103,8 @@ public class DefaultModuleExtractor {
 
 		Map<Integer, Set<DefaultIdentifierCollector>> map = buildMapOfAxioms(axioms);
 
-		Set<Integer> visitedClasses = new HashSet<Integer>();
-		Set<Integer> classesToVisit = new HashSet<Integer>();
+		Set<Integer> visitedClasses = new TreeSet<>();
+		Set<Integer> classesToVisit = new TreeSet<>();
 		classesToVisit.addAll(setOfClasses);
 		int resultSize = -1;
 		while (newAxioms.size() > resultSize) {
@@ -109,7 +121,10 @@ public class DefaultModuleExtractor {
 			classesToVisit.removeAll(visitedClasses);
 		}
 
-		return new Module(visitedClasses, newAxioms);
+		Set<Integer> entities = new TreeSet<>();
+		entities.addAll(visitedClasses);
+		newAxioms.forEach(axiom -> entities.addAll(getEntities(axiom)));
+		return new Module(entities, newAxioms);
 	}
 
 }
