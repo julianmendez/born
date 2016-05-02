@@ -17,24 +17,51 @@ public class ExampleLoaderTest {
 	public void testGetExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
 		List<ExampleConfiguration> list = loader.getExampleConfigurations();
-		Assert.assertEquals(2, list.size());
+		Assert.assertEquals(5, list.size());
 
 		{
-			ExampleConfiguration conf0 = list.get(0);
-			Assert.assertEquals("example-0", conf0.getOntologyName());
-			Assert.assertTrue(conf0.getOntologyFileName().endsWith("/examples/example-0.owl"));
+			ExampleConfiguration conf = list.get(0);
+			Assert.assertEquals("example-0", conf.getOntologyName());
+			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-0.owl"));
 			Assert.assertEquals(
 					"query(sub('http://lat.inf.tu-dresden.de/systems/born/born-example#a', 'http://lat.inf.tu-dresden.de/systems/born/born-example#e')).\n\n",
-					conf0.getQuery());
+					conf.getQuery());
 		}
 
 		{
-			ExampleConfiguration conf1 = list.get(1);
-			Assert.assertEquals("example-1", conf1.getOntologyName());
-			Assert.assertTrue(conf1.getOntologyFileName().endsWith("/examples/example-1.owl"));
+			ExampleConfiguration conf = list.get(1);
+			Assert.assertEquals("example-1", conf.getOntologyName());
+			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-1.owl"));
 			Assert.assertEquals(
 					"query(sub('http://lat.inf.tu-dresden.de/systems/born/born-example#a', 'http://lat.inf.tu-dresden.de/systems/born/born-example#e')).\n\n",
-					conf1.getQuery());
+					conf.getQuery());
+		}
+
+		{
+			ExampleConfiguration conf = list.get(2);
+			Assert.assertEquals("example-2", conf.getOntologyName());
+			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-2.owl"));
+			Assert.assertEquals(
+					"query(inst('http://lat.inf.tu-dresden.de/systems/born/born-example#i0', 'http://lat.inf.tu-dresden.de/systems/born/born-example#e')).\n\n",
+					conf.getQuery());
+		}
+
+		{
+			ExampleConfiguration conf = list.get(3);
+			Assert.assertEquals("example-3", conf.getOntologyName());
+			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-3.owl"));
+			Assert.assertEquals(
+					"query(inst('http://lat.inf.tu-dresden.de/systems/born/born-example#r', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i0', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i1')).\n\n",
+					conf.getQuery());
+		}
+
+		{
+			ExampleConfiguration conf = list.get(4);
+			Assert.assertEquals("example-4", conf.getOntologyName());
+			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-4.owl"));
+			Assert.assertEquals(
+					"query(inst('http://lat.inf.tu-dresden.de/systems/born/born-example#r', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i0', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i1')).\n\n",
+					conf.getQuery());
 		}
 
 	}

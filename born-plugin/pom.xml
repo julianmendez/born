@@ -98,11 +98,11 @@
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							@born-protege-${project.version}.jar,
-							@jcel-coreontology-0.23.2.jar,
-							@jcel-core-0.23.2.jar,
-							@jcel-ontology-0.23.2.jar,
-							@jcel-reasoner-0.23.2.jar,
-							@jcel-owlapi-0.23.2.jar,
+							@jcel-coreontology-0.24.0-SNAPSHOT.jar,
+							@jcel-core-0.24.0-SNAPSHOT.jar,
+							@jcel-ontology-0.24.0-SNAPSHOT.jar,
+							@jcel-reasoner-0.24.0-SNAPSHOT.jar,
+							@jcel-owlapi-0.24.0-SNAPSHOT.jar,
 							LICENSE.txt=../LICENSE.txt
 						</Include-Resource>
 					</instructions>

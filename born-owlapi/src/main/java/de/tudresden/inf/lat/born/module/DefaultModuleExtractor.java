@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
+import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerAxiom;
 
 /**
  * An object of this class is a module extractor, i.e. it can extract a subset
@@ -71,6 +73,16 @@ public class DefaultModuleExtractor {
 		return ret;
 	}
 
+	Set<Integer> getEntities(IntegerAxiom axiom) {
+		Set<Integer> ret = new TreeSet<>();
+		ret.addAll(axiom.getClassesInSignature());
+		ret.addAll(axiom.getObjectPropertiesInSignature());
+		ret.addAll(axiom.getIndividualsInSignature());
+		ret.addAll(axiom.getDataPropertiesInSignature());
+		ret.addAll(axiom.getDatatypesInSignature());
+		return ret;
+	}
+
 	/**
 	 * Returns a module, i.e. a subset of axioms relevant to answer a query.
 	 * 
@@ -80,24 +92,23 @@ public class DefaultModuleExtractor {
 	 *            set of classes
 	 * @return a module, i.e. a subset of axioms relevant to answer a query
 	 */
-	public Set<NormalizedIntegerAxiom> extractModule(Collection<NormalizedIntegerAxiom> setOfAxioms,
-			Set<Integer> setOfClasses) {
+	public Module extractModule(Collection<NormalizedIntegerAxiom> setOfAxioms, Set<Integer> setOfClasses) {
 
-		Set<NormalizedIntegerAxiom> ret = new HashSet<>();
+		Set<NormalizedIntegerAxiom> newAxioms = new HashSet<>();
 
 		Set<DefaultIdentifierCollector> axioms = new HashSet<>();
 		setOfAxioms.forEach(axiom -> axioms.add(new DefaultIdentifierCollector(axiom)));
 
-		ret.addAll(getAxiomsWithoutEntitiesOnTheLeft(axioms));
+		newAxioms.addAll(getAxiomsWithoutEntitiesOnTheLeft(axioms));
 
 		Map<Integer, Set<DefaultIdentifierCollector>> map = buildMapOfAxioms(axioms);
 
-		Set<Integer> visitedClasses = new HashSet<Integer>();
-		Set<Integer> classesToVisit = new HashSet<Integer>();
+		Set<Integer> visitedClasses = new TreeSet<>();
+		Set<Integer> classesToVisit = new TreeSet<>();
 		classesToVisit.addAll(setOfClasses);
 		int resultSize = -1;
-		while (ret.size() > resultSize) {
-			resultSize = ret.size();
+		while (newAxioms.size() > resultSize) {
+			resultSize = newAxioms.size();
 
 			Set<DefaultIdentifierCollector> axiomsToVisit = getAxiomsWithClassesOnTheLeft(classesToVisit, map);
 			visitedClasses.addAll(classesToVisit);
@@ -105,12 +116,15 @@ public class DefaultModuleExtractor {
 
 			axiomsToVisit.forEach(axiom -> {
 				classesToVisit.addAll(axiom.getClassesOnTheRight());
-				ret.add(axiom.getAxiom());
+				newAxioms.add(axiom.getAxiom());
 			});
 			classesToVisit.removeAll(visitedClasses);
 		}
 
-		return ret;
+		Set<Integer> entities = new TreeSet<>();
+		entities.addAll(visitedClasses);
+		newAxioms.forEach(axiom -> entities.addAll(getEntities(axiom)));
+		return new Module(entities, newAxioms);
 	}
 
 }

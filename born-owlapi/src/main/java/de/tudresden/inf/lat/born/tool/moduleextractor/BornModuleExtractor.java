@@ -30,6 +30,7 @@ import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
+import de.tudresden.inf.lat.born.module.Module;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
 import de.tudresden.inf.lat.jcel.ontology.axiom.complex.ComplexIntegerAxiom;
@@ -110,8 +111,8 @@ public class BornModuleExtractor {
 				.map(intClass -> intClass.getId()).collect(Collectors.toSet());
 
 		Set<Integer> classesInSignature = new HashSet<>();
-		(new DefaultModuleExtractor()).extractModule(normalizedAxioms, setOfClasses)
-				.forEach(axiom -> classesInSignature.addAll(axiom.getClassesInSignature()));
+		Module module = (new DefaultModuleExtractor()).extractModule(normalizedAxioms, setOfClasses);
+		module.getAxioms().forEach(axiom -> classesInSignature.addAll(axiom.getClassesInSignature()));
 
 		Set<OWLClass> moduleOwlClasses = classesInSignature.stream()
 				.filter(cls -> !translator.getOntologyObjectFactory().getEntityManager().isAuxiliary(cls))

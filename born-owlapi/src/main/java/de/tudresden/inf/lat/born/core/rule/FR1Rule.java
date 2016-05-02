@@ -7,40 +7,29 @@ import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
 
 /**
- * This is a completion rule for ProbLog.
- * <ul>
- * <li>CR-3 : <b>if</b> X \u2291 A &isin; S, A \u2291 &exist; r <i>.</i> B
- * &isin; <i>T</i><br>
- * <b>then</b> R := R &cup;{(X \u2291 &exist; r <i>.</i> B)}</li>
- * </ul>
- * <br>
+ * This is a rule for ProbLog.
  * 
  * @author Julian Mendez
  *
  */
-public class CR3Rule implements CompletionRule {
+public class FR1Rule implements CompletionRule {
 
 	private final Clause clause;
 
 	/**
-	 * Constructs a new CR-3 rule.
+	 * Constructs a new FR-1 rule.
 	 */
-	public CR3Rule() {
+	public FR1Rule() {
 		FormulaConstructor c = new FormulaConstructor();
 
 		Term x = c.newVar("X");
-		Term a = c.newVar("A");
 		Term b = c.newVar("B");
-		Term r = c.newVar("R");
 
-		Term head = c.subx(x, c.exists(r, b));
+		Term head = c.sub(x, b);
 		List<Term> body = new ArrayList<>();
-		body.add(c.gci(a, c.exists(r, b)));
-		body.add(c.subx(x, a));
-		body.add(c.coni(x));
-		body.add(c.coni(a));
-		body.add(c.coni(b));
-		body.add(c.role(r));
+		body.add(c.con(x));
+		body.add(c.con(b));
+		body.add(c.subx(x, b));
 
 		this.clause = c.rule(head, body);
 	}
@@ -64,10 +53,10 @@ public class CR3Rule implements CompletionRule {
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
-		} else if (!(obj instanceof CR3Rule)) {
+		} else if (!(obj instanceof FR1Rule)) {
 			return false;
 		} else {
-			CR3Rule other = (CR3Rule) obj;
+			FR1Rule other = (FR1Rule) obj;
 			return this.clause.equals(other.clause);
 		}
 	}

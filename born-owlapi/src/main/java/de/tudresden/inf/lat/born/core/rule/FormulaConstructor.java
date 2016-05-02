@@ -20,9 +20,14 @@ public class FormulaConstructor {
 
 	public static final String TOP = "top";
 	public static final String CON = "con";
+	public static final String CONI = "coni";
 	public static final String ROLE = "role";
+	public static final String INDIV = "indiv";
 	public static final String SUB = "sub";
+	public static final String SUBX = "subx";
 	public static final String GCI = "gci";
+	public static final String INST = "inst";
+	public static final String ASSERTION = "assertion";
 	public static final String EXISTS = "exists";
 	public static final String AND = "and";
 	public static final String QUERY = "query";
@@ -103,6 +108,31 @@ public class FormulaConstructor {
 	}
 
 	/**
+	 * Returns the result of applying the functor to three parameters.
+	 * 
+	 * @param name
+	 *            functor name
+	 * @param first
+	 *            first parameter
+	 * @param second
+	 *            second parameter
+	 * @param third
+	 *            third parameter
+	 * @return the result of applying the functor to three parameters
+	 */
+	public Term fun(String name, Term first, Term second, Term third) {
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(first);
+		Objects.requireNonNull(second);
+		Objects.requireNonNull(third);
+		List<Term> arguments = new ArrayList<>();
+		arguments.add(first);
+		arguments.add(second);
+		arguments.add(third);
+		return new TermImpl(name, arguments);
+	}
+
+	/**
 	 * Returns the 'top' constant.
 	 * 
 	 * @return the 'top' constant
@@ -124,6 +154,18 @@ public class FormulaConstructor {
 	}
 
 	/**
+	 * Returns the result of declaring a term as a concept or individual.
+	 * 
+	 * @param clss
+	 *            the term
+	 * @return the result of declaring a term as a concept or individual
+	 */
+	public Term coni(Term clss) {
+		Objects.requireNonNull(clss);
+		return fun(CONI, clss);
+	}
+
+	/**
 	 * Returns the result of declaring a term as a role (compare to an object
 	 * property).
 	 * 
@@ -135,6 +177,18 @@ public class FormulaConstructor {
 	public Term role(Term clss) {
 		Objects.requireNonNull(clss);
 		return fun(ROLE, clss);
+	}
+
+	/**
+	 * Returns the result of declaring a term as an individual.
+	 * 
+	 * @param ind
+	 *            the term
+	 * @return the result of declaring a term as an individual
+	 */
+	public Term indiv(Term ind) {
+		Objects.requireNonNull(ind);
+		return fun(INDIV, ind);
 	}
 
 	/**
@@ -161,10 +215,58 @@ public class FormulaConstructor {
 	 *            super class
 	 * @return the axiom denoting subsumption
 	 */
+	public Term subx(Term subClass, Term superClass) {
+		Objects.requireNonNull(subClass);
+		Objects.requireNonNull(superClass);
+		return fun(SUBX, subClass, superClass);
+	}
+
+	/**
+	 * Returns the axiom denoting a subsumption declared in the ontology.
+	 * 
+	 * @param subClass
+	 *            sub class
+	 * @param superClass
+	 *            super class
+	 * @return the axiom denoting a subsumption declared in the ontology
+	 */
 	public Term gci(Term subClass, Term superClass) {
 		Objects.requireNonNull(subClass);
 		Objects.requireNonNull(superClass);
 		return fun(GCI, subClass, superClass);
+	}
+
+	/**
+	 * Returns the axiom denoting an concept assertion.
+	 * 
+	 * @param indiv
+	 *            individual
+	 * @param clss
+	 *            class
+	 * @return the axiom denoting an concept assertion
+	 */
+	public Term inst(Term indiv, Term clss) {
+		Objects.requireNonNull(indiv);
+		Objects.requireNonNull(clss);
+		return fun(INST, indiv, clss);
+	}
+
+	/**
+	 * Returns the axiom denoting a role assertion.
+	 * 
+	 * @param role
+	 *            role
+	 * @param indiv0
+	 *            left individual
+	 * @param indiv1
+	 *            right individual
+	 * @return the axiom denoting a role assertion
+	 */
+	public Term inst(Term role, Term indiv0, Term indiv1) {
+		Objects.requireNonNull(indiv0);
+		Objects.requireNonNull(indiv1);
+		Objects.requireNonNull(role);
+		return fun(INST, role, indiv0, indiv1);
 	}
 
 	/**

@@ -31,13 +31,13 @@ public class CR1Rule implements CompletionRule {
 		Term a = c.newVar("A");
 		Term b = c.newVar("B");
 
-		Term head = c.sub(x, b);
+		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
 		body.add(c.gci(a, b));
-		body.add(c.sub(x, a));
-		body.add(c.con(x));
-		body.add(c.con(a));
-		body.add(c.con(b));
+		body.add(c.subx(x, a));
+		body.add(c.coni(x));
+		body.add(c.coni(a));
+		body.add(c.coni(b));
 
 		this.clause = c.rule(head, body);
 	}

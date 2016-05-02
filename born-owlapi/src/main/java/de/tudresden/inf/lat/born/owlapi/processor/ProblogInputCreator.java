@@ -12,9 +12,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -28,10 +30,19 @@ import de.tudresden.inf.lat.born.core.rule.CR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR3Rule;
 import de.tudresden.inf.lat.born.core.rule.CR4Rule;
 import de.tudresden.inf.lat.born.core.rule.CompletionRule;
+import de.tudresden.inf.lat.born.core.rule.FR1Rule;
+import de.tudresden.inf.lat.born.core.rule.FR2Rule;
+import de.tudresden.inf.lat.born.core.rule.FR3Rule;
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
+import de.tudresden.inf.lat.born.core.rule.RR1Rule;
+import de.tudresden.inf.lat.born.core.rule.RR2Rule;
+import de.tudresden.inf.lat.born.core.rule.TR1Rule;
+import de.tudresden.inf.lat.born.core.rule.TR2Rule;
+import de.tudresden.inf.lat.born.core.rule.TR3Rule;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
+import de.tudresden.inf.lat.born.module.Module;
 import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
 import de.tudresden.inf.lat.born.problog.parser.TokenType;
@@ -52,6 +63,8 @@ import de.tudresden.inf.lat.jcel.owlapi.translator.Translator;
  */
 public class ProblogInputCreator {
 
+	private static final Logger logger = Logger.getLogger(ProblogInputCreator.class.getName());
+
 	private static final String NUMBER_OF_OWL_AXIOMS_MSG = "  Number of OWL axioms: ";
 	private static final String NUMBER_OF_AXIOMS_MSG = "  Number of axioms: ";
 	private static final String NUMBER_OF_NORM_AXIOMS_MSG = "  Number of normalized axioms: ";
@@ -65,17 +78,34 @@ public class ProblogInputCreator {
 				.filter(token -> (token.getType().equals(TokenType.IDENTIFIER)
 						|| token.getType().equals(TokenType.CONSTANT)))
 				.map(token -> token.getValue()).collect(Collectors.toList());
-		list.remove(FormulaConstructor.QUERY);
-		list.remove(FormulaConstructor.SUB);
+
 		Set<String> set = new TreeSet<>();
-		if (!list.isEmpty()) {
-			set.add(list.iterator().next());
+		if (list.get(0).equals(FormulaConstructor.QUERY)) {
+			list.remove(FormulaConstructor.QUERY);
+			if (list.get(0).equals(FormulaConstructor.SUB)) {
+				list.remove(FormulaConstructor.SUB);
+				if (!list.isEmpty()) {
+					set.add(list.iterator().next());
+				}
+			} else if (list.get(0).equals(FormulaConstructor.INST)) {
+				list.remove(FormulaConstructor.INST);
+				if (list.size() > 2) {
+					set.add(list.get(1));
+				} else if (list.size() > 1) {
+					set.add(list.get(0));
+				}
+			}
 		}
 		return set;
 	}
 
 	public List<CompletionRule> getDefaultCompletionRules() {
 		List<CompletionRule> completionRules = new ArrayList<>();
+		completionRules.add(new FR1Rule());
+		completionRules.add(new FR2Rule());
+		completionRules.add(new FR3Rule());
+		completionRules.add(new RR1Rule());
+		completionRules.add(new RR2Rule());
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
 		completionRules.add(new BR3Rule());
@@ -83,6 +113,9 @@ public class ProblogInputCreator {
 		completionRules.add(new CR2Rule());
 		completionRules.add(new CR3Rule());
 		completionRules.add(new CR4Rule());
+		completionRules.add(new TR1Rule());
+		completionRules.add(new TR2Rule());
+		completionRules.add(new TR3Rule());
 		return completionRules;
 	}
 
@@ -95,34 +128,49 @@ public class ProblogInputCreator {
 		writer.close();
 	}
 
-	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms) {
+	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Module module) {
 		Objects.requireNonNull(factory);
-		Objects.requireNonNull(axioms);
+		Objects.requireNonNull(module);
 		List<Clause> ret = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
 		Set<Integer> classes = new TreeSet<>();
 		Set<Integer> objectProperties = new TreeSet<>();
-		axioms.forEach(axiom -> {
-			classes.addAll(axiom.getClassesInSignature());
+		Set<Integer> individuals = new TreeSet<>();
+		Set<Integer> entities = module.getEntities();
+		entities.forEach(entity -> {
+			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
+				individuals.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
+				classes.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.OBJECT_PROPERTY)) {
+				objectProperties.add(entity);
+			} else {
+				throw new IllegalStateException("Entity of unknown type: '" + entity + "'.");
+			}
+		});
+		module.getAxioms().forEach(axiom -> {
+			// classes.addAll(axiom.getClassesInSignature());
 			objectProperties.addAll(axiom.getObjectPropertiesInSignature());
+			// individuals.addAll(axiom.getIndividualsInSignature());
 		});
 
 		classes.forEach(cls -> ret.add(renderer.renderDeclarationOfClass(cls)));
 		objectProperties.forEach(objectProperty -> ret.add(renderer.renderDeclarationOfObjectProperty(objectProperty)));
+		individuals.forEach(individual -> ret.add(renderer.renderDeclarationOfIndividual(individual)));
 
 		return ret;
 	}
 
-	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Set<NormalizedIntegerAxiom> axioms)
-			throws IOException {
+	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Module module) throws IOException {
 		Objects.requireNonNull(factory);
-		Objects.requireNonNull(axioms);
+		Objects.requireNonNull(module);
+
 		List<Clause> ontology = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
-		ontology.addAll(getDeclarations(factory, axioms));
+		ontology.addAll(getDeclarations(factory, module));
 
-		axioms.forEach(axiom -> {
+		module.getAxioms().forEach(axiom -> {
 			Clause clause = axiom.accept(renderer);
 			ontology.add(clause);
 		});
@@ -149,11 +197,13 @@ public class ProblogInputCreator {
 		}
 	}
 
-	public Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
+	public Set<Integer> getSetOfEntities(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
 		Objects.requireNonNull(factory);
 		Objects.requireNonNull(symbolStrSet);
 		Map<String, Integer> map = new TreeMap<>();
 		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
+				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
+		factory.getEntityManager().getEntities(IntegerEntityType.INDIVIDUAL, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
 
 		Set<Integer> ret = new TreeSet<>();
@@ -189,8 +239,12 @@ public class ProblogInputCreator {
 		IntegerOntologyObjectFactory factory = new IntegerOntologyObjectFactoryImpl();
 
 		long translationStart = System.nanoTime();
+		logger.fine("OWL Axioms: " + owlOntology.getAxioms());
+
 		Translator translator = new Translator(owlOntology.getOWLOntologyManager().getOWLDataFactory(), factory);
 		Set<ComplexIntegerAxiom> axioms = translator.translateSA(owlOntology.getAxioms());
+		logger.fine("Integer Axioms: " + axioms);
+
 		executionResult.setTranslationTime(System.nanoTime() - translationStart);
 		executionResult.setOntologySize(axioms.size());
 		sbuf.append(NUMBER_OF_AXIOMS_MSG + axioms.size());
@@ -199,6 +253,8 @@ public class ProblogInputCreator {
 		long normalizationStart = System.nanoTime();
 		OntologyNormalizer normalizer = new OntologyNormalizer();
 		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
+		logger.fine("Normalized Axioms: " + normalizedAxioms);
+
 		executionResult.setNormalizationTime(System.nanoTime() - normalizationStart);
 		executionResult.setNormalizedOntologySize(normalizedAxioms.size());
 		sbuf.append(NUMBER_OF_NORM_AXIOMS_MSG + normalizedAxioms.size());
@@ -206,23 +262,46 @@ public class ProblogInputCreator {
 
 		long moduleExtractionStart = System.nanoTime();
 		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
-		Set<Integer> setOfClasses = getSetOfClasses(factory, relevantSymbols);
-		Set<NormalizedIntegerAxiom> module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
+		Set<Integer> setOfEntities = getSetOfEntities(factory, relevantSymbols);
+
+		Set<Integer> setOfClasses = new TreeSet<>();
+		setOfEntities.forEach(entity -> {
+			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
+				setOfClasses.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
+				setOfClasses.add(entity);
+				Optional<Integer> classForIndivOpt = factory.getEntityManager().getAuxiliaryNominal(entity);
+				if (classForIndivOpt.isPresent()) {
+					setOfClasses.add(classForIndivOpt.get());
+				}
+			}
+		});
+
+		Module module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
+		logger.fine("Module entities: " + module.getEntities());
+		logger.fine("Module axioms: " + module.getAxioms());
+
 		executionResult.setModuleExtractionTime(System.nanoTime() - moduleExtractionStart);
-		executionResult.setModuleSize(module.size());
-		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.size());
+		executionResult.setModuleSize(module.getAxioms().size());
+		sbuf.append(NUMBER_OF_AXIOMS_IN_MODULE + module.getAxioms().size());
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
-		program.setOntology(getClauses(factory, module));
+		List<Clause> clauses = getClauses(factory, module);
+		program.setOntology(clauses);
+		logger.fine("Clauses: " + program.getClauses());
 
 		if (useOfDefaultCompletionRules) {
 			program.setCompletionRules(getDefaultCompletionRules());
 		} else {
 			program.setCompletionRules(Collections.emptyList());
 		}
+		logger.fine("Completion Rules: " + program.getCompletionRules());
+
 		program.setAdditionalCompletionRulesAsText(additionalCompletionRules);
+		logger.fine("Additional Completion Rules: " + program.getAdditionalCompletionRulesAsText());
 
 		program.setBayesianNetworkAddendum(bayesianNetwork);
+		logger.fine("Bayesian Network: " + program.getBayesianNetworkAddendum());
 
 		write(new OutputStreamWriter(resultOutputStream), program);
 

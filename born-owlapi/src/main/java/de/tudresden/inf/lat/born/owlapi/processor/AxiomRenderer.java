@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -130,6 +131,15 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 		return clause;
 	}
 
+	public Clause renderDeclarationOfIndividual(Integer entity) {
+		Objects.requireNonNull(entity);
+		FormulaConstructor c = new FormulaConstructor();
+		Term a = get(entity);
+		Set<Annotation> emptySet = Collections.emptySet();
+		Clause clause = ax(c.indiv(a), emptySet);
+		return clause;
+	}
+
 	@Override
 	public Clause visit(FunctObjectPropAxiom axiom) {
 		Objects.requireNonNull(axiom);
@@ -182,7 +192,11 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	@Override
 	public Clause visit(NominalAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		throw new UnsupportedOperationException();
+		FormulaConstructor c = new FormulaConstructor();
+		Term i = get(axiom.getIndividual());
+		Term a = get(axiom.getClassExpression());
+
+		return ax(c.gci(i, a), new HashSet<Annotation>());
 	}
 
 	@Override

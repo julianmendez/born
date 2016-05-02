@@ -34,15 +34,15 @@ public class CR4Rule implements CompletionRule {
 		Term b = c.newVar("B");
 		Term r = c.newVar("R");
 
-		Term head = c.sub(x, b);
+		Term head = c.subx(x, b);
 		List<Term> body = new ArrayList<>();
 		body.add(c.gci(c.exists(r, a), b));
-		body.add(c.sub(x, c.exists(r, y)));
-		body.add(c.sub(y, a));
-		body.add(c.con(x));
-		body.add(c.con(y));
-		body.add(c.con(a));
-		body.add(c.con(b));
+		body.add(c.subx(x, c.exists(r, y)));
+		body.add(c.subx(y, a));
+		body.add(c.coni(x));
+		body.add(c.coni(y));
+		body.add(c.coni(a));
+		body.add(c.coni(b));
 		body.add(c.role(r));
 
 		this.clause = c.rule(head, body);
