@@ -173,8 +173,8 @@ public class ProblogInputCreator {
 		ontology.addAll(getDeclarations(factory, module));
 
 		module.getAxioms().forEach(axiom -> {
-			Clause clause = axiom.accept(renderer);
-			ontology.add(clause);
+			Set<Clause> clauses = axiom.accept(renderer);
+			ontology.addAll(clauses);
 		});
 		return ontology;
 	}

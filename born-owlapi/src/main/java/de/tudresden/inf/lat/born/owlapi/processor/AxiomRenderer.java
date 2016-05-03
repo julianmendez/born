@@ -31,7 +31,7 @@ import de.tudresden.inf.lat.jcel.ontology.axiom.extension.IntegerOntologyObjectF
  * @author Julian Mendez
  *
  */
-public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
+public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>> {
 
 	public static final char APOSTROPHE = '\'';
 	public static final char QUOTES = '"';
@@ -141,84 +141,87 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Clause> {
 	}
 
 	@Override
-	public Clause visit(FunctObjectPropAxiom axiom) {
+	public Set<Clause> visit(FunctObjectPropAxiom axiom) {
 		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Clause visit(GCI0Axiom axiom) {
+	public Set<Clause> visit(GCI0Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(axiom.getSubClass());
 		Term b = get(axiom.getSuperClass());
 
-		return ax(c.gci(a, b), axiom.getAnnotations());
+		return Collections.singleton(ax(c.gci(a, b), axiom.getAnnotations()));
 	}
 
 	@Override
-	public Clause visit(GCI1Axiom axiom) {
+	public Set<Clause> visit(GCI1Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a1 = get(axiom.getLeftSubClass());
 		Term a2 = get(axiom.getRightSubClass());
 		Term b = get(axiom.getSuperClass());
 
-		return ax(c.gci(c.and(a1, a2), b), axiom.getAnnotations());
+		return Collections.singleton(ax(c.gci(c.and(a1, a2), b), axiom.getAnnotations()));
 	}
 
 	@Override
-	public Clause visit(GCI2Axiom axiom) {
+	public Set<Clause> visit(GCI2Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(axiom.getSubClass());
 		Term r = get(axiom.getPropertyInSuperClass());
 		Term b = get(axiom.getClassInSuperClass());
 
-		return ax(c.gci(a, c.exists(r, b)), axiom.getAnnotations());
+		return Collections.singleton(ax(c.gci(a, c.exists(r, b)), axiom.getAnnotations()));
 	}
 
 	@Override
-	public Clause visit(GCI3Axiom axiom) {
+	public Set<Clause> visit(GCI3Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		FormulaConstructor c = new FormulaConstructor();
 		Term r = get(axiom.getPropertyInSubClass());
 		Term a = get(axiom.getClassInSubClass());
 		Term b = get(axiom.getSuperClass());
 
-		return ax(c.gci(c.exists(r, a), b), axiom.getAnnotations());
+		return Collections.singleton(ax(c.gci(c.exists(r, a), b), axiom.getAnnotations()));
 	}
 
 	@Override
-	public Clause visit(NominalAxiom axiom) {
+	public Set<Clause> visit(NominalAxiom axiom) {
 		Objects.requireNonNull(axiom);
+		Set<Clause> ret = new HashSet<Clause>();
 		FormulaConstructor c = new FormulaConstructor();
 		Term i = get(axiom.getIndividual());
 		Term a = get(axiom.getClassExpression());
 
-		return ax(c.gci(i, a), new HashSet<Annotation>());
+		ret.add(ax(c.gci(i, a), new HashSet<Annotation>()));
+		ret.add(ax(c.gci(a, i), new HashSet<Annotation>()));
+		return ret;
 	}
 
 	@Override
-	public Clause visit(RangeAxiom axiom) {
+	public Set<Clause> visit(RangeAxiom axiom) {
 		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Clause visit(RI1Axiom axiom) {
+	public Set<Clause> visit(RI1Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Clause visit(RI2Axiom axiom) {
+	public Set<Clause> visit(RI2Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Clause visit(RI3Axiom axiom) {
+	public Set<Clause> visit(RI3Axiom axiom) {
 		Objects.requireNonNull(axiom);
 		throw new UnsupportedOperationException();
 	}
