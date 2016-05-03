@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -47,6 +48,7 @@ import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
 import de.tudresden.inf.lat.born.problog.parser.TokenType;
 import de.tudresden.inf.lat.born.problog.type.ProblogProgram;
+import de.tudresden.inf.lat.jcel.coreontology.axiom.NominalAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerEntityManager;
 import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerEntityType;
@@ -217,6 +219,21 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
+	Set<NormalizedIntegerAxiom> removeUnnecessaryAnnotations(Set<NormalizedIntegerAxiom> axioms,
+			IntegerOntologyObjectFactory factory) {
+		Set<NormalizedIntegerAxiom> ret = new HashSet<NormalizedIntegerAxiom>();
+		axioms.forEach(axiom -> {
+			if (axiom instanceof NominalAxiom) {
+				NominalAxiom nominalAxiom = (NominalAxiom) axiom;
+				ret.add(factory.getNormalizedAxiomFactory().createNominalAxiom(nominalAxiom.getClassExpression(),
+						nominalAxiom.getIndividual(), new HashSet<>()));
+			} else {
+				ret.add(axiom);
+			}
+		});
+		return ret;
+	}
+
 	public String createProblogFile(boolean useOfDefaultCompletionRules, String additionalCompletionRules,
 			OWLOntology owlOntology, String bayesianNetwork, String query, OutputStream resultOutputStream,
 			ProcessorExecutionResult executionResult) throws IOException, OWLOntologyCreationException {
@@ -252,7 +269,8 @@ public class ProblogInputCreator {
 
 		long normalizationStart = System.nanoTime();
 		OntologyNormalizer normalizer = new OntologyNormalizer();
-		Set<NormalizedIntegerAxiom> normalizedAxioms = normalizer.normalize(axioms, factory);
+		Set<NormalizedIntegerAxiom> normalizedAxioms = removeUnnecessaryAnnotations(
+				normalizer.normalize(axioms, factory), factory);
 		logger.fine("Normalized Axioms: " + normalizedAxioms);
 
 		executionResult.setNormalizationTime(System.nanoTime() - normalizationStart);
