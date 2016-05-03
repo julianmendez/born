@@ -17,7 +17,7 @@ public class ExampleLoaderTest {
 	public void testGetExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
 		List<ExampleConfiguration> list = loader.getExampleConfigurations();
-		Assert.assertEquals(5, list.size());
+		Assert.assertEquals(6, list.size());
 
 		{
 			ExampleConfiguration conf = list.get(0);
@@ -61,6 +61,15 @@ public class ExampleLoaderTest {
 			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-4.owl"));
 			Assert.assertEquals(
 					"query(inst('http://lat.inf.tu-dresden.de/systems/born/born-example#r', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i0', 'http://lat.inf.tu-dresden.de/systems/born/born-example#i1')).\n\n",
+					conf.getQuery());
+		}
+
+		{
+			ExampleConfiguration conf = list.get(5);
+			Assert.assertEquals("example-5", conf.getOntologyName());
+			Assert.assertTrue(conf.getOntologyFileName().endsWith("/examples/example-5.owl"));
+			Assert.assertEquals(
+					"query(sub('http://lat.inf.tu-dresden.de/systems/born/born-example#a', 'http://lat.inf.tu-dresden.de/systems/born/born-example#d')).\n\n",
 					conf.getQuery());
 		}
 
