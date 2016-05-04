@@ -10,7 +10,7 @@ import java.util.Set;
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
 import de.tudresden.inf.lat.born.core.term.Clause;
 import de.tudresden.inf.lat.born.core.term.Term;
-import de.tudresden.inf.lat.jcel.coreontology.axiom.Annotation;
+import de.tudresden.inf.lat.jcel.coreontology.axiom.IntegerAnnotation;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.FunctObjectPropAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI0Axiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI1Axiom;
@@ -93,15 +93,15 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		}
 	}
 
-	Clause ax(Term str, Set<Annotation> annotations) {
+	Clause ax(Term str, Set<IntegerAnnotation> annotations) {
 		FormulaConstructor c = new FormulaConstructor();
 		if (annotations.isEmpty()) {
 			List<Term> emptyList = Collections.emptyList();
 			return c.rule(str, emptyList);
 
 		} else if (annotations.size() == 1) {
-			Annotation annotation = annotations.iterator().next();
-			String value = getValue(annotation.getAnnotationValue());
+			IntegerAnnotation annotation = annotations.iterator().next();
+			String value = getValue(get(annotation.getAnnotationValue()).asString());
 			Term newCons = c.newCons(value);
 			List<Term> preconditions = new ArrayList<Term>();
 			preconditions.add(newCons);
@@ -117,7 +117,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		Objects.requireNonNull(entity);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
-		Set<Annotation> emptySet = Collections.emptySet();
+		Set<IntegerAnnotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.con(a), emptySet);
 		return clause;
 	}
@@ -126,7 +126,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		Objects.requireNonNull(entity);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
-		Set<Annotation> emptySet = Collections.emptySet();
+		Set<IntegerAnnotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.role(a), emptySet);
 		return clause;
 	}
@@ -135,7 +135,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		Objects.requireNonNull(entity);
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(entity);
-		Set<Annotation> emptySet = Collections.emptySet();
+		Set<IntegerAnnotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.indiv(a), emptySet);
 		return clause;
 	}
@@ -197,8 +197,8 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		Term i = get(axiom.getIndividual());
 		Term a = get(axiom.getClassExpression());
 
-		ret.add(ax(c.gci(i, a), new HashSet<Annotation>()));
-		ret.add(ax(c.gci(a, i), new HashSet<Annotation>()));
+		ret.add(ax(c.gci(i, a), new HashSet<IntegerAnnotation>()));
+		ret.add(ax(c.gci(a, i), new HashSet<IntegerAnnotation>()));
 		return ret;
 	}
 
