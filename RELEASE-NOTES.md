@@ -12,7 +12,7 @@
 ### v0.3.0
 *(unreleased)*
 * uses a faster implementation of module extraction
-* uses jcel 0.23.2
+* uses jcel 0.24.0 (SNAPSHOT)
 * uses the OWL API 4.1.3
 * runs on Java 8
 * can be used as a plug-in for Protégé 5.0.0-beta-21
