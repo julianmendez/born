@@ -1,5 +1,8 @@
 package de.tudresden.inf.lat.born.gui.processor;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -58,6 +61,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final ProcessorConfiguration model;
 
 	public ProcessorPanel(ProcessorConfiguration model) {
+		setBackground(new Color(0, 102, 153));
 		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
@@ -140,16 +144,19 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// ontology
 
-		JLabel lblOntology = new JLabel("ontology");
-		lblOntology.setBounds(282, 83, 70, 15);
+		JLabel lblOntology = new JLabel("ONTOLOGY");
+		lblOntology.setFont(new Font("Courier New", Font.BOLD, 13));
+		lblOntology.setForeground(new Color(255, 255, 255));
+		lblOntology.setBounds(40, 48, 96, 15);
 		add(lblOntology);
 
 		buttonOntologyFile.setIcon(BornIcon.OPEN_FILE);
-		buttonOntologyFile.setBounds(213, 43, 54, 28);
+		buttonOntologyFile.setBounds(192, 40, 54, 28);
 		buttonOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonOntologyFile);
+		textOntologyFile.setBackground(new Color(255, 255, 240));
 
-		textOntologyFile.setBounds(282, 43, 688, 28);
+		textOntologyFile.setBounds(32, 77, 400, 28);
 		textOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		textOntologyFile.setEditable(false);
@@ -157,16 +164,19 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// Bayesian network
 
-		JLabel lblBayesianNetwork = new JLabel("Bayesian network");
-		lblBayesianNetwork.setBounds(282, 175, 128, 15);
+		JLabel lblBayesianNetwork = new JLabel("BAYESIAN NETWORK");
+		lblBayesianNetwork.setFont(new Font("Courier New", Font.BOLD, 13));
+		lblBayesianNetwork.setForeground(new Color(255, 255, 255));
+		lblBayesianNetwork.setBounds(40, 144, 128, 15);
 		add(lblBayesianNetwork);
 
 		buttonBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
-		buttonBayesianNetworkFile.setBounds(213, 135, 54, 28);
+		buttonBayesianNetworkFile.setBounds(192, 136, 54, 28);
 		buttonBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonBayesianNetworkFile);
+		textBayesianNetworkFile.setBackground(new Color(255, 255, 240));
 
-		textBayesianNetworkFile.setBounds(282, 135, 688, 28);
+		textBayesianNetworkFile.setBounds(32, 180, 400, 28);
 		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 		textBayesianNetworkFile.setEditable(false);
@@ -174,63 +184,71 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// rules
 
-		JLabel lblRules = new JLabel("rules");
-		lblRules.setBounds(282, 296, 70, 15);
+		JLabel lblRules = new JLabel("RULES");
+		lblRules.setFont(new Font("Courier New", Font.BOLD, 13));
+		lblRules.setForeground(new Color(255, 255, 255));
+		lblRules.setBounds(40, 248, 70, 15);
 		add(lblRules);
 
 		buttonResetCompletionRules.setIcon(BornIcon.REFRESH);
-		buttonResetCompletionRules.setBounds(213, 219, 54, 28);
+		buttonResetCompletionRules.setBounds(284, 240, 54, 28);
 		buttonResetCompletionRules.setToolTipText(Message.tooltipButtonResetCompletionRules);
 		add(buttonResetCompletionRules);
 
 		buttonGoToPreviousCompletionRules.setIcon(BornIcon.BACK);
-		buttonGoToPreviousCompletionRules.setBounds(213, 256, 54, 28);
+		buttonGoToPreviousCompletionRules.setBounds(192, 240, 54, 28);
 		buttonGoToPreviousCompletionRules.setToolTipText(Message.tooltipButtonGoToPreviousCompletionRules);
 		add(buttonGoToPreviousCompletionRules);
 
+		scrollCompletionRules.setBounds(32, 284, 400, 400);
+		scrollCompletionRules.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		add(scrollCompletionRules);
+		scrollCompletionRules.setViewportView(textCompletionRules);
+		textCompletionRules.setBackground(new Color(255, 255, 240));
+
 		textCompletionRules.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textCompletionRules.setAlignmentX(LEFT_ALIGNMENT);
-		textCompletionRules.setBounds(282, 219, 688, 65);
-
-		scrollCompletionRules.setBounds(282, 219, 688, 65);
-		scrollCompletionRules.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollCompletionRules.setViewportView(textCompletionRules);
-		add(scrollCompletionRules);
 
 		// query
 
-		JLabel lblInput = new JLabel("input");
-		lblInput.setBounds(282, 413, 70, 15);
+		JLabel lblInput = new JLabel("QUERY");
+		lblInput.setFont(new Font("Courier New", Font.BOLD, 13));
+		lblInput.setForeground(new Color(255, 255, 255));
+		lblInput.setBounds(552, 144, 70, 15);
 		add(lblInput);
 
 		buttonConsoleInput.setIcon(BornIcon.OPEN_FILE);
-		buttonConsoleInput.setBounds(213, 335, 54, 28);
+		buttonConsoleInput.setBounds(704, 136, 54, 28);
 		buttonConsoleInput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonConsoleInput);
+
+		scrollConsoleInput.setBounds(544, 180, 448, 193);
+		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		add(scrollConsoleInput);
+		textConsoleInput.setBackground(new Color(255, 255, 240));
+		scrollConsoleInput.setViewportView(textConsoleInput);
 
 		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
-		scrollConsoleInput.setBounds(282, 335, 688, 66);
-		scrollConsoleInput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollConsoleInput.setViewportView(textConsoleInput);
-		add(scrollConsoleInput);
-
 		// result
 
-		JLabel lblOutput = new JLabel("output");
-		lblOutput.setBounds(282, 538, 70, 15);
+		JLabel lblOutput = new JLabel("RESULT");
+		lblOutput.setFont(new Font("Courier New", Font.BOLD, 13));
+		lblOutput.setForeground(new Color(255, 255, 255));
+		lblOutput.setBounds(552, 456, 70, 15);
 		add(lblOutput);
 
 		buttonConsoleOutput.setIcon(BornIcon.SAVE_FILE);
-		buttonConsoleOutput.setBounds(213, 461, 54, 28);
+		buttonConsoleOutput.setBounds(704, 448, 54, 28);
 		buttonConsoleOutput.setToolTipText(Message.tooltipOpenInputOntologyFile);
 		add(buttonConsoleOutput);
 
-		scrollConsoleOutput.setBounds(282, 461, 688, 65);
+		scrollConsoleOutput.setBounds(544, 492, 448, 192);
 		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollConsoleOutput.setViewportView(textConsoleOutput);
 		add(scrollConsoleOutput);
+		textConsoleOutput.setBackground(new Color(255, 255, 240));
+		scrollConsoleOutput.setViewportView(textConsoleOutput);
 
 		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
 		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
@@ -238,24 +256,46 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		// execution
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
-		buttonComputeInference.setBounds(213, 573, 54, 28);
+		buttonComputeInference.setBounds(796, 136, 54, 28);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
 		add(buttonComputeInference);
+		labelProgress.setFont(new Font("Courier New", Font.BOLD, 13));
+		labelProgress.setForeground(new Color(255, 255, 255));
 
-		labelProgress.setBounds(213, 624, 99, 15);
+		labelProgress.setBounds(796, 456, 96, 15);
 		labelProgress.setVisible(false);
 		add(labelProgress);
 
 		// examples
 
-		comboBoxExample.setBounds(702, 573, 268, 28);
+		comboBoxExample.setBounds(796, 40, 192, 28);
 		comboBoxExample.setToolTipText(Message.tooltipComboBoxExample);
 		add(comboBoxExample);
 
 		buttonUpdateExample.setIcon(BornIcon.REFRESH);
-		buttonUpdateExample.setBounds(622, 573, 54, 28);
+		buttonUpdateExample.setBounds(704, 40, 54, 28);
 		buttonUpdateExample.setToolTipText(Message.tooltipButtonUpdateExample);
 		add(buttonUpdateExample);
+
+		JButton button = new JButton();
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setToolTipText("opens an input ontology file");
+		button.setBounds(284, 40, 54, 28);
+		add(button);
+
+		JButton button_1 = new JButton();
+		button_1.setToolTipText("opens an input ontology file");
+		button_1.setBounds(284, 136, 54, 28);
+		add(button_1);
+
+		JLabel lblExamples = new JLabel("EXAMPLES");
+		lblExamples.setFont(new Font("Courier New", Font.BOLD, 13));
+		lblExamples.setForeground(new Color(255, 255, 255));
+		lblExamples.setBounds(552, 48, 70, 15);
+		add(lblExamples);
 
 	}
 
