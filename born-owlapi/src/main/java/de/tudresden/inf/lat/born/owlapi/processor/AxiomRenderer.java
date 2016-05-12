@@ -9,13 +9,14 @@ import java.util.Set;
 
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
 import de.tudresden.inf.lat.born.core.term.Clause;
+import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.core.term.Term;
-import de.tudresden.inf.lat.jcel.coreontology.axiom.IntegerAnnotation;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.FunctObjectPropAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI0Axiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI1Axiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI2Axiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI3Axiom;
+import de.tudresden.inf.lat.jcel.coreontology.axiom.IntegerAnnotation;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NominalAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiomVisitor;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.RI1Axiom;
@@ -65,6 +66,17 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		return sbuf.toString();
 	}
 
+	String removeApostrophes(String symbolStr0) {
+		String symbolStr = symbolStr0;
+		if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
+			symbolStr = symbolStr.substring(1);
+			symbolStr = symbolStr.substring(0, symbolStr.length() - 1);
+			return symbolStr;
+		} else {
+			return symbolStr0;
+		}
+	}
+
 	String getValue(String value) {
 		if (Objects.isNull(value)) {
 			return "";
@@ -101,7 +113,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 
 		} else if (annotations.size() == 1) {
 			IntegerAnnotation annotation = annotations.iterator().next();
-			String value = getValue(get(annotation.getAnnotationValue()).asString());
+			String value = removeApostrophes(getValue(get(annotation.getAnnotationValue()).asString()));
 			Term newCons = c.newCons(value);
 			List<Term> preconditions = new ArrayList<Term>();
 			preconditions.add(newCons);
