@@ -1,7 +1,6 @@
 package de.tudresden.inf.lat.born.core.term;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,23 +54,25 @@ public class ClauseImpl implements Clause {
 		if (this.body.isEmpty()) {
 			return this.head.asString() + Symbol.POINT_CHAR + Symbol.NEW_LINE_CHAR;
 		} else {
-			StringBuffer sbuf = new StringBuffer();
-			sbuf.append(this.head.asString() + Symbol.SPACE_CHAR + Symbol.IF_SYMBOL + Symbol.SPACE_CHAR);
+			StringBuilder sb = new StringBuilder();
+			sb.append(this.head.asString() + Symbol.SPACE_CHAR + Symbol.IF_SYMBOL + Symbol.SPACE_CHAR);
 			if (this.body.size() == 1) {
-				sbuf.append(this.body.iterator().next().asString() + Symbol.POINT_CHAR + Symbol.NEW_LINE_CHAR);
-				return sbuf.toString();
+				sb.append(this.body.iterator().next().asString() + Symbol.POINT_CHAR + Symbol.NEW_LINE_CHAR);
+				return sb.toString();
 			} else {
-				Iterator<Term> it = body.iterator();
-				while (it.hasNext()) {
-					sbuf.append(Symbol.NEW_LINE_CHAR + TAB);
-					sbuf.append(it.next().asString());
-					if (it.hasNext()) {
-						sbuf.append(Symbol.COMMA_CHAR);
+				boolean[] first = new boolean[1];
+				first[0] = true;
+				this.body.forEach(term -> {
+					if (first[0]) {
+						first[0] = false;
+					} else {
+						sb.append("" + Symbol.COMMA_CHAR + Symbol.SPACE_CHAR);
 					}
-				}
-				sbuf.append(Symbol.POINT_CHAR);
-				sbuf.append(Symbol.NEW_LINE_CHAR);
-				return sbuf.toString();
+					sb.append(term.asString());
+				});
+				sb.append(Symbol.POINT_CHAR);
+				sb.append(Symbol.NEW_LINE_CHAR);
+				return sb.toString();
 			}
 		}
 	}
