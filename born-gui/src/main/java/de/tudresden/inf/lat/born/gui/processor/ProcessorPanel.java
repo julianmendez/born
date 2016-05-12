@@ -272,7 +272,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		comboBoxExample.setToolTipText(Message.tooltipComboBoxExample);
 		add(comboBoxExample);
 
-		buttonUpdateExample.setIcon(BornIcon.REFRESH);
+		buttonUpdateExample.setIcon(BornIcon.OPEN_FILE);
 		buttonUpdateExample.setBounds(704, 40, 54, 28);
 		buttonUpdateExample.setToolTipText(Message.tooltipButtonUpdateExample);
 		add(buttonUpdateExample);
