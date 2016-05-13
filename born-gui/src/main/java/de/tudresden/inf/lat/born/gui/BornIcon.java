@@ -20,6 +20,7 @@ public class BornIcon {
 
 	public static final String PATH_OPEN_FILE = "icons/openfolder.png";
 	public static final String PATH_SAVE_FILE = "icons/floppydisk.png";
+	public static final String PATH_VIEW_FILE = "icons/magnifyingglass.png";
 	public static final String PATH_RUN = "icons/play.png";
 	public static final String PATH_REFRESH = "icons/refresh.png";
 	public static final String PATH_BACK = "icons/back.png";
@@ -28,6 +29,7 @@ public class BornIcon {
 
 	public static final ImageIcon OPEN_FILE = createIcon(PATH_OPEN_FILE).get();
 	public static final ImageIcon SAVE_FILE = createIcon(PATH_SAVE_FILE).get();
+	public static final ImageIcon VIEW_FILE = createIcon(PATH_VIEW_FILE).get();
 	public static final ImageIcon RUN = createIcon(PATH_RUN).get();
 	public static final ImageIcon REFRESH = createIcon(PATH_REFRESH).get();
 	public static final ImageIcon BACK = createIcon(PATH_BACK).get();

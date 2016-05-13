@@ -41,7 +41,9 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! ";
 
 	private final JButton buttonOntologyFile = new JButton();
+	private final JButton buttonViewOntology = new JButton();
 	private final JButton buttonBayesianNetworkFile = new JButton();
+	private final JButton buttonViewBayesianNetwork = new JButton();
 	private final JButton buttonResetCompletionRules = new JButton();
 	private final JButton buttonGoToPreviousCompletionRules = new JButton();
 	private final JButton buttonConsoleInput = new JButton();
@@ -277,19 +279,19 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonUpdateExample.setToolTipText(Message.tooltipButtonUpdateExample);
 		add(buttonUpdateExample);
 
-		JButton button = new JButton();
-		button.addActionListener(new ActionListener() {
+		buttonViewOntology.setIcon(BornIcon.VIEW_FILE);
+		buttonViewOntology.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button.setToolTipText("opens an input ontology file");
-		button.setBounds(284, 40, 54, 28);
-		add(button);
+		buttonViewOntology.setToolTipText("view ontology file");
+		buttonViewOntology.setBounds(284, 40, 54, 28);
+		add(buttonViewOntology);
 
-		JButton button_1 = new JButton();
-		button_1.setToolTipText("opens an input ontology file");
-		button_1.setBounds(284, 136, 54, 28);
-		add(button_1);
+		buttonViewBayesianNetwork.setIcon(BornIcon.VIEW_FILE);
+		buttonViewBayesianNetwork.setToolTipText("view Bayesian network file");
+		buttonViewBayesianNetwork.setBounds(284, 136, 54, 28);
+		add(buttonViewBayesianNetwork);
 
 		JLabel lblExamples = new JLabel("EXAMPLES");
 		lblExamples.setFont(new Font("Courier New", Font.BOLD, 13));
@@ -467,7 +469,9 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void setButtonsEnabled(boolean status) {
 		buttonOntologyFile.setEnabled(status);
+		buttonViewOntology.setEnabled(status);
 		buttonBayesianNetworkFile.setEnabled(status);
+		buttonViewBayesianNetwork.setEnabled(status);
 		buttonResetCompletionRules.setEnabled(status);
 		buttonGoToPreviousCompletionRules.setEnabled(status);
 		buttonConsoleInput.setEnabled(status);
