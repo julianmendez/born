@@ -24,5 +24,5 @@ public class Module {
 	public Set<NormalizedIntegerAxiom> getAxioms() {
 		return this.axioms;
 	}
-	
+
 }
