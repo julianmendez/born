@@ -79,11 +79,27 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	@Override
+	public void addButtonViewOntologyListener(ActionListener listener, String actionCommand) {
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
+		buttonViewOntology.addActionListener(listener);
+		buttonViewOntology.setActionCommand(actionCommand);
+	}
+
+	@Override
 	public void addButtonBayesianNetworkFileListener(ActionListener listener, String actionCommand) {
 		Objects.requireNonNull(listener);
 		Objects.requireNonNull(actionCommand);
 		buttonBayesianNetworkFile.addActionListener(listener);
 		buttonBayesianNetworkFile.setActionCommand(actionCommand);
+	}
+
+	@Override
+	public void addButtonViewBayesianNetworkListener(ActionListener listener, String actionCommand) {
+		Objects.requireNonNull(listener);
+		Objects.requireNonNull(actionCommand);
+		buttonViewBayesianNetwork.addActionListener(listener);
+		buttonViewBayesianNetwork.setActionCommand(actionCommand);
 	}
 
 	@Override

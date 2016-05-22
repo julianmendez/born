@@ -1,18 +1,26 @@
 package de.tudresden.inf.lat.born.gui.processor;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Objects;
 
 import javax.swing.JFileChooser;
 
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.gui.common.TextViewer;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogInputCreator;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
+import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResult;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
@@ -46,8 +54,10 @@ public class ProcessorController implements ActionListener {
 
 	}
 
-	private static final String actionInputOntology = "open file";
+	private static final String actionInputOntology = "open ontology file";
+	private static final String actionViewOntology = "view ontology file";
 	private static final String actionBayesianNetwork = "Bayesian network file";
+	private static final String actionViewBayesianNetwork = "view Bayesian network file";
 	private static final String actionResetCompletionRules = "reset completion rules";
 	private static final String actionGoToPreviousCompletionRules = "go to previous completion rules";
 	private static final String actionConsoleInput = "read console";
@@ -88,8 +98,12 @@ public class ProcessorController implements ActionListener {
 		String cmd = e.getActionCommand();
 		if (cmd.equals(actionInputOntology)) {
 			executeActionInputOntology();
+		} else if (cmd.equals(actionViewOntology)) {
+			executeActionViewOntology();
 		} else if (cmd.equals(actionBayesianNetwork)) {
 			executeActionBayesianNetwork();
+		} else if (cmd.equals(actionViewBayesianNetwork)) {
+			executeActionViewBayesianNetwork();
 		} else if (cmd.equals(actionResetCompletionRules)) {
 			executeActionResetCompletionRules();
 		} else if (cmd.equals(actionGoToPreviousCompletionRules)) {
@@ -123,6 +137,25 @@ public class ProcessorController implements ActionListener {
 		}
 	}
 
+	void executeActionViewOntology() {
+		String text = "";
+		try {
+			OWLOntology ontology = ProcessorConfigurationImpl
+					.readOntology(new FileInputStream(getView().getOntologyFile()));
+			StringBuilder sb = new StringBuilder();
+			ontology.getAxioms().forEach(axiom -> sb.append(" " + axiom.toString() + "\n"));
+			text = sb.toString();
+		} catch (IOException e) {
+			text = e.getMessage();
+		} catch (OWLOntologyCreationException e) {
+			text = e.getMessage();
+		}
+		TextViewer panel = new TextViewer();
+		panel.setBounds(new Rectangle(0, 0, 800, 600));
+		panel.setVisible(true);
+		panel.getView().setModel(text);
+	}
+
 	void executeActionBayesianNetwork() {
 		JFileChooser fileChooser = new JFileChooser(this.lastPath);
 		int returnVal = fileChooser.showOpenDialog(getView().getPanel());
@@ -135,6 +168,19 @@ public class ProcessorController implements ActionListener {
 			getView().updateBayesianNetworkFile();
 			this.lastPath = file.getParentFile();
 		}
+	}
+
+	void executeActionViewBayesianNetwork() {
+		String text = "";
+		try {
+			text = ProcessorConfigurationImpl.read(new FileReader(getView().getBayesianNetworkFile()));
+		} catch (IOException e) {
+			text = e.getMessage();
+		}
+		TextViewer panel = new TextViewer();
+		panel.setBounds(new Rectangle(0, 0, 800, 600));
+		panel.setVisible(true);
+		panel.getView().setModel(text);
 	}
 
 	void executeActionResetCompletionRules() {
@@ -242,7 +288,9 @@ public class ProcessorController implements ActionListener {
 		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
 
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
+		getView().addButtonViewOntologyListener(this, actionViewOntology);
 		getView().addButtonBayesianNetworkFileListener(this, actionBayesianNetwork);
+		getView().addButtonViewBayesianNetworkListener(this, actionViewBayesianNetwork);
 		getView().addButtonResetCompletionRulesListener(this, actionResetCompletionRules);
 		getView().addButtonGoToPreviousCompletionRulesListener(this, actionGoToPreviousCompletionRules);
 		getView().addButtonConsoleInputListener(this, actionConsoleInput);

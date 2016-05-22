@@ -26,6 +26,16 @@ public interface ProcessorView extends JPanelView {
 	void addButtonOntologyFileListener(ActionListener listener, String actionCommand);
 
 	/**
+	 * Adds an action listener to the button to view the input ontology.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	void addButtonViewOntologyListener(ActionListener listener, String actionCommand);
+
+	/**
 	 * Adds an action listener to the button to select the Bayesian network.
 	 * 
 	 * @param listener
@@ -34,6 +44,16 @@ public interface ProcessorView extends JPanelView {
 	 *            action command
 	 */
 	void addButtonBayesianNetworkFileListener(ActionListener listener, String actionCommand);
+
+	/**
+	 * Adds an action listener to the button to view the Bayesian network.
+	 * 
+	 * @param listener
+	 *            listener
+	 * @param actionCommand
+	 *            action command
+	 */
+	void addButtonViewBayesianNetworkListener(ActionListener listener, String actionCommand);
 
 	/**
 	 * Adds an action listener to the button to reset the completion rules.
