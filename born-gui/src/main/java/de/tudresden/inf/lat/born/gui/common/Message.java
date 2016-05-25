@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.gui;
+package de.tudresden.inf.lat.born.gui.common;
 
 /**
  * This interface provides text constants for the graphical user interface.

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
-import de.tudresden.inf.lat.born.gui.Message;
+import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotationCreator;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;

@@ -24,7 +24,7 @@ import javax.swing.ScrollPaneConstants;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
-import de.tudresden.inf.lat.born.gui.Message;
+import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;

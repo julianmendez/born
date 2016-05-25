@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerPanel;
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
 import de.tudresden.inf.lat.born.gui.processor.ProcessorPanel;
