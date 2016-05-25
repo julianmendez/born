@@ -31,6 +31,7 @@ import de.tudresden.inf.lat.born.core.rule.CR2Rule;
 import de.tudresden.inf.lat.born.core.rule.CR3Rule;
 import de.tudresden.inf.lat.born.core.rule.CR4Rule;
 import de.tudresden.inf.lat.born.core.rule.CompletionRule;
+import de.tudresden.inf.lat.born.core.rule.EmptyRule;
 import de.tudresden.inf.lat.born.core.rule.FR1Rule;
 import de.tudresden.inf.lat.born.core.rule.FR2Rule;
 import de.tudresden.inf.lat.born.core.rule.FR3Rule;
@@ -67,10 +68,16 @@ public class ProblogInputCreator {
 
 	private static final Logger logger = Logger.getLogger(ProblogInputCreator.class.getName());
 
-	private static final String NUMBER_OF_OWL_AXIOMS_MSG = "  Number of OWL axioms: ";
-	private static final String NUMBER_OF_AXIOMS_MSG = "  Number of axioms: ";
-	private static final String NUMBER_OF_NORM_AXIOMS_MSG = "  Number of normalized axioms: ";
-	private static final String NUMBER_OF_AXIOMS_IN_MODULE = "  Number of axioms in module: ";
+	static final String NUMBER_OF_OWL_AXIOMS_MSG = "  Number of OWL axioms: ";
+	static final String NUMBER_OF_AXIOMS_MSG = "  Number of axioms: ";
+	static final String NUMBER_OF_NORM_AXIOMS_MSG = "  Number of normalized axioms: ";
+	static final String NUMBER_OF_AXIOMS_IN_MODULE = "  Number of axioms in module: ";
+
+	static final String RULES_TO_INTERPRET_QUERIES_MSG = " Rules to interpret the queries";
+	static final String RULES_TO_PROCESS_INDIVIDUALS_MSG = " Rules to process individuals";
+	static final String BASIC_RULES_FOR_COMPLETION_MSG = " Basic rules for the completion";
+	static final String EL_COMPLETION_RULES_MSG = " EL complettion rules";
+	static final String RULES_TO_AVOID_EMPTY_PREDICATES_OF_ENTITIES_MSG = " Rules to avoid empty predicates of entities";
 
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
 		Objects.requireNonNull(reader);
@@ -103,18 +110,28 @@ public class ProblogInputCreator {
 
 	public List<CompletionRule> getDefaultCompletionRules() {
 		List<CompletionRule> completionRules = new ArrayList<>();
+		completionRules.add(new EmptyRule());
+		completionRules.add(new EmptyRule(RULES_TO_INTERPRET_QUERIES_MSG));
 		completionRules.add(new FR1Rule());
 		completionRules.add(new FR2Rule());
 		completionRules.add(new FR3Rule());
+		completionRules.add(new EmptyRule());
+		completionRules.add(new EmptyRule(RULES_TO_PROCESS_INDIVIDUALS_MSG));
 		completionRules.add(new RR1Rule());
 		completionRules.add(new RR2Rule());
+		completionRules.add(new EmptyRule());
+		completionRules.add(new EmptyRule(BASIC_RULES_FOR_COMPLETION_MSG));
 		completionRules.add(new BR1Rule());
 		completionRules.add(new BR2Rule());
 		completionRules.add(new BR3Rule());
+		completionRules.add(new EmptyRule());
+		completionRules.add(new EmptyRule(EL_COMPLETION_RULES_MSG));
 		completionRules.add(new CR1Rule());
 		completionRules.add(new CR2Rule());
 		completionRules.add(new CR3Rule());
 		completionRules.add(new CR4Rule());
+		completionRules.add(new EmptyRule());
+		completionRules.add(new EmptyRule(RULES_TO_AVOID_EMPTY_PREDICATES_OF_ENTITIES_MSG));
 		completionRules.add(new TR1Rule());
 		completionRules.add(new TR2Rule());
 		completionRules.add(new TR3Rule());

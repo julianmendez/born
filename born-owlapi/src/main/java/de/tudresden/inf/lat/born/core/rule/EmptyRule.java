@@ -43,7 +43,7 @@ public class EmptyRule implements CompletionRule {
 
 	@Override
 	public String asString() {
-		return BEGIN_COMMENT + comment + END_COMMENT;
+		return comment.isEmpty() ? END_COMMENT : (BEGIN_COMMENT + comment + END_COMMENT);
 	}
 
 	@Override

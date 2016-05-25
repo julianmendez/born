@@ -124,8 +124,6 @@ public class ProblogProgram {
 		StringBuffer sb = new StringBuffer();
 		clauses.forEach(clause -> {
 			sb.append(clause.asString());
-			sb.append(Symbol.PERCENT_CHAR);
-			sb.append(Symbol.NEW_LINE_CHAR);
 		});
 		return sb.toString();
 	}
