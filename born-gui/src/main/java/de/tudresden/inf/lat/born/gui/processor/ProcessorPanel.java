@@ -24,6 +24,7 @@ import javax.swing.ScrollPaneConstants;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
+import de.tudresden.inf.lat.born.gui.common.FormatTool;
 import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
@@ -40,6 +41,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! ";
 
+	private final FormatTool formatTool = new FormatTool();
 	private final JButton buttonOntologyFile = new JButton();
 	private final JButton buttonViewOntology = new JButton();
 	private final JButton buttonBayesianNetworkFile = new JButton();
@@ -324,46 +326,46 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public String getOntologyFile() {
-		return textOntologyFile.getText();
+		return textOntologyFile.getText().trim();
 	}
 
 	@Override
 	public void setOntologyFile(String fileName) {
 		Objects.requireNonNull(fileName);
-		textOntologyFile.setText(fileName);
+		textOntologyFile.setText(formatTool.formatText(fileName));
 	}
 
 	@Override
 	public String getBayesianNetworkFile() {
-		return textBayesianNetworkFile.getText();
+		return textBayesianNetworkFile.getText().trim();
 	}
 
 	@Override
 	public void setBayesianNetworkFile(String fileName) {
 		Objects.requireNonNull(fileName);
-		textBayesianNetworkFile.setText(fileName);
+		textBayesianNetworkFile.setText(formatTool.formatText(fileName));
 	}
 
 	@Override
 	public String getCompletionRules() {
-		return textCompletionRules.getText();
+		return formatTool.trimText(textCompletionRules.getText());
 	}
 
 	@Override
 	public void setCompletionRules(String text) {
 		Objects.requireNonNull(text);
-		textCompletionRules.setText(text);
+		textCompletionRules.setText(formatTool.formatText(text));
 	}
 
 	@Override
 	public String getConsoleInput() {
-		return textConsoleInput.getText();
+		return formatTool.trimText(textConsoleInput.getText());
 	}
 
 	@Override
 	public void setConsoleInput(String text) {
 		Objects.requireNonNull(text);
-		textConsoleInput.setText(text);
+		textConsoleInput.setText(formatTool.formatText(text));
 	}
 
 	@Override
@@ -372,7 +374,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		if (Objects.nonNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
 			try {
 				String text = ProcessorConfigurationImpl.read(new FileReader(consoleInputFile));
-				this.textConsoleInput.setText(text);
+				this.textConsoleInput.setText(formatTool.formatText(text));
 				updateQuery();
 			} catch (IOException e) {
 				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
@@ -385,7 +387,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		Objects.requireNonNull(consoleOutputFile);
 		if (Objects.nonNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
-				String text = this.textConsoleOutput.getText();
+				String text = formatTool.trimText(this.textConsoleOutput.getText());
 				ProcessorConfigurationImpl.write(new StringReader(text), new FileWriter(consoleOutputFile));
 			} catch (IOException e) {
 				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
@@ -395,13 +397,13 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public String getConsoleOutput() {
-		return textConsoleOutput.getText();
+		return formatTool.trimText(textConsoleOutput.getText());
 	}
 
 	@Override
 	public void setConsoleOutput(String text) {
 		Objects.requireNonNull(text);
-		textConsoleOutput.setText(text);
+		textConsoleOutput.setText(formatTool.formatText(text));
 	}
 
 	@Override
@@ -431,7 +433,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public void updateCompletionRules() {
-		String completionRules = textCompletionRules.getText();
+		String completionRules = formatTool.trimText(textCompletionRules.getText());
 		if (Objects.nonNull(completionRules) && !completionRules.trim().isEmpty()) {
 			getModel().setAdditionalCompletionRules(completionRules);
 		}
@@ -465,7 +467,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public void updateQuery() {
-		String query = textConsoleInput.getText();
+		String query = formatTool.trimText(textConsoleInput.getText());
 		if (Objects.nonNull(query) && !query.trim().isEmpty()) {
 			getModel().setQuery(query);
 		}
@@ -474,7 +476,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void setResult(String result) {
 		Objects.requireNonNull(result);
-		textConsoleOutput.setText(result);
+		textConsoleOutput.setText(formatTool.formatText(result));
 	}
 
 	@Override
@@ -500,7 +502,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void addExamples(Collection<ExampleConfiguration> examples) {
 		Objects.requireNonNull(examples);
-		examples.forEach(configuration -> comboBoxExample.addItem(configuration.getOntologyName()));
+		examples.forEach(
+				configuration -> comboBoxExample.addItem(formatTool.formatText(configuration.getOntologyName())));
 	}
 
 	@Override
