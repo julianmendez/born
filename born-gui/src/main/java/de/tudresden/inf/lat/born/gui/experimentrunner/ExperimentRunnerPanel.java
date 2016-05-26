@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
+import de.tudresden.inf.lat.born.gui.common.FormatTool;
 import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorCore;
@@ -24,6 +25,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
+	private FormatTool formatTool = new FormatTool();
 	private JButton buttonInputOntologyDirectory = new JButton();
 	private JButton buttonBayesianNetworkDirectory = new JButton();
 	private JButton buttonOutputDirectory = new JButton();
@@ -182,37 +184,37 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 	@Override
 	public String getInputOntologyDirectory() {
-		return this.textInputOntologyDirectory.getText();
+		return this.textInputOntologyDirectory.getText().trim();
 	}
 
 	@Override
 	public void setInputOntologyDirectory(String directoryName) {
 		Objects.requireNonNull(directoryName);
-		this.textInputOntologyDirectory.setText(directoryName);
+		this.textInputOntologyDirectory.setText(formatTool.formatText(directoryName));
 		updateInputOntologyDirectory();
 	}
 
 	@Override
 	public String getBayesianNetworkDirectory() {
-		return this.textBayesianNetworkDirectory.getText();
+		return this.textBayesianNetworkDirectory.getText().trim();
 	}
 
 	@Override
 	public void setBayesianNetworkDirectory(String directoryName) {
 		Objects.requireNonNull(directoryName);
-		this.textBayesianNetworkDirectory.setText(directoryName);
+		this.textBayesianNetworkDirectory.setText(formatTool.formatText(directoryName));
 		updateBayesianNetworkDirectory();
 	}
 
 	@Override
 	public String getOutputDirectory() {
-		return this.textOutputDirectory.getText();
+		return this.textOutputDirectory.getText().trim();
 	}
 
 	@Override
 	public void setOutputDirectory(String directoryName) {
 		Objects.requireNonNull(directoryName);
-		this.textOutputDirectory.setText(directoryName);
+		this.textOutputDirectory.setText(formatTool.formatText(directoryName));
 		updateOutputDirectory();
 	}
 
@@ -254,25 +256,25 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 	@Override
 	public void updateSeed() {
-		String seedStr = this.textSeed.getText();
+		String seedStr = this.textSeed.getText().trim();
 		int seed = 0;
 		try {
 			seed = Integer.parseInt(seedStr);
 		} catch (NumberFormatException e) {
 		}
-		this.textSeed.setText("" + seed);
+		this.textSeed.setText(formatTool.formatText("" + seed));
 		this.model.setSeed(seed);
 	}
 
 	@Override
 	public void updateNumberOfQueries() {
-		String numberOfQueriesStr = this.textNumberOfQueries.getText();
+		String numberOfQueriesStr = this.textNumberOfQueries.getText().trim();
 		int numberOfQueries = 0;
 		try {
 			numberOfQueries = Integer.parseInt(numberOfQueriesStr);
 		} catch (NumberFormatException e) {
 		}
-		this.textNumberOfQueries.setText("" + numberOfQueries);
+		this.textNumberOfQueries.setText(formatTool.formatText("" + numberOfQueries));
 		this.model.setNumberOfQueries(numberOfQueries);
 	}
 
@@ -292,18 +294,18 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 	@Override
 	public String getNumebrOfQueries() {
-		return this.textNumberOfQueries.getText();
+		return this.textNumberOfQueries.getText().trim();
 	}
 
 	@Override
 	public String getSeed() {
-		return this.textSeed.getText();
+		return this.textSeed.getText().trim();
 	}
 
 	@Override
 	public void setSeed(String seed) {
 		Objects.requireNonNull(seed);
-		this.textSeed.setText(seed);
+		this.textSeed.setText(formatTool.formatText(seed));
 	}
 
 	@Override

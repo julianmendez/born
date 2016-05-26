@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.tudresden.inf.lat.born.gui.BornIcon;
+import de.tudresden.inf.lat.born.gui.common.FormatTool;
 import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotationCreator;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
@@ -30,6 +31,8 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
 
 	private static final long serialVersionUID = -7460256750941145085L;
+
+	private FormatTool formatTool = new FormatTool();
 
 	private JButton buttonSelectInputOntologyFile = new JButton();
 	private JButton buttonSelectInputBayesianNetworkFile = new JButton();
@@ -217,7 +220,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	@Override
 	public void updateThreshold() {
 		try {
-			double th = Double.parseDouble(textThreshold.getText());
+			double th = Double.parseDouble(textThreshold.getText().trim());
 			getModel().setThreshold(th);
 		} catch (NumberFormatException e) {
 		}
@@ -238,46 +241,46 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 	@Override
 	public String getInputOntologyFile() {
-		return textInputOntologyFile.getText();
+		return textInputOntologyFile.getText().trim();
 	}
 
 	@Override
 	public void setInputOntologyFile(String fileName) {
 		Objects.requireNonNull(fileName);
-		textInputOntologyFile.setText(fileName);
+		textInputOntologyFile.setText(formatTool.formatText(fileName));
 	}
 
 	@Override
 	public String getThreshold() {
-		return textThreshold.getText();
+		return textThreshold.getText().trim();
 	}
 
 	@Override
 	public void setThreshold(String threshold) {
 		Objects.requireNonNull(threshold);
-		textThreshold.setText(threshold);
+		textThreshold.setText(formatTool.formatText(threshold));
 	}
 
 	@Override
 	public String getInputBayesianNetworkFile() {
-		return textInputBayesianNetworkFile.getText();
+		return textInputBayesianNetworkFile.getText().trim();
 	}
 
 	@Override
 	public void setInputBayesianNetworkFile(String inputBayesianNetworkFile) {
 		Objects.requireNonNull(inputBayesianNetworkFile);
-		textInputBayesianNetworkFile.setText(inputBayesianNetworkFile);
+		textInputBayesianNetworkFile.setText(formatTool.formatText(inputBayesianNetworkFile));
 	}
 
 	@Override
 	public String getListOfParents() {
-		return textListOfParents.getText();
+		return textListOfParents.getText().trim();
 	}
 
 	@Override
 	public void setListOfParents(String listOfParents) {
 		Objects.requireNonNull(listOfParents);
-		textListOfParents.setText(listOfParents);
+		textListOfParents.setText(formatTool.formatText(listOfParents));
 	}
 
 	@Override
