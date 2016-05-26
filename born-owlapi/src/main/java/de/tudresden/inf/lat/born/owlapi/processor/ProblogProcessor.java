@@ -1,24 +1,9 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
-import java.util.stream.IntStream;
 import java.util.zip.ZipEntry;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
@@ -32,14 +17,7 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
  */
 public class ProblogProcessor implements QueryProcessor {
 
-	final String MD5 = "MD5";
-	final String SHA_1 = "SHA-1";
-	final String SHA_256 = "SHA-256";
-
 	static final String FILE_SEPARATOR = Symbol.FILE_SEPARATOR;
-	static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI.create("https://bitbucket.org/problog/problog/get/master.zip");
-	static final String DEFAULT_PROBLOG_ZIP_FILE = "problog-2.1-SNAPSHOT.zip";
-	static final String DEFAULT_VERIFICATION_FILE = DEFAULT_PROBLOG_ZIP_FILE + ".sha";
 	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = FILE_SEPARATOR + "tmp";
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
@@ -84,93 +62,6 @@ public class ProblogProcessor implements QueryProcessor {
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
-	}
-
-	/**
-	 * Downloads ProbLog from the default download URI.
-	 * 
-	 * @param start
-	 *            execution start
-	 * @param problogZipFile
-	 *            file name of the ProbLog ZIP file
-	 * @throws IOException
-	 *             if something goes wrong with I/O
-	 * @throws URISyntaxException
-	 *             if the default URI is not valid
-	 */
-	void downloadProblog(long start, String problogZipFile) throws IOException, URISyntaxException {
-		Objects.requireNonNull(problogZipFile);
-		log("Download ProbLog.", start);
-		ReadableByteChannel channel = Channels.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
-		FileOutputStream output = new FileOutputStream(problogZipFile);
-		output.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
-		output.close();
-	}
-
-	String readVerificationCode() {
-		String ret = "";
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DEFAULT_VERIFICATION_FILE));
-			StringBuilder sb = new StringBuilder();
-			reader.lines().forEach(line -> {
-				sb.append(line.trim());
-			});
-			reader.close();
-			ret = sb.toString();
-		} catch (IOException e) {
-		}
-		return ret;
-	}
-
-	void storeVerificationCode(String code) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(DEFAULT_VERIFICATION_FILE));
-		writer.write(code.trim());
-		writer.newLine();
-		writer.flush();
-		writer.close();
-	}
-
-	byte[] getBytes(InputStream inputStream) throws IOException {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		BufferedInputStream input = new BufferedInputStream(inputStream);
-		for (int ch = input.read(); ch != -1; ch = input.read()) {
-			output.write(ch);
-		}
-		return output.toByteArray();
-	}
-
-	String computeVerificationCode() {
-		String ret = "";
-		try {
-			ret = asHexString(computeVerificationCode(getBytes(new FileInputStream(DEFAULT_PROBLOG_ZIP_FILE))));
-		} catch (IOException e) {
-
-		}
-		return ret;
-	}
-
-	byte[] computeVerificationCode(byte[] content) throws IOException {
-		Objects.requireNonNull(content);
-		MessageDigest md;
-		byte[] digest;
-		try {
-			md = MessageDigest.getInstance(SHA_256);
-			md.update(content);
-			digest = md.digest();
-		} catch (NoSuchAlgorithmException e) {
-			throw new IllegalStateException(e);
-		}
-		return digest;
-	}
-
-	String asHexString(byte[] buffer) {
-		StringBuilder sb = new StringBuilder();
-		IntStream.range(0, buffer.length).forEach(index -> {
-			int value = Byte.toUnsignedInt(buffer[index]);
-			String valueStr = ((value < 0x10) ? "0" : "") + Integer.toHexString(value);
-			sb.append("" + valueStr);
-		});
-		return sb.toString();
 	}
 
 	/**
@@ -245,14 +136,6 @@ public class ProblogProcessor implements QueryProcessor {
 		return this.problogDirectory;
 	}
 
-	boolean checkIfDownloadIsNecessary(String problogZipFile) {
-		Objects.requireNonNull(problogZipFile);
-		String storedVerificationCode = readVerificationCode();
-		String verificationCode = computeVerificationCode();
-		return storedVerificationCode.isEmpty()
-				|| verificationCode.isEmpty() && !verificationCode.equals(storedVerificationCode);
-	}
-
 	/**
 	 * Downloads and installs ProbLog.
 	 * 
@@ -265,15 +148,12 @@ public class ProblogProcessor implements QueryProcessor {
 	 * @throws InterruptedException
 	 *             if the execution was interrupted
 	 */
-	public void install(long start) throws IOException, URISyntaxException, InterruptedException {
-		boolean downloadIsNecessary = checkIfDownloadIsNecessary(DEFAULT_PROBLOG_ZIP_FILE);
-		if (downloadIsNecessary) {
-			downloadProblog(start, DEFAULT_PROBLOG_ZIP_FILE);
-			String verificationCode = computeVerificationCode();
-			storeVerificationCode(verificationCode);
-		}
+	public void install(long start) throws IOException, InterruptedException {
+		ProblogDownloadManager downloadManager = new ProblogDownloadManager();
+		downloadManager.downloadIfNecessary();
 
-		String directory = decompressProblog(start, DEFAULT_PROBLOG_ZIP_FILE, DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+		String directory = decompressProblog(start, downloadManager.getProblogZipFile(),
+				DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
 		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
 		updatePermissions(start, problogDirectory);
 		installProblog(start, problogDirectory);
@@ -291,7 +171,7 @@ public class ProblogProcessor implements QueryProcessor {
 				synchronized (problogInstallationMonitor) {
 					try {
 						install(start);
-					} catch (IOException | URISyntaxException | InterruptedException e) {
+					} catch (IOException | InterruptedException e) {
 						throw new RuntimeException(e);
 					}
 				}

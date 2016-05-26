@@ -24,7 +24,7 @@ public class ProcessorSubApp implements SubApp {
 
 	static final String LOGGING_OPTION = "--log";
 	public static final String COMMAND = "get";
-	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProblogProcessor.DEFAULT_PROBLOG_DOWNLOAD_URI;
+	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProblogDownloadManager.DEFAULT_PROBLOG_DOWNLOAD_URI;
 	static final String HELP = ""
 			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"
 			+ "\n"
