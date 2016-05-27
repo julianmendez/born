@@ -84,12 +84,18 @@ public class ProcessorCore {
 	 * 
 	 * @param start
 	 *            execution start
+	 * @param useOfDefaultCompletionRules
+	 *            use of default completion rules
+	 * @param additionalCompletionRules
+	 *            additional completion rules
 	 * @param ontology
 	 *            OWL ontology
 	 * @param bayesianNetwork
 	 *            Bayesian network
 	 * @param query
 	 *            query
+	 * @param executionResult
+	 *            execution result
 	 * @return the content of the ProbLog input file
 	 * @throws OWLOntologyCreationException
 	 *             if the ontology was not created

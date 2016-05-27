@@ -2,7 +2,6 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 
@@ -65,7 +64,7 @@ public class ProblogProcessor implements QueryProcessor {
 	}
 
 	/**
-	 * Decompresses the ProbLog ZIP file.
+	 * Decompresses the ProbLog ZIP file and returns the directory name.
 	 * 
 	 * @param start
 	 *            execution start
@@ -73,6 +72,7 @@ public class ProblogProcessor implements QueryProcessor {
 	 *            file name of ProbLog ZIP file
 	 * @param problogDirectory
 	 *            directory where ProbLog is being installed
+	 * @return the directory name
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
@@ -143,8 +143,6 @@ public class ProblogProcessor implements QueryProcessor {
 	 *            execution start
 	 * @throws IOException
 	 *             if something goes wrong with I/O
-	 * @throws URISyntaxException
-	 *             if some URI is wrong
 	 * @throws InterruptedException
 	 *             if the execution was interrupted
 	 */

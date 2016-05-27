@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.security.MessageDigest;
@@ -44,7 +43,7 @@ public class ProblogDownloadManager {
 	/**
 	 * Returns the downloaded ZIP file name.
 	 * 
-	 * @return
+	 * @return the downloaded ZIP file name
 	 */
 	public String getProblogZipFile() {
 		return DEFAULT_PROBLOG_ZIP_FILE;
@@ -69,14 +68,10 @@ public class ProblogDownloadManager {
 	/**
 	 * Downloads ProbLog from the default download URI.
 	 * 
-	 * @param start
-	 *            execution start
 	 * @param problogZipFile
 	 *            file name of the ProbLog ZIP file
 	 * @throws IOException
 	 *             if something goes wrong with I/O
-	 * @throws URISyntaxException
-	 *             if the default URI is not valid
 	 */
 	void downloadProblog(String problogZipFile) throws IOException {
 		Objects.requireNonNull(problogZipFile);
