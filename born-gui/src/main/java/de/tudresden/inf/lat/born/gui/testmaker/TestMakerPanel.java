@@ -137,16 +137,25 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSelectInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputOntologyFile.setBounds(215, 101, 50, 26);
 		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSelectInputOntologyFile.setOpaque(false);
+		buttonSelectInputOntologyFile.setContentAreaFilled(false);
+		buttonSelectInputOntologyFile.setBorderPainted(false);
 		add(buttonSelectInputOntologyFile);
 
 		buttonSelectInputBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputBayesianNetworkFile.setBounds(215, 188, 50, 26);
 		buttonSelectInputBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSelectInputBayesianNetworkFile.setOpaque(false);
+		buttonSelectInputBayesianNetworkFile.setContentAreaFilled(false);
+		buttonSelectInputBayesianNetworkFile.setBorderPainted(false);
 		add(buttonSelectInputBayesianNetworkFile);
 
 		buttonSaveOntologyFile.setIcon(BornIcon.SAVE_FILE);
 		buttonSaveOntologyFile.setBounds(215, 348, 50, 26);
 		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSaveOntologyFile.setOpaque(false);
+		buttonSaveOntologyFile.setContentAreaFilled(false);
+		buttonSaveOntologyFile.setBorderPainted(false);
 		add(buttonSaveOntologyFile);
 
 		textInputOntologyFile.setBounds(277, 101, 688, 28);
@@ -181,6 +190,9 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSaveBayesianNetwork.setIcon(BornIcon.SAVE_FILE);
 		buttonSaveBayesianNetwork.setBounds(215, 550, 50, 26);
 		buttonSaveBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSaveBayesianNetwork.setOpaque(false);
+		buttonSaveBayesianNetwork.setContentAreaFilled(false);
+		buttonSaveBayesianNetwork.setBorderPainted(false);
 		add(buttonSaveBayesianNetwork);
 
 		textListOfParents.setBounds(277, 476, 688, 28);

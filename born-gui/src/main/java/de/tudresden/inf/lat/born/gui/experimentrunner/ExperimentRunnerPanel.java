@@ -104,6 +104,9 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonInputOntologyDirectory.setIcon(BornIcon.OPEN_FILE);
 		buttonInputOntologyDirectory.setBounds(216, 43, 54, 28);
 		buttonInputOntologyDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonInputOntologyDirectory.setOpaque(false);
+		buttonInputOntologyDirectory.setContentAreaFilled(false);
+		buttonInputOntologyDirectory.setBorderPainted(false);
 		add(buttonInputOntologyDirectory);
 
 		textInputOntologyDirectory.setBounds(282, 43, 688, 28);
@@ -119,6 +122,9 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonBayesianNetworkDirectory.setIcon(BornIcon.OPEN_FILE);
 		buttonBayesianNetworkDirectory.setBounds(216, 135, 54, 28);
 		buttonBayesianNetworkDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonBayesianNetworkDirectory.setOpaque(false);
+		buttonBayesianNetworkDirectory.setContentAreaFilled(false);
+		buttonBayesianNetworkDirectory.setBorderPainted(false);
 		add(buttonBayesianNetworkDirectory);
 
 		textBayesianNetworkDirectory.setBounds(282, 135, 688, 28);
@@ -134,6 +140,9 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonOutputDirectory.setIcon(BornIcon.OPEN_FILE);
 		buttonOutputDirectory.setBounds(216, 243, 54, 28);
 		buttonOutputDirectory.setToolTipText(Message.tooltipButtonOutputDirectory);
+		buttonOutputDirectory.setOpaque(false);
+		buttonOutputDirectory.setContentAreaFilled(false);
+		buttonOutputDirectory.setBorderPainted(false);
 		add(buttonOutputDirectory);
 
 		textOutputDirectory = new JTextField();
@@ -164,11 +173,17 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonUpdateSeed.setIcon(BornIcon.REFRESH);
 		buttonUpdateSeed.setBounds(474, 341, 54, 28);
 		buttonUpdateSeed.setToolTipText(Message.tooltipButtonUpdateSeed);
+		buttonUpdateSeed.setOpaque(false);
+		buttonUpdateSeed.setContentAreaFilled(false);
+		buttonUpdateSeed.setBorderPainted(false);
 		add(buttonUpdateSeed);
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
 		buttonComputeInference.setBounds(227, 429, 54, 28);
 		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
+		buttonComputeInference.setOpaque(false);
+		buttonComputeInference.setContentAreaFilled(false);
+		buttonComputeInference.setBorderPainted(false);
 		add(buttonComputeInference);
 
 		labelProgress.setBounds(237, 478, 99, 15);
