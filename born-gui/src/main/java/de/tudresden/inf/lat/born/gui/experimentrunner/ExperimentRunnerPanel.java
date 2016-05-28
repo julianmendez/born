@@ -152,7 +152,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		add(buttonOutputDirectory);
 
 		textOutputDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
-		textOutputDirectory = new JTextField();
 		textOutputDirectory.setBounds(282, 243, 688, 28);
 		textOutputDirectory.setToolTipText(Message.TOOLTIP_TEXT_FIELD_OUTPUT_DIRECTORY);
 		textOutputDirectory.setAlignmentX(LEFT_ALIGNMENT);
@@ -164,6 +163,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		lblNumberOfQueries.setBounds(292, 381, 177, 15);
 		add(lblNumberOfQueries);
 
+		textNumberOfQueries.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textNumberOfQueries.setBounds(290, 341, 106, 28);
 		textNumberOfQueries.setToolTipText(Message.TOOLTIP_TEXT_FIELD_NUMBER_OF_QUERIES);
 		textNumberOfQueries.setAlignmentX(LEFT_ALIGNMENT);
