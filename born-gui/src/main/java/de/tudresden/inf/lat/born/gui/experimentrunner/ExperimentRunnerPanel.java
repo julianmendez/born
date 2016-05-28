@@ -24,15 +24,13 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 	private static final long serialVersionUID = 8987374313881883318L;
 
-	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
-
 	private FormatTool formatTool = new FormatTool();
 	private JButton buttonInputOntologyDirectory = new JButton();
 	private JButton buttonBayesianNetworkDirectory = new JButton();
 	private JButton buttonOutputDirectory = new JButton();
 	private JButton buttonUpdateSeed = new JButton();
 	private JButton buttonComputeInference = new JButton();
-	private JLabel labelProgress = new JLabel("computing ...");
+	private JLabel labelProgress = new JLabel(Message.COMPUTING);
 	private JTextField textInputOntologyDirectory = new JTextField();
 	private JTextField textBayesianNetworkDirectory = new JTextField();
 	private JTextField textNumberOfQueries = new JTextField();
@@ -100,8 +98,9 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 		setBackground(BornIcon.BACKGROUND_COLOR);
 
-		JLabel lblInputOntologyDirectory = new JLabel("ontology directory");
-		lblInputOntologyDirectory.setBounds(292, 83, 178, 15);
+		JLabel lblInputOntologyDirectory = new JLabel(Message.ONTOLOGY_DIRECTORY);
+		lblInputOntologyDirectory.setForeground(BornIcon.FOREGROUND_COLOR);
+		lblInputOntologyDirectory.setBounds(292, 83, 236, 15);
 		add(lblInputOntologyDirectory);
 
 		buttonInputOntologyDirectory.setIcon(BornIcon.OPEN_FILE);
@@ -112,14 +111,16 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonInputOntologyDirectory.setBorderPainted(false);
 		add(buttonInputOntologyDirectory);
 
+		textInputOntologyDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textInputOntologyDirectory.setBounds(282, 43, 688, 28);
 		textInputOntologyDirectory.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		textInputOntologyDirectory.setEditable(false);
 		add(textInputOntologyDirectory);
 
-		JLabel lblBayesianNetworkDirectory = new JLabel("Bayesian network directory");
-		lblBayesianNetworkDirectory.setBounds(292, 186, 220, 15);
+		JLabel lblBayesianNetworkDirectory = new JLabel(Message.BAYESIAN_NETWORK_DIRECTORY);
+		lblBayesianNetworkDirectory.setForeground(BornIcon.FOREGROUND_COLOR);
+		lblBayesianNetworkDirectory.setBounds(292, 186, 236, 15);
 		add(lblBayesianNetworkDirectory);
 
 		buttonBayesianNetworkDirectory.setIcon(BornIcon.OPEN_FILE);
@@ -130,14 +131,16 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonBayesianNetworkDirectory.setBorderPainted(false);
 		add(buttonBayesianNetworkDirectory);
 
+		textBayesianNetworkDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textBayesianNetworkDirectory.setBounds(282, 135, 688, 28);
 		textBayesianNetworkDirectory.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		textBayesianNetworkDirectory.setEditable(false);
 		add(textBayesianNetworkDirectory);
 
-		JLabel lblInput = new JLabel("output directory");
-		lblInput.setBounds(292, 283, 128, 15);
+		JLabel lblInput = new JLabel(Message.OUTPUT_DIRECTORY);
+		lblInput.setForeground(BornIcon.FOREGROUND_COLOR);
+		lblInput.setBounds(292, 283, 236, 15);
 		add(lblInput);
 
 		buttonOutputDirectory.setIcon(BornIcon.OPEN_FILE);
@@ -148,6 +151,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		buttonOutputDirectory.setBorderPainted(false);
 		add(buttonOutputDirectory);
 
+		textOutputDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textOutputDirectory = new JTextField();
 		textOutputDirectory.setBounds(282, 243, 688, 28);
 		textOutputDirectory.setToolTipText(Message.tooltipTextFieldOutputDirectory);
@@ -156,7 +160,8 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		add(textOutputDirectory);
 
 		JLabel lblNumberOfQueries = new JLabel(Message.textNumberOfQueries);
-		lblNumberOfQueries.setBounds(292, 381, 140, 15);
+		lblNumberOfQueries.setForeground(BornIcon.FOREGROUND_COLOR);
+		lblNumberOfQueries.setBounds(292, 381, 177, 15);
 		add(lblNumberOfQueries);
 
 		textNumberOfQueries.setBounds(290, 341, 106, 28);
@@ -165,9 +170,11 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		add(textNumberOfQueries);
 
 		JLabel lblSeed = new JLabel(Message.textSeed);
-		lblSeed.setBounds(550, 381, 70, 15);
+		lblSeed.setForeground(BornIcon.FOREGROUND_COLOR);
+		lblSeed.setBounds(550, 381, 89, 15);
 		add(lblSeed);
 
+		textSeed.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textSeed.setBounds(540, 341, 89, 28);
 		textSeed.setToolTipText(Message.tooltipTextFieldSeed);
 		textSeed.setAlignmentX(LEFT_ALIGNMENT);
@@ -190,6 +197,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		add(buttonComputeInference);
 
 		labelProgress.setBounds(237, 478, 99, 15);
+		labelProgress.setForeground(BornIcon.FOREGROUND_COLOR);
 		labelProgress.setVisible(false);
 		add(labelProgress);
 

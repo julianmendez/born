@@ -15,6 +15,8 @@ import javax.swing.ImageIcon;
 public interface BornIcon {
 
 	Color BACKGROUND_COLOR = new Color(0, 102, 153);
+	Color FOREGROUND_COLOR = new Color(255, 255, 255);
+	Color TEXT_BACKGROUND_COLOR = new Color(255, 255, 240);
 
 	Font TITLE_FONT = new Font("Courier New", Font.BOLD, 13);
 

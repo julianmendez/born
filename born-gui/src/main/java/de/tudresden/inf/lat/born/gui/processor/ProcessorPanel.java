@@ -1,6 +1,5 @@
 package de.tudresden.inf.lat.born.gui.processor;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -165,7 +164,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		JLabel lblOntology = new JLabel(Message.ONTOLOGY);
 		lblOntology.setFont(BornIcon.TITLE_FONT);
-		lblOntology.setForeground(new Color(255, 255, 255));
+		lblOntology.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblOntology.setBounds(40, 48, 96, 15);
 		add(lblOntology);
 
@@ -177,7 +176,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonOntologyFile.setBorderPainted(false);
 		add(buttonOntologyFile);
 
-		textOntologyFile.setBackground(new Color(255, 255, 240));
+		textOntologyFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textOntologyFile.setBounds(32, 77, 400, 28);
 		textOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
@@ -188,7 +187,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		JLabel lblBayesianNetwork = new JLabel(Message.BAYESIAN_NETWORK);
 		lblBayesianNetwork.setFont(BornIcon.TITLE_FONT);
-		lblBayesianNetwork.setForeground(new Color(255, 255, 255));
+		lblBayesianNetwork.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblBayesianNetwork.setBounds(40, 144, 128, 15);
 		add(lblBayesianNetwork);
 
@@ -200,7 +199,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonBayesianNetworkFile.setBorderPainted(false);
 		add(buttonBayesianNetworkFile);
 
-		textBayesianNetworkFile.setBackground(new Color(255, 255, 240));
+		textBayesianNetworkFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textBayesianNetworkFile.setBounds(32, 180, 400, 28);
 		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
@@ -211,7 +210,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		JLabel lblRules = new JLabel(Message.RULES);
 		lblRules.setFont(BornIcon.TITLE_FONT);
-		lblRules.setForeground(new Color(255, 255, 255));
+		lblRules.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblRules.setBounds(40, 248, 70, 15);
 		add(lblRules);
 
@@ -231,7 +230,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonGoToPreviousCompletionRules.setBorderPainted(false);
 		add(buttonGoToPreviousCompletionRules);
 
-		textCompletionRules.setBackground(new Color(255, 255, 240));
+		textCompletionRules.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textCompletionRules.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textCompletionRules.setAlignmentX(LEFT_ALIGNMENT);
 
@@ -244,7 +243,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		JLabel lblInput = new JLabel(Message.QUERY);
 		lblInput.setFont(BornIcon.TITLE_FONT);
-		lblInput.setForeground(new Color(255, 255, 255));
+		lblInput.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblInput.setBounds(552, 144, 70, 15);
 		add(lblInput);
 
@@ -256,7 +255,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonConsoleInput.setBorderPainted(false);
 		add(buttonConsoleInput);
 
-		textConsoleInput.setBackground(new Color(255, 255, 240));
+		textConsoleInput.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
 		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
@@ -269,7 +268,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		JLabel lblOutput = new JLabel(Message.RESULT);
 		lblOutput.setFont(BornIcon.TITLE_FONT);
-		lblOutput.setForeground(new Color(255, 255, 255));
+		lblOutput.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblOutput.setBounds(552, 456, 70, 15);
 		add(lblOutput);
 
@@ -283,7 +282,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
 		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
-		textConsoleOutput.setBackground(new Color(255, 255, 240));
+		textConsoleOutput.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 
 		scrollConsoleOutput.setBounds(544, 492, 448, 192);
 		scrollConsoleOutput.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -301,7 +300,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		add(buttonComputeInference);
 
 		labelProgress.setFont(BornIcon.TITLE_FONT);
-		labelProgress.setForeground(new Color(255, 255, 255));
+		labelProgress.setForeground(BornIcon.FOREGROUND_COLOR);
 		labelProgress.setBounds(796, 456, 96, 15);
 		labelProgress.setVisible(false);
 		add(labelProgress);
@@ -342,8 +341,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		JLabel lblExamples = new JLabel(Message.EXAMPLES);
 		lblExamples.setFont(BornIcon.TITLE_FONT);
-		lblExamples.setForeground(new Color(255, 255, 255));
-		lblExamples.setBounds(552, 48, 70, 15);
+		lblExamples.setForeground(BornIcon.FOREGROUND_COLOR);
+		lblExamples.setBounds(552, 48, 96, 15);
 		add(lblExamples);
 
 	}

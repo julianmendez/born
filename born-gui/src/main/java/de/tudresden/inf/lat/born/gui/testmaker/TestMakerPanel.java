@@ -29,8 +29,6 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfigu
  */
 public class TestMakerPanel extends JPanel implements TestMakerView {
 
-	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! --> ";
-
 	private static final long serialVersionUID = -7460256750941145085L;
 
 	private FormatTool formatTool = new FormatTool();
@@ -45,10 +43,10 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	private JTextField textInputBayesianNetworkFile = new JTextField();
 	private JTextField textListOfParents = new JTextField();
 
-	private final JLabel lblInputOntology = new JLabel("input ontology");
-	private final JLabel lblThreshold = new JLabel("threshold [0,1]");
-	private final JLabel lblInputBayesianNetwork = new JLabel("input Bayesian network");
-	private final JLabel lblListOfParents = new JLabel("list of parents (e.g. \"1,1,2,3,5,8\")");
+	private final JLabel lblInputOntology = new JLabel(Message.INPUT_ONTOLOGY);
+	private final JLabel lblThreshold = new JLabel(Message.THRESHOLD);
+	private final JLabel lblInputBayesianNetwork = new JLabel(Message.INPUT_BAYESIAN_NETWORK);
+	private final JLabel lblListOfParents = new JLabel(Message.LIST_OF_PARENTS);
 
 	private final AnnotatorConfiguration model;
 
@@ -160,33 +158,40 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSaveOntologyFile.setBorderPainted(false);
 		add(buttonSaveOntologyFile);
 
+		textInputOntologyFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textInputOntologyFile.setBounds(277, 101, 688, 28);
 		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		textInputOntologyFile.setEditable(false);
 		add(textInputOntologyFile);
 
+		textInputBayesianNetworkFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textInputBayesianNetworkFile.setBounds(277, 186, 688, 28);
 		textInputBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
 		textInputBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 		textInputBayesianNetworkFile.setEditable(false);
 		add(textInputBayesianNetworkFile);
 
+		textThreshold.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textThreshold.setBounds(277, 281, 259, 28);
 		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
-		lblInputOntology.setBounds(287, 139, 120, 15);
+		lblInputOntology.setBounds(287, 139, 249, 15);
+		lblInputOntology.setForeground(BornIcon.FOREGROUND_COLOR);
 		add(lblInputOntology);
 
 		lblThreshold.setBounds(287, 321, 259, 15);
+		lblThreshold.setForeground(BornIcon.FOREGROUND_COLOR);
 		add(lblThreshold);
 
 		lblInputBayesianNetwork.setBounds(287, 226, 249, 15);
+		lblInputBayesianNetwork.setForeground(BornIcon.FOREGROUND_COLOR);
 		add(lblInputBayesianNetwork);
 
 		lblListOfParents.setBounds(278, 516, 328, 15);
+		lblListOfParents.setForeground(BornIcon.FOREGROUND_COLOR);
 		add(lblListOfParents);
 
 		buttonSaveBayesianNetwork.setIcon(BornIcon.SAVE_FILE);
@@ -197,6 +202,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 		buttonSaveBayesianNetwork.setBorderPainted(false);
 		add(buttonSaveBayesianNetwork);
 
+		textListOfParents.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textListOfParents.setBounds(277, 476, 688, 28);
 		textListOfParents.setToolTipText(Message.tooltipTextFieldThreshold);
 		textListOfParents.setAlignmentX(LEFT_ALIGNMENT);
@@ -226,7 +232,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 			try {
 				getModel().setInputOntology(new FileInputStream(inputOntologyFile));
 			} catch (IOException e) {
-				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setInputOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			}
 		}
 	}
@@ -248,7 +254,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 				getModel().setInputBayesianNetworkVariables(AnnotationCreator
 						.extractVariables(ProcessorConfigurationImpl.read(new FileReader(inputBayesianNetworkFile))));
 			} catch (IOException e) {
-				setInputOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setInputOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			}
 		}
 	}
