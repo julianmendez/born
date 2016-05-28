@@ -49,7 +49,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final JButton buttonConsoleOutput = new JButton();
 	private final JButton buttonComputeInference = new JButton();
 	private final JButton buttonUpdateExample = new JButton();
-	private final JLabel labelProgress = new JLabel(Message.COMPUTING);
+	private final JLabel labelProgress = new JLabel(Message.LBL_COMPUTING);
 	private final JTextField textOntologyFile = new JTextField();
 	private final JTextField textBayesianNetworkFile = new JTextField();
 	private final JTextArea textCompletionRules = new JTextArea();
@@ -162,7 +162,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// ontology
 
-		JLabel lblOntology = new JLabel(Message.ONTOLOGY);
+		JLabel lblOntology = new JLabel(Message.LBL_ONTOLOGY);
 		lblOntology.setFont(BornIcon.TITLE_FONT);
 		lblOntology.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblOntology.setBounds(40, 48, 96, 15);
@@ -170,7 +170,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonOntologyFile.setBounds(192, 40, 54, 28);
-		buttonOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonOntologyFile.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonOntologyFile.setOpaque(false);
 		buttonOntologyFile.setContentAreaFilled(false);
 		buttonOntologyFile.setBorderPainted(false);
@@ -178,14 +178,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		textOntologyFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textOntologyFile.setBounds(32, 77, 400, 28);
-		textOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textOntologyFile.setToolTipText(Message.TOOLTIP_TEXT_FIELD_INPUT_ONTOLOGY_FILE);
 		textOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		textOntologyFile.setEditable(false);
 		add(textOntologyFile);
 
 		// Bayesian network
 
-		JLabel lblBayesianNetwork = new JLabel(Message.BAYESIAN_NETWORK);
+		JLabel lblBayesianNetwork = new JLabel(Message.LBL_BAYESIAN_NETWORK);
 		lblBayesianNetwork.setFont(BornIcon.TITLE_FONT);
 		lblBayesianNetwork.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblBayesianNetwork.setBounds(40, 144, 128, 15);
@@ -193,7 +193,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
 		buttonBayesianNetworkFile.setBounds(192, 136, 54, 28);
-		buttonBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonBayesianNetworkFile.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_BAYESIAN_NETWORK_FILE);
 		buttonBayesianNetworkFile.setOpaque(false);
 		buttonBayesianNetworkFile.setContentAreaFilled(false);
 		buttonBayesianNetworkFile.setBorderPainted(false);
@@ -201,14 +201,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		textBayesianNetworkFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textBayesianNetworkFile.setBounds(32, 180, 400, 28);
-		textBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
+		textBayesianNetworkFile.setToolTipText(Message.TOOLTIP_TEXT_FIELD_OPEN_BAYESIAN_NETWORK_FILE);
 		textBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 		textBayesianNetworkFile.setEditable(false);
 		add(textBayesianNetworkFile);
 
 		// rules
 
-		JLabel lblRules = new JLabel(Message.RULES);
+		JLabel lblRules = new JLabel(Message.LBL_RULES);
 		lblRules.setFont(BornIcon.TITLE_FONT);
 		lblRules.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblRules.setBounds(40, 248, 70, 15);
@@ -216,7 +216,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonResetCompletionRules.setIcon(BornIcon.REFRESH);
 		buttonResetCompletionRules.setBounds(284, 240, 54, 28);
-		buttonResetCompletionRules.setToolTipText(Message.tooltipButtonResetCompletionRules);
+		buttonResetCompletionRules.setToolTipText(Message.TOOLTIP_BUTTON_RESET_COMPLETION_RULES);
 		buttonResetCompletionRules.setOpaque(false);
 		buttonResetCompletionRules.setContentAreaFilled(false);
 		buttonResetCompletionRules.setBorderPainted(false);
@@ -224,14 +224,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonGoToPreviousCompletionRules.setIcon(BornIcon.BACK);
 		buttonGoToPreviousCompletionRules.setBounds(192, 240, 54, 28);
-		buttonGoToPreviousCompletionRules.setToolTipText(Message.tooltipButtonGoToPreviousCompletionRules);
+		buttonGoToPreviousCompletionRules.setToolTipText(Message.TOOLTIP_BUTTON_GO_TO_PREVIOUS_COMPLETION_RULES);
 		buttonGoToPreviousCompletionRules.setOpaque(false);
 		buttonGoToPreviousCompletionRules.setContentAreaFilled(false);
 		buttonGoToPreviousCompletionRules.setBorderPainted(false);
 		add(buttonGoToPreviousCompletionRules);
 
 		textCompletionRules.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
-		textCompletionRules.setToolTipText(Message.tooltipTextFieldListOfParents);
+		textCompletionRules.setToolTipText(Message.TOOLTIP_TEXT_FIELD_LIST_OF_PARENTS);
 		textCompletionRules.setAlignmentX(LEFT_ALIGNMENT);
 
 		scrollCompletionRules.setBounds(32, 284, 400, 400);
@@ -241,7 +241,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// query
 
-		JLabel lblInput = new JLabel(Message.QUERY);
+		JLabel lblInput = new JLabel(Message.LBL_QUERY);
 		lblInput.setFont(BornIcon.TITLE_FONT);
 		lblInput.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblInput.setBounds(552, 144, 70, 15);
@@ -249,14 +249,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonConsoleInput.setIcon(BornIcon.OPEN_FILE);
 		buttonConsoleInput.setBounds(704, 136, 54, 28);
-		buttonConsoleInput.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonConsoleInput.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonConsoleInput.setOpaque(false);
 		buttonConsoleInput.setContentAreaFilled(false);
 		buttonConsoleInput.setBorderPainted(false);
 		add(buttonConsoleInput);
 
 		textConsoleInput.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
-		textConsoleInput.setToolTipText(Message.tooltipTextFieldListOfParents);
+		textConsoleInput.setToolTipText(Message.TOOLTIP_TEXT_FIELD_LIST_OF_PARENTS);
 		textConsoleInput.setAlignmentX(LEFT_ALIGNMENT);
 
 		scrollConsoleInput.setBounds(544, 180, 448, 193);
@@ -266,7 +266,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// result
 
-		JLabel lblOutput = new JLabel(Message.RESULT);
+		JLabel lblOutput = new JLabel(Message.LBL_RESULT);
 		lblOutput.setFont(BornIcon.TITLE_FONT);
 		lblOutput.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblOutput.setBounds(552, 456, 70, 15);
@@ -274,13 +274,13 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonConsoleOutput.setIcon(BornIcon.SAVE_FILE);
 		buttonConsoleOutput.setBounds(704, 448, 54, 28);
-		buttonConsoleOutput.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonConsoleOutput.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonConsoleOutput.setOpaque(false);
 		buttonConsoleOutput.setContentAreaFilled(false);
 		buttonConsoleOutput.setBorderPainted(false);
 		add(buttonConsoleOutput);
 
-		textConsoleOutput.setToolTipText(Message.tooltipTextFieldOutputFile);
+		textConsoleOutput.setToolTipText(Message.TOOLTIP_TEXT_FIELD_OUTPUT_FILE);
 		textConsoleOutput.setAlignmentX(LEFT_ALIGNMENT);
 		textConsoleOutput.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 
@@ -293,7 +293,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
 		buttonComputeInference.setBounds(796, 136, 54, 28);
-		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
+		buttonComputeInference.setToolTipText(Message.TOOLTIP_BUTTON_COMPUTE_INFERENCE);
 		buttonComputeInference.setOpaque(false);
 		buttonComputeInference.setContentAreaFilled(false);
 		buttonComputeInference.setBorderPainted(false);
@@ -308,12 +308,12 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		// examples
 
 		comboBoxExample.setBounds(796, 40, 192, 28);
-		comboBoxExample.setToolTipText(Message.tooltipComboBoxExample);
+		comboBoxExample.setToolTipText(Message.TOOLTIP_COMBO_BOX_EXAMPLE);
 		add(comboBoxExample);
 
 		buttonUpdateExample.setIcon(BornIcon.OPEN_FILE);
 		buttonUpdateExample.setBounds(704, 40, 54, 28);
-		buttonUpdateExample.setToolTipText(Message.tooltipButtonUpdateExample);
+		buttonUpdateExample.setToolTipText(Message.TOOLTIP_BUTTON_UPDATE_EXAMPLE);
 		buttonUpdateExample.setOpaque(false);
 		buttonUpdateExample.setContentAreaFilled(false);
 		buttonUpdateExample.setBorderPainted(false);
@@ -324,7 +324,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		buttonViewOntology.setToolTipText(Message.tooltipViewOntologyFile);
+		buttonViewOntology.setToolTipText(Message.TOOLTIP_BUTTON_VIEW_ONTOLOGY_FILE);
 		buttonViewOntology.setBounds(284, 40, 54, 28);
 		buttonViewOntology.setOpaque(false);
 		buttonViewOntology.setContentAreaFilled(false);
@@ -332,14 +332,14 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		add(buttonViewOntology);
 
 		buttonViewBayesianNetwork.setIcon(BornIcon.VIEW_FILE);
-		buttonViewBayesianNetwork.setToolTipText(Message.tooltipViewBayesianNetworkFile);
+		buttonViewBayesianNetwork.setToolTipText(Message.TOOLTIP_BUTTON_VIEW_BAYESIAN_NETWORK_FILE);
 		buttonViewBayesianNetwork.setBounds(284, 136, 54, 28);
 		buttonViewBayesianNetwork.setOpaque(false);
 		buttonViewBayesianNetwork.setContentAreaFilled(false);
 		buttonViewBayesianNetwork.setBorderPainted(false);
 		add(buttonViewBayesianNetwork);
 
-		JLabel lblExamples = new JLabel(Message.EXAMPLES);
+		JLabel lblExamples = new JLabel(Message.LBL_EXAMPLES);
 		lblExamples.setFont(BornIcon.TITLE_FONT);
 		lblExamples.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblExamples.setBounds(552, 48, 96, 15);

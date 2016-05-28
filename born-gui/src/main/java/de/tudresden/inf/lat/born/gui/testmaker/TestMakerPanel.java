@@ -43,10 +43,10 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	private JTextField textInputBayesianNetworkFile = new JTextField();
 	private JTextField textListOfParents = new JTextField();
 
-	private final JLabel lblInputOntology = new JLabel(Message.INPUT_ONTOLOGY);
-	private final JLabel lblThreshold = new JLabel(Message.THRESHOLD);
-	private final JLabel lblInputBayesianNetwork = new JLabel(Message.INPUT_BAYESIAN_NETWORK);
-	private final JLabel lblListOfParents = new JLabel(Message.LIST_OF_PARENTS);
+	private final JLabel lblInputOntology = new JLabel(Message.LBL_INPUT_ONTOLOGY);
+	private final JLabel lblThreshold = new JLabel(Message.LBL_THRESHOLD);
+	private final JLabel lblInputBayesianNetwork = new JLabel(Message.LBL_INPUT_BAYESIAN_NETWORK);
+	private final JLabel lblListOfParents = new JLabel(Message.LBL_LIST_OF_PARENTS);
 
 	private final AnnotatorConfiguration model;
 
@@ -136,7 +136,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 		buttonSelectInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputOntologyFile.setBounds(215, 101, 50, 26);
-		buttonSelectInputOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSelectInputOntologyFile.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonSelectInputOntologyFile.setOpaque(false);
 		buttonSelectInputOntologyFile.setContentAreaFilled(false);
 		buttonSelectInputOntologyFile.setBorderPainted(false);
@@ -144,7 +144,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 		buttonSelectInputBayesianNetworkFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputBayesianNetworkFile.setBounds(215, 188, 50, 26);
-		buttonSelectInputBayesianNetworkFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSelectInputBayesianNetworkFile.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonSelectInputBayesianNetworkFile.setOpaque(false);
 		buttonSelectInputBayesianNetworkFile.setContentAreaFilled(false);
 		buttonSelectInputBayesianNetworkFile.setBorderPainted(false);
@@ -152,7 +152,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 		buttonSaveOntologyFile.setIcon(BornIcon.SAVE_FILE);
 		buttonSaveOntologyFile.setBounds(215, 348, 50, 26);
-		buttonSaveOntologyFile.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSaveOntologyFile.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonSaveOntologyFile.setOpaque(false);
 		buttonSaveOntologyFile.setContentAreaFilled(false);
 		buttonSaveOntologyFile.setBorderPainted(false);
@@ -160,21 +160,21 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 		textInputOntologyFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textInputOntologyFile.setBounds(277, 101, 688, 28);
-		textInputOntologyFile.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textInputOntologyFile.setToolTipText(Message.TOOLTIP_TEXT_FIELD_INPUT_ONTOLOGY_FILE);
 		textInputOntologyFile.setAlignmentX(LEFT_ALIGNMENT);
 		textInputOntologyFile.setEditable(false);
 		add(textInputOntologyFile);
 
 		textInputBayesianNetworkFile.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textInputBayesianNetworkFile.setBounds(277, 186, 688, 28);
-		textInputBayesianNetworkFile.setToolTipText(Message.tooltipTextFieldMaxNumberOfVar);
+		textInputBayesianNetworkFile.setToolTipText(Message.TOOLTIP_TEXT_FIELD_MAX_NUMBER_OF_VAR);
 		textInputBayesianNetworkFile.setAlignmentX(LEFT_ALIGNMENT);
 		textInputBayesianNetworkFile.setEditable(false);
 		add(textInputBayesianNetworkFile);
 
 		textThreshold.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textThreshold.setBounds(277, 281, 259, 28);
-		textThreshold.setToolTipText(Message.tooltipTextFieldThreshold);
+		textThreshold.setToolTipText(Message.TOOLTIP_TEXT_FIELD_THRESHOLD);
 		textThreshold.setAlignmentX(LEFT_ALIGNMENT);
 		add(textThreshold);
 
@@ -196,7 +196,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 		buttonSaveBayesianNetwork.setIcon(BornIcon.SAVE_FILE);
 		buttonSaveBayesianNetwork.setBounds(215, 550, 50, 26);
-		buttonSaveBayesianNetwork.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonSaveBayesianNetwork.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonSaveBayesianNetwork.setOpaque(false);
 		buttonSaveBayesianNetwork.setContentAreaFilled(false);
 		buttonSaveBayesianNetwork.setBorderPainted(false);
@@ -204,7 +204,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 
 		textListOfParents.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textListOfParents.setBounds(277, 476, 688, 28);
-		textListOfParents.setToolTipText(Message.tooltipTextFieldThreshold);
+		textListOfParents.setToolTipText(Message.TOOLTIP_TEXT_FIELD_THRESHOLD);
 		textListOfParents.setAlignmentX(LEFT_ALIGNMENT);
 		add(textListOfParents);
 

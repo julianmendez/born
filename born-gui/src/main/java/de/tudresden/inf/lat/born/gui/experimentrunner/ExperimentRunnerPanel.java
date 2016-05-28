@@ -30,7 +30,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	private JButton buttonOutputDirectory = new JButton();
 	private JButton buttonUpdateSeed = new JButton();
 	private JButton buttonComputeInference = new JButton();
-	private JLabel labelProgress = new JLabel(Message.COMPUTING);
+	private JLabel labelProgress = new JLabel(Message.LBL_COMPUTING);
 	private JTextField textInputOntologyDirectory = new JTextField();
 	private JTextField textBayesianNetworkDirectory = new JTextField();
 	private JTextField textNumberOfQueries = new JTextField();
@@ -98,14 +98,14 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 		setBackground(BornIcon.BACKGROUND_COLOR);
 
-		JLabel lblInputOntologyDirectory = new JLabel(Message.ONTOLOGY_DIRECTORY);
+		JLabel lblInputOntologyDirectory = new JLabel(Message.LBL_ONTOLOGY_DIRECTORY);
 		lblInputOntologyDirectory.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblInputOntologyDirectory.setBounds(292, 83, 236, 15);
 		add(lblInputOntologyDirectory);
 
 		buttonInputOntologyDirectory.setIcon(BornIcon.OPEN_FILE);
 		buttonInputOntologyDirectory.setBounds(216, 43, 54, 28);
-		buttonInputOntologyDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonInputOntologyDirectory.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonInputOntologyDirectory.setOpaque(false);
 		buttonInputOntologyDirectory.setContentAreaFilled(false);
 		buttonInputOntologyDirectory.setBorderPainted(false);
@@ -113,19 +113,19 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 		textInputOntologyDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textInputOntologyDirectory.setBounds(282, 43, 688, 28);
-		textInputOntologyDirectory.setToolTipText(Message.tooltipTextFieldInputOntologyFile);
+		textInputOntologyDirectory.setToolTipText(Message.TOOLTIP_TEXT_FIELD_INPUT_ONTOLOGY_FILE);
 		textInputOntologyDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		textInputOntologyDirectory.setEditable(false);
 		add(textInputOntologyDirectory);
 
-		JLabel lblBayesianNetworkDirectory = new JLabel(Message.BAYESIAN_NETWORK_DIRECTORY);
+		JLabel lblBayesianNetworkDirectory = new JLabel(Message.LBL_BAYESIAN_NETWORK_DIRECTORY);
 		lblBayesianNetworkDirectory.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblBayesianNetworkDirectory.setBounds(292, 186, 236, 15);
 		add(lblBayesianNetworkDirectory);
 
 		buttonBayesianNetworkDirectory.setIcon(BornIcon.OPEN_FILE);
 		buttonBayesianNetworkDirectory.setBounds(216, 135, 54, 28);
-		buttonBayesianNetworkDirectory.setToolTipText(Message.tooltipOpenInputOntologyFile);
+		buttonBayesianNetworkDirectory.setToolTipText(Message.TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE);
 		buttonBayesianNetworkDirectory.setOpaque(false);
 		buttonBayesianNetworkDirectory.setContentAreaFilled(false);
 		buttonBayesianNetworkDirectory.setBorderPainted(false);
@@ -133,19 +133,19 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 		textBayesianNetworkDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textBayesianNetworkDirectory.setBounds(282, 135, 688, 28);
-		textBayesianNetworkDirectory.setToolTipText(Message.tooltipTextFieldBayesianNetworkFile);
+		textBayesianNetworkDirectory.setToolTipText(Message.TOOLTIP_TEXT_FIELD_OPEN_BAYESIAN_NETWORK_FILE);
 		textBayesianNetworkDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		textBayesianNetworkDirectory.setEditable(false);
 		add(textBayesianNetworkDirectory);
 
-		JLabel lblInput = new JLabel(Message.OUTPUT_DIRECTORY);
+		JLabel lblInput = new JLabel(Message.LBL_OUTPUT_DIRECTORY);
 		lblInput.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblInput.setBounds(292, 283, 236, 15);
 		add(lblInput);
 
 		buttonOutputDirectory.setIcon(BornIcon.OPEN_FILE);
 		buttonOutputDirectory.setBounds(216, 243, 54, 28);
-		buttonOutputDirectory.setToolTipText(Message.tooltipButtonOutputDirectory);
+		buttonOutputDirectory.setToolTipText(Message.TOOLTIP_BUTTON_OUTPUT_DIRECTORY);
 		buttonOutputDirectory.setOpaque(false);
 		buttonOutputDirectory.setContentAreaFilled(false);
 		buttonOutputDirectory.setBorderPainted(false);
@@ -154,35 +154,35 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 		textOutputDirectory.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textOutputDirectory = new JTextField();
 		textOutputDirectory.setBounds(282, 243, 688, 28);
-		textOutputDirectory.setToolTipText(Message.tooltipTextFieldOutputDirectory);
+		textOutputDirectory.setToolTipText(Message.TOOLTIP_TEXT_FIELD_OUTPUT_DIRECTORY);
 		textOutputDirectory.setAlignmentX(LEFT_ALIGNMENT);
 		textOutputDirectory.setEditable(false);
 		add(textOutputDirectory);
 
-		JLabel lblNumberOfQueries = new JLabel(Message.textNumberOfQueries);
+		JLabel lblNumberOfQueries = new JLabel(Message.LBL_NUMBER_OF_QUERIES);
 		lblNumberOfQueries.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblNumberOfQueries.setBounds(292, 381, 177, 15);
 		add(lblNumberOfQueries);
 
 		textNumberOfQueries.setBounds(290, 341, 106, 28);
-		textNumberOfQueries.setToolTipText(Message.tooltipTextFieldNumberOfQueries);
+		textNumberOfQueries.setToolTipText(Message.TOOLTIP_TEXT_FIELD_NUMBER_OF_QUERIES);
 		textNumberOfQueries.setAlignmentX(LEFT_ALIGNMENT);
 		add(textNumberOfQueries);
 
-		JLabel lblSeed = new JLabel(Message.textSeed);
+		JLabel lblSeed = new JLabel(Message.LBL_SEED);
 		lblSeed.setForeground(BornIcon.FOREGROUND_COLOR);
 		lblSeed.setBounds(550, 381, 89, 15);
 		add(lblSeed);
 
 		textSeed.setBackground(BornIcon.TEXT_BACKGROUND_COLOR);
 		textSeed.setBounds(540, 341, 89, 28);
-		textSeed.setToolTipText(Message.tooltipTextFieldSeed);
+		textSeed.setToolTipText(Message.TOOLTIP_TEXT_FIELD_SEED);
 		textSeed.setAlignmentX(LEFT_ALIGNMENT);
 		add(textSeed);
 
 		buttonUpdateSeed.setIcon(BornIcon.REFRESH);
 		buttonUpdateSeed.setBounds(474, 341, 54, 28);
-		buttonUpdateSeed.setToolTipText(Message.tooltipButtonUpdateSeed);
+		buttonUpdateSeed.setToolTipText(Message.TOOLTIP_BUTTON_UPDATE_SEED);
 		buttonUpdateSeed.setOpaque(false);
 		buttonUpdateSeed.setContentAreaFilled(false);
 		buttonUpdateSeed.setBorderPainted(false);
@@ -190,7 +190,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 
 		buttonComputeInference.setIcon(BornIcon.RUN);
 		buttonComputeInference.setBounds(227, 429, 54, 28);
-		buttonComputeInference.setToolTipText(Message.tooltipComputeInference);
+		buttonComputeInference.setToolTipText(Message.TOOLTIP_BUTTON_COMPUTE_INFERENCE);
 		buttonComputeInference.setOpaque(false);
 		buttonComputeInference.setContentAreaFilled(false);
 		buttonComputeInference.setBorderPainted(false);

@@ -61,10 +61,10 @@ public class BornPanel extends JPanel implements BornView {
 		ImageIcon icon = null;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setPreferredSize(new Dimension(1024, 768));
-		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView.getPanel(), Message.tooltipProcessor);
-		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView.getPanel(), Message.tooltipTestMaker);
-		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView.getPanel(),
-				Message.tooltipExperimentMaker);
+		tabbedPane.addTab(Message.TAB_PROCESSOR, icon, this.processorView.getPanel(), Message.TOOLTIP_PROCESSOR);
+		tabbedPane.addTab(Message.TAB_TEST_MAKER, icon, this.testMakerView.getPanel(), Message.TOOLTIP_TEST_MAKER);
+		tabbedPane.addTab(Message.TAB_EXPERIMENT_MAKER, icon, this.experimentMakerView.getPanel(),
+				Message.TOOLTIP_EXPERIMENT_MAKER);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		add(tabbedPane);
 
