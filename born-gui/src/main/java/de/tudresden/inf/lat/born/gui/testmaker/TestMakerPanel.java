@@ -1,5 +1,6 @@
 package de.tudresden.inf.lat.born.gui.testmaker;
 
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -131,8 +132,9 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	 * Creates the panel.
 	 */
 	void createPanel() {
-
 		setLayout(null);
+
+		setBackground(BornIcon.BACKGROUND_COLOR);
 
 		buttonSelectInputOntologyFile.setIcon(BornIcon.OPEN_FILE);
 		buttonSelectInputOntologyFile.setBounds(215, 101, 50, 26);
@@ -298,6 +300,12 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	@Override
 	public JPanel getPanel() {
 		return this;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(BornIcon.BACKGROUND, 0, 0, null);
 	}
 
 }

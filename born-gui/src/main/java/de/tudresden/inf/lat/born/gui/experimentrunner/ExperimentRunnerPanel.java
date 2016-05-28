@@ -1,5 +1,6 @@
 package de.tudresden.inf.lat.born.gui.experimentrunner;
 
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
@@ -48,7 +49,6 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	public ExperimentRunnerPanel(MultiProcessorConfiguration model) {
 		Objects.requireNonNull(model);
 		this.model = model;
-		setLayout(null);
 		createPanel();
 	}
 
@@ -96,6 +96,9 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	 * Creates the panel.
 	 */
 	void createPanel() {
+		setLayout(null);
+
+		setBackground(BornIcon.BACKGROUND_COLOR);
 
 		JLabel lblInputOntologyDirectory = new JLabel("ontology directory");
 		lblInputOntologyDirectory.setBounds(292, 83, 178, 15);
@@ -335,6 +338,12 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	@Override
 	public JPanel getPanel() {
 		return this;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(BornIcon.BACKGROUND, 0, 0, null);
 	}
 
 }

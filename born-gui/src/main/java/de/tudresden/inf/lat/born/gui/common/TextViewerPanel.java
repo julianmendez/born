@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.gui.common;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,7 +23,6 @@ public class TextViewerPanel extends JPanel implements TextViewerView {
 
 	public TextViewerPanel(String model) {
 		setModel(model);
-		setLayout(null);
 		createPanel();
 	}
 
@@ -43,6 +43,10 @@ public class TextViewerPanel extends JPanel implements TextViewerView {
 	}
 
 	void createPanel() {
+		setLayout(null);
+
+		setBackground(BornIcon.BACKGROUND_COLOR);
+
 		textContent.setBackground(new Color(255, 255, 240));
 		textContent.setToolTipText("Content");
 		textContent.setAlignmentX(LEFT_ALIGNMENT);
@@ -51,6 +55,12 @@ public class TextViewerPanel extends JPanel implements TextViewerView {
 		scrollContent.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollContent.setViewportView(textContent);
 		add(scrollContent);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(BornIcon.BACKGROUND, 0, 0, null);
 	}
 
 }

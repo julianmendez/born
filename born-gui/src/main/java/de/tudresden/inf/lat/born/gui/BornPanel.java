@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.gui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import de.tudresden.inf.lat.born.gui.common.BornIcon;
 import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerPanel;
 import de.tudresden.inf.lat.born.gui.experimentrunner.ExperimentRunnerView;
@@ -43,7 +45,7 @@ public class BornPanel extends JPanel implements BornView {
 		this.testMakerView = new TestMakerPanel(this.model.getAnnotatorConfiguration());
 		this.experimentMakerView = new ExperimentRunnerPanel(this.model.getMultiProcessorConfiguration());
 
-		add(createPanel());
+		createPanel();
 	}
 
 	/**
@@ -51,26 +53,21 @@ public class BornPanel extends JPanel implements BornView {
 	 * 
 	 * @return the panel
 	 */
-	JPanel createPanel() {
+	void createPanel() {
+		setLayout(new GridLayout(1, 1));
 
-		JPanel ret = new JPanel();
-		ret.setLayout(new GridLayout(1, 1));
-
-		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.setPreferredSize(new Dimension(1024, 768));
+		setBackground(BornIcon.BACKGROUND_COLOR);
 
 		ImageIcon icon = null;
-
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setPreferredSize(new Dimension(1024, 768));
 		tabbedPane.addTab(Message.tabProcessor, icon, this.processorView.getPanel(), Message.tooltipProcessor);
 		tabbedPane.addTab(Message.tabTestMaker, icon, this.testMakerView.getPanel(), Message.tooltipTestMaker);
 		tabbedPane.addTab(Message.tabExperminentMaker, icon, this.experimentMakerView.getPanel(),
 				Message.tooltipExperimentMaker);
-
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		add(tabbedPane);
 
-		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
-		return ret;
 	}
 
 	@Override
@@ -96,6 +93,12 @@ public class BornPanel extends JPanel implements BornView {
 	@Override
 	public JPanel getPanel() {
 		return this;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(BornIcon.BACKGROUND, 0, 0, null);
 	}
 
 }

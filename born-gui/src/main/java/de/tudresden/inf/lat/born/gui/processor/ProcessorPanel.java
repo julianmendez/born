@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.gui.processor;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -65,7 +66,6 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final ProcessorConfiguration model;
 
 	public ProcessorPanel(ProcessorConfiguration model) {
-		setBackground(new Color(0, 102, 153));
 		Objects.requireNonNull(model);
 		this.model = model;
 		setLayout(null);
@@ -161,6 +161,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	}
 
 	void createPanel() {
+
+		setBackground(BornIcon.BACKGROUND_COLOR);
 
 		// ontology
 
@@ -539,6 +541,12 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public JPanel getPanel() {
 		return this;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(BornIcon.BACKGROUND, 0, 0, null);
 	}
 
 }
