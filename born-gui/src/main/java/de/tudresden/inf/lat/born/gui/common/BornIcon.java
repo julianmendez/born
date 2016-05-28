@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.gui;
+package de.tudresden.inf.lat.born.gui.common;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;

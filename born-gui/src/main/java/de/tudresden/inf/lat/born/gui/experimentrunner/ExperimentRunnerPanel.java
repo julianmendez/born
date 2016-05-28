@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import de.tudresden.inf.lat.born.gui.BornIcon;
+import de.tudresden.inf.lat.born.gui.common.BornIcon;
 import de.tudresden.inf.lat.born.gui.common.FormatTool;
 import de.tudresden.inf.lat.born.gui.common.Message;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
