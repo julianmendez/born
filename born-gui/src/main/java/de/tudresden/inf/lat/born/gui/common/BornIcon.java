@@ -1,6 +1,7 @@
 package de.tudresden.inf.lat.born.gui.common;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import javax.swing.ImageIcon;
 public class BornIcon {
 
 	public static final Color BACKGROUND_COLOR = new Color(0, 102, 153);
+
+	public static final Font TITLE_FONT = new Font("Courier New", Font.BOLD, 13);
 
 	public static final String PATH_BACKGROUND = "images/background.png";
 

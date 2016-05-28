@@ -40,8 +40,20 @@ public interface Message {
 	String tooltipTextFieldOutputFile = "select the output file";
 	String tooltipButtonUpdateExample = "load the selected example";
 	String tooltipComboBoxExample = "select example";
+	String tooltipViewOntologyFile = "view ontology file";
+	String tooltipViewBayesianNetworkFile = "view Bayesian network file";
+	String ONTOLOGY = "ONTOLOGY";
+	String BAYESIAN_NETWORK = "BAYESIAN NETWORK";
+	String RULES = "RULES";
+	String QUERY = "QUERY";
+	String RESULT = "RESULT";
+	String EXAMPLES = "EXAMPLES";
+	String COMPUTING = "computing ...";
 
 	// Annotator
 	String tooltipTextFieldThreshold = "the threshold is a number between 0 and 1 to determine the probability to annotate an axiom";
+
+	// Errors
+	String WRONG_FILE_NAME_ERROR = "WRONG FILE NAME! ";
 
 }

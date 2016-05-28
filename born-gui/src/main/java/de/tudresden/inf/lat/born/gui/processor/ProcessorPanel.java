@@ -1,7 +1,6 @@
 package de.tudresden.inf.lat.born.gui.processor;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,8 +39,6 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	private static final long serialVersionUID = -3489883631448640992L;
 
-	static final String WRONG_FILE_NAME_ERROR_MESSAGE = "WRONG FILE NAME! ";
-
 	private final FormatTool formatTool = new FormatTool();
 	private final JButton buttonOntologyFile = new JButton();
 	private final JButton buttonViewOntology = new JButton();
@@ -53,7 +50,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final JButton buttonConsoleOutput = new JButton();
 	private final JButton buttonComputeInference = new JButton();
 	private final JButton buttonUpdateExample = new JButton();
-	private final JLabel labelProgress = new JLabel("computing ...");
+	private final JLabel labelProgress = new JLabel(Message.COMPUTING);
 	private final JTextField textOntologyFile = new JTextField();
 	private final JTextField textBayesianNetworkFile = new JTextField();
 	private final JTextArea textCompletionRules = new JTextArea();
@@ -166,8 +163,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// ontology
 
-		JLabel lblOntology = new JLabel("ONTOLOGY");
-		lblOntology.setFont(new Font("Courier New", Font.BOLD, 13));
+		JLabel lblOntology = new JLabel(Message.ONTOLOGY);
+		lblOntology.setFont(BornIcon.TITLE_FONT);
 		lblOntology.setForeground(new Color(255, 255, 255));
 		lblOntology.setBounds(40, 48, 96, 15);
 		add(lblOntology);
@@ -189,8 +186,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// Bayesian network
 
-		JLabel lblBayesianNetwork = new JLabel("BAYESIAN NETWORK");
-		lblBayesianNetwork.setFont(new Font("Courier New", Font.BOLD, 13));
+		JLabel lblBayesianNetwork = new JLabel(Message.BAYESIAN_NETWORK);
+		lblBayesianNetwork.setFont(BornIcon.TITLE_FONT);
 		lblBayesianNetwork.setForeground(new Color(255, 255, 255));
 		lblBayesianNetwork.setBounds(40, 144, 128, 15);
 		add(lblBayesianNetwork);
@@ -212,8 +209,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// rules
 
-		JLabel lblRules = new JLabel("RULES");
-		lblRules.setFont(new Font("Courier New", Font.BOLD, 13));
+		JLabel lblRules = new JLabel(Message.RULES);
+		lblRules.setFont(BornIcon.TITLE_FONT);
 		lblRules.setForeground(new Color(255, 255, 255));
 		lblRules.setBounds(40, 248, 70, 15);
 		add(lblRules);
@@ -245,8 +242,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// query
 
-		JLabel lblInput = new JLabel("QUERY");
-		lblInput.setFont(new Font("Courier New", Font.BOLD, 13));
+		JLabel lblInput = new JLabel(Message.QUERY);
+		lblInput.setFont(BornIcon.TITLE_FONT);
 		lblInput.setForeground(new Color(255, 255, 255));
 		lblInput.setBounds(552, 144, 70, 15);
 		add(lblInput);
@@ -270,8 +267,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 		// result
 
-		JLabel lblOutput = new JLabel("RESULT");
-		lblOutput.setFont(new Font("Courier New", Font.BOLD, 13));
+		JLabel lblOutput = new JLabel(Message.RESULT);
+		lblOutput.setFont(BornIcon.TITLE_FONT);
 		lblOutput.setForeground(new Color(255, 255, 255));
 		lblOutput.setBounds(552, 456, 70, 15);
 		add(lblOutput);
@@ -303,7 +300,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonComputeInference.setBorderPainted(false);
 		add(buttonComputeInference);
 
-		labelProgress.setFont(new Font("Courier New", Font.BOLD, 13));
+		labelProgress.setFont(BornIcon.TITLE_FONT);
 		labelProgress.setForeground(new Color(255, 255, 255));
 		labelProgress.setBounds(796, 456, 96, 15);
 		labelProgress.setVisible(false);
@@ -328,7 +325,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		buttonViewOntology.setToolTipText("view ontology file");
+		buttonViewOntology.setToolTipText(Message.tooltipViewOntologyFile);
 		buttonViewOntology.setBounds(284, 40, 54, 28);
 		buttonViewOntology.setOpaque(false);
 		buttonViewOntology.setContentAreaFilled(false);
@@ -336,15 +333,15 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		add(buttonViewOntology);
 
 		buttonViewBayesianNetwork.setIcon(BornIcon.VIEW_FILE);
-		buttonViewBayesianNetwork.setToolTipText("view Bayesian network file");
+		buttonViewBayesianNetwork.setToolTipText(Message.tooltipViewBayesianNetworkFile);
 		buttonViewBayesianNetwork.setBounds(284, 136, 54, 28);
 		buttonViewBayesianNetwork.setOpaque(false);
 		buttonViewBayesianNetwork.setContentAreaFilled(false);
 		buttonViewBayesianNetwork.setBorderPainted(false);
 		add(buttonViewBayesianNetwork);
 
-		JLabel lblExamples = new JLabel("EXAMPLES");
-		lblExamples.setFont(new Font("Courier New", Font.BOLD, 13));
+		JLabel lblExamples = new JLabel(Message.EXAMPLES);
+		lblExamples.setFont(BornIcon.TITLE_FONT);
 		lblExamples.setForeground(new Color(255, 255, 255));
 		lblExamples.setBounds(552, 48, 70, 15);
 		add(lblExamples);
@@ -409,7 +406,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 				this.textConsoleInput.setText(formatTool.formatText(text));
 				updateQuery();
 			} catch (IOException e) {
-				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			}
 		}
 	}
@@ -422,7 +419,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 				String text = formatTool.trimText(this.textConsoleOutput.getText());
 				ProcessorConfigurationImpl.write(new StringReader(text), new FileWriter(consoleOutputFile));
 			} catch (IOException e) {
-				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			}
 		}
 	}
@@ -478,9 +475,9 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 			try {
 				getModel().setOntology(ProcessorConfigurationImpl.readOntology(new FileInputStream(inputOntologyFile)));
 			} catch (IOException e) {
-				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			} catch (OWLOntologyCreationException e) {
-				setOntologyFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			}
 		}
 	}
@@ -492,7 +489,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 			try {
 				getModel().setBayesianNetwork(ProcessorConfigurationImpl.read(new FileReader(bayesianNetworkFile)));
 			} catch (IOException e) {
-				setBayesianNetworkFile(WRONG_FILE_NAME_ERROR_MESSAGE);
+				setBayesianNetworkFile(Message.WRONG_FILE_NAME_ERROR);
 			}
 		}
 	}
