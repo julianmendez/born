@@ -2,13 +2,12 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
-import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 
 /**
  * An object of this class processes an set of OWL ontology files, produces a
@@ -23,7 +22,6 @@ public class MultiProcessorSubApp implements SubApp {
 
 	static final String LOGGING_OPTION = "--log";
 	public static final String COMMAND = "experiment";
-	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProcessorSubApp.DEFAULT_PROBLOG_DOWNLOAD_URI;
 	static final String HELP = ""
 			+ "\nParameters: [--log] <directory of ontologies> <directory of Bayesian networks> <number of queries> <seed> <directory of results> [<ProbLog directory>]"
 			+ "\n"
@@ -41,7 +39,7 @@ public class MultiProcessorSubApp implements SubApp {
 			+ " --log ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
 			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
 			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
-			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI
+			+ "\n   " + ResourceConstant.DEFAULT_PROBLOG_DOWNLOAD_URI
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
 			+ "\n" //
 			+ "\n" //

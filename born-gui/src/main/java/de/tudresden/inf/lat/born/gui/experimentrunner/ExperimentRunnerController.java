@@ -55,8 +55,6 @@ public class ExperimentRunnerController implements ActionListener {
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
 
-	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
-
 	private final OWLOntologyManager owlOntologyManager;
 	private final ExperimentRunnerView view;
 	private ExperimentMakerRunner experimentMakerRunner;

@@ -4,11 +4,11 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.net.URI;
 import java.util.Objects;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
 /**
@@ -24,7 +24,6 @@ public class ProcessorSubApp implements SubApp {
 
 	static final String LOGGING_OPTION = "--log";
 	public static final String COMMAND = "get";
-	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = ProblogDownloadManager.DEFAULT_PROBLOG_DOWNLOAD_URI;
 	static final String HELP = ""
 			+ "\nParameters: [--log] <ontology file> <Bayesian network file> <query file> <output file> [<ProbLog directory>]"
 			+ "\n"
@@ -42,7 +41,7 @@ public class ProcessorSubApp implements SubApp {
 			+ "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:" + "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
 			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
 			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
-			+ "\n   " + DEFAULT_PROBLOG_DOWNLOAD_URI
+			+ "\n   " + ResourceConstant.DEFAULT_PROBLOG_DOWNLOAD_URI
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
 			+ "\n" //
 			+ "\n" //

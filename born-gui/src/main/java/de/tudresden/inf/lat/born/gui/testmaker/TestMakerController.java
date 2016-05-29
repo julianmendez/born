@@ -34,8 +34,6 @@ public class TestMakerController implements ActionListener {
 	private static final String actionSelectOutputOntologyFile = "save output ontology";
 	private static final String actionSaveBayesianNetwork = "save Bayesian network";
 
-	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
-
 	private final OWLOntologyManager owlOntologyManager;
 	private final TestMakerView view;
 	private File lastPath = null;

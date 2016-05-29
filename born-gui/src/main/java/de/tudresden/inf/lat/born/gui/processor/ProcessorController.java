@@ -15,6 +15,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.gui.common.TextViewer;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
@@ -65,8 +66,6 @@ public class ProcessorController implements ActionListener {
 	private static final String actionComputeInference = "compute inference";
 	private static final String actionComboBoxExample = "choose example";
 	private static final String actionUpdateExample = "update example";
-
-	public static final String DEFAULT_TEMPORARY_FILE_NAME = "/tmp/temporary_born_output_file.txt";
 
 	private final OWLOntologyManager owlOntologyManager;
 	private final ProcessorView view;
@@ -285,7 +284,7 @@ public class ProcessorController implements ActionListener {
 	 */
 	void init() {
 		getModel().setUseOfDefaultCompletionRules(false);
-		getModel().setOutputFileName(DEFAULT_TEMPORARY_FILE_NAME);
+		getModel().setOutputFileName(ResourceConstant.DEFAULT_TEMPORARY_FILE_NAME);
 
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonViewOntologyListener(this, actionViewOntology);

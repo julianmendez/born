@@ -12,6 +12,7 @@ import java.util.Objects;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 
 /**
@@ -23,13 +24,7 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
  */
 public class ProcessorCore {
 
-	static final String PROBLOG_CLI = "problog-cli.py";
-	static final String PROBLOG_OUTPUT_FILE = Symbol.FILE_SEPARATOR + "tmp" + Symbol.FILE_SEPARATOR
-			+ "~tmp-output.pl.tmp";
-	static final String PROBLOG_OUTPUT_OPTION = "-o";
-	static final String PYTHON = "python";
-	static final String SPACE = " ";
-	static final String LONG_TAB = "\t    : ";
+	static final String PROBLOG_OUTPUT_FILE = ResourceConstant.PROBLOG_OUTPUT_FILE;
 
 	private boolean isShowingLog = false;
 
@@ -72,7 +67,7 @@ public class ProcessorCore {
 		Objects.requireNonNull(str);
 		Objects.requireNonNull(start);
 		long current = System.nanoTime();
-		String info = "" + (current - start) + LONG_TAB + str;
+		String info = "" + (current - start) + Symbol.LONG_TAB + str;
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}

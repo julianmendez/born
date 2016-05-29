@@ -61,6 +61,7 @@ import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.SWRLRule;
 
+import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
@@ -105,7 +106,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 		Objects.requireNonNull(bayesianNetworkVariables);
 		this.owlOntology = manager.createOntology();
 		this.df = manager.getOWLDataFactory();
-		IRI probabilityIri = IRI.create(Symbol.PROBABILITY_URI);
+		IRI probabilityIri = IRI.create(ResourceConstant.PROBABILITY_URI);
 		this.annotationProperty = manager.getOWLDataFactory().getOWLAnnotationProperty(probabilityIri);
 		this.threshold = threshold;
 		this.bayesianNetworkVariableSet.addAll(bayesianNetworkVariables);

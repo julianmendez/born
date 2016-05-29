@@ -1,7 +1,5 @@
 package de.tudresden.inf.lat.born.core.term;
 
-import java.net.URI;
-
 /**
  * This interface contains all the valid symbols.
  * 
@@ -34,7 +32,7 @@ public interface Symbol {
 	char NEW_LINE_CHAR = '\n';
 	char SPACE_CHAR = ' ';
 
-	URI PROBABILITY_URI = URI.create("http://lat.inf.tu-dresden.de/systems/born#probability");
+	String LONG_TAB = "\t    : ";
 
 	String FILE_SEPARATOR = System.getProperty("file.separator");
 
