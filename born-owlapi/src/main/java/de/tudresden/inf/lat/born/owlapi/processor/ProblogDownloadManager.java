@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 import de.tudresden.inf.lat.born.core.common.ResourceConstant;
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 
 /**
  * An object of this class manages the download of the ProbLog ZIP file.
@@ -58,7 +59,7 @@ public class ProblogDownloadManager {
 		if (downloadIsNecessary) {
 			downloadProblog(ResourceConstant.DEFAULT_PROBLOG_ZIP_FILE);
 			String verificationCode = computeVerificationCode();
-			storeVerificationCode(verificationCode);
+			storeVerificationCode(verificationCode, ResourceConstant.DEFAULT_VERIFICATION_FILE);
 		}
 	}
 
@@ -74,6 +75,7 @@ public class ProblogDownloadManager {
 		Objects.requireNonNull(problogZipFile);
 		ReadableByteChannel channel = Channels
 				.newChannel(ResourceConstant.DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
+		ResourceUtil.ensurePath(problogZipFile);
 		FileOutputStream output = new FileOutputStream(problogZipFile);
 		output.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
 		output.close();
@@ -94,8 +96,9 @@ public class ProblogDownloadManager {
 		return ret;
 	}
 
-	void storeVerificationCode(String code) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(ResourceConstant.DEFAULT_VERIFICATION_FILE));
+	void storeVerificationCode(String code, String file) throws IOException {
+		ResourceUtil.ensurePath(file);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		writer.write(code.trim());
 		writer.newLine();
 		writer.flush();

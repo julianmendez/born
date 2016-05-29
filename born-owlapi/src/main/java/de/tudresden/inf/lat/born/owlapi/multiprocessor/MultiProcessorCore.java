@@ -20,6 +20,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
@@ -164,6 +165,7 @@ public class MultiProcessorCore {
 
 				String resultFileName = conf.getOutputDirectory() + FILE_SEPARATOR + ontPair.getOntologyName()
 						+ LOG_EXTENSION;
+				ResourceUtil.ensurePath(resultFileName);
 				Writer output = new FileWriter(resultFileName, true);
 
 				String temporaryFileName = conf.getOutputDirectory() + FILE_SEPARATOR + ontPair.getOntologyName()
@@ -248,6 +250,7 @@ public class MultiProcessorCore {
 		for (OntologyAndNetwork ontNet : ontologyList) {
 			String result = resultIt.next();
 			String fileName = outputDirectory + FILE_SEPARATOR + ontNet.getOntologyName() + CSV_EXTENSION;
+			ResourceUtil.ensurePath(fileName);
 			FileWriter fileWriter = new FileWriter(fileName, true);
 			fileWriter.write(result);
 			fileWriter.flush();

@@ -22,6 +22,7 @@ import javax.swing.ScrollPaneConstants;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.gui.common.BornIcon;
 import de.tudresden.inf.lat.born.gui.common.FormatTool;
 import de.tudresden.inf.lat.born.gui.common.Message;
@@ -416,6 +417,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		if (Objects.nonNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = formatTool.trimText(this.textConsoleOutput.getText());
+				ResourceUtil.ensurePath(consoleOutputFile);
 				ProcessorConfigurationImpl.write(new StringReader(text), new FileWriter(consoleOutputFile));
 			} catch (IOException e) {
 				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);

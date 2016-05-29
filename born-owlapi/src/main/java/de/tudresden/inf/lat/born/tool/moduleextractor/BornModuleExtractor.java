@@ -29,6 +29,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.module.DefaultModuleExtractor;
 import de.tudresden.inf.lat.born.module.Module;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
@@ -155,6 +156,7 @@ public class BornModuleExtractor {
 	void appendPair(String fileName, OWLClass owlClass, int size) throws IOException {
 		Objects.requireNonNull(fileName);
 		Objects.requireNonNull(owlClass);
+		ResourceUtil.ensurePath(fileName);
 		BufferedWriter output = new BufferedWriter(new FileWriter(fileName, true));
 		output.write(owlClass.getIRI().toURI().toString());
 		output.write(SEPARATOR);
