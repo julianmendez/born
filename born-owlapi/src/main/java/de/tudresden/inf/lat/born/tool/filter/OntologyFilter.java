@@ -15,6 +15,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
 /**
@@ -50,7 +51,7 @@ public class OntologyFilter {
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(fileName);
 		Objects.requireNonNull(renderer);
-		FileOutputStream output = new FileOutputStream(fileName);
+		FileOutputStream output = new FileOutputStream(ResourceUtil.ensurePath(fileName));
 		renderer.render(owlOntology, output);
 		output.flush();
 		output.close();

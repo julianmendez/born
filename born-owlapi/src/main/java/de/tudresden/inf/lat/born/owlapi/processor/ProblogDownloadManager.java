@@ -75,8 +75,7 @@ public class ProblogDownloadManager {
 		Objects.requireNonNull(problogZipFile);
 		ReadableByteChannel channel = Channels
 				.newChannel(ResourceConstant.DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
-		ResourceUtil.ensurePath(problogZipFile);
-		FileOutputStream output = new FileOutputStream(problogZipFile);
+		FileOutputStream output = new FileOutputStream(ResourceUtil.ensurePath(problogZipFile));
 		output.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
 		output.close();
 	}
@@ -97,8 +96,7 @@ public class ProblogDownloadManager {
 	}
 
 	void storeVerificationCode(String code, String file) throws IOException {
-		ResourceUtil.ensurePath(file);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(ResourceUtil.ensurePath(file)));
 		writer.write(code.trim());
 		writer.newLine();
 		writer.flush();

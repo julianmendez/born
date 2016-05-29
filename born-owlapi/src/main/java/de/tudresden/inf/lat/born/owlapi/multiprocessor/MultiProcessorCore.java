@@ -165,8 +165,7 @@ public class MultiProcessorCore {
 
 				String resultFileName = conf.getOutputDirectory() + FILE_SEPARATOR + ontPair.getOntologyName()
 						+ LOG_EXTENSION;
-				ResourceUtil.ensurePath(resultFileName);
-				Writer output = new FileWriter(resultFileName, true);
+				Writer output = new FileWriter(ResourceUtil.ensurePath(resultFileName), true);
 
 				String temporaryFileName = conf.getOutputDirectory() + FILE_SEPARATOR + ontPair.getOntologyName()
 						+ TEMP_FILE_SUFFIX;
@@ -250,8 +249,7 @@ public class MultiProcessorCore {
 		for (OntologyAndNetwork ontNet : ontologyList) {
 			String result = resultIt.next();
 			String fileName = outputDirectory + FILE_SEPARATOR + ontNet.getOntologyName() + CSV_EXTENSION;
-			ResourceUtil.ensurePath(fileName);
-			FileWriter fileWriter = new FileWriter(fileName, true);
+			FileWriter fileWriter = new FileWriter(ResourceUtil.ensurePath(fileName), true);
 			fileWriter.write(result);
 			fileWriter.flush();
 			fileWriter.close();

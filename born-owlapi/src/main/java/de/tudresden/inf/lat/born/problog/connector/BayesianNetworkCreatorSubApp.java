@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
 /**
@@ -77,7 +78,7 @@ public class BayesianNetworkCreatorSubApp implements SubApp {
 				List<Integer> dependencies = parseIntegers(args[0]);
 				conf.setDependencies(dependencies);
 
-				OutputStream output = new FileOutputStream(args[1]);
+				OutputStream output = new FileOutputStream(ResourceUtil.ensurePath(args[1]));
 				conf.setOutput(output);
 
 				BayesianNetworkCreatorCore core = new BayesianNetworkCreatorCore();

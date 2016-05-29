@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Objects;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 
 /**
@@ -51,10 +52,10 @@ public class SplitterSubApp implements SubApp {
 				InputStream in = new FileInputStream(args[0]);
 				conf.setInputOntology(in);
 
-				OutputStream outOnt = new FileOutputStream(args[1]);
+				OutputStream outOnt = new FileOutputStream(ResourceUtil.ensurePath(args[1]));
 				conf.setOutputOntology(outOnt);
 
-				OutputStream outNet = new FileOutputStream(args[2]);
+				OutputStream outNet = new FileOutputStream(ResourceUtil.ensurePath(args[2]));
 				conf.setBayesianNetwork(outNet);
 
 				SplitterCore core = new SplitterCore();

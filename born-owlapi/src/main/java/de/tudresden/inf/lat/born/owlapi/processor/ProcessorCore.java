@@ -107,9 +107,9 @@ public class ProcessorCore {
 		Objects.requireNonNull(query);
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
-		ResourceUtil.ensurePath(PROBLOG_OUTPUT_FILE);
 		String ret = instance.createProblogFile(useOfDefaultCompletionRules, additionalCompletionRules, ontology,
-				bayesianNetwork, query, new FileOutputStream(PROBLOG_OUTPUT_FILE), executionResult);
+				bayesianNetwork, query, new FileOutputStream(ResourceUtil.ensurePath(PROBLOG_OUTPUT_FILE)),
+				executionResult);
 		return ret;
 
 	}

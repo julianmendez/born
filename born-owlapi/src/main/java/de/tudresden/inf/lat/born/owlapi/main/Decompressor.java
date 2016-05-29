@@ -11,6 +11,8 @@ import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
+
 /**
  * 
  * An object of this class decompresses a ZIP file.
@@ -34,7 +36,8 @@ public class Decompressor {
 		Objects.requireNonNull(inputStream);
 		Objects.requireNonNull(outputFile);
 		BufferedInputStream input = new BufferedInputStream(inputStream);
-		BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(outputFile));
+		BufferedOutputStream output = new BufferedOutputStream(
+				new FileOutputStream(ResourceUtil.ensurePath(outputFile)));
 		for (int ch = input.read(); ch != -1; ch = input.read()) {
 			output.write(ch);
 		}

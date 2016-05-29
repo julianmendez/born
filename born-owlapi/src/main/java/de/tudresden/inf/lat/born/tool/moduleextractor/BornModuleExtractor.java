@@ -147,7 +147,7 @@ public class BornModuleExtractor {
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(fileName);
 		Objects.requireNonNull(renderer);
-		FileOutputStream output = new FileOutputStream(fileName);
+		FileOutputStream output = new FileOutputStream(ResourceUtil.ensurePath(fileName));
 		renderer.render(owlOntology, output);
 		output.flush();
 		output.close();
@@ -156,8 +156,7 @@ public class BornModuleExtractor {
 	void appendPair(String fileName, OWLClass owlClass, int size) throws IOException {
 		Objects.requireNonNull(fileName);
 		Objects.requireNonNull(owlClass);
-		ResourceUtil.ensurePath(fileName);
-		BufferedWriter output = new BufferedWriter(new FileWriter(fileName, true));
+		BufferedWriter output = new BufferedWriter(new FileWriter(ResourceUtil.ensurePath(fileName), true));
 		output.write(owlClass.getIRI().toURI().toString());
 		output.write(SEPARATOR);
 		output.write("" + size);

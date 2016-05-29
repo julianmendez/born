@@ -10,6 +10,7 @@ import java.io.UncheckedIOException;
 import java.util.Objects;
 import java.util.Set;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
@@ -60,7 +61,7 @@ public class AnnotatorSubApp implements SubApp {
 						.extractVariables(ProcessorConfigurationImpl.read(new FileReader(args[3])));
 				conf.setInputBayesianNetworkVariables(bayesianNetworkVariables);
 
-				OutputStream outOnt = new FileOutputStream(args[1]);
+				OutputStream outOnt = new FileOutputStream(ResourceUtil.ensurePath(args[1]));
 				conf.setOutputOntology(outOnt);
 
 				AnnotatorCore instance = new AnnotatorCore();

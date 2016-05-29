@@ -417,8 +417,8 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		if (Objects.nonNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
 				String text = formatTool.trimText(this.textConsoleOutput.getText());
-				ResourceUtil.ensurePath(consoleOutputFile);
-				ProcessorConfigurationImpl.write(new StringReader(text), new FileWriter(consoleOutputFile));
+				ProcessorConfigurationImpl.write(new StringReader(text),
+						new FileWriter(ResourceUtil.ensurePath(consoleOutputFile)));
 			} catch (IOException e) {
 				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);
 			}

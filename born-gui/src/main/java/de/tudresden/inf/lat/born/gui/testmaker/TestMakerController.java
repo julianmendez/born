@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorCore;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorConfiguration;
@@ -117,7 +118,7 @@ public class TestMakerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			try {
-				annotateOntology(new FileOutputStream(file));
+				annotateOntology(new FileOutputStream(ResourceUtil.ensurePath(file)));
 				this.lastPath = file.getParentFile();
 			} catch (IOException e) {
 				throw new UncheckedIOException(e);
@@ -157,7 +158,7 @@ public class TestMakerController implements ActionListener {
 		}
 		if (Objects.nonNull(file)) {
 			try {
-				createBayesianNetwork(new FileOutputStream(file));
+				createBayesianNetwork(new FileOutputStream(ResourceUtil.ensurePath(file)));
 				this.lastPath = file.getParentFile();
 			} catch (IOException e) {
 				throw new UncheckedIOException(e);
