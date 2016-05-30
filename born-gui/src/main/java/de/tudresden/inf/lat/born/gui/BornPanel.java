@@ -49,9 +49,7 @@ public class BornPanel extends JPanel implements BornView {
 	}
 
 	/**
-	 * Returns the panel.
-	 * 
-	 * @return the panel
+	 * Creates the panel.
 	 */
 	void createPanel() {
 		setLayout(new GridLayout(1, 1));
