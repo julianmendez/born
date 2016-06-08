@@ -205,7 +205,6 @@
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<manifestEntries>
-										<Private-Package></Private-Package>
 										<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
 										<Bundle-Name>born</Bundle-Name>
 										<Bundle-Version>${project.version}</Bundle-Version>
