@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>born-standalone</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 
 	<dependencies>
 
@@ -183,65 +183,56 @@
 
 	<build>
 
-		<finalName>born</finalName>
-
 		<plugins>
 
 			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Private-Package></Private-Package>
-						<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
-						<Bundle-Name>born</Bundle-Name>
-						<Bundle-Version>${project.version}</Bundle-Version>
-						<Bundle-Category>protege</Bundle-Category>
-						<Bundle-Description>BORN standalone</Bundle-Description>
-						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
-						<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
-						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
-						<Import-Package>${import.package}</Import-Package>
-						<Main-Class>${mainClass}</Main-Class>
-						<Include-Resource>
-							{maven-resources}, {maven-dependencies},
-							@born-owlapi-${project.version}.jar,
-							@born-gui-${project.version}.jar,
-							@jcel-coreontology-0.24.0-SNAPSHOT.jar,
-							@jcel-core-0.24.0-SNAPSHOT.jar,
-							@jcel-ontology-0.24.0-SNAPSHOT.jar,
-							@jcel-reasoner-0.24.0-SNAPSHOT.jar,
-							@jcel-owlapi-0.24.0-SNAPSHOT.jar,
-							@owlapi-distribution-4.1.3.jar,
-							@slf4j-api-1.7.7.jar,
-							@guava-18.0.jar,
-							@guice-4.0-beta.jar,
-							@guice-multibindings-4.0-beta.jar,
-							@guice-assistedinject-4.0-beta.jar,
-							@javax.inject-1.jar,
-							@aopalliance-1.0.jar,
-							@commons-io-2.4.jar,
-							@xz-1.5.jar,
-							@sesame-model-2.7.12.jar,
-							@sesame-rio-api-2.7.12.jar,
-							@sesame-rio-binary-2.7.12.jar,
-							@sesame-rio-datatypes-2.7.12.jar,
-							@sesame-rio-languages-2.7.12.jar,
-							@sesame-rio-n3-2.7.12.jar,
-							@sesame-rio-nquads-2.7.12.jar,
-							@sesame-rio-ntriples-2.7.12.jar,
-							@sesame-rio-rdfjson-2.7.12.jar,
-							@sesame-rio-rdfxml-2.7.12.jar,
-							@sesame-rio-trig-2.7.12.jar,
-							@sesame-rio-trix-2.7.12.jar,
-							@sesame-rio-turtle-2.7.12.jar,
-							@sesame-util-2.7.12.jar,
-							@trove4j-3.0.3.jar,
-							LICENSE.txt=../LICENSE.txt
-						</Include-Resource>
-					</instructions>
-				</configuration>
+
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+
+					<execution>
+						<id>standalone</id>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+							<finalName>born</finalName>
+							<minimizeJar>false</minimizeJar>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Private-Package></Private-Package>
+										<Bundle-SymbolicName>${project.groupId};singleton:=true</Bundle-SymbolicName>
+										<Bundle-Name>born</Bundle-Name>
+										<Bundle-Version>${project.version}</Bundle-Version>
+										<Bundle-Category>protege</Bundle-Category>
+										<Bundle-Description>BORN standalone</Bundle-Description>
+										<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
+										<Bundle-DocURL>http://lat.inf.tu-dresden.de</Bundle-DocURL>
+										<Bundle-ClassPath>.</Bundle-ClassPath>
+										<Import-Package>${import.package}</Import-Package>
+										<Main-Class>${mainClass}</Main-Class>
+									</manifestEntries>
+								</transformer>
+							</transformers>
+							<filters>
+								<filter>
+									<artifact>*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+
+				</executions>
 			</plugin>
 
 			<plugin>
