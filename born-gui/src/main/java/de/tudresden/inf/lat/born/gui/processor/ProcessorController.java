@@ -172,7 +172,7 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionResetCompletionRules() {
 		String defaultCompletionRules = (new ProblogProgram())
-				.asStringC((new ProblogInputCreator()).getDefaultCompletionRules());
+				.asStringWithTabs((new ProblogInputCreator()).getDefaultCompletionRules());
 		getView().setCompletionRules(defaultCompletionRules);
 		updatePreviousToLastUsedCompletionRules(defaultCompletionRules);
 		updatePreviousToLastUsedCompletionRules(defaultCompletionRules);

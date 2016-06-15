@@ -66,7 +66,8 @@ public class ClauseImpl implements Clause {
 					if (first[0]) {
 						first[0] = false;
 					} else {
-						sb.append("" + Symbol.COMMA_CHAR + Symbol.SPACE_CHAR);
+						sb.append(Symbol.COMMA_CHAR);
+						sb.append(Symbol.SPACE_CHAR);
 					}
 					sb.append(term.asString());
 				});
