@@ -4,15 +4,12 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
 import javax.swing.JFileChooser;
 
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import de.tudresden.inf.lat.born.core.common.ResourceConstant;
@@ -136,14 +133,8 @@ public class ProcessorController implements ActionListener {
 	void executeActionViewOntology() {
 		String text = "";
 		try {
-			OWLOntology ontology = ProcessorConfigurationImpl
-					.readOntology(new FileInputStream(getView().getOntologyFile()));
-			StringBuilder sb = new StringBuilder();
-			ontology.getAxioms().forEach(axiom -> sb.append(" " + axiom.toString() + "\n"));
-			text = sb.toString();
+			text = ProcessorConfigurationImpl.read(new FileReader(getView().getOntologyFile()));
 		} catch (IOException e) {
-			text = e.getMessage();
-		} catch (OWLOntologyCreationException e) {
 			text = e.getMessage();
 		}
 		TextViewer panel = new TextViewer();
