@@ -1,5 +1,8 @@
 package de.tudresden.inf.lat.born.gui.common;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import javax.swing.JFrame;
 
 /**
@@ -22,6 +25,11 @@ public class TextViewer extends JFrame {
 		TextViewerPanel view = new TextViewerPanel();
 		add(view);
 		this.view = view;
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent evt) {
+				view.resizeContent(getContentPane().getSize());
+			}
+		});
 	}
 
 	public TextViewerView getView() {

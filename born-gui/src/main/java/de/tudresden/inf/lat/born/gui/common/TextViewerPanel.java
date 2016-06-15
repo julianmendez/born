@@ -1,16 +1,24 @@
 package de.tudresden.inf.lat.born.gui.common;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+/**
+ * An object of this class is the text viewer panel.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public class TextViewerPanel extends JPanel implements TextViewerView {
 
 	private static final long serialVersionUID = -486147305343218431L;
+
+	public static final int MARGIN = 8;
 
 	private final JTextArea textContent = new JTextArea();
 	private final JScrollPane scrollContent = new JScrollPane();
@@ -42,25 +50,28 @@ public class TextViewerPanel extends JPanel implements TextViewerView {
 		return this;
 	}
 
+	@Override
+	public void resizeContent(Dimension dimension) {
+		int xSize = Math.max(dimension.width - 2 * MARGIN, 2 * MARGIN);
+		int ySize = Math.max(dimension.height - 2 * MARGIN, 2 * MARGIN);
+		scrollContent.setBounds(MARGIN, MARGIN, xSize, ySize);
+	}
+
 	void createPanel() {
 		setLayout(null);
 
-		setBackground(BornIcon.BACKGROUND_COLOR);
+		setBackground(Color.WHITE);
 
-		textContent.setBackground(new Color(255, 255, 240));
+		textContent.setBackground(Color.WHITE);
 		textContent.setToolTipText("Content");
 		textContent.setAlignmentX(LEFT_ALIGNMENT);
+		textContent.setLineWrap(true);
+		textContent.setWrapStyleWord(true);
 
-		scrollContent.setBounds(32, 32, 400, 400);
+		scrollContent.setBorder(null);
 		scrollContent.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollContent.setViewportView(textContent);
 		add(scrollContent);
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.drawImage(BornIcon.BACKGROUND, 0, 0, null);
 	}
 
 }

@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.gui.common;
 
+import java.awt.Dimension;
+
 /**
  * This interface models a file viewer.
  * 
@@ -22,5 +24,13 @@ public interface TextViewerView extends JPanelView {
 	 *            the model
 	 */
 	void setModel(String model);
+
+	/**
+	 * Resizes the content.
+	 * 
+	 * @param dimension
+	 *            dimension
+	 */
+	void resizeContent(Dimension dimension);
 
 }
