@@ -68,7 +68,7 @@ public class ProcessorCore {
 		Objects.requireNonNull(str);
 		Objects.requireNonNull(start);
 		long current = System.nanoTime();
-		String info = "" + (current - start) + Symbol.LONG_TAB + str;
+		String info = "" + (current - start) + Symbol.TAB_AND_COLON + str;
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}

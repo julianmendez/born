@@ -54,7 +54,7 @@ public class ProblogProcessor implements QueryProcessor {
 	void log(String str, long start) {
 		Objects.requireNonNull(str);
 		long current = System.nanoTime();
-		String info = "" + (current - start) + Symbol.LONG_TAB + str;
+		String info = "" + (current - start) + Symbol.TAB_AND_COLON + str;
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}

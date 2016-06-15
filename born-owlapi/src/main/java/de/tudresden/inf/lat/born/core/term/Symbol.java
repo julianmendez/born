@@ -32,7 +32,9 @@ public interface Symbol {
 	char NEW_LINE_CHAR = '\n';
 	char SPACE_CHAR = ' ';
 
-	String LONG_TAB = "\t    : ";
+	String SHORT_TAB = "    ";
+	String LONG_TAB = "\t" + SHORT_TAB;
+	String TAB_AND_COLON = LONG_TAB + COLON_CHAR + SPACE_CHAR;
 
 	String FILE_SEPARATOR = System.getProperty("file.separator");
 
