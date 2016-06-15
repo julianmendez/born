@@ -117,16 +117,6 @@ public interface ProcessorView extends JPanelView {
 	void addComboBoxExampleListener(ActionListener listener, String actionCommand);
 
 	/**
-	 * Adds an action listener to the button to update the selected example.
-	 * 
-	 * @param listener
-	 *            listener
-	 * @param actionCommand
-	 *            action command
-	 */
-	void addButtonUpdateExampleListener(ActionListener listener, String actionCommand);
-
-	/**
 	 * Returns the model.
 	 * 
 	 * @return the model

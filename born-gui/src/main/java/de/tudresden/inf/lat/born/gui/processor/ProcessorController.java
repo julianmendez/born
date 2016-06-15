@@ -65,7 +65,6 @@ public class ProcessorController implements ActionListener {
 	private static final String actionConsoleOutput = "console output";
 	private static final String actionComputeInference = "compute inference";
 	private static final String actionComboBoxExample = "choose example";
-	private static final String actionUpdateExample = "update example";
 
 	private final OWLOntologyManager owlOntologyManager;
 	private final ProcessorView view;
@@ -115,8 +114,6 @@ public class ProcessorController implements ActionListener {
 			executeActionComputeInference();
 		} else if (cmd.equals(actionComboBoxExample)) {
 			executeActionComboBoxExample();
-		} else if (cmd.equals(actionUpdateExample)) {
-			executeActionUpdateExample();
 		} else {
 			throw new IllegalStateException();
 		}
@@ -232,10 +229,6 @@ public class ProcessorController implements ActionListener {
 	}
 
 	void executeActionComboBoxExample() {
-		// ignore this action
-	}
-
-	void executeActionUpdateExample() {
 		int index = getView().getComboBoxExampleIndex();
 		ExampleConfiguration exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
 
@@ -296,7 +289,6 @@ public class ProcessorController implements ActionListener {
 		getView().addButtonConsoleOutputListener(this, actionConsoleOutput);
 		getView().addButtonComputeInferenceListener(this, actionComputeInference);
 		getView().addComboBoxExampleListener(this, actionComboBoxExample);
-		getView().addButtonUpdateExampleListener(this, actionUpdateExample);
 
 		getView().addExamples(this.exampleLoader.getExampleConfigurations());
 

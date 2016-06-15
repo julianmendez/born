@@ -49,7 +49,6 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final JButton buttonConsoleInput = new JButton();
 	private final JButton buttonConsoleOutput = new JButton();
 	private final JButton buttonComputeInference = new JButton();
-	private final JButton buttonUpdateExample = new JButton();
 	private final JLabel labelProgress = new JLabel(Message.LBL_COMPUTING);
 	private final JTextField textOntologyFile = new JTextField();
 	private final JTextField textBayesianNetworkFile = new JTextField();
@@ -147,14 +146,6 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		Objects.requireNonNull(actionCommand);
 		comboBoxExample.addActionListener(listener);
 		comboBoxExample.setActionCommand(actionCommand);
-	}
-
-	@Override
-	public void addButtonUpdateExampleListener(ActionListener listener, String actionCommand) {
-		Objects.requireNonNull(listener);
-		Objects.requireNonNull(actionCommand);
-		buttonUpdateExample.addActionListener(listener);
-		buttonUpdateExample.setActionCommand(actionCommand);
 	}
 
 	void createPanel() {
@@ -311,14 +302,6 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		comboBoxExample.setBounds(796, 40, 192, 28);
 		comboBoxExample.setToolTipText(Message.TOOLTIP_COMBO_BOX_EXAMPLE);
 		add(comboBoxExample);
-
-		buttonUpdateExample.setIcon(BornIcon.OPEN_FILE);
-		buttonUpdateExample.setBounds(704, 40, 54, 28);
-		buttonUpdateExample.setToolTipText(Message.TOOLTIP_BUTTON_UPDATE_EXAMPLE);
-		buttonUpdateExample.setOpaque(false);
-		buttonUpdateExample.setContentAreaFilled(false);
-		buttonUpdateExample.setBorderPainted(false);
-		add(buttonUpdateExample);
 
 		buttonViewOntology.setIcon(BornIcon.VIEW_FILE);
 		buttonViewOntology.addActionListener(new ActionListener() {
@@ -525,7 +508,6 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		buttonConsoleInput.setEnabled(status);
 		buttonConsoleOutput.setEnabled(status);
 		buttonComputeInference.setEnabled(status);
-		buttonUpdateExample.setEnabled(status);
 		comboBoxExample.setEnabled(status);
 	}
 
