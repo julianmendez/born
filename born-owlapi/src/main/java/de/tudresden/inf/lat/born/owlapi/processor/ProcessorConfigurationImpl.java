@@ -9,6 +9,7 @@ import java.io.Writer;
 import java.util.Objects;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.formats.PrefixDocumentFormat;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -217,6 +218,20 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 		Objects.requireNonNull(input);
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		return manager.loadOntologyFromOntologyDocument(input);
+	}
+
+	/**
+	 * Returns a document format that contains the prefixes of the given
+	 * ontology.
+	 * 
+	 * @param ontology
+	 *            ontology
+	 * @return a document format that contains the prefixes of the given
+	 *         ontology
+	 */
+	public static PrefixDocumentFormat getPrefixes(OWLOntology ontology) {
+		OWLOntologyManager manager = ontology.getOWLOntologyManager();
+		return manager.getOntologyFormat(ontology).asPrefixOWLOntologyFormat();
 	}
 
 }
