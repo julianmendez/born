@@ -33,7 +33,7 @@ public class BornStandalone {
 		JFrame frame = new JFrame();
 		frame.add(starter.getPanel().getView().getPanel());
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(new Dimension(1024, 720));
+		frame.setSize(new Dimension(1024, 800));
 		frame.setVisible(true);
 	}
 
