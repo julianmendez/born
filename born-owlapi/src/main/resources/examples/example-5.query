@@ -1,2 +1,2 @@
-query(sub('http://lat.inf.tu-dresden.de/systems/born/born-example#a', 'http://lat.inf.tu-dresden.de/systems/born/born-example#d')).
+query(sub('ont:a', 'ont:d')).
 
