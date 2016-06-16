@@ -1,7 +1,5 @@
 package de.tudresden.inf.lat.born.problog.type;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,26 +23,16 @@ public class ProblogProgram {
 	static final String TITLE_BAYESIAN_NETWORK = "%% Bayesian Network";
 	static final String TITLE_QUERIES = "%% Queries";
 
+	private final ProblogProgramData data = new ProblogProgramData();
 	private String additionalCompletionRulesAsText = "";
-
-	private final List<CompletionRule> completionRules = new ArrayList<>();
-	private final List<Clause> ontology = new ArrayList<>();
-	private final List<ProbClause> bayesianNetwork = new ArrayList<>();
-	private final List<Clause> queries = new ArrayList<>();
 	private String bayesianNetworkAddendum = "";
 	private String queryListAddendum = "";
 
 	public ProblogProgram() {
 	}
 
-	public List<CompletionRule> getCompletionRules() {
-		return Collections.unmodifiableList(this.completionRules);
-	}
-
-	public void setCompletionRules(List<CompletionRule> completionRules) {
-		Objects.requireNonNull(completionRules);
-		this.completionRules.clear();
-		this.completionRules.addAll(completionRules);
+	public ProblogProgramData getData() {
+		return this.data;
 	}
 
 	public String getAdditionalCompletionRulesAsText() {
@@ -56,26 +44,6 @@ public class ProblogProgram {
 		this.additionalCompletionRulesAsText = completionRulesAsText;
 	}
 
-	public List<Clause> getOntology() {
-		return Collections.unmodifiableList(this.ontology);
-	}
-
-	public void setOntology(List<Clause> ontology) {
-		Objects.requireNonNull(ontology);
-		this.ontology.clear();
-		this.ontology.addAll(ontology);
-	}
-
-	public List<ProbClause> getBayesianNetwork() {
-		return Collections.unmodifiableList(this.bayesianNetwork);
-	}
-
-	public void setBayesianNetwork(List<ProbClause> bayesianNetwork) {
-		Objects.requireNonNull(bayesianNetwork);
-		this.bayesianNetwork.clear();
-		this.bayesianNetwork.addAll(bayesianNetwork);
-	}
-
 	public String getBayesianNetworkAddendum() {
 		return this.bayesianNetworkAddendum;
 	}
@@ -85,16 +53,6 @@ public class ProblogProgram {
 		this.bayesianNetworkAddendum = bayesianNetworkAddendum;
 	}
 
-	public List<Clause> getQueries() {
-		return this.queries;
-	}
-
-	public void setQueries(List<Clause> queries) {
-		Objects.requireNonNull(queries);
-		this.queries.clear();
-		this.queries.addAll(queries);
-	}
-
 	public String getQueryListAddendum() {
 		return this.queryListAddendum;
 	}
@@ -102,15 +60,6 @@ public class ProblogProgram {
 	public void setQueryListAddendum(String queryListAddendum) {
 		Objects.requireNonNull(queryListAddendum);
 		this.queryListAddendum = queryListAddendum;
-	}
-
-	public List<Clause> getClauses() {
-		ArrayList<Clause> ret = new ArrayList<Clause>();
-		ret.addAll(this.completionRules);
-		ret.addAll(this.ontology);
-		ret.addAll(this.bayesianNetwork);
-		ret.addAll(this.queries);
-		return Collections.unmodifiableList(ret);
 	}
 
 	String asString(List<Clause> clauses) {
@@ -175,7 +124,7 @@ public class ProblogProgram {
 		sb.append(TITLE_COMPLETION_RULES);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asStringC(this.completionRules));
+		sb.append(asStringC(this.data.getCompletionRules()));
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(this.additionalCompletionRulesAsText);
 		sb.append(Symbol.NEW_LINE_CHAR);
@@ -183,13 +132,13 @@ public class ProblogProgram {
 		sb.append(TITLE_ONTOLOGY);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asString(this.ontology));
+		sb.append(asString(this.data.getOntology()));
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(TITLE_BAYESIAN_NETWORK);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asStringP(this.bayesianNetwork));
+		sb.append(asStringP(this.data.getBayesianNetwork()));
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(this.bayesianNetworkAddendum);
 		sb.append(Symbol.NEW_LINE_CHAR);
@@ -197,7 +146,7 @@ public class ProblogProgram {
 		sb.append(TITLE_QUERIES);
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asString(this.queries));
+		sb.append(asString(this.data.getQueries()));
 		sb.append(Symbol.NEW_LINE_CHAR);
 		sb.append(this.queryListAddendum);
 		sb.append(Symbol.NEW_LINE_CHAR);

@@ -322,15 +322,15 @@ public class ProblogInputCreator {
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
 		List<Clause> clauses = getClauses(factory, module);
-		program.setOntology(clauses);
-		logger.fine("Clauses: " + program.getClauses());
+		program.getData().setOntology(clauses);
+		logger.fine("Ontology: " + program.getData().getOntology());
 
 		if (useOfDefaultCompletionRules) {
-			program.setCompletionRules(getDefaultCompletionRules());
+			program.getData().setCompletionRules(getDefaultCompletionRules());
 		} else {
-			program.setCompletionRules(Collections.emptyList());
+			program.getData().setCompletionRules(Collections.emptyList());
 		}
-		logger.fine("Completion Rules: " + program.getCompletionRules());
+		logger.fine("Completion Rules: " + program.getData().getCompletionRules());
 
 		program.setAdditionalCompletionRulesAsText(additionalCompletionRules);
 		logger.fine("Additional Completion Rules: " + program.getAdditionalCompletionRulesAsText());
