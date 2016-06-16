@@ -8,7 +8,10 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +23,7 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.semanticweb.owlapi.formats.PrefixDocumentFormat;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
@@ -251,6 +255,57 @@ public class ProblogInputCreator {
 		return ret;
 	}
 
+	List<String> orderByLongestFirst(Collection<String> oldList) {
+		List<String> newList = new ArrayList<String>();
+		newList.addAll(oldList);
+		Collections.sort(newList, new Comparator<String>() {
+			@Override
+			public int compare(String str0, String str1) {
+				int str0len = str0 == null ? -1 : str0.length();
+				int str1len = str1 == null ? -1 : str1.length();
+				int ret = str1len - str0len;
+				if (ret == 0 && str0 != null) {
+					ret = str0.compareTo(str1);
+				}
+				return ret;
+			}
+		});
+		return newList;
+	}
+
+	String replaceAll(Map<String, String> map, String text) {
+		String[] current = new String[1];
+		current[0] = text;
+		List<String> keys = orderByLongestFirst(map.keySet());
+		keys.forEach(key -> {
+			String value = map.get(key);
+			current[0] = current[0].replaceAll(key, value);
+		});
+		return current[0];
+	}
+
+	String expandPrefixes(OWLOntology ontology, String text) {
+		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
+		Map<String, String> prefixNames = new HashMap<String, String>();
+		prefixes.getPrefixNames().forEach(prefixName -> {
+			if (prefixName.length() > 1) {
+				prefixNames.put(prefixName, prefixes.getIRI(prefixName).toString());
+			}
+		});
+		return replaceAll(prefixNames, text);
+	}
+
+	String replaceByPrefixes(OWLOntology ontology, String text) {
+		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
+		Map<String, String> revPrefixNames = new HashMap<String, String>();
+		prefixes.getPrefixNames().forEach(prefixName -> {
+			if (prefixName.length() > 1) {
+				revPrefixNames.put(prefixes.getIRI(prefixName).toString(), prefixName);
+			}
+		});
+		return replaceAll(revPrefixNames, text);
+	}
+
 	public String createProblogFile(boolean useOfDefaultCompletionRules, String additionalCompletionRules,
 			OWLOntology owlOntology, String bayesianNetwork, String query, OutputStream resultOutputStream,
 			ProcessorExecutionResult executionResult) throws IOException, OWLOntologyCreationException {
@@ -266,9 +321,10 @@ public class ProblogInputCreator {
 		sbuf.append(Symbol.NEW_LINE_CHAR);
 
 		ProblogProgram program = new ProblogProgram();
-		program.setQueryListAddendum(query);
+		String expandedQuery = expandPrefixes(owlOntology, query);
+		program.setQueryListAddendum(expandedQuery);
 
-		Set<String> relevantSymbols = parseRelevantSymbols(new StringReader(query));
+		Set<String> relevantSymbols = parseRelevantSymbols(new StringReader(expandedQuery));
 
 		IntegerOntologyObjectFactory factory = new IntegerOntologyObjectFactoryImpl();
 
