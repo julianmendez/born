@@ -344,7 +344,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void setOntologyFile(String fileName) {
 		Objects.requireNonNull(fileName);
-		textOntologyFile.setText(formatTool.formatText(fileName));
+		textOntologyFile.setText(this.formatTool.formatText(fileName));
 	}
 
 	@Override
@@ -355,29 +355,29 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void setBayesianNetworkFile(String fileName) {
 		Objects.requireNonNull(fileName);
-		textBayesianNetworkFile.setText(formatTool.formatText(fileName));
+		textBayesianNetworkFile.setText(this.formatTool.formatText(fileName));
 	}
 
 	@Override
 	public String getCompletionRules() {
-		return formatTool.trimText(textCompletionRules.getText());
+		return this.formatTool.trimText(textCompletionRules.getText());
 	}
 
 	@Override
 	public void setCompletionRules(String text) {
 		Objects.requireNonNull(text);
-		textCompletionRules.setText(formatTool.formatText(text));
+		textCompletionRules.setText(this.formatTool.formatText(text));
 	}
 
 	@Override
 	public String getConsoleInput() {
-		return formatTool.trimText(textConsoleInput.getText());
+		return this.formatTool.trimText(textConsoleInput.getText());
 	}
 
 	@Override
 	public void setConsoleInput(String text) {
 		Objects.requireNonNull(text);
-		textConsoleInput.setText(formatTool.formatText(text));
+		textConsoleInput.setText(this.formatTool.formatText(text));
 	}
 
 	@Override
@@ -386,7 +386,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		if (Objects.nonNull(consoleInputFile) && !consoleInputFile.trim().isEmpty()) {
 			try {
 				String text = ProcessorConfigurationImpl.read(new FileReader(consoleInputFile));
-				this.textConsoleInput.setText(formatTool.formatText(text));
+				this.textConsoleInput.setText(this.formatTool.formatText(text));
 				updateQuery();
 			} catch (IOException e) {
 				setOntologyFile(Message.WRONG_FILE_NAME_ERROR);
@@ -399,7 +399,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 		Objects.requireNonNull(consoleOutputFile);
 		if (Objects.nonNull(consoleOutputFile) && !consoleOutputFile.trim().isEmpty()) {
 			try {
-				String text = formatTool.trimText(this.textConsoleOutput.getText());
+				String text = this.formatTool.trimText(this.textConsoleOutput.getText());
 				ProcessorConfigurationImpl.write(new StringReader(text),
 						new FileWriter(ResourceUtil.ensurePath(consoleOutputFile)));
 			} catch (IOException e) {
@@ -410,13 +410,13 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public String getConsoleOutput() {
-		return formatTool.trimText(textConsoleOutput.getText());
+		return this.formatTool.trimText(textConsoleOutput.getText());
 	}
 
 	@Override
 	public void setConsoleOutput(String text) {
 		Objects.requireNonNull(text);
-		textConsoleOutput.setText(formatTool.formatText(text));
+		textConsoleOutput.setText(this.formatTool.formatText(text));
 	}
 
 	@Override
@@ -446,7 +446,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public void updateCompletionRules() {
-		String completionRules = formatTool.trimText(textCompletionRules.getText());
+		String completionRules = this.formatTool.trimText(textCompletionRules.getText());
 		if (Objects.nonNull(completionRules) && !completionRules.trim().isEmpty()) {
 			getModel().setAdditionalCompletionRules(completionRules);
 		}
@@ -480,7 +480,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 
 	@Override
 	public void updateQuery() {
-		String query = formatTool.trimText(textConsoleInput.getText());
+		String query = this.formatTool.trimText(textConsoleInput.getText());
 		if (Objects.nonNull(query) && !query.trim().isEmpty()) {
 			getModel().setQuery(query);
 		}
@@ -489,7 +489,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	@Override
 	public void setResult(String result) {
 		Objects.requireNonNull(result);
-		textConsoleOutput.setText(formatTool.formatText(result));
+		textConsoleOutput.setText(this.formatTool.formatText(result));
 	}
 
 	@Override
@@ -515,7 +515,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	public void addExamples(Collection<ExampleConfiguration> examples) {
 		Objects.requireNonNull(examples);
 		examples.forEach(
-				configuration -> comboBoxExample.addItem(formatTool.formatText(configuration.getOntologyName())));
+				configuration -> comboBoxExample.addItem(this.formatTool.formatText(configuration.getOntologyName())));
 	}
 
 	@Override
