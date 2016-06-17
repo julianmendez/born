@@ -45,7 +45,11 @@ public class ProcessorController implements ActionListener {
 			ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
 			core.run(getModel(), start, executionResult);
 
-			getView().setResult(executionResult.getResult());
+			String resultText = executionResult.getResult();
+			ProblogInputCreator problogInputCreator = new ProblogInputCreator();
+			String result = problogInputCreator.replaceByPrefixes(getModel().getOntology(), resultText);
+
+			getView().setResult(result);
 			getView().setComputing(false);
 			getView().setButtonsEnabled(true);
 		}

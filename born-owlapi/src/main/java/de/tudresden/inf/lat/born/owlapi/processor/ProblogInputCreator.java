@@ -284,7 +284,7 @@ public class ProblogInputCreator {
 		return current[0];
 	}
 
-	String expandPrefixes(OWLOntology ontology, String text) {
+	public String expandPrefixes(OWLOntology ontology, String text) {
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
 		Map<String, String> prefixNames = new HashMap<String, String>();
 		prefixes.getPrefixNames().forEach(prefixName -> {
@@ -295,7 +295,7 @@ public class ProblogInputCreator {
 		return replaceAll(prefixNames, text);
 	}
 
-	String replaceByPrefixes(OWLOntology ontology, String text) {
+	public String replaceByPrefixes(OWLOntology ontology, String text) {
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
 		Map<String, String> revPrefixNames = new HashMap<String, String>();
 		prefixes.getPrefixNames().forEach(prefixName -> {
