@@ -23,11 +23,11 @@ public class ProblogProcessor implements QueryProcessor {
 	static final String PYTHON = "python";
 
 	static final String FILE_SEPARATOR = Symbol.FILE_SEPARATOR;
-	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
+	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
 	static final String PROBLOG_EXEC_DARWIN = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "darwin"
 			+ FILE_SEPARATOR + "dsharp";
-	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
+	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
 			+ FILE_SEPARATOR + "dsharp";
 
 	private boolean isShowingLog = false;
@@ -95,9 +95,9 @@ public class ProblogProcessor implements QueryProcessor {
 	void updatePermissions(long start, String problogDirectory) throws IOException {
 		Objects.requireNonNull(problogDirectory);
 		log("Update permissions.", start);
-		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_LINUX)).setExecutable(true);
-		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_DARWIN)).setExecutable(true);
 		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_WINDOWS)).setExecutable(true);
+		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_DARWIN)).setExecutable(true);
+		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_LINUX)).setExecutable(true);
 	}
 
 	/**
