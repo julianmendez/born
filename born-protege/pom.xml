@@ -24,12 +24,12 @@
 
 		<dependency>
 			<groupId>edu.stanford.protege</groupId>
-			<artifactId>org.protege.editor.owl</artifactId>
+			<artifactId>protege-editor-owl</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>edu.stanford.protege</groupId>
-			<artifactId>org.protege.editor.core.application</artifactId>
+			<artifactId>protege-editor-core</artifactId>
 		</dependency>
 
 	</dependencies>
