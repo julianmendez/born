@@ -42,7 +42,7 @@
 			<dependency>
 				<groupId>de.tu-dresden.inf.lat.jcel</groupId>
 				<artifactId>jcel-owlapi</artifactId>
-				<version>0.24.0-SNAPSHOT</version>
+				<version>0.24.0</version>
 			</dependency>
 
 		</dependencies>
