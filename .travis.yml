@@ -9,11 +9,6 @@ language: java
 jdk:
   - oraclejdk8
 
-before_install:
-  - git clone https://github.com/julianmendez/jcel.git
-  - cd jcel
-  - mvn clean install
-
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=false -B -V
 
