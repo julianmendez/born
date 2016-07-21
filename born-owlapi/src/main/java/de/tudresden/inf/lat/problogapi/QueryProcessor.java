@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.problogapi;
 
+import java.io.Reader;
+
 /**
  * This interface models the query processor.
  * 
@@ -10,14 +12,13 @@ package de.tudresden.inf.lat.problogapi;
 public interface QueryProcessor {
 
 	/**
-	 * Executes a query and returns a value given by the operating system.
+	 * Executes a ProbLog program and returns the result of executing the
+	 * processor.
 	 * 
-	 * @param start
-	 *            starting point
-	 * @param outputFileName
-	 *            output file name
-	 * @return a value given by the operating system
+	 * @param input
+	 *            ProbLog program given as input
+	 * @return the result of executing the processor
 	 */
-	int execute(long start, String outputFileName);
+	String execute(Reader input);
 
 }

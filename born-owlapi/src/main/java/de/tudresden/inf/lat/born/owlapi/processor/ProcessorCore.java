@@ -1,11 +1,9 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Objects;
 
@@ -131,19 +129,13 @@ public class ProcessorCore {
 			log(info, start);
 
 			long queryProcessingStart = System.nanoTime();
-			int exitVal = queryProcessor.execute(start, conf.getOutputFileName());
+			String result = queryProcessor.execute(new FileReader(ResourceConstant.PROBLOG_OUTPUT_FILE));
 			executionResult.setProblogReasoningTime(System.nanoTime() - queryProcessingStart);
 
 			log("End and show results.", start);
 
-			File outputFile = new File(conf.getOutputFileName());
-			if (outputFile.exists()) {
-				show(sbuf, new InputStreamReader(new FileInputStream(outputFile)));
+			sbuf.append(result);
 
-			} else {
-				sbuf.append("No results. Exit value: '" + exitVal + "'.");
-
-			}
 		} catch (IOException | OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
 		}

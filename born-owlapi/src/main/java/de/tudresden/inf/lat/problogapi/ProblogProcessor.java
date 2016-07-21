@@ -1,7 +1,14 @@
 package de.tudresden.inf.lat.problogapi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UncheckedIOException;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 
@@ -191,7 +198,7 @@ public class ProblogProcessor implements QueryProcessor {
 				log("Execute ProbLog.", start);
 				Runtime runtime = Runtime.getRuntime();
 				String commandLine = PYTHON + Symbol.SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-						+ Symbol.SPACE_CHAR + (new File(ResourceConstant.PROBLOG_OUTPUT_FILE)).getAbsolutePath()
+						+ Symbol.SPACE_CHAR + (new File(ResourceConstant.INPUT_FILE_FOR_PROBLOG)).getAbsolutePath()
 						+ Symbol.SPACE_CHAR + PROBLOG_OUTPUT_OPTION + Symbol.SPACE_CHAR
 						+ (new File(outputFileName)).getAbsolutePath();
 				log(commandLine, start);
@@ -201,6 +208,53 @@ public class ProblogProcessor implements QueryProcessor {
 				throw new RuntimeException(e);
 			}
 
+		}
+	}
+
+	/**
+	 * Returns string with the content of a given reader.
+	 * 
+	 * @param input
+	 *            reader
+	 * @return string with the content of a given reader
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	String show(Reader input) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		Objects.requireNonNull(input);
+		BufferedReader reader = new BufferedReader(input);
+		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
+			sb.append(line);
+			sb.append(Symbol.NEW_LINE_CHAR);
+		}
+		return sb.toString();
+	}
+
+	void createInputFileForProblog(Reader input, String inputFileForProblog) throws IOException {
+		BufferedReader reader = new BufferedReader(input);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(inputFileForProblog));
+		for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+			writer.write(line);
+			writer.newLine();
+		}
+		writer.flush();
+		writer.close();
+	}
+
+	@Override
+	public String execute(Reader input) {
+		try {
+			createInputFileForProblog(input, ResourceConstant.INPUT_FILE_FOR_PROBLOG);
+			execute(0, ResourceConstant.DEFAULT_TEMPORARY_FILE_NAME);
+			File outputFile = new File(ResourceConstant.DEFAULT_TEMPORARY_FILE_NAME);
+			if (outputFile.exists()) {
+				return show(new InputStreamReader(new FileInputStream(outputFile)));
+			} else {
+				return "No results.";
+			}
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
 		}
 	}
 
