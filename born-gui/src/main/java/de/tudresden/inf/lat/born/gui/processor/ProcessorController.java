@@ -272,7 +272,7 @@ public class ProcessorController implements ActionListener {
 	 */
 	void init() {
 		getModel().setUseOfDefaultCompletionRules(false);
-		getModel().setOutputFileName(ResourceConstant.DEFAULT_TEMPORARY_FILE_NAME);
+		getModel().setOutputFileName(ResourceConstant.DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
 
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonViewOntologyListener(this, actionViewOntology);

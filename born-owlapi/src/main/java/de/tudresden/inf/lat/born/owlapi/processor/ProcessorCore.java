@@ -24,7 +24,7 @@ import de.tudresden.inf.lat.problogapi.ResourceConstant;
  */
 public class ProcessorCore {
 
-	static final String PROBLOG_OUTPUT_FILE = ResourceConstant.PROBLOG_OUTPUT_FILE;
+	static final String PROBLOG_OUTPUT_FILE = ResourceConstant.TEMPORARY_INPUT_FILE_FOR_PROBLOG;
 
 	private boolean isShowingLog = false;
 
@@ -129,7 +129,7 @@ public class ProcessorCore {
 			log(info, start);
 
 			long queryProcessingStart = System.nanoTime();
-			String result = queryProcessor.execute(new FileReader(ResourceConstant.PROBLOG_OUTPUT_FILE));
+			String result = queryProcessor.execute(new FileReader(ResourceConstant.TEMPORARY_INPUT_FILE_FOR_PROBLOG));
 			executionResult.setProblogReasoningTime(System.nanoTime() - queryProcessingStart);
 
 			log("End and show results.", start);
