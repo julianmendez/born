@@ -24,8 +24,6 @@ import de.tudresden.inf.lat.problogapi.ResourceConstant;
  */
 public class ProcessorCore {
 
-	static final String PROBLOG_OUTPUT_FILE = ResourceConstant.TEMPORARY_INPUT_FILE_FOR_PROBLOG;
-
 	private boolean isShowingLog = false;
 
 	/**
@@ -107,7 +105,7 @@ public class ProcessorCore {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(useOfDefaultCompletionRules, additionalCompletionRules, ontology,
-				bayesianNetwork, query, new FileOutputStream(ResourceUtil.ensurePath(PROBLOG_OUTPUT_FILE)),
+				bayesianNetwork, query, new FileOutputStream(ResourceUtil.ensurePath(ResourceConstant.TEMPORARY_INPUT_FILE_FOR_PROBLOG)),
 				executionResult);
 		return ret;
 
