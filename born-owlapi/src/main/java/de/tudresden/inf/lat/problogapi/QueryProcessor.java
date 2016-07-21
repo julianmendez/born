@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.owlapi.processor;
+package de.tudresden.inf.lat.problogapi;
 
 /**
  * This interface models the query processor.

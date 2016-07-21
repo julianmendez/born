@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.owlapi.processor;
+package de.tudresden.inf.lat.problogapi;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -17,7 +17,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 
 /**

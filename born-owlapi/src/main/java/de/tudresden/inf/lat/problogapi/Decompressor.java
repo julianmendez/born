@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.owlapi.main;
+package de.tudresden.inf.lat.problogapi;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

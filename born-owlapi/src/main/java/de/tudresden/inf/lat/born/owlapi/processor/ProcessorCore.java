@@ -12,9 +12,10 @@ import java.util.Objects;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.Symbol;
+import de.tudresden.inf.lat.problogapi.QueryProcessor;
+import de.tudresden.inf.lat.problogapi.ResourceConstant;
 
 /**
  * An object of this class processes an OWL ontology, produces a ProbLog file,

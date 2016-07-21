@@ -5,9 +5,9 @@ import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Objects;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.SubApp;
-import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
+import de.tudresden.inf.lat.problogapi.ProblogProcessor;
+import de.tudresden.inf.lat.problogapi.ResourceConstant;
 
 /**
  * An object of this class processes an set of OWL ontology files, produces a

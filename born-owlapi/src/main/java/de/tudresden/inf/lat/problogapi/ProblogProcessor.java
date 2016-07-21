@@ -1,13 +1,11 @@
-package de.tudresden.inf.lat.born.owlapi.processor;
+package de.tudresden.inf.lat.problogapi;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
 /**
  * An object of this class manages the installation of ProbLog.

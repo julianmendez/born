@@ -2,7 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
 import java.util.List;
 
-import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
+import de.tudresden.inf.lat.problogapi.QueryProcessor;
 
 /**
  * This interface models the configuration of a multi-processor.

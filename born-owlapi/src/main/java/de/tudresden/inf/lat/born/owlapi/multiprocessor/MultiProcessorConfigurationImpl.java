@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
+import de.tudresden.inf.lat.problogapi.QueryProcessor;
 
 /**
  * 

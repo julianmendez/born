@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.core.common;
+package de.tudresden.inf.lat.problogapi;
 
 import java.net.URI;
 

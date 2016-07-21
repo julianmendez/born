@@ -2,6 +2,8 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import de.tudresden.inf.lat.problogapi.QueryProcessor;
+
 /**
  * This interface models the configuration of a processor.
  * 
