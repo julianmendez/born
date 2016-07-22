@@ -24,6 +24,9 @@ import de.tudresden.inf.lat.problogapi.ResourceConstant;
  */
 public class ProcessorCore {
 
+	public static final String TEMPORARY_INPUT_FILE_FOR_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
+			+ ResourceConstant.FILE_SEPARATOR + "temporary_input_for_problog.txt";
+
 	private boolean isShowingLog = false;
 
 	/**
@@ -105,8 +108,7 @@ public class ProcessorCore {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(useOfDefaultCompletionRules, additionalCompletionRules, ontology,
-				bayesianNetwork, query,
-				new FileOutputStream(ResourceUtil.ensurePath(ResourceConstant.TEMPORARY_INPUT_FILE_FOR_PROBLOG)),
+				bayesianNetwork, query, new FileOutputStream(ResourceUtil.ensurePath(TEMPORARY_INPUT_FILE_FOR_PROBLOG)),
 				executionResult);
 		return ret;
 
@@ -128,7 +130,7 @@ public class ProcessorCore {
 			log(info, start);
 
 			long queryProcessingStart = System.nanoTime();
-			String result = queryProcessor.apply(new FileReader(ResourceConstant.TEMPORARY_INPUT_FILE_FOR_PROBLOG));
+			String result = queryProcessor.apply(new FileReader(TEMPORARY_INPUT_FILE_FOR_PROBLOG));
 			executionResult.setProblogReasoningTime(System.nanoTime() - queryProcessingStart);
 
 			log("End and show results.", start);

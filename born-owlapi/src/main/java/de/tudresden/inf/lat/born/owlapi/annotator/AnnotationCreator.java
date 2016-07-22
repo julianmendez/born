@@ -2,6 +2,7 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +65,6 @@ import org.semanticweb.owlapi.model.SWRLRule;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
-import de.tudresden.inf.lat.problogapi.ResourceConstant;
 
 /**
  * An object of this annotates an ontology, axiom by axiom.
@@ -73,6 +73,8 @@ import de.tudresden.inf.lat.problogapi.ResourceConstant;
  *
  */
 public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
+
+	public static final URI PROBABILITY_URI = URI.create("http://lat.inf.tu-dresden.de/systems/born#probability");
 
 	public static final String VARIABLE_PREFIX = "x";
 	public static final String QUOTES = "\"";
@@ -106,7 +108,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 		Objects.requireNonNull(bayesianNetworkVariables);
 		this.owlOntology = manager.createOntology();
 		this.df = manager.getOWLDataFactory();
-		IRI probabilityIri = IRI.create(ResourceConstant.PROBABILITY_URI);
+		IRI probabilityIri = IRI.create(PROBABILITY_URI);
 		this.annotationProperty = manager.getOWLDataFactory().getOWLAnnotationProperty(probabilityIri);
 		this.threshold = threshold;
 		this.bayesianNetworkVariableSet.addAll(bayesianNetworkVariables);

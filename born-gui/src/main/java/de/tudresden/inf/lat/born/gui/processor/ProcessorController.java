@@ -22,7 +22,7 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorCore;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResult;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
 import de.tudresden.inf.lat.born.problog.type.ProblogProgram;
-import de.tudresden.inf.lat.problogapi.ResourceConstant;
+import de.tudresden.inf.lat.problogapi.ProblogProcessor;
 
 /**
  * This class is a controller for the main panel.
@@ -272,7 +272,7 @@ public class ProcessorController implements ActionListener {
 	 */
 	void init() {
 		getModel().setUseOfDefaultCompletionRules(false);
-		getModel().setOutputFileName(ResourceConstant.DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+		getModel().setOutputFileName(ProblogProcessor.DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
 
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonViewOntologyListener(this, actionViewOntology);

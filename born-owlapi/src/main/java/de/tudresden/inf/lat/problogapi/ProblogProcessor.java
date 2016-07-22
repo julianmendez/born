@@ -23,12 +23,20 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
  */
 public class ProblogProcessor implements Function<Reader, String> {
 
+	public static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
+			+ ResourceConstant.FILE_SEPARATOR + "input_for_problog.txt";
+
+	public static final String DEFAULT_OUTPUT_FILE_FROM_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
+			+ ResourceConstant.FILE_SEPARATOR + "output_from_problog.txt";
+
+	public static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = ResourceConstant.BORN_WORKING_DIRECTORY;
+
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 
-	static final String FILE_SEPARATOR = Symbol.FILE_SEPARATOR;
+	static final String FILE_SEPARATOR = ResourceConstant.FILE_SEPARATOR;
 	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
 	static final String PROBLOG_EXEC_DARWIN = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "darwin"
@@ -154,8 +162,8 @@ public class ProblogProcessor implements Function<Reader, String> {
 		downloadManager.downloadIfNecessary();
 
 		String directory = decompressProblog(start, downloadManager.getProblogZipFile(),
-				ResourceConstant.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-		this.problogDirectory = ResourceConstant.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
+				DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
 		updatePermissions(start, problogDirectory);
 		installProblog(start, problogDirectory);
 	}
@@ -199,8 +207,7 @@ public class ProblogProcessor implements Function<Reader, String> {
 				log("Execute ProbLog.", start);
 				Runtime runtime = Runtime.getRuntime();
 				String commandLine = PYTHON + Symbol.SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-						+ Symbol.SPACE_CHAR
-						+ (new File(ResourceConstant.DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath()
+						+ Symbol.SPACE_CHAR + (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath()
 						+ Symbol.SPACE_CHAR + PROBLOG_OUTPUT_OPTION + Symbol.SPACE_CHAR
 						+ (new File(outputFileName)).getAbsolutePath();
 				log(commandLine, start);
@@ -247,9 +254,9 @@ public class ProblogProcessor implements Function<Reader, String> {
 	@Override
 	public String apply(Reader input) {
 		try {
-			createInputFileForProblog(input, ResourceConstant.DEFAULT_INPUT_FILE_FOR_PROBLOG);
-			execute(0, ResourceConstant.DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
-			File outputFile = new File(ResourceConstant.DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+			createInputFileForProblog(input, DEFAULT_INPUT_FILE_FOR_PROBLOG);
+			execute(0, DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+			File outputFile = new File(DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
 			if (outputFile.exists()) {
 				return show(new InputStreamReader(new FileInputStream(outputFile)));
 			} else {
