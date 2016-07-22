@@ -1,9 +1,11 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.util.Objects;
 import java.util.function.Function;
@@ -11,9 +13,7 @@ import java.util.function.Function;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.problogapi.ResourceConstant;
 
 /**
  * An object of this class processes an OWL ontology, produces a ProbLog file,
@@ -23,9 +23,6 @@ import de.tudresden.inf.lat.problogapi.ResourceConstant;
  *
  */
 public class ProcessorCore {
-
-	public static final String TEMPORARY_INPUT_FILE_FOR_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
-			+ ResourceConstant.FILE_SEPARATOR + "temporary_input_for_problog.txt";
 
 	private boolean isShowingLog = false;
 
@@ -92,6 +89,8 @@ public class ProcessorCore {
 	 *            query
 	 * @param executionResult
 	 *            execution result
+	 * @param inputForProblog
+	 *            input for ProbLog
 	 * @return the content of the ProbLog input file
 	 * @throws OWLOntologyCreationException
 	 *             if the ontology was not created
@@ -99,8 +98,8 @@ public class ProcessorCore {
 	 *             if something goes wrong with I/O
 	 */
 	String createProblogFile(long start, boolean useOfDefaultCompletionRules, String additionalCompletionRules,
-			OWLOntology ontology, String bayesianNetwork, String query, ProcessorExecutionResult executionResult)
-					throws OWLOntologyCreationException, IOException {
+			OWLOntology ontology, String bayesianNetwork, String query, ProcessorExecutionResult executionResult,
+			OutputStream inputForProblog) throws OWLOntologyCreationException, IOException {
 		Objects.requireNonNull(additionalCompletionRules);
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(bayesianNetwork);
@@ -108,10 +107,8 @@ public class ProcessorCore {
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
 		String ret = instance.createProblogFile(useOfDefaultCompletionRules, additionalCompletionRules, ontology,
-				bayesianNetwork, query, new FileOutputStream(ResourceUtil.ensurePath(TEMPORARY_INPUT_FILE_FOR_PROBLOG)),
-				executionResult);
+				bayesianNetwork, query, inputForProblog, executionResult);
 		return ret;
-
 	}
 
 	public void run(ProcessorConfiguration conf, long start, ProcessorExecutionResult executionResult) {
@@ -124,13 +121,16 @@ public class ProcessorCore {
 
 			Function<Reader, String> queryProcessor = conf.getQueryProcessor();
 
+			ByteArrayOutputStream inputForProblogByteArray = new ByteArrayOutputStream();
 			String info = createProblogFile(start, conf.hasDefaultCompletionRules(),
 					conf.getAdditionalCompletionRules(), conf.getOntology(), conf.getBayesianNetwork(), conf.getQuery(),
-					executionResult);
+					executionResult, inputForProblogByteArray);
 			log(info, start);
 
 			long queryProcessingStart = System.nanoTime();
-			String result = queryProcessor.apply(new FileReader(TEMPORARY_INPUT_FILE_FOR_PROBLOG));
+			Reader inputForProblog = new InputStreamReader(
+					new ByteArrayInputStream(inputForProblogByteArray.toByteArray()));
+			String result = queryProcessor.apply(inputForProblog);
 			executionResult.setProblogReasoningTime(System.nanoTime() - queryProcessingStart);
 
 			log("End and show results.", start);
