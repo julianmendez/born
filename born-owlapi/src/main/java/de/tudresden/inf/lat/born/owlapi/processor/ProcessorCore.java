@@ -1,10 +1,8 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.util.Objects;
@@ -119,7 +117,7 @@ public class ProcessorCore {
 		try {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
-			Function<Reader, String> queryProcessor = conf.getQueryProcessor();
+			Function<String, String> queryProcessor = conf.getQueryProcessor();
 
 			ByteArrayOutputStream inputForProblogByteArray = new ByteArrayOutputStream();
 			String info = createProblogFile(start, conf.hasDefaultCompletionRules(),
@@ -128,8 +126,7 @@ public class ProcessorCore {
 			log(info, start);
 
 			long queryProcessingStart = System.nanoTime();
-			Reader inputForProblog = new InputStreamReader(
-					new ByteArrayInputStream(inputForProblogByteArray.toByteArray()));
+			String inputForProblog = new String(inputForProblogByteArray.toByteArray());
 			String result = queryProcessor.apply(inputForProblog);
 			executionResult.setProblogReasoningTime(System.nanoTime() - queryProcessingStart);
 

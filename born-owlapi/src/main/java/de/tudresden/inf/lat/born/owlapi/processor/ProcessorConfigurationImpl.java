@@ -30,7 +30,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	private String bayesianNetwork = "";
 	private String query = "";
 	private String outputFileName = "";
-	private Function<Reader, String> queryProcessor = null;
+	private Function<String, String> queryProcessor = null;
 	private boolean showingLog = true;
 
 	public ProcessorConfigurationImpl() {
@@ -107,12 +107,12 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	}
 
 	@Override
-	public Function<Reader, String> getQueryProcessor() {
+	public Function<String, String> getQueryProcessor() {
 		return queryProcessor;
 	}
 
 	@Override
-	public void setQueryProcessor(Function<Reader, String> queryProcessor) {
+	public void setQueryProcessor(Function<String, String> queryProcessor) {
 		Objects.requireNonNull(queryProcessor);
 		this.queryProcessor = queryProcessor;
 	}

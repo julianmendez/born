@@ -21,7 +21,7 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
  * @author Julian Mendez
  *
  */
-public class ProblogProcessor implements Function<Reader, String> {
+public class ProblogProcessor implements Function<String, String> {
 
 	public static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
 			+ ResourceConstant.FILE_SEPARATOR + "input_for_problog.txt";
@@ -240,19 +240,15 @@ public class ProblogProcessor implements Function<Reader, String> {
 		return sb.toString();
 	}
 
-	void createInputFileForProblog(Reader input, String inputFileForProblog) throws IOException {
-		BufferedReader reader = new BufferedReader(input);
+	void createInputFileForProblog(String input, String inputFileForProblog) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(inputFileForProblog));
-		for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-			writer.write(line);
-			writer.newLine();
-		}
+		writer.write(input);
 		writer.flush();
 		writer.close();
 	}
 
 	@Override
-	public String apply(Reader input) {
+	public String apply(String input) {
 		try {
 			createInputFileForProblog(input, DEFAULT_INPUT_FILE_FOR_PROBLOG);
 			execute(0, DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
