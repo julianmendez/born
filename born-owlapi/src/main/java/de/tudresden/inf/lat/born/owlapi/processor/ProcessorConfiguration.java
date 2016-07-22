@@ -1,8 +1,9 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
-import org.semanticweb.owlapi.model.OWLOntology;
+import java.io.Reader;
+import java.util.function.Function;
 
-import de.tudresden.inf.lat.problogapi.QueryProcessor;
+import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
  * This interface models the configuration of a processor.
@@ -108,7 +109,7 @@ public interface ProcessorConfiguration {
 	 * 
 	 * @return the query processor
 	 */
-	QueryProcessor getQueryProcessor();
+	Function<Reader, String> getQueryProcessor();
 
 	/**
 	 * Sets the query processor.
@@ -116,7 +117,7 @@ public interface ProcessorConfiguration {
 	 * @param queryProcessor
 	 *            the query processor
 	 */
-	void setQueryProcessor(QueryProcessor queryProcessor);
+	void setQueryProcessor(Function<Reader, String> queryProcessor);
 
 	/**
 	 * Tells whether the log is showing.

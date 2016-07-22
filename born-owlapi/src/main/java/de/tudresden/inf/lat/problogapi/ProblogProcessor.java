@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UncheckedIOException;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.zip.ZipEntry;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
@@ -20,7 +21,7 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
  * @author Julian Mendez
  *
  */
-public class ProblogProcessor implements QueryProcessor {
+public class ProblogProcessor implements Function<Reader, String> {
 
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
@@ -198,7 +199,8 @@ public class ProblogProcessor implements QueryProcessor {
 				log("Execute ProbLog.", start);
 				Runtime runtime = Runtime.getRuntime();
 				String commandLine = PYTHON + Symbol.SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-						+ Symbol.SPACE_CHAR + (new File(ResourceConstant.DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath()
+						+ Symbol.SPACE_CHAR
+						+ (new File(ResourceConstant.DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath()
 						+ Symbol.SPACE_CHAR + PROBLOG_OUTPUT_OPTION + Symbol.SPACE_CHAR
 						+ (new File(outputFileName)).getAbsolutePath();
 				log(commandLine, start);
@@ -243,7 +245,7 @@ public class ProblogProcessor implements QueryProcessor {
 	}
 
 	@Override
-	public String execute(Reader input) {
+	public String apply(Reader input) {
 		try {
 			createInputFileForProblog(input, ResourceConstant.DEFAULT_INPUT_FILE_FOR_PROBLOG);
 			execute(0, ResourceConstant.DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
