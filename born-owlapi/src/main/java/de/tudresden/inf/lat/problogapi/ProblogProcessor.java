@@ -14,8 +14,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
 
-import de.tudresden.inf.lat.born.core.term.Symbol;
-
 /**
  * An object of this class manages the installation of ProbLog.
  * 
@@ -57,6 +55,10 @@ public class ProblogProcessor implements Function<String, String> {
 	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
 			+ FILE_SEPARATOR + "dsharp";
 
+	static final char SPACE_CHAR = ' ';
+	static final char NEW_LINE_CHAR = '\n';
+	static final String TAB_AND_COLON = "\t    : ";
+
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
 	private Object problogInstallationMonitor = new Object();
@@ -81,7 +83,7 @@ public class ProblogProcessor implements Function<String, String> {
 	void log(String str, long start) {
 		Objects.requireNonNull(str);
 		long current = System.nanoTime();
-		String info = "" + (current - start) + Symbol.TAB_AND_COLON + str;
+		String info = "" + (current - start) + TAB_AND_COLON + str;
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
@@ -144,8 +146,8 @@ public class ProblogProcessor implements Function<String, String> {
 	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
 		Objects.requireNonNull(problogDirectory);
 		log("Install ProbLog.", start);
-		String commandLine = PYTHON + Symbol.SPACE_CHAR + problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-				+ Symbol.SPACE_CHAR + PROBLOG_INSTALL_COMMAND;
+		String commandLine = PYTHON + SPACE_CHAR + problogDirectory + FILE_SEPARATOR + PROBLOG_CLI + SPACE_CHAR
+				+ PROBLOG_INSTALL_COMMAND;
 		log(commandLine, start);
 		Runtime runtime = Runtime.getRuntime();
 		Process process = runtime.exec(commandLine);
@@ -220,10 +222,9 @@ public class ProblogProcessor implements Function<String, String> {
 			try {
 				log("Execute ProbLog.", start);
 				Runtime runtime = Runtime.getRuntime();
-				String commandLine = PYTHON + Symbol.SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-						+ Symbol.SPACE_CHAR + (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath()
-						+ Symbol.SPACE_CHAR + PROBLOG_OUTPUT_OPTION + Symbol.SPACE_CHAR
-						+ (new File(outputFileName)).getAbsolutePath();
+				String commandLine = PYTHON + SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
+						+ SPACE_CHAR + (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath() + SPACE_CHAR
+						+ PROBLOG_OUTPUT_OPTION + SPACE_CHAR + (new File(outputFileName)).getAbsolutePath();
 				log(commandLine, start);
 				Process process = runtime.exec(commandLine);
 				return process.waitFor();
@@ -249,7 +250,7 @@ public class ProblogProcessor implements Function<String, String> {
 		BufferedReader reader = new BufferedReader(input);
 		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
 			sb.append(line);
-			sb.append(Symbol.NEW_LINE_CHAR);
+			sb.append(NEW_LINE_CHAR);
 		}
 		return sb.toString();
 	}
