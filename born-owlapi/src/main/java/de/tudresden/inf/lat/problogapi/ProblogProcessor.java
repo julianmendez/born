@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UncheckedIOException;
+import java.net.URI;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
@@ -23,20 +24,32 @@ import de.tudresden.inf.lat.born.core.term.Symbol;
  */
 public class ProblogProcessor implements Function<String, String> {
 
-	public static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
-			+ ResourceConstant.FILE_SEPARATOR + "input_for_problog.txt";
+	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
+			.create("https://bitbucket.org/problog/problog/get/master.zip");
 
-	public static final String DEFAULT_OUTPUT_FILE_FROM_PROBLOG = ResourceConstant.BORN_WORKING_DIRECTORY
-			+ ResourceConstant.FILE_SEPARATOR + "output_from_problog.txt";
+	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
-	public static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = ResourceConstant.BORN_WORKING_DIRECTORY;
+	public static final String USER_HOME_DIRECTORY = System.getProperty("user.home");
+
+	public static final String BORN_WORKING_DIRECTORY = USER_HOME_DIRECTORY + FILE_SEPARATOR + ".cache" + FILE_SEPARATOR
+			+ "born";
+
+	public static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+			+ "input_for_problog.txt";
+
+	public static final String DEFAULT_OUTPUT_FILE_FROM_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+			+ "output_from_problog.txt";
+
+	public static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = BORN_WORKING_DIRECTORY;
+
+	public static final String DEFAULT_PROBLOG_ZIP_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+			+ "problog-2.1-SNAPSHOT.zip";
 
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 
-	static final String FILE_SEPARATOR = ResourceConstant.FILE_SEPARATOR;
 	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
 	static final String PROBLOG_EXEC_DARWIN = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "darwin"
@@ -158,7 +171,8 @@ public class ProblogProcessor implements Function<String, String> {
 	 *             if the execution was interrupted
 	 */
 	public void install(long start) throws IOException, InterruptedException {
-		ProblogDownloadManager downloadManager = new ProblogDownloadManager();
+		ProblogDownloadManager downloadManager = new ProblogDownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI,
+				DEFAULT_PROBLOG_ZIP_FILE);
 		downloadManager.downloadIfNecessary();
 
 		String directory = decompressProblog(start, downloadManager.getProblogZipFile(),

@@ -26,31 +26,42 @@ import java.util.stream.IntStream;
  */
 public class ProblogDownloadManager {
 
-	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
-			.create("https://bitbucket.org/problog/problog/get/master.zip");
-
-	public static final String DEFAULT_PROBLOG_ZIP_FILE = ResourceConstant.BORN_WORKING_DIRECTORY
-			+ ResourceConstant.FILE_SEPARATOR + "problog-2.1-SNAPSHOT.zip";
-
-	public static final String DEFAULT_VERIFICATION_FILE = DEFAULT_PROBLOG_ZIP_FILE + ".sha";
-
 	final String MD5 = "MD5";
 	final String SHA_1 = "SHA-1";
 	final String SHA_256 = "SHA-256";
+	final String VERIFICATION_FILE_EXTENSION = ".sha";
+
+	private final URI problogDownloadUri;
+	private final String problogZipFileName;
+	private final String verificationFile;
 
 	/**
 	 * Creates a new ProbLog download manager.
 	 */
-	public ProblogDownloadManager() {
+	public ProblogDownloadManager(URI problogDownloadUri, String problogZipFileName) {
+		Objects.nonNull(problogDownloadUri);
+		Objects.nonNull(problogZipFileName);
+		this.problogDownloadUri = problogDownloadUri;
+		this.problogZipFileName = problogZipFileName;
+		this.verificationFile = problogZipFileName + VERIFICATION_FILE_EXTENSION;
 	}
 
 	/**
-	 * Returns the downloaded ZIP file name.
+	 * Returns the name of the ZIP file that is downloaded.
 	 * 
-	 * @return the downloaded ZIP file name
+	 * @return the name of the ZIP file that is downloaded
 	 */
 	public String getProblogZipFile() {
-		return DEFAULT_PROBLOG_ZIP_FILE;
+		return this.problogZipFileName;
+	}
+
+	/**
+	 * Returns the URI used to download ProbLog.
+	 * 
+	 * @return the URI used to download ProbLog
+	 */
+	public URI getProblogDownloadUri() {
+		return this.problogDownloadUri;
 	}
 
 	/**
@@ -61,11 +72,11 @@ public class ProblogDownloadManager {
 	 *             if something went wrong with the input/output
 	 */
 	public void downloadIfNecessary() throws IOException {
-		boolean downloadIsNecessary = checkIfDownloadIsNecessary(DEFAULT_PROBLOG_ZIP_FILE);
+		boolean downloadIsNecessary = checkIfDownloadIsNecessary(problogZipFileName);
 		if (downloadIsNecessary) {
-			downloadProblog(DEFAULT_PROBLOG_ZIP_FILE);
+			downloadProblog(problogZipFileName);
 			String verificationCode = computeVerificationCode();
-			storeVerificationCode(verificationCode, DEFAULT_VERIFICATION_FILE);
+			storeVerificationCode(verificationCode, verificationFile);
 		}
 	}
 
@@ -79,7 +90,7 @@ public class ProblogDownloadManager {
 	 */
 	void downloadProblog(String problogZipFile) throws IOException {
 		Objects.requireNonNull(problogZipFile);
-		ReadableByteChannel channel = Channels.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
+		ReadableByteChannel channel = Channels.newChannel(problogDownloadUri.toURL().openStream());
 		FileOutputStream output = new FileOutputStream(Decompressor.ensurePath(problogZipFile));
 		output.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
 		output.close();
@@ -88,7 +99,7 @@ public class ProblogDownloadManager {
 	String readVerificationCode() {
 		String ret = "";
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DEFAULT_VERIFICATION_FILE));
+			BufferedReader reader = new BufferedReader(new FileReader(verificationFile));
 			StringBuilder sb = new StringBuilder();
 			reader.lines().forEach(line -> {
 				sb.append(line.trim());
@@ -120,7 +131,7 @@ public class ProblogDownloadManager {
 	String computeVerificationCode() {
 		String ret = "";
 		try {
-			ret = asHexString(computeVerificationCode(getBytes(new FileInputStream(DEFAULT_PROBLOG_ZIP_FILE))));
+			ret = asHexString(computeVerificationCode(getBytes(new FileInputStream(problogZipFileName))));
 		} catch (IOException e) {
 
 		}
