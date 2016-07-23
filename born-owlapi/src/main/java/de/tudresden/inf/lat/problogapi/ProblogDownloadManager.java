@@ -18,8 +18,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-import de.tudresden.inf.lat.born.core.common.ResourceUtil;
-
 /**
  * An object of this class manages the download of the ProbLog ZIP file.
  * 
@@ -82,7 +80,7 @@ public class ProblogDownloadManager {
 	void downloadProblog(String problogZipFile) throws IOException {
 		Objects.requireNonNull(problogZipFile);
 		ReadableByteChannel channel = Channels.newChannel(DEFAULT_PROBLOG_DOWNLOAD_URI.toURL().openStream());
-		FileOutputStream output = new FileOutputStream(ResourceUtil.ensurePath(problogZipFile));
+		FileOutputStream output = new FileOutputStream(Decompressor.ensurePath(problogZipFile));
 		output.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
 		output.close();
 	}
@@ -103,7 +101,7 @@ public class ProblogDownloadManager {
 	}
 
 	void storeVerificationCode(String code, String file) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(ResourceUtil.ensurePath(file)));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Decompressor.ensurePath(file)));
 		writer.write(code.trim());
 		writer.newLine();
 		writer.flush();
