@@ -1,13 +1,18 @@
-package de.tudresden.inf.lat.born.owlapi.processor;
+package de.tudresden.inf.lat.problogapi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UncheckedIOException;
+import java.net.URI;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.zip.ZipEntry;
-
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
-import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
 
 /**
  * An object of this class manages the installation of ProbLog.
@@ -15,20 +20,44 @@ import de.tudresden.inf.lat.born.owlapi.main.Decompressor;
  * @author Julian Mendez
  *
  */
-public class ProblogProcessor implements QueryProcessor {
+public class ProblogProcessor implements Function<String, String> {
+
+	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
+			.create("https://bitbucket.org/problog/problog/get/master.zip");
+
+	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+
+	public static final String USER_HOME_DIRECTORY = System.getProperty("user.home");
+
+	public static final String BORN_WORKING_DIRECTORY = USER_HOME_DIRECTORY + FILE_SEPARATOR + ".cache" + FILE_SEPARATOR
+			+ "born";
+
+	public static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+			+ "input_for_problog.txt";
+
+	public static final String DEFAULT_OUTPUT_FILE_FROM_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+			+ "output_from_problog.txt";
+
+	public static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = BORN_WORKING_DIRECTORY;
+
+	public static final String DEFAULT_PROBLOG_ZIP_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+			+ "problog-2.1-SNAPSHOT.zip";
 
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON = "python";
 
-	static final String FILE_SEPARATOR = Symbol.FILE_SEPARATOR;
 	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
 	static final String PROBLOG_EXEC_DARWIN = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "darwin"
 			+ FILE_SEPARATOR + "dsharp";
 	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
 			+ FILE_SEPARATOR + "dsharp";
+
+	static final char SPACE_CHAR = ' ';
+	static final char NEW_LINE_CHAR = '\n';
+	static final String TAB_AND_COLON = "\t    : ";
 
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
@@ -54,7 +83,7 @@ public class ProblogProcessor implements QueryProcessor {
 	void log(String str, long start) {
 		Objects.requireNonNull(str);
 		long current = System.nanoTime();
-		String info = "" + (current - start) + Symbol.TAB_AND_COLON + str;
+		String info = "" + (current - start) + TAB_AND_COLON + str;
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
@@ -117,8 +146,8 @@ public class ProblogProcessor implements QueryProcessor {
 	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
 		Objects.requireNonNull(problogDirectory);
 		log("Install ProbLog.", start);
-		String commandLine = PYTHON + Symbol.SPACE_CHAR + problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-				+ Symbol.SPACE_CHAR + PROBLOG_INSTALL_COMMAND;
+		String commandLine = PYTHON + SPACE_CHAR + problogDirectory + FILE_SEPARATOR + PROBLOG_CLI + SPACE_CHAR
+				+ PROBLOG_INSTALL_COMMAND;
 		log(commandLine, start);
 		Runtime runtime = Runtime.getRuntime();
 		Process process = runtime.exec(commandLine);
@@ -144,12 +173,13 @@ public class ProblogProcessor implements QueryProcessor {
 	 *             if the execution was interrupted
 	 */
 	public void install(long start) throws IOException, InterruptedException {
-		ProblogDownloadManager downloadManager = new ProblogDownloadManager();
+		ProblogDownloadManager downloadManager = new ProblogDownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI,
+				DEFAULT_PROBLOG_ZIP_FILE);
 		downloadManager.downloadIfNecessary();
 
 		String directory = decompressProblog(start, downloadManager.getProblogZipFile(),
-				ResourceConstant.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
-		this.problogDirectory = ResourceConstant.DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
+				DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
+		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
 		updatePermissions(start, problogDirectory);
 		installProblog(start, problogDirectory);
 	}
@@ -192,10 +222,9 @@ public class ProblogProcessor implements QueryProcessor {
 			try {
 				log("Execute ProbLog.", start);
 				Runtime runtime = Runtime.getRuntime();
-				String commandLine = PYTHON + Symbol.SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-						+ Symbol.SPACE_CHAR + (new File(ResourceConstant.PROBLOG_OUTPUT_FILE)).getAbsolutePath()
-						+ Symbol.SPACE_CHAR + PROBLOG_OUTPUT_OPTION + Symbol.SPACE_CHAR
-						+ (new File(outputFileName)).getAbsolutePath();
+				String commandLine = PYTHON + SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
+						+ SPACE_CHAR + (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath() + SPACE_CHAR
+						+ PROBLOG_OUTPUT_OPTION + SPACE_CHAR + (new File(outputFileName)).getAbsolutePath();
 				log(commandLine, start);
 				Process process = runtime.exec(commandLine);
 				return process.waitFor();
@@ -203,6 +232,49 @@ public class ProblogProcessor implements QueryProcessor {
 				throw new RuntimeException(e);
 			}
 
+		}
+	}
+
+	/**
+	 * Returns string with the content of a given reader.
+	 * 
+	 * @param input
+	 *            reader
+	 * @return string with the content of a given reader
+	 * @throws IOException
+	 *             if something goes wrong with I/O
+	 */
+	String show(Reader input) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		Objects.requireNonNull(input);
+		BufferedReader reader = new BufferedReader(input);
+		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
+			sb.append(line);
+			sb.append(NEW_LINE_CHAR);
+		}
+		return sb.toString();
+	}
+
+	void createInputFileForProblog(String input, String inputFileForProblog) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(inputFileForProblog));
+		writer.write(input);
+		writer.flush();
+		writer.close();
+	}
+
+	@Override
+	public String apply(String input) {
+		try {
+			createInputFileForProblog(input, DEFAULT_INPUT_FILE_FOR_PROBLOG);
+			execute(0, DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+			File outputFile = new File(DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+			if (outputFile.exists()) {
+				return show(new InputStreamReader(new FileInputStream(outputFile)));
+			} else {
+				return "No results.";
+			}
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
 		}
 	}
 

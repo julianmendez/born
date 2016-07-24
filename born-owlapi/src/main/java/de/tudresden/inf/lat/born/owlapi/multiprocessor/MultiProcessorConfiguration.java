@@ -1,8 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
 import java.util.List;
-
-import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
+import java.util.function.Function;
 
 /**
  * This interface models the configuration of a multi-processor.
@@ -77,7 +76,7 @@ public interface MultiProcessorConfiguration {
 	 * 
 	 * @return the query processor
 	 */
-	QueryProcessor getQueryProcessor();
+	Function<String, String> getQueryProcessor();
 
 	/**
 	 * Sets the query processor.
@@ -85,7 +84,7 @@ public interface MultiProcessorConfiguration {
 	 * @param queryProcessor
 	 *            query processor
 	 */
-	void setQueryProcessor(QueryProcessor queryProcessor);
+	void setQueryProcessor(Function<String, String> queryProcessor);
 
 	/**
 	 * Tells whether the log is showing.

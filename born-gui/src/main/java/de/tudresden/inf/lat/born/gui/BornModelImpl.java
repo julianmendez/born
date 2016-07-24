@@ -7,9 +7,9 @@ import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
-import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
+import de.tudresden.inf.lat.problogapi.ProblogProcessor;
 
 /**
  * This is the model of the graphical user interface.

@@ -95,6 +95,7 @@
 						<Main-Class>${mainClass}</Main-Class>
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
+							@born-problog-${project.version}.jar,
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							@born-protege-${project.version}.jar,

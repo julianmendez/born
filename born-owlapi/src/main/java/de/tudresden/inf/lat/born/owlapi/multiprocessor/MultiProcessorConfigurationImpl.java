@@ -3,9 +3,9 @@ package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
-import de.tudresden.inf.lat.born.owlapi.processor.QueryProcessor;
 
 /**
  * 
@@ -16,7 +16,7 @@ public class MultiProcessorConfigurationImpl implements MultiProcessorConfigurat
 
 	private List<OntologyAndNetwork> ontologyList = new ArrayList<>();
 	private String outputDirectory;
-	private QueryProcessor queryProcessor;
+	private Function<String, String> queryProcessor;
 	private boolean showingLog = true;
 	private int seed = 1;
 	private int numberOfQueries = 1;
@@ -64,12 +64,12 @@ public class MultiProcessorConfigurationImpl implements MultiProcessorConfigurat
 	}
 
 	@Override
-	public QueryProcessor getQueryProcessor() {
+	public Function<String, String> getQueryProcessor() {
 		return queryProcessor;
 	}
 
 	@Override
-	public void setQueryProcessor(QueryProcessor queryProcessor) {
+	public void setQueryProcessor(Function<String, String> queryProcessor) {
 		Objects.requireNonNull(queryProcessor);
 		this.queryProcessor = queryProcessor;
 	}

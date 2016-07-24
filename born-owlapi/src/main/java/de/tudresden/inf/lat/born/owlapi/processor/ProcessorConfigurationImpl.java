@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.Objects;
+import java.util.function.Function;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.PrefixDocumentFormat;
@@ -29,7 +30,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	private String bayesianNetwork = "";
 	private String query = "";
 	private String outputFileName = "";
-	private QueryProcessor queryProcessor = null;
+	private Function<String, String> queryProcessor = null;
 	private boolean showingLog = true;
 
 	public ProcessorConfigurationImpl() {
@@ -106,12 +107,12 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	}
 
 	@Override
-	public QueryProcessor getQueryProcessor() {
+	public Function<String, String> getQueryProcessor() {
 		return queryProcessor;
 	}
 
 	@Override
-	public void setQueryProcessor(QueryProcessor queryProcessor) {
+	public void setQueryProcessor(Function<String, String> queryProcessor) {
 		Objects.requireNonNull(queryProcessor);
 		this.queryProcessor = queryProcessor;
 	}

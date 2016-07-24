@@ -1,5 +1,7 @@
 package de.tudresden.inf.lat.born.owlapi.processor;
 
+import java.util.function.Function;
+
 import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
@@ -106,7 +108,7 @@ public interface ProcessorConfiguration {
 	 * 
 	 * @return the query processor
 	 */
-	QueryProcessor getQueryProcessor();
+	Function<String, String> getQueryProcessor();
 
 	/**
 	 * Sets the query processor.
@@ -114,7 +116,7 @@ public interface ProcessorConfiguration {
 	 * @param queryProcessor
 	 *            the query processor
 	 */
-	void setQueryProcessor(QueryProcessor queryProcessor);
+	void setQueryProcessor(Function<String, String> queryProcessor);
 
 	/**
 	 * Tells whether the log is showing.

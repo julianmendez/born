@@ -8,8 +8,8 @@ import java.util.Objects;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.SubApp;
+import de.tudresden.inf.lat.problogapi.ProblogProcessor;
 
 /**
  * An object of this class processes an OWL ontology, produces a ProbLog file,
@@ -40,8 +40,7 @@ public class ProcessorSubApp implements SubApp {
 			+ " --log ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n" + "\n Bayesian network:"
 			+ "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:" + "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
 			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
-			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
-			+ "\n   " + ResourceConstant.DEFAULT_PROBLOG_DOWNLOAD_URI
+			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog."
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
 			+ "\n" //
 			+ "\n" //

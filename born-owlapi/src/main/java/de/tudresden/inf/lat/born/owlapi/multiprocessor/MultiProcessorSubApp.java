@@ -5,9 +5,8 @@ import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Objects;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.core.term.SubApp;
-import de.tudresden.inf.lat.born.owlapi.processor.ProblogProcessor;
+import de.tudresden.inf.lat.problogapi.ProblogProcessor;
 
 /**
  * An object of this class processes an set of OWL ontology files, produces a
@@ -38,8 +37,7 @@ public class MultiProcessorSubApp implements SubApp {
 			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
 			+ " --log ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
 			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
-			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog from:"
-			+ "\n   " + ResourceConstant.DEFAULT_PROBLOG_DOWNLOAD_URI
+			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog."
 			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
 			+ "\n" //
 			+ "\n" //

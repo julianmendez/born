@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.born.owlapi.main;
+package de.tudresden.inf.lat.problogapi;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -11,8 +11,6 @@ import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import de.tudresden.inf.lat.born.core.common.ResourceUtil;
-
 /**
  * 
  * An object of this class decompresses a ZIP file.
@@ -21,6 +19,20 @@ import de.tudresden.inf.lat.born.core.common.ResourceUtil;
  * 
  */
 public class Decompressor {
+
+	public static String ensurePath(String fileName) throws IOException {
+		ensurePath(new File(fileName));
+		return fileName;
+	}
+
+	public static File ensurePath(File file) throws IOException {
+		Objects.requireNonNull(file);
+		String parent = file.getParent();
+		if (Objects.nonNull(parent)) {
+			(new File(parent)).mkdirs();
+		}
+		return file;
+	}
 
 	/**
 	 * Stores a file.
@@ -36,8 +48,7 @@ public class Decompressor {
 		Objects.requireNonNull(inputStream);
 		Objects.requireNonNull(outputFile);
 		BufferedInputStream input = new BufferedInputStream(inputStream);
-		BufferedOutputStream output = new BufferedOutputStream(
-				new FileOutputStream(ResourceUtil.ensurePath(outputFile)));
+		BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(ensurePath(outputFile)));
 		for (int ch = input.read(); ch != -1; ch = input.read()) {
 			output.write(ch);
 		}

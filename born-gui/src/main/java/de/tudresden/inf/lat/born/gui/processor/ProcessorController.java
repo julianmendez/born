@@ -12,7 +12,6 @@ import javax.swing.JFileChooser;
 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import de.tudresden.inf.lat.born.core.common.ResourceConstant;
 import de.tudresden.inf.lat.born.gui.common.TextViewer;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleConfiguration;
 import de.tudresden.inf.lat.born.owlapi.example.ExampleLoader;
@@ -272,7 +271,6 @@ public class ProcessorController implements ActionListener {
 	 */
 	void init() {
 		getModel().setUseOfDefaultCompletionRules(false);
-		getModel().setOutputFileName(ResourceConstant.DEFAULT_TEMPORARY_FILE_NAME);
 
 		getView().addButtonOntologyFileListener(this, actionInputOntology);
 		getView().addButtonViewOntologyListener(this, actionViewOntology);
