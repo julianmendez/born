@@ -29,7 +29,7 @@ public class ProblogDownloadManager {
 	final String MD5 = "MD5";
 	final String SHA_1 = "SHA-1";
 	final String SHA_256 = "SHA-256";
-	final String VERIFICATION_FILE_EXTENSION = ".sha";
+	final String VERIFICATION_FILE_EXTENSION = ".sha1";
 
 	private final URI problogDownloadUri;
 	private final String problogZipFileName;
@@ -143,7 +143,7 @@ public class ProblogDownloadManager {
 		MessageDigest md;
 		byte[] digest;
 		try {
-			md = MessageDigest.getInstance(SHA_256);
+			md = MessageDigest.getInstance(SHA_1);
 			md.update(content);
 			digest = md.digest();
 		} catch (NoSuchAlgorithmException e) {
