@@ -1,34 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<!-- Copyright 2015 Julian Mendez -->
+	<!-- Copyright 2016 Julian Mendez -->
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>born-owlapi</artifactId>
+	<artifactId>born-problog</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>born-problog</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>de.tu-dresden.inf.lat.jcel</groupId>
-			<artifactId>jcel-owlapi</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -41,8 +25,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<mainClass>de.tudresden.inf.lat.born.owlapi.main.BornMain</mainClass>
 	</properties>
 
 	<build>
@@ -80,7 +62,7 @@
 		</plugins>
 	</build>
 
-	<name>BORN OWL API</name>
+	<name>BORN ProbLog connector</name>
 
 </project>
 

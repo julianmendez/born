@@ -50,6 +50,7 @@
 	</dependencyManagement>
 
 	<modules>
+		<module>born-problog</module>
 		<module>born-owlapi</module>
 		<module>born-gui</module>
 		<module>born-protege</module>
