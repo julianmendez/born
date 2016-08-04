@@ -23,6 +23,24 @@ import java.util.zip.ZipEntry;
  */
 public class ProblogProcessor implements Function<String, String> {
 
+	public static final String JYTHON_GROUP_ID = "org.python";
+	public static final String JYTHON_ARTIFACT_ID = "jython-standalone";
+	public static final String JYTHON_VERSION = "2.7.0";
+
+	public static final String MAVEN_REPOSITORY = "http://repo1.maven.org/maven2";
+
+	static final char SPACE_CHAR = ' ';
+	static final char NEW_LINE_CHAR = '\n';
+	static final String TAB_AND_COLON = "\t    : ";
+	static final char HYPHEN_CHAR = '-';
+	static final char SLASH_CHAR = '/';
+
+	public static final String JYTHON_JAR = "jython-standalone" + HYPHEN_CHAR + JYTHON_VERSION + ".jar";
+
+	public static final URI DEFAULT_JYTHON_DOWNLOAD_URI = URI
+			.create(MAVEN_REPOSITORY + SLASH_CHAR + JYTHON_GROUP_ID.replace('.', SLASH_CHAR) + SLASH_CHAR
+					+ JYTHON_ARTIFACT_ID + SLASH_CHAR + JYTHON_VERSION + SLASH_CHAR + JYTHON_JAR);
+
 	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
 			.create("https://bitbucket.org/problog/problog/get/master.zip");
 
@@ -44,10 +62,15 @@ public class ProblogProcessor implements Function<String, String> {
 	public static final String DEFAULT_PROBLOG_ZIP_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
 			+ "problog-2.1-SNAPSHOT.zip";
 
+	public static final String DEFAULT_JYTHON_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR + JYTHON_JAR;
+
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
 	static final String PYTHON_COMMAND = "python";
+	static final String JAVA_COMMAND = "java";
+	static final String JAR_OPTION = "-jar";
+	static final String JYTHON_COMMAND = JAVA_COMMAND + SPACE_CHAR + JAR_OPTION + SPACE_CHAR + DEFAULT_JYTHON_FILE;
 
 	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
@@ -55,10 +78,6 @@ public class ProblogProcessor implements Function<String, String> {
 			+ FILE_SEPARATOR + "dsharp";
 	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
 			+ FILE_SEPARATOR + "dsharp";
-
-	static final char SPACE_CHAR = ' ';
-	static final char NEW_LINE_CHAR = '\n';
-	static final String TAB_AND_COLON = "\t    : ";
 
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
@@ -110,7 +129,19 @@ public class ProblogProcessor implements Function<String, String> {
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
+	}
 
+	int runJython(String[] args) {
+		try {
+			String commandLine = JYTHON_COMMAND + flattenArguments(args);
+			Runtime runtime = Runtime.getRuntime();
+			Process process = runtime.exec(commandLine);
+			return process.waitFor();
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -194,10 +225,14 @@ public class ProblogProcessor implements Function<String, String> {
 	 *             if the execution was interrupted
 	 */
 	public void install(long start) throws IOException, InterruptedException {
-		DownloadManager downloadManager = new DownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI, DEFAULT_PROBLOG_ZIP_FILE);
-		downloadManager.downloadIfNecessary();
+		DownloadManager jythonDownloadManager = new DownloadManager(DEFAULT_JYTHON_DOWNLOAD_URI, DEFAULT_JYTHON_FILE);
+		jythonDownloadManager.downloadIfNecessary();
 
-		String directory = decompressProblog(start, downloadManager.getFileName(),
+		DownloadManager problogDownloadManager = new DownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI,
+				DEFAULT_PROBLOG_ZIP_FILE);
+		problogDownloadManager.downloadIfNecessary();
+
+		String directory = decompressProblog(start, problogDownloadManager.getFileName(),
 				DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
 		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
 		updatePermissions(start, problogDirectory);
