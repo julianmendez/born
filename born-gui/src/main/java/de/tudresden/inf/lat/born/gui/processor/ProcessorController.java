@@ -224,18 +224,20 @@ public class ProcessorController implements ActionListener {
 
 	void executeActionComboBoxExample() {
 		int index = getView().getComboBoxExampleIndex();
-		ExampleConfiguration exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
+		if (index >= 0) {
+			ExampleConfiguration exampleConfiguration = this.exampleLoader.getExampleConfigurations().get(index);
 
-		getView().setOntologyFile(exampleConfiguration.getOntologyFileName());
-		getModel().setOntology(exampleConfiguration.getOntology());
+			getView().setOntologyFile(exampleConfiguration.getOntologyFileName());
+			getModel().setOntology(exampleConfiguration.getOntology());
 
-		getView().setBayesianNetworkFile(exampleConfiguration.getBayesianNetworkFileName());
-		getModel().setBayesianNetwork(exampleConfiguration.getBayesianNetwork());
+			getView().setBayesianNetworkFile(exampleConfiguration.getBayesianNetworkFileName());
+			getModel().setBayesianNetwork(exampleConfiguration.getBayesianNetwork());
 
-		getView().setConsoleInput(exampleConfiguration.getQuery());
-		getModel().setQuery(exampleConfiguration.getQuery());
+			getView().setConsoleInput(exampleConfiguration.getQuery());
+			getModel().setQuery(exampleConfiguration.getQuery());
 
-		getView().setConsoleOutput("");
+			getView().setConsoleOutput("");
+		}
 	}
 
 	/**
