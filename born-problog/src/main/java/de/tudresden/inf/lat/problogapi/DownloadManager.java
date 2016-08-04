@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
  * @author Julian Mendez
  *
  */
-public class ProblogDownloadManager {
+public class DownloadManager {
 
 	final String MD5 = "MD5";
 	final String SHA_1 = "SHA-1";
@@ -43,7 +43,7 @@ public class ProblogDownloadManager {
 	 * @param problogZipFileName
 	 *            ProbLog ZIP file name
 	 */
-	public ProblogDownloadManager(URI problogDownloadUri, String problogZipFileName) {
+	public DownloadManager(URI problogDownloadUri, String problogZipFileName) {
 		Objects.nonNull(problogDownloadUri);
 		Objects.nonNull(problogZipFileName);
 		this.problogDownloadUri = problogDownloadUri;
