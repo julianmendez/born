@@ -12,6 +12,7 @@ import java.io.UncheckedIOException;
 import java.net.URI;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 import java.util.zip.ZipEntry;
 
 /**
@@ -46,7 +47,7 @@ public class ProblogProcessor implements Function<String, String> {
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
-	static final String PYTHON = "python";
+	static final String PYTHON_COMMAND = "python";
 
 	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
@@ -87,6 +88,29 @@ public class ProblogProcessor implements Function<String, String> {
 		if (this.isShowingLog) {
 			System.out.println(info);
 		}
+	}
+
+	String flattenArguments(String[] args) {
+		StringBuilder sb = new StringBuilder();
+		IntStream.range(0, args.length).forEach(index -> {
+			sb.append(SPACE_CHAR);
+			sb.append(args[index]);
+		});
+		return sb.toString();
+	}
+
+	int runPython(String[] args) {
+		try {
+			String commandLine = PYTHON_COMMAND + flattenArguments(args);
+			Runtime runtime = Runtime.getRuntime();
+			Process process = runtime.exec(commandLine);
+			return process.waitFor();
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 	/**
@@ -144,14 +168,11 @@ public class ProblogProcessor implements Function<String, String> {
 	 *             if the execution was interrupted
 	 */
 	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
-		Objects.requireNonNull(problogDirectory);
 		log("Install ProbLog.", start);
-		String commandLine = PYTHON + SPACE_CHAR + problogDirectory + FILE_SEPARATOR + PROBLOG_CLI + SPACE_CHAR
-				+ PROBLOG_INSTALL_COMMAND;
-		log(commandLine, start);
-		Runtime runtime = Runtime.getRuntime();
-		Process process = runtime.exec(commandLine);
-		return process.waitFor();
+		String[] args = new String[2];
+		args[0] = problogDirectory + FILE_SEPARATOR + PROBLOG_CLI;
+		args[1] = PROBLOG_INSTALL_COMMAND;
+		return runPython(args);
 	}
 
 	public boolean isProblogNeeded() {
@@ -217,20 +238,13 @@ public class ProblogProcessor implements Function<String, String> {
 	public int execute(long start, String outputFileName) {
 		Objects.requireNonNull(outputFileName);
 		synchronized (this.problogInstallationMonitor) {
-
-			try {
-				log("Execute ProbLog.", start);
-				Runtime runtime = Runtime.getRuntime();
-				String commandLine = PYTHON + SPACE_CHAR + this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI
-						+ SPACE_CHAR + (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath() + SPACE_CHAR
-						+ PROBLOG_OUTPUT_OPTION + SPACE_CHAR + (new File(outputFileName)).getAbsolutePath();
-				log(commandLine, start);
-				Process process = runtime.exec(commandLine);
-				return process.waitFor();
-			} catch (InterruptedException | IOException e) {
-				throw new RuntimeException(e);
-			}
-
+			log("Execute ProbLog.", start);
+			String[] args = new String[4];
+			args[0] = this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI;
+			args[1] = (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath();
+			args[2] = PROBLOG_OUTPUT_OPTION;
+			args[3] = (new File(outputFileName)).getAbsolutePath();
+			return runPython(args);
 		}
 	}
 
