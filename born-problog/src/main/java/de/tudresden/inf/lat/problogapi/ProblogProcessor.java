@@ -79,9 +79,15 @@ public class ProblogProcessor implements Function<String, String> {
 	static final String PROBLOG_EXEC_LINUX = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "linux"
 			+ FILE_SEPARATOR + "dsharp";
 
+	public static final String NO_RESULTS = "No results.";
+
+	public static final int KNOWN_ISSUE_MAX_RETRIES = 5;
+	public static final String KNOWN_ISSUE_MESSAGE = "DSharpError: DSharp has encountered an error. This is a known issue. See KNOWN_ISSUES for details on how to resolve this problem.";
+
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
 	private Object problogInstallationMonitor = new Object();
+	private boolean jythonMode = true;
 
 	public ProblogProcessor() {
 		this.problogDirectory = null;
@@ -90,6 +96,26 @@ public class ProblogProcessor implements Function<String, String> {
 	public ProblogProcessor(String problogDirectory) {
 		Objects.requireNonNull(problogDirectory);
 		this.problogDirectory = problogDirectory;
+	}
+
+	/**
+	 * Tells whether this processor in in 'Jython mode', i.e. it uses Jython
+	 * instead of Python.
+	 * 
+	 * @return <code>true</code> if it is in Jython mode
+	 */
+	public boolean getJythonMode() {
+		return this.jythonMode;
+	}
+
+	/**
+	 * Sets the 'Jython mode', i.e. it uses Jython instead of Python.
+	 * 
+	 * @param jythonMode
+	 *            Jython mode
+	 */
+	public void setJythonMode(boolean jythonMode) {
+		this.jythonMode = jythonMode;
 	}
 
 	/**
@@ -141,6 +167,14 @@ public class ProblogProcessor implements Function<String, String> {
 			throw new UncheckedIOException(e);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	int run(String args[]) {
+		if (this.jythonMode) {
+			return runJython(args);
+		} else {
+			return runPython(args);
 		}
 	}
 
@@ -203,7 +237,7 @@ public class ProblogProcessor implements Function<String, String> {
 		String[] args = new String[2];
 		args[0] = problogDirectory + FILE_SEPARATOR + PROBLOG_CLI;
 		args[1] = PROBLOG_INSTALL_COMMAND;
-		return runPython(args);
+		return run(args);
 	}
 
 	public boolean isProblogNeeded() {
@@ -279,7 +313,7 @@ public class ProblogProcessor implements Function<String, String> {
 			args[1] = (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath();
 			args[2] = PROBLOG_OUTPUT_OPTION;
 			args[3] = (new File(outputFileName)).getAbsolutePath();
-			return runPython(args);
+			return run(args);
 		}
 	}
 
@@ -310,17 +344,27 @@ public class ProblogProcessor implements Function<String, String> {
 		writer.close();
 	}
 
+	String tryExecution() throws IOException {
+		execute(0, DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+		File outputFile = new File(DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+		if (outputFile.exists()) {
+			return show(new InputStreamReader(new FileInputStream(outputFile)));
+		} else {
+			return NO_RESULTS;
+		}
+	}
+
 	@Override
 	public String apply(String input) {
+		Objects.requireNonNull(input);
 		try {
 			createInputFileForProblog(input, DEFAULT_INPUT_FILE_FOR_PROBLOG);
-			execute(0, DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
-			File outputFile = new File(DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
-			if (outputFile.exists()) {
-				return show(new InputStreamReader(new FileInputStream(outputFile)));
-			} else {
-				return "No results.";
+			String ret = "";
+			for (int iteration = 0; iteration < KNOWN_ISSUE_MAX_RETRIES
+					&& (ret.isEmpty() || ret.trim().equals(KNOWN_ISSUE_MESSAGE)); iteration++) {
+				ret = tryExecution();
 			}
+			return ret;
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
