@@ -37,6 +37,11 @@ public class ProblogDownloadManager {
 
 	/**
 	 * Creates a new ProbLog download manager.
+	 * 
+	 * @param problogDownloadUri
+	 *            ProbLog download URI
+	 * @param problogZipFileName
+	 *            ProbLog ZIP file name
 	 */
 	public ProblogDownloadManager(URI problogDownloadUri, String problogZipFileName) {
 		Objects.nonNull(problogDownloadUri);
