@@ -87,35 +87,33 @@ public class ProblogProcessor implements Function<String, String> {
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
 	private Object problogInstallationMonitor = new Object();
-	private boolean jythonMode = true;
+	private final boolean jythonMode;
 
 	public ProblogProcessor() {
-		this.problogDirectory = null;
+		this(null, true);
+	}
+
+	public ProblogProcessor(boolean jythonMode) {
+		this(null, jythonMode);
 	}
 
 	public ProblogProcessor(String problogDirectory) {
-		Objects.requireNonNull(problogDirectory);
+		this(problogDirectory, true);
+	}
+
+	public ProblogProcessor(String problogDirectory, boolean jythonMode) {
 		this.problogDirectory = problogDirectory;
+		this.jythonMode = jythonMode;
 	}
 
 	/**
-	 * Tells whether this processor in in 'Jython mode', i.e. it uses Jython
+	 * Tells whether this processor is in 'Jython mode', i.e. it uses Jython
 	 * instead of Python.
 	 * 
-	 * @return <code>true</code> if it is in Jython mode
+	 * @return <code>true</code> if this processor is in Jython mode
 	 */
 	public boolean getJythonMode() {
 		return this.jythonMode;
-	}
-
-	/**
-	 * Sets the 'Jython mode', i.e. it uses Jython instead of Python.
-	 * 
-	 * @param jythonMode
-	 *            Jython mode
-	 */
-	public void setJythonMode(boolean jythonMode) {
-		this.jythonMode = jythonMode;
 	}
 
 	/**
@@ -259,8 +257,11 @@ public class ProblogProcessor implements Function<String, String> {
 	 *             if the execution was interrupted
 	 */
 	public void install(long start) throws IOException, InterruptedException {
-		DownloadManager jythonDownloadManager = new DownloadManager(DEFAULT_JYTHON_DOWNLOAD_URI, DEFAULT_JYTHON_FILE);
-		jythonDownloadManager.downloadIfNecessary();
+		if (this.jythonMode) {
+			DownloadManager jythonDownloadManager = new DownloadManager(DEFAULT_JYTHON_DOWNLOAD_URI,
+					DEFAULT_JYTHON_FILE);
+			jythonDownloadManager.downloadIfNecessary();
+		}
 
 		DownloadManager problogDownloadManager = new DownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI,
 				DEFAULT_PROBLOG_ZIP_FILE);
