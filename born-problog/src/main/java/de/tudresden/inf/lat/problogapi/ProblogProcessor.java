@@ -173,11 +173,10 @@ public class ProblogProcessor implements Function<String, String> {
 	 *             if the execution was interrupted
 	 */
 	public void install(long start) throws IOException, InterruptedException {
-		DownloadManager downloadManager = new DownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI,
-				DEFAULT_PROBLOG_ZIP_FILE);
+		DownloadManager downloadManager = new DownloadManager(DEFAULT_PROBLOG_DOWNLOAD_URI, DEFAULT_PROBLOG_ZIP_FILE);
 		downloadManager.downloadIfNecessary();
 
-		String directory = decompressProblog(start, downloadManager.getProblogZipFile(),
+		String directory = decompressProblog(start, downloadManager.getFileName(),
 				DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
 		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
 		updatePermissions(start, problogDirectory);
