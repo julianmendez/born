@@ -12,10 +12,11 @@
 ### v0.3.0
 *(unreleased)*
 * uses a faster implementation of module extraction
-* uses jcel 0.24.0 (SNAPSHOT)
+* uses jcel 0.24.0
 * uses the OWL API 4.2.5
 * runs on Java 8
 * can be used as a plug-in for Protégé 5.0.0
+* if Python is not installed, it downloads Jython from the Central Repository, and it uses Jython instead
 * build commands:
 ```
 $ mvn clean install
