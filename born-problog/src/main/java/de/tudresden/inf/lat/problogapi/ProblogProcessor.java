@@ -16,7 +16,11 @@ import java.util.stream.IntStream;
 import java.util.zip.ZipEntry;
 
 /**
- * An object of this class manages the installation of ProbLog.
+ * An object of this class manages the installation and execution of ProbLog.
+ * The processor detects whether a valid version of Python is already installed.
+ * If Python is installed, the processor is in 'Python mode' and it uses Python
+ * to run ProbLog. Otherwise, it downloads Jython from the Central Repository,
+ * and uses Jython to run ProbLog.
  * 
  * @author Julian Mendez
  *
@@ -44,33 +48,36 @@ public class ProblogProcessor implements Function<String, String> {
 	public static final URI DEFAULT_PROBLOG_DOWNLOAD_URI = URI
 			.create("https://bitbucket.org/problog/problog/get/master.zip");
 
-	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+	static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
-	public static final String USER_HOME_DIRECTORY = System.getProperty("user.home");
+	static final String USER_HOME_DIRECTORY = System.getProperty("user.home");
 
-	public static final String BORN_WORKING_DIRECTORY = USER_HOME_DIRECTORY + FILE_SEPARATOR + ".cache" + FILE_SEPARATOR
+	static final String BORN_WORKING_DIRECTORY = USER_HOME_DIRECTORY + FILE_SEPARATOR + ".cache" + FILE_SEPARATOR
 			+ "born";
 
-	public static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+	static final String DEFAULT_INPUT_FILE_FOR_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
 			+ "input_for_problog.txt";
 
-	public static final String DEFAULT_OUTPUT_FILE_FROM_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
+	static final String DEFAULT_OUTPUT_FILE_FROM_PROBLOG = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
 			+ "output_from_problog.txt";
 
-	public static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = BORN_WORKING_DIRECTORY;
+	static final String DEFAULT_PROBLOG_INSTALLATION_DIRECTORY = BORN_WORKING_DIRECTORY;
 
-	public static final String DEFAULT_PROBLOG_ZIP_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR
-			+ "problog-2.1-SNAPSHOT.zip";
+	static final String DEFAULT_PROBLOG_ZIP_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR + "problog-2.1-SNAPSHOT.zip";
 
-	public static final String DEFAULT_JYTHON_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR + JYTHON_JAR;
+	static final String DEFAULT_JYTHON_FILE = BORN_WORKING_DIRECTORY + FILE_SEPARATOR + JYTHON_JAR;
 
 	static final String PROBLOG_CLI = "problog-cli.py";
 	static final String PROBLOG_INSTALL_COMMAND = "install";
 	static final String PROBLOG_OUTPUT_OPTION = "-o";
+
 	static final String PYTHON_COMMAND = "python";
+	static final String PYTHON_VERSION_OPTION = "-V";
+	static final String PYTHON_VERSION_2_7 = "Python 2.7";
+	static final String PYTHON_VERSION_3_2 = "Python 3.2";
 	static final String JAVA_COMMAND = "java";
-	static final String JAR_OPTION = "-jar";
-	static final String JYTHON_COMMAND = JAVA_COMMAND + SPACE_CHAR + JAR_OPTION + SPACE_CHAR + DEFAULT_JYTHON_FILE;
+	static final String JAVA_JAR_OPTION = "-jar";
+	static final String JYTHON_COMMAND = JAVA_COMMAND + SPACE_CHAR + JAVA_JAR_OPTION + SPACE_CHAR + DEFAULT_JYTHON_FILE;
 
 	static final String PROBLOG_EXEC_WINDOWS = "problog" + FILE_SEPARATOR + "bin" + FILE_SEPARATOR + "windows"
 			+ FILE_SEPARATOR + "dsharp.exe";
@@ -87,33 +94,46 @@ public class ProblogProcessor implements Function<String, String> {
 	private boolean isShowingLog = false;
 	private String problogDirectory = null;
 	private Object problogInstallationMonitor = new Object();
-	private final boolean jythonMode;
+	private final boolean pythonMode;
 
 	public ProblogProcessor() {
-		this(null, true);
-	}
-
-	public ProblogProcessor(boolean jythonMode) {
-		this(null, jythonMode);
+		this.problogDirectory = null;
+		this.pythonMode = isPythonInstalled();
 	}
 
 	public ProblogProcessor(String problogDirectory) {
-		this(problogDirectory, true);
+		this.problogDirectory = problogDirectory;
+		this.pythonMode = isPythonInstalled();
 	}
 
-	public ProblogProcessor(String problogDirectory, boolean jythonMode) {
+	ProblogProcessor(String problogDirectory, boolean pythonMode) {
 		this.problogDirectory = problogDirectory;
-		this.jythonMode = jythonMode;
+		this.pythonMode = pythonMode;
+	}
+
+	boolean isPythonInstalled() {
+		try {
+			ProcessBuilder builder = new ProcessBuilder(PYTHON_COMMAND, PYTHON_VERSION_OPTION);
+			Process process = builder.start();
+			process.waitFor();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			String line = reader.readLine();
+			return (line != null && (line.startsWith(PYTHON_VERSION_2_7) || line.startsWith(PYTHON_VERSION_3_2)));
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
-	 * Tells whether this processor is in 'Jython mode', i.e. it uses Jython
-	 * instead of Python.
+	 * Tells whether this processor is in 'Python mode', i.e. it uses Python
+	 * instead of Jython.
 	 * 
-	 * @return <code>true</code> if this processor is in Jython mode
+	 * @return <code>true</code> if this processor is in Python mode
 	 */
-	public boolean getJythonMode() {
-		return this.jythonMode;
+	public boolean getPythonMode() {
+		return this.pythonMode;
 	}
 
 	/**
@@ -169,10 +189,10 @@ public class ProblogProcessor implements Function<String, String> {
 	}
 
 	int run(String args[]) {
-		if (this.jythonMode) {
-			return runJython(args);
-		} else {
+		if (this.pythonMode) {
 			return runPython(args);
+		} else {
+			return runJython(args);
 		}
 	}
 
@@ -257,7 +277,7 @@ public class ProblogProcessor implements Function<String, String> {
 	 *             if the execution was interrupted
 	 */
 	public void install(long start) throws IOException, InterruptedException {
-		if (this.jythonMode) {
+		if (!this.pythonMode) {
 			DownloadManager jythonDownloadManager = new DownloadManager(DEFAULT_JYTHON_DOWNLOAD_URI,
 					DEFAULT_JYTHON_FILE);
 			jythonDownloadManager.downloadIfNecessary();
