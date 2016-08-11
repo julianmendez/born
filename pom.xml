@@ -7,8 +7,8 @@
 
 	<groupId>de.tu-dresden.inf.lat.born</groupId>
 	<artifactId>born-parent</artifactId>
-	<packaging>pom</packaging>
 	<version>0.3.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>de.tu-dresden.inf.lat</groupId>
@@ -18,7 +18,6 @@
 	</parent>
 
 	<dependencyManagement>
-
 		<dependencies>
 
 			<dependency>
@@ -59,7 +58,6 @@
 			</dependency>
 
 		</dependencies>
-
 	</dependencyManagement>
 
 	<modules>
@@ -80,7 +78,6 @@
 	</properties>
 
 	<build>
-
 		<plugins>
 
 			<plugin>
@@ -94,7 +91,6 @@
 			</plugin>
 
 		</plugins>
-
 	</build>
 
 	<name>BORN</name>
