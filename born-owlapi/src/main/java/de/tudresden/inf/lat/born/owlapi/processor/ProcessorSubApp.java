@@ -9,7 +9,7 @@ import java.util.Objects;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
-import de.tudresden.inf.lat.jproblog.ProblogProcessor;
+import de.tudresden.inf.lat.jproblog.JProblog;
 
 /**
  * An object of this class processes an OWL ontology, produces a ProbLog file,
@@ -95,10 +95,9 @@ public class ProcessorSubApp implements SubApp {
 			conf.setOutputFileName(newArgs[3]);
 
 			if (newArgs.length == 5) {
-				conf.setQueryProcessor(new ProblogProcessor(newArgs[4]));
+				conf.setQueryProcessor(new JProblog(newArgs[4]));
 			} else {
-				ProblogProcessor queryProcessor = new ProblogProcessor();
-				queryProcessor.startInstallation(start);
+				JProblog queryProcessor = new JProblog();
 				conf.setQueryProcessor(queryProcessor);
 			}
 

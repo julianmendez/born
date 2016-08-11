@@ -1,6 +1,5 @@
 package de.tudresden.inf.lat.born.gui;
 
-import java.util.Date;
 import java.util.Objects;
 
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorConfiguration;
@@ -9,7 +8,7 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurati
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
-import de.tudresden.inf.lat.jproblog.ProblogProcessor;
+import de.tudresden.inf.lat.jproblog.JProblog;
 
 /**
  * This is the model of the graphical user interface.
@@ -27,10 +26,9 @@ public class BornModelImpl implements BornModel {
 	 * Constructs a new BORN model.
 	 */
 	public BornModelImpl() {
-		ProblogProcessor queryProcessor = new ProblogProcessor();
+		JProblog queryProcessor = new JProblog();
 		this.processorConfiguration.setQueryProcessor(queryProcessor);
 		this.multiProcessorConfiguration.setQueryProcessor(queryProcessor);
-		queryProcessor.startInstallation((new Date().getTime()));
 	}
 
 	@Override

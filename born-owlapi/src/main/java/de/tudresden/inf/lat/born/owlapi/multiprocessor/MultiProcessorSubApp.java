@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
-import de.tudresden.inf.lat.jproblog.ProblogProcessor;
+import de.tudresden.inf.lat.jproblog.JProblog;
 
 /**
  * An object of this class processes an set of OWL ontology files, produces a
@@ -86,10 +86,9 @@ public class MultiProcessorSubApp implements SubApp {
 			conf.setOutputDirectory(newArgs[4]);
 
 			if (newArgs.length == 6) {
-				conf.setQueryProcessor(new ProblogProcessor(newArgs[5]));
+				conf.setQueryProcessor(new JProblog(newArgs[5]));
 			} else {
-				ProblogProcessor queryProcessor = new ProblogProcessor();
-				queryProcessor.startInstallation(start);
+				JProblog queryProcessor = new JProblog();
 				conf.setQueryProcessor(queryProcessor);
 			}
 
