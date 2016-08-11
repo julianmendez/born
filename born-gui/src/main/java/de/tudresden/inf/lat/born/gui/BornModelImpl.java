@@ -9,7 +9,7 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurati
 import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorConfigurationImpl;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfiguration;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
-import de.tudresden.inf.lat.problogapi.ProblogProcessor;
+import de.tudresden.inf.lat.jproblog.ProblogProcessor;
 
 /**
  * This is the model of the graphical user interface.

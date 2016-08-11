@@ -9,7 +9,7 @@ import java.util.Objects;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import de.tudresden.inf.lat.born.core.term.SubApp;
-import de.tudresden.inf.lat.problogapi.ProblogProcessor;
+import de.tudresden.inf.lat.jproblog.ProblogProcessor;
 
 /**
  * An object of this class processes an OWL ontology, produces a ProbLog file,

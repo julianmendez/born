@@ -1,4 +1,4 @@
-package de.tudresden.inf.lat.problogapi;
+package de.tudresden.inf.lat.jproblog;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
