@@ -84,7 +84,6 @@ public class ProblogInputCreator {
 	static final String RULES_TO_AVOID_EMPTY_PREDICATES_OF_ENTITIES_MSG = " Rules to avoid empty predicates of entities";
 
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
-		Objects.requireNonNull(reader);
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
 		List<String> list = tokens.stream()
@@ -152,8 +151,6 @@ public class ProblogInputCreator {
 	}
 
 	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Module module) {
-		Objects.requireNonNull(factory);
-		Objects.requireNonNull(module);
 		List<Clause> ret = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
@@ -186,9 +183,6 @@ public class ProblogInputCreator {
 	}
 
 	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Module module) throws IOException {
-		Objects.requireNonNull(factory);
-		Objects.requireNonNull(module);
-
 		List<Clause> ontology = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 		ontology.addAll(getDeclarations(factory, module));
@@ -220,9 +214,7 @@ public class ProblogInputCreator {
 		}
 	}
 
-	public Set<Integer> getSetOfEntities(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
-		Objects.requireNonNull(factory);
-		Objects.requireNonNull(symbolStrSet);
+	Set<Integer> getSetOfEntities(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
 		Map<String, Integer> map = new TreeMap<>();
 		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
@@ -238,6 +230,22 @@ public class ProblogInputCreator {
 
 		});
 		return ret;
+	}
+
+	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<Integer> setOfEntities) {
+		Set<Integer> setOfClasses = new TreeSet<>();
+		setOfEntities.forEach(entity -> {
+			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
+				setOfClasses.add(entity);
+			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
+				setOfClasses.add(entity);
+				Optional<Integer> classForIndivOpt = factory.getEntityManager().getAuxiliaryNominal(entity);
+				if (classForIndivOpt.isPresent()) {
+					setOfClasses.add(classForIndivOpt.get());
+				}
+			}
+		});
+		return setOfClasses;
 	}
 
 	Set<NormalizedIntegerAxiom> removeUnnecessaryAnnotations(Set<NormalizedIntegerAxiom> axioms,
@@ -285,6 +293,8 @@ public class ProblogInputCreator {
 	}
 
 	public String expandPrefixes(OWLOntology ontology, String text) {
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(text);
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
 		Map<String, String> prefixNames = new HashMap<String, String>();
 		prefixes.getPrefixNames().forEach(prefixName -> {
@@ -296,6 +306,8 @@ public class ProblogInputCreator {
 	}
 
 	public String replaceByPrefixes(OWLOntology ontology, String text) {
+		Objects.requireNonNull(ontology);
+		Objects.requireNonNull(text);
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
 		Map<String, String> revPrefixNames = new HashMap<String, String>();
 		prefixes.getPrefixNames().forEach(prefixName -> {
@@ -354,19 +366,7 @@ public class ProblogInputCreator {
 		long moduleExtractionStart = System.nanoTime();
 		DefaultModuleExtractor moduleExtractor = new DefaultModuleExtractor();
 		Set<Integer> setOfEntities = getSetOfEntities(factory, relevantSymbols);
-
-		Set<Integer> setOfClasses = new TreeSet<>();
-		setOfEntities.forEach(entity -> {
-			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
-				setOfClasses.add(entity);
-			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
-				setOfClasses.add(entity);
-				Optional<Integer> classForIndivOpt = factory.getEntityManager().getAuxiliaryNominal(entity);
-				if (classForIndivOpt.isPresent()) {
-					setOfClasses.add(classForIndivOpt.get());
-				}
-			}
-		});
+		Set<Integer> setOfClasses = getSetOfClasses(factory, setOfEntities);
 
 		Module module = moduleExtractor.extractModule(normalizedAxioms, setOfClasses);
 		logger.fine("Module entities: " + module.getEntities());
