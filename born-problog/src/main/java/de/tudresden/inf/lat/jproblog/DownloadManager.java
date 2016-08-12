@@ -172,4 +172,27 @@ public class DownloadManager {
 				|| verificationCode.isEmpty() && !verificationCode.equals(storedVerificationCode);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof DownloadManager)) {
+			return false;
+		} else {
+			DownloadManager other = (DownloadManager) obj;
+			return this.getDownloadUri().equals(other.getDownloadUri())
+					&& this.getFileName().equals(other.getFileName());
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.downloadUri.hashCode() + 0x1F * +this.fileName.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return this.downloadUri.toASCIIString() + " -> " + this.fileName;
+	}
+
 }

@@ -99,4 +99,25 @@ public class Decompressor {
 		return ret;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof Decompressor)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getClass().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getName();
+	}
+
 }
