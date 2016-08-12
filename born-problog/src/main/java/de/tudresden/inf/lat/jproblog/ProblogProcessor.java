@@ -92,7 +92,6 @@ public class ProblogProcessor implements Function<String, String> {
 	public static final int KNOWN_ISSUE_MAX_RETRIES = 5;
 	public static final String KNOWN_ISSUE_MESSAGE = "DSharpError: DSharp has encountered an error. This is a known issue. See KNOWN_ISSUES for details on how to resolve this problem.";
 
-	private boolean isShowingLog = false;
 	private String problogDirectory = null;
 	private Object problogInstallationMonitor = new Object();
 	private final boolean pythonMode;
@@ -128,23 +127,6 @@ public class ProblogProcessor implements Function<String, String> {
 	 */
 	public boolean getPythonMode() {
 		return this.pythonMode;
-	}
-
-	/**
-	 * Shows the entry on the standard output, if logging is enabled.
-	 * 
-	 * @param str
-	 *            entry to log
-	 * @param start
-	 *            execution start
-	 */
-	void log(String str, long start) {
-		Objects.requireNonNull(str);
-		long current = System.nanoTime();
-		String info = "" + (current - start) + TAB_AND_COLON + str;
-		if (this.isShowingLog) {
-			System.out.println(info);
-		}
 	}
 
 	String flattenArguments(String[] args) {
@@ -203,10 +185,9 @@ public class ProblogProcessor implements Function<String, String> {
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	String decompressProblog(long start, String problogZipFile, String problogDirectory) throws IOException {
+	String decompressProblog(String problogZipFile, String problogDirectory) throws IOException {
 		Objects.requireNonNull(problogZipFile);
 		Objects.requireNonNull(problogDirectory);
-		log("Decompress ProbLog.", start);
 		Decompressor installer = new Decompressor();
 		ZipEntry directory = installer.decompress(new File(problogZipFile), new File(problogDirectory));
 		return directory.getName();
@@ -222,9 +203,8 @@ public class ProblogProcessor implements Function<String, String> {
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 */
-	void updatePermissions(long start, String problogDirectory) throws IOException {
+	void updatePermissions(String problogDirectory) throws IOException {
 		Objects.requireNonNull(problogDirectory);
-		log("Update permissions.", start);
 		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_WINDOWS)).setExecutable(true);
 		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_DARWIN)).setExecutable(true);
 		(new File(problogDirectory + FILE_SEPARATOR + PROBLOG_EXEC_LINUX)).setExecutable(true);
@@ -244,8 +224,7 @@ public class ProblogProcessor implements Function<String, String> {
 	 * @throws InterruptedException
 	 *             if the execution was interrupted
 	 */
-	int installProblog(long start, String problogDirectory) throws IOException, InterruptedException {
-		log("Install ProbLog.", start);
+	int installProblog(String problogDirectory) throws IOException, InterruptedException {
 		String[] args = new String[2];
 		args[0] = problogDirectory + FILE_SEPARATOR + PROBLOG_CLI;
 		args[1] = PROBLOG_INSTALL_COMMAND;
@@ -266,7 +245,7 @@ public class ProblogProcessor implements Function<String, String> {
 	 * @throws InterruptedException
 	 *             if the execution was interrupted
 	 */
-	public void install(long start) throws IOException, InterruptedException {
+	public void install() throws IOException, InterruptedException {
 		if (!this.pythonMode) {
 			DownloadManager jythonDownloadManager = new DownloadManager(DEFAULT_JYTHON_DOWNLOAD_URI,
 					DEFAULT_JYTHON_FILE);
@@ -277,11 +256,11 @@ public class ProblogProcessor implements Function<String, String> {
 				DEFAULT_PROBLOG_ZIP_FILE);
 		problogDownloadManager.downloadIfNecessary();
 
-		String directory = decompressProblog(start, problogDownloadManager.getFileName(),
+		String directory = decompressProblog(problogDownloadManager.getFileName(),
 				DEFAULT_PROBLOG_INSTALLATION_DIRECTORY);
 		this.problogDirectory = DEFAULT_PROBLOG_INSTALLATION_DIRECTORY + FILE_SEPARATOR + directory;
-		updatePermissions(start, problogDirectory);
-		installProblog(start, problogDirectory);
+		updatePermissions(problogDirectory);
+		installProblog(problogDirectory);
 	}
 
 	/**
@@ -290,12 +269,12 @@ public class ProblogProcessor implements Function<String, String> {
 	 * @param start
 	 *            execution start
 	 */
-	public void startInstallation(long start) {
+	public void startInstallation() {
 		Thread thread = new Thread() {
 			public void run() {
 				synchronized (problogInstallationMonitor) {
 					try {
-						install(start);
+						install();
 					} catch (IOException | InterruptedException e) {
 						throw new RuntimeException(e);
 					}
@@ -318,7 +297,6 @@ public class ProblogProcessor implements Function<String, String> {
 	public int execute(long start, String outputFileName) {
 		Objects.requireNonNull(outputFileName);
 		synchronized (this.problogInstallationMonitor) {
-			log("Execute ProbLog.", start);
 			String[] args = new String[4];
 			args[0] = this.problogDirectory + FILE_SEPARATOR + PROBLOG_CLI;
 			args[1] = (new File(DEFAULT_INPUT_FILE_FOR_PROBLOG)).getAbsolutePath();

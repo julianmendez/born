@@ -30,7 +30,7 @@ public class JProblog implements Function<String, String> {
 	 */
 	public JProblog() {
 		this.processor = new ProblogProcessor();
-		this.processor.startInstallation(0);
+		this.processor.startInstallation();
 	}
 
 	/**
