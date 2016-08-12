@@ -96,6 +96,9 @@ public class ProblogProcessor implements Function<String, String> {
 	private Object problogInstallationMonitor = new Object();
 	private final boolean pythonMode;
 
+	/**
+	 * Constructs a new ProbLog processor
+	 */
 	public ProblogProcessor() {
 		this.pythonMode = isPythonInstalled();
 	}
@@ -175,8 +178,6 @@ public class ProblogProcessor implements Function<String, String> {
 	/**
 	 * Decompresses the ProbLog ZIP file and returns the directory name.
 	 * 
-	 * @param start
-	 *            execution start
 	 * @param problogZipFile
 	 *            file name of ProbLog ZIP file
 	 * @param problogDirectory
@@ -196,8 +197,6 @@ public class ProblogProcessor implements Function<String, String> {
 	/**
 	 * Updates execute permission of key executable files.
 	 * 
-	 * @param start
-	 *            execution start
 	 * @param problogDirectory
 	 *            directory where ProbLog is being installed
 	 * @throws IOException
@@ -214,8 +213,6 @@ public class ProblogProcessor implements Function<String, String> {
 	 * Installs ProbLog. This is necessary because just decompressing the ZIP
 	 * file is not enough.
 	 * 
-	 * @param start
-	 *            execution start
 	 * @param problogDirectory
 	 *            directory where ProbLog has been installed
 	 * @return the exit value given by the operating system
@@ -238,8 +235,6 @@ public class ProblogProcessor implements Function<String, String> {
 	/**
 	 * Downloads and installs ProbLog.
 	 * 
-	 * @param start
-	 *            execution start
 	 * @throws IOException
 	 *             if something goes wrong with I/O
 	 * @throws InterruptedException
@@ -265,9 +260,6 @@ public class ProblogProcessor implements Function<String, String> {
 
 	/**
 	 * Starts the installation of ProbLog.
-	 * 
-	 * @param start
-	 *            execution start
 	 */
 	public void startInstallation() {
 		Thread thread = new Thread() {
@@ -288,13 +280,11 @@ public class ProblogProcessor implements Function<String, String> {
 	 * Executes ProbLog and returns the exit value given by the operating
 	 * system.
 	 * 
-	 * @param start
-	 *            execution start
 	 * @param outputFileName
 	 *            file name of output
 	 * @return the exit value given by the operating system
 	 */
-	public int execute(long start, String outputFileName) {
+	public int execute(String outputFileName) {
 		Objects.requireNonNull(outputFileName);
 		synchronized (this.problogInstallationMonitor) {
 			String[] args = new String[4];
@@ -334,7 +324,7 @@ public class ProblogProcessor implements Function<String, String> {
 	}
 
 	String tryExecution() throws IOException {
-		execute(0, DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
+		execute(DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
 		File outputFile = new File(DEFAULT_OUTPUT_FILE_FROM_PROBLOG);
 		if (outputFile.exists()) {
 			return show(new InputStreamReader(new FileInputStream(outputFile)));
