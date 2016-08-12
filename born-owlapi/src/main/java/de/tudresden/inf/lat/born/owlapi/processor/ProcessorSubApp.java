@@ -32,16 +32,14 @@ public class ProcessorSubApp implements SubApp {
 			+ "\n  <query file>             : file name of the query"
 			+ "\n  <output file>            : file name of the output"
 			+ "\n  <ProbLog directory>      : (optional) directory where ProbLog is installed" + "\n" + "\n Option:"
-			+ "\n   --log                   : shows log" + "\n" + "\nExamples:" + "\n"
-			+ "\n Execution without ProbLog installed:" + "\n  java -jar born.jar " + COMMAND
-			+ " ontology.owl network.pl query.pl output.pl" + "\n" + "\n Execution with ProbLog installed:"
-			+ "\n  java -jar born.jar " + COMMAND + " ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n"
-			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
-			+ " --log ontology.owl network.pl query.pl output.pl /opt/problog2.1" + "\n" + "\n Bayesian network:"
-			+ "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Query:" + "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
-			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
-			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog."
-			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
+			+ "\n   --log                   : shows log" + "\n" + "\nExamples:" + "\n" + "\n Execution:"
+			+ "\n  java -jar born.jar " + COMMAND + " ontology.owl network.pl query.pl output.pl" + "\n"
+			+ "\n Execution not showing log:" + "\n  java -jar born.jar " + COMMAND
+			+ " ontology.owl network.pl query.pl output.pl" + "\n" + "\n Execution showing log:"
+			+ "\n  java -jar born.jar " + COMMAND + " --log ontology.owl network.pl query.pl output.pl" + "\n"
+			+ "\n Example of Bayesian network:" + "\n  0.58::x1." + "\n  0.35::x2." + "\n" + "\n Example of query:"
+			+ "\n  query(sub('A', 'C'))." + "\n" + "\n" + "\n"
+			+ "\nNote: this program requires an Internet connection to install ProbLog." + "\n" //
 			+ "\n" //
 			+ "\n" //
 			+ "\n";
@@ -55,8 +53,8 @@ public class ProcessorSubApp implements SubApp {
 	@Override
 	public boolean isValid(String[] args) {
 		Objects.requireNonNull(args);
-		return (((args.length == 4) && !args[0].equals(LOGGING_OPTION)) || (args.length == 5)
-				|| ((args.length == 6) && args[0].equals(LOGGING_OPTION)));
+		return (((args.length == 4) && !args[0].equals(LOGGING_OPTION))
+				|| ((args.length == 5) && args[0].equals(LOGGING_OPTION)));
 	}
 
 	@Override
@@ -94,12 +92,8 @@ public class ProcessorSubApp implements SubApp {
 			}
 			conf.setOutputFileName(newArgs[3]);
 
-			if (newArgs.length == 5) {
-				conf.setQueryProcessor(new JProblog(newArgs[4]));
-			} else {
-				JProblog queryProcessor = new JProblog();
-				conf.setQueryProcessor(queryProcessor);
-			}
+			JProblog queryProcessor = new JProblog();
+			conf.setQueryProcessor(queryProcessor);
 
 			ProcessorCore core = new ProcessorCore();
 			ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();

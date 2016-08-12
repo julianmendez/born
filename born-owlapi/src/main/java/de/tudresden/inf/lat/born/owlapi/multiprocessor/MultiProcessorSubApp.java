@@ -29,18 +29,12 @@ public class MultiProcessorSubApp implements SubApp {
 			+ "\n  <number of queries>               : number of queries to generate"
 			+ "\n  <seed>                            : seed used by the pseudorandom number generator"
 			+ "\n  <directory of results>            : directory to write the output files, each output file has the ontology name and a '.csv' extension"
-			+ "\n  <ProbLog directory>               : (optional) directory where ProbLog is installed" + "\n"
-			+ "\n Option:" + "\n   --log                            : shows log" + "\n" + "\nExamples:" + "\n"
-			+ "\n Execution without ProbLog installed:" + "\n  java -jar born.jar " + COMMAND
-			+ " ontologies/ networks/ 10 127 results/" + "\n" + "\n Execution with ProbLog installed:"
-			+ "\n  java -jar born.jar " + COMMAND + " ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
-			+ "\n Execution with ProbLog installed showing log:" + "\n  java -jar born.jar " + COMMAND
-			+ " --log ontologies/ networks/ 10 127 results/ /opt/problog2.1" + "\n"
-			+ "\nNote: this program requires the following installed:" + "\n - Java 8" + "\n - ProbLog 2.1"
-			+ "\n - Python 2.7+ or 3.2+" + "\n" + "\nIf ProbLog is not installed, this program downloads ProbLog."
-			+ "\nPlease note that this option requires an Internet connection and the execution time can be longer."
-			+ "\n" //
-			+ "\n" //
+			+ "\n" + "\n Option:" + "\n   --log                            : shows log" + "\n" + "\nExamples:" + "\n"
+			+ "\n Execution:" + "\n  java -jar born.jar " + COMMAND + " ontologies/ networks/ 10 127 results/" + "\n"
+			+ "\n Execution not showing log:" + "\n  java -jar born.jar " + COMMAND
+			+ " ontologies/ networks/ 10 127 results/" + "\n" + "\n Execution showing log:"
+			+ "\n  java -jar born.jar " + COMMAND + " --log ontologies/ networks/ 10 127 results/" + "\n"
+			+ "\nNote: this program requires an Internet connection to install ProbLog." + "\n" //
 			+ "\n";
 
 	/**
@@ -52,8 +46,8 @@ public class MultiProcessorSubApp implements SubApp {
 	@Override
 	public boolean isValid(String[] args) {
 		Objects.requireNonNull(args);
-		return (((args.length == 5) && !args[0].equals(LOGGING_OPTION)) || (args.length == 6)
-				|| ((args.length == 7) && args[0].equals(LOGGING_OPTION)));
+		return (((args.length == 5) && !args[0].equals(LOGGING_OPTION))
+				|| ((args.length == 6) && args[0].equals(LOGGING_OPTION)));
 	}
 
 	@Override
@@ -85,12 +79,8 @@ public class MultiProcessorSubApp implements SubApp {
 			conf.setSeed(Integer.parseInt(newArgs[3]));
 			conf.setOutputDirectory(newArgs[4]);
 
-			if (newArgs.length == 6) {
-				conf.setQueryProcessor(new JProblog(newArgs[5]));
-			} else {
-				JProblog queryProcessor = new JProblog();
-				conf.setQueryProcessor(queryProcessor);
-			}
+			JProblog queryProcessor = new JProblog();
+			conf.setQueryProcessor(queryProcessor);
 
 			MultiProcessorCore core = new MultiProcessorCore();
 			List<String> result = core.run(conf, start);

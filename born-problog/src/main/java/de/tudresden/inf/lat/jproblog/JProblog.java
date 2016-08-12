@@ -34,17 +34,6 @@ public class JProblog implements Function<String, String> {
 	}
 
 	/**
-	 * Constructs a new JProblog using the path to where ProbLog is installed.
-	 * 
-	 * @param path
-	 *            path
-	 */
-	public JProblog(String path) {
-		this.processor = new ProblogProcessor(path);
-		this.processor.startInstallation(0);
-	}
-
-	/**
 	 * Returns the result of running ProbLog with the given input.
 	 * 
 	 * @param input

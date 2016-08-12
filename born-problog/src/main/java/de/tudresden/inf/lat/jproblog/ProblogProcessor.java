@@ -98,17 +98,10 @@ public class ProblogProcessor implements Function<String, String> {
 	private final boolean pythonMode;
 
 	public ProblogProcessor() {
-		this.problogDirectory = null;
 		this.pythonMode = isPythonInstalled();
 	}
 
-	public ProblogProcessor(String problogDirectory) {
-		this.problogDirectory = problogDirectory;
-		this.pythonMode = isPythonInstalled();
-	}
-
-	ProblogProcessor(String problogDirectory, boolean pythonMode) {
-		this.problogDirectory = problogDirectory;
+	ProblogProcessor(boolean pythonMode) {
 		this.pythonMode = pythonMode;
 	}
 
@@ -257,10 +250,6 @@ public class ProblogProcessor implements Function<String, String> {
 		args[0] = problogDirectory + FILE_SEPARATOR + PROBLOG_CLI;
 		args[1] = PROBLOG_INSTALL_COMMAND;
 		return run(args);
-	}
-
-	public boolean isProblogNeeded() {
-		return Objects.isNull(this.problogDirectory);
 	}
 
 	public String getProblogDirectory() {
