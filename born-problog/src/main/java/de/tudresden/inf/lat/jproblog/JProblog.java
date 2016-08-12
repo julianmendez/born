@@ -43,8 +43,7 @@ public class JProblog implements Function<String, String> {
 	@Override
 	public String apply(String input) {
 		Objects.requireNonNull(input);
-		ProblogProcessor processor = new ProblogProcessor();
-		return processor.apply(input);
+		return this.processor.apply(input);
 	}
 
 	String read(BufferedReader reader) throws IOException {
