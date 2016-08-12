@@ -119,38 +119,21 @@ public class ProblogProgram {
 	}
 
 	public String asString() {
+		String nl = "" + Symbol.NEW_LINE_CHAR;
+		String nlnl = "" + Symbol.NEW_LINE_CHAR + Symbol.NEW_LINE_CHAR;
 		StringBuffer sb = new StringBuffer();
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(TITLE_COMPLETION_RULES);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asStringC(this.data.getCompletionRules()));
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(this.additionalCompletionRulesAsText);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(TITLE_ONTOLOGY);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asString(this.data.getOntology()));
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(TITLE_BAYESIAN_NETWORK);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asStringP(this.data.getBayesianNetwork()));
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(this.bayesianNetworkAddendum);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(TITLE_QUERIES);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(asString(this.data.getQueries()));
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(this.queryListAddendum);
-		sb.append(Symbol.NEW_LINE_CHAR);
-		sb.append(Symbol.NEW_LINE_CHAR);
+		sb.append(nl);
+		sb.append(TITLE_COMPLETION_RULES + nlnl);
+		sb.append(asStringC(this.data.getCompletionRules()) + nl);
+		sb.append(this.additionalCompletionRulesAsText + nlnl);
+		sb.append(TITLE_ONTOLOGY + nlnl);
+		sb.append(asString(this.data.getOntology()) + nlnl);
+		sb.append(TITLE_BAYESIAN_NETWORK + nlnl);
+		sb.append(asStringP(this.data.getBayesianNetwork()) + nl);
+		sb.append(this.bayesianNetworkAddendum + nlnl);
+		sb.append(TITLE_QUERIES + nlnl);
+		sb.append(asString(this.data.getQueries()) + nl);
+		sb.append(this.queryListAddendum + nlnl);
 		return sb.toString();
 	}
 
