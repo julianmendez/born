@@ -20,12 +20,26 @@ import java.util.zip.ZipInputStream;
  */
 public class Decompressor {
 
-	public static String ensurePath(String fileName) throws IOException {
+	/**
+	 * Creates parent directories for the given file name, if necessary.
+	 * 
+	 * @param fileName
+	 *            file name
+	 * @return the same given file name
+	 */
+	public static String ensurePath(String fileName) {
 		ensurePath(new File(fileName));
 		return fileName;
 	}
 
-	public static File ensurePath(File file) throws IOException {
+	/**
+	 * Creates parent directories for the given file, if necessary.
+	 * 
+	 * @param file
+	 *            file
+	 * @return the same given file
+	 */
+	public static File ensurePath(File file) {
 		Objects.requireNonNull(file);
 		String parent = file.getParent();
 		if (Objects.nonNull(parent)) {
