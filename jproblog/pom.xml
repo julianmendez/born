@@ -5,10 +5,43 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>de.tu-dresden.inf.lat.jproblog</groupId>
 	<artifactId>jproblog</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	<parent>
+		<groupId>de.tu-dresden.inf.lat</groupId>
+		<artifactId>lat-parent</artifactId>
+		<version>0.1.0</version>
+		<relativePath></relativePath>
+	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.python</groupId>
+				<artifactId>jython</artifactId>
+				<version>2.7.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+
+		<dependency>
+			<groupId>org.python</groupId>
+			<artifactId>jython</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -17,18 +50,14 @@
 
 	</dependencies>
 
-	<parent>
-		<groupId>de.tu-dresden.inf.lat.born</groupId>
-		<artifactId>born-parent</artifactId>
-		<version>0.3.0-SNAPSHOT</version>
-	</parent>
-
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<build>
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -42,12 +71,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<includeDependencySources>true</includeDependencySources>
-					<dependencySourceIncludes>
-						<dependencySourceInclude>${project.groupId}</dependencySourceInclude>
-					</dependencySourceIncludes>
-				</configuration>
 			</plugin>
 
 			<plugin>
@@ -59,10 +82,49 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+			</plugin>
+
 		</plugins>
 	</build>
 
 	<name>JProbLog</name>
+
+	<description>Java interface for ProbLog.</description>
+
+	<inceptionYear>2016</inceptionYear>
+
+	<licenses>
+
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+
+	</licenses>
+
+	<organization>
+		<name>Chair of Automata Theory - TU Dresden</name>
+		<url>http://lat.inf.tu-dresden.de</url>
+	</organization>
+
+	<developers>
+
+		<developer>
+			<id>julianmendez</id>
+			<name>Julian Mendez</name>
+			<email>julian.mendez@tu-dresden.de</email>
+		</developer>
+
+	</developers>
 
 </project>
 

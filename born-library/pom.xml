@@ -96,7 +96,7 @@
 						<Main-Class>${mainClass}</Main-Class>
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
-							@jproblog-${project.version}.jar,
+							@jproblog-0.1.0-SNAPSHOT.jar,
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							LICENSE.txt=../LICENSE.txt
