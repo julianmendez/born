@@ -61,7 +61,7 @@
 	</dependencyManagement>
 
 	<modules>
-		<module>born-problog</module>
+		<module>jproblog</module>
 		<module>born-owlapi</module>
 		<module>born-gui</module>
 		<module>born-protege</module>
