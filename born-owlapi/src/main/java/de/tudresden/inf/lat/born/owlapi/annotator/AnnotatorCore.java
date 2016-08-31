@@ -3,8 +3,6 @@ package de.tudresden.inf.lat.born.owlapi.annotator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,9 +38,8 @@ public class AnnotatorCore {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(ontologyOutputStream);
 		AbstractOWLRenderer renderer = new OWLXMLRenderer();
-		Writer writer = new OutputStreamWriter(ontologyOutputStream);
-		renderer.render(ontology, writer);
-		writer.flush();
+		renderer.render(ontology, ontologyOutputStream);
+		ontologyOutputStream.flush();
 	}
 
 	public void annotate(InputStream ontologyInputStream, OutputStream newOntologyOutputStream, double threshold,

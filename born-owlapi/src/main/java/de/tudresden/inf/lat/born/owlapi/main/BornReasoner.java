@@ -21,7 +21,6 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
-import org.semanticweb.owlapi.model.OWLException;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
@@ -530,7 +529,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	}
 
 	@Override
-	public void ontologiesChanged(List<? extends OWLOntologyChange> changes) throws OWLException {
+	public void ontologiesChanged(List<? extends OWLOntologyChange> changes) {
 		Objects.requireNonNull(changes);
 		// TODO not implemented
 	}

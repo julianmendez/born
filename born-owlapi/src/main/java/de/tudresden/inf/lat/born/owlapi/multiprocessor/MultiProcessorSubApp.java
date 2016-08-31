@@ -32,8 +32,9 @@ public class MultiProcessorSubApp implements SubApp {
 			+ "\n" + "\n Option:" + "\n   --log                            : shows log" + "\n" + "\nExamples:" + "\n"
 			+ "\n Execution:" + "\n  java -jar born.jar " + COMMAND + " ontologies/ networks/ 10 127 results/" + "\n"
 			+ "\n Execution not showing log:" + "\n  java -jar born.jar " + COMMAND
-			+ " ontologies/ networks/ 10 127 results/" + "\n" + "\n Execution showing log:"
-			+ "\n  java -jar born.jar " + COMMAND + " --log ontologies/ networks/ 10 127 results/" + "\n"
+			+ " ontologies/ networks/ 10 127 results/" + "\n" //
+			+ "\n Execution showing log:" + "\n  java -jar born.jar " + COMMAND
+			+ " --log ontologies/ networks/ 10 127 results/" + "\n"
 			+ "\nNote: this program requires an Internet connection to install ProbLog." + "\n" //
 			+ "\n";
 

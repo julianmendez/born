@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -68,9 +67,8 @@ public class SplitterCore {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(ontologyOutputStream);
 		AbstractOWLRenderer renderer = new OWLXMLRenderer();
-		Writer writer = new OutputStreamWriter(ontologyOutputStream);
-		renderer.render(ontology, writer);
-		writer.flush();
+		renderer.render(ontology, ontologyOutputStream);
+		ontologyOutputStream.flush();
 	}
 
 	/**
