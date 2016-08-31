@@ -11,24 +11,23 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>de.tu-dresden.inf.lat.jproblog</groupId>
-			<artifactId>jproblog</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
+			<groupId>de.tu-dresden.inf.lat.jproblog</groupId>
+			<artifactId>jproblog</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.tu-dresden.inf.lat.jcel</groupId>
 			<artifactId>jcel-owlapi</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.owlapi</groupId>
+			<artifactId>owlapi-distribution</artifactId>
 		</dependency>
 
 	</dependencies>

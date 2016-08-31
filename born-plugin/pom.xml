@@ -95,15 +95,15 @@
 						<Main-Class>${mainClass}</Main-Class>
 						<Include-Resource>
 							{maven-resources}, {maven-dependencies},
-							@jproblog-0.1.0-SNAPSHOT.jar,
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							@born-protege-${project.version}.jar,
-							@jcel-coreontology-0.24.0.jar,
-							@jcel-core-0.24.0.jar,
-							@jcel-ontology-0.24.0.jar,
-							@jcel-reasoner-0.24.0.jar,
-							@jcel-owlapi-0.24.0.jar,
+							@jproblog-${jproblog.version}.jar,
+							@jcel-coreontology-${jcel.version}.jar,
+							@jcel-core-${jcel.version}.jar,
+							@jcel-ontology-${jcel.version}.jar,
+							@jcel-reasoner-${jcel.version}.jar,
+							@jcel-owlapi-${jcel.version}.jar,
 							LICENSE.txt=../LICENSE.txt
 						</Include-Resource>
 					</instructions>

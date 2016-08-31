@@ -28,33 +28,39 @@
 			</dependency>
 
 			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-distribution</artifactId>
-				<version>4.2.5</version>
-			</dependency>
-
-			<dependency>
-				<groupId>edu.stanford.protege</groupId>
-				<artifactId>protege-editor-owl</artifactId>
-				<version>5.0.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>edu.stanford.protege</groupId>
-				<artifactId>protege-editor-core</artifactId>
-				<version>5.0.0</version>
+				<groupId>de.tu-dresden.inf.lat.jproblog</groupId>
+				<artifactId>jproblog</artifactId>
+				<version>${jproblog.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.tu-dresden.inf.lat.jcel</groupId>
 				<artifactId>jcel-owlapi</artifactId>
-				<version>0.24.0</version>
+				<version>${jcel.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sourceforge.owlapi</groupId>
+				<artifactId>owlapi-distribution</artifactId>
+				<version>${owlapi.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>edu.stanford.protege</groupId>
+				<artifactId>protege-editor-owl</artifactId>
+				<version>${protege.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>edu.stanford.protege</groupId>
+				<artifactId>protege-editor-core</artifactId>
+				<version>${protege.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.python</groupId>
 				<artifactId>jython-standalone</artifactId>
-				<version>2.7.0</version>
+				<version>${jython.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -75,6 +81,12 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<jproblog.version>0.1.0-SNAPSHOT</jproblog.version>
+		<jcel.version>0.24.0</jcel.version>
+		<owlapi.version>4.2.5</owlapi.version>
+		<protege.version>5.0.0</protege.version>
+		<jython.version>2.7.0</jython.version>
 	</properties>
 
 	<build>
