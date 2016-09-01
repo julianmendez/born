@@ -21,12 +21,6 @@
 		<dependencies>
 
 			<dependency>
-				<groupId>org.python</groupId>
-				<artifactId>jython</artifactId>
-				<version>2.7.0</version>
-			</dependency>
-
-			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.12</version>
@@ -37,11 +31,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>org.python</groupId>
-			<artifactId>jython</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -102,6 +91,8 @@
 
 	<description>Java interface for ProbLog.</description>
 
+	<url>https://github.com/julianmendez/jproblog</url>
+
 	<inceptionYear>2016</inceptionYear>
 
 	<licenses>
@@ -127,6 +118,12 @@
 		</developer>
 
 	</developers>
+
+	<scm>
+		<url>https://github.com/julianmendez/jproblog.git</url>
+		<connection>scm:git:https://github.com/julianmendez/jproblog.git</connection>
+		<developerConnection>scm:git:https://github.com/julianmendez/jproblog.git</developerConnection>
+	</scm>
 
 </project>
 
