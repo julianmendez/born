@@ -40,8 +40,7 @@ public class ProblogProgram {
 	}
 
 	public void setAdditionalCompletionRulesAsText(String completionRulesAsText) {
-		Objects.requireNonNull(completionRulesAsText);
-		this.additionalCompletionRulesAsText = completionRulesAsText;
+		this.additionalCompletionRulesAsText = Objects.requireNonNull(completionRulesAsText);
 	}
 
 	public String getBayesianNetworkAddendum() {
@@ -49,8 +48,7 @@ public class ProblogProgram {
 	}
 
 	public void setBayesianNetworkAddendum(String bayesianNetworkAddendum) {
-		Objects.requireNonNull(bayesianNetworkAddendum);
-		this.bayesianNetworkAddendum = bayesianNetworkAddendum;
+		this.bayesianNetworkAddendum = Objects.requireNonNull(bayesianNetworkAddendum);
 	}
 
 	public String getQueryListAddendum() {
@@ -58,8 +56,7 @@ public class ProblogProgram {
 	}
 
 	public void setQueryListAddendum(String queryListAddendum) {
-		Objects.requireNonNull(queryListAddendum);
-		this.queryListAddendum = queryListAddendum;
+		this.queryListAddendum = Objects.requireNonNull(queryListAddendum);
 	}
 
 	String asString(List<Clause> clauses) {

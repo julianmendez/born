@@ -39,11 +39,9 @@ public class OntologyAndNetwork {
 	 *            Bayesian network in ProbLog syntax
 	 */
 	public OntologyAndNetwork(OWLOntology owlOntology, String bayesianNetwork) {
-		Objects.requireNonNull(owlOntology);
-		Objects.requireNonNull(bayesianNetwork);
-		this.owlOntology = owlOntology;
+		this.owlOntology = Objects.requireNonNull(owlOntology);
 		this.ontologyName = owlOntology.getOntologyID().toString();
-		this.bayesianNetwork = bayesianNetwork;
+		this.bayesianNetwork = Objects.requireNonNull(bayesianNetwork);
 	}
 
 	/**
@@ -57,12 +55,9 @@ public class OntologyAndNetwork {
 	 *            Bayesian network in ProbLog syntax
 	 */
 	public OntologyAndNetwork(String ontologyName, OWLOntology owlOntology, String bayesianNetwork) {
-		Objects.requireNonNull(ontologyName);
-		Objects.requireNonNull(owlOntology);
-		Objects.requireNonNull(bayesianNetwork);
-		this.ontologyName = ontologyName;
-		this.owlOntology = owlOntology;
-		this.bayesianNetwork = bayesianNetwork;
+		this.ontologyName = Objects.requireNonNull(ontologyName);
+		this.owlOntology = Objects.requireNonNull(owlOntology);
+		this.bayesianNetwork = Objects.requireNonNull(bayesianNetwork);
 	}
 
 	/**

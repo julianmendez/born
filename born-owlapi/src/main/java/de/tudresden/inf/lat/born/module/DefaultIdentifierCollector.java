@@ -24,8 +24,7 @@ public class DefaultIdentifierCollector {
 	 *            normalized axiom
 	 */
 	public DefaultIdentifierCollector(NormalizedIntegerAxiom axiom) {
-		Objects.requireNonNull(axiom);
-		this.axiom = axiom;
+		this.axiom = Objects.requireNonNull(axiom);
 		axiom.accept(new AuxiliaryIdentifierCollector());
 	}
 

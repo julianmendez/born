@@ -24,8 +24,7 @@ public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 
 	@Override
 	public void setInputOntology(InputStream inputOntology) {
-		Objects.requireNonNull(inputOntology);
-		this.inputOntology = inputOntology;
+		this.inputOntology = Objects.requireNonNull(inputOntology);
 	}
 
 	@Override
@@ -35,8 +34,7 @@ public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 
 	@Override
 	public void setOutputOntology(OutputStream outputOntology) {
-		Objects.requireNonNull(outputOntology);
-		this.outputOntology = outputOntology;
+		this.outputOntology = Objects.requireNonNull(outputOntology);
 	}
 
 	@Override
@@ -56,8 +54,7 @@ public class AnnotatorConfigurationImpl implements AnnotatorConfiguration {
 
 	@Override
 	public void setInputBayesianNetworkVariables(Set<String> inputBayesianNetworkVariables) {
-		Objects.requireNonNull(inputBayesianNetworkVariables);
-		this.inputBayesianNetworkVariables = inputBayesianNetworkVariables;
+		this.inputBayesianNetworkVariables = Objects.requireNonNull(inputBayesianNetworkVariables);
 	}
 
 	@Override

@@ -48,10 +48,8 @@ public class TestMakerController implements ActionListener {
 	 *            an OWL ontology manager
 	 */
 	public TestMakerController(TestMakerView view, OWLOntologyManager ontologyManager) {
-		Objects.requireNonNull(view);
-		Objects.requireNonNull(ontologyManager);
-		this.view = view;
-		this.owlOntologyManager = ontologyManager;
+		this.view = Objects.requireNonNull(view);
+		this.owlOntologyManager = Objects.requireNonNull(ontologyManager);
 		init();
 	}
 

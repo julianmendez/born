@@ -83,10 +83,8 @@ public class ProcessorController implements ActionListener {
 	 *            an OWL ontology manager
 	 */
 	public ProcessorController(ProcessorView view, OWLOntologyManager ontologyManager) {
-		Objects.requireNonNull(view);
-		Objects.requireNonNull(ontologyManager);
-		this.view = view;
-		this.owlOntologyManager = ontologyManager;
+		this.view = Objects.requireNonNull(view);
+		this.owlOntologyManager = Objects.requireNonNull(ontologyManager);
 		init();
 	}
 

@@ -57,8 +57,7 @@ public class TestMakerPanel extends JPanel implements TestMakerView {
 	 *            model
 	 */
 	public TestMakerPanel(AnnotatorConfiguration model) {
-		Objects.requireNonNull(model);
-		this.model = model;
+		this.model = Objects.requireNonNull(model);
 		createPanel();
 	}
 

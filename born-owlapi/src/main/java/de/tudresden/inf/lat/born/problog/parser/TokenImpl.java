@@ -28,8 +28,7 @@ public class TokenImpl implements Token {
 	 *            line number
 	 */
 	public TokenImpl(String str, int lineNumber) {
-		Objects.requireNonNull(str);
-		this.tokenValue = str;
+		this.tokenValue = Objects.requireNonNull(str);
 		this.lineNumber = lineNumber;
 		this.tokenType = findType(str);
 	}

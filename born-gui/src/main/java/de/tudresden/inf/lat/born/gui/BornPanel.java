@@ -39,8 +39,7 @@ public class BornPanel extends JPanel implements BornView {
 	 *            model
 	 */
 	public BornPanel(BornModel model) {
-		Objects.requireNonNull(model);
-		this.model = model;
+		this.model = Objects.requireNonNull(model);
 		this.processorView = new ProcessorPanel(this.model.getProcessorConfiguration());
 		this.testMakerView = new TestMakerPanel(this.model.getAnnotatorConfiguration());
 		this.experimentMakerView = new ExperimentRunnerPanel(this.model.getMultiProcessorConfiguration());

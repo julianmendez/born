@@ -37,9 +37,8 @@ public class ProbClauseImpl implements ProbClause {
 	public ProbClauseImpl(Term head, List<Term> body, String probability) {
 		Objects.requireNonNull(head);
 		Objects.requireNonNull(body);
-		Objects.requireNonNull(probability);
 		this.clause = new ClauseImpl(head, body);
-		this.probability = probability;
+		this.probability = Objects.requireNonNull(probability);
 	}
 
 	@Override

@@ -39,18 +39,12 @@ public class ExampleConfigurationImpl implements ExampleConfiguration {
 	 */
 	public ExampleConfigurationImpl(String ontologyName, String ontologyFileName, OWLOntology owlOntology,
 			String bayesianNetworkFileName, String bayesianNetwork, String query) {
-		Objects.requireNonNull(ontologyName);
-		Objects.requireNonNull(ontologyFileName);
-		Objects.requireNonNull(owlOntology);
-		Objects.requireNonNull(bayesianNetworkFileName);
-		Objects.requireNonNull(bayesianNetwork);
-		Objects.requireNonNull(query);
-		this.ontologyName = ontologyName;
-		this.ontologyFileName = ontologyFileName;
-		this.owlOntology = owlOntology;
-		this.bayesianNetworkFileName = bayesianNetworkFileName;
-		this.bayesianNetwork = bayesianNetwork;
-		this.query = query;
+		this.ontologyName = Objects.requireNonNull(ontologyName);
+		this.ontologyFileName = Objects.requireNonNull(ontologyFileName);
+		this.owlOntology = Objects.requireNonNull(owlOntology);
+		this.bayesianNetworkFileName = Objects.requireNonNull(bayesianNetworkFileName);
+		this.bayesianNetwork = Objects.requireNonNull(bayesianNetwork);
+		this.query = Objects.requireNonNull(query);
 	}
 
 	@Override

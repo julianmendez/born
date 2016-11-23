@@ -21,8 +21,7 @@ public class BayesianNetworkCreatorConfigurationImpl implements BayesianNetworkC
 
 	@Override
 	public void setDependencies(List<Integer> dependencies) {
-		Objects.requireNonNull(dependencies);
-		this.dependencies = dependencies;
+		this.dependencies = Objects.requireNonNull(dependencies);
 	}
 
 	@Override
@@ -32,8 +31,7 @@ public class BayesianNetworkCreatorConfigurationImpl implements BayesianNetworkC
 
 	@Override
 	public void setOutput(OutputStream output) {
-		Objects.requireNonNull(output);
-		this.output = output;
+		this.output = Objects.requireNonNull(output);
 	}
 
 	@Override

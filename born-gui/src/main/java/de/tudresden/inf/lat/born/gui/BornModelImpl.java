@@ -38,8 +38,7 @@ public class BornModelImpl implements BornModel {
 
 	@Override
 	public void setAnnotatorConfiguration(AnnotatorConfiguration annotatorConfiguration) {
-		Objects.requireNonNull(annotatorConfiguration);
-		this.annotatorConfiguration = annotatorConfiguration;
+		this.annotatorConfiguration = Objects.requireNonNull(annotatorConfiguration);
 	}
 
 	@Override
@@ -49,8 +48,7 @@ public class BornModelImpl implements BornModel {
 
 	@Override
 	public void setProcessorConfiguration(ProcessorConfiguration processorConfiguration) {
-		Objects.requireNonNull(processorConfiguration);
-		this.processorConfiguration = processorConfiguration;
+		this.processorConfiguration = Objects.requireNonNull(processorConfiguration);
 	}
 
 	@Override
@@ -60,8 +58,7 @@ public class BornModelImpl implements BornModel {
 
 	@Override
 	public void setMultiProcessorConfiguration(MultiProcessorConfiguration multiProcessorConfiguration) {
-		Objects.requireNonNull(multiProcessorConfiguration);
-		this.multiProcessorConfiguration = multiProcessorConfiguration;
+		this.multiProcessorConfiguration = Objects.requireNonNull(multiProcessorConfiguration);
 	}
 
 }

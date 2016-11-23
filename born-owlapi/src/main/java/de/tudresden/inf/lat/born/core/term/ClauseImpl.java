@@ -33,9 +33,8 @@ public class ClauseImpl implements Clause {
 	 *            body
 	 */
 	public ClauseImpl(Term head, List<Term> body) {
-		Objects.requireNonNull(head);
 		Objects.requireNonNull(body);
-		this.head = head;
+		this.head = Objects.requireNonNull(head);
 		this.body.addAll(body);
 	}
 
