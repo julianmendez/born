@@ -93,9 +93,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	 */
 	public BornReasoner(OWLOntology rootOntology, boolean buffering, OWLReasonerConfiguration configuration) {
 		this(rootOntology, buffering);
-		Objects.requireNonNull(rootOntology);
-		Objects.requireNonNull(configuration);
-		this.reasonerConfiguration = configuration;
+		this.reasonerConfiguration = Objects.requireNonNull(configuration);
 	}
 
 	public boolean addAxiom(OWLAxiom axiom) {
@@ -198,7 +196,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLObjectPropertyExpression> getDisjointObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
-					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
+			FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getDisjointDataProperties(" + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
@@ -226,7 +224,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public Node<OWLObjectPropertyExpression> getEquivalentObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
-					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
+			FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getEquivalentObjectProperties(" + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
@@ -258,7 +256,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public Node<OWLObjectPropertyExpression> getInverseObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
-					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
+			FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getInverseObjectProperties(" + objectPropertyExpression + ")");
 		throw new UnsupportedReasonerOperationInBornException(
@@ -268,7 +266,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLClass> getObjectPropertyDomains(OWLObjectPropertyExpression objectPropertyExpression,
 			boolean direct) throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
-					TimeOutException {
+			TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getObjectPropertyDomains(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
@@ -278,7 +276,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLClass> getObjectPropertyRanges(OWLObjectPropertyExpression objectPropertyExpression,
 			boolean direct) throws InconsistentOntologyException, FreshEntitiesException, ReasonerInterruptedException,
-					TimeOutException {
+			TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getObjectPropertyRanges(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
@@ -288,7 +286,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLNamedIndividual> getObjectPropertyValues(OWLNamedIndividual individual,
 			OWLObjectPropertyExpression objectPropertyExpression) throws InconsistentOntologyException,
-					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
+			FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
 		Objects.requireNonNull(individual);
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getObjectPropertyValues(" + individual + ", " + objectPropertyExpression + ")");
@@ -397,7 +395,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLObjectPropertyExpression> getSubObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression, boolean direct) throws InconsistentOntologyException,
-					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
+			FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getSubObjectProperties(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(
@@ -427,7 +425,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public NodeSet<OWLObjectPropertyExpression> getSuperObjectProperties(
 			OWLObjectPropertyExpression objectPropertyExpression, boolean direct) throws InconsistentOntologyException,
-					FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
+			FreshEntitiesException, ReasonerInterruptedException, TimeOutException {
 		Objects.requireNonNull(objectPropertyExpression);
 		logger.finer("getSuperObjectProperties(" + objectPropertyExpression + ", " + direct + ")");
 		throw new UnsupportedReasonerOperationInBornException(

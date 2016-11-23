@@ -27,8 +27,7 @@ public class EmptyRule implements CompletionRule {
 	}
 
 	public EmptyRule(String comment) {
-		Objects.requireNonNull(comment);
-		this.comment = comment;
+		this.comment = Objects.requireNonNull(comment);
 	}
 
 	@Override

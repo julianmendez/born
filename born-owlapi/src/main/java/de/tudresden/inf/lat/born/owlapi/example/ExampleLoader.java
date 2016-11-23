@@ -162,8 +162,7 @@ public class ExampleLoader {
 	}
 
 	String getFileName(String fileNameWithPath) {
-		Objects.requireNonNull(fileNameWithPath);
-		String ret = fileNameWithPath;
+		String ret = Objects.requireNonNull(fileNameWithPath);
 		int lastIndex = fileNameWithPath.lastIndexOf(Symbol.FILE_SEPARATOR);
 		if (lastIndex != -1) {
 			ret = fileNameWithPath.substring(lastIndex + Symbol.FILE_SEPARATOR.length());

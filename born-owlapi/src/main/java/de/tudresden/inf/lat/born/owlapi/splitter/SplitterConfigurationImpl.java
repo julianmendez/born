@@ -22,8 +22,7 @@ public class SplitterConfigurationImpl implements SplitterConfiguration {
 
 	@Override
 	public void setInputOntology(InputStream inputOntology) {
-		Objects.requireNonNull(inputOntology);
-		this.inputOntology = inputOntology;
+		this.inputOntology = Objects.requireNonNull(inputOntology);
 	}
 
 	@Override
@@ -33,8 +32,7 @@ public class SplitterConfigurationImpl implements SplitterConfiguration {
 
 	@Override
 	public void setOutputOntology(OutputStream outputOntology) {
-		Objects.requireNonNull(outputOntology);
-		this.outputOntology = outputOntology;
+		this.outputOntology = Objects.requireNonNull(outputOntology);
 	}
 
 	@Override
@@ -44,8 +42,7 @@ public class SplitterConfigurationImpl implements SplitterConfiguration {
 
 	@Override
 	public void setBayesianNetwork(OutputStream bayesianNetwork) {
-		Objects.requireNonNull(bayesianNetwork);
-		this.bayesianNetwork = bayesianNetwork;
+		this.bayesianNetwork = Objects.requireNonNull(bayesianNetwork);
 	}
 
 	@Override

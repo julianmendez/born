@@ -28,10 +28,8 @@ public class SubsumptionQuery {
 	 *            super class
 	 */
 	public SubsumptionQuery(OWLClass subClass, OWLClass superClass) {
-		Objects.requireNonNull(subClass);
-		Objects.requireNonNull(superClass);
-		this.subClass = subClass;
-		this.superClass = superClass;
+		this.subClass = Objects.requireNonNull(subClass);
+		this.superClass = Objects.requireNonNull(superClass);
 	}
 
 	/**

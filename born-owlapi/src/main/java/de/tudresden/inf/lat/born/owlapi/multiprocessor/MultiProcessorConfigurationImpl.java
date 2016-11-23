@@ -28,8 +28,7 @@ public class MultiProcessorConfigurationImpl implements MultiProcessorConfigurat
 
 	@Override
 	public void setOntologyList(List<OntologyAndNetwork> ontologyList) {
-		Objects.requireNonNull(ontologyList);
-		this.ontologyList = ontologyList;
+		this.ontologyList = Objects.requireNonNull(ontologyList);
 	}
 
 	@Override
@@ -39,8 +38,7 @@ public class MultiProcessorConfigurationImpl implements MultiProcessorConfigurat
 
 	@Override
 	public void setOutputDirectory(String outputDirectory) {
-		Objects.requireNonNull(outputDirectory);
-		this.outputDirectory = outputDirectory;
+		this.outputDirectory = Objects.requireNonNull(outputDirectory);
 	}
 
 	@Override
@@ -70,8 +68,7 @@ public class MultiProcessorConfigurationImpl implements MultiProcessorConfigurat
 
 	@Override
 	public void setQueryProcessor(Function<String, String> queryProcessor) {
-		Objects.requireNonNull(queryProcessor);
-		this.queryProcessor = queryProcessor;
+		this.queryProcessor = Objects.requireNonNull(queryProcessor);
 	}
 
 	@Override

@@ -45,8 +45,7 @@ public class ExperimentRunnerPanel extends JPanel implements ExperimentRunnerVie
 	 *            model
 	 */
 	public ExperimentRunnerPanel(MultiProcessorConfiguration model) {
-		Objects.requireNonNull(model);
-		this.model = model;
+		this.model = Objects.requireNonNull(model);
 		createPanel();
 	}
 

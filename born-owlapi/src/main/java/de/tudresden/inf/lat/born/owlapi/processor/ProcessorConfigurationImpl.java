@@ -59,8 +59,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public void setAdditionalCompletionRules(String completionRules) {
-		Objects.requireNonNull(completionRules);
-		this.completionRules = completionRules;
+		this.completionRules = Objects.requireNonNull(completionRules);
 	}
 
 	@Override
@@ -70,8 +69,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public void setOntology(OWLOntology ontologyInputStream) {
-		Objects.requireNonNull(ontologyInputStream);
-		this.ontology = ontologyInputStream;
+		this.ontology = Objects.requireNonNull(ontologyInputStream);
 	}
 
 	@Override
@@ -81,8 +79,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public void setBayesianNetwork(String bayesianNetwork) {
-		Objects.requireNonNull(bayesianNetwork);
-		this.bayesianNetwork = bayesianNetwork;
+		this.bayesianNetwork = Objects.requireNonNull(bayesianNetwork);
 	}
 
 	@Override
@@ -102,8 +99,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public void setOutputFileName(String outputFileName) {
-		Objects.requireNonNull(outputFileName);
-		this.outputFileName = outputFileName;
+		this.outputFileName = Objects.requireNonNull(outputFileName);
 	}
 
 	@Override
@@ -113,8 +109,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 
 	@Override
 	public void setQueryProcessor(Function<String, String> queryProcessor) {
-		Objects.requireNonNull(queryProcessor);
-		this.queryProcessor = queryProcessor;
+		this.queryProcessor = Objects.requireNonNull(queryProcessor);
 	}
 
 	@Override

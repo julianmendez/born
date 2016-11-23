@@ -62,8 +62,7 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final ProcessorConfiguration model;
 
 	public ProcessorPanel(ProcessorConfiguration model) {
-		Objects.requireNonNull(model);
-		this.model = model;
+		this.model = Objects.requireNonNull(model);
 		setLayout(null);
 		createPanel();
 	}

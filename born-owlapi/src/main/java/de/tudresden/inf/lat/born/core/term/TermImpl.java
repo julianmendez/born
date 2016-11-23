@@ -82,9 +82,8 @@ public class TermImpl implements Term {
 	 */
 	public TermImpl(Term leftTerm, String infixOperator, Term rightTerm) {
 		Objects.requireNonNull(leftTerm);
-		Objects.requireNonNull(infixOperator);
 		Objects.requireNonNull(rightTerm);
-		this.name = infixOperator;
+		this.name = Objects.requireNonNull(infixOperator);
 		this.arguments.add(leftTerm);
 		this.arguments.add(rightTerm);
 		this.termType = Term.Type.INFIX_OPERATOR;

@@ -11,10 +11,8 @@ public class Module {
 	private Set<NormalizedIntegerAxiom> axioms;
 
 	public Module(Set<Integer> entities, Set<NormalizedIntegerAxiom> axioms) {
-		Objects.requireNonNull(entities);
-		Objects.requireNonNull(axioms);
-		this.entities = entities;
-		this.axioms = axioms;
+		this.entities = Objects.requireNonNull(entities);
+		this.axioms = Objects.requireNonNull(axioms);
 	}
 
 	public Set<Integer> getEntities() {

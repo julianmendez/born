@@ -41,8 +41,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 	private final IntegerOntologyObjectFactory factory;
 
 	public AxiomRenderer(IntegerOntologyObjectFactory factory) {
-		Objects.requireNonNull(factory);
-		this.factory = factory;
+		this.factory = Objects.requireNonNull(factory);
 	}
 
 	String removeDoubleBackslash(String str) {
