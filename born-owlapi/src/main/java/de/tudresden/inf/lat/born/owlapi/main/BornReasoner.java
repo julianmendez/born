@@ -59,8 +59,6 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	private final boolean buffering = false;
 	private OWLReasonerConfiguration reasonerConfiguration = null;
 	private final OWLOntology rootOntology;
-	private final Date start = new Date();
-	private boolean isUpdateNeeded = false;
 	private long timeOut = 0x100000000L;
 
 	/**
@@ -75,8 +73,6 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 		Objects.requireNonNull(rootOntology);
 		logger.fine("configuring BORN reasoner ...");
 		this.rootOntology = rootOntology;
-		logger.fine("resetting reasoner ...");
-		resetReasoner();
 
 		logger.fine("BORN reasoner configured.");
 	}
@@ -96,15 +92,6 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 		this.reasonerConfiguration = Objects.requireNonNull(configuration);
 	}
 
-	public boolean addAxiom(OWLAxiom axiom) {
-		Objects.requireNonNull(axiom);
-		logger.finer("addAxiom(" + axiom + ")");
-		if (!this.buffering) {
-			resetReasoner();
-		}
-		return true;
-	}
-
 	@Override
 	public void dispose() {
 		logger.finer("dispose()");
@@ -114,7 +101,6 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public void flush() {
 		logger.finer("flush()");
-		resetReasoner();
 	}
 
 	@Override
@@ -332,6 +318,11 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 		return ret;
 	}
 
+	/**
+	 * Returns the reasoner configuration.
+	 * 
+	 * @return the reasoner configuration
+	 */
 	public OWLReasonerConfiguration getReasonerConfiguration() {
 		return this.reasonerConfiguration;
 	}
@@ -368,10 +359,6 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 		logger.finer("getSameIndividuals(" + individual + ")");
 		throw new UnsupportedReasonerOperationInBornException(
 				"Unsupported operation : getSameIndividuals(OWLNamedIndividual)");
-	}
-
-	public Date getStartTime() {
-		return this.start;
 	}
 
 	@Override
@@ -544,29 +531,11 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 
 		logger.finer("preparing ontology ...");
 		Date start = new Date();
-		resetReasoner();
 		logger.finer("BORN prepared the ontology in " + ((new Date()).getTime() - start.getTime()) + "ms");
 
 		if (Objects.nonNull(this.reasonerConfiguration)) {
 			this.reasonerConfiguration.getProgressMonitor().reasonerTaskStopped();
 		}
-	}
-
-	public boolean removeAxiom(OWLAxiom axiom) {
-		Objects.requireNonNull(axiom);
-		logger.finer("removeAxiom(" + axiom + ")");
-		this.isUpdateNeeded = true;
-		if (!this.buffering) {
-			resetReasoner();
-		}
-		return true;
-	}
-
-	private void resetReasoner() {
-		if (isUpdateNeeded) {
-			// TO DO
-		}
-		this.isUpdateNeeded = false;
 	}
 
 }
