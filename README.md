@@ -41,6 +41,7 @@ To use it as a standalone, use file `born-standalone/target/born.jar`, and start
 ```
 java -jar born.jar
 ```
+
 or use the console interface giving parameters. The details can be obtained with:
 
 ```
@@ -65,6 +66,7 @@ To compile the project offline, first download the dependencies:
 ```
 $ mvn dependency:go-offline
 ```
+
 and once offline, use:
 
 ```
@@ -76,12 +78,14 @@ The bundles uploaded to [Sonatype](https://oss.sonatype.org/) are created with:
 ```
 $ mvn clean install -DperformRelease=true
 ```
+
 and then on each module:
 
 ```
 $ cd target
 $ jar -cf bundle.jar born-*
 ```
+
 and on the main directory:
 
 ```
@@ -94,6 +98,7 @@ The version number is updated with:
 ```
 $ mvn versions:set -DnewVersion=NEW_VERSION
 ```
+
 where *NEW_VERSION* is the new version.
 
 
