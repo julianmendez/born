@@ -20,12 +20,11 @@ read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it
 * [The Central Repository](https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/)
 * as dependency
 
-<dependency>
-  <groupId>de.tu-dresden.inf.lat.born</groupId>
-  <artifactId>born-gui</artifactId>
-  <version>0.2.0</version>
-</dependency>
-
+`<dependency>`
+  `<groupId>`de.tu-dresden.inf.lat.born`</groupId>`
+  `<artifactId>`born-gui`</artifactId>`
+  `<version>`0.2.0`</version>`
+`</dependency>`
 
 
 ## Usage
