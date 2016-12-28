@@ -14,7 +14,10 @@ import de.tudresden.inf.lat.born.core.term.Term;
  */
 public class EmptyRule implements CompletionRule {
 
+	/** String to denote the beginning of a comment. */
 	public static final String BEGIN_COMMENT = "%";
+
+	/** String to denote the end of a comment. */
 	public static final String END_COMMENT = "\n";
 
 	private final String comment;

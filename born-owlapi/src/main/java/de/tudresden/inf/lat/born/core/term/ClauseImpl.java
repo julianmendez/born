@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 public class ClauseImpl implements Clause {
 
+	/** String for a tabulation (not necessarily a tab char). */
 	public static final String TAB = "   ";
 
 	private final Term head;

@@ -18,18 +18,43 @@ import de.tudresden.inf.lat.born.core.term.TermImpl;
  */
 public class FormulaConstructor {
 
+	/** Functor of the top concept. */
 	public static final String TOP = "top";
+
+	/** Functor to declare that a term is a concept. */
 	public static final String CON = "con";
+
+	/** Functor to declare that a term is a concept or individual. */
 	public static final String CONI = "coni";
+
+	/** Functor to declare that a term is a role. */
 	public static final String ROLE = "role";
+
+	/** Functor to declare that a term is an individual. */
 	public static final String INDIV = "indiv";
+
+	/** Functor of a subsumption. */
 	public static final String SUB = "sub";
+
+	/** Functor of a subsumption, where individuals are considered concepts. */
 	public static final String SUBX = "subx";
+
+	/** Functor of a subsumption taken from the ontology. */
 	public static final String GCI = "gci";
+
+	/** Functor of an instance. */
 	public static final String INST = "inst";
+
+	/** Functor of an assertion. */
 	public static final String ASSERTION = "assertion";
+
+	/** Functor of an existential restriction. */
 	public static final String EXISTS = "exists";
+
+	/** Functor of the conjunction of two concepts. */
 	public static final String AND = "and";
+
+	/** Functor of a query. */
 	public static final String QUERY = "query";
 
 	/**
@@ -192,13 +217,13 @@ public class FormulaConstructor {
 	}
 
 	/**
-	 * Returns the axiom denoting subsumption.
+	 * Returns the axiom denoting subsumption of two term declared as concepts.
 	 * 
 	 * @param subClass
 	 *            sub class
 	 * @param superClass
 	 *            super class
-	 * @return the axiom denoting subsumption
+	 * @return the axiom denoting subsumption of two term declared as concepts
 	 */
 	public Term sub(Term subClass, Term superClass) {
 		Objects.requireNonNull(subClass);
@@ -207,13 +232,16 @@ public class FormulaConstructor {
 	}
 
 	/**
-	 * Returns the axiom denoting subsumption.
+	 * Returns the axiom denoting a subsumption where the individuals are also
+	 * considered concepts.
 	 * 
 	 * @param subClass
 	 *            sub class
 	 * @param superClass
 	 *            super class
-	 * @return the axiom denoting subsumption
+	 * @return the axiom denoting a subsumption where the individuals are also
+	 *         considered concepts
+	 * 
 	 */
 	public Term subx(Term subClass, Term superClass) {
 		Objects.requireNonNull(subClass);
@@ -270,15 +298,15 @@ public class FormulaConstructor {
 	}
 
 	/**
-	 * Returns the construction of the intersection of two concepts (or class
-	 * expressions).
+	 * Returns the construction of the conjunction (or intersection) of two
+	 * concepts (or class expressions).
 	 * 
 	 * @param left
 	 *            first term
 	 * @param right
 	 *            second term
-	 * @return the construction of the intersection of two concepts (or class
-	 *         expressions)
+	 * @return the construction of the conjunction (or intersection) of two
+	 *         concepts (or class expressions)
 	 * 
 	 */
 	public Term and(Term left, Term right) {
