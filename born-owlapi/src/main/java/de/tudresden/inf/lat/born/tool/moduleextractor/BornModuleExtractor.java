@@ -41,7 +41,8 @@ import de.tudresden.inf.lat.jcel.ontology.normalization.OntologyNormalizer;
 import de.tudresden.inf.lat.jcel.owlapi.translator.Translator;
 
 /**
- * This is an executable class to extract a module.
+ * An object of this class models a module extractor, i.e. an executable class
+ * to extract a module.
  * 
  * @author Julian Mendez
  *
@@ -57,9 +58,23 @@ public class BornModuleExtractor {
 
 	public static final String SEPARATOR = "\t";
 
+	/**
+	 * Constructs a new module extractor.
+	 */
 	public BornModuleExtractor() {
 	}
 
+	/**
+	 * 
+	 * @param ontologyFileName
+	 *            file name of ontology
+	 * @param repetitions
+	 * @param countFile
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 * @throws OWLException
+	 *             if something went wrong using the OWL API
+	 */
 	public void countRandom(String ontologyFileName, int repetitions, String countFile)
 			throws IOException, OWLException {
 		Objects.requireNonNull(ontologyFileName);
@@ -80,6 +95,22 @@ public class BornModuleExtractor {
 		});
 	}
 
+	/**
+	 * Extracts a module.
+	 * 
+	 * @param ontologyFileName
+	 *            file name of ontology
+	 * @param signatureFileName
+	 *            file name of signature
+	 * @param moduleFileName
+	 *            file name of module
+	 * @param renderer
+	 *            renderer
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 * @throws OWLException
+	 *             if something went wrong using the OWL API
+	 */
 	public void extractModule(String ontologyFileName, String signatureFileName, String moduleFileName,
 			OWLRenderer renderer) throws IOException, OWLException {
 		Objects.requireNonNull(ontologyFileName);
@@ -96,6 +127,18 @@ public class BornModuleExtractor {
 		storeOntology(extractModule(owlOntology, signature), moduleFileName, renderer);
 	}
 
+	/**
+	 * Returns the extracted module for the given ontology and the given
+	 * signature.
+	 * 
+	 * @param owlOntology
+	 *            OWL ontology
+	 * @param signature
+	 *            signature
+	 * @return the extracted module for the given ontology and the given
+	 *         signature
+	 * @throws OWLOntologyCreationException
+	 */
 	public OWLOntology extractModule(OWLOntology owlOntology, Set<OWLClass> signature)
 			throws OWLOntologyCreationException {
 		Objects.requireNonNull(owlOntology);
@@ -165,6 +208,16 @@ public class BornModuleExtractor {
 		output.close();
 	}
 
+	/**
+	 * This is the entry point to execute the module extractor.
+	 * 
+	 * @param args
+	 *            arguments
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 * @throws OWLException
+	 *             if something went wrong when using the OWL API
+	 */
 	public static void main(String[] args) throws IOException, OWLException {
 		Objects.requireNonNull(args);
 		if (args.length == 3) {

@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 
 import de.tudresden.inf.lat.born.core.term.Symbol;
 
+/**
+ * An object of this class is creator of tokens.
+ * 
+ * @author Julian Mendez
+ *
+ */
 public class TokenCreator {
 
 	enum Mode {
@@ -83,6 +89,15 @@ public class TokenCreator {
 		}
 	}
 
+	/**
+	 * Returns tokens read from the given reader.
+	 * 
+	 * @param reader
+	 *            reader
+	 * @return tokens read from the given reader
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 */
 	public List<Token> createTokens(Reader reader) throws IOException {
 		Objects.requireNonNull(reader);
 		List<Token> ret = new ArrayList<>();

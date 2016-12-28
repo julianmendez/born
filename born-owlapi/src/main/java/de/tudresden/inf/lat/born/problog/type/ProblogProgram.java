@@ -28,33 +28,75 @@ public class ProblogProgram {
 	private String bayesianNetworkAddendum = "";
 	private String queryListAddendum = "";
 
+	/**
+	 * Constructs a ProbLog program.
+	 */
 	public ProblogProgram() {
 	}
 
+	/**
+	 * Returns the ProbLog program data, i.e. an object with the required data
+	 * to build a ProbLog program.
+	 * 
+	 * @return the ProbLog program data
+	 */
 	public ProblogProgramData getData() {
 		return this.data;
 	}
 
+	/**
+	 * Returns the additional completion rules as text.
+	 * 
+	 * @return the additional completion rules as text
+	 */
 	public String getAdditionalCompletionRulesAsText() {
 		return this.additionalCompletionRulesAsText;
 	}
 
+	/**
+	 * Sets the additional completion rules.
+	 * 
+	 * @param completionRulesAsText
+	 *            additional completion rules
+	 */
 	public void setAdditionalCompletionRulesAsText(String completionRulesAsText) {
 		this.additionalCompletionRulesAsText = Objects.requireNonNull(completionRulesAsText);
 	}
 
+	/**
+	 * Returns the addendum of the Bayesian network.
+	 * 
+	 * @return the addendum of the Bayesian network
+	 */
 	public String getBayesianNetworkAddendum() {
 		return this.bayesianNetworkAddendum;
 	}
 
+	/**
+	 * Sets the addendum of the Bayesian network.
+	 * 
+	 * @param bayesianNetworkAddendum
+	 *            the addendum of the Bayesian network
+	 */
 	public void setBayesianNetworkAddendum(String bayesianNetworkAddendum) {
 		this.bayesianNetworkAddendum = Objects.requireNonNull(bayesianNetworkAddendum);
 	}
 
+	/**
+	 * Returns the addendum of the query list.
+	 * 
+	 * @return the addendum of the query list
+	 */
 	public String getQueryListAddendum() {
 		return this.queryListAddendum;
 	}
 
+	/**
+	 * Returns the addendum of the query list.
+	 * 
+	 * @param queryListAddendum
+	 *            the addendum of the query list
+	 */
 	public void setQueryListAddendum(String queryListAddendum) {
 		this.queryListAddendum = Objects.requireNonNull(queryListAddendum);
 	}
@@ -94,6 +136,14 @@ public class ProblogProgram {
 		}
 	}
 
+	/**
+	 * Returns the given list of completion rules as a string with tabs.
+	 * 
+	 * @param completionRules
+	 *            list of completion rules
+	 * 
+	 * @return the given list of completion rules as a string with tabs
+	 */
 	public String asStringWithTabs(List<CompletionRule> completionRules) {
 		Objects.requireNonNull(completionRules);
 		StringBuffer sb = new StringBuffer();
@@ -115,6 +165,11 @@ public class ProblogProgram {
 		return sb.toString();
 	}
 
+	/**
+	 * Returns this ProbLog program as a string.
+	 * 
+	 * @return this ProbLog program as a string
+	 */
 	public String asString() {
 		String nl = "" + Symbol.NEW_LINE_CHAR;
 		String nlnl = "" + Symbol.NEW_LINE_CHAR + Symbol.NEW_LINE_CHAR;

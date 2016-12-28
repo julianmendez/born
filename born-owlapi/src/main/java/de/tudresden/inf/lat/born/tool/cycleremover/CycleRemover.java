@@ -31,6 +31,9 @@ public class CycleRemover {
 			"  <ontology file> <output file>: removes the cycles in a given ontology \n";
 	public static final String NEW_ONTOLOGY_SUFFIX = "-acyclic";
 
+	/**
+	 * Constructs a cycle remover.
+	 */
 	public CycleRemover() {
 	}
 
@@ -75,6 +78,16 @@ public class CycleRemover {
 		output.close();
 	}
 
+	/**
+	 * This is the entry point to execute the cycle remover.
+	 * 
+	 * @param args
+	 *            arguments
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 * @throws OWLException
+	 *             if something went wrong with the OWL API
+	 */
 	public static void main(String[] args) throws IOException, OWLException {
 		Objects.requireNonNull(args);
 		if (args.length == 2) {
