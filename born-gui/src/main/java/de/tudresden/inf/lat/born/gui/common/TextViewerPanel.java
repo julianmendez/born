@@ -18,6 +18,7 @@ public class TextViewerPanel extends JPanel implements TextViewerView {
 
 	private static final long serialVersionUID = -486147305343218431L;
 
+	/** Margin for the text shown. Every direction has the same margin. */
 	public static final int MARGIN = 8;
 
 	private final JTextArea textContent = new JTextArea();
