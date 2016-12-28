@@ -9,20 +9,20 @@ public interface Message {
 
 	// common
 	String TOOLTIP_TEXT_FIELD_INPUT_ONTOLOGY_FILE = "select the input ontology file";
-	String TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE = "opens an input ontology file";
+	String TOOLTIP_BUTTON_OPEN_INPUT_ONTOLOGY_FILE = "open an input ontology file";
 
 	// Main Panel
 	String TAB_PROCESSOR = "Reasoner";
-	String TOOLTIP_PROCESSOR = "processes an ontology to get the subsumption value";
+	String TOOLTIP_PROCESSOR = "process an ontology to get the subsumption value";
 	String TAB_TEST_MAKER = "Tests";
-	String TOOLTIP_TEST_MAKER = "helps in the creation of test data";
+	String TOOLTIP_TEST_MAKER = "help in the creation of test data";
 	String TAB_EXPERIMENT_MAKER = "Experiments";
-	String TOOLTIP_EXPERIMENT_MAKER = "creates and runs experiments";
+	String TOOLTIP_EXPERIMENT_MAKER = "create and run experiments";
 
 	// Processor Panel
 	String TOOLTIP_TEXT_FIELD_LIST_OF_PARENTS = "select query file";
 	String TOOLTIP_TEXT_FIELD_OPEN_BAYESIAN_NETWORK_FILE = "select the Bayesian network file";
-	String TOOLTIP_BUTTON_OPEN_BAYESIAN_NETWORK_FILE = "opens the input ontology file";
+	String TOOLTIP_BUTTON_OPEN_BAYESIAN_NETWORK_FILE = "open the Bayesian network file";
 	String TOOLTIP_BUTTON_RESET_COMPLETION_RULES = "reset the completion rules";
 	String TOOLTIP_BUTTON_GO_TO_PREVIOUS_COMPLETION_RULES = "go to the previous to the last used completion rules";
 	String TOOLTIP_BUTTON_COMPUTE_INFERENCE = "compute inference";
