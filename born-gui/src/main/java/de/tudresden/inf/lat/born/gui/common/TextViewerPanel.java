@@ -25,10 +25,19 @@ public class TextViewerPanel extends JPanel implements TextViewerView {
 
 	private String model;
 
+	/**
+	 * Constructs a new text viewer panel.
+	 */
 	public TextViewerPanel() {
 		this("");
 	}
 
+	/**
+	 * Constructs a new text viewer panel.
+	 * 
+	 * @param model
+	 *            model
+	 */
 	public TextViewerPanel(String model) {
 		setModel(model);
 		createPanel();

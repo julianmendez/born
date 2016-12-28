@@ -26,6 +26,12 @@ public class EmptyRule implements CompletionRule {
 		this.comment = "";
 	}
 
+	/**
+	 * Constructs a new empty rule with a given comment.
+	 * 
+	 * @param comment
+	 *            comment
+	 */
 	public EmptyRule(String comment) {
 		this.comment = Objects.requireNonNull(comment);
 	}

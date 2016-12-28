@@ -32,6 +32,11 @@ public class TextViewer extends JFrame {
 		});
 	}
 
+	/**
+	 * Returns the view.
+	 * 
+	 * @return the view
+	 */
 	public TextViewerView getView() {
 		return this.view;
 	}

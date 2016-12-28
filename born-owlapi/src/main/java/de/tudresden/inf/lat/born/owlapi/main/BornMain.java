@@ -13,6 +13,8 @@ import de.tudresden.inf.lat.born.owlapi.splitter.SplitterSubApp;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorSubApp;
 
 /**
+ * An object of this class models the BORN main application. This is the parent
+ * application of all the children applications (sub apps).
  * 
  * @author Julian Mendez
  *
@@ -25,6 +27,9 @@ public class BornMain implements SubApp {
 			+ "\n\nParameters: <command> [<command parameters>]" + "\n\n";
 	static final String LINE = "----------------------------------------------------------------";
 
+	/**
+	 * Constructs a new BORN main application.
+	 */
 	public BornMain() {
 		this.subAppMap.put(ProcessorSubApp.COMMAND, new ProcessorSubApp());
 		this.subAppMap.put(MultiProcessorSubApp.COMMAND, new MultiProcessorSubApp());

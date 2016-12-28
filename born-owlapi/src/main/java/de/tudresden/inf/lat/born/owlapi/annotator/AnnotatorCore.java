@@ -17,13 +17,14 @@ import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 /**
  * An object of this class add annotations with variables to an OWL ontology.
  * 
- * 
- * 
  * @author Julian Mendez
  *
  */
 public class AnnotatorCore {
 
+	/**
+	 * Constructs a new annotator core.
+	 */
 	public AnnotatorCore() {
 	}
 
@@ -42,9 +43,27 @@ public class AnnotatorCore {
 		ontologyOutputStream.flush();
 	}
 
+	/**
+	 * Annotates an ontology with the given parameters.
+	 * 
+	 * @param ontologyInputStream
+	 *            input stream of input ontology
+	 * @param newOntologyOutputStream
+	 *            output stream of output ontology
+	 * @param threshold
+	 *            threshold for the annotations, which is between 0 and 1
+	 * @param bayesianNetworkVariables
+	 *            variables of the Bayesian network
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 * @throws OWLOntologyCreationException
+	 *             if something went wrong with the ontology creations
+	 * @throws OWLRendererException
+	 *             if something went wrong while rendering the output ontology
+	 */
 	public void annotate(InputStream ontologyInputStream, OutputStream newOntologyOutputStream, double threshold,
 			Set<String> bayesianNetworkVariables)
-					throws IOException, OWLOntologyCreationException, OWLRendererException {
+			throws IOException, OWLOntologyCreationException, OWLRendererException {
 		Objects.requireNonNull(ontologyInputStream);
 		Objects.requireNonNull(newOntologyOutputStream);
 		Objects.requireNonNull(bayesianNetworkVariables);
@@ -55,6 +74,12 @@ public class AnnotatorCore {
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
 	}
 
+	/**
+	 * Runs the annotator with the given configuration.
+	 * 
+	 * @param conf
+	 *            configuration
+	 */
 	public void run(AnnotatorConfiguration conf) {
 		Objects.requireNonNull(conf);
 		try {
