@@ -65,17 +65,22 @@ public class BornModuleExtractor {
 	}
 
 	/**
+	 * Keeps a count of the size of the extracted module from a randomly chosen
+	 * OWL class. This process can be repeated several times, but the OWL
+	 * classes are not necessarily distinct.
 	 * 
 	 * @param ontologyFileName
 	 *            file name of ontology
 	 * @param repetitions
-	 * @param countFile
+	 *            number of times to run the module extraction
+	 * @param countFileName
+	 *            file name of the results
 	 * @throws IOException
 	 *             if something went wrong with I/O
 	 * @throws OWLException
-	 *             if something went wrong using the OWL API
+	 *             if something went wrong when using the OWL API
 	 */
-	public void countRandom(String ontologyFileName, int repetitions, String countFile)
+	public void countRandom(String ontologyFileName, int repetitions, String countFileName)
 			throws IOException, OWLException {
 		Objects.requireNonNull(ontologyFileName);
 
@@ -88,7 +93,7 @@ public class BornModuleExtractor {
 			OWLClass chosenOwlClass = list.get((new Random()).nextInt(list.size()));
 			Set<OWLClass> signature = Collections.singleton(chosenOwlClass);
 			try {
-				appendPair(countFile, chosenOwlClass, extractModule(owlOntology, signature).getAxiomCount());
+				appendPair(countFileName, chosenOwlClass, extractModule(owlOntology, signature).getAxiomCount());
 			} catch (IOException | OWLOntologyCreationException e) {
 				throw new RuntimeException(e);
 			}
