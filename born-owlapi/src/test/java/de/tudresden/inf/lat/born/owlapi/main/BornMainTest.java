@@ -16,12 +16,23 @@ import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResult;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorExecutionResultImpl;
 
 /**
+ * This is a unit test for {@link BornMain}.
  * 
  * @author Julian Mendez
  *
  */
 public class BornMainTest {
 
+	/**
+	 * Tests that reading some example does not throw any exception.
+	 * 
+	 * @throws OWLRendererException
+	 *             if something went wrong when serializing the OWL ontology
+	 * @throws OWLOntologyCreationException
+	 *             if something went wrong when creating the ontology
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 */
 	@Test
 	public void testRun() throws OWLRendererException, OWLOntologyCreationException, IOException {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();

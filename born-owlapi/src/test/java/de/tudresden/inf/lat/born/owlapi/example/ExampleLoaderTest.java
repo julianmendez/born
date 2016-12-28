@@ -17,6 +17,9 @@ public class ExampleLoaderTest {
 
 	private final List<ExampleConfiguration> list = new ArrayList<ExampleConfiguration>();
 
+	/**
+	 * Tests the example loader and loads all the example configurations.
+	 */
 	@Before
 	public void testGetExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
@@ -25,6 +28,9 @@ public class ExampleLoaderTest {
 		Assert.assertEquals(6, this.list.size());
 	}
 
+	/**
+	 * Tests example 0.
+	 */
 	@Test
 	public void testExample0() {
 		ExampleConfiguration conf = this.list.get(0);
@@ -33,6 +39,9 @@ public class ExampleLoaderTest {
 		Assert.assertEquals("query(sub('ont:a', 'ont:e')).\n\n", conf.getQuery());
 	}
 
+	/**
+	 * Tests example 1.
+	 */
 	@Test
 	public void testExample1() {
 		ExampleConfiguration conf = this.list.get(1);
@@ -41,6 +50,9 @@ public class ExampleLoaderTest {
 		Assert.assertEquals("query(sub('ont:a', 'ont:e')).\n\n", conf.getQuery());
 	}
 
+	/**
+	 * Tests example 2.
+	 */
 	@Test
 	public void testExample2() {
 		ExampleConfiguration conf = this.list.get(2);
@@ -49,6 +61,9 @@ public class ExampleLoaderTest {
 		Assert.assertEquals("query(inst('ont:i0', 'ont:e')).\n\n", conf.getQuery());
 	}
 
+	/**
+	 * Tests example 3.
+	 */
 	@Test
 	public void testExample3() {
 		ExampleConfiguration conf = this.list.get(3);
@@ -57,6 +72,9 @@ public class ExampleLoaderTest {
 		Assert.assertEquals("query(inst('ont:r', 'ont:i0', 'ont:i1')).\n\n", conf.getQuery());
 	}
 
+	/**
+	 * Tests example 4.
+	 */
 	@Test
 	public void testExample4() {
 		ExampleConfiguration conf = this.list.get(4);
@@ -65,6 +83,9 @@ public class ExampleLoaderTest {
 		Assert.assertEquals("query(inst('ont:r', 'ont:i0', 'ont:i1')).\n\n", conf.getQuery());
 	}
 
+	/**
+	 * Tests example 5.
+	 */
 	@Test
 	public void testExample5() {
 		ExampleConfiguration conf = this.list.get(5);

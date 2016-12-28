@@ -10,11 +10,16 @@ import org.junit.Test;
 
 /**
  * 
+ * This is a unit test for {@link ProblogInputCreator}.
+ * 
  * @author Julian Mendez
  *
  */
 public class ProblogInputCreatorTest {
 
+	/**
+	 * Tests sorting strings by its length first, and then alphabetically.
+	 */
 	@Test
 	public void testOrderByLongestFirst() {
 		ProblogInputCreator instance = new ProblogInputCreator();
@@ -35,6 +40,9 @@ public class ProblogInputCreatorTest {
 		Assert.assertEquals(expected, actual);
 	}
 
+	/**
+	 * Tests the expansion of prefixes.
+	 */
 	@Test
 	public void testReplaceAll() {
 		ProblogInputCreator instance = (new ProblogInputCreator());
