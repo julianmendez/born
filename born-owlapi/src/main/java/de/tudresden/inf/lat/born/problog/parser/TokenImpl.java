@@ -34,7 +34,7 @@ public class TokenImpl implements Token {
 	}
 
 	Set<String> getSymbols() {
-		Set<String> ret = new TreeSet<String>();
+		Set<String> ret = new TreeSet<>();
 		ret.add("" + Symbol.PAR_A_CHAR); // "(";
 		ret.add("" + Symbol.PAR_B_CHAR); // ")";
 		ret.add("" + Symbol.SQB_A_CHAR); // "[";

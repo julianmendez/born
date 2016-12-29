@@ -190,7 +190,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	}
 
 	Set<OWLAnnotation> annot() {
-		Set<OWLAnnotation> ret = new TreeSet<OWLAnnotation>();
+		Set<OWLAnnotation> ret = new TreeSet<>();
 		if (Math.random() < this.threshold) {
 			ret.add(createNewAnnotation());
 		}

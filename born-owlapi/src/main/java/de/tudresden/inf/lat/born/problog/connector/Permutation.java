@@ -42,7 +42,7 @@ class Permutation {
 	 */
 	public boolean computeNextPermutation() {
 		boolean carry = true;
-		List<Boolean> ret = new ArrayList<Boolean>();
+		List<Boolean> ret = new ArrayList<>();
 		for (int index = 0; (index < this.currentPermutation.size()); index++) {
 			boolean current = this.currentPermutation.get(index);
 			if (carry) {

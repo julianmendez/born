@@ -18,14 +18,14 @@ public class ProblogInputCreatorTest {
 	@Test
 	public void testOrderByLongestFirst() {
 		ProblogInputCreator instance = new ProblogInputCreator();
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		list.add("this");
 		list.add("is");
 		list.add("an");
 		list.add("interesting");
 		list.add("function");
 
-		List<String> expected = new ArrayList<String>();
+		List<String> expected = new ArrayList<>();
 		expected.add("interesting");
 		expected.add("function");
 		expected.add("this");
@@ -39,7 +39,7 @@ public class ProblogInputCreatorTest {
 	public void testReplaceAll() {
 		ProblogInputCreator instance = (new ProblogInputCreator());
 
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		map.put("born:", "http://lat.inf.tu-dresden.de/systems/born#");
 		map.put("ont:", "http://lat.inf.tu-dresden.de/systems/born/born-example#");
 
@@ -49,7 +49,7 @@ public class ProblogInputCreatorTest {
 		map.put("xsd:", "http://www.w3.org/2001/XMLSchema#");
 		map.put("rdfs:", "http://www.w3.org/2000/01/rdf-schema#");
 
-		Map<String, String> revMap = new HashMap<String, String>();
+		Map<String, String> revMap = new HashMap<>();
 		map.keySet().forEach(key -> revMap.put(map.get(key), key));
 
 		{

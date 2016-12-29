@@ -250,7 +250,7 @@ public class ProblogInputCreator {
 
 	Set<NormalizedIntegerAxiom> removeUnnecessaryAnnotations(Set<NormalizedIntegerAxiom> axioms,
 			IntegerOntologyObjectFactory factory) {
-		Set<NormalizedIntegerAxiom> ret = new HashSet<NormalizedIntegerAxiom>();
+		Set<NormalizedIntegerAxiom> ret = new HashSet<>();
 		axioms.forEach(axiom -> {
 			if (axiom instanceof NominalAxiom) {
 				NominalAxiom nominalAxiom = (NominalAxiom) axiom;
@@ -264,7 +264,7 @@ public class ProblogInputCreator {
 	}
 
 	List<String> orderByLongestFirst(Collection<String> oldList) {
-		List<String> newList = new ArrayList<String>();
+		List<String> newList = new ArrayList<>();
 		newList.addAll(oldList);
 		Collections.sort(newList, new Comparator<String>() {
 			@Override
@@ -296,7 +296,7 @@ public class ProblogInputCreator {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(text);
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
-		Map<String, String> prefixNames = new HashMap<String, String>();
+		Map<String, String> prefixNames = new HashMap<>();
 		prefixes.getPrefixNames().forEach(prefixName -> {
 			if (prefixName.length() > 1) {
 				prefixNames.put(prefixName, prefixes.getIRI(prefixName).toString());
@@ -309,7 +309,7 @@ public class ProblogInputCreator {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(text);
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
-		Map<String, String> revPrefixNames = new HashMap<String, String>();
+		Map<String, String> revPrefixNames = new HashMap<>();
 		prefixes.getPrefixNames().forEach(prefixName -> {
 			if (prefixName.length() > 1) {
 				revPrefixNames.put(prefixes.getIRI(prefixName).toString(), prefixName);
