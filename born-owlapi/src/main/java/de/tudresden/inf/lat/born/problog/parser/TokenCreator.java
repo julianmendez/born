@@ -1,7 +1,6 @@
 package de.tudresden.inf.lat.born.problog.parser;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,19 +82,16 @@ public class TokenCreator {
 		}
 	}
 
-	public List<Token> createTokens(Reader reader) throws IOException {
+	public List<Token> createTokens(Reader reader) {
 		Objects.requireNonNull(reader);
 		List<Token> ret = new ArrayList<>();
 		BufferedReader in = new BufferedReader(reader);
-		int lineNumber = 0;
-		String line = "";
-		while (Objects.nonNull(line)) {
-			line = in.readLine();
-			if (Objects.nonNull(line)) {
-				lineNumber += 1;
-				ret.addAll(removeBlanksAndComments(createTokens(line, lineNumber)));
-			}
-		}
+		int[] lineNumber = new int[1];
+		lineNumber[0] = 0;
+		in.lines().forEach(line -> {
+			lineNumber[0] += 1;
+			ret.addAll(removeBlanksAndComments(createTokens(line, lineNumber[0])));
+		});
 		return ret;
 	}
 

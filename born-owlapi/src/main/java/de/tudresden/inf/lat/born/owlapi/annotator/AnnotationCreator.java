@@ -1,6 +1,5 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
 import java.util.ArrayList;
@@ -117,24 +116,21 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
 	public static Set<String> extractVariables(String bayesianNetwork) {
 		Set<String> variables = new TreeSet<>();
-		try {
-			StringReader reader = new StringReader(bayesianNetwork);
-			TokenCreator instance = new TokenCreator();
-			List<Token> tokens = instance.createTokens(reader);
-			int[] colons = new int[1];
-			colons[0] = 0;
-			tokens.forEach(token -> {
-				if (colons[0] == 2) {
-					variables.add(token.getValue());
-					colons[0] = 0;
-				} else if (token.getValue().equals("" + Symbol.COLON_CHAR)) {
-					colons[0] = colons[0] + 1;
-				} else {
-					colons[0] = 0;
-				}
-			});
-		} catch (IOException e) {
-		}
+		StringReader reader = new StringReader(bayesianNetwork);
+		TokenCreator instance = new TokenCreator();
+		List<Token> tokens = instance.createTokens(reader);
+		int[] colons = new int[1];
+		colons[0] = 0;
+		tokens.forEach(token -> {
+			if (colons[0] == 2) {
+				variables.add(token.getValue());
+				colons[0] = 0;
+			} else if (token.getValue().equals("" + Symbol.COLON_CHAR)) {
+				colons[0] = colons[0] + 1;
+			} else {
+				colons[0] = 0;
+			}
+		});
 		return variables;
 	}
 

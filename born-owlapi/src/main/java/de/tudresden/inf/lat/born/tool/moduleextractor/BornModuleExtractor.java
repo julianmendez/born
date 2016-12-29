@@ -134,10 +134,7 @@ public class BornModuleExtractor {
 		Objects.requireNonNull(fileName);
 		Set<String> ret = new TreeSet<>();
 		BufferedReader reader = new BufferedReader(new FileReader(fileName));
-		for (String line = reader.readLine(); Objects.nonNull(line); reader.readLine()) {
-			ret.add(line.trim());
-			line = reader.readLine();
-		}
+		reader.lines().forEach(line -> ret.add(line.trim()));
 		reader.close();
 		return ret;
 	}

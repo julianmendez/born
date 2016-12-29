@@ -153,10 +153,10 @@ public class ExampleLoader {
 		Objects.requireNonNull(input);
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
+		reader.lines().forEach(line -> {
 			sbuf.append(line);
 			sbuf.append(Symbol.LINE_SEPARATOR);
-		}
+		});
 		reader.close();
 		return sbuf.toString();
 	}
