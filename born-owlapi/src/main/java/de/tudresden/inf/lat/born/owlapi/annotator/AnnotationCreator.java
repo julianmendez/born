@@ -73,7 +73,7 @@ import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
  */
 public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
-	public static final URI PROBABILITY_URI = URI.create("http://lat.inf.tu-dresden.de/systems/born#probability");
+	public static final URI PROBABILITY_URI = URI.create("https://lat.inf.tu-dresden.de/systems/born#probability");
 
 	public static final String VARIABLE_PREFIX = "x";
 	public static final String QUOTES = "\"";

@@ -1,14 +1,14 @@
-Prefix(:=<http://lat.inf.tu-dresden.de/systems/born/born-example#>)
-Prefix(ont:=<http://lat.inf.tu-dresden.de/systems/born/born-example#>)
-Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
-Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
-Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
-Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
-Prefix(born:=<http://lat.inf.tu-dresden.de/systems/born#>)
-Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(:=<https://lat.inf.tu-dresden.de/systems/born/born-example#>)
+Prefix(ont:=<https://lat.inf.tu-dresden.de/systems/born/born-example#>)
+Prefix(owl:=<https://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<https://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<https://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<https://www.w3.org/2001/XMLSchema#>)
+Prefix(born:=<https://lat.inf.tu-dresden.de/systems/born#>)
+Prefix(rdfs:=<https://www.w3.org/2000/01/rdf-schema#>)
 
 
-Ontology(<http://lat.inf.tu-dresden.de/systems/born/born-example>
+Ontology(<https://lat.inf.tu-dresden.de/systems/born/born-example>
 
 Declaration(Class(ont:a))
 Declaration(Class(ont:b))
