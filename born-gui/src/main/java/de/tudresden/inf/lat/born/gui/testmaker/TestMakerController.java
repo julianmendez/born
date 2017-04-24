@@ -126,7 +126,7 @@ public class TestMakerController implements ActionListener {
 
 	List<Integer> parseIntegers(String str) {
 		Objects.requireNonNull(str);
-		List<Integer> ret = new ArrayList<Integer>();
+		List<Integer> ret = new ArrayList<>();
 		StringTokenizer stok = new StringTokenizer(str, ",");
 		while (stok.hasMoreTokens()) {
 			try {

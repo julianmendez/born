@@ -283,7 +283,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public Set<OWLAxiom> getPendingAxiomAdditions() {
 		logger.finer("getPendingAxiomAdditions()");
-		Set<OWLAxiom> ret = new HashSet<OWLAxiom>();
+		Set<OWLAxiom> ret = new HashSet<>();
 		logger.finer("" + ret);
 		return Collections.unmodifiableSet(ret);
 	}
@@ -291,7 +291,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public Set<OWLAxiom> getPendingAxiomRemovals() {
 		logger.finer("getPendingAxiomRemovals()");
-		Set<OWLAxiom> ret = new HashSet<OWLAxiom>();
+		Set<OWLAxiom> ret = new HashSet<>();
 		logger.finer("" + ret);
 		return Collections.unmodifiableSet(ret);
 	}
@@ -299,7 +299,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public List<OWLOntologyChange> getPendingChanges() {
 		logger.finer("getPendingChanges()");
-		List<OWLOntologyChange> ret = new ArrayList<OWLOntologyChange>();
+		List<OWLOntologyChange> ret = new ArrayList<>();
 		logger.finer("" + ret);
 		return Collections.unmodifiableList(ret);
 	}
@@ -307,7 +307,7 @@ public class BornReasoner implements OWLReasoner, OWLOntologyChangeListener {
 	@Override
 	public Set<InferenceType> getPrecomputableInferenceTypes() {
 		logger.finer("getPrecomputableInferenceTypes()");
-		Set<InferenceType> ret = new HashSet<InferenceType>();
+		Set<InferenceType> ret = new HashSet<>();
 		ret.add(InferenceType.CLASS_HIERARCHY);
 		ret.add(InferenceType.OBJECT_PROPERTY_HIERARCHY);
 		ret.add(InferenceType.CLASS_ASSERTIONS);

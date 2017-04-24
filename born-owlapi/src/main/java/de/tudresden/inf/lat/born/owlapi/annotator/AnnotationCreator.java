@@ -1,6 +1,5 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
  */
 public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
-	public static final URI PROBABILITY_URI = URI.create("http://lat.inf.tu-dresden.de/systems/born#probability");
+	public static final URI PROBABILITY_URI = URI.create("https://lat.inf.tu-dresden.de/systems/born#probability");
 
 	public static final String VARIABLE_PREFIX = "x";
 	public static final String QUOTES = "\"";
@@ -117,24 +116,21 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 
 	public static Set<String> extractVariables(String bayesianNetwork) {
 		Set<String> variables = new TreeSet<>();
-		try {
-			StringReader reader = new StringReader(bayesianNetwork);
-			TokenCreator instance = new TokenCreator();
-			List<Token> tokens = instance.createTokens(reader);
-			int[] colons = new int[1];
-			colons[0] = 0;
-			tokens.forEach(token -> {
-				if (colons[0] == 2) {
-					variables.add(token.getValue());
-					colons[0] = 0;
-				} else if (token.getValue().equals("" + Symbol.COLON_CHAR)) {
-					colons[0] = colons[0] + 1;
-				} else {
-					colons[0] = 0;
-				}
-			});
-		} catch (IOException e) {
-		}
+		StringReader reader = new StringReader(bayesianNetwork);
+		TokenCreator instance = new TokenCreator();
+		List<Token> tokens = instance.createTokens(reader);
+		int[] colons = new int[1];
+		colons[0] = 0;
+		tokens.forEach(token -> {
+			if (colons[0] == 2) {
+				variables.add(token.getValue());
+				colons[0] = 0;
+			} else if (token.getValue().equals("" + Symbol.COLON_CHAR)) {
+				colons[0] = colons[0] + 1;
+			} else {
+				colons[0] = 0;
+			}
+		});
 		return variables;
 	}
 
@@ -194,7 +190,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	}
 
 	Set<OWLAnnotation> annot() {
-		Set<OWLAnnotation> ret = new TreeSet<OWLAnnotation>();
+		Set<OWLAnnotation> ret = new TreeSet<>();
 		if (Math.random() < this.threshold) {
 			ret.add(createNewAnnotation());
 		}

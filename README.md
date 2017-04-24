@@ -1,17 +1,17 @@
-# [BORN](http://julianmendez.github.io/born/)
+# [BORN](https://julianmendez.github.io/born/)
 *Bayesian Ontology Reasoner*
 
 
 [![Build Status](https://travis-ci.org/julianmendez/born.png?branch=master)](https://travis-ci.org/julianmendez/born)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](http://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](https://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
 
 
 **BORN** is a probabilistic reasoner for BEL (Bayesian EL), which is an extension of the
 lightweight [Description Logic](http://dl.kr.org/) EL. Bayesian Ontology Languages are a
 family of probabilistic ontology languages that allow to encode probabilistic information
 over the axioms of an ontology with the help of a Bayesian network. BORN uses
-the [OWL API](http://owlcs.github.io/owlapi/) to
-read [OWL 2 EL](http://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it can be used as a [Prot&eacute;g&eacute;](http://protege.stanford.edu/) plug-in.
+the [OWL API](https://owlcs.github.io/owlapi/) to
+read [OWL 2 EL](https://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it can be used as a [Prot&eacute;g&eacute;](https://protege.stanford.edu/) plug-in.
 
 
 
@@ -104,17 +104,17 @@ where *NEW_VERSION* is the new version.
 
 ## License
 
-This software is distributed under the [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
+This software is distributed under the [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
 
 ## Release notes
 
-See [release notes](http://github.com/julianmendez/born/blob/master/RELEASE-NOTES.md).
+See [release notes](https://github.com/julianmendez/born/blob/master/RELEASE-NOTES.md).
 
 
 ## Architecture
 
-BORN has a hybrid architecture that uses [Java](http://www.oracle.com/technetwork/java/index.html) and [ProbLog](https://dtai.cs.kuleuven.be/problog/). In addition to Java, BORN requires having [Python](https://www.python.org/) installed, because it is used to execute ProbLog. If ProbLog is not installed, BORN automatically downloads the most recent version of ProbLog, and uses it to solve the queries.
+BORN has a hybrid architecture that uses [Java](https://www.oracle.com/technetwork/java/index.html) and [ProbLog](https://dtai.cs.kuleuven.be/problog/). In addition to Java, BORN requires having [Python](https://www.python.org/) installed, because it is used to execute ProbLog. If ProbLog is not installed, BORN automatically downloads the most recent version of ProbLog, and uses it to solve the queries.
 Details on the versions of those requirements are available in the release notes.
 
 

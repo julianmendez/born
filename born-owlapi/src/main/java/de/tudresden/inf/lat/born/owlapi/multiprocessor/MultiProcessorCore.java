@@ -108,7 +108,7 @@ public class MultiProcessorCore {
 	 */
 	List<String> getConditions(OntologyAndNetwork ontPair, ProcessorConfiguration configuration,
 			SubsumptionQuery query) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		ret.add(ontPair.getOntologyName() + OWL_EXTENSION);
 		ret.add(ontPair.getOntologyName() + PL_EXTENSION);
 		ret.add(query.getSubClass().getIRI().toURI().toString());
@@ -124,7 +124,7 @@ public class MultiProcessorCore {
 	 * @return the result of one query as presented in the CSV file
 	 */
 	List<String> getResult(ProcessorExecutionResult executionResult) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
 		String result = executionResult.getResult().trim();
 		if (result.indexOf(TAB_CHAR) == -1) {

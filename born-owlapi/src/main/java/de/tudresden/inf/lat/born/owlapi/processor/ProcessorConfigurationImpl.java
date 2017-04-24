@@ -172,10 +172,10 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 		Objects.requireNonNull(reader);
 		StringBuffer sbuf = new StringBuffer();
 		BufferedReader input = new BufferedReader(reader);
-		for (String line = input.readLine(); Objects.nonNull(line); line = input.readLine()) {
+		input.lines().forEach(line -> {
 			sbuf.append(line);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
-		}
+		});
 		return sbuf.toString();
 	}
 
