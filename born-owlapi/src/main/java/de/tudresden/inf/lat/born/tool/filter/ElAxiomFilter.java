@@ -53,14 +53,32 @@ import org.semanticweb.owlapi.model.SWRLRule;
  */
 public class ElAxiomFilter implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter {
 
-	public final boolean withAnnotations;
+	private final boolean withAnnotations;
 
+	/**
+	 * Constructs a new EL axiom filter.
+	 */
 	public ElAxiomFilter() {
 		this.withAnnotations = true;
 	}
 
+	/**
+	 * Constructs a new EL axiom filter.
+	 * 
+	 * @param withAnnotations
+	 *            <code>true</code> if the annotations must be preserved
+	 */
 	public ElAxiomFilter(boolean withAnnotations) {
 		this.withAnnotations = withAnnotations;
+	}
+
+	/**
+	 * Tell whether the annotations are considered.
+	 * 
+	 * @return <code>true</code> if and only if the annotations are considered
+	 */
+	public boolean isWithAnnotations() {
+		return this.withAnnotations;
 	}
 
 	@Override

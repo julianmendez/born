@@ -11,7 +11,7 @@ import org.semanticweb.owlapi.io.OWLRendererException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 /**
- * Test class for {@link TokenCreator}.
+ * This is a unit test for {@link TokenCreator}.
  * 
  * @author Julian Mendez
  *
@@ -26,6 +26,16 @@ public class TokenCreatorTest {
 			"\nsub(a, b)." + //
 			"\n";
 
+	/**
+	 * Test for program 0.
+	 * 
+	 * @throws OWLRendererException
+	 *             if something went wrong when serializing the OWL ontology
+	 * @throws OWLOntologyCreationException
+	 *             if something went wrong when creating the ontology
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 */
 	@Test
 	public void testCreateTokens0() throws OWLRendererException, OWLOntologyCreationException, IOException {
 		List<Token> expected = new ArrayList<>();
@@ -53,6 +63,16 @@ public class TokenCreatorTest {
 		Assert.assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test for program 1.
+	 * 
+	 * @throws OWLRendererException
+	 *             if something went wrong when serializing the OWL ontology
+	 * @throws OWLOntologyCreationException
+	 *             if something went wrong when creating the ontology
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 */
 	@Test
 	public void testCreateTokens1() throws OWLRendererException, OWLOntologyCreationException, IOException {
 		List<Token> expected = new ArrayList<>();

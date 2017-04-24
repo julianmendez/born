@@ -11,6 +11,7 @@ import java.util.Objects;
  */
 public class ProbClauseImpl implements ProbClause {
 
+	/** Probability value for a certainty. */
 	public static final String CERTAIN = "1";
 
 	private final String probability;

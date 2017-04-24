@@ -86,6 +86,13 @@ public class MultiProcessorCore {
 		return listOfQueries;
 	}
 
+	/**
+	 * Returns a line formed by the concatenations of the given columns.
+	 * 
+	 * @param columns
+	 *            columns
+	 * @return a line formed by the concatenations of the given columns
+	 */
 	public String makeLine(List<String> columns) {
 		StringBuilder sb = new StringBuilder();
 		columns.forEach(column -> {
@@ -198,6 +205,15 @@ public class MultiProcessorCore {
 		return ret;
 	}
 
+	/**
+	 * Returns the list of ontology-network pairs.
+	 * 
+	 * @param ontologyDirectory
+	 *            ontology directory
+	 * @param bayesianNetworkDirectory
+	 *            Bayesian network directory
+	 * @return the list of ontology-network pairs
+	 */
 	public static List<OntologyAndNetwork> getOntologyAndNetworkList(String ontologyDirectory,
 			String bayesianNetworkDirectory) {
 		Objects.requireNonNull(ontologyDirectory);
@@ -240,10 +256,20 @@ public class MultiProcessorCore {
 		}
 	}
 
-	public void storeResults(MultiProcessorConfiguration conf, List<String> list) throws IOException {
+	/**
+	 * Stores the results.
+	 * 
+	 * @param conf
+	 *            configuration
+	 * @param results
+	 *            results
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 */
+	public void storeResults(MultiProcessorConfiguration conf, List<String> results) throws IOException {
 		Objects.requireNonNull(conf);
-		Objects.requireNonNull(list);
-		Iterator<String> resultIt = list.iterator();
+		Objects.requireNonNull(results);
+		Iterator<String> resultIt = results.iterator();
 		List<OntologyAndNetwork> ontologyList = conf.getOntologyList();
 		String outputDirectory = conf.getOutputDirectory();
 		for (OntologyAndNetwork ontNet : ontologyList) {

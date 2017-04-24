@@ -29,6 +29,9 @@ public class BayesianNetworkCreatorCore {
 	public static final int PRECISION = 2;
 	public static final int PRECISION_PLUS_2 = PRECISION + 2;
 
+	/**
+	 * Constructs a Bayesian network creator.
+	 */
 	public BayesianNetworkCreatorCore() {
 	}
 
@@ -84,6 +87,13 @@ public class BayesianNetworkCreatorCore {
 		return ret;
 	}
 
+	/**
+	 * Returns a Bayesian network using the given variables.
+	 * 
+	 * @param variables
+	 *            variables
+	 * @return a Bayesian network using the given variables
+	 */
 	public List<ProbClause> createNetwork(List<Integer> variables) {
 		Objects.requireNonNull(variables);
 		List<ProbClause> ret = new ArrayList<>();
@@ -99,6 +109,16 @@ public class BayesianNetworkCreatorCore {
 		return ret;
 	}
 
+	/**
+	 * Writes a Bayesian network on the given writer.
+	 * 
+	 * @param writer
+	 *            writer
+	 * @param network
+	 *            Bayesian network
+	 * @throws IOException
+	 *             if something went wrong with the I/O
+	 */
 	public void write(Writer writer, List<ProbClause> network) throws IOException {
 		Objects.requireNonNull(writer);
 		Objects.requireNonNull(network);
@@ -110,6 +130,12 @@ public class BayesianNetworkCreatorCore {
 		output.flush();
 	}
 
+	/**
+	 * Runs the Bayesian network creator.
+	 * 
+	 * @param conf
+	 *            configuration
+	 */
 	public void run(BayesianNetworkCreatorConfiguration conf) {
 		Objects.requireNonNull(conf);
 		try {

@@ -20,19 +20,43 @@ public class UnsupportedReasonerOperationInBornException extends UnsupportedOper
 
 	private static final long serialVersionUID = 5757365447889383439L;
 
+	/**
+	 * Constructs a new unsupported-reasoner-operation exception.
+	 */
 	public UnsupportedReasonerOperationInBornException() {
 		super("This operation is not supported by BORN.");
 	}
 
+	/**
+	 * Constructs a new unsupported-reasoner-operation exception.
+	 * 
+	 * @param message
+	 *            message
+	 */
 	public UnsupportedReasonerOperationInBornException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Constructs a new unsupported-reasoner-operation exception.
+	 * 
+	 * @param message
+	 *            message
+	 * @param cause
+	 *            cause
+	 */
 	public UnsupportedReasonerOperationInBornException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * Constructs a new unsupported-reasoner-operation exception.
+	 * 
+	 * @param cause
+	 *            cause
+	 */
 	public UnsupportedReasonerOperationInBornException(Throwable cause) {
 		super(cause);
 	}
+
 }

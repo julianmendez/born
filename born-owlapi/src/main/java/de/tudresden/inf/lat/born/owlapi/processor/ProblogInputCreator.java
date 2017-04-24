@@ -86,9 +86,8 @@ public class ProblogInputCreator {
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
-		List<String> list = tokens.stream()
-				.filter(token -> (token.getType().equals(TokenType.IDENTIFIER)
-						|| token.getType().equals(TokenType.CONSTANT)))
+		List<String> list = tokens.stream().filter(
+				token -> (token.getType().equals(TokenType.IDENTIFIER) || token.getType().equals(TokenType.CONSTANT)))
 				.map(token -> token.getValue()).collect(Collectors.toList());
 
 		Set<String> set = new TreeSet<>();
@@ -111,6 +110,11 @@ public class ProblogInputCreator {
 		return set;
 	}
 
+	/**
+	 * Returns the default list of completion rules.
+	 * 
+	 * @return the default list of completion rules
+	 */
 	public List<CompletionRule> getDefaultCompletionRules() {
 		List<CompletionRule> completionRules = new ArrayList<>();
 		completionRules.add(new EmptyRule());
@@ -292,6 +296,16 @@ public class ProblogInputCreator {
 		return current[0];
 	}
 
+	/**
+	 * Returns the given text with its prefixes expanded. The prefixes are
+	 * defined in the given ontology.
+	 * 
+	 * @param ontology
+	 *            ontology
+	 * @param text
+	 *            text
+	 * @return the given text with its prefixes expanded
+	 */
 	public String expandPrefixes(OWLOntology ontology, String text) {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(text);
@@ -305,6 +319,16 @@ public class ProblogInputCreator {
 		return replaceAll(prefixNames, text);
 	}
 
+	/**
+	 * Returns the given text with its prefixes compressed. The prefixes are
+	 * defined in the given ontology.
+	 * 
+	 * @param ontology
+	 *            ontology
+	 * @param text
+	 *            text
+	 * @return the given text with its prefixes compressed
+	 */
 	public String replaceByPrefixes(OWLOntology ontology, String text) {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(text);
@@ -318,6 +342,30 @@ public class ProblogInputCreator {
 		return replaceAll(revPrefixNames, text);
 	}
 
+	/**
+	 * Returns a ProbLog program with the given parameters.
+	 * 
+	 * @param useOfDefaultCompletionRules
+	 *            <code>true</code> if and only if the default completion rules
+	 *            are used
+	 * @param additionalCompletionRules
+	 *            addition completion rules
+	 * @param owlOntology
+	 *            OWL ontology
+	 * @param bayesianNetwork
+	 *            Bayesian network
+	 * @param query
+	 *            query
+	 * @param resultOutputStream
+	 *            output stream for the result
+	 * @param executionResult
+	 *            result of the processor execution
+	 * @return a ProbLog program with the given parameters
+	 * @throws IOException
+	 *             if something went wrong with I/O
+	 * @throws OWLOntologyCreationException
+	 *             if something went wrong with the ontology creation
+	 */
 	public String createProblogFile(boolean useOfDefaultCompletionRules, String additionalCompletionRules,
 			OWLOntology owlOntology, String bayesianNetwork, String query, OutputStream resultOutputStream,
 			ProcessorExecutionResult executionResult) throws IOException, OWLOntologyCreationException {

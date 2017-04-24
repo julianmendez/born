@@ -14,7 +14,10 @@ import de.tudresden.inf.lat.born.core.term.Term;
  */
 public class EmptyRule implements CompletionRule {
 
+	/** String to denote the beginning of a comment. */
 	public static final String BEGIN_COMMENT = "%";
+
+	/** String to denote the end of a comment. */
 	public static final String END_COMMENT = "\n";
 
 	private final String comment;
@@ -26,6 +29,12 @@ public class EmptyRule implements CompletionRule {
 		this.comment = "";
 	}
 
+	/**
+	 * Constructs a new empty rule with a given comment.
+	 * 
+	 * @param comment
+	 *            comment
+	 */
 	public EmptyRule(String comment) {
 		this.comment = Objects.requireNonNull(comment);
 	}

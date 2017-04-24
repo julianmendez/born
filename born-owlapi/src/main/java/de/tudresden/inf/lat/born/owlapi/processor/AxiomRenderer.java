@@ -40,6 +40,12 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 
 	private final IntegerOntologyObjectFactory factory;
 
+	/**
+	 * Constructs an new axiom renderer.
+	 * 
+	 * @param factory
+	 *            ontology factory
+	 */
 	public AxiomRenderer(IntegerOntologyObjectFactory factory) {
 		this.factory = Objects.requireNonNull(factory);
 	}
@@ -124,28 +130,49 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		}
 	}
 
-	public Clause renderDeclarationOfClass(Integer entity) {
-		Objects.requireNonNull(entity);
+	/**
+	 * Returns a clause with a declaration of a class.
+	 * 
+	 * @param classId
+	 *            class identifier
+	 * @return a clause with a declaration of a class
+	 */
+	public Clause renderDeclarationOfClass(Integer classId) {
+		Objects.requireNonNull(classId);
 		FormulaConstructor c = new FormulaConstructor();
-		Term a = get(entity);
+		Term a = get(classId);
 		Set<IntegerAnnotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.con(a), emptySet);
 		return clause;
 	}
 
-	public Clause renderDeclarationOfObjectProperty(Integer entity) {
-		Objects.requireNonNull(entity);
+	/**
+	 * Returns a clause with a declaration of an object property.
+	 * 
+	 * @param objectPropertyId
+	 *            object property identifier
+	 * @return a clause with a declaration of an object property
+	 */
+	public Clause renderDeclarationOfObjectProperty(Integer objectPropertyId) {
+		Objects.requireNonNull(objectPropertyId);
 		FormulaConstructor c = new FormulaConstructor();
-		Term a = get(entity);
+		Term a = get(objectPropertyId);
 		Set<IntegerAnnotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.role(a), emptySet);
 		return clause;
 	}
 
-	public Clause renderDeclarationOfIndividual(Integer entity) {
-		Objects.requireNonNull(entity);
+	/**
+	 * Returns a clause with a declaration of an individual.
+	 * 
+	 * @param individualId
+	 *            individual identifier
+	 * @return a clause with a declaration of an individual
+	 */
+	public Clause renderDeclarationOfIndividual(Integer individualId) {
+		Objects.requireNonNull(individualId);
 		FormulaConstructor c = new FormulaConstructor();
-		Term a = get(entity);
+		Term a = get(individualId);
 		Set<IntegerAnnotation> emptySet = Collections.emptySet();
 		Clause clause = ax(c.indiv(a), emptySet);
 		return clause;

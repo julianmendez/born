@@ -33,6 +33,9 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	private Function<String, String> queryProcessor = null;
 	private boolean showingLog = true;
 
+	/**
+	 * Constructs a new processor configuration.
+	 */
 	public ProcessorConfigurationImpl() {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		try {
