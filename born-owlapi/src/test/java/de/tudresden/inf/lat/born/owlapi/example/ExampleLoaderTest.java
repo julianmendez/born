@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class ExampleLoaderTest {
 
-	private final List<ExampleConfiguration> list = new ArrayList<ExampleConfiguration>();
+	private final List<ExampleConfiguration> list = new ArrayList<>();
 
 	/**
 	 * Tests the example loader and loads all the example configurations.

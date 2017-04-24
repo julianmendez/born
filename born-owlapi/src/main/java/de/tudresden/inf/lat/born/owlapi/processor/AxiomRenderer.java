@@ -120,7 +120,7 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 			IntegerAnnotation annotation = annotations.iterator().next();
 			String value = removeApostrophes(getValue(get(annotation.getAnnotationValue()).asString()));
 			Term newCons = c.newCons(value);
-			List<Term> preconditions = new ArrayList<Term>();
+			List<Term> preconditions = new ArrayList<>();
 			preconditions.add(newCons);
 			return c.rule(str, preconditions);
 
@@ -230,13 +230,13 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 	@Override
 	public Set<Clause> visit(NominalAxiom axiom) {
 		Objects.requireNonNull(axiom);
-		Set<Clause> ret = new HashSet<Clause>();
+		Set<Clause> ret = new HashSet<>();
 		FormulaConstructor c = new FormulaConstructor();
 		Term i = get(axiom.getIndividual());
 		Term a = get(axiom.getClassExpression());
 
-		ret.add(ax(c.gci(i, a), new HashSet<IntegerAnnotation>()));
-		ret.add(ax(c.gci(a, i), new HashSet<IntegerAnnotation>()));
+		ret.add(ax(c.gci(i, a), new HashSet<>()));
+		ret.add(ax(c.gci(a, i), new HashSet<>()));
 		return ret;
 	}
 

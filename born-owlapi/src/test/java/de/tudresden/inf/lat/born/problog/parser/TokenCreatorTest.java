@@ -38,7 +38,7 @@ public class TokenCreatorTest {
 	 */
 	@Test
 	public void testCreateTokens0() throws OWLRendererException, OWLOntologyCreationException, IOException {
-		List<Token> expected = new ArrayList<Token>();
+		List<Token> expected = new ArrayList<>();
 		expected.add(new TokenImpl("sub", 1));
 		expected.add(new TokenImpl("(", 1));
 		expected.add(new TokenImpl("a", 1));
@@ -75,7 +75,7 @@ public class TokenCreatorTest {
 	 */
 	@Test
 	public void testCreateTokens1() throws OWLRendererException, OWLOntologyCreationException, IOException {
-		List<Token> expected = new ArrayList<Token>();
+		List<Token> expected = new ArrayList<>();
 		expected.add(new TokenImpl("sub", 4));
 		expected.add(new TokenImpl("(", 4));
 		expected.add(new TokenImpl("a", 4));

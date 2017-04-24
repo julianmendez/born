@@ -45,10 +45,10 @@ public class ProcessorCore {
 		Objects.requireNonNull(sbuf);
 		Objects.requireNonNull(input);
 		BufferedReader reader = new BufferedReader(input);
-		for (String line = reader.readLine(); Objects.nonNull(line); line = reader.readLine()) {
+		reader.lines().forEach(line -> {
 			sbuf.append(line);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
-		}
+		});
 	}
 
 	/**
