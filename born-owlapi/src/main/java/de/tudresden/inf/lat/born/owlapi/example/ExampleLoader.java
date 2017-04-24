@@ -170,6 +170,15 @@ public class ExampleLoader {
 		return ret;
 	}
 
+	/**
+	 * Returns an input stream for the given file name.
+	 * 
+	 * @param fileName
+	 *            file name
+	 * @return an input stream for the given file name
+	 * @throws FileNotFoundException
+	 *             if the file was not found
+	 */
 	public InputStream getInputStreamForFile(String fileName) throws FileNotFoundException {
 		Objects.requireNonNull(fileName);
 		InputStream owlInputStream;
@@ -182,6 +191,13 @@ public class ExampleLoader {
 
 	}
 
+	/**
+	 * Tells whether this class is executed inside a jar file. This is used to
+	 * properly retrieve resources, such as the example files.
+	 * 
+	 * @return <code>true</code> if and only if this class is executed inside a
+	 *         jar file
+	 */
 	public boolean isInJar() {
 		File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
 		return Objects.nonNull(jarFile) && (jarFile.isFile());

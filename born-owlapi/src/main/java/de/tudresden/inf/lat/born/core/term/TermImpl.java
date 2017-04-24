@@ -89,23 +89,37 @@ public class TermImpl implements Term {
 		this.termType = Term.Type.INFIX_OPERATOR;
 	}
 
-	public boolean isVariable(String name) {
-		Objects.requireNonNull(name);
-		if (Objects.isNull(name) || name.trim().isEmpty()) {
+	/**
+	 * Tells whether the given string is a variable.
+	 * 
+	 * @param str
+	 *            string
+	 * @return <code>true</code> if and only if the given string is a variable
+	 */
+	public boolean isVariable(String str) {
+		Objects.requireNonNull(str);
+		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else {
-			char firstChar = name.trim().charAt(0);
+			char firstChar = str.trim().charAt(0);
 			return ('A' <= firstChar && firstChar <= 'Z') || (firstChar == '_');
 		}
 	}
 
-	public boolean isLong(String name) {
-		Objects.requireNonNull(name);
-		if (Objects.isNull(name) || name.trim().isEmpty()) {
+	/**
+	 * Tells whether the given string is a long (number).
+	 * 
+	 * @param str
+	 *            string
+	 * @return <code>true</code> if and only if the string is a long (number)
+	 */
+	public boolean isLong(String str) {
+		Objects.requireNonNull(str);
+		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else {
 			try {
-				Long.parseLong(name.trim());
+				Long.parseLong(str.trim());
 				return true;
 			} catch (NumberFormatException e) {
 				return false;
@@ -113,13 +127,20 @@ public class TermImpl implements Term {
 		}
 	}
 
-	public boolean isDouble(String name) {
-		Objects.requireNonNull(name);
-		if (Objects.isNull(name) || name.trim().isEmpty()) {
+	/**
+	 * Tells whether the given string is a double (number).
+	 * 
+	 * @param str
+	 *            string
+	 * @return <code>true</code> if and only if the string is a double (number)
+	 */
+	public boolean isDouble(String str) {
+		Objects.requireNonNull(str);
+		if (Objects.isNull(str) || str.trim().isEmpty()) {
 			return false;
 		} else {
 			try {
-				Double.parseDouble(name.trim());
+				Double.parseDouble(str.trim());
 				return true;
 			} catch (NumberFormatException e) {
 				return false;

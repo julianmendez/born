@@ -73,25 +73,55 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	private final List<String> variableOrder = new ArrayList<>();
 	private final Map<String, String> network = new TreeMap<>();
 
+	/**
+	 * Constructs a new annotation processor.
+	 * 
+	 * @param manager
+	 *            OWL ontology manager
+	 * @throws OWLOntologyCreationException
+	 *             if something went wrong with the ontology creation
+	 */
 	public AnnotationProcessor(OWLOntologyManager manager) throws OWLOntologyCreationException {
 		Objects.requireNonNull(manager);
 		this.owlOntology = manager.createOntology();
 		this.df = manager.getOWLDataFactory();
 	}
 
+	/**
+	 * Returns the variables.
+	 * 
+	 * @return the variables
+	 */
 	public List<String> getVariables() {
 		return Collections.unmodifiableList(this.variableOrder);
 	}
 
+	/**
+	 * Returns the value for the given variable.
+	 * 
+	 * @param variable
+	 *            variable
+	 * @return the value for the given variable
+	 */
 	public String getValue(String variable) {
 		Objects.requireNonNull(variable);
 		return this.network.get(variable);
 	}
 
+	/**
+	 * Returns the OWL ontology.
+	 * 
+	 * @return the OWL ontology
+	 */
 	public OWLOntology getOWLOntology() {
 		return this.owlOntology;
 	}
 
+	/**
+	 * Returns the network.
+	 * 
+	 * @return the network
+	 */
 	public Map<String, String> getNetwork() {
 		return this.network;
 	}

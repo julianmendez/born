@@ -67,6 +67,12 @@ public class CycleDetector implements OWLAxiomVisitorEx<Boolean>, OwlAxiomFilter
 			IntegerEntityManager.topClassId);
 	private final Translator translator;
 
+	/**
+	 * Constructs a cycle detector.
+	 * 
+	 * @param dataFactory
+	 *            OWL data factory
+	 */
 	public CycleDetector(OWLDataFactory dataFactory) {
 		this.translator = new Translator(dataFactory, new IntegerOntologyObjectFactoryImpl());
 	}

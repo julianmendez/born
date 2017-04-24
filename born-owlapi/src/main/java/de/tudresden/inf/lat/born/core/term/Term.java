@@ -10,6 +10,12 @@ import java.util.List;
  */
 public interface Term extends Formula {
 
+	/**
+	 * This models the types of terms.
+	 * 
+	 * @author Julian Mendez
+	 *
+	 */
 	enum Type {
 
 		UNDEFINED, ATOM, LONG, DOUBLE, VARIABLE, COMPOUND_TERM, INFIX_OPERATOR

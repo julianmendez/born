@@ -61,6 +61,12 @@ public class ProcessorPanel extends JPanel implements ProcessorView {
 	private final JComboBox<String> comboBoxExample = new JComboBox<String>();
 	private final ProcessorConfiguration model;
 
+	/**
+	 * Creates a new processor panel.
+	 * 
+	 * @param model
+	 *            model
+	 */
 	public ProcessorPanel(ProcessorConfiguration model) {
 		this.model = Objects.requireNonNull(model);
 		setLayout(null);

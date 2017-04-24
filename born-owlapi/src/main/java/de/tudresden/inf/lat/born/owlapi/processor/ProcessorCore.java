@@ -109,6 +109,16 @@ public class ProcessorCore {
 		return ret;
 	}
 
+	/**
+	 * Runs the processor with the given configuration.
+	 * 
+	 * @param conf
+	 *            configuration
+	 * @param start
+	 *            starting point measured in nanoseconds
+	 * @param executionResult
+	 *            execution result
+	 */
 	public void run(ProcessorConfiguration conf, long start, ProcessorExecutionResult executionResult) {
 		long processorStart = System.nanoTime();
 		Objects.requireNonNull(conf);
