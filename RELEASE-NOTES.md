@@ -3,10 +3,23 @@
 
 | version | release date | Java | OWL API | Protégé       | ProbLog | Python     |
 |:--------|:-------------|:----:|:--------|:--------------|:-------:|:----------:|
+| v0.4.0  | (unreleased) | 8    | 4.2.8   | 5.2.0         | 2.1     | 2.7 or 3.2 |   
 | v0.3.0  | 2017-04-26   | 8    | 4.2.5   | 5.0.0         | 2.1     | 2.7 or 3.2 |
 | v0.2.0  | 2015-11-28   | 7    | 3.5.1   | 5.0.0-beta-17 | 2.1     | 2.7 or 3.2 |
 | v0.1.1  | 2015-06-02   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |
 | v0.1.0  | 2015-04-14   | 8    | 3.5.0   | -             | 2.1     | 2.7 or 3.2 |
+
+
+### v0.3.0
+*unreleased*
+* uses the OWL API 4.2.8
+* can be used as a plug-in for Protégé 5.2.0
+* build commands:
+```
+$ mvn clean install
+```
+* release: `target/born-0.4.0.zip`
+* plug-in: `born-plugin/target/de.tu-dresden.inf.lat.born-0.4.0.jar`
 
 
 ### v0.3.0
