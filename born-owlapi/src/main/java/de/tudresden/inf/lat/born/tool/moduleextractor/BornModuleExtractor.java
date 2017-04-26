@@ -143,6 +143,7 @@ public class BornModuleExtractor {
 	 * @return the extracted module for the given ontology and the given
 	 *         signature
 	 * @throws OWLOntologyCreationException
+	 *             if something went wrong while creating the ontology
 	 */
 	public OWLOntology extractModule(OWLOntology owlOntology, Set<OWLClass> signature)
 			throws OWLOntologyCreationException {
