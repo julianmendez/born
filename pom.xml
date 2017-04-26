@@ -46,6 +46,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>net.sourceforge.owlapi</groupId>
+				<artifactId>owlapi-osgidistribution</artifactId>
+				<version>${owlapi.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>edu.stanford.protege</groupId>
 				<artifactId>protege-editor-owl</artifactId>
 				<version>${protege.version}</version>
