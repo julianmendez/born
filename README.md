@@ -102,6 +102,12 @@ $ mvn versions:set -DnewVersion=NEW_VERSION
 where *NEW_VERSION* is the new version.
 
 
+## Authors
+
+Idea: [&#0304;smail &#0304;lkan Ceylan](https://iccl.inf.tu-dresden.de/web/%c4%b0smail_%c4%b0lkan_Ceylan/en)
+Design and Implementation: [Julian Mendez](https://lat.inf.tu-dresden.de/~mendez/)
+
+
 ## License
 
 This software is distributed under the [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).
