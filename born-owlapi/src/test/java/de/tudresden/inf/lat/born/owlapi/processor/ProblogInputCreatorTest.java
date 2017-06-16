@@ -3,10 +3,12 @@ package de.tudresden.inf.lat.born.owlapi.processor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.tudresden.inf.lat.born.core.common.OptMap;
+import de.tudresden.inf.lat.born.core.common.OptMapImpl;
 
 /**
  * 
@@ -47,7 +49,7 @@ public class ProblogInputCreatorTest {
 	public void testReplaceAll() {
 		ProblogInputCreator instance = (new ProblogInputCreator());
 
-		Map<String, String> map = new HashMap<>();
+		OptMap<String, String> map = new OptMapImpl<>(new HashMap<>());
 		map.put("born:", "https://lat.inf.tu-dresden.de/systems/born#");
 		map.put("ont:", "https://lat.inf.tu-dresden.de/systems/born/born-example#");
 
@@ -57,8 +59,8 @@ public class ProblogInputCreatorTest {
 		map.put("xsd:", "https://www.w3.org/2001/XMLSchema#");
 		map.put("rdfs:", "https://www.w3.org/2000/01/rdf-schema#");
 
-		Map<String, String> revMap = new HashMap<>();
-		map.keySet().forEach(key -> revMap.put(map.get(key), key));
+		OptMap<String, String> revMap = new OptMapImpl<>(new HashMap<>());
+		map.keySet().forEach(key -> revMap.put(map.get(key).get(), key));
 
 		{
 			String textWithPrefixes = "query(sub('ont:a', 'ont:e')).";

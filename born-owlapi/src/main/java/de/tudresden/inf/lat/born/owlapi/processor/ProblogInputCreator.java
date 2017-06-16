@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -27,6 +26,8 @@ import org.semanticweb.owlapi.formats.PrefixDocumentFormat;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import de.tudresden.inf.lat.born.core.common.OptMap;
+import de.tudresden.inf.lat.born.core.common.OptMapImpl;
 import de.tudresden.inf.lat.born.core.rule.BR1Rule;
 import de.tudresden.inf.lat.born.core.rule.BR2Rule;
 import de.tudresden.inf.lat.born.core.rule.BR3Rule;
@@ -209,17 +210,17 @@ public class ProblogInputCreator {
 		}
 	}
 
-	Integer getId(Map<String, Integer> map, String symbolStr0) {
+	Optional<Integer> getId(OptMap<String, Integer> map, String symbolStr0) {
 		String symbolStr = removeApostrophes(symbolStr0);
 		if (symbolStr.equals(FormulaConstructor.TOP)) {
-			return IntegerEntityManager.topClassId;
+			return Optional.of(IntegerEntityManager.topClassId);
 		} else {
 			return map.get(symbolStr);
 		}
 	}
 
 	Set<Integer> getSetOfEntities(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
-		Map<String, Integer> map = new TreeMap<>();
+		OptMap<String, Integer> map = new OptMapImpl<>(new TreeMap<>());
 		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
 		factory.getEntityManager().getEntities(IntegerEntityType.INDIVIDUAL, false)
@@ -227,9 +228,9 @@ public class ProblogInputCreator {
 
 		Set<Integer> ret = new TreeSet<>();
 		symbolStrSet.forEach(symbolStr -> {
-			Integer id = getId(map, symbolStr);
-			if (Objects.nonNull(id)) {
-				ret.add(id);
+			Optional<Integer> optId = getId(map, symbolStr);
+			if (optId.isPresent()) {
+				ret.add(optId.get());
 			}
 
 		});
@@ -285,12 +286,12 @@ public class ProblogInputCreator {
 		return newList;
 	}
 
-	String replaceAll(Map<String, String> map, String text) {
+	String replaceAll(OptMap<String, String> map, String text) {
 		String[] current = new String[1];
 		current[0] = text;
 		List<String> keys = orderByLongestFirst(map.keySet());
 		keys.forEach(key -> {
-			String value = map.get(key);
+			String value = map.get(key).get();
 			current[0] = current[0].replaceAll(key, value);
 		});
 		return current[0];
@@ -310,7 +311,7 @@ public class ProblogInputCreator {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(text);
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
-		Map<String, String> prefixNames = new HashMap<>();
+		OptMap<String, String> prefixNames = new OptMapImpl<>(new HashMap<>());
 		prefixes.getPrefixNames().forEach(prefixName -> {
 			if (prefixName.length() > 1) {
 				prefixNames.put(prefixName, prefixes.getIRI(prefixName).toString());
@@ -333,7 +334,7 @@ public class ProblogInputCreator {
 		Objects.requireNonNull(ontology);
 		Objects.requireNonNull(text);
 		PrefixDocumentFormat prefixes = ProcessorConfigurationImpl.getPrefixes(ontology);
-		Map<String, String> revPrefixNames = new HashMap<>();
+		OptMap<String, String> revPrefixNames = new OptMapImpl<>(new HashMap<>());
 		prefixes.getPrefixNames().forEach(prefixName -> {
 			if (prefixName.length() > 1) {
 				revPrefixNames.put(prefixes.getIRI(prefixName).toString(), prefixName);

@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.AbstractOWLRenderer;
@@ -16,6 +16,9 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
+
+import de.tudresden.inf.lat.born.core.common.OptMap;
+import de.tudresden.inf.lat.born.core.common.OptMapImpl;
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
@@ -83,19 +86,21 @@ public class SplitterCore {
 	 * @throws IOException
 	 *             if something went wrong with the I/P
 	 */
-	void storeBayesianNetwork(List<String> keyOrder, Map<String, String> map, OutputStream outputNetwork)
+	void storeBayesianNetwork(List<String> keyOrder, OptMap<String, String> map, OutputStream outputNetwork)
 			throws IOException {
 		Objects.requireNonNull(keyOrder);
 		Objects.requireNonNull(map);
 		Objects.requireNonNull(outputNetwork);
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputNetwork));
 		for (String key : keyOrder) {
-			String value = map.get(key);
-			writer.append(value);
-			writer.append(COLON_COLON);
-			writer.append(key);
-			writer.append(POINT);
-			writer.newLine();
+			Optional<String> optValue = map.get(key);
+			if (optValue.isPresent()) {
+				writer.append(optValue.get());
+				writer.append(COLON_COLON);
+				writer.append(key);
+				writer.append(POINT);
+				writer.newLine();
+			}
 		}
 		writer.flush();
 	}
@@ -126,7 +131,7 @@ public class SplitterCore {
 		AnnotationProcessor processor = new AnnotationProcessor(ont.getOWLOntologyManager());
 		ont.getAxioms().forEach(axiom -> axiom.accept(processor));
 		storeOWLOntology(processor.getOWLOntology(), newOntologyOutputStream);
-		storeBayesianNetwork(processor.getVariables(), processor.getNetwork(), networkOutputStream);
+		storeBayesianNetwork(processor.getVariables(), new OptMapImpl<>(processor.getNetwork()), networkOutputStream);
 	}
 
 	/**

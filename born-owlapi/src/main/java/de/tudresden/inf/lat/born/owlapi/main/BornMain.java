@@ -1,9 +1,11 @@
 package de.tudresden.inf.lat.born.owlapi.main;
 
-import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.TreeMap;
 
+import de.tudresden.inf.lat.born.core.common.OptMap;
+import de.tudresden.inf.lat.born.core.common.OptMapImpl;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorSubApp;
@@ -21,7 +23,7 @@ import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorSubApp;
  */
 public class BornMain implements SubApp {
 
-	private Map<String, SubApp> subAppMap = new TreeMap<>();
+	private OptMap<String, SubApp> subAppMap = new OptMapImpl<>(new TreeMap<>());
 
 	static final String HELP = "\nBORN - Bayesian Ontology Reasoner"
 			+ "\n\nParameters: <command> [<command parameters>]" + "\n\n";
@@ -49,7 +51,7 @@ public class BornMain implements SubApp {
 			sbuf.append("Command: " + command);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 			sbuf.append(Symbol.NEW_LINE_CHAR);
-			sbuf.append(this.subAppMap.get(command).getHelp());
+			sbuf.append(this.subAppMap.get(command).get().getHelp());
 			sbuf.append(Symbol.NEW_LINE_CHAR);
 		});
 		return sbuf.toString();
@@ -62,13 +64,13 @@ public class BornMain implements SubApp {
 			return false;
 		} else {
 			String command = args[0];
-			SubApp subApp = this.subAppMap.get(command);
-			if (Objects.isNull(subApp)) {
+			Optional<SubApp> optSubApp = this.subAppMap.get(command);
+			if (!optSubApp.isPresent()) {
 				return false;
 			} else {
 				String[] newArgs = new String[args.length - 1];
 				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-				return subApp.isValid(newArgs);
+				return optSubApp.get().isValid(newArgs);
 			}
 		}
 	}
@@ -77,10 +79,10 @@ public class BornMain implements SubApp {
 	public String run(String[] args) {
 		if (isValid(args)) {
 			String command = args[0];
-			SubApp subApp = this.subAppMap.get(command);
+			Optional<SubApp> optSubApp = this.subAppMap.get(command);
 			String[] newArgs = new String[args.length - 1];
 			System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-			String ret = subApp.run(newArgs);
+			String ret = optSubApp.get().run(newArgs);
 			return ret;
 		} else {
 			return getHelp();

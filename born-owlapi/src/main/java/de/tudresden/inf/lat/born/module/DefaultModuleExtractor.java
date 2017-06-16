@@ -4,11 +4,12 @@ package de.tudresden.inf.lat.born.module;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
+import de.tudresden.inf.lat.born.core.common.OptMap;
+import de.tudresden.inf.lat.born.core.common.OptMapImpl;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.NormalizedIntegerAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.datatype.IntegerAxiom;
 
@@ -35,17 +36,18 @@ public class DefaultModuleExtractor {
 	 * @return a map that relates a class with the set of axioms where this
 	 *         class occurs on the left side of the axiom
 	 */
-	Map<Integer, Set<DefaultIdentifierCollector>> buildMapOfAxioms(Set<DefaultIdentifierCollector> normalizedAxioms) {
-		Map<Integer, Set<DefaultIdentifierCollector>> map = new HashMap<>();
+	OptMap<Integer, Set<DefaultIdentifierCollector>> buildMapOfAxioms(
+			Set<DefaultIdentifierCollector> normalizedAxioms) {
+		OptMap<Integer, Set<DefaultIdentifierCollector>> map = new OptMapImpl<>(new HashMap<>());
 		normalizedAxioms.forEach(axiom -> {
 			Set<Integer> classesOnTheLeft = axiom.getClassesOnTheLeft();
 			classesOnTheLeft.forEach(classId -> {
-				Set<DefaultIdentifierCollector> value = map.get(classId);
-				if (Objects.isNull(value)) {
-					value = new HashSet<>();
-					map.put(classId, value);
+				Optional<Set<DefaultIdentifierCollector>> optValue = map.get(classId);
+				if (!optValue.isPresent()) {
+					optValue = Optional.of(new HashSet<>());
+					map.put(classId, optValue.get());
 				}
-				value.add(axiom);
+				optValue.get().add(axiom);
 			});
 		});
 		return map;
@@ -62,12 +64,12 @@ public class DefaultModuleExtractor {
 	}
 
 	Set<DefaultIdentifierCollector> getAxiomsWithClassesOnTheLeft(Set<Integer> classesToVisit,
-			Map<Integer, Set<DefaultIdentifierCollector>> map) {
+			OptMap<Integer, Set<DefaultIdentifierCollector>> map) {
 		Set<DefaultIdentifierCollector> ret = new HashSet<>();
 		classesToVisit.forEach(classId -> {
-			Set<DefaultIdentifierCollector> newAxioms = map.get(classId);
-			if (Objects.nonNull(newAxioms)) {
-				ret.addAll(newAxioms);
+			Optional<Set<DefaultIdentifierCollector>> optNewAxioms = map.get(classId);
+			if (optNewAxioms.isPresent()) {
+				ret.addAll(optNewAxioms.get());
 			}
 		});
 		return ret;
@@ -101,7 +103,7 @@ public class DefaultModuleExtractor {
 
 		newAxioms.addAll(getAxiomsWithoutEntitiesOnTheLeft(axioms));
 
-		Map<Integer, Set<DefaultIdentifierCollector>> map = buildMapOfAxioms(axioms);
+		OptMap<Integer, Set<DefaultIdentifierCollector>> map = buildMapOfAxioms(axioms);
 
 		Set<Integer> visitedClasses = new TreeSet<>();
 		Set<Integer> classesToVisit = new TreeSet<>();

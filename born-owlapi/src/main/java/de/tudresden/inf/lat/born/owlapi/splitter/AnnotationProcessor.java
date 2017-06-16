@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -56,6 +57,9 @@ import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.SWRLRule;
 
+import de.tudresden.inf.lat.born.core.common.OptMap;
+import de.tudresden.inf.lat.born.core.common.OptMapImpl;
+
 /**
  * An object of this class is a visitor of OWL axioms, and splits the ontology
  * axiom by axiom.
@@ -71,7 +75,7 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	private final OWLDataFactory df;
 	private final OWLOntology owlOntology;
 	private final List<String> variableOrder = new ArrayList<>();
-	private final Map<String, String> network = new TreeMap<>();
+	private final OptMap<String, String> network = new OptMapImpl<>(new TreeMap<>());
 
 	/**
 	 * Constructs a new annotation processor.
@@ -103,7 +107,7 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	 *            variable
 	 * @return the value for the given variable
 	 */
-	public String getValue(String variable) {
+	public Optional<String> getValue(String variable) {
 		Objects.requireNonNull(variable);
 		return this.network.get(variable);
 	}
@@ -123,7 +127,7 @@ public class AnnotationProcessor implements OWLAxiomVisitorEx<Boolean> {
 	 * @return the network
 	 */
 	public Map<String, String> getNetwork() {
-		return this.network;
+		return this.network.asMap();
 	}
 
 	String asString(OWLAnnotationValue value) {
