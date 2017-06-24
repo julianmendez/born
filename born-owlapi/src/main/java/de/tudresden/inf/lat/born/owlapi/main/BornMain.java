@@ -4,8 +4,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.TreeMap;
 
-import de.tudresden.inf.lat.born.core.common.OptMap;
-import de.tudresden.inf.lat.born.core.common.OptMapImpl;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.owlapi.annotator.AnnotatorSubApp;
@@ -13,6 +11,8 @@ import de.tudresden.inf.lat.born.owlapi.multiprocessor.MultiProcessorSubApp;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorSubApp;
 import de.tudresden.inf.lat.born.owlapi.splitter.SplitterSubApp;
 import de.tudresden.inf.lat.born.problog.connector.BayesianNetworkCreatorSubApp;
+import de.tudresden.inf.lat.util.map.OptMap;
+import de.tudresden.inf.lat.util.map.OptMapImpl;
 
 /**
  * An object of this class models the BORN main application. This is the parent

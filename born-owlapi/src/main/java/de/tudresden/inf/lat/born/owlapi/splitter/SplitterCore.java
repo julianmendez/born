@@ -17,8 +17,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.owlxml.renderer.OWLXMLRenderer;
 
-import de.tudresden.inf.lat.born.core.common.OptMap;
-import de.tudresden.inf.lat.born.core.common.OptMapImpl;
+import de.tudresden.inf.lat.util.map.OptMap;
+import de.tudresden.inf.lat.util.map.OptMapImpl;
 
 /**
  * An object of this class splits a probabilistic OWL ontology in two parts: an
