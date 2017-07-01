@@ -104,7 +104,7 @@ where *NEW_VERSION* is the new version.
 
 ## Authors
 
-Design and Implementation: [Julian Mendez](https://lat.inf.tu-dresden.de/~mendez/)
+Design and Implementation: [Julian Mendez](https://julianmendez.github.io)
 
 Idea: [&#0304;smail &#0304;lkan Ceylan](https://iccl.inf.tu-dresden.de/web/%c4%b0smail_%c4%b0lkan_Ceylan/en)
 
@@ -116,7 +116,7 @@ This software is distributed under the [Apache License Version 2.0](https://www.
 
 ## Release notes
 
-See [release notes](https://github.com/julianmendez/born/blob/master/RELEASE-NOTES.md).
+See [release notes](https://julianmendez.github.io/born/RELEASE-NOTES.html).
 
 
 ## Architecture
