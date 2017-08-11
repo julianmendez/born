@@ -59,11 +59,12 @@ public class MultiProcessorSubApp implements SubApp {
 	@Override
 	public String run(String[] args) {
 		Objects.requireNonNull(args);
+		String result = "";
 		long start = System.nanoTime();
 		if (isValid(args)) {
 			MultiProcessorConfiguration conf = new MultiProcessorConfigurationImpl();
 
-			StringBuffer sbuf = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			String[] newArgs = null;
 			if (args[0].equals(LOGGING_OPTION)) {
 				newArgs = new String[args.length - 1];
@@ -84,18 +85,20 @@ public class MultiProcessorSubApp implements SubApp {
 			conf.setQueryProcessor(queryProcessor);
 
 			MultiProcessorCore core = new MultiProcessorCore();
-			List<String> result = core.run(conf, start);
+			List<String> coreResult = core.run(conf, start);
 			try {
-				core.storeResults(conf, result);
+				core.storeResults(conf, coreResult);
 			} catch (IOException e) {
 				throw new UncheckedIOException(e);
 			}
-			sbuf.append(result);
+			sb.append(coreResult);
 
-			return sbuf.toString();
+			result = sb.toString();
 		} else {
-			return getHelp();
+			result = getHelp();
 		}
+
+		return result;
 	}
 
 }

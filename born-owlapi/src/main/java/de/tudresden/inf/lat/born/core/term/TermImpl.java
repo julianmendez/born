@@ -98,12 +98,15 @@ public class TermImpl implements Term {
 	 */
 	public boolean isVariable(String str) {
 		Objects.requireNonNull(str);
+		boolean result = false;
 		if (Objects.isNull(str) || str.trim().isEmpty()) {
-			return false;
+			result = false;
 		} else {
 			char firstChar = str.trim().charAt(0);
-			return ('A' <= firstChar && firstChar <= 'Z') || (firstChar == '_');
+			result = ('A' <= firstChar && firstChar <= 'Z') || (firstChar == '_');
 		}
+
+		return result;
 	}
 
 	/**
@@ -115,16 +118,19 @@ public class TermImpl implements Term {
 	 */
 	public boolean isLong(String str) {
 		Objects.requireNonNull(str);
+		boolean result = false;
 		if (Objects.isNull(str) || str.trim().isEmpty()) {
-			return false;
+			result = false;
 		} else {
 			try {
 				Long.parseLong(str.trim());
-				return true;
+				result = true;
 			} catch (NumberFormatException e) {
-				return false;
+				result = false;
 			}
 		}
+
+		return result;
 	}
 
 	/**
@@ -136,16 +142,19 @@ public class TermImpl implements Term {
 	 */
 	public boolean isDouble(String str) {
 		Objects.requireNonNull(str);
+		boolean result = false;
 		if (Objects.isNull(str) || str.trim().isEmpty()) {
-			return false;
+			result = false;
 		} else {
 			try {
 				Double.parseDouble(str.trim());
-				return true;
+				result = true;
 			} catch (NumberFormatException e) {
-				return false;
+				result = false;
 			}
 		}
+
+		return result;
 	}
 
 	@Override
@@ -165,22 +174,22 @@ public class TermImpl implements Term {
 
 	@Override
 	public String asString() {
-		StringBuffer sbuf = new StringBuffer();
-		sbuf.append(this.name);
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.name);
 		if (this.termType.equals(Term.Type.COMPOUND_TERM)) {
-			sbuf.append(Symbol.PAR_A_CHAR);
+			sb.append(Symbol.PAR_A_CHAR);
 			Iterator<Term> it = this.arguments.iterator();
 			while (it.hasNext()) {
 				Term current = it.next();
-				sbuf.append(current);
+				sb.append(current);
 				if (it.hasNext()) {
-					sbuf.append(Symbol.COMMA_CHAR);
-					sbuf.append(Symbol.SPACE_CHAR);
+					sb.append(Symbol.COMMA_CHAR);
+					sb.append(Symbol.SPACE_CHAR);
 				}
 			}
-			sbuf.append(Symbol.PAR_B_CHAR);
+			sb.append(Symbol.PAR_B_CHAR);
 		}
-		return sbuf.toString();
+		return sb.toString();
 	}
 
 	@Override

@@ -6,13 +6,14 @@ import java.util.Objects;
 
 /**
  * Default implementation of a clause.
- * 
- * @author Julian Mendez
  *
+ * @author Julian Mendez
  */
 public class ClauseImpl implements Clause {
 
-	/** String for a tabulation (not necessarily a tab char). */
+	/**
+	 * String for a tabulation (not necessarily a tab char).
+	 */
 	public static final String TAB = "   ";
 
 	private final Term head;
@@ -27,11 +28,9 @@ public class ClauseImpl implements Clause {
 
 	/**
 	 * Constructs a new clause.
-	 * 
-	 * @param head
-	 *            head
-	 * @param body
-	 *            body
+	 *
+	 * @param head head
+	 * @param body body
 	 */
 	public ClauseImpl(Term head, List<Term> body) {
 		Objects.requireNonNull(body);
@@ -51,8 +50,9 @@ public class ClauseImpl implements Clause {
 
 	@Override
 	public String asString() {
+		String result = "";
 		if (this.body.isEmpty()) {
-			return this.head.asString() + Symbol.POINT_CHAR + Symbol.NEW_LINE_CHAR;
+			result = this.head.asString() + Symbol.POINT_CHAR + Symbol.NEW_LINE_CHAR;
 		} else {
 			StringBuilder sb = new StringBuilder();
 			sb.append(this.head.asString() + Symbol.SPACE_CHAR + Symbol.IF_SYMBOL + Symbol.SPACE_CHAR);
@@ -73,9 +73,11 @@ public class ClauseImpl implements Clause {
 				});
 				sb.append(Symbol.POINT_CHAR);
 				sb.append(Symbol.NEW_LINE_CHAR);
-				return sb.toString();
+				result = sb.toString();
 			}
 		}
+
+		return result;
 	}
 
 	@Override

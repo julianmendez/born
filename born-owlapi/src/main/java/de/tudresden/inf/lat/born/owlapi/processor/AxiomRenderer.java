@@ -8,9 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import de.tudresden.inf.lat.born.core.rule.FormulaConstructor;
-import de.tudresden.inf.lat.born.core.term.Clause;
-import de.tudresden.inf.lat.born.core.term.Symbol;
-import de.tudresden.inf.lat.born.core.term.Term;
+import de.tudresden.inf.lat.born.core.term.*;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.FunctObjectPropAxiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI0Axiom;
 import de.tudresden.inf.lat.jcel.coreontology.axiom.GCI1Axiom;
@@ -72,49 +70,59 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 	}
 
 	String removeApostrophes(String symbolStr0) {
+		String result = "";
 		String symbolStr = symbolStr0;
 		if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
 			symbolStr = symbolStr.substring(1);
 			symbolStr = symbolStr.substring(0, symbolStr.length() - 1);
-			return symbolStr;
+			result = symbolStr;
 		} else {
-			return symbolStr0;
+			result = symbolStr0;
 		}
+
+		return result;
 	}
 
 	String getValue(String value) {
+		String result = "";
 		if (Objects.isNull(value)) {
-			return "";
+			result = "";
 		} else {
 			String str = value.toString().trim();
 			if (str.startsWith("" + QUOTES)) {
 				int pos = str.indexOf(QUOTES, 1);
 				if (pos == -1) {
-					return removeDoubleBackslash(str);
+					result = removeDoubleBackslash(str);
 				} else {
-					return removeDoubleBackslash(str.substring(1, pos));
+					result = removeDoubleBackslash(str.substring(1, pos));
 				}
 			} else {
-				return str;
+				result = str;
 			}
 		}
+
+		return result;
 	}
 
 	Term get(int identifier) {
+		Term result = new TermImpl();
 		FormulaConstructor c = new FormulaConstructor();
 		if (identifier == IntegerEntityManager.topClassId) {
-			return c.top();
+			result = c.top();
 		} else {
 			String name = this.factory.getEntityManager().getName(identifier).trim();
-			return c.newCons(APOSTROPHE + name + APOSTROPHE);
+			result = c.newCons(APOSTROPHE + name + APOSTROPHE);
 		}
+
+		return result;
 	}
 
 	Clause ax(Term str, Set<IntegerAnnotation> annotations) {
+		Clause result = new ClauseImpl();
 		FormulaConstructor c = new FormulaConstructor();
 		if (annotations.isEmpty()) {
 			List<Term> emptyList = Collections.emptyList();
-			return c.rule(str, emptyList);
+			result = c.rule(str, emptyList);
 
 		} else if (annotations.size() == 1) {
 			IntegerAnnotation annotation = annotations.iterator().next();
@@ -122,12 +130,14 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 			Term newCons = c.newCons(value);
 			List<Term> preconditions = new ArrayList<>();
 			preconditions.add(newCons);
-			return c.rule(str, preconditions);
+			result = c.rule(str, preconditions);
 
 		} else {
 			throw new RuntimeException("Too many annotations in axiom: " + annotations.toString());
 
 		}
+
+		return result;
 	}
 
 	/**
@@ -142,8 +152,9 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(classId);
 		Set<IntegerAnnotation> emptySet = Collections.emptySet();
-		Clause clause = ax(c.con(a), emptySet);
-		return clause;
+		Clause result = ax(c.con(a), emptySet);
+
+		return result;
 	}
 
 	/**
@@ -158,8 +169,9 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(objectPropertyId);
 		Set<IntegerAnnotation> emptySet = Collections.emptySet();
-		Clause clause = ax(c.role(a), emptySet);
-		return clause;
+		Clause result = ax(c.role(a), emptySet);
+
+		return result;
 	}
 
 	/**
@@ -174,8 +186,9 @@ public class AxiomRenderer implements NormalizedIntegerAxiomVisitor<Set<Clause>>
 		FormulaConstructor c = new FormulaConstructor();
 		Term a = get(individualId);
 		Set<IntegerAnnotation> emptySet = Collections.emptySet();
-		Clause clause = ax(c.indiv(a), emptySet);
-		return clause;
+		Clause result = ax(c.indiv(a), emptySet);
+
+		return result;
 	}
 
 	@Override

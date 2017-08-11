@@ -85,30 +85,31 @@ public class ProblogInputCreator {
 	static final String RULES_TO_AVOID_EMPTY_PREDICATES_OF_ENTITIES_MSG = " Rules to avoid empty predicates of entities";
 
 	Set<String> parseRelevantSymbols(Reader reader) throws IOException {
+		Set<String> result = new TreeSet<>();
 		TokenCreator c = new TokenCreator();
 		List<Token> tokens = c.createTokens(reader);
 		List<String> list = tokens.stream().filter(
 				token -> (token.getType().equals(TokenType.IDENTIFIER) || token.getType().equals(TokenType.CONSTANT)))
 				.map(token -> token.getValue()).collect(Collectors.toList());
 
-		Set<String> set = new TreeSet<>();
 		if (list.get(0).equals(FormulaConstructor.QUERY)) {
 			list.remove(FormulaConstructor.QUERY);
 			if (list.get(0).equals(FormulaConstructor.SUB)) {
 				list.remove(FormulaConstructor.SUB);
 				if (!list.isEmpty()) {
-					set.add(list.iterator().next());
+					result.add(list.iterator().next());
 				}
 			} else if (list.get(0).equals(FormulaConstructor.INST)) {
 				list.remove(FormulaConstructor.INST);
 				if (list.size() > 2) {
-					set.add(list.get(1));
+					result.add(list.get(1));
 				} else if (list.size() > 1) {
-					set.add(list.get(0));
+					result.add(list.get(0));
 				}
 			}
 		}
-		return set;
+
+		return result;
 	}
 
 	/**
@@ -117,33 +118,34 @@ public class ProblogInputCreator {
 	 * @return the default list of completion rules
 	 */
 	public List<CompletionRule> getDefaultCompletionRules() {
-		List<CompletionRule> completionRules = new ArrayList<>();
-		completionRules.add(new EmptyRule());
-		completionRules.add(new EmptyRule(RULES_TO_INTERPRET_QUERIES_MSG));
-		completionRules.add(new FR1Rule());
-		completionRules.add(new FR2Rule());
-		completionRules.add(new FR3Rule());
-		completionRules.add(new EmptyRule());
-		completionRules.add(new EmptyRule(RULES_TO_PROCESS_INDIVIDUALS_MSG));
-		completionRules.add(new RR1Rule());
-		completionRules.add(new RR2Rule());
-		completionRules.add(new EmptyRule());
-		completionRules.add(new EmptyRule(BASIC_RULES_FOR_COMPLETION_MSG));
-		completionRules.add(new BR1Rule());
-		completionRules.add(new BR2Rule());
-		completionRules.add(new BR3Rule());
-		completionRules.add(new EmptyRule());
-		completionRules.add(new EmptyRule(EL_COMPLETION_RULES_MSG));
-		completionRules.add(new CR1Rule());
-		completionRules.add(new CR2Rule());
-		completionRules.add(new CR3Rule());
-		completionRules.add(new CR4Rule());
-		completionRules.add(new EmptyRule());
-		completionRules.add(new EmptyRule(RULES_TO_AVOID_EMPTY_PREDICATES_OF_ENTITIES_MSG));
-		completionRules.add(new TR1Rule());
-		completionRules.add(new TR2Rule());
-		completionRules.add(new TR3Rule());
-		return completionRules;
+		List<CompletionRule> result = new ArrayList<>();
+		result.add(new EmptyRule());
+		result.add(new EmptyRule(RULES_TO_INTERPRET_QUERIES_MSG));
+		result.add(new FR1Rule());
+		result.add(new FR2Rule());
+		result.add(new FR3Rule());
+		result.add(new EmptyRule());
+		result.add(new EmptyRule(RULES_TO_PROCESS_INDIVIDUALS_MSG));
+		result.add(new RR1Rule());
+		result.add(new RR2Rule());
+		result.add(new EmptyRule());
+		result.add(new EmptyRule(BASIC_RULES_FOR_COMPLETION_MSG));
+		result.add(new BR1Rule());
+		result.add(new BR2Rule());
+		result.add(new BR3Rule());
+		result.add(new EmptyRule());
+		result.add(new EmptyRule(EL_COMPLETION_RULES_MSG));
+		result.add(new CR1Rule());
+		result.add(new CR2Rule());
+		result.add(new CR3Rule());
+		result.add(new CR4Rule());
+		result.add(new EmptyRule());
+		result.add(new EmptyRule(RULES_TO_AVOID_EMPTY_PREDICATES_OF_ENTITIES_MSG));
+		result.add(new TR1Rule());
+		result.add(new TR2Rule());
+		result.add(new TR3Rule());
+
+		return result;
 	}
 
 	void write(Writer output, ProblogProgram program) throws IOException {
@@ -156,7 +158,7 @@ public class ProblogInputCreator {
 	}
 
 	List<Clause> getDeclarations(IntegerOntologyObjectFactory factory, Module module) {
-		List<Clause> ret = new ArrayList<>();
+		List<Clause> result = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
 
 		Set<Integer> classes = new TreeSet<>();
@@ -180,98 +182,107 @@ public class ProblogInputCreator {
 			// individuals.addAll(axiom.getIndividualsInSignature());
 		});
 
-		classes.forEach(cls -> ret.add(renderer.renderDeclarationOfClass(cls)));
-		objectProperties.forEach(objectProperty -> ret.add(renderer.renderDeclarationOfObjectProperty(objectProperty)));
-		individuals.forEach(individual -> ret.add(renderer.renderDeclarationOfIndividual(individual)));
+		classes.forEach(cls -> result.add(renderer.renderDeclarationOfClass(cls)));
+		objectProperties.forEach(objectProperty -> result.add(renderer.renderDeclarationOfObjectProperty(objectProperty)));
+		individuals.forEach(individual -> result.add(renderer.renderDeclarationOfIndividual(individual)));
 
-		return ret;
+		return result;
 	}
 
 	List<Clause> getClauses(IntegerOntologyObjectFactory factory, Module module) throws IOException {
-		List<Clause> ontology = new ArrayList<>();
+		List<Clause> result = new ArrayList<>();
 		AxiomRenderer renderer = new AxiomRenderer(factory);
-		ontology.addAll(getDeclarations(factory, module));
+		result.addAll(getDeclarations(factory, module));
 
 		module.getAxioms().forEach(axiom -> {
 			Set<Clause> clauses = axiom.accept(renderer);
-			ontology.addAll(clauses);
+			result.addAll(clauses);
 		});
-		return ontology;
+
+		return result;
 	}
 
 	String removeApostrophes(String symbolStr0) {
+		String result = "";
 		String symbolStr = symbolStr0;
 		if (symbolStr.startsWith("" + Symbol.APOSTROPHE_CHAR) && symbolStr.endsWith("" + Symbol.APOSTROPHE_CHAR)) {
 			symbolStr = symbolStr.substring(1);
 			symbolStr = symbolStr.substring(0, symbolStr.length() - 1);
-			return symbolStr;
+			result = symbolStr;
 		} else {
-			return symbolStr0;
+			result = symbolStr0;
 		}
+
+		return result;
 	}
 
 	Optional<Integer> getId(OptMap<String, Integer> map, String symbolStr0) {
+		Optional<Integer> result = Optional.empty();
 		String symbolStr = removeApostrophes(symbolStr0);
 		if (symbolStr.equals(FormulaConstructor.TOP)) {
-			return Optional.of(IntegerEntityManager.topClassId);
+			result = Optional.of(IntegerEntityManager.topClassId);
 		} else {
-			return map.get(symbolStr);
+			result = map.get(symbolStr);
 		}
+
+		return result;
 	}
 
 	Set<Integer> getSetOfEntities(IntegerOntologyObjectFactory factory, Set<String> symbolStrSet) {
+		Set<Integer> result = new TreeSet<>();
 		OptMap<String, Integer> map = new OptMapImpl<>(new TreeMap<>());
 		factory.getEntityManager().getEntities(IntegerEntityType.CLASS, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
 		factory.getEntityManager().getEntities(IntegerEntityType.INDIVIDUAL, false)
 				.forEach(id -> map.put(factory.getEntityManager().getName(id), id));
 
-		Set<Integer> ret = new TreeSet<>();
 		symbolStrSet.forEach(symbolStr -> {
 			Optional<Integer> optId = getId(map, symbolStr);
 			if (optId.isPresent()) {
-				ret.add(optId.get());
+				result.add(optId.get());
 			}
 
 		});
-		return ret;
+		return result;
 	}
 
 	Set<Integer> getSetOfClasses(IntegerOntologyObjectFactory factory, Set<Integer> setOfEntities) {
-		Set<Integer> setOfClasses = new TreeSet<>();
+		Set<Integer> result = new TreeSet<>();
 		setOfEntities.forEach(entity -> {
 			if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.CLASS)) {
-				setOfClasses.add(entity);
+				result.add(entity);
 			} else if (factory.getEntityManager().getType(entity).equals(IntegerEntityType.INDIVIDUAL)) {
-				setOfClasses.add(entity);
+				result.add(entity);
 				Optional<Integer> classForIndivOpt = factory.getEntityManager().getAuxiliaryNominal(entity);
 				if (classForIndivOpt.isPresent()) {
-					setOfClasses.add(classForIndivOpt.get());
+					result.add(classForIndivOpt.get());
 				}
 			}
 		});
-		return setOfClasses;
+
+		return result;
 	}
 
 	Set<NormalizedIntegerAxiom> removeUnnecessaryAnnotations(Set<NormalizedIntegerAxiom> axioms,
 			IntegerOntologyObjectFactory factory) {
-		Set<NormalizedIntegerAxiom> ret = new HashSet<>();
+		Set<NormalizedIntegerAxiom> result = new HashSet<>();
 		axioms.forEach(axiom -> {
 			if (axiom instanceof NominalAxiom) {
 				NominalAxiom nominalAxiom = (NominalAxiom) axiom;
-				ret.add(factory.getNormalizedAxiomFactory().createNominalAxiom(nominalAxiom.getClassExpression(),
+				result.add(factory.getNormalizedAxiomFactory().createNominalAxiom(nominalAxiom.getClassExpression(),
 						nominalAxiom.getIndividual(), new HashSet<>()));
 			} else {
-				ret.add(axiom);
+				result.add(axiom);
 			}
 		});
-		return ret;
+
+		return result;
 	}
 
 	List<String> orderByLongestFirst(Collection<String> oldList) {
-		List<String> newList = new ArrayList<>();
-		newList.addAll(oldList);
-		Collections.sort(newList, new Comparator<String>() {
+		List<String> result = new ArrayList<>();
+		result.addAll(oldList);
+		Collections.sort(result, new Comparator<String>() {
 			@Override
 			public int compare(String str0, String str1) {
 				int str0len = str0 == null ? -1 : str0.length();
@@ -283,7 +294,8 @@ public class ProblogInputCreator {
 				return ret;
 			}
 		});
-		return newList;
+
+		return result;
 	}
 
 	String replaceAll(OptMap<String, String> map, String text) {

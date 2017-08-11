@@ -59,34 +59,39 @@ public class BornMain implements SubApp {
 
 	@Override
 	public boolean isValid(String[] args) {
+		boolean result = false;
 		Objects.requireNonNull(args);
 		if (args.length == 0) {
-			return false;
+			result = false;
 		} else {
 			String command = args[0];
 			Optional<SubApp> optSubApp = this.subAppMap.get(command);
 			if (!optSubApp.isPresent()) {
-				return false;
+				result = false;
 			} else {
 				String[] newArgs = new String[args.length - 1];
 				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-				return optSubApp.get().isValid(newArgs);
+				result = optSubApp.get().isValid(newArgs);
 			}
 		}
+
+		return result;
 	}
 
 	@Override
 	public String run(String[] args) {
+		String result = "";
 		if (isValid(args)) {
 			String command = args[0];
 			Optional<SubApp> optSubApp = this.subAppMap.get(command);
 			String[] newArgs = new String[args.length - 1];
 			System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-			String ret = optSubApp.get().run(newArgs);
-			return ret;
+			result = optSubApp.get().run(newArgs);
 		} else {
-			return getHelp();
+			result = getHelp();
 		}
+
+		return result;
 	}
 
 	public static void main(String[] args) {

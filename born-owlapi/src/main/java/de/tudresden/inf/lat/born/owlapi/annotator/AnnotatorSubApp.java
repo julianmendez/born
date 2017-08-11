@@ -1,27 +1,19 @@
 package de.tudresden.inf.lat.born.owlapi.annotator;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UncheckedIOException;
-import java.util.Objects;
-import java.util.Set;
-
 import de.tudresden.inf.lat.born.core.common.ResourceUtil;
 import de.tudresden.inf.lat.born.core.term.SubApp;
 import de.tudresden.inf.lat.born.owlapi.processor.ProcessorConfigurationImpl;
 
+import java.io.*;
+import java.util.Objects;
+import java.util.Set;
+
 /**
  * An object of this class add annotations with variables to an OWL ontology.
  * These variables are of the form x0, x1, x2, ... .
- * 
- * @see AnnotatorCore
- * 
- * @author Julian Mendez
  *
+ * @author Julian Mendez
+ * @see AnnotatorCore
  */
 public class AnnotatorSubApp implements SubApp {
 
@@ -44,6 +36,7 @@ public class AnnotatorSubApp implements SubApp {
 	@Override
 	public String run(String args[]) {
 		Objects.requireNonNull(args);
+		String result = "";
 		if (isValid(args)) {
 			AnnotatorConfiguration conf = new AnnotatorConfigurationImpl();
 
@@ -72,10 +65,12 @@ public class AnnotatorSubApp implements SubApp {
 			} catch (IOException e) {
 				throw new UncheckedIOException(e);
 			}
-			return "Done.";
+			result = "Done.";
 		} else {
-			return getHelp();
+			result = getHelp();
 		}
+
+		return result;
 	}
 
 }

@@ -1,14 +1,13 @@
 package de.tudresden.inf.lat.born.owlapi.multiprocessor;
 
-import java.util.Objects;
-
 import org.semanticweb.owlapi.model.OWLClass;
+
+import java.util.Objects;
 
 /**
  * An object of this class represent a subsumption query.
- * 
- * @author Julian Mendez
  *
+ * @author Julian Mendez
  */
 public class SubsumptionQuery {
 
@@ -21,11 +20,9 @@ public class SubsumptionQuery {
 
 	/**
 	 * Constructs a new subsumption query.
-	 * 
-	 * @param subClass
-	 *            sub class
-	 * @param superClass
-	 *            super class
+	 *
+	 * @param subClass   sub class
+	 * @param superClass super class
 	 */
 	public SubsumptionQuery(OWLClass subClass, OWLClass superClass) {
 		this.subClass = Objects.requireNonNull(subClass);
@@ -34,7 +31,7 @@ public class SubsumptionQuery {
 
 	/**
 	 * Returns the sub class.
-	 * 
+	 *
 	 * @return the sub class
 	 */
 	public OWLClass getSubClass() {
@@ -43,7 +40,7 @@ public class SubsumptionQuery {
 
 	/**
 	 * Returns the super class.
-	 * 
+	 *
 	 * @return the super class
 	 */
 	public OWLClass getSuperClass() {
@@ -52,7 +49,7 @@ public class SubsumptionQuery {
 
 	/**
 	 * Returns a ProbLog string representation of this query.
-	 * 
+	 *
 	 * @return a ProbLog string representation of this query
 	 */
 	public String asProblogString() {
@@ -61,14 +58,14 @@ public class SubsumptionQuery {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (Objects.isNull(obj)) {
+		if (this == obj) {
+			return true;
+		} else if (!(obj instanceof SubsumptionQuery)) {
 			return false;
+		} else {
+			SubsumptionQuery other = (SubsumptionQuery) obj;
+			return getSubClass().equals(other.getSubClass()) && getSuperClass().equals(other.getSuperClass());
 		}
-		if (!(obj instanceof SubsumptionQuery)) {
-			return false;
-		}
-		SubsumptionQuery other = (SubsumptionQuery) obj;
-		return getSubClass().equals(other.getSubClass()) && getSuperClass().equals(other.getSuperClass());
 	}
 
 	@Override

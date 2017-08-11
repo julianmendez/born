@@ -181,13 +181,13 @@ public class ExampleLoader {
 	 */
 	public InputStream getInputStreamForFile(String fileName) throws FileNotFoundException {
 		Objects.requireNonNull(fileName);
-		InputStream owlInputStream;
+		InputStream result;
 		if (isInJar()) {
-			owlInputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+			result = getClass().getClassLoader().getResourceAsStream(fileName);
 		} else {
-			owlInputStream = new FileInputStream(fileName);
+			result = new FileInputStream(fileName);
 		}
-		return owlInputStream;
+		return result;
 
 	}
 
