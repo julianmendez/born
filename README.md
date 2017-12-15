@@ -1,9 +1,11 @@
 # [BORN](https://julianmendez.github.io/born/)
+
+[![build](https://travis-ci.org/julianmendez/born.png?branch=master)](https://travis-ci.org/julianmendez/born)
+[![maven central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](https://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
 *Bayesian Ontology Reasoner*
-
-
-[![Build Status](https://travis-ci.org/julianmendez/born.png?branch=master)](https://travis-ci.org/julianmendez/born)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](https://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
 
 
 **BORN** is a probabilistic reasoner for BEL (Bayesian EL), which is an extension of the
