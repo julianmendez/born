@@ -4,9 +4,7 @@
 [![maven central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](https://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-
 *Bayesian Ontology Reasoner*
-
 
 **BORN** is a probabilistic reasoner for BEL (Bayesian EL), which is an extension of the
 lightweight [Description Logic](http://dl.kr.org/) EL. Bayesian Ontology Languages are a
@@ -14,7 +12,6 @@ family of probabilistic ontology languages that allow to encode probabilistic in
 over the axioms of an ontology with the help of a Bayesian network. BORN uses
 the [OWL API](https://owlcs.github.io/owlapi/) to
 read [OWL 2 EL](https://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it can be used as a [Prot&eacute;g&eacute;](https://protege.stanford.edu/) plug-in.
-
 
 
 ## Download
@@ -153,18 +150,19 @@ BORN is implemented with the following modules:
 Technically each command is implemented in its own package. Each command has the following classes:
 
 * `-Configuration`: contains the interface for the configuration (parameters) of the command line execution, and is also used as model in the visual interface.
-* `-ConfigurationImpl`: contains the default implementation of the `-Configuration` interface. 
+* `-ConfigurationImpl`: contains the default implementation of the `-Configuration` interface.
 * `-Core`: contains the methods to execute the command itself, which may include the communication with ProbLog or the OWL API.
 * `-SubApp`: is a snippet used to register this command in the list of commands, containing the help and some parsing methods to read the arguments from the command line.
 
 `born-gui` has a package for each panel, and a package to integrate them using tabs. Each package contains:
 
 * `-View`: contains the interface for the visual components
-* `-Panel`: implements `-View` and contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder). 
+* `-Panel`: implements `-View` and contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder).
 * `-Controller`: contains the behavior for the provided view, using the `-Configuration` interface as model.  The controller uses the `-Core` class and might run it in a separate thread, to avoid blocking the whole application.
 
 
 ## Contact
 
 In case you need more information, please contact @julianmendez .
+
 
