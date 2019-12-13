@@ -28,6 +28,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>de.tu-dresden.inf.lat.util</groupId>
+				<artifactId>util-map</artifactId>
+				<version>${util.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>de.tu-dresden.inf.lat.jproblog</groupId>
 				<artifactId>jproblog</artifactId>
 				<version>${jproblog.version}</version>
@@ -81,6 +87,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
+		<util.version>0.1.0</util.version>
 		<jproblog.version>0.1.0</jproblog.version>
 		<jcel.version>0.24.1</jcel.version>
 		<owlapi.version>4.2.8</owlapi.version>

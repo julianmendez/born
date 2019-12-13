@@ -5,13 +5,14 @@ import java.util.Objects;
 
 /**
  * Default implementation of a clause.
- * 
- * @author Julian Mendez
  *
+ * @author Julian Mendez
  */
 public class ProbClauseImpl implements ProbClause {
 
-	/** Probability value for a certainty. */
+	/**
+	 * Probability value for a certainty.
+	 */
 	public static final String CERTAIN = "1";
 
 	private final String probability;
@@ -27,13 +28,10 @@ public class ProbClauseImpl implements ProbClause {
 
 	/**
 	 * Constructs a new clause.
-	 * 
-	 * @param head
-	 *            head
-	 * @param body
-	 *            body
-	 * @param probability
-	 *            probability
+	 *
+	 * @param head        head
+	 * @param body        body
+	 * @param probability probability
 	 */
 	public ProbClauseImpl(Term head, List<Term> body, String probability) {
 		Objects.requireNonNull(head);
@@ -68,23 +66,26 @@ public class ProbClauseImpl implements ProbClause {
 
 	@Override
 	public boolean equals(Object obj) {
+		boolean result = false;
 		if (this == obj) {
-			return true;
+			result = true;
 		} else if (!(obj instanceof Clause)) {
-			return false;
+			result = false;
 		} else {
 			Clause other = (Clause) obj;
 			if (getHead().equals(other.getHead()) && getBody().equals(other.getBody())) {
 				if (obj instanceof ProbClause) {
 					ProbClause otherProb = (ProbClause) other;
-					return getProbability().equals(otherProb.getProbability());
+					result = getProbability().equals(otherProb.getProbability());
 				} else {
-					return getProbability().equals(CERTAIN);
+					result = getProbability().equals(CERTAIN);
 				}
 			} else {
-				return false;
+				result = false;
 			}
 		}
+
+		return result;
 	}
 
 	@Override

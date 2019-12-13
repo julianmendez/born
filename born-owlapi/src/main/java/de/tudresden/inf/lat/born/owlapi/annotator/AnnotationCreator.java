@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -64,6 +65,8 @@ import org.semanticweb.owlapi.model.SWRLRule;
 import de.tudresden.inf.lat.born.core.term.Symbol;
 import de.tudresden.inf.lat.born.problog.parser.Token;
 import de.tudresden.inf.lat.born.problog.parser.TokenCreator;
+import de.tudresden.inf.lat.util.map.OptMap;
+import de.tudresden.inf.lat.util.map.OptMapImpl;
 
 /**
  * An object of this annotates an ontology, axiom by axiom.
@@ -85,7 +88,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	private final List<String> variableOrder = new ArrayList<>();
 	private final Set<String> bayesianNetworkVariableSet = new TreeSet<>();
 	private final List<String> bayesianNetworkVariableList = new ArrayList<>();
-	private final Map<String, String> network = new TreeMap<>();
+	private final OptMap<String, String> network = new OptMapImpl<>(new TreeMap<>());
 	private int counter = 0;
 	private final double threshold;
 
@@ -142,7 +145,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 		return Collections.unmodifiableSet(this.bayesianNetworkVariableSet);
 	}
 
-	public String getValue(String variable) {
+	public Optional<String> getValue(String variable) {
 		Objects.requireNonNull(variable);
 		return this.network.get(variable);
 	}
@@ -152,7 +155,7 @@ public class AnnotationCreator implements OWLAxiomVisitorEx<Boolean> {
 	}
 
 	public Map<String, String> getNetwork() {
-		return this.network;
+		return this.network.asMap();
 	}
 
 	String asString(OWLAnnotationValue value) {

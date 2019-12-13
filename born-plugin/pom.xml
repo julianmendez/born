@@ -98,6 +98,7 @@
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
 							@born-protege-${project.version}.jar,
+							@util-map-${util.version}.jar,
 							@jproblog-${jproblog.version}.jar,
 							@jcel-coreontology-${jcel.version}.jar,
 							@jcel-core-${jcel.version}.jar,

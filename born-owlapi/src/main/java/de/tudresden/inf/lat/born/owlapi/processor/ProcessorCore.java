@@ -104,9 +104,10 @@ public class ProcessorCore {
 		Objects.requireNonNull(query);
 		log("Create ProbLog file.", start);
 		ProblogInputCreator instance = new ProblogInputCreator();
-		String ret = instance.createProblogFile(useOfDefaultCompletionRules, additionalCompletionRules, ontology,
+		String result = instance.createProblogFile(useOfDefaultCompletionRules, additionalCompletionRules, ontology,
 				bayesianNetwork, query, inputForProblog, executionResult);
-		return ret;
+
+		return result;
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class ProcessorCore {
 		long processorStart = System.nanoTime();
 		Objects.requireNonNull(conf);
 		Objects.requireNonNull(executionResult);
-		StringBuffer sbuf = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		try {
 			log("Start. Each row shows nanoseconds from start and task that is starting.", start);
 
@@ -142,13 +143,13 @@ public class ProcessorCore {
 
 			log("End and show results.", start);
 
-			sbuf.append(result);
+			sb.append(result);
 
 		} catch (IOException | OWLOntologyCreationException e) {
 			throw new RuntimeException(e);
 		}
 
-		executionResult.setResult(sbuf.toString());
+		executionResult.setResult(sb.toString());
 		executionResult.setTotalTime(System.nanoTime() - processorStart);
 	}
 

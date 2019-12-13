@@ -46,17 +46,20 @@ public class PseudorandomNumberGenerator {
 	 *         greater than or equal to 0, and less than the given number
 	 */
 	public int nextInt(int bound) {
+		int result = 0;
 		if (bound < 1) {
 			throw new IllegalArgumentException("Bound must be a positive number.");
 		} else if (bound == 1) {
-			return 0;
+			result = 0;
 		} else {
 			int ret = nextInt();
 			if (ret < 0) {
 				ret = (-1) * ret;
 			}
-			return ret % bound;
+			result = ret % bound;
 		}
+
+		return result;
 	}
 
 	/**
