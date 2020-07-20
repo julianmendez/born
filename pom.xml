@@ -95,6 +95,21 @@
 	</properties>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<!--
+					[[https://repo1.maven.org/maven2/org/apache/felix/maven-bundle-plugin/]]
+					-->
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<version>5.1.1</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 
 			<plugin>
