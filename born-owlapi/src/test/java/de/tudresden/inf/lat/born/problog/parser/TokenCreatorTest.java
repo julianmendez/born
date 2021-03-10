@@ -5,8 +5,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.io.OWLRendererException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
@@ -60,7 +60,7 @@ public class TokenCreatorTest {
 		TokenCreator instance = new TokenCreator();
 		List<Token> actual = instance.createTokens(reader);
 
-		Assert.assertEquals(expected, actual);
+		Assertions.assertEquals(expected, actual);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class TokenCreatorTest {
 		TokenCreator instance = new TokenCreator();
 		List<Token> actual = instance.createTokens(reader);
 
-		Assert.assertEquals(expected, actual);
+		Assertions.assertEquals(expected, actual);
 	}
 
 }

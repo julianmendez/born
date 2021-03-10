@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ProcessorConfigurationImplTest {
 
@@ -15,7 +15,7 @@ public class ProcessorConfigurationImplTest {
 	public void testRead() throws IOException {
 		StringReader reader = new StringReader(exampleText);
 		String actual = ProcessorConfigurationImpl.read(reader);
-		Assert.assertEquals(exampleText, actual);
+		Assertions.assertEquals(exampleText, actual);
 	}
 
 	@Test
@@ -24,7 +24,7 @@ public class ProcessorConfigurationImplTest {
 		StringWriter output = new StringWriter();
 		ProcessorConfigurationImpl.write(reader, output);
 		String actual = output.toString();
-		Assert.assertEquals(exampleText, actual);
+		Assertions.assertEquals(exampleText, actual);
 	}
 
 }

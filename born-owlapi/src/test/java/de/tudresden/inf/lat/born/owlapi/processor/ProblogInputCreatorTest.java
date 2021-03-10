@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import de.tudresden.inf.lat.util.map.OptMap;
 import de.tudresden.inf.lat.util.map.OptMapImpl;
@@ -39,7 +39,7 @@ public class ProblogInputCreatorTest {
 		expected.add("an");
 		expected.add("is");
 		List<String> actual = instance.orderByLongestFirst(list);
-		Assert.assertEquals(expected, actual);
+		Assertions.assertEquals(expected, actual);
 	}
 
 	/**
@@ -66,15 +66,15 @@ public class ProblogInputCreatorTest {
 			String textWithPrefixes = "query(sub('ont:a', 'ont:e')).";
 			String textWithoutPrefixes = "query(sub('https://lat.inf.tu-dresden.de/systems/born/born-example#a', 'https://lat.inf.tu-dresden.de/systems/born/born-example#e')).";
 
-			Assert.assertEquals(textWithoutPrefixes, instance.replaceAll(map, textWithPrefixes));
-			Assert.assertEquals(textWithPrefixes, instance.replaceAll(revMap, textWithoutPrefixes));
+			Assertions.assertEquals(textWithoutPrefixes, instance.replaceAll(map, textWithPrefixes));
+			Assertions.assertEquals(textWithPrefixes, instance.replaceAll(revMap, textWithoutPrefixes));
 		}
 
 		{
 			String textWithPrefixes = "sub('ont:a','ont:e'):	0.09882";
 			String textWithoutPrefixes = "sub('https://lat.inf.tu-dresden.de/systems/born/born-example#a','https://lat.inf.tu-dresden.de/systems/born/born-example#e'):	0.09882";
-			Assert.assertEquals(textWithoutPrefixes, instance.replaceAll(map, textWithPrefixes));
-			Assert.assertEquals(textWithPrefixes, instance.replaceAll(revMap, textWithoutPrefixes));
+			Assertions.assertEquals(textWithoutPrefixes, instance.replaceAll(map, textWithPrefixes));
+			Assertions.assertEquals(textWithPrefixes, instance.replaceAll(revMap, textWithoutPrefixes));
 		}
 	}
 
