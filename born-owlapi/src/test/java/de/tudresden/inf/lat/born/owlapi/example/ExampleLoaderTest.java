@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,17 +14,16 @@ import org.junit.jupiter.api.Test;
  */
 public class ExampleLoaderTest {
 
-	private final List<ExampleConfiguration> list = new ArrayList<>();
+	private final List<ExampleConfiguration> list = getExampleConfigurations();
 
 	/**
 	 * Tests the example loader and loads all the example configurations.
 	 */
-	@BeforeEach
-	public void testGetExampleConfigurations() {
+	public List<ExampleConfiguration>  getExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
-		this.list.clear();
-		this.list.addAll(loader.getExampleConfigurations());
-		Assertions.assertEquals(6, this.list.size());
+		List<ExampleConfiguration> list = new ArrayList<>(loader.getExampleConfigurations());
+		Assertions.assertEquals(6, list.size());
+		return list;
 	}
 
 	/**
