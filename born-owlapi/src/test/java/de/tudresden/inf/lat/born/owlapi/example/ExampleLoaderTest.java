@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,7 +20,7 @@ public class ExampleLoaderTest {
 	/**
 	 * Tests the example loader and loads all the example configurations.
 	 */
-	@BeforeAll
+	@BeforeEach
 	public void testGetExampleConfigurations() {
 		ExampleLoader loader = new ExampleLoader();
 		this.list.clear();
