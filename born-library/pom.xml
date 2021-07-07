@@ -99,7 +99,7 @@
 							@jproblog-${jproblog.version}.jar,
 							@born-owlapi-${project.version}.jar,
 							@born-gui-${project.version}.jar,
-							LICENSE.txt=../LICENSE.txt
+							LICENSE.txt=../docs/LICENSE.txt
 						</Include-Resource>
 					</instructions>
 				</configuration>
