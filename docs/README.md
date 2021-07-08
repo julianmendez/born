@@ -1,6 +1,6 @@
 # [BORN](https://julianmendez.github.io/born/)
 
-[![build](https://travis-ci.org/julianmendez/born.png?branch=master)](https://travis-ci.org/julianmendez/born)
+[![build](https://github.com/julianmendez/born/workflows/Java%20CI/badge.svg)](https://github.com/julianmendez/born/actions)
 [![maven central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](https://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
