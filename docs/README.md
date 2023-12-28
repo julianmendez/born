@@ -16,7 +16,7 @@ read [OWL 2 EL](https://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and i
 
 ## Download
 
-* [all-in-one ZIP file](https://sourceforge.net/projects/latitude/files/born/0.3.0/born-0.3.0.zip/download)
+* [all-in-one ZIP file](https://sourceforge.net/projects/latitude/files/born/0.4.0/born-0.4.0.zip/download)
 * [The Central Repository](https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/)
 * as dependency
 
@@ -24,7 +24,7 @@ read [OWL 2 EL](https://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and i
 <dependency>
   <groupId>de.tu-dresden.inf.lat.born</groupId>
   <artifactId>born-gui</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
