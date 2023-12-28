@@ -81,7 +81,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<util.version>0.1.0</util.version>
-		<jproblog.version>0.1.0</jproblog.version>
+		<jproblog.version>0.2.0</jproblog.version>
 		<jcel.version>0.24.1</jcel.version>
 		<owlapi.version>4.5.9</owlapi.version>
 		<protege.version>5.5.0</protege.version>
