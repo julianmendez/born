@@ -1,8 +1,8 @@
-# Release notes
+# Release Notes
 
 ---
 - - summary:
-    - v0.4.0 (2023-12-31), Java 11-21, OWL API 4.5.26, Protege 5.6.3, ProbLog 2.2.4,
+    - v0.4.0 (2023-12-31), Java 11-21, OWL API 4.5.26, Protege 5.5.0, ProbLog 2.2.4,
       Python 3.7-3.10
     - v0.3.0 (2017-04-26), Java 8, OWL API 4.2.5, Protege 5.0.0, ProbLog 2.1, Python
       2.7 or 3.2
@@ -17,9 +17,9 @@
     - Python 3.7 or higher, test with Python 3.10
     - ProbLog 2.2.4 needs to be downloaded
   - features:
-    - it uses jcel 0.24.0
+    - it uses jcel 0.24.1
     - it uses OWL API 4.5.26
-    - it can be used as a plug-in for Protege 5.6.3
+    - it can be used as a plug-in for Protege 5.5.0
   - build: mvn clean install
   - release: target/born-0.4.0.zip
   - plug-in: born-plugin/target/de.tu-dresden.inf.lat.born-0.4.0.jar
