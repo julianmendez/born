@@ -22,9 +22,15 @@
 		</dependency>
 
 		<dependency>
+			<!--
+			Simple Logging Facade for Java (SLF4J) Simple Provider
+			[[https://www.slf4j.org/manual.html]]
+			[[https://github.com/qos-ch/slf4j]]
+			[[https://repo1.maven.org/maven2/org/slf4j/slf4j-simple/]]
+			-->
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.10</version>
+			<version>2.0.9</version>
 		</dependency>
 
 	</dependencies>
