@@ -1,0 +1,114 @@
+
+%% EL completion rules
+
+
+
+% Rules to interpret the queries
+sub(X, B) :-
+con(X),
+con(B),
+subx(X, B).
+inst(X, B) :-
+indiv(X),
+con(B),
+subx(X, B).
+inst(R, X, B) :-
+role(R),
+indiv(X),
+indiv(B),
+subx(X, exists(R, A)),
+subx(A, B).
+
+% Rules to process individuals
+coni(X) :- con(X).
+coni(X) :- indiv(X).
+
+% Basic rules for the completion
+subx(X, X) :- coni(X).
+subx(X, top) :- coni(X).
+subx(X, B) :- gci(X, B).
+
+% EL complettion rules
+subx(X, B) :-
+gci(A, B),
+subx(X, A),
+coni(X),
+coni(A),
+coni(B).
+subx(X, B) :-
+gci(and(A1, A2), B),
+subx(X, A1),
+subx(X, A2),
+coni(X),
+coni(A1),
+coni(A2),
+coni(B).
+subx(X, exists(R, B)) :-
+gci(A, exists(R, B)),
+subx(X, A),
+coni(X),
+coni(A),
+coni(B),
+role(R).
+subx(X, B) :-
+gci(exists(R, A), B),
+subx(X, exists(R, Y)),
+subx(Y, A),
+coni(X),
+coni(Y),
+coni(A),
+coni(B),
+role(R).
+
+% Rules to avoid empty predicates of entities
+con(-).
+role(-).
+indiv(-).
+
+
+%% Ontology
+
+con('https://lat.inf.tu-dresden.de/systems/born/born-example#a').
+con('https://lat.inf.tu-dresden.de/systems/born/born-example#b').
+con('https://lat.inf.tu-dresden.de/systems/born/born-example#c').
+con('https://lat.inf.tu-dresden.de/systems/born/born-example#d').
+role('https://lat.inf.tu-dresden.de/systems/born/born-example#r').
+gci(exists('https://lat.inf.tu-dresden.de/systems/born/born-example#r', 'https://lat.inf.tu-dresden.de/systems/born/born-example#c'), 'https://lat.inf.tu-dresden.de/systems/born/born-example#d') :- x0.
+gci('https://lat.inf.tu-dresden.de/systems/born/born-example#b', 'https://lat.inf.tu-dresden.de/systems/born/born-example#c') :- x0.
+gci('https://lat.inf.tu-dresden.de/systems/born/born-example#a', exists('https://lat.inf.tu-dresden.de/systems/born/born-example#r', 'https://lat.inf.tu-dresden.de/systems/born/born-example#b')) :- x0.
+
+
+%% Bayesian Network
+
+
+0.25::x0.
+
+0.84::x1 :- x0.
+
+0.27::x1 :- \+x0.
+
+0.77::x2 :- 
+   x0,
+   x1.
+
+0.77::x2 :- 
+   \+x0,
+   x1.
+
+0.45::x2 :- 
+   x0,
+   \+x1.
+
+0.12::x2 :- 
+   \+x0,
+   \+x1.
+
+
+
+%% Queries
+
+
+query(sub('https://lat.inf.tu-dresden.de/systems/born/born-example#a', 'https://lat.inf.tu-dresden.de/systems/born/born-example#d')).
+
+
+
