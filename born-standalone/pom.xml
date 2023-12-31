@@ -81,7 +81,7 @@
 										<Bundle-Category>protege</Bundle-Category>
 										<Bundle-Description>BORN standalone</Bundle-Description>
 										<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
-										<Bundle-DocURL>https://lat.inf.tu-dresden.de</Bundle-DocURL>
+										<Bundle-DocURL>https://tu-dresden.de/ing/informatik/thi/lat</Bundle-DocURL>
 										<Bundle-ClassPath>.</Bundle-ClassPath>
 										<Import-Package>${import.package}</Import-Package>
 										<Main-Class>${mainClass}</Main-Class>

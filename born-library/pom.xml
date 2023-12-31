@@ -90,7 +90,7 @@
 						<Bundle-Activator>${bundle.activator}</Bundle-Activator>
 						<Bundle-Description>BORN library</Bundle-Description>
 						<Bundle-Vendor>Chair of Automata Theory - TU Dresden</Bundle-Vendor>
-						<Bundle-DocURL>https://lat.inf.tu-dresden.de</Bundle-DocURL>
+						<Bundle-DocURL>https://tu-dresden.de/ing/informatik/thi/lat</Bundle-DocURL>
 						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
 						<Import-Package>${import.package}</Import-Package>
 						<Main-Class>${mainClass}</Main-Class>
