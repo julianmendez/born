@@ -1,30 +1,30 @@
 # [BORN](https://julianmendez.github.io/born/)
 
-[![build](https://github.com/julianmendez/born/workflows/Java%20CI/badge.svg)](https://github.com/julianmendez/born/actions)
-[![maven central](https://maven-badges.herokuapp.com/maven-central/de.tu-dresden.inf.lat.born/born-parent/badge.svg)](https://search.maven.org/#search|ga|1|g%3A%22de.tu-dresden.inf.lat.born%22)
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)][license]
+[![Maven Central](https://img.shields.io/maven-central/v/de.tu-dresden.inf.lat.born/born-parent.svg)][maven-central]
+[![build](https://github.com/julianmendez/born/workflows/Java%20CI/badge.svg)][build-status]
 
 *Bayesian Ontology Reasoner*
 
 **BORN** is a probabilistic reasoner for BEL (Bayesian EL), which is an extension of the
-lightweight [Description Logic](http://dl.kr.org/) EL. Bayesian Ontology Languages are a
+lightweight [Description Logic][description-logics] EL. Bayesian Ontology Languages are a
 family of probabilistic ontology languages that allow to encode probabilistic information
 over the axioms of an ontology with the help of a Bayesian network. BORN uses
-the [OWL API](https://owlcs.github.io/owlapi/) to
-read [OWL 2 EL](https://www.w3.org/TR/owl2-profiles/#OWL_2_EL) ontologies, and it can be used as a [Prot&eacute;g&eacute;](https://protege.stanford.edu/) plug-in.
+the [OWL API][owl-api] to
+read [OWL 2 EL][owl-2-el] ontologies, and it can be used as a [Prot&eacute;g&eacute;][protege] plug-in.
 
 
 ## Download
 
-* [all-in-one ZIP file](https://sourceforge.net/projects/latitude/files/born/0.3.0/born-0.3.0.zip/download)
-* [The Central Repository](https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/)
+* [all-in-one ZIP file][zip-file]
+* [The Central Repository][central-repository]
 * as dependency
 
 ```xml
 <dependency>
   <groupId>de.tu-dresden.inf.lat.born</groupId>
   <artifactId>born-gui</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
@@ -72,7 +72,7 @@ and once offline, use:
 $ mvn --offline clean install
 ```
 
-The bundles uploaded to [Sonatype](https://oss.sonatype.org/) are created with:
+The bundles uploaded to [Sonatype][sonatype] are created with:
 
 ```
 $ mvn clean install -DperformRelease=true
@@ -103,24 +103,24 @@ where *NEW_VERSION* is the new version.
 
 ## Authors
 
-Design and Implementation: [Julian Mendez](https://julianmendez.github.io)
+Design and Implementation: [Julian Alfredo Mendez][author1]
 
-Idea: [&#0304;smail &#0304;lkan Ceylan](https://iccl.inf.tu-dresden.de/web/%c4%b0smail_%c4%b0lkan_Ceylan/en)
+Idea: [&#0304;smail &#0304;lkan Ceylan][author2]
 
 
 ## License
 
-This software is distributed under the [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).
+This software is distributed under the [Apache License Version 2.0][license].
 
 
 ## Release notes
 
-See [release notes](https://julianmendez.github.io/born/RELEASE-NOTES.html).
+See [release notes][release-notes].
 
 
 ## Architecture
 
-BORN has a hybrid architecture that uses [Java](https://www.oracle.com/technetwork/java/index.html) and [ProbLog](https://dtai.cs.kuleuven.be/problog/). In addition to Java, BORN requires having [Python](https://www.python.org/) installed, because it is used to execute ProbLog. If ProbLog is not installed, BORN automatically downloads the most recent version of ProbLog, and uses it to solve the queries.
+BORN has a hybrid architecture that uses [Java][java] and [ProbLog][problog]. In addition to Java, BORN requires having [Python][python] installed, because it is used to execute ProbLog. If ProbLog is not installed, BORN automatically downloads the most recent version of ProbLog, and uses it to solve the queries.
 Details on the versions of those requirements are available in the release notes.
 
 
@@ -157,12 +157,31 @@ Technically each command is implemented in its own package. Each command has the
 `born-gui` has a package for each panel, and a package to integrate them using tabs. Each package contains:
 
 * `-View`: contains the interface for the visual components
-* `-Panel`: implements `-View` and contains the visual components, but not their behavior. This class can be edited using [WindowBuilder](https://projects.eclipse.org/projects/tools.windowbuilder).
+* `-Panel`: implements `-View` and contains the visual components, but not their behavior. This class can be edited using [WindowBuilder][windowbuilder].
 * `-Controller`: contains the behavior for the provided view, using the `-Configuration` interface as model.  The controller uses the `-Core` class and might run it in a separate thread, to avoid blocking the whole application.
 
 
 ## Contact
 
-In case you need more information, please contact @julianmendez .
+In case you need more information, please contact [julianmendez][author1].
+
+[author1]: https://julianmendez.github.io
+[author2]: https://iccl.inf.tu-dresden.de/web/%c4%b0smail_%c4%b0lkan_Ceylan/en
+[license]: https://www.apache.org/licenses/LICENSE-2.0.txt
+[maven-central]: https://search.maven.org/artifact/de.tu-dresden.inf.lat.jproblog/jproblog
+[build-status]: https://github.com/julianmendez/born/actions
+[central-repository]: https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/
+[zip-file]: https://sourceforge.net/projects/latitude/files/born/0.4.0/born-0.4.0.zip/download
+[release-notes]: https://julianmendez.github.io/born/RELEASE-NOTES.html
+[sonatype]: https://oss.sonatype.org
+[java]: https://www.oracle.com/java/technologies/
+[problog]: https://dtai.cs.kuleuven.be/problog/
+[problog-repository]: https://github.com/ML-KULeuven/problog
+[python]: https://www.python.org
+[description-logics]: http://dl.kr.org
+[owl-api]: https://owlcs.github.io/owlapi/
+[owl-2-el]: https://www.w3.org/TR/owl2-profiles/#OWL_2_EL
+[protege]: https://protege.stanford.edu
+[windowbuilder]: https://projects.eclipse.org/projects/tools.windowbuilder
 
 

@@ -7,13 +7,13 @@
 
 	<groupId>de.tu-dresden.inf.lat.born</groupId>
 	<artifactId>born-parent</artifactId>
-	<version>0.4.0-SNAPSHOT</version>
+	<version>0.4.0</version>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>de.tu-dresden.inf.lat</groupId>
 		<artifactId>lat-parent</artifactId>
-		<version>0.1.5</version>
+		<version>0.1.7</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -21,42 +21,84 @@
 		<dependencies>
 
 			<dependency>
+				<!--
+				JProbLog
+				[[https://julianmendez.github.io/util/]]
+				[[https://github.com/julianmendez/util]]
+				[[https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/util]]
+				-->
 				<groupId>de.tu-dresden.inf.lat.util</groupId>
 				<artifactId>util-map</artifactId>
 				<version>${util.version}</version>
 			</dependency>
 
 			<dependency>
+				<!--
+				JProbLog
+				[[https://julianmendez.github.io/jproblog/]]
+				[[https://github.com/julianmendez/jproblog]]
+				[[https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/jproblog]]
+				-->
 				<groupId>de.tu-dresden.inf.lat.jproblog</groupId>
 				<artifactId>jproblog</artifactId>
 				<version>${jproblog.version}</version>
 			</dependency>
 
 			<dependency>
+				<!--
+				jcel
+				[[https://julianmendez.github.io/jcel/]]
+				[[https://github.com/julianmendez/jcel]]
+				[[https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/jcel]]
+				-->
 				<groupId>de.tu-dresden.inf.lat.jcel</groupId>
 				<artifactId>jcel-owlapi</artifactId>
 				<version>${jcel.version}</version>
 			</dependency>
 
 			<dependency>
+				<!--
+				OWL API (distribution)
+				[[https://owlcs.github.io/owlapi/]]
+				[[https://github.com/owlcs/owlapi]]
+				[[https://repo1.maven.org/maven2/net/sourceforge/owlapi/owlapi-distribution/]]
+				-->
 				<groupId>net.sourceforge.owlapi</groupId>
 				<artifactId>owlapi-distribution</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 
 			<dependency>
+				<!--
+				OWL API (osgidistribution)
+				[[https://owlcs.github.io/owlapi/]]
+				[[https://github.com/owlcs/owlapi]]
+				[[https://repo1.maven.org/maven2/net/sourceforge/owlapi/owlapi-osgidistribution/]]
+				-->
 				<groupId>net.sourceforge.owlapi</groupId>
 				<artifactId>owlapi-osgidistribution</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 
 			<dependency>
+				<!--
+				Protege (editor owl)
+				[[https://protege.stanford.edu]]
+				[[https://github.com/protegeproject/protege]]
+				[[https://repo1.maven.org/maven2/edu/stanford/protege/protege-editor-owl/]]
+				-->
 				<groupId>edu.stanford.protege</groupId>
 				<artifactId>protege-editor-owl</artifactId>
 				<version>${protege.version}</version>
 			</dependency>
 
 			<dependency>
+				<!--
+				Protege (editor core)
+				[[https://protege.stanford.edu]]
+				[[https://github.com/protegeproject/protege]]
+				[[https://repo1.maven.org/maven2/edu/stanford/protege/protege-editor-core/]]
+				-->
 				<groupId>edu.stanford.protege</groupId>
 				<artifactId>protege-editor-core</artifactId>
 				<version>${protege.version}</version>
@@ -81,9 +123,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<util.version>0.1.0</util.version>
-		<jproblog.version>0.1.0</jproblog.version>
+		<jproblog.version>0.2.0</jproblog.version>
 		<jcel.version>0.24.1</jcel.version>
-		<owlapi.version>4.5.9</owlapi.version>
+		<owlapi.version>4.5.26</owlapi.version>
 		<protege.version>5.5.0</protege.version>
 	</properties>
 
@@ -129,8 +171,9 @@
 
 		<developer>
 			<id>julianmendez</id>
-			<name>Julian Mendez</name>
+			<name>Julian Alfredo Mendez</name>
 			<email>julian.mendez@gmail.com</email>
+			<url>https://julianmendez.github.io</url>
 		</developer>
 
 		<developer>

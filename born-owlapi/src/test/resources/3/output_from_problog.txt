@@ -1,0 +1,1 @@
+inst('https://lat.inf.tu-dresden.de/systems/born/born-example#r','https://lat.inf.tu-dresden.de/systems/born/born-example#i0','https://lat.inf.tu-dresden.de/systems/born/born-example#i1'):	0.66772143

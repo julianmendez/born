@@ -31,7 +31,9 @@ public class BornStarter implements OWLOntologyChangeListener, OWLOntologyLoader
 	 */
 	public BornStarter(OWLOntologyManager manager) {
 		this.ontologyManager = Objects.requireNonNull(manager, "Ontology manager must not be null");
-		this.panel = new BornController(new BornPanel(new BornModelImpl()), this.ontologyManager);
+		BornModelImpl bornModelImpl = new BornModelImpl();
+		BornPanel bornPanel = new BornPanel(bornModelImpl);
+		this.panel = new BornController(bornPanel, this.ontologyManager);
 		getOWLOntologyManager().addOntologyLoaderListener(this);
 		getOWLOntologyManager().addOntologyChangeListener(this);
 	}
