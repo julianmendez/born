@@ -103,7 +103,7 @@ where *NEW_VERSION* is the new version.
 
 ## Authors
 
-Design and Implementation: [Julian Mendez][author1]
+Design and Implementation: [Julian Alfredo Mendez][author1]
 
 Idea: [&#0304;smail &#0304;lkan Ceylan][author2]
 
