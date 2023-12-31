@@ -37,9 +37,10 @@ public class ProblogProcessorTest {
      * This tests the example ontologies.
      */
     @Test
-    public void testApply() {
+    public void testApply() throws IOException, InterruptedException {
         ProcessorConfiguration conf = new ProcessorConfigurationImpl();
         JProblog queryProcessor = new JProblog();
+        queryProcessor.getProcessor().install();
         conf.setQueryProcessor(queryProcessor);
         IntStream.range(0, 6).forEach(index -> {
             String input = readFile(File.separator + index + File.separator + INPUT_FOR_PROBLOG);
