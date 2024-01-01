@@ -107,6 +107,7 @@
 			<dependency>
 				<!--
 				Jackson core
+				(required by OWL API)
 				[[https://github.com/FasterXML/jackson-core]]
 				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/]]
 				-->
@@ -117,18 +118,8 @@
 
 			<dependency>
 				<!--
-				Jackson annotations
-				[[https://github.com/FasterXML/jackson-annotations]]
-				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/]]
-				-->
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-annotations</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
 				Jackson data-bind
+				(required by OWL API)
 				[[https://github.com/FasterXML/jackson-databind]]
 				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind]]
 				-->
@@ -139,7 +130,20 @@
 
 			<dependency>
 				<!--
+				Jackson annotations
+				(required by OWL API)
+				[[https://github.com/FasterXML/jackson-annotations]]
+				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/]]
+				-->
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<!--
 				Logback core
+				(required by Protege)
 				[[https://logback.qos.ch]]
 				[[https://github.com/qos-ch/logback]]
 				[[https://repo1.maven.org/maven2/ch/qos/logback/logback-core/]]
@@ -152,6 +156,7 @@
 			<dependency>
 				<!--
 				Logback classic
+				(required by Protege)
 				[[https://logback.qos.ch]]
 				[[https://github.com/qos-ch/logback]]
 				[[https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/]]
@@ -164,6 +169,7 @@
 			<dependency>
 				<!--
 				Eclipse JGit
+				(required by Protege)
 				[[https://www.eclipse.org/jgit/]]
 				[[https://git.eclipse.org/r/plugins/gitiles/jgit/jgit/]]
 				[[https://repo1.maven.org/maven2/org/eclipse/jgit/org.eclipse.jgit/]]
@@ -175,19 +181,8 @@
 
 			<dependency>
 				<!--
-				Google Guava
-				[[https://www.eclipse.org/jgit/]]
-				[[https://github.com/google/guava]]
-				[[https://repo1.maven.org/maven2/com/google/guava/guava/]]
-				-->
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
 				Apache Commons IO
+				(required by OWL API and Protege)
 				[[https://commons.apache.org/proper/commons-io/]]
 				[[https://github.com/apache/commons-io]]
 				[[https://repo1.maven.org/maven2/commons-io/commons-io/]]
@@ -207,6 +202,19 @@
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>${httpclient.version}</version>
+			</dependency>
+
+			<dependency>
+				<!--
+				Google Guava
+				(required by OWL API and Protege, but OWL API uses a newer version)
+				[[https://www.eclipse.org/jgit/]]
+				[[https://github.com/google/guava]]
+				[[https://repo1.maven.org/maven2/com/google/guava/guava/]]
+				-->
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guavaForProtege.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -235,9 +243,9 @@
 		<jackson.version>2.16.0</jackson.version>
 		<logback.version>1.4.14</logback.version>
 		<jgit.version>6.8.0.202311291450-r</jgit.version>
-		<guava.version>32.1.3-jre</guava.version>
 		<commonsio.version>2.15.1</commonsio.version>
 		<httpclient.version>4.5.14</httpclient.version>
+		<guavaForProtege.version>18.0</guavaForProtege.version>
 	</properties>
 
 	<build>
