@@ -142,6 +142,19 @@
 
 			<dependency>
 				<!--
+				Eclipse RDF4J Util
+				(required by OWL API)
+				[[https://rdf4j.org]]
+				[[https://github.com/eclipse-rdf4j/rdf4j]]
+				[[https://repo1.maven.org/maven2/org/eclipse/rdf4j/rdf4j-util/]]
+				-->
+				<groupId>org.eclipse.rdf4j</groupId>
+				<artifactId>rdf4j-util</artifactId>
+				<version>${rdf4jutil.version}</version>
+			</dependency>
+
+			<dependency>
+				<!--
 				Logback core
 				(required by Protege)
 				[[https://logback.qos.ch]]
@@ -241,6 +254,7 @@
 		<owlapi.version>4.5.22</owlapi.version>
 		<protege.version>5.5.0</protege.version>
 		<jackson.version>2.16.0</jackson.version>
+		<rdf4jutil.version>3.7.7</rdf4jutil.version>
 		<logback.version>1.4.14</logback.version>
 		<jgit.version>6.8.0.202311291450-r</jgit.version>
 		<commonsio.version>2.15.1</commonsio.version>
