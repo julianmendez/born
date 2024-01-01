@@ -7,7 +7,7 @@
 
 	<groupId>de.tu-dresden.inf.lat.born</groupId>
 	<artifactId>born-parent</artifactId>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<packaging>pom</packaging>
 
 	<parent>
