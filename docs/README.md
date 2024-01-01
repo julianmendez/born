@@ -168,7 +168,7 @@ In case you need more information, please contact [julianmendez][author1].
 [author1]: https://julianmendez.github.io
 [author2]: https://iccl.inf.tu-dresden.de/web/%c4%b0smail_%c4%b0lkan_Ceylan/en
 [license]: https://www.apache.org/licenses/LICENSE-2.0.txt
-[maven-central]: https://search.maven.org/artifact/de.tu-dresden.inf.lat.jproblog/jproblog
+[maven-central]: https://search.maven.org/artifact/de.tu-dresden.inf.lat.born/born-gui
 [build-status]: https://github.com/julianmendez/born/actions
 [central-repository]: https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/
 [zip-file]: https://sourceforge.net/projects/latitude/files/born/0.4.0/born-0.4.0.zip/download
