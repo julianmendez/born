@@ -29,7 +29,31 @@
 
 		<bundle.classpath>.</bundle.classpath>
 		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
-		<import.package>javax.accessibility,javax.swing,javax.swing.border,org.osgi.framework,org.protege.editor.core.plugin,org.protege.editor.core.ui.workspace,*</import.package>
+		<import.package>
+			org.semanticweb.owlapi.apibinding,
+			org.semanticweb.owlapi.formats,
+			org.semanticweb.owlapi.functional.renderer,
+			org.semanticweb.owlapi.io,
+			org.semanticweb.owlapi.krss2.renderer,
+			org.semanticweb.owlapi.latex.renderer,
+			org.semanticweb.owlapi.manchestersyntax.renderer,
+			org.semanticweb.owlapi.model,
+			org.semanticweb.owlapi.model.parameters,
+			org.semanticweb.owlapi.owlxml.renderer,
+			org.semanticweb.owlapi.reasoner,
+			org.semanticweb.owlapi.reasoner.impl,
+			org.semanticweb.owlapi.util,
+			org.protege.editor.core.plugin,
+			org.protege.editor.core.ui.workspace,
+			org.protege.editor.owl.model,
+			org.protege.editor.owl.model.inference,
+			org.protege.editor.owl.ui.view.cls,
+			com.google.common.base,
+			javax.swing,javax.swing.border,
+			javax.imageio,
+			javax.accessibility,
+			org.osgi.framework
+		</import.package>
 	</properties>
 
 	<build>
