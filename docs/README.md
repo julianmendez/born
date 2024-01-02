@@ -1,7 +1,7 @@
 # [BORN](https://julianmendez.github.io/born/)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)][license]
-[![Maven Central](https://img.shields.io/maven-central/v/de.tu-dresden.inf.lat.born/born-parent.svg)][maven-central]
+[![Maven Central](https://img.shields.io/maven-central/v/de.tu-dresden.inf.lat.born/born-parent.svg?label=Maven%20Central)][maven-central]
 [![build](https://github.com/julianmendez/born/workflows/Java%20CI/badge.svg)][build-status]
 
 *Bayesian Ontology Reasoner*
