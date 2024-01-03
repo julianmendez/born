@@ -106,55 +106,6 @@
 
 			<dependency>
 				<!--
-				Jackson core
-				(required by OWL API)
-				[[https://github.com/FasterXML/jackson-core]]
-				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/]]
-				-->
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-core</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
-				Jackson data-bind
-				(required by OWL API)
-				[[https://github.com/FasterXML/jackson-databind]]
-				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind]]
-				-->
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
-				Jackson annotations
-				(required by OWL API)
-				[[https://github.com/FasterXML/jackson-annotations]]
-				[[https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/]]
-				-->
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-annotations</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
-				Eclipse RDF4J Util
-				(required by OWL API)
-				[[https://rdf4j.org]]
-				[[https://github.com/eclipse-rdf4j/rdf4j]]
-				[[https://repo1.maven.org/maven2/org/eclipse/rdf4j/rdf4j-util/]]
-				-->
-				<groupId>org.eclipse.rdf4j</groupId>
-				<artifactId>rdf4j-util</artifactId>
-				<version>${rdf4jutil.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
 				Logback core
 				(required by Protege)
 				[[https://logback.qos.ch]]
@@ -192,44 +143,6 @@
 				<version>${jgit.version}</version>
 			</dependency>
 
-			<dependency>
-				<!--
-				Apache Commons IO
-				(required by OWL API and Protege)
-				[[https://commons.apache.org/proper/commons-io/]]
-				[[https://github.com/apache/commons-io]]
-				[[https://repo1.maven.org/maven2/commons-io/commons-io/]]
-				-->
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>${commonsio.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
-				Apache HttpComponents HttpClient
-				[[https://hc.apache.org]]
-				[[https://github.com/apache/httpcomponents-client]]
-				[[https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/]]
-				-->
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>${httpclient.version}</version>
-			</dependency>
-
-			<dependency>
-				<!--
-				Google Guava
-				(required by OWL API and Protege, but OWL API uses a newer version)
-				[[https://www.eclipse.org/jgit/]]
-				[[https://github.com/google/guava]]
-				[[https://repo1.maven.org/maven2/com/google/guava/guava/]]
-				-->
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
-			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
@@ -251,15 +164,10 @@
 		<util.version>0.1.0</util.version>
 		<jproblog.version>0.2.0</jproblog.version>
 		<jcel.version>0.24.1</jcel.version>
-		<owlapi.version>4.5.22</owlapi.version>
+		<owlapi.version>4.5.26</owlapi.version>
 		<protege.version>5.5.0</protege.version>
-		<jackson.version>2.16.0</jackson.version>
-		<rdf4jutil.version>3.7.7</rdf4jutil.version>
 		<logback.version>1.4.14</logback.version>
 		<jgit.version>6.8.0.202311291450-r</jgit.version>
-		<commonsio.version>2.15.1</commonsio.version>
-		<httpclient.version>4.5.14</httpclient.version>
-		<guava.version>32.1.3-jre</guava.version>
 	</properties>
 
 	<build>
