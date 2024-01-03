@@ -27,6 +27,8 @@
 
 		<mainClass>de.tudresden.inf.lat.born.main.Main</mainClass>
 
+		<guavaDependency>com.google.common.base;version="[18,33)"</guavaDependency>
+
 		<bundle.classpath>.</bundle.classpath>
 		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
 		<import.package>
@@ -48,7 +50,7 @@
 			org.protege.editor.owl.model,
 			org.protege.editor.owl.model.inference,
 			org.protege.editor.owl.ui.view.cls,
-			com.google.common.base,
+			${guavaDependency},
 			javax.swing,javax.swing.border,
 			javax.imageio,
 			javax.accessibility,
