@@ -27,35 +27,45 @@
 
 		<mainClass>de.tudresden.inf.lat.born.main.Main</mainClass>
 
-		<guavaDependency>com.google.common.base;version="[18,33)"</guavaDependency>
+		<guava.package>com.google.common.base;version="[18,33)"</guava.package>
 
 		<bundle.classpath>.</bundle.classpath>
+
 		<bundle.activator>org.protege.editor.core.plugin.DefaultPluginActivator</bundle.activator>
+
 		<import.package>
-			org.semanticweb.owlapi.apibinding,
-			org.semanticweb.owlapi.formats,
-			org.semanticweb.owlapi.functional.renderer,
-			org.semanticweb.owlapi.io,
-			org.semanticweb.owlapi.krss2.renderer,
-			org.semanticweb.owlapi.latex.renderer,
-			org.semanticweb.owlapi.manchestersyntax.renderer,
-			org.semanticweb.owlapi.model,
-			org.semanticweb.owlapi.model.parameters,
-			org.semanticweb.owlapi.owlxml.renderer,
-			org.semanticweb.owlapi.reasoner,
-			org.semanticweb.owlapi.reasoner.impl,
-			org.semanticweb.owlapi.util,
 			org.protege.editor.core.plugin,
-			org.protege.editor.core.ui.workspace,
-			org.protege.editor.owl.model,
-			org.protege.editor.owl.model.inference,
-			org.protege.editor.owl.ui.view.cls,
-			${guavaDependency},
-			javax.swing,javax.swing.border,
+			${guava.package},
+			javax.swing,
+			javax.swing.border,
 			javax.imageio,
 			javax.accessibility,
 			org.osgi.framework
 		</import.package>
+
+		<require.bundle>
+			org.eclipse.equinox.registry,
+			org.eclipse.equinox.common,
+			org.protege.editor.core.application,
+			org.protege.editor.owl,
+			org.semanticweb.owl.owlapi
+		</require.bundle>
+
+		<include.resource>
+			{maven-resources}, {maven-dependencies},
+			@born-owlapi-${project.version}.jar,
+			@born-gui-${project.version}.jar,
+			@born-protege-${project.version}.jar,
+			@util-map-${util.version}.jar,
+			@jproblog-${jproblog.version}.jar,
+			@jcel-coreontology-${jcel.version}.jar,
+			@jcel-core-${jcel.version}.jar,
+			@jcel-ontology-${jcel.version}.jar,
+			@jcel-reasoner-${jcel.version}.jar,
+			@jcel-owlapi-${jcel.version}.jar,
+			LICENSE.txt=../docs/LICENSE.txt
+		</include.resource>
+
 	</properties>
 
 	<build>
@@ -118,21 +128,9 @@
 						<Bundle-DocURL>https://tu-dresden.de/ing/informatik/thi/lat</Bundle-DocURL>
 						<Bundle-ClassPath>${bundle.classpath}</Bundle-ClassPath>
 						<Import-Package>${import.package}</Import-Package>
+						<Require-Bundle>${require.bundle}</Require-Bundle>
 						<Main-Class>${mainClass}</Main-Class>
-						<Include-Resource>
-							{maven-resources}, {maven-dependencies},
-							@born-owlapi-${project.version}.jar,
-							@born-gui-${project.version}.jar,
-							@born-protege-${project.version}.jar,
-							@util-map-${util.version}.jar,
-							@jproblog-${jproblog.version}.jar,
-							@jcel-coreontology-${jcel.version}.jar,
-							@jcel-core-${jcel.version}.jar,
-							@jcel-ontology-${jcel.version}.jar,
-							@jcel-reasoner-${jcel.version}.jar,
-							@jcel-owlapi-${jcel.version}.jar,
-							LICENSE.txt=../docs/LICENSE.txt
-						</Include-Resource>
+						<Include-Resource>${include.resource}</Include-Resource>
 					</instructions>
 				</configuration>
 			</plugin>
