@@ -1,7 +1,7 @@
 ## Release Notes
 ---
 - - summary:
-    - v0.4.1 (unreleased), Java 11, Python 3     , ProbLog 2.2.4, OWL API 4.5.26,
+    - v0.4.1 (2024-01-04), Java 11, Python 3     , ProbLog 2.2.4, OWL API 4.5.26,
       Protege 5.5.0
     - v0.4.0 (2023-12-31), Java 11, Python 3     , ProbLog 2.2.4, OWL API 4.5.9 ,
       Protege 5.5.0
@@ -14,11 +14,11 @@
     - v0.1.0 (2015-04-14), Java 8 , Python 2 or 3, ProbLog 2.1  , OWL API 3.5.0 ,
       -
 - - version: v0.4.1
-  - date: unreleased
+  - date: '2024-01-04'
   - requirements:
     - Java 11 or higher, tested with Java 21
     - Python 3.7 or higher, tested with Python 3.10
-    - ProbLog 2.2.4 needs to be downloaded
+    - ProbLog 2.2.4 is downloaded during the first execution
   - features:
     - it uses jcel 0.24.1
     - it uses OWL API 4.5.26
@@ -31,11 +31,11 @@
   - requirements:
     - Java 11 or higher, tested with Java 21
     - Python 3.7 or higher, test with Python 3.10
-    - ProbLog 2.2.4 needs to be downloaded
+    - ProbLog 2.2.4 is downloaded during the first execution
   - features:
     - it uses jcel 0.24.1
     - it uses OWL API 4.5.9
-    - it can be used as a plug-in for Protege 5.5.0
+    - it can be used as a plug-in for Protege 5.5.0, tested with Protege 5.6.3
     - ProbLog 2.2.4 is downloaded from https://github.com/ML-KULeuven/problog/archive/refs/tags/v2.2.4.zip
   - build: $ `mvn clean install`
   - release: target/born-0.4.0.zip
@@ -98,3 +98,5 @@
     - ProbLog 2.1 is downloaded from https://mips-build.cs.kuleuven.be/jenkins/job/problog2/lastSuccessfulBuild/artifact/problog.zip
   - build: $ `mvn clean install`
   - release: target/born-0.1.0.zip
+
+

@@ -24,7 +24,7 @@ read [OWL 2 EL][owl-2-el] ontologies, and it can be used as a [Prot&eacute;g&eac
 <dependency>
   <groupId>de.tu-dresden.inf.lat.born</groupId>
   <artifactId>born-gui</artifactId>
-  <version>0.4.0</version>
+  <version>0.4.1</version>
 </dependency>
 ```
 
@@ -171,7 +171,7 @@ In case you need more information, please contact [julianmendez][author1].
 [maven-central]: https://search.maven.org/artifact/de.tu-dresden.inf.lat.born/born-gui
 [build-status]: https://github.com/julianmendez/born/actions
 [central-repository]: https://repo1.maven.org/maven2/de/tu-dresden/inf/lat/born/
-[zip-file]: https://sourceforge.net/projects/latitude/files/born/0.4.0/born-0.4.0.zip/download
+[zip-file]: https://sourceforge.net/projects/latitude/files/born/0.4.1/born-0.4.1.zip/download
 [release-notes]: https://julianmendez.github.io/born/RELEASE-NOTES.html
 [sonatype]: https://oss.sonatype.org
 [java]: https://www.oracle.com/java/technologies/
