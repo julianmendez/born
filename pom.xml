@@ -215,7 +215,7 @@
 		<jcel.version>0.24.1</jcel.version>
 		<owlapi.version>4.5.26</owlapi.version>
 		<protege.version>5.5.0</protege.version>
-		<jackson.version>2.16.0</jackson.version>
+		<jackson.version>2.18.2</jackson.version>
 		<logback.version>1.5.14</logback.version>
 		<jgit.version>6.8.0.202311291450-r</jgit.version>
 		<guava.version>33.4.0-jre</guava.version>
