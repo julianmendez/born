@@ -17,7 +17,7 @@
 	<fileSets>
 
 		<fileSet>
-			<directory>${basedir}/../born-gui/target</directory>
+			<directory>${basedir}/../born-protege/target</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
 				<include>apidocs/**</include>
@@ -25,9 +25,10 @@
 		</fileSet>
 
 		<fileSet>
-			<directory>${basedir}/..</directory>
+			<directory>${basedir}/../docs</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
+				<include>LICENSE.txt</include>
 				<include>README.md</include>
 			</includes>
 		</fileSet>
