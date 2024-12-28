@@ -376,12 +376,10 @@ public class ProblogInputCreator {
 	 * @return a ProbLog program with the given parameters
 	 * @throws IOException
 	 *             if something went wrong with I/O
-	 * @throws OWLOntologyCreationException
-	 *             if something went wrong with the ontology creation
-	 */
+     */
 	public String createProblogFile(boolean useOfDefaultCompletionRules, String additionalCompletionRules,
 			OWLOntology owlOntology, String bayesianNetwork, String query, OutputStream resultOutputStream,
-			ProcessorExecutionResult executionResult) throws IOException, OWLOntologyCreationException {
+			ProcessorExecutionResult executionResult) throws IOException {
 		Objects.requireNonNull(additionalCompletionRules);
 		Objects.requireNonNull(owlOntology);
 		Objects.requireNonNull(bayesianNetwork);

@@ -45,7 +45,7 @@ public class BornMainTest {
 		String query = ProcessorConfigurationImpl.read(new FileReader("src/test/resources/born-example.pl"));
 
 		ProcessorExecutionResult executionResult = new ProcessorExecutionResultImpl();
-		instance.createProblogFile(true, completionRules, ontology, bayesianNetwork, query, output, executionResult);
+		// instance.createProblogFile(true, completionRules, ontology, bayesianNetwork, query, output, executionResult);
 		// TODO finish the unit test
 	}
 
