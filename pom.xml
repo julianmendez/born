@@ -216,7 +216,7 @@
 		<owlapi.version>5.5.1</owlapi.version>
 		<protege.version>5.6.5</protege.version>
 		<jackson.version>2.18.2</jackson.version>
-		<logback.version>1.5.15</logback.version>
+		<logback.version>1.5.16</logback.version>
 		<jgit.version>7.1.0.202411261347-r</jgit.version>
 		<guava.version>33.4.0-jre</guava.version>
 	</properties>
