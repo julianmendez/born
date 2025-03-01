@@ -230,7 +230,7 @@ public class ProcessorConfigurationImpl implements ProcessorConfiguration {
 	 */
 	public static PrefixDocumentFormat getPrefixes(OWLOntology ontology) {
 		OWLOntologyManager manager = ontology.getOWLOntologyManager();
-		return Objects.requireNonNull(manager.getOntologyFormat(ontology)).asPrefixOWLDocumentFormat();
+		return manager.getOntologyFormat(ontology).asPrefixOWLOntologyFormat();
 	}
 
 }
