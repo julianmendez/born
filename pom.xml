@@ -218,7 +218,7 @@
 		<jackson.version>2.18.3</jackson.version>
 		<logback.version>1.5.17</logback.version>
 		<jgit.version>7.1.0.202411261347-r</jgit.version>
-		<guava.version>33.4.0-jre</guava.version>
+		<guava.version>33.4.5-jre</guava.version>
 	</properties>
 
 	<build>
