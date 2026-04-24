@@ -1,20 +1,15 @@
 target/
+out/
 .settings/
+.gradle/
 .project
 .classpath
 .idea/
+.bsp/
+.lake/
 *.iml
 .DS_Store
 Thumbs.db
-
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.war
-*.ear
-
-# virtual machine crash logs, see https://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+.cache
+.cache-main
+.cache-tests
